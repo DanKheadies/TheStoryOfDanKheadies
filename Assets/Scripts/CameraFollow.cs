@@ -12,56 +12,97 @@ public class CameraFollow : MonoBehaviour {
     public float smoothTimeX = 0.2f;
     public float smoothTimeY = 0.2f;
 
-    public bool sandbox3Bounds = false;
-    public Vector2 sb3MinCamPos;
-    public Vector2 sb3MaxCamPos;
+    public bool bHome = false;
+    public Vector2 homeMinCamPos;
+    public Vector2 homeMaxCamPos;
 
-    public bool sandbox4Bounds = false;
-    public Vector2 sb4MinCamPos;
-    public Vector2 sb4MaxCamPos;
+    public bool bField = false;
+    Vector2 fieldMinCamPos;
+    Vector2 fieldMaxCamPos;
 
-    public bool sandbox5Bounds = false;
+    public bool bFarm = false;
+    Vector2 farmMinCamPos;
+    Vector2 farmMaxCamPos;
+
+    public bool bPlay = false;
+    Vector2 playMinCamPos;
+    Vector2 playMaxCamPos;
+
+    public bool bCampus = false;
+    Vector2 campusMinCamPos;
+    Vector2 campusMaxCamPos;
+
 
 
     void Start () {
         myCam = GetComponent<Camera>();
         player = GameObject.FindGameObjectWithTag("Player");
          
-        sandbox3Bounds = true;
+        bHome = true;
 
-        sb3MinCamPos = new Vector2(sb3MinCamPos.x * ((Screen.width / 100.0f) / 4f), sb3MinCamPos.y);
+        //homeMinCamPos = new Vector2(homeMinCamPos.x * ((Screen.width / 100.0f) / 4f), homeMinCamPos.y);
+        homeMinCamPos = new Vector2(homeMinCamPos.x, homeMinCamPos.y);
+
+        //Screen.SetResolution(100, 80, true);
     }
 
     void Update () {
-        myCam.orthographicSize = (Screen.height / 100.0f) / 4f;
+        //myCam.orthographicSize = (Screen.height / 100.0f) / 4.0f;
+        myCam.orthographicSize = 0.66f;
+
+        //if (Screen.width >= 1200)
+        //{
+        //    myCam.orthographicSize = (Screen.height / 100.0f) / 12.0f;
+        //}
+        //else if (Screen.width < 1200 && Screen.width >= 600)
+        //{
+        //    myCam.orthographicSize = (Screen.height / 100.0f) / 8.0f;
+        //}
+        //else if (Screen.width < 600)
+        //{
+        //    myCam.orthographicSize = (Screen.height / 100.0f) / 4.0f;
+        //}
 
         float posX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x, ref velocity.x, smoothTimeX);
         float posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y, ref velocity.y, smoothTimeY);
 
         transform.position = new Vector3(posX, posY, -10);
 
-        if (sandbox3Bounds)
+        if (bHome)
         {
             transform.position = new Vector3(
             Mathf.Clamp(
                 transform.position.x,
                 ( //minX based on camera / screen width
-                    0.00000004396f * (Screen.width * Screen.width) + 0.002452f * Screen.width
+                  //0.00000004396f * (Screen.width * Screen.width) + 0.002452f * Screen.width
+                  //0.0f + 1.0f * 0.66f
+                  //1.0f * 0.66f
+                    homeMinCamPos.x
                 ),
                 ( //maxX based on camera / screen width
-                    -0.00000004396f * (Screen.width * Screen.width) - 0.002452f * Screen.width + 5.11f /*6.9895f*/
+                  //-0.00000004396f * (Screen.width * Screen.width) - 0.002452f * Screen.width + 5.11f /*6.9895f*/
+                  //5.12f - 1.0f * 0.66f
+                  //5.12f - 1.0f * 0.66f
+                    homeMaxCamPos.x
                 )),
             Mathf.Clamp(
                 transform.position.y,
                 ( //minY based on camera / screen height
-                    0.0025f * Screen.height
+                  //0.0025f * Screen.height
+                  //0.0f + 1.0f * 0.66f
+                  //0.00165f * Screen.height // height = 400
+                    homeMinCamPos.y
                 ),
                 ( //maxY based on camera / screen height
-                    -0.0025f * Screen.height + 5.11f
+                  //-0.0025f * Screen.height + 5.11f
+                  //5.12f - 1.0f * 0.66f
+                  // 4.46
+                  //0.01115f * Screen.height // height = 400
+                    homeMaxCamPos.y
                 )
                 ),
             -10);
-        } else if (sandbox4Bounds)
+        } else if (bField)
         {
             transform.position = new Vector3(
             Mathf.Clamp(
@@ -82,7 +123,7 @@ public class CameraFollow : MonoBehaviour {
                 )
                 ),
             -10);
-        } else if (sandbox5Bounds)
+        } else if (bFarm)
         {
             transform.position = new Vector3(
                 transform.position.x,
@@ -106,7 +147,11 @@ public class CameraFollow : MonoBehaviour {
     {
         if (Input.GetKeyDown("space"))
         {
-            Debug.Log("Let's get high on life and drugs!");
+            Debug.Log("("+Screen.width+","+Screen.height+")");
+            //Debug.Log("MinX: " + myCam.transform.position.x);
+            //Debug.Log("MinY: " + myCam.transform.position.y);
+            //Debug.Log("MaxX: " + homeMaxCamPos.x);
+            //Debug.Log("MaxY: " + homeMaxCamPos.y);
         }
     }
 }

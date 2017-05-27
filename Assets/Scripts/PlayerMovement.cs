@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     GameObject cameraToFollow;
     CameraFollow cameraFollow;
 
-    public GameObject map;
+    GameObject map;
 
     ScreenFader screenFader;
 
@@ -56,30 +56,30 @@ public class PlayerMovement : MonoBehaviour {
         if (collision.CompareTag("ToSandbox3"))
         {
             Debug.Log("Sandbox3 Hit");
-            cameraFollow.sandbox3Bounds = true;
-            cameraFollow.sandbox4Bounds = false;
-            cameraFollow.sandbox5Bounds = false;
+            cameraFollow.bHome = true;
+            cameraFollow.bField = false;
+            cameraFollow.bFarm = false;
         }
         else if (collision.CompareTag("ToSandbox4"))
         {
             Debug.Log("Sandbox4 Hit");
-            cameraFollow.sandbox3Bounds = false;
-            cameraFollow.sandbox4Bounds = true;
-            cameraFollow.sandbox5Bounds = false;
+            cameraFollow.bHome = false;
+            cameraFollow.bField = true;
+            cameraFollow.bFarm = false;
         }
         else if (collision.CompareTag("ToSandbox5"))
         {
             Debug.Log("Sandbox5 Hit");
-            cameraFollow.sandbox3Bounds = false;
-            cameraFollow.sandbox4Bounds = false;
-            cameraFollow.sandbox5Bounds = true;
+            cameraFollow.bHome = false;
+            cameraFollow.bField = false;
+            cameraFollow.bFarm = true;
         }
         else
         {
             Debug.Log("Something?");
-            cameraFollow.sandbox3Bounds = false;
-            cameraFollow.sandbox4Bounds = false;
-            cameraFollow.sandbox5Bounds = false;
+            cameraFollow.bHome = false;
+            cameraFollow.bField = false;
+            cameraFollow.bFarm = false;
         }
     }
 
