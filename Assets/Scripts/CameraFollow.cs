@@ -43,12 +43,12 @@ public class CameraFollow : MonoBehaviour {
         //homeMinCamPos = new Vector2(homeMinCamPos.x * ((Screen.width / 100.0f) / 4f), homeMinCamPos.y);
         homeMinCamPos = new Vector2(homeMinCamPos.x, homeMinCamPos.y);
 
-        //Screen.SetResolution(100, 80, true);
+        myCam.orthographicSize = 1.142857f;
     }
 
     void Update () {
         //myCam.orthographicSize = (Screen.height / 100.0f) / 4.0f;
-        myCam.orthographicSize = 0.66f;
+        //myCam.orthographicSize = 0.66f;
 
         //if (Screen.width >= 1200)
         //{
@@ -77,13 +77,15 @@ public class CameraFollow : MonoBehaviour {
                   //0.00000004396f * (Screen.width * Screen.width) + 0.002452f * Screen.width
                   //0.0f + 1.0f * 0.66f
                   //1.0f * 0.66f
-                    homeMinCamPos.x
+                    //homeMinCamPos.x
+                    0
                 ),
                 ( //maxX based on camera / screen width
                   //-0.00000004396f * (Screen.width * Screen.width) - 0.002452f * Screen.width + 5.11f /*6.9895f*/
                   //5.12f - 1.0f * 0.66f
                   //5.12f - 1.0f * 0.66f
-                    homeMaxCamPos.x
+                    //homeMaxCamPos.x
+                    5
                 )),
             Mathf.Clamp(
                 transform.position.y,
@@ -91,14 +93,16 @@ public class CameraFollow : MonoBehaviour {
                   //0.0025f * Screen.height
                   //0.0f + 1.0f * 0.66f
                   //0.00165f * Screen.height // height = 400
-                    homeMinCamPos.y
+                    //homeMinCamPos.y
+                    0
                 ),
                 ( //maxY based on camera / screen height
                   //-0.0025f * Screen.height + 5.11f
                   //5.12f - 1.0f * 0.66f
                   // 4.46
                   //0.01115f * Screen.height // height = 400
-                    homeMaxCamPos.y
+                    //homeMaxCamPos.y
+                    5
                 )
                 ),
             -10);

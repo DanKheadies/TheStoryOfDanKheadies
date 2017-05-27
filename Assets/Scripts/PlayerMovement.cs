@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    GameObject cameraToFollow;
+    //GameObject cameraToFollow;
     CameraFollow cameraFollow;
 
     GameObject map;
@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour {
         
         screenFader = GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>();
 
-        cameraToFollow = GameObject.FindGameObjectWithTag("MainCamera");
+        //cameraToFollow = GameObject.FindGameObjectWithTag("MainCamera");
         cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
     }
 
