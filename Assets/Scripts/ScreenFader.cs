@@ -7,18 +7,19 @@ public class ScreenFader : MonoBehaviour {
     Animator anim;
     Animator playerAnim;
 
-    public bool isFading = false;
+    PlayerMovement playerMovement;
 
 	void Start () {
         anim = GetComponent<Animator>();
         playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
 	
     public IEnumerator FadeToClear()
     {
-        isFading = true;
+        playerMovement.bStopPlayerMovement = true;
         anim.SetTrigger("FadeIn");
-        while (isFading)
+        while (playerMovement.bStopPlayerMovement)
         {
             playerAnim.SetBool("IsWalking", false);
             yield return null;
@@ -27,9 +28,9 @@ public class ScreenFader : MonoBehaviour {
 
     public IEnumerator FadeToBlack()
     {
-        isFading = true;
+        playerMovement.bStopPlayerMovement = true;
         anim.SetTrigger("FadeOut");
-        while (isFading)
+        while (playerMovement.bStopPlayerMovement)
         {
             playerAnim.SetBool("IsWalking", false);
             yield return null;
@@ -38,6 +39,6 @@ public class ScreenFader : MonoBehaviour {
 
     void AnimationComplete()
     {
-        isFading = false;
+        playerMovement.bStopPlayerMovement = false;
     }
 }

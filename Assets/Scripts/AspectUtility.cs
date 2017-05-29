@@ -39,17 +39,20 @@ public class AspectUtility : MonoBehaviour {
             }
             return;
         }
-        // Pillarbox
+        // Pillarbox (i.e. Width > Height)
         if (currentAspectRatio > wantedAspectRatio)
         {
             float inset = 1.0f - wantedAspectRatio / currentAspectRatio;
             cam.rect = new Rect(inset / 2, 0.0f, 1.0f - inset, 1.0f);
         }
-        // Letterbox
+        // Letterbox (i.e. Width < Height)
         else
         {
             float inset = 1.0f - currentAspectRatio / wantedAspectRatio;
-            cam.rect = new Rect(0.0f, inset / 2, 1.0f, 1.0f - inset);
+            // Option A - Middle of Screen
+            // cam.rect = new Rect(0.0f, inset / 2, 1.0f, 1.0f - inset); 
+            // Option B - Top of Screen
+            cam.rect = new Rect(0.0f, inset, 1.0f, 1.0f - inset);
         }
         if (!backgroundCam)
         {

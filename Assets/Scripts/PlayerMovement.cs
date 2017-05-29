@@ -4,30 +4,29 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    //GameObject cameraToFollow;
-    CameraFollow cameraFollow;
-
-    GameObject map;
-
-    ScreenFader screenFader;
-
-    Rigidbody2D rBody;
     Animator anim;
+    CameraFollow cameraFollow;
+    CameraSlider cameraSlider;
+    Rigidbody2D rBody;
+
+    public PolygonCollider2D playerCollider;
+
+    public bool bStopPlayerMovement;
     
 	void Start ()
     {
         rBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         
-        screenFader = GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>();
-
-        //cameraToFollow = GameObject.FindGameObjectWithTag("MainCamera");
         cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
+        cameraSlider = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraSlider>();
+
+        playerCollider = GetComponent<PolygonCollider2D>();
     }
 
     void Update()
     {
-        if (!screenFader.isFading)
+        if (!bStopPlayerMovement)
         {
             MovePlayer();
         }
@@ -47,51 +46,108 @@ public class PlayerMovement : MonoBehaviour {
         {
             anim.SetBool("IsWalking", false);
         }
-
-        rBody.MovePosition(rBody.position + movementVector * Time.deltaTime);
-    }
-
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("ToSandbox3"))
+        
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            Debug.Log("Sandbox3 Hit");
-            cameraFollow.bHome = true;
-            cameraFollow.bField = false;
-            cameraFollow.bFarm = false;
-        }
-        else if (collision.CompareTag("ToSandbox4"))
-        {
-            Debug.Log("Sandbox4 Hit");
-            cameraFollow.bHome = false;
-            cameraFollow.bField = true;
-            cameraFollow.bFarm = false;
-        }
-        else if (collision.CompareTag("ToSandbox5"))
-        {
-            Debug.Log("Sandbox5 Hit");
-            cameraFollow.bHome = false;
-            cameraFollow.bField = false;
-            cameraFollow.bFarm = true;
+            rBody.MovePosition(rBody.position + 2 * movementVector * Time.deltaTime);
+            anim.speed = 2.0f;
         }
         else
         {
-            Debug.Log("Something?");
-            cameraFollow.bHome = false;
-            cameraFollow.bField = false;
-            cameraFollow.bFarm = false;
+            rBody.MovePosition(rBody.position + movementVector * Time.deltaTime);
+
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                anim.speed = 1.0f;
+            }
         }
+        
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.gameObject.tag == "Map")
+        if (collision.name == "Home2Play")
         {
-            map = other.gameObject;
-            Debug.Log(map);
+            anim.speed = 0.001f;
+            cameraFollow.bHome = false;
+            cameraFollow.bUpdateOn = false;
+            bStopPlayerMovement = true;
+            playerCollider.enabled = false;
+            cameraSlider.SlideUp();
+            cameraFollow.bPlay = true;
+        }
+        else if (collision.name == "Play2Home")
+        {
+            anim.speed = 0.001f;
+            cameraFollow.bPlay = false;
+            cameraFollow.bUpdateOn = false;
+            bStopPlayerMovement = true;
+            playerCollider.enabled = false;
+            cameraSlider.SlideDown();
+            cameraFollow.bHome = true;
+        }
+        else if (collision.name == "Home2Field")
+        {
+            anim.speed = 0.001f;
+            cameraFollow.bHome = false;
+            cameraFollow.bUpdateOn = false;
+            bStopPlayerMovement = true;
+            playerCollider.enabled = false;
+            cameraSlider.SlideRight();
+            cameraFollow.bField = true;
+
+        }
+        else if (collision.name == "Field2Home")
+        {
+            anim.speed = 0.001f;
+            cameraFollow.bField = false;
+            cameraFollow.bUpdateOn = false;
+            bStopPlayerMovement = true;
+            playerCollider.enabled = false;
+            cameraSlider.SlideLeft();
+            cameraFollow.bHome = true;
+        }
+        else if (collision.name == "Field2Farm")
+        {
+            anim.speed = 0.001f;
+            cameraFollow.bField = false;
+            cameraFollow.bUpdateOn = false;
+            bStopPlayerMovement = true;
+            playerCollider.enabled = false;
+            cameraSlider.SlideRight();
+            cameraFollow.bFarm = true;
+        }
+        else if (collision.name == "Farm2Field")
+        {
+            anim.speed = 0.001f;
+            cameraFollow.bFarm = false;
+            cameraFollow.bUpdateOn = false;
+            bStopPlayerMovement = true;
+            playerCollider.enabled = false;
+            cameraSlider.SlideLeft();
+            cameraFollow.bField = true;
+        }
+        else if (collision.name == "Farm2Campus")
+        {
+            anim.speed = 0.001f;
+            cameraFollow.bFarm = false;
+            cameraFollow.bUpdateOn = false;
+            bStopPlayerMovement = true;
+            playerCollider.enabled = false;
+            cameraSlider.SlideRight();
+            cameraFollow.bCampus = true;
+        }
+        else if (collision.name == "Campus2Farm")
+        {
+            anim.speed = 0.001f;
+            cameraFollow.bCampus = false;
+            cameraFollow.bUpdateOn = false;
+            bStopPlayerMovement = true;
+            playerCollider.enabled = false;
+            cameraSlider.SlideLeft();
+            cameraFollow.bFarm = true;
         }
 
 
     }
-
 }
