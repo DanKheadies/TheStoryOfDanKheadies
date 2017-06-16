@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScreenFader : MonoBehaviour {
 
@@ -9,7 +10,9 @@ public class ScreenFader : MonoBehaviour {
 
     PlayerMovement playerMovement;
 
-	void Start () {
+    Scene scene;
+
+    void Start () {
         anim = GetComponent<Animator>();
         playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
@@ -39,6 +42,12 @@ public class ScreenFader : MonoBehaviour {
 
     void AnimationComplete()
     {
-        playerMovement.bStopPlayerMovement = false;
+        scene = SceneManager.GetActiveScene();
+
+        if (scene.name != "Battle")
+        {
+            Debug.Log(scene.name);
+            playerMovement.bStopPlayerMovement = false;
+        }
     }
 }
