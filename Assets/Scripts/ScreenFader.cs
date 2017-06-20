@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
+// Authors: David W. Corso
+// Start: 04/20/2017
+// Last:  06/19/2017
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,9 +12,7 @@ public class ScreenFader : MonoBehaviour {
 
     Animator anim;
     Animator playerAnim;
-
     PlayerMovement playerMovement;
-
     Scene scene;
 
     void Start () {
@@ -46,7 +49,6 @@ public class ScreenFader : MonoBehaviour {
 
         if (scene.name != "Battle")
         {
-            Debug.Log(scene.name);
             playerMovement.bStopPlayerMovement = false;
         }
     }

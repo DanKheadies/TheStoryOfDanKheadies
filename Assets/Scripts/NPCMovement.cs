@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
+// Authors: David W. Corso
+// Start: 04/20/2017
+// Last:  06/19/2017
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,11 +25,15 @@ public class NPCMovement : MonoBehaviour {
     private int walkDirection;
 
     public Collider2D walkZone;
-    private bool hasWalkZone;
+    private bool bHasWalkZone;
+
+    public bool bCanMove;
+    private DialogueManager theDM;
 
     void Start ()
     {
         NPCRigidBody = GetComponent<Rigidbody2D>();
+        theDM = FindObjectOfType<DialogueManager>();
 
         waitCounter = waitTime;
         walkCounter = walkTime;
@@ -35,12 +44,25 @@ public class NPCMovement : MonoBehaviour {
         {
             minWalkPoint = walkZone.bounds.min;
             maxWalkPoint = walkZone.bounds.max;
-            hasWalkZone = true;
+            bHasWalkZone = true;
         }
+
+        bCanMove = true;
 	}
 	
 	void Update ()
     {
+        if (!theDM.dialogueActive)
+        {
+            bCanMove = true;
+        }
+
+        if (!bCanMove)
+        {
+            NPCRigidBody.velocity = Vector2.zero;
+            return;
+        }
+
 		if (isWalking == true)
         {
             walkCounter -= Time.deltaTime;
@@ -49,7 +71,7 @@ public class NPCMovement : MonoBehaviour {
             {
                 case 0:
                     NPCRigidBody.velocity = new Vector2(0, moveSpeed);
-                    if (hasWalkZone && transform.position.y > (maxWalkPoint.y - 0.25))
+                    if (bHasWalkZone && transform.position.y > (maxWalkPoint.y - 0.25))
                     {
                         isWalking = false;
                         waitCounter = waitTime;
@@ -58,7 +80,7 @@ public class NPCMovement : MonoBehaviour {
 
                 case 1:
                     NPCRigidBody.velocity = new Vector2(moveSpeed, 0);
-                    if (hasWalkZone && transform.position.x > (maxWalkPoint.x - 0.25))
+                    if (bHasWalkZone && transform.position.x > (maxWalkPoint.x - 0.25))
                     {
                         isWalking = false;
                         waitCounter = waitTime;
@@ -67,7 +89,7 @@ public class NPCMovement : MonoBehaviour {
 
                 case 2:
                     NPCRigidBody.velocity = new Vector2(0, -moveSpeed);
-                    if (hasWalkZone && transform.position.y < (minWalkPoint.y + 0.25))
+                    if (bHasWalkZone && transform.position.y < (minWalkPoint.y + 0.25))
                     {
                         isWalking = false;
                         waitCounter = waitTime;
@@ -76,7 +98,7 @@ public class NPCMovement : MonoBehaviour {
 
                 case 3:
                     NPCRigidBody.velocity = new Vector2(-moveSpeed, 0);
-                    if (hasWalkZone && transform.position.x < (minWalkPoint.x + 0.25))
+                    if (bHasWalkZone && transform.position.x < (minWalkPoint.x + 0.25))
                     {
                         isWalking = false;
                         waitCounter = waitTime;
