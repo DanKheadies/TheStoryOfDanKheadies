@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/19/2017
+// Last:  06/25/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +12,8 @@ using UnityEngine.SceneManagement;
 // Fades images / sprites for animations and scene transitions (i.e. loading screens)
 public class ImageFader : MonoBehaviour
 {
+    public Image fadingImage;
+
     public bool bFadeIn;
     public bool bFadeOut;
 
@@ -21,8 +23,6 @@ public class ImageFader : MonoBehaviour
     public float preFadeOutDelay;
     public float fadeOutTime;
     public float postFadeOutDelay;
-
-    public Image fadingImage;
 
     private IEnumerator Start()
     {

@@ -1,29 +1,37 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/19/2017
+// Last:  06/25/2017
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneTransitioner : MonoBehaviour {
-    
-    Scene scene;
+// 
+public class SceneTransitioner : MonoBehaviour
+{
+    private Scene scene;
 
     public bool bNeedsTimer;
+
     public float timeToLoad;
+
     public string loadLevel;
     
+
     void Update()
     {
-        if ((scene.name == "LogoSplash" || scene.name == "MainMenu_Animation") && Input.anyKeyDown)
+        // Quick skip on loading screens / scenes
+        if ((scene.name == "LogoSplash" || 
+             scene.name == "MainMenu_Animation") 
+            && Input.anyKeyDown)
         {
             SceneManager.LoadScene(loadLevel);
         }
     }
 
+    // Trigger and timer for loading screens / scenes
     private IEnumerator Start()
     {
         scene = SceneManager.GetActiveScene();

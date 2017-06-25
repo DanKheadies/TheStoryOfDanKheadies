@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/19/2017
+// Last:  06/25/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -10,13 +10,13 @@ using UnityEngine;
 // Controls NPC movements, constraints, and dialogue
 public class NPCMovement : MonoBehaviour
 {
+    public Collider2D walkZone;
+    private DialogueManager theDM;
+    private Rigidbody2D NPCRigidBody;
+
     public bool bCanMove;
     private bool bHasWalkZone;
     public bool bIsWalking;
-
-    public Collider2D walkZone;
-
-    private DialogueManager theDM;
 
     public float moveSpeed;
     private float waitCounter;
@@ -26,13 +26,12 @@ public class NPCMovement : MonoBehaviour
 
     private int walkDirection;
 
-    private Rigidbody2D NPCRigidBody;
-
     public Vector2 minWalkPoint;
     public Vector2 maxWalkPoint;
 
     void Start ()
     {
+        // Initializers
         NPCRigidBody = GetComponent<Rigidbody2D>();
         theDM = FindObjectOfType<DialogueManager>();
 
@@ -111,6 +110,7 @@ public class NPCMovement : MonoBehaviour
                     break;
             }
 
+            // Denotes standing & resets walk counter
             if (walkCounter < 0)
             {
                 bIsWalking = false;
@@ -119,10 +119,12 @@ public class NPCMovement : MonoBehaviour
         }
         else
         {
+            // Wait countdown
             waitCounter -= Time.deltaTime;
 
             NPCRigidBody.velocity = Vector2.zero;
 
+            // Trigger to walk
             if (waitCounter < 0)
             {
                 ChooseDirection();

@@ -10,13 +10,11 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 // Controls where dialogues are displayed
-public class DialogueManager : MonoBehaviour
+public class BattleDialogueManager : MonoBehaviour
 {
     public AspectUtility aspectUtil;
-    public CameraFollow oCamera;
+    public Camera battleCamera;
     public GameObject dbox;
-    private PlayerMovement thePlayer;
-    private Scene scene;
     public Text dText;
 
     public bool dialogueActive;
@@ -32,27 +30,19 @@ public class DialogueManager : MonoBehaviour
 
     public string[] dialogueLines;
 
-    
-	void Start ()
+
+    void Start()
     {
         // Initializers
         aspectUtil = GetComponent<AspectUtility>();
-        oCamera = FindObjectOfType<CameraFollow>();
-        scene = SceneManager.GetActiveScene();
-        thePlayer = FindObjectOfType<PlayerMovement>();
+        battleCamera = FindObjectOfType<Camera>();
 
         ConfigureParameters();
     }
-	
 
-	void Update ()
+
+    void Update()
     {
-        // Check sizing stuff
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    Debug.Log("A:" + oCamera.myCam.pixelRect);
-        //    Debug.Log("(" + Screen.width + ", " + Screen.height + ")");
-        //}
 
         // Temp: Update Camera display / aspect ratio
         if (Input.GetKeyUp(KeyCode.R))
@@ -73,12 +63,6 @@ public class DialogueManager : MonoBehaviour
             dialogueActive = false;
 
             currentLine = 0;
-
-            // Avoid console error when no player object is present
-            if (scene.name != "Battle")
-            {
-                thePlayer.bStopPlayerMovement = false;
-            }
         }
 
         // Set current text
@@ -90,9 +74,6 @@ public class DialogueManager : MonoBehaviour
         // Displays the dialogue box
         dialogueActive = true;
         dbox.SetActive(true);
-
-        // Stops the player's movement
-        thePlayer.bStopPlayerMovement = true;
     }
 
     public void ConfigureParameters()
@@ -101,7 +82,7 @@ public class DialogueManager : MonoBehaviour
         screenWidth = Screen.width;
 
         // UI Text Positioning & Sizing based off camera size
-        if (screenWidth > oCamera.myCam.pixelWidth)
+        if (screenWidth > battleCamera.pixelWidth)
         {
             // Height => change in height affects variables
             rtLeft = 0.00004293f * (screenHeight * screenHeight) + 0.04109f * screenHeight + 6.043f;

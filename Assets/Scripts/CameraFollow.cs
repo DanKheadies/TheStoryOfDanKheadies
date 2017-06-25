@@ -12,6 +12,7 @@ public class CameraFollow : MonoBehaviour
 {
     public AspectUtility aspectUtil;
     public Camera myCam;
+    public GameObject player;
 
     public bool bHome = false;
     public bool bField = false;
@@ -22,8 +23,6 @@ public class CameraFollow : MonoBehaviour
     public bool bUpdateOn = true;
 
     public float smoothTime = 0.2f;
-
-    public GameObject player;
 
     public Vector2 minCamPos;
     public Vector2 maxCamPos;

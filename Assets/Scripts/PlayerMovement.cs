@@ -1,32 +1,32 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/19/2017
+// Last:  06/25/2017
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
-
-    Animator anim;
-    CameraFollow cameraFollow;
-    CameraSlider cameraSlider;
-    Rigidbody2D rBody;
-
+// Control Player movement and overworld transition areas
+public class PlayerMovement : MonoBehaviour
+{
+    private Animator anim;
+    private CameraFollow cameraFollow;
+    private CameraSlider cameraSlider;
     public PolygonCollider2D playerCollider;
+    private Rigidbody2D rBody;
 
     public bool bStopPlayerMovement;
     
+
 	void Start ()
     {
-        rBody = GetComponent<Rigidbody2D>();
+        // Initializers
         anim = GetComponent<Animator>();
-        
         cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
         cameraSlider = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraSlider>();
-
         playerCollider = GetComponent<PolygonCollider2D>();
+        rBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         Vector2 movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         
+        // Animate movement
         if (movementVector != Vector2.zero)
         {
             anim.SetBool("IsWalking", true);
@@ -52,11 +53,13 @@ public class PlayerMovement : MonoBehaviour {
             anim.SetBool("IsWalking", false);
         }
         
+        // 2x Move Speed
         if (Input.GetKey(KeyCode.LeftShift))
         {
             rBody.MovePosition(rBody.position + 2 * movementVector * Time.deltaTime);
             anim.speed = 2.0f;
         }
+        // 1x Move Speed
         else
         {
             rBody.MovePosition(rBody.position + movementVector * Time.deltaTime);
@@ -69,6 +72,7 @@ public class PlayerMovement : MonoBehaviour {
         
     }
 
+    // Location triggers, camera sliding, player stop/start, and player sliding
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name == "Home2Play")
@@ -100,7 +104,6 @@ public class PlayerMovement : MonoBehaviour {
             playerCollider.enabled = false;
             cameraSlider.SlideRight();
             cameraFollow.bField = true;
-
         }
         else if (collision.name == "Field2Home")
         {
@@ -152,7 +155,5 @@ public class PlayerMovement : MonoBehaviour {
             cameraSlider.SlideLeft();
             cameraFollow.bFarm = true;
         }
-
-
     }
 }

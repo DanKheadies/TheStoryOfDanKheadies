@@ -7,9 +7,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Screen Fader Initializer => sits a gameobject above the fader object
 public class ScreenFaderInit : MonoBehaviour
 {
-
     public GameObject screenFader;
 
     void Start()

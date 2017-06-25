@@ -1,19 +1,20 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/19/2017
+// Last:  06/25/2017
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ScreenFader : MonoBehaviour {
-
-    Animator anim;
-    Animator playerAnim;
-    PlayerMovement playerMovement;
-    Scene scene;
+// Stops player movement while fading in / out
+public class ScreenFader : MonoBehaviour
+{
+    private Animator anim;
+    private Animator playerAnim;
+    private PlayerMovement playerMovement;
+    private Scene scene;
 
     void Start () {
         anim = GetComponent<Animator>();
@@ -43,6 +44,7 @@ public class ScreenFader : MonoBehaviour {
         }
     }
 
+    // Avoid console error when no player object is present
     void AnimationComplete()
     {
         scene = SceneManager.GetActiveScene();
