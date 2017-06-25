@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// For Buttons only: transition scene or quit game
 public class MenuControl : MonoBehaviour {
 
 	public void LoadScene(string sceneName)

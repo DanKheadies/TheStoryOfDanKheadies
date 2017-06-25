@@ -9,10 +9,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+// Fades images / sprites for animations and scene transitions (i.e. loading screens)
 public class ImageFader : MonoBehaviour
 {
-    public Image fadingImage;
-
     public bool bFadeIn;
     public bool bFadeOut;
 
@@ -23,6 +22,8 @@ public class ImageFader : MonoBehaviour
     public float fadeOutTime;
     public float postFadeOutDelay;
 
+    public Image fadingImage;
+
     private IEnumerator Start()
     {
         if(bFadeIn == true)
@@ -32,6 +33,7 @@ public class ImageFader : MonoBehaviour
             FadeIn();
             yield return new WaitForSeconds(postFadeInDelay);
         }
+
         if(bFadeOut == true)
         {
             fadingImage.canvasRenderer.SetAlpha(1.0f);

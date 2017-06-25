@@ -1,7 +1,8 @@
 ﻿// CC 3.0 International License: Attribution--Eric5h5--ShareALike (https://creativecommons.org/licenses/by-sa/3.0/)
-// Authors: Eric Haines, David W. Corso
+// Authors: Eric Haines
+// Contributors: David W. Corso
 // Start: --/--/----
-// Last:  06/19/2017
+// Last:  06/25/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +15,8 @@ public class AspectUtility : MonoBehaviour {
     static Camera cam;
     static Camera backgroundCam;
 
-    void Awake()
+    // DC 06/25/2017 -- Call to refresh the camera / screen display
+    public void Awake()
     {
         cam = GetComponent<Camera>();
         if (!cam)

@@ -7,22 +7,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraSlider : MonoBehaviour {
-
-    Animator anim;
-    CameraFollow mainCamera;
-    GameObject player;
-    PlayerMovement playerMovement;
+// Slide overworld camera and player during area transitions
+public class CameraSlider : MonoBehaviour
+{
+    private Animator anim;
+    private CameraFollow mainCamera;
+    private GameObject player;
+    private PlayerMovement playerMovement;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        anim = player.GetComponent<Animator>();
-        playerMovement = player.GetComponent<PlayerMovement>();
 
+        anim = player.GetComponent<Animator>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
+        playerMovement = player.GetComponent<PlayerMovement>();
     }
 
+    // Slide the overworld camera when transitioning areas
     public IEnumerator Slide(Transform transform, Vector3 position, float timeToMove)
     {
         var currentPos = transform.position;
@@ -37,6 +39,7 @@ public class CameraSlider : MonoBehaviour {
         mainCamera.bUpdateOn = true;
     }
 
+    // Slide the player when transitioning areas
     public IEnumerator DelayedSlide(Transform transform, Vector3 position, float timeToMove)
     {
         yield return new WaitForSeconds(1.0f);

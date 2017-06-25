@@ -7,20 +7,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueHolder : MonoBehaviour {
+// 
+public class DialogueHolder : MonoBehaviour
+{
+    private DialogueManager dMan;
 
     public string dialogue;
     public string[] dialogueLines;
 
-    private DialogueManager dMan;
-
-	void Start () {
+	void Start ()
+    {
         dMan = FindObjectOfType<DialogueManager>();
-	}
-	
-
-	void Update () {
-		
 	}
 
     void OnTriggerStay2D(Collider2D collision)

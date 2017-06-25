@@ -7,28 +7,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCMovement : MonoBehaviour {
+// Controls NPC movements, constraints, and dialogue
+public class NPCMovement : MonoBehaviour
+{
+    public bool bCanMove;
+    private bool bHasWalkZone;
+    public bool bIsWalking;
+
+    public Collider2D walkZone;
+
+    private DialogueManager theDM;
 
     public float moveSpeed;
-    public Vector2 minWalkPoint;
-    public Vector2 maxWalkPoint;
-
-    private Rigidbody2D NPCRigidBody;
-
-    public bool isWalking;
-
-    public float walkTime;
-    private float walkCounter;
-    public float waitTime;
     private float waitCounter;
+    public float waitTime;
+    private float walkCounter;
+    public float walkTime;
 
     private int walkDirection;
 
-    public Collider2D walkZone;
-    private bool bHasWalkZone;
+    private Rigidbody2D NPCRigidBody;
 
-    public bool bCanMove;
-    private DialogueManager theDM;
+    public Vector2 minWalkPoint;
+    public Vector2 maxWalkPoint;
 
     void Start ()
     {
@@ -40,6 +41,7 @@ public class NPCMovement : MonoBehaviour {
         
         ChooseDirection();
 
+        // Bounds (if any)
         if (walkZone != null)
         {
             minWalkPoint = walkZone.bounds.min;
@@ -52,18 +54,21 @@ public class NPCMovement : MonoBehaviour {
 	
 	void Update ()
     {
+        // Move if there is no dialogue prompt
         if (!theDM.dialogueActive)
         {
             bCanMove = true;
         }
 
+        // Stop movement
         if (!bCanMove)
         {
             NPCRigidBody.velocity = Vector2.zero;
             return;
         }
 
-		if (isWalking == true)
+        // Basic movement
+		if (bIsWalking == true)
         {
             walkCounter -= Time.deltaTime;
 
@@ -73,7 +78,7 @@ public class NPCMovement : MonoBehaviour {
                     NPCRigidBody.velocity = new Vector2(0, moveSpeed);
                     if (bHasWalkZone && transform.position.y > (maxWalkPoint.y - 0.25))
                     {
-                        isWalking = false;
+                        bIsWalking = false;
                         waitCounter = waitTime;
                     }
                     break;
@@ -82,7 +87,7 @@ public class NPCMovement : MonoBehaviour {
                     NPCRigidBody.velocity = new Vector2(moveSpeed, 0);
                     if (bHasWalkZone && transform.position.x > (maxWalkPoint.x - 0.25))
                     {
-                        isWalking = false;
+                        bIsWalking = false;
                         waitCounter = waitTime;
                     }
                     break;
@@ -91,7 +96,7 @@ public class NPCMovement : MonoBehaviour {
                     NPCRigidBody.velocity = new Vector2(0, -moveSpeed);
                     if (bHasWalkZone && transform.position.y < (minWalkPoint.y + 0.25))
                     {
-                        isWalking = false;
+                        bIsWalking = false;
                         waitCounter = waitTime;
                     }
                     break;
@@ -100,7 +105,7 @@ public class NPCMovement : MonoBehaviour {
                     NPCRigidBody.velocity = new Vector2(-moveSpeed, 0);
                     if (bHasWalkZone && transform.position.x < (minWalkPoint.x + 0.25))
                     {
-                        isWalking = false;
+                        bIsWalking = false;
                         waitCounter = waitTime;
                     }
                     break;
@@ -108,7 +113,7 @@ public class NPCMovement : MonoBehaviour {
 
             if (walkCounter < 0)
             {
-                isWalking = false;
+                bIsWalking = false;
                 waitCounter = waitTime;
             }
         }
@@ -128,7 +133,7 @@ public class NPCMovement : MonoBehaviour {
     public void ChooseDirection()
     {
         walkDirection = Random.Range(0, 4);
-        isWalking = true;
+        bIsWalking = true;
         walkCounter = walkTime;
     }
 }
