@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/25/2017
+// Last:  06/29/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -49,7 +49,7 @@ public class ScreenFader : MonoBehaviour
     {
         scene = SceneManager.GetActiveScene();
 
-        if (scene.name != "Battle")
+        if (scene.name != "Showdown")
         {
             playerMovement.bStopPlayerMovement = false;
         }

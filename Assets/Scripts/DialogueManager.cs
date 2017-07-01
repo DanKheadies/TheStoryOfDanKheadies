@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/25/2017
+// Last:  06/29/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -75,7 +75,7 @@ public class DialogueManager : MonoBehaviour
             currentLine = 0;
 
             // Avoid console error when no player object is present
-            if (scene.name != "Battle")
+            if (scene.name != "Showdown")
             {
                 thePlayer.bStopPlayerMovement = false;
             }
