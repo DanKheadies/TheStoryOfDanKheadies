@@ -1,14 +1,14 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/25/2017
+// Last:  07/01/2017
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// 
+// Transition amongst Unity Scenes
 public class SceneTransitioner : MonoBehaviour
 {
     private Scene scene;

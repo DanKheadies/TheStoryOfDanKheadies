@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/25/2017
+// Last:  07/02/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private CameraFollow cameraFollow;
     private CameraSlider cameraSlider;
+    private PlayerBrioManager playerBrioMan;
     public PolygonCollider2D playerCollider;
     private Rigidbody2D rBody;
 
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
         cameraSlider = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraSlider>();
+        playerBrioMan = GetComponent<PlayerBrioManager>();
         playerCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
     }
@@ -44,13 +46,13 @@ public class PlayerMovement : MonoBehaviour
         // Animate movement
         if (movementVector != Vector2.zero)
         {
-            anim.SetBool("IsWalking", true);
+            anim.SetBool("bIsWalking", true);
             anim.SetFloat("Input_X", movementVector.x);
             anim.SetFloat("Input_Y", movementVector.y);
         }
         else
         {
-            anim.SetBool("IsWalking", false);
+            anim.SetBool("bIsWalking", false);
         }
         
         // 2x Move Speed
@@ -58,6 +60,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rBody.MovePosition(rBody.position + 2 * movementVector * Time.deltaTime);
             anim.speed = 2.0f;
+            
+            if (movementVector != Vector2.zero)
+            {
+                playerBrioMan.FatiguePlayer(0.1f);
+            }
         }
         // 1x Move Speed
         else
@@ -72,9 +79,10 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    // Location triggers, camera sliding, player stop/start, and player sliding
+    // Location triggers, camera sliding, player stop/start, player sliding & faders
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        // Overworld Shifts
         if (collision.name == "Home2Play")
         {
             anim.speed = 0.001f;
@@ -154,6 +162,12 @@ public class PlayerMovement : MonoBehaviour
             playerCollider.enabled = false;
             cameraSlider.SlideLeft();
             cameraFollow.bFarm = true;
+        }
+
+        // Overworld Warps
+        if (collision.CompareTag("Door"))
+        {
+            Destroy(collision.gameObject);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/29/2017
+// Last:  07/02/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,8 +13,10 @@ using UnityEngine.SceneManagement;
 public class DialogueManager : MonoBehaviour
 {
     public AspectUtility aspectUtil;
+    private Animator anim;
     public CameraFollow oCamera;
     public GameObject dbox;
+    public ImageStrobe imgStrobe;
     private PlayerMovement thePlayer;
     private Scene scene;
     public Text dText;
@@ -40,6 +42,7 @@ public class DialogueManager : MonoBehaviour
         oCamera = FindObjectOfType<CameraFollow>();
         scene = SceneManager.GetActiveScene();
         thePlayer = FindObjectOfType<PlayerMovement>();
+        anim = thePlayer.GetComponent<Animator>();
 
         ConfigureParameters();
     }
@@ -74,6 +77,9 @@ public class DialogueManager : MonoBehaviour
 
             currentLine = 0;
 
+            // Reset ContinueArrow strobing
+            imgStrobe.bCoRunning = false;
+
             // Avoid console error when no player object is present
             if (scene.name != "Showdown")
             {
@@ -93,6 +99,7 @@ public class DialogueManager : MonoBehaviour
 
         // Stops the player's movement
         thePlayer.bStopPlayerMovement = true;
+        anim.SetBool("bIsWalking", false);
     }
 
     public void ConfigureParameters()

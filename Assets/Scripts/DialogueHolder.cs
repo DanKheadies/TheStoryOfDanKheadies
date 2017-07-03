@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/25/2017
+// Last:  07/02/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +10,7 @@ using UnityEngine;
 // Holds NPC text (in Unity)
 public class DialogueHolder : MonoBehaviour
 {
+    private Animator anim;
     private DialogueManager dMan;
 
     public string dialogue;
@@ -17,6 +18,7 @@ public class DialogueHolder : MonoBehaviour
 
 	void Start ()
     {
+        anim = GetComponentInParent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
 	}
 
@@ -39,6 +41,41 @@ public class DialogueHolder : MonoBehaviour
                 {
                     transform.parent.GetComponent<NPCMovement>().bCanMove = false;
                 }
+
+                // Orient the NPC
+                //// NPC above Player
+                if ((transform.parent.position.y > collision.transform.position.y) &&
+                    (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) > 
+                     Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+                {
+                    anim.Play("Down");
+                }
+                //// NPC below Player
+                else if ((transform.parent.position.y < collision.transform.position.y) &&
+                    (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
+                     Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+                {
+                    anim.Play("Up");
+                }
+                //// NPC to the right of Player
+                else if ((transform.parent.position.x > collision.transform.position.x) &&
+                    (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+                     Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+                {
+                    anim.Play("Left");
+                }
+                //// NPC to the left of Player
+                else if ((transform.parent.position.x < collision.transform.position.x) &&
+                    (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+                     Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+                {
+                    anim.Play("Right");
+                }
+            }
+            
+            if (!dMan.dialogueActive)
+            {
+                anim.Play("NPC Movement");
             }
         }
     }

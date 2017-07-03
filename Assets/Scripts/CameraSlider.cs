@@ -67,7 +67,7 @@ public class CameraSlider : MonoBehaviour
 
         StartCoroutine(DelayedSlide(
             player.transform,
-            (player.transform.position + new Vector3(0.225f, 0f)),
+            (player.transform.position + new Vector3(0.25f, 0f)),
             0.33f));
     }
 
@@ -80,7 +80,7 @@ public class CameraSlider : MonoBehaviour
 
         StartCoroutine(DelayedSlide(
             player.transform,
-            (player.transform.position + new Vector3(-0.225f, 0f)),
+            (player.transform.position + new Vector3(-0.25f, 0f)),
             0.33f));
     }
 
@@ -106,7 +106,7 @@ public class CameraSlider : MonoBehaviour
 
         StartCoroutine(DelayedSlide(
             player.transform,
-            (player.transform.position + new Vector3(0f, -0.275f)),
+            (player.transform.position + new Vector3(0f, -0.3f)),
             0.33f));
     }
 }

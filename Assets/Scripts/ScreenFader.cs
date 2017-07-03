@@ -28,7 +28,7 @@ public class ScreenFader : MonoBehaviour
         anim.SetTrigger("FadeIn");
         while (playerMovement.bStopPlayerMovement)
         {
-            playerAnim.SetBool("IsWalking", false);
+            playerAnim.SetBool("bIsWalking", false);
             yield return null;
         }
     }
@@ -39,7 +39,7 @@ public class ScreenFader : MonoBehaviour
         anim.SetTrigger("FadeOut");
         while (playerMovement.bStopPlayerMovement)
         {
-            playerAnim.SetBool("IsWalking", false);
+            playerAnim.SetBool("bIsWalking", false);
             yield return null;
         }
     }
