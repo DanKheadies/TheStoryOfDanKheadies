@@ -159,8 +159,7 @@ public class NPCMovement : MonoBehaviour
 
     public void ChooseDirection()
     {
-        //walkDirection = Random.Range(0, 4);
-        walkDirection = 2;
+        walkDirection = Random.Range(0, 4);
         bIsWalking = true;
         walkCounter = walkTime;
     }
