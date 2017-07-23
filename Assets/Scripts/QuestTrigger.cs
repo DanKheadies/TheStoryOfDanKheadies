@@ -44,42 +44,7 @@ public class QuestTrigger : MonoBehaviour
                 {
                     if (spRend)
                     {
-                        Debug.Log("testicle");
-                        // Orient the NPC
-                        //// NPC above Player
-                        if ((transform.parent.position.y > collision.transform.position.y) &&
-                            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
-                             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
-                        {
-                            anim.Play("Down");
-                        }
-                        //// NPC below Player
-                        else if ((transform.parent.position.y < collision.transform.position.y) &&
-                            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
-                             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
-                        {
-                            anim.Play("Up");
-                        }
-                        //// NPC to the right of Player
-                        else if ((transform.parent.position.x > collision.transform.position.x) &&
-                            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
-                             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
-                        {
-                            anim.Play("Left");
-                        }
-                        //// NPC to the left of Player
-                        else if ((transform.parent.position.x < collision.transform.position.x) &&
-                            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
-                             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
-                        {
-                            anim.Play("Right");
-                        }
-
-                        // Stop NPC movement
-                        if (transform.parent.GetComponent<NPCMovement>() != null)
-                        {
-                            transform.parent.GetComponent<NPCMovement>().bCanMove = false;
-                        }
+                        OrientNPC(collision);
                     }
                     
                     // Quest Text
@@ -91,35 +56,7 @@ public class QuestTrigger : MonoBehaviour
                 {
                     if (spRend)
                     {
-                        // Orient the NPC
-                        //// NPC above Player
-                        if ((transform.parent.position.y > collision.transform.position.y) &&
-                            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
-                             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
-                        {
-                            anim.Play("Down");
-                        }
-                        //// NPC below Player
-                        else if ((transform.parent.position.y < collision.transform.position.y) &&
-                            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
-                             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
-                        {
-                            anim.Play("Up");
-                        }
-                        //// NPC to the right of Player
-                        else if ((transform.parent.position.x > collision.transform.position.x) &&
-                            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
-                             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
-                        {
-                            anim.Play("Left");
-                        }
-                        //// NPC to the left of Player
-                        else if ((transform.parent.position.x < collision.transform.position.x) &&
-                            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
-                             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
-                        {
-                            anim.Play("Right");
-                        }
+                        OrientNPC(collision);
 
                         // Stop NPC movement
                         if (transform.parent.GetComponent<NPCMovement>() != null)
@@ -138,6 +75,38 @@ public class QuestTrigger : MonoBehaviour
         if (spRend && !theDM.dialogueActive)
         {
             anim.Play("NPC Movement");
+        }
+    }
+
+    void OrientNPC(Collider2D collision)
+    {
+        //// NPC above Player
+        if ((transform.parent.position.y > collision.transform.position.y) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
+             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Down");
+        }
+        //// NPC below Player
+        else if ((transform.parent.position.y < collision.transform.position.y) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
+             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Up");
+        }
+        //// NPC to the right of Player
+        else if ((transform.parent.position.x > collision.transform.position.x) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Left");
+        }
+        //// NPC to the left of Player
+        else if ((transform.parent.position.x < collision.transform.position.x) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Right");
         }
     }
 }

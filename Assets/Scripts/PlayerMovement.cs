@@ -11,11 +11,13 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Animator anim;
+    private AudioClip Gay;
     private CameraFollow cameraFollow;
     private CameraSlider cameraSlider;
     private PlayerBrioManager playerBrioMan;
     public PolygonCollider2D playerCollider;
     private Rigidbody2D rBody;
+    private SFXManager SFXMan;
 
     public bool bStopPlayerMovement;
     
@@ -29,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         playerBrioMan = GetComponent<PlayerBrioManager>();
         playerCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
+        SFXMan = FindObjectOfType<SFXManager>();
     }
 
     void Update()
@@ -79,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    // Location triggers, camera sliding, player stop/start, player sliding & faders
+    // Location triggers, camera sliding, player stop/start, player sliding, faders, & sound effects
     public void OnTriggerEnter2D(Collider2D collision)
     {
         // Overworld Shifts
@@ -167,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
         // Overworld Warps
         if (collision.CompareTag("Door"))
         {
+            SFXMan.openDoor2.PlayOneShot(SFXMan.openDoor2.clip);
             Destroy(collision.gameObject);
         }
     }

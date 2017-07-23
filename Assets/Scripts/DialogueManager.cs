@@ -19,6 +19,7 @@ public class DialogueManager : MonoBehaviour
     public ImageStrobe imgStrobe;
     private PlayerMovement thePlayer;
     private Scene scene;
+    private SFXManager SFXMan;
     public Text dText;
 
     public bool dialogueActive;
@@ -43,6 +44,7 @@ public class DialogueManager : MonoBehaviour
         scene = SceneManager.GetActiveScene();
         thePlayer = FindObjectOfType<PlayerMovement>();
         anim = thePlayer.GetComponent<Animator>();
+        SFXMan = FindObjectOfType<SFXManager>();
 
         ConfigureParameters();
     }
@@ -96,6 +98,8 @@ public class DialogueManager : MonoBehaviour
         // Displays the dialogue box
         dialogueActive = true;
         dbox.SetActive(true);
+
+        SFXMan.dialogueMedium.PlayOneShot(SFXMan.dialogueMedium.clip);
 
         // Stops the player's movement
         thePlayer.bStopPlayerMovement = true;

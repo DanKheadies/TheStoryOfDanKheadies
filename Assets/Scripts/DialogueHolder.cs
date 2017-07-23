@@ -42,41 +42,45 @@ public class DialogueHolder : MonoBehaviour
                     transform.parent.GetComponent<NPCMovement>().bCanMove = false;
                 }
 
-                // Orient the NPC
-                //// NPC above Player
-                if ((transform.parent.position.y > collision.transform.position.y) &&
-                    (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) > 
-                     Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
-                {
-                    anim.Play("Down");
-                }
-                //// NPC below Player
-                else if ((transform.parent.position.y < collision.transform.position.y) &&
-                    (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
-                     Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
-                {
-                    anim.Play("Up");
-                }
-                //// NPC to the right of Player
-                else if ((transform.parent.position.x > collision.transform.position.x) &&
-                    (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
-                     Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
-                {
-                    anim.Play("Left");
-                }
-                //// NPC to the left of Player
-                else if ((transform.parent.position.x < collision.transform.position.x) &&
-                    (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
-                     Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
-                {
-                    anim.Play("Right");
-                }
+                OrientNPC(collision);
             }
             
             if (!dMan.dialogueActive)
             {
                 anim.Play("NPC Movement");
             }
+        }
+    }
+
+    void OrientNPC(Collider2D collision)
+    {
+        //// NPC above Player
+        if ((transform.parent.position.y > collision.transform.position.y) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
+                Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Down");
+        }
+        //// NPC below Player
+        else if ((transform.parent.position.y < collision.transform.position.y) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
+                Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Up");
+        }
+        //// NPC to the right of Player
+        else if ((transform.parent.position.x > collision.transform.position.x) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+                Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Left");
+        }
+        //// NPC to the left of Player
+        else if ((transform.parent.position.x < collision.transform.position.x) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+                Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Right");
         }
     }
 }
