@@ -10,6 +10,7 @@ using UnityEngine;
 // Assigns plants Cannabis Objects
 public class CannabisPlant : MonoBehaviour
 {
+    private Animator anim;
     private DialogueManager theDM;
 
     public bool bHasBud;
@@ -20,6 +21,7 @@ public class CannabisPlant : MonoBehaviour
     void Start()
     {
         // Initializers
+        anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         theDM = FindObjectOfType<DialogueManager>();
 
 
@@ -46,13 +48,15 @@ public class CannabisPlant : MonoBehaviour
             {
                 if (bHasBud)
                 {
-                    // Dan Raise Animation
+                    anim.Play("Acquire");
                     // Display Bud Sprite
                     // Add to inventory
 
                     theDM.dialogueLines = new string[HasBud.Length];
                     theDM.dialogueLines = HasBud;
                     theDM.ShowDialogue();
+
+                    this.bHasBud = false;
                 }
                 else
                 {

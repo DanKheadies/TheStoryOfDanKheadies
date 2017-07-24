@@ -25,7 +25,8 @@ public class SFXManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            //Debug.Log("SFX");
+            //Destroy(gameObject);
         }
 	}
 	

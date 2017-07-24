@@ -25,7 +25,8 @@ public class MusicManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            //Debug.Log("Music");
+            //Destroy(gameObject);
         }
     }
 

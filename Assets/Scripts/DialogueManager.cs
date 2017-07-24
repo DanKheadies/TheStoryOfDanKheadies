@@ -86,6 +86,7 @@ public class DialogueManager : MonoBehaviour
             if (scene.name != "Showdown")
             {
                 thePlayer.bStopPlayerMovement = false;
+                anim.Play("Idle");
             }
         }
 
