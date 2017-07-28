@@ -39,7 +39,7 @@ public class MusicManager : MonoBehaviour
                 musicTracks[currentTrack].Play();
             }
         }
-        else
+        else if (!bMusicExists)
         {
             musicTracks[currentTrack].Stop();
         }
