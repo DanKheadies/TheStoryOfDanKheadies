@@ -26,15 +26,13 @@ public class CameraFollow : MonoBehaviour
 
     public Vector2 minCamPos;
     public Vector2 maxCamPos;
-    private Vector2 smoothVelocity = new Vector2(0.2f, 0.2f);
+    public Vector2 smoothVelocity = new Vector2(0.2f, 0.2f);
 
     void Start ()
     {
         aspectUtil = GetComponent<AspectUtility>();
         myCam = GetComponent<Camera>();
         player = GameObject.FindGameObjectWithTag("Player");
-         
-        bHome = true;
 
         // Camera 'bounding-box'
         minCamPos = new Vector2(1.305f, 1.14f);

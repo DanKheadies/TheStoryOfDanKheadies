@@ -19,11 +19,6 @@ public class VolumeController : MonoBehaviour
     {
         theAudio = GetComponent<AudioSource>();
 	}
-	
-	void Update ()
-    {
-		
-	}
 
     public void SetAudioLevel (float volume)
     {

@@ -26,7 +26,10 @@ public class PlayerBrioManager : MonoBehaviour
         dMan = FindObjectOfType<DialogueManager>();
         thePlayer = FindObjectOfType<PlayerMovement>();
 
-        playerCurrentBrio = playerMaxBrio;
+        if (playerCurrentBrio == 0)
+        {
+            playerCurrentBrio = playerMaxBrio;
+        }
 
         warningLines = new string[2];
         warningLines[0] = "Phew.. I am le tired...";

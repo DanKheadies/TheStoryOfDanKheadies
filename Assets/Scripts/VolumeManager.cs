@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/23/2017
-// Last:  07/23/2017
+// Last:  08/26/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +14,7 @@ public class VolumeManager : MonoBehaviour
 
     public float currentVolumeLevel;
     public float maxVolumeLevel = 1.0f;
+    public float minVolumeLevel = 0.0f;
 
 	void Start ()
     {
@@ -22,6 +23,10 @@ public class VolumeManager : MonoBehaviour
         if (currentVolumeLevel > maxVolumeLevel)
         {
             currentVolumeLevel = maxVolumeLevel;
+        }
+        else if (currentVolumeLevel < minVolumeLevel)
+        {
+            currentVolumeLevel = minVolumeLevel;
         }
 
         for (int i = 0; i < vcObjects.Length; i++)
@@ -44,5 +49,45 @@ public class VolumeManager : MonoBehaviour
                 vcObjects[i].SetAudioLevel(currentVolumeLevel);
             }
         }
+
+        if (Input.GetKeyUp(KeyCode.Equals))
+        {
+            if (currentVolumeLevel < maxVolumeLevel)
+            {
+                for (int i = 0; i < vcObjects.Length; i++)
+                {
+                    vcObjects[i].SetAudioLevel(currentVolumeLevel + 0.1f);
+                }
+                
+                currentVolumeLevel = currentVolumeLevel + 0.1f;
+            }
+            else
+            {
+                currentVolumeLevel = maxVolumeLevel;
+            }
+        }
+        else if (Input.GetKeyUp(KeyCode.Minus))
+        {
+            if (currentVolumeLevel > minVolumeLevel)
+            {
+                for (int i = 0; i < vcObjects.Length; i++)
+                {
+                    vcObjects[i].SetAudioLevel(currentVolumeLevel - 0.1f);
+                }
+                
+                currentVolumeLevel = currentVolumeLevel - 0.1f;
+            }
+            else
+            {
+                currentVolumeLevel = minVolumeLevel;
+            }
+        }
+    }
+
+    public void testicle ()
+    {
+        Debug.Log("yolo");
+        //brioBar.maxValue = playerBrio.playerMaxBrio;
+        //brioBar.value = playerBrio.playerCurrentBrio;
     }
 }

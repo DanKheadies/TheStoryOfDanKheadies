@@ -23,11 +23,6 @@ public class MusicManager : MonoBehaviour
         {
             bMusicExists = true;
         }
-        else
-        {
-            //Debug.Log("Music");
-            //Destroy(gameObject);
-        }
     }
 
 	void Update ()
