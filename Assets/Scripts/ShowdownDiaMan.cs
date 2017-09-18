@@ -65,7 +65,8 @@ public class ShowdownDiaMan : MonoBehaviour
         }
 
         // Advance active dialogues
-        if (dialogueActive && Input.GetKeyDown(KeyCode.Space))
+        if (dialogueActive && Input.GetKeyDown(KeyCode.Space) ||
+            dialogueActive && Input.GetMouseButtonDown(0))
         {
             currentLine++;
         }

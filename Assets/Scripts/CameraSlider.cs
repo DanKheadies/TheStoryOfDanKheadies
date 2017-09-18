@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/19/2017
+// Last:  09/18/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -14,14 +14,21 @@ public class CameraSlider : MonoBehaviour
     private CameraFollow mainCamera;
     private GameObject player;
     private PlayerMovement playerMovement;
+    private TouchControls touches;
+    private UIManager uiMan;
+
+    public bool bTempControlActive;
 
     void Start()
     {
+        // Initializers (order)
         player = GameObject.FindGameObjectWithTag("Player");
 
         anim = player.GetComponent<Animator>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
         playerMovement = player.GetComponent<PlayerMovement>();
+        touches = FindObjectOfType<TouchControls>();
+        uiMan = FindObjectOfType<UIManager>();
     }
 
     // Slide the overworld camera when transitioning areas
@@ -42,6 +49,8 @@ public class CameraSlider : MonoBehaviour
     // Slide the player when transitioning areas
     public IEnumerator DelayedSlide(Transform transform, Vector3 position, float timeToMove)
     {
+        player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+
         yield return new WaitForSeconds(1.0f);
         var currentPos = transform.position;
         var t = 0f;
@@ -52,9 +61,16 @@ public class CameraSlider : MonoBehaviour
             yield return null;
         }
 
+        // Return the player's movement / state
         anim.speed = 1.0f;
         playerMovement.bStopPlayerMovement = false;
         playerMovement.playerCollider.enabled = true;
+
+        // Checks (& resumes) UI controls
+        if (bTempControlActive)
+        {
+            touches.GetComponent<Canvas>().enabled = true;
+        }
     }
 
 

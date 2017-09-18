@@ -11,7 +11,7 @@ using UnityEngine.UI;
 // Strobe an image's opacity / alpha for the duration of its existence
 public class ImageStrobe : MonoBehaviour
 {
-    private DialogueManager dMan;
+    //private DialogueManager dMan;
     private Image image;
 
     public bool bCoRunning;
@@ -21,7 +21,7 @@ public class ImageStrobe : MonoBehaviour
 
 	private IEnumerator Start()
     {
-        dMan = GetComponentInParent<DialogueManager>();
+        //dMan = GetComponentInParent<DialogueManager>();
         image = GetComponent<Image>();
         yield return null;
 

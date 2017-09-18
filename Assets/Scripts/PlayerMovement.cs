@@ -1,25 +1,32 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  07/02/2017
+// Last:  08/27/2017
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 // Control Player movement and overworld transition areas
 public class PlayerMovement : MonoBehaviour
 {
-    private Animator anim;
-    private AudioClip Gay;
+    public Animator anim;
     private CameraFollow cameraFollow;
     private CameraSlider cameraSlider;
     private PlayerBrioManager playerBrioMan;
     public PolygonCollider2D playerCollider;
-    private Rigidbody2D rBody;
+    public Rigidbody2D rBody;
     private SFXManager SFXMan;
+    private TouchControls touches;
+    private UIManager uiMan;
+    public Vector2 movementVector;
 
     public bool bStopPlayerMovement;
+    public bool bBoosting;
+
+    public float moveSpeed;
     
 
 	void Start ()
@@ -32,6 +39,11 @@ public class PlayerMovement : MonoBehaviour
         playerCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
         SFXMan = FindObjectOfType<SFXManager>();
+        touches = FindObjectOfType<TouchControls>();
+        uiMan = FindObjectOfType<UIManager>();
+
+        bBoosting = false;
+        moveSpeed = 1.0f;
     }
 
     void Update()
@@ -40,12 +52,27 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayer();
         }
-	}
 
-    void MovePlayer()
+        if (Input.GetButtonDown("Boost"))
+        {
+            bBoosting = true;
+        }
+        else if (Input.GetButtonUp("Boost"))
+        {
+            bBoosting = false;
+        }
+    }
+
+    public void MovePlayer()
     {
-        Vector2 movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        
+        //Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Move(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical"));
+    }
+
+    public void Move(float xInput, float yInput) 
+    {
+        movementVector = moveSpeed * new Vector2(xInput, yInput);
+
         // Animate movement
         if (movementVector != Vector2.zero)
         {
@@ -57,13 +84,15 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("bIsWalking", false);
         }
-        
+
         // 2x Move Speed
-        if (Input.GetKey(KeyCode.LeftShift))
+        //if (Input.GetButton("Boost"))
+        if (bBoosting)
         {
-            rBody.MovePosition(rBody.position + 2 * movementVector * Time.deltaTime);
+            rBody.velocity = movementVector * 2;
             anim.speed = 2.0f;
-            
+
+            // Use Brio
             if (movementVector != Vector2.zero)
             {
                 playerBrioMan.FatiguePlayer(0.1f);
@@ -72,14 +101,14 @@ public class PlayerMovement : MonoBehaviour
         // 1x Move Speed
         else
         {
-            rBody.MovePosition(rBody.position + movementVector * Time.deltaTime);
+            rBody.velocity = movementVector;
+            anim.speed = 1.0f;
 
-            if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                anim.speed = 1.0f;
-            }
+            //if (Input.GetKeyUp(KeyCode.LeftShift))
+            //{
+            //    anim.speed = 1.0f;
+            //}
         }
-        
     }
 
     // Location triggers, camera sliding, player stop/start, player sliding, faders, & sound effects
@@ -91,6 +120,9 @@ public class PlayerMovement : MonoBehaviour
             anim.speed = 0.001f;
             cameraFollow.bHome = false;
             cameraFollow.bUpdateOn = false;
+            cameraSlider.bTempControlActive = uiMan.bControlsActive;
+            touches.GetComponent<Canvas>().enabled = false;
+            touches.UnpressedAllArrows();
             bStopPlayerMovement = true;
             playerCollider.enabled = false;
             cameraSlider.SlideUp();
@@ -101,6 +133,9 @@ public class PlayerMovement : MonoBehaviour
             anim.speed = 0.001f;
             cameraFollow.bPlay = false;
             cameraFollow.bUpdateOn = false;
+            cameraSlider.bTempControlActive = uiMan.bControlsActive;
+            touches.GetComponent<Canvas>().enabled = false;
+            touches.UnpressedAllArrows();
             bStopPlayerMovement = true;
             playerCollider.enabled = false;
             cameraSlider.SlideDown();
@@ -111,6 +146,9 @@ public class PlayerMovement : MonoBehaviour
             anim.speed = 0.001f;
             cameraFollow.bHome = false;
             cameraFollow.bUpdateOn = false;
+            cameraSlider.bTempControlActive = uiMan.bControlsActive;
+            touches.GetComponent<Canvas>().enabled = false;
+            touches.UnpressedAllArrows();
             bStopPlayerMovement = true;
             playerCollider.enabled = false;
             cameraSlider.SlideRight();
@@ -121,6 +159,9 @@ public class PlayerMovement : MonoBehaviour
             anim.speed = 0.001f;
             cameraFollow.bField = false;
             cameraFollow.bUpdateOn = false;
+            cameraSlider.bTempControlActive = uiMan.bControlsActive;
+            touches.GetComponent<Canvas>().enabled = false;
+            touches.UnpressedAllArrows();
             bStopPlayerMovement = true;
             playerCollider.enabled = false;
             cameraSlider.SlideLeft();
@@ -131,6 +172,9 @@ public class PlayerMovement : MonoBehaviour
             anim.speed = 0.001f;
             cameraFollow.bField = false;
             cameraFollow.bUpdateOn = false;
+            cameraSlider.bTempControlActive = uiMan.bControlsActive;
+            touches.GetComponent<Canvas>().enabled = false;
+            touches.UnpressedAllArrows();
             bStopPlayerMovement = true;
             playerCollider.enabled = false;
             cameraSlider.SlideRight();
@@ -141,6 +185,9 @@ public class PlayerMovement : MonoBehaviour
             anim.speed = 0.001f;
             cameraFollow.bFarm = false;
             cameraFollow.bUpdateOn = false;
+            cameraSlider.bTempControlActive = uiMan.bControlsActive;
+            touches.GetComponent<Canvas>().enabled = false;
+            touches.UnpressedAllArrows();
             bStopPlayerMovement = true;
             playerCollider.enabled = false;
             cameraSlider.SlideLeft();
@@ -151,6 +198,9 @@ public class PlayerMovement : MonoBehaviour
             anim.speed = 0.001f;
             cameraFollow.bFarm = false;
             cameraFollow.bUpdateOn = false;
+            cameraSlider.bTempControlActive = uiMan.bControlsActive;
+            touches.GetComponent<Canvas>().enabled = false;
+            touches.UnpressedAllArrows();
             bStopPlayerMovement = true;
             playerCollider.enabled = false;
             cameraSlider.SlideRight();
@@ -161,6 +211,9 @@ public class PlayerMovement : MonoBehaviour
             anim.speed = 0.001f;
             cameraFollow.bCampus = false;
             cameraFollow.bUpdateOn = false;
+            cameraSlider.bTempControlActive = uiMan.bControlsActive;
+            touches.GetComponent<Canvas>().enabled = false;
+            touches.UnpressedAllArrows();
             bStopPlayerMovement = true;
             playerCollider.enabled = false;
             cameraSlider.SlideLeft();

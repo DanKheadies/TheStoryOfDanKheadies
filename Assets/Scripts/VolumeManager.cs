@@ -1,55 +1,67 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/23/2017
-// Last:  08/26/2017
+// Last:  09/17/2017
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-// 
+// Set & control the overall volume
 public class VolumeManager : MonoBehaviour
 {
+    public SaveGame saved;
+    public Scene scene;
+    public Slider slider;
     public VolumeController[] vcObjects;
 
     public float currentVolumeLevel;
+    public float defaultVolume = 0.5f;
     public float maxVolumeLevel = 1.0f;
     public float minVolumeLevel = 0.0f;
 
 	void Start ()
     {
-        vcObjects = FindObjectsOfType<VolumeController>();	
+        // Initializers
+        scene = SceneManager.GetActiveScene();
 
-        if (currentVolumeLevel > maxVolumeLevel)
+        // Scene Conditions
+        if (scene.name == "MainMenu")
         {
-            currentVolumeLevel = maxVolumeLevel;
+            // Initializers
+            vcObjects = FindObjectsOfType<VolumeController>();
         }
-        else if (currentVolumeLevel < minVolumeLevel)
+        else
         {
-            currentVolumeLevel = minVolumeLevel;
-        }
+            // Initializers
+            saved = GameObject.Find("Game_Controller").GetComponent<SaveGame>();
+            slider = GameObject.FindGameObjectWithTag("VolumeSlider").GetComponent<Slider>();
+            vcObjects = FindObjectsOfType<VolumeController>();
 
-        for (int i = 0; i < vcObjects.Length; i++)
-        {
-            vcObjects[i].SetAudioLevel(currentVolumeLevel);
-        }
-	}
-	
-	void Update ()
-    {
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            if (currentVolumeLevel > maxVolumeLevel)
+            // Sets initial volume based off saved data
+            if (!PlayerPrefs.HasKey("Volume"))
             {
-                currentVolumeLevel = maxVolumeLevel;
+                currentVolumeLevel = defaultVolume;
             }
-
+            else
+            {
+                currentVolumeLevel = PlayerPrefs.GetFloat("Volume");
+                slider.value = currentVolumeLevel;
+            }
+            
+            // Sets all volume control objects to the current / saved volume
             for (int i = 0; i < vcObjects.Length; i++)
             {
                 vcObjects[i].SetAudioLevel(currentVolumeLevel);
             }
         }
-
+	}
+	
+	void Update ()
+    {
+        // Increase volume w/ keyboard
         if (Input.GetKeyUp(KeyCode.Equals))
         {
             if (currentVolumeLevel < maxVolumeLevel)
@@ -66,6 +78,7 @@ public class VolumeManager : MonoBehaviour
                 currentVolumeLevel = maxVolumeLevel;
             }
         }
+        // Decrease volume w/ keyboard
         else if (Input.GetKeyUp(KeyCode.Minus))
         {
             if (currentVolumeLevel > minVolumeLevel)
@@ -84,10 +97,13 @@ public class VolumeManager : MonoBehaviour
         }
     }
 
-    public void testicle ()
+    public void OnSliderChange ()
     {
-        Debug.Log("yolo");
-        //brioBar.maxValue = playerBrio.playerMaxBrio;
-        //brioBar.value = playerBrio.playerCurrentBrio;
+        currentVolumeLevel = slider.value;
+
+        for (int i = 0; i < vcObjects.Length; i++)
+        {
+            vcObjects[i].SetAudioLevel(currentVolumeLevel);
+        }
     }
 }

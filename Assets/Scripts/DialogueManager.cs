@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  07/02/2017
+// Last:  09/18/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +21,10 @@ public class DialogueManager : MonoBehaviour
     private Scene scene;
     private SFXManager SFXMan;
     public Text dText;
+    private TouchControls touches;
+    private UIManager uiMan;
 
+    private bool bTempControlActive;
     public bool dialogueActive;
 
     private float screenHeight;
@@ -45,6 +48,8 @@ public class DialogueManager : MonoBehaviour
         thePlayer = FindObjectOfType<PlayerMovement>();
         anim = thePlayer.GetComponent<Animator>();
         SFXMan = FindObjectOfType<SFXManager>();
+        touches = FindObjectOfType<TouchControls>();
+        uiMan = FindObjectOfType<UIManager>();
 
         ConfigureParameters();
     }
@@ -52,13 +57,6 @@ public class DialogueManager : MonoBehaviour
 
 	void Update ()
     {
-        // Check sizing stuff
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    Debug.Log("A:" + oCamera.myCam.pixelRect);
-        //    Debug.Log("(" + Screen.width + ", " + Screen.height + ")");
-        //}
-
         // Temp: Update Camera display / aspect ratio
         if (Input.GetKeyUp(KeyCode.R))
         {
@@ -66,7 +64,8 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Advance active dialogues
-        if (dialogueActive && Input.GetKeyDown(KeyCode.Space))
+        if (dialogueActive && Input.GetKeyDown(KeyCode.Space) ||
+            dialogueActive && Input.GetMouseButtonDown(0))
         {
             currentLine++;
         }
@@ -83,15 +82,31 @@ public class DialogueManager : MonoBehaviour
             imgStrobe.bCoRunning = false;
 
             // Avoid console error when no player object is present
+            // DC 09/17/2017 -- TODO: Remove conditional on basis that ShowdownDiaMan is it's own thing
+            // i.e. this no longer needs to check
             if (scene.name != "Showdown")
             {
+                // Stop the player
                 thePlayer.bStopPlayerMovement = false;
                 anim.Play("Idle");
+                
+                // Show controls if visible
+                if (bTempControlActive)
+                {
+                    touches.GetComponent<Canvas>().enabled = true;
+                }
             }
         }
 
         // Set current text
         dText.text = dialogueLines[currentLine];
+
+        // Check sizing stuff
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    Debug.Log("A:" + oCamera.myCam.pixelRect);
+        //    Debug.Log("(" + Screen.width + ", " + Screen.height + ")");
+        //}
     }
 
     public void ShowDialogue()
@@ -100,11 +115,21 @@ public class DialogueManager : MonoBehaviour
         dialogueActive = true;
         dbox.SetActive(true);
 
+        // Sound Effect
         SFXMan.dialogueMedium.PlayOneShot(SFXMan.dialogueMedium.clip);
 
         // Stops the player's movement
-        thePlayer.bStopPlayerMovement = true;
+        thePlayer.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
         anim.SetBool("bIsWalking", false);
+        touches.UnpressedAllArrows();
+        thePlayer.bStopPlayerMovement = true;
+
+        // Checks (& hides) UI controls
+        bTempControlActive = uiMan.bControlsActive;
+        if (uiMan.bControlsActive)
+        {
+            touches.GetComponent<Canvas>().enabled = false;
+        }
     }
 
     public void ConfigureParameters()

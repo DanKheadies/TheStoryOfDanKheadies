@@ -12,7 +12,7 @@ public class PlayerBrioManager : MonoBehaviour
 {
     private Animator anim;
     private DialogueManager dMan;
-    private PlayerMovement thePlayer;
+    //private PlayerMovement thePlayer;
 
     public float diffMaxAndCurrent;
     public float playerMaxBrio;
@@ -24,7 +24,7 @@ public class PlayerBrioManager : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
-        thePlayer = FindObjectOfType<PlayerMovement>();
+        //thePlayer = FindObjectOfType<PlayerMovement>();
 
         if (playerCurrentBrio == 0)
         {

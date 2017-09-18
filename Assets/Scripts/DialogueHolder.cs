@@ -12,6 +12,7 @@ public class DialogueHolder : MonoBehaviour
 {
     private Animator anim;
     private DialogueManager dMan;
+    private TouchControls touches;
 
     public string dialogue;
     public string[] dialogueLines;
@@ -20,13 +21,16 @@ public class DialogueHolder : MonoBehaviour
     {
         anim = GetComponentInParent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
+        touches = FindObjectOfType<TouchControls>();
 	}
 
     void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.Space) ||
+                touches.bAction ||
+                Input.GetMouseButtonDown(0))
             {
                 // Opens Dialogue Manager and uses NPC's first line
                 if (!dMan.dialogueActive)
@@ -43,6 +47,8 @@ public class DialogueHolder : MonoBehaviour
                 }
 
                 OrientNPC(collision);
+
+                touches.bAction = false;
             }
             
             if (!dMan.dialogueActive)

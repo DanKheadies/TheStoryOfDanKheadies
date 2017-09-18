@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/18/2017
-// Last:  07/18/2017
+// Last:  09/16/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +12,7 @@ public class CannabisPlant : MonoBehaviour
 {
     private Animator anim;
     private DialogueManager theDM;
+    private TouchControls touches;
 
     public bool bHasBud;
 
@@ -23,6 +24,7 @@ public class CannabisPlant : MonoBehaviour
         // Initializers
         anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         theDM = FindObjectOfType<DialogueManager>();
+        touches = FindObjectOfType<TouchControls>();
 
 
         if (Random.Range(0.0f, 1.0f) > 0.66f)
@@ -44,7 +46,8 @@ public class CannabisPlant : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.Space) ||
+                touches.bAction)
             {
                 if (bHasBud)
                 {
@@ -64,6 +67,8 @@ public class CannabisPlant : MonoBehaviour
                     theDM.dialogueLines = NoBud;
                     theDM.ShowDialogue();
                 }
+
+                touches.bAction = false;
             }
         }
     }
