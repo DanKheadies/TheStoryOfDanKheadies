@@ -82,7 +82,7 @@ public class DialogueManager : MonoBehaviour
             imgStrobe.bCoRunning = false;
 
             // Avoid console error when no player object is present
-            // DC 09/17/2017 -- TODO: Remove conditional on basis that ShowdownDiaMan is it's own thing
+            // DC 09/17/2017 -- TODO: Remove this conditional on basis that ShowdownDiaMan is it's own thing
             // i.e. this no longer needs to check
             if (scene.name != "Showdown")
             {

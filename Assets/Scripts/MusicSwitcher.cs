@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/23/2017
-// Last:  07/23/2017
+// Last:  09/24/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -12,19 +12,20 @@ public class MusicSwitcher : MonoBehaviour
 {
     private MusicManager theMan;
 
-    public bool bSwitchOnStart;
+    //public bool bSwitchOnStart;
 
     public int newTrack;
 
 	void Start ()
     {
+        // Initializers
         theMan = FindObjectOfType<MusicManager>();	
 
-        if (bSwitchOnStart)
-        {
-            theMan.SwitchTrack(newTrack);
-            //gameObject.SetActive(false);
-        }
+
+        //if (bSwitchOnStart)
+        //{
+        //    theMan.SwitchTrack(newTrack);
+        //}
 	}
 	
 	void Update ()
@@ -37,7 +38,6 @@ public class MusicSwitcher : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             theMan.SwitchTrack(newTrack);
-            //gameObject.SetActive(false);
         }
     }
 }

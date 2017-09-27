@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  07/02/2017
+// Last:  09/24/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +12,6 @@ public class PlayerBrioManager : MonoBehaviour
 {
     private Animator anim;
     private DialogueManager dMan;
-    //private PlayerMovement thePlayer;
 
     public float diffMaxAndCurrent;
     public float playerMaxBrio;
@@ -22,15 +21,17 @@ public class PlayerBrioManager : MonoBehaviour
 
     void Start ()
     {
+        // Initializers
         anim = GetComponent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
-        //thePlayer = FindObjectOfType<PlayerMovement>();
 
+        // Give player full Brio if none
         if (playerCurrentBrio == 0)
         {
             playerCurrentBrio = playerMaxBrio;
         }
 
+        // Set warning dialogue
         warningLines = new string[2];
         warningLines[0] = "Phew.. I am le tired...";
         warningLines[1] = "I may need a nap or something.";
@@ -38,6 +39,7 @@ public class PlayerBrioManager : MonoBehaviour
 	
 	void Update ()
     {
+        // Warning Message when Brio is out
         if (playerCurrentBrio <= 0)
         {
             // Opens Dialogue Manager and gives a warning
@@ -46,26 +48,29 @@ public class PlayerBrioManager : MonoBehaviour
             dMan.ShowDialogue();
             playerCurrentBrio = 1;
         }
-
+        
         BasicRestorePlayer();
 
+        // Temp solution to give Brio
         if (Input.GetKeyUp(KeyCode.X))
         {
             RestorePlayer(50);
         }
-
     }
 
+    // Removes Brio
     public void FatiguePlayer (float damageToGive)
     {
         playerCurrentBrio -= damageToGive;
     }
 
+    // Adds Brio
     public void RestorePlayer (float brioToGive)
     {
         playerCurrentBrio += brioToGive;
     }
 
+    // Adds Brio
     public void BasicRestorePlayer()
     {
         diffMaxAndCurrent = playerMaxBrio - playerCurrentBrio;
@@ -75,6 +80,7 @@ public class PlayerBrioManager : MonoBehaviour
         }
     }
 
+    // Return to Max Brio
     public void SetMaxBrio()
     {
         playerCurrentBrio = playerMaxBrio;

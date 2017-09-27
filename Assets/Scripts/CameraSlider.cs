@@ -15,7 +15,7 @@ public class CameraSlider : MonoBehaviour
     private GameObject player;
     private PlayerMovement playerMovement;
     private TouchControls touches;
-    private UIManager uiMan;
+    //private UIManager uiMan;
 
     public bool bTempControlActive;
 
@@ -28,7 +28,7 @@ public class CameraSlider : MonoBehaviour
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
         playerMovement = player.GetComponent<PlayerMovement>();
         touches = FindObjectOfType<TouchControls>();
-        uiMan = FindObjectOfType<UIManager>();
+        //uiMan = FindObjectOfType<UIManager>();
     }
 
     // Slide the overworld camera when transitioning areas
@@ -109,7 +109,7 @@ public class CameraSlider : MonoBehaviour
 
         StartCoroutine(DelayedSlide(
             player.transform,
-            (player.transform.position + new Vector3(0f, 0.275f)),
+            (player.transform.position + new Vector3(0f, 0.3f)),
             0.33f));
     }
 

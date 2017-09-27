@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
             MovePlayer();
         }
 
+        // Set boosting
         if (Input.GetButtonDown("Boost"))
         {
             bBoosting = true;
@@ -65,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovePlayer()
     {
+        // Unit's Project Settings -> Input
         //Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Move(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical"));
     }
@@ -86,7 +88,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // 2x Move Speed
-        //if (Input.GetButton("Boost"))
         if (bBoosting)
         {
             rBody.velocity = movementVector * 2;
@@ -103,121 +104,558 @@ public class PlayerMovement : MonoBehaviour
         {
             rBody.velocity = movementVector;
             anim.speed = 1.0f;
-
-            //if (Input.GetKeyUp(KeyCode.LeftShift))
-            //{
-            //    anim.speed = 1.0f;
-            //}
         }
+    }
+
+    public void CollisionBundle()
+    {
+        anim.speed = 0.001f;
+        cameraFollow.currentCoords = 0;
+        cameraFollow.bUpdateOn = false;
+        cameraSlider.bTempControlActive = uiMan.bControlsActive;
+        touches.GetComponent<Canvas>().enabled = false;
+        touches.UnpressedAllArrows();
+        bStopPlayerMovement = true;
+        playerCollider.enabled = false;
     }
 
     // Location triggers, camera sliding, player stop/start, player sliding, faders, & sound effects
     public void OnTriggerEnter2D(Collider2D collision)
     {
         // Overworld Shifts
-        if (collision.name == "Home2Play")
+        // Collisions listed alphabetically by ShiftZone parent
+        // DC 09/25/2017 -- TODO: Possible performance upgrade based on most visited at the top
+        if (collision.name == "BatteryNE2BatteryNW")
         {
-            anim.speed = 0.001f;
-            cameraFollow.bHome = false;
-            cameraFollow.bUpdateOn = false;
-            cameraSlider.bTempControlActive = uiMan.bControlsActive;
-            touches.GetComponent<Canvas>().enabled = false;
-            touches.UnpressedAllArrows();
-            bStopPlayerMovement = true;
-            playerCollider.enabled = false;
-            cameraSlider.SlideUp();
-            cameraFollow.bPlay = true;
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BatteryNW;
         }
-        else if (collision.name == "Play2Home")
+        else if (collision.name == "BatteryNE2BatterySE")
         {
-            anim.speed = 0.001f;
-            cameraFollow.bPlay = false;
-            cameraFollow.bUpdateOn = false;
-            cameraSlider.bTempControlActive = uiMan.bControlsActive;
-            touches.GetComponent<Canvas>().enabled = false;
-            touches.UnpressedAllArrows();
-            bStopPlayerMovement = true;
-            playerCollider.enabled = false;
+            CollisionBundle();
             cameraSlider.SlideDown();
-            cameraFollow.bHome = true;
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BatterySE;
         }
-        else if (collision.name == "Home2Field")
+        else if (collision.name == "BatteryNW2BatteryNE")
         {
-            anim.speed = 0.001f;
-            cameraFollow.bHome = false;
-            cameraFollow.bUpdateOn = false;
-            cameraSlider.bTempControlActive = uiMan.bControlsActive;
-            touches.GetComponent<Canvas>().enabled = false;
-            touches.UnpressedAllArrows();
-            bStopPlayerMovement = true;
-            playerCollider.enabled = false;
+            CollisionBundle();
             cameraSlider.SlideRight();
-            cameraFollow.bField = true;
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BatteryNE;
         }
-        else if (collision.name == "Field2Home")
+        else if (collision.name == "BatteryNW2BatterySW")
         {
-            anim.speed = 0.001f;
-            cameraFollow.bField = false;
-            cameraFollow.bUpdateOn = false;
-            cameraSlider.bTempControlActive = uiMan.bControlsActive;
-            touches.GetComponent<Canvas>().enabled = false;
-            touches.UnpressedAllArrows();
-            bStopPlayerMovement = true;
-            playerCollider.enabled = false;
-            cameraSlider.SlideLeft();
-            cameraFollow.bHome = true;
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BatterySW;
         }
-        else if (collision.name == "Field2Farm")
+        else if (collision.name == "BatterySW2BatterySE")
         {
-            anim.speed = 0.001f;
-            cameraFollow.bField = false;
-            cameraFollow.bUpdateOn = false;
-            cameraSlider.bTempControlActive = uiMan.bControlsActive;
-            touches.GetComponent<Canvas>().enabled = false;
-            touches.UnpressedAllArrows();
-            bStopPlayerMovement = true;
-            playerCollider.enabled = false;
+            CollisionBundle();
             cameraSlider.SlideRight();
-            cameraFollow.bFarm = true;
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BatterySE;
         }
-        else if (collision.name == "Farm2Field")
+        else if (collision.name == "BatterySW2BatteryNW")
         {
-            anim.speed = 0.001f;
-            cameraFollow.bFarm = false;
-            cameraFollow.bUpdateOn = false;
-            cameraSlider.bTempControlActive = uiMan.bControlsActive;
-            touches.GetComponent<Canvas>().enabled = false;
-            touches.UnpressedAllArrows();
-            bStopPlayerMovement = true;
-            playerCollider.enabled = false;
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BatteryNW;
+        }
+        else if (collision.name == "BatterySW2Campus")
+        {
+            CollisionBundle();
             cameraSlider.SlideLeft();
-            cameraFollow.bField = true;
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.Campus;
         }
-        else if (collision.name == "Farm2Campus")
+        else if (collision.name == "BatterySE2BatterySW")
         {
-            anim.speed = 0.001f;
-            cameraFollow.bFarm = false;
-            cameraFollow.bUpdateOn = false;
-            cameraSlider.bTempControlActive = uiMan.bControlsActive;
-            touches.GetComponent<Canvas>().enabled = false;
-            touches.UnpressedAllArrows();
-            bStopPlayerMovement = true;
-            playerCollider.enabled = false;
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BatterySW;
+        }
+        else if (collision.name == "BatterySE2BatteryNE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BatteryNE;
+        }
+        else if (collision.name == "BatterySE2HousesE")
+        {
+            CollisionBundle();
             cameraSlider.SlideRight();
-            cameraFollow.bCampus = true;
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.HousesE;
         }
-        else if (collision.name == "Campus2Farm")
+        else if (collision.name == "BuildersSE2BuildersSW")
         {
-            anim.speed = 0.001f;
-            cameraFollow.bCampus = false;
-            cameraFollow.bUpdateOn = false;
-            cameraSlider.bTempControlActive = uiMan.bControlsActive;
-            touches.GetComponent<Canvas>().enabled = false;
-            touches.UnpressedAllArrows();
-            bStopPlayerMovement = true;
-            playerCollider.enabled = false;
+            CollisionBundle();
             cameraSlider.SlideLeft();
-            cameraFollow.bFarm = true;
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BuildersSW;
+        }
+        else if (collision.name == "BuildersSE2Campus")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.Campus;
+        }
+        else if (collision.name == "BuildersSE2BuildersNE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BuildersNE;
+        }
+        else if (collision.name == "BuildersSW2BuildersSE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BuildersSE;
+        }
+        else if (collision.name == "BuildersSW2BuildersNW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BuildersNW;
+        }
+        else if (collision.name == "BuildersNE2HousesN")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.HousesN;
+        }
+        else if (collision.name == "BuildersNE2BuildersNW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BuildersNW;
+        }
+        else if (collision.name == "BuildersNE2BuildersSE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BuildersSE;
+        }
+        else if (collision.name == "BuildersNW2BuildersNE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BuildersNE;
+        }
+        else if (collision.name == "BuildersNW2BuildersSW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BuildersSW;
+        }
+        else if (collision.name == "Campus2CannaHouse")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.CannaHouse;
+        }
+        else if (collision.name == "Campus2FarmNW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmNW;
+        }
+        else if (collision.name == "Campus2BuildersSE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BuildersSE;
+        }
+        else if (collision.name == "Campus2BatterySW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BatterySW;
+        }
+        else if (collision.name == "CannaFieldNW2Home")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.Home;
+        }
+        else if (collision.name == "CannaFieldNW2CannaHouse")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.CannaHouse;
+        }
+        else if (collision.name == "CannaFieldNW2CannaFieldSW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.CannaFieldSW;
+        }
+        else if (collision.name == "CannaFieldSE2CannaFieldSW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.CannaFieldSW;
+        }
+        else if (collision.name == "CannaFieldSE2CannaHouse")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.CannaHouse;
+        }
+        else if (collision.name == "CannaFieldSW2CannaFieldSE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.CannaFieldSE;
+        }
+        else if (collision.name == "CannaFieldSW2CannaFieldNW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.CannaFieldNW;
+        }
+        else if (collision.name == "CannaHouse2Campus")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.Campus;
+        }
+        else if (collision.name == "CannaHouse2CannaFieldSE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.CannaFieldSE;
+        }
+        else if (collision.name == "CannaHouse2CannaFieldNW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.CannaFieldNW;
+        }
+        else if (collision.name == "FarmNW2Campus")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.Campus;
+        }
+        else if (collision.name == "FarmNW2FarmNC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmNC;
+        }
+        else if (collision.name == "FarmNW2FarmWC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmWC;
+        }
+        else if (collision.name == "FarmNC2FarmNW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmNW;
+        }
+        else if (collision.name == "FarmNC2FarmNE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmNE;
+        }
+        else if (collision.name == "FarmNC2FarmCC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmCC;
+        }
+        else if (collision.name == "FarmNE2FarmEC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmEC;
+        }
+        else if (collision.name == "FarmNE2FarmNC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmNC;
+        }
+        else if (collision.name == "FarmWC2FarmCC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmCC;
+        }
+        else if (collision.name == "FarmWC2FarmSW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmSW;
+        }
+        else if (collision.name == "FarmWC2FarmNW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmNW;
+        }
+        else if (collision.name == "FarmCC2FarmWC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmWC;
+        }
+        else if (collision.name == "FarmCC2FarmEC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmEC;
+        }
+        else if (collision.name == "FarmCC2FarmNC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmNC;
+        }
+        else if (collision.name == "FarmCC2FarmSC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmSC;
+        }
+        else if (collision.name == "FarmEC2FarmNE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmNE;
+        }
+        else if (collision.name == "FarmEC2FarmSE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmSE;
+        }
+        else if (collision.name == "FarmEC2FarmCC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmCC;
+        }
+        else if (collision.name == "FarmSW2FarmSC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmSC;
+        }
+        else if (collision.name == "FarmSW2FarmWC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmWC;
+        }
+        else if (collision.name == "FarmSW2HousesS")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.HousesS;
+        }
+        else if (collision.name == "FarmSC2FarmSW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmSW;
+        }
+        else if (collision.name == "FarmSC2FarmSE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmSE;
+        }
+        else if (collision.name == "FarmSC2FarmCC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmCC;
+        }
+        else if (collision.name == "FarmSE2FarmEC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmEC;
+        }
+        else if (collision.name == "FarmSE2FarmSC")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmSC;
+        }
+        else if (collision.name == "Home2CannaFieldNW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.CannaFieldNW;
+        }
+        else if (collision.name == "Home2PlaygroundW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.PlaygroundW;
+        }
+        else if (collision.name == "Home2HousesW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.HousesW;
+        }
+        else if (collision.name == "HousesE2PlaygroundE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.PlaygroundE;
+        }
+        else if (collision.name == "HousesE2BatterySE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BatterySE;
+        }
+        else if (collision.name == "HousesN2BuildersNE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.BuildersNE;
+        }
+        else if (collision.name == "HousesN2PlaygroundN")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.PlaygroundN;
+        }
+        else if (collision.name == "HousesN2River")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.River;
+        }
+        else if (collision.name == "HousesS2PlaygroundS")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.PlaygroundS;
+        }
+        else if (collision.name == "HousesS2FarmSW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.FarmSW;
+        }
+        else if (collision.name == "HousesW2WoodsWAlpha" ||
+                 collision.name == "HousesW2WoodsWBeta" ||
+                 collision.name == "HousesW2WoodsWGamma")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.WoodsW;
+        }
+        else if (collision.name == "HousesW2Home")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.Home;
+        }
+        else if (collision.name == "Lake2River")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.River;
+        }
+        else if (collision.name == "Lake2PlaygroundN")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.PlaygroundN;
+        }
+        else if (collision.name == "PlaygroundE2HousesE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.HousesE;
+        }
+        else if (collision.name == "PlaygroundE2RaceTrackE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.RaceTrackE;
+        }
+        else if (collision.name == "PlaygroundN2HousesN")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.HousesN;
+        }
+        else if (collision.name == "PlaygroundN2Lake")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.Lake;
+        }
+        else if (collision.name == "PlaygroundS2HousesS")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.HousesS;
+        }
+        else if (collision.name == "PlaygroundW2WoodsW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideLeft();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.WoodsW;
+        }
+        else if (collision.name == "PlaygroundW2Home")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.Home;
+        }
+        else if (collision.name == "RaceTrackE2PlaygroundE")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.PlaygroundE;
+        }
+        else if (collision.name == "River2Lake")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.Lake;
+        }
+        else if (collision.name == "River2HousesN")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.HousesN;
+        }
+        else if (collision.name == "WoodsW2PlaygroundW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideRight();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.PlaygroundW;
+        }
+        else if (collision.name == "WoodsW2HousesWAlpha" ||
+                 collision.name == "WoodsW2HousesWBeta" ||
+                 collision.name == "WoodsW2HousesWGamma")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.HousesW;
+        }
+        else if (collision.name == "WoodsW2WoodsWSecret")
+        {
+            CollisionBundle();
+            cameraSlider.SlideUp();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.WoodsWSecret;
+        }
+        else if (collision.name == "WoodsWSecret2WoodsW")
+        {
+            CollisionBundle();
+            cameraSlider.SlideDown();
+            cameraFollow.currentCoords = CameraFollow.AnandaCoords.WoodsW;
         }
 
         // Overworld Warps

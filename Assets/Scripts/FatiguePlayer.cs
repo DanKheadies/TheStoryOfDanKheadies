@@ -10,13 +10,12 @@ using UnityEngine;
 // Means and methods to reduce the player's brio
 public class FatiguePlayer : MonoBehaviour
 {
-    public int damageToGive;
+    public int negativeBrio;
 
 	void Start () {
 		
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}
@@ -25,7 +24,7 @@ public class FatiguePlayer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerBrioManager>().FatiguePlayer(damageToGive);
+            collision.gameObject.GetComponent<PlayerBrioManager>().FatiguePlayer(negativeBrio);
         }
     }
 }

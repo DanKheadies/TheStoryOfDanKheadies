@@ -49,7 +49,15 @@ public class SaveGame : MonoBehaviour
         PlayerPrefs.SetFloat("Cam_y", savedCamera.transform.position.y);
         PlayerPrefs.SetFloat("P_x", savedPlayer.transform.position.x);
         PlayerPrefs.SetFloat("P_y", savedPlayer.transform.position.y);
+        PlayerPrefs.SetInt("AnandaCoord", (int)camFollow.currentCoords);
         PlayerPrefs.SetFloat("Brio", savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio);
+
+        // Check saved values
+        Debug.Log("Cam: (" + PlayerPrefs.GetFloat("Cam_x") + "," + PlayerPrefs.GetFloat("Cam_y") + ")");
+        Debug.Log("Dan: (" + PlayerPrefs.GetFloat("P_x") + "," + PlayerPrefs.GetFloat("P_y") + ")");
+        Debug.Log("Loc: " + PlayerPrefs.GetInt("AnandaCoord"));
+        Debug.Log("Loc: " + (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord"));
+        Debug.Log("Bri: " + PlayerPrefs.GetFloat("Brio"));
 
         // On Quit, resumes time
         if (bQuit)
@@ -63,6 +71,9 @@ public class SaveGame : MonoBehaviour
     public void SavingVolume()
     {
         PlayerPrefs.SetFloat("Volume", savedVol.currentVolumeLevel); // Called in VolumeManager
+
+        // Check saved values
+        Debug.Log("Vol: " + PlayerPrefs.GetFloat("Volume"));
     }
 
     // Saves UI controls' opacity and  data
@@ -78,62 +89,49 @@ public class SaveGame : MonoBehaviour
         {
             PlayerPrefs.SetInt("ControlsActive", 0);
         }
+
+        // Check saved values
+        Debug.Log("Opa: " + PlayerPrefs.GetFloat("ControlsOpac"));
+        Debug.Log("Act: " + PlayerPrefs.GetInt("ControlsActive"));
     }
 
     // Loads *all* user data at the start
     public void GetSavedGame()
     {
-        savedCamera.transform.position = new Vector2(
-            PlayerPrefs.GetFloat("Cam_x"),
-            PlayerPrefs.GetFloat("Cam_y"));
-        savedPlayer.transform.position = new Vector2(
-            PlayerPrefs.GetFloat("P_x"),
-            PlayerPrefs.GetFloat("P_y"));
-        savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio = PlayerPrefs.GetFloat("Brio");
+        // Temp delete all for testing
+        //PlayerPrefs.DeleteAll();
 
-        // DC 08/26/2017 -- Weird bug that gives 5 Brio every time you Save & Quit and then Start
+        // Use initial values if no saved data
+        if (PlayerPrefs.GetInt("AnandaCoord") == 0)
+        {
+            savedPlayer.transform.position = new Vector2(-13, -8);
 
-        float posX = Mathf.SmoothDamp(savedCamera.transform.position.x, savedPlayer.transform.position.x, ref camFollow.smoothVelocity.x, camFollow.smoothTime);
-        float posY = Mathf.SmoothDamp(savedCamera.transform.position.y, savedPlayer.transform.position.y, ref camFollow.smoothVelocity.y, camFollow.smoothTime);
-        savedCamera.transform.position = new Vector3(posX, posY, -10);
+            savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio = savedPlayer.GetComponent<PlayerBrioManager>().playerMaxBrio;
+            // DC 08/26/2017 -- Weird bug that gives 5 Brio every time you Save & Quit and then Start
 
-        float num = 5.12f;
+            camFollow.currentCoords = CameraFollow.AnandaCoords.Home;
 
-        // Sets the camera's location based off saved data
-        if (savedPlayer.transform.position.x >= num * 0 &&
-            savedPlayer.transform.position.x <= num * 1 &&
-            savedPlayer.transform.position.y >= num * 0 &&
-            savedPlayer.transform.position.y <= num * 1)
-        {
-            camFollow.bHome = true;
+            savedCamera.transform.position = new Vector2(-13, -8);
+            //float posX = Mathf.SmoothDamp(savedCamera.transform.position.x, savedPlayer.transform.position.x, ref camFollow.smoothVelocity.x, camFollow.smoothTime);
+            //float posY = Mathf.SmoothDamp(savedCamera.transform.position.y, savedPlayer.transform.position.y, ref camFollow.smoothVelocity.y, camFollow.smoothTime);
+            //savedCamera.transform.position = new Vector3(posX, posY, -10);
+
         }
-        else if (savedPlayer.transform.position.x >= num * 1 &&
-            savedPlayer.transform.position.x <= num * 2 &&
-            savedPlayer.transform.position.y >= num * 0 &&
-            savedPlayer.transform.position.y <= num * 1)
+        else
         {
-            camFollow.bField = true;
-        }
-        else if (savedPlayer.transform.position.x >= num * 2 &&
-            savedPlayer.transform.position.x <= num * 3 &&
-            savedPlayer.transform.position.y >= num * 0 &&
-            savedPlayer.transform.position.y <= num * 1)
-        {
-            camFollow.bFarm = true;
-        }
-        else if (savedPlayer.transform.position.x >= num * 3 &&
-            savedPlayer.transform.position.x <= num * 5 &&
-            savedPlayer.transform.position.y >= num * 0 &&
-            savedPlayer.transform.position.y <= num * 2)
-        {
-            camFollow.bCampus = true;
-        }
-        else if (savedPlayer.transform.position.x >= num * 0 &&
-            savedPlayer.transform.position.x <= num * 1 &&
-            savedPlayer.transform.position.y >= num * 1 &&
-            savedPlayer.transform.position.y <= num * 2)
-        {
-            camFollow.bPlay = true;
+            savedPlayer.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("P_x"),
+                PlayerPrefs.GetFloat("P_y"));
+
+            savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio = PlayerPrefs.GetFloat("Brio");
+            // DC 08/26/2017 -- Weird bug that gives 5 Brio every time you Save & Quit and then Start
+
+            savedCamera.transform.position = new Vector2(PlayerPrefs.GetFloat("Cam_x"), PlayerPrefs.GetFloat("Cam_y"));
+            float posX = Mathf.SmoothDamp(savedCamera.transform.position.x, savedPlayer.transform.position.x, ref camFollow.smoothVelocity.x, camFollow.smoothTime);
+            float posY = Mathf.SmoothDamp(savedCamera.transform.position.y, savedPlayer.transform.position.y, ref camFollow.smoothVelocity.y, camFollow.smoothTime);
+            savedCamera.transform.position = new Vector3(posX, posY, -10);
+
+            camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord");
         }
     }
 }

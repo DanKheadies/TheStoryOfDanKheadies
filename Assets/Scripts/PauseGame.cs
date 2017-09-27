@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/26/2017
-// Last:  08/26/2017
+// Last:  09/24/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -20,12 +20,16 @@ public class PauseGame : MonoBehaviour
 
     void Start ()
     {
+        // Initializers
         pauseTrans = GameObject.FindGameObjectWithTag("Pause").GetComponent<Transform>();
         pauseMenu = GameObject.Find("PauseMenu").transform;
         soundMenu = GameObject.Find("SoundMenu").transform;
         controlsMenu = GameObject.Find("ControlsMenu").transform;
 
+        // Hide Pause screen
         pauseTrans.gameObject.SetActive(false);
+
+        // Set Pause screen scale (workaround: set to 0,0,0 in Unity to see the GameScene
         pauseTrans.transform.localScale = new Vector3(1, 1, 1);
     } 
 

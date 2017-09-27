@@ -11,11 +11,6 @@ using UnityEngine.SceneManagement;
 // For Buttons only: transition scene or quiting game
 public class MenuControl : MonoBehaviour
 {
-    void Start()
-    {
-        
-    } 
-
     public void EndGame()
     {
         Application.Quit();
