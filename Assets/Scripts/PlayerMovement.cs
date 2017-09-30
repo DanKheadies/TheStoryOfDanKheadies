@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/27/2017
+// Last:  09/29/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ using UnityStandardAssets.CrossPlatformInput;
 public class PlayerMovement : MonoBehaviour
 {
     public Animator anim;
+    private AspectUtility aspectUtil;
     private CameraFollow cameraFollow;
     private CameraSlider cameraSlider;
     private PlayerBrioManager playerBrioMan;
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Initializers
         anim = GetComponent<Animator>();
+        aspectUtil = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AspectUtility>();
         cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
         cameraSlider = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraSlider>();
         playerBrioMan = GetComponent<PlayerBrioManager>();
@@ -109,13 +111,26 @@ public class PlayerMovement : MonoBehaviour
 
     public void CollisionBundle()
     {
+        // Note: order is important
+        // Reset Camera dimension / ratio incase screen size changed at all (e.g. WebGL Fullscreen)
+        aspectUtil.Awake();
+
+        // "Stop" player animation
         anim.speed = 0.001f;
+
+        // Unsync and stop camera tracking
         cameraFollow.currentCoords = 0;
         cameraFollow.bUpdateOn = false;
+
+        // Hide UI (if present) and prevent input
         cameraSlider.bTempControlActive = uiMan.bControlsActive;
         touches.GetComponent<Canvas>().enabled = false;
         touches.UnpressedAllArrows();
+
+        // Prevent player movement
         bStopPlayerMovement = true;
+
+        // Prevent player interactions (e.g. other tripwires)
         playerCollider.enabled = false;
     }
 
