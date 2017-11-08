@@ -53,18 +53,11 @@ public class SaveGame : MonoBehaviour
         PlayerPrefs.SetFloat("Brio", savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio);
 
         // Check saved values
-        Debug.Log("Cam: (" + PlayerPrefs.GetFloat("Cam_x") + "," + PlayerPrefs.GetFloat("Cam_y") + ")");
-        Debug.Log("Dan: (" + PlayerPrefs.GetFloat("P_x") + "," + PlayerPrefs.GetFloat("P_y") + ")");
-        Debug.Log("Loc: " + PlayerPrefs.GetInt("AnandaCoord"));
-        Debug.Log("Loc: " + (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord"));
-        Debug.Log("Bri: " + PlayerPrefs.GetFloat("Brio"));
-
-        // On Quit, resumes time
-        if (bQuit)
-        {
-            Time.timeScale = 1;
-            menuCont.LoadScene("MainMenu_Animation");
-        }
+        //Debug.Log("Cam: (" + PlayerPrefs.GetFloat("Cam_x") + "," + PlayerPrefs.GetFloat("Cam_y") + ")");
+        //Debug.Log("Dan: (" + PlayerPrefs.GetFloat("P_x") + "," + PlayerPrefs.GetFloat("P_y") + ")");
+        //Debug.Log("Loc: " + PlayerPrefs.GetInt("AnandaCoord"));
+        //Debug.Log("Loc: " + (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord"));
+        //Debug.Log("Bri: " + PlayerPrefs.GetFloat("Brio"));
     }
 
     // Saves UI Volume data
@@ -132,6 +125,15 @@ public class SaveGame : MonoBehaviour
             savedCamera.transform.position = new Vector3(posX, posY, -10);
 
             camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord");
+        }
+    }
+
+    public void QuitGame(bool bQuit)
+    {
+        if (bQuit)
+        {
+            Time.timeScale = 1;
+            menuCont.LoadScene("MainMenu_Animation");
         }
     }
 }
