@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  09/29/2017
+// Last:  11/15/2017
 
 using System.Collections;
 using System.Collections.Generic;
@@ -128,12 +128,12 @@ public class SaveGame : MonoBehaviour
         }
     }
 
-    public void QuitGame(bool bQuit)
-    {
-        if (bQuit)
-        {
-            Time.timeScale = 1;
-            menuCont.LoadScene("MainMenu_Animation");
-        }
-    }
+    //public void QuitGame(bool bQuit)
+    //{
+    //    if (bQuit)
+    //    {
+    //        Time.timeScale = 1;
+    //        menuCont.LoadScene("MainMenu_Animation");
+    //    }
+    //}
 }

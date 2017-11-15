@@ -1,8 +1,15 @@
-﻿using System.Collections;
+﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
+// Authors: David W. Corso
+// Start: 11/08/2017
+// Last:  11/08/2017
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
+// To "move" and execute the arrows on the Pause Menu
 public class MovePauseMenuArrow : MonoBehaviour
 {
     private Button GoOnBtn;
@@ -21,7 +28,8 @@ public class MovePauseMenuArrow : MonoBehaviour
     private GameObject ControlsArw;
     private GameObject QuitArw;
 
-    //public int[] arrowPositions;
+    private Scene scene;
+
 
     public enum ArrowPos : int
     {
@@ -55,6 +63,9 @@ public class MovePauseMenuArrow : MonoBehaviour
         ControlsArw = GameObject.Find("ControlsArw");
         QuitArw = GameObject.Find("QuitArw");
 
+        scene = SceneManager.GetActiveScene();
+
+
         currentPosition = ArrowPos.GoOn;
     }
 	
@@ -75,9 +86,18 @@ public class MovePauseMenuArrow : MonoBehaviour
         {
             if (currentPosition == ArrowPos.GoOn)
             {
-                currentPosition = ArrowPos.Save;
-                ClearAllArrows();
-                SaveArw.transform.localScale = new Vector3(1, 1, 1);
+                if (scene.name == "Showdown")
+                {
+                    currentPosition = ArrowPos.Sound;
+                    ClearAllArrows();
+                    SoundArw.transform.localScale = new Vector3(1, 1, 1);
+                }
+                else
+                {
+                    currentPosition = ArrowPos.Save;
+                    ClearAllArrows();
+                    SaveArw.transform.localScale = new Vector3(1, 1, 1);
+                }
             }
             else if (currentPosition == ArrowPos.Save)
             {
@@ -133,26 +153,35 @@ public class MovePauseMenuArrow : MonoBehaviour
             }
             else if (currentPosition == ArrowPos.Sound)
             {
-                // currentPosition = ArrowPos.Map;
-                ClearAllArrows();
-                MapArw.transform.localScale = new Vector3(1, 1, 1);
+                //currentPosition = ArrowPos.Map;
+                //ClearAllArrows();
+                //MapArw.transform.localScale = new Vector3(1, 1, 1);
 
                 // Temp: Skip the Stuff & Map until built / accessible
-                currentPosition = ArrowPos.Save;
-                ClearAllArrows();
-                SaveArw.transform.localScale = new Vector3(1, 1, 1);
+                if (scene.name == "Showdown")
+                {
+                    currentPosition = ArrowPos.GoOn;
+                    ClearAllArrows();
+                    GoOnArw.transform.localScale = new Vector3(1, 1, 1);
+                }
+                else
+                {
+                    currentPosition = ArrowPos.Save;
+                    ClearAllArrows();
+                    SaveArw.transform.localScale = new Vector3(1, 1, 1);
+                }
             }
             else if (currentPosition == ArrowPos.Map)
             {
                 currentPosition = ArrowPos.Stuff;
                 ClearAllArrows();
-                MapArw.transform.localScale = new Vector3(1, 1, 1);
+                StuffArw.transform.localScale = new Vector3(1, 1, 1);
             }
             else if (currentPosition == ArrowPos.Stuff)
             {
                 currentPosition = ArrowPos.Save;
                 ClearAllArrows();
-                StuffArw.transform.localScale = new Vector3(1, 1, 1);
+                SaveArw.transform.localScale = new Vector3(1, 1, 1);
             }
             else if (currentPosition == ArrowPos.Save)
             {

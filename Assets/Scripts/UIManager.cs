@@ -1,25 +1,27 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  09/17/2017
+// Last:  11/15/2017
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 // Manage Overworld UI Display
 public class UIManager : MonoBehaviour
 {
     public CanvasGroup contOpacCan;
-    private CanvasGroup sliderCanvas;
-    private DialogueManager dMan;
+    public CanvasGroup sliderCanvas;
+    public DialogueManager dMan;
     public PlayerBrioManager playerBrio;
+    public Scene currScene;
     public Slider brioBar;
-    private Slider contOpacSlider;
+    public Slider contOpacSlider;
     public Text brioText;
-    private Toggle conTog;
-    private TouchControls touches;
+    public Toggle conTog;
+    public TouchControls touches;
 
     public bool bControlsActive;
 
@@ -29,13 +31,21 @@ public class UIManager : MonoBehaviour
     void Start ()
     {
         // Initializers
+        if (currScene.name != "Showdown2")
+        {
+            playerBrio = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBrioManager>();
+        }
+        brioBar = GameObject.Find("BrioBar").GetComponent<Slider>();
+        brioText = GameObject.Find("BrioText").GetComponent<Text>();
         contOpacCan = GameObject.Find("GUIControls").GetComponent<CanvasGroup>();
         contOpacSlider = GameObject.Find("ShowButtonsSlider").GetComponent<Slider>();
         conTog = GameObject.Find("ShowButtonsToggle").GetComponent<Toggle>();
+        currScene = SceneManager.GetActiveScene();
         dMan = GameObject.FindObjectOfType<DialogueManager>();
         sliderCanvas = GetComponent<CanvasGroup>();
         touches = FindObjectOfType<TouchControls>();
         
+
         // Sets initial activation off saved data
         if (!PlayerPrefs.HasKey("ControlsActive"))
         {
@@ -102,6 +112,7 @@ public class UIManager : MonoBehaviour
         contOpacCan.alpha = currentContOpac;
     }
 
+    // Toggles the UI controls
     public void ToggleControls()
     {
         if (bControlsActive)
@@ -115,4 +126,7 @@ public class UIManager : MonoBehaviour
             bControlsActive = true;
         }
     }
+
+    // Adjusts the volume slider based off keyboard input
+    // DC 11/14/2017 -- TODO: Adjusts the volume slider based off keyboard input
 }
