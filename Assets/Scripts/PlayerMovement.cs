@@ -56,11 +56,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Set boosting
-        if (Input.GetButtonDown("Boost"))
+        if (Input.GetButtonDown("Boost") || Input.GetButtonDown("Boost2"))
         {
             bBoosting = true;
         }
-        else if (Input.GetButtonUp("Boost"))
+        else if (Input.GetButtonUp("Boost") || Input.GetButtonUp("Boost2"))
         {
             bBoosting = false;
         }

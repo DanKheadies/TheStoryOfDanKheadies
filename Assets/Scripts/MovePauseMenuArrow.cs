@@ -80,7 +80,7 @@ public class MovePauseMenuArrow : MonoBehaviour
         //    );
         //Debug.Log(newfloat);
         //Debug.Log((int)currentPosition);
-        
+
         if (Input.GetKeyDown(KeyCode.S) ||
             Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -88,9 +88,9 @@ public class MovePauseMenuArrow : MonoBehaviour
             {
                 if (scene.name == "Showdown")
                 {
-                    currentPosition = ArrowPos.Sound;
+                    currentPosition = ArrowPos.Stuff;
                     ClearAllArrows();
-                    SoundArw.transform.localScale = new Vector3(1, 1, 1);
+                    StuffArw.transform.localScale = new Vector3(1, 1, 1);
                 }
                 else
                 {
@@ -101,20 +101,26 @@ public class MovePauseMenuArrow : MonoBehaviour
             }
             else if (currentPosition == ArrowPos.Save)
             {
-                //// currentPosition = ArrowPos.Stuff;
-                //ClearAllArrows();
-                //StuffArw.transform.localScale = new Vector3(1, 1, 1);
-
-                // Temp: Skip the Stuff & Map until built / accessible
-                currentPosition = ArrowPos.Sound;
+                currentPosition = ArrowPos.Stuff;
                 ClearAllArrows();
-                SoundArw.transform.localScale = new Vector3(1, 1, 1);
+                StuffArw.transform.localScale = new Vector3(1, 1, 1);
+
+                // DC TODO remove below section
+                //// Temp: Skip the Stuff & Map until built / accessible
+                //currentPosition = ArrowPos.Sound;
+                //ClearAllArrows();
+                //SoundArw.transform.localScale = new Vector3(1, 1, 1);
             }
             else if (currentPosition == ArrowPos.Stuff)
             {
-                currentPosition = ArrowPos.Map;
+                //currentPosition = ArrowPos.Map;
+                //ClearAllArrows();
+                //MapArw.transform.localScale = new Vector3(1, 1, 1);
+
+                // Temp: Skip the Map until built / accessible
+                currentPosition = ArrowPos.Sound;
                 ClearAllArrows();
-                MapArw.transform.localScale = new Vector3(1, 1, 1);
+                SoundArw.transform.localScale = new Vector3(1, 1, 1);
             }
             else if (currentPosition == ArrowPos.Map)
             {
@@ -153,11 +159,32 @@ public class MovePauseMenuArrow : MonoBehaviour
             }
             else if (currentPosition == ArrowPos.Sound)
             {
-                //currentPosition = ArrowPos.Map;
-                //ClearAllArrows();
-                //MapArw.transform.localScale = new Vector3(1, 1, 1);
+                if (scene.name == "Showdown")
+                {
+                    currentPosition = ArrowPos.Stuff;
+                    ClearAllArrows();
+                    StuffArw.transform.localScale = new Vector3(1, 1, 1);
+                }
+                else
+                {
+                    //currentPosition = ArrowPos.Map;
+                    //ClearAllArrows();
+                    //MapArw.transform.localScale = new Vector3(1, 1, 1);
 
-                // Temp: Skip the Stuff & Map until built / accessible
+                    // Temp: Skip Map and go to Stuff
+                    currentPosition = ArrowPos.Stuff;
+                    ClearAllArrows();
+                    StuffArw.transform.localScale = new Vector3(1, 1, 1);
+                }
+            }
+            else if (currentPosition == ArrowPos.Map)
+            {
+                currentPosition = ArrowPos.Stuff;
+                ClearAllArrows();
+                StuffArw.transform.localScale = new Vector3(1, 1, 1);
+            }
+            else if (currentPosition == ArrowPos.Stuff)
+            {
                 if (scene.name == "Showdown")
                 {
                     currentPosition = ArrowPos.GoOn;
@@ -170,18 +197,6 @@ public class MovePauseMenuArrow : MonoBehaviour
                     ClearAllArrows();
                     SaveArw.transform.localScale = new Vector3(1, 1, 1);
                 }
-            }
-            else if (currentPosition == ArrowPos.Map)
-            {
-                currentPosition = ArrowPos.Stuff;
-                ClearAllArrows();
-                StuffArw.transform.localScale = new Vector3(1, 1, 1);
-            }
-            else if (currentPosition == ArrowPos.Stuff)
-            {
-                currentPosition = ArrowPos.Save;
-                ClearAllArrows();
-                SaveArw.transform.localScale = new Vector3(1, 1, 1);
             }
             else if (currentPosition == ArrowPos.Save)
             {
@@ -221,6 +236,10 @@ public class MovePauseMenuArrow : MonoBehaviour
             {
                 QuitBtn.onClick.Invoke();
             }
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SaveBtn.GetComponentInChildren<Text>().text = "Save";
         }
     }
 

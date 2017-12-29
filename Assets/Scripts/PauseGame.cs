@@ -16,6 +16,7 @@ public class PauseGame : MonoBehaviour
     public Transform pauseMenu;
     public Transform pauseTrans;
     public Transform soundMenu;
+    public Transform stuffMenu;
 
 
     void Start ()
@@ -23,6 +24,7 @@ public class PauseGame : MonoBehaviour
         // Initializers
         pauseTrans = GameObject.FindGameObjectWithTag("Pause").GetComponent<Transform>();
         pauseMenu = GameObject.Find("PauseMenu").transform;
+        stuffMenu = GameObject.Find("StuffMenu").transform;
         soundMenu = GameObject.Find("SoundMenu").transform;
         controlsMenu = GameObject.Find("ControlsMenu").transform;
 
@@ -48,6 +50,7 @@ public class PauseGame : MonoBehaviour
             if (pauseMenu.gameObject.activeInHierarchy == false)
             {
                 pauseMenu.gameObject.SetActive(true);
+                stuffMenu.gameObject.SetActive(false);
                 soundMenu.gameObject.SetActive(false);
                 controlsMenu.gameObject.SetActive(false);
             }
@@ -58,6 +61,20 @@ public class PauseGame : MonoBehaviour
         {
             pauseTrans.gameObject.SetActive(false);
             Time.timeScale = 1;
+        }
+    }
+
+    public void Stuff(bool bOpen)
+    {
+        if (bOpen)
+        {
+            stuffMenu.gameObject.SetActive(true);
+            pauseMenu.gameObject.SetActive(false);
+        }
+        else
+        {
+            stuffMenu.gameObject.SetActive(false);
+            pauseMenu.gameObject.SetActive(true);
         }
     }
 

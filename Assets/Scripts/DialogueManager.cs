@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
     public AspectUtility aspectUtil;
     private Animator anim;
     public CameraFollow oCamera;
+    private CannabisPlant cannaP;
     public GameObject dbox;
     public ImageStrobe imgStrobe;
     private PlayerMovement thePlayer;
@@ -43,6 +44,7 @@ public class DialogueManager : MonoBehaviour
     {
         // Initializers
         aspectUtil = GetComponent<AspectUtility>();
+        cannaP = FindObjectOfType<CannabisPlant>();
         oCamera = FindObjectOfType<CameraFollow>();
         scene = SceneManager.GetActiveScene();
         thePlayer = FindObjectOfType<PlayerMovement>();
@@ -71,12 +73,10 @@ public class DialogueManager : MonoBehaviour
         {
             if (scene.name == "Showdown")
             {
-                Debug.Log("Showndow");
                 ConfigureShowdownParameters();
             }
             else
             {
-                Debug.Log("Normal");
                 ConfigureParameters();
             }
         }
@@ -114,6 +114,9 @@ public class DialogueManager : MonoBehaviour
                     touches.GetComponent<Canvas>().enabled = true;
                 }
             }
+
+            // Hide Items
+            cannaP.HideBud();
         }
 
         // Set current text
