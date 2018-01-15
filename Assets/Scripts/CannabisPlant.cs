@@ -17,6 +17,7 @@ public class CannabisPlant : MonoBehaviour
     public GameObject player;
     private GameObject purpleBud;
     private GameObject whiteBud;
+    private Inventory inv;
     private TouchControls touches;
 
     public bool bHasBud;
@@ -35,6 +36,7 @@ public class CannabisPlant : MonoBehaviour
         anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         greenBud = GameObject.Find("Cannabis.Bud.Green");
         orangeBud = GameObject.Find("Cannabis.Bud.Orange");
+        inv = GameObject.Find("Inventory").GetComponent<Inventory>();
         player = GameObject.FindGameObjectWithTag("Player");
         purpleBud = GameObject.Find("Cannabis.Bud.Purple");
         theDM = FindObjectOfType<DialogueManager>();
@@ -67,29 +69,28 @@ public class CannabisPlant : MonoBehaviour
                 if (bHasBud)
                 {
                     anim.Play("Acquire");
-
-                    //DisplayBud();
-                    Debug.Log("yarp");
+                    
+                    // Display and add bud to inventory
                     if (this.bGreen)
                     {
                         greenBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+                        inv.AddItem(0);
                     }
                     else if (this.bOrange)
                     {
                         orangeBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+                        inv.AddItem(2);
                     }
                     else if (this.bPurple)
                     {
                         purpleBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+                        inv.AddItem(1);
                     }
                     else if (this.bWhite)
                     {
-                        Debug.Log("white");
                         whiteBud.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                        whiteBud.GetComponent<Transform>().position = new Vector3(player.transform.position.x, player.transform.position.y + 0.175f, 0.0f);
+                        inv.AddItem(3);
                     }
-
-                    // Add to inventory
 
                     theDM.dialogueLines = new string[HasBud.Length];
                     theDM.dialogueLines = HasBud;

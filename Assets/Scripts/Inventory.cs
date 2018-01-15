@@ -40,20 +40,6 @@ public class Inventory : MonoBehaviour
             itemShells[i].transform.SetParent(itemsContainer.transform);
             itemShells[i].transform.localScale = new Vector3(1, 1, 1);
         }
-
-        AddItem(0);
-        AddItem(1);
-        AddItem(1);
-        AddItem(1);
-        AddItem(1);
-        AddItem(1);
-        AddItem(1);
-        AddItem(2);
-        AddItem(1);
-        AddItem(2);
-        AddItem(2);
-        AddItem(3);
-        AddItem(0);
     }
 
     public void AddItem(int id)
@@ -85,11 +71,10 @@ public class Inventory : MonoBehaviour
                     itemObj.GetComponent<ItemData>().item = itemToAdd;
                     itemObj.GetComponent<ItemData>().amount = 1;
                     itemObj.GetComponent<ItemData>().itemShell = i;
-                    itemObj.transform.position = Vector2.zero;
+                    itemObj.transform.localPosition = Vector2.zero;
                     itemObj.GetComponent<Image>().sprite = itemToAdd.Sprite;
                     itemObj.name = itemToAdd.Title;
                     itemObj.transform.localScale = new Vector3(1, 1, 1);
-
                     break;
                 }
             }
