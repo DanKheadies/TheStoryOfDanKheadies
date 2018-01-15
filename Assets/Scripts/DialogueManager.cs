@@ -55,12 +55,12 @@ public class DialogueManager : MonoBehaviour
 
         if (scene.name == "Showdown")
         {
-            Debug.Log("Showndow");
+            // Debug.Log("Showndow");
             ConfigureShowdownParameters();
         }
         else
         {
-            Debug.Log("Normal");
+            // Debug.Log("Normal");
             ConfigureParameters();
         }
     }
