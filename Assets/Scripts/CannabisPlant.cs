@@ -18,6 +18,7 @@ public class CannabisPlant : MonoBehaviour
     private GameObject purpleBud;
     private GameObject whiteBud;
     private Inventory inv;
+    public InventoryItemTemplate item;
     private TouchControls touches;
 
     public bool bHasBud;
@@ -37,6 +38,7 @@ public class CannabisPlant : MonoBehaviour
         greenBud = GameObject.Find("Cannabis.Bud.Green");
         orangeBud = GameObject.Find("Cannabis.Bud.Orange");
         inv = GameObject.Find("Inventory").GetComponent<Inventory>();
+        //item = InventoryItemTemplate.FindObjectOfType<InventoryItemTemplate>();
         player = GameObject.FindGameObjectWithTag("Player");
         purpleBud = GameObject.Find("Cannabis.Bud.Purple");
         theDM = FindObjectOfType<DialogueManager>();
@@ -74,22 +76,34 @@ public class CannabisPlant : MonoBehaviour
                     if (this.bGreen)
                     {
                         greenBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
-                        inv.AddItem(0);
+                        Debug.Log("Collecting " + item.itemName);
+                        Inventory.instance.Adding(item);
+                        Debug.Log("Adding " + greenBud.transform.name + " to inventory");
+                        //inv.AddItem(0);
                     }
                     else if (this.bOrange)
                     {
                         orangeBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
-                        inv.AddItem(2);
+                        Debug.Log("Collecting " + orangeBud.transform.name);
+                        Inventory.instance.Adding(item);
+                        Debug.Log("Adding " + orangeBud.transform.name + " to inventory");
+                        //inv.AddItem(2);
                     }
                     else if (this.bPurple)
                     {
                         purpleBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
-                        inv.AddItem(1);
+                        Debug.Log("Collecting " + purpleBud.transform.name);
+                        Inventory.instance.Adding(item);
+                        Debug.Log("Adding " + purpleBud.transform.name + " to inventory");
+                        //inv.AddItem(1);
                     }
                     else if (this.bWhite)
                     {
                         whiteBud.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                        inv.AddItem(3);
+                        Debug.Log("Collecting " + whiteBud.transform.name);
+                        Inventory.instance.Adding(item);
+                        Debug.Log("Adding " + whiteBud.transform.name + " to inventory");
+                        //inv.AddItem(3);
                     }
 
                     theDM.dialogueLines = new string[HasBud.Length];
@@ -106,6 +120,7 @@ public class CannabisPlant : MonoBehaviour
                 }
 
                 touches.bAction = false;
+                
             }
         }
     }

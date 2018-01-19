@@ -11,86 +11,147 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    GameObject stuff;
-    GameObject itemsContainer;
-    public GameObject itemShell;
-    public GameObject item;
+    //GameObject stuff;
+    //GameObject itemsContainer;
+    //public GameObject itemShell;
+    //public GameObject item;
 
-    ItemDatabase itemDatabase;
+    //ItemDatabase itemDatabase;
 
-    int totalItems;
+    //int totalItems;
 
-    public List<Item> items = new List<Item>();
-    public List<GameObject> itemShells = new List<GameObject>();
+    //public List<Item> items = new List<Item>();
+    //public List<GameObject> itemShells = new List<GameObject>();
+
+    public List<InventoryItemTemplate> items2 = new List<InventoryItemTemplate>();
+    public static Inventory instance;
+    public int totalItems2;
+    public delegate void onItemChanged();
+    public onItemChanged onItemChangedCallback;
 
     void Awake()
     {
         // Initializers
-        itemDatabase = GetComponent<ItemDatabase>();
+        //itemDatabase = GetComponent<ItemDatabase>();
 
-        totalItems = 20;
-        stuff = GameObject.Find("StuffMenu");
-        itemsContainer = stuff.transform.FindChild("Items").gameObject;
+        //totalItems = 20;
+        //stuff = GameObject.Find("StuffMenu");
+        //itemsContainer = stuff.transform.FindChild("Items").gameObject;
 
-        for (int i = 0; i < totalItems; i++)
+        if (instance != null)
         {
-            items.Add(new Item());
-            itemShells.Add(Instantiate(itemShell));
-            itemShells[i].GetComponent<InventoryItemShell>().id = i;
-            itemShells[i].transform.SetParent(itemsContainer.transform);
-            itemShells[i].transform.localScale = new Vector3(1, 1, 1);
+            Debug.Log("More than one instance of inventory found");
+            return;
         }
+
+        instance = this;
+
+        totalItems2 = 20;
+
+        //for (int i = 0; i < totalItems; i++)
+        //{
+        //    items.Add(new Item());
+        //    itemShells.Add(Instantiate(itemShell));
+        //    itemShells[i].GetComponent<InventoryItemShell>().id = i;
+        //    itemShells[i].transform.SetParent(itemsContainer.transform);
+        //    itemShells[i].transform.localScale = new Vector3(1, 1, 1);
+        //}
+
+        //AddItem(0);
+        //AddItem(1);
     }
 
-    public void AddItem(int id)
+    //public void AddItem(int id)
+    //{
+    //    Item itemToAdd = itemDatabase.FetchItemByID(id);
+
+    //    if (itemToAdd.bStackable && CheckIfItemInInventory(itemToAdd))
+    //    {
+    //        for (int i = 0; i < items.Count; i++)
+    //        {
+    //            if (items[i].ID == id)
+    //            {
+    //                ItemData data = itemShells[i].transform.GetChild(0).GetComponent<ItemData>();
+    //                data.amount++;
+    //                data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+    //                break;
+    //            }
+    //        }
+    //    }
+    //    else
+    //    {
+    //        for (int i = 0; i < items.Count; i++)
+    //        {
+    //            if (items[i].ID == -1)
+    //            {
+    //                items[i] = itemToAdd;
+    //                GameObject itemObj = Instantiate(item);
+    //                itemObj.transform.SetParent(itemShells[i].transform);
+    //                itemObj.GetComponent<ItemData>().item = itemToAdd;
+    //                itemObj.GetComponent<ItemData>().amount = 1;
+    //                itemObj.GetComponent<ItemData>().itemShell = i;
+    //                itemObj.transform.localPosition = Vector2.zero;
+    //                itemObj.GetComponent<Image>().sprite = itemToAdd.Sprite;
+    //                itemObj.name = itemToAdd.Title;
+    //                itemObj.transform.localScale = new Vector3(1, 1, 1);
+    //                break;
+    //            }
+    //        }
+    //    }
+    //}
+
+    public bool Adding (InventoryItemTemplate item)
     {
-        Item itemToAdd = itemDatabase.FetchItemByID(id);
+        if (!item.isDefault)
+        {
+            if (items2.Count >= totalItems2)
+            {
+                Debug.Log("Not enough room.");
+                return false;
+            }
 
-        if (itemToAdd.bStackable && CheckIfItemInInventory(itemToAdd))
-        {
-            for (int i = 0; i < items.Count; i++)
+            items2.Add(item);
+
+            if (onItemChangedCallback != null)
             {
-                if (items[i].ID == id)
-                {
-                    ItemData data = itemShells[i].transform.GetChild(0).GetComponent<ItemData>();
-                    data.amount++;
-                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
-                    break;
-                }
+                onItemChangedCallback.Invoke();
             }
         }
-        else
-        {
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (items[i].ID == -1)
-                {
-                    items[i] = itemToAdd;
-                    GameObject itemObj = Instantiate(item);
-                    itemObj.transform.SetParent(itemShells[i].transform);
-                    itemObj.GetComponent<ItemData>().item = itemToAdd;
-                    itemObj.GetComponent<ItemData>().amount = 1;
-                    itemObj.GetComponent<ItemData>().itemShell = i;
-                    itemObj.transform.localPosition = Vector2.zero;
-                    itemObj.GetComponent<Image>().sprite = itemToAdd.Sprite;
-                    itemObj.name = itemToAdd.Title;
-                    itemObj.transform.localScale = new Vector3(1, 1, 1);
-                    break;
-                }
-            }
-        }
+
+        return true;
     }
 
-    bool CheckIfItemInInventory(Item item)
+    public void PickUpDestory(InventoryItemTemplate item)
     {
-        for (int i = 0; i < items.Count; i++)
-        {
-            if (items[i].ID == item.ID)
-            {
-                return true;
-            }
-        }
+        bool wasPickedUp = Inventory.instance.Adding(item);
 
-        return false;
+        // Remove item if needed
+        if (wasPickedUp)
+        {
+            Destroy(gameObject);
+        }
     }
+
+    public void Removing (InventoryItemTemplate item)
+    {
+        items2.Remove(item);
+
+        if (onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
+        }
+    }
+
+    //bool CheckIfItemInInventory(Item item)
+    //{
+    //    for (int i = 0; i < items.Count; i++)
+    //    {
+    //        if (items[i].ID == item.ID)
+    //        {
+    //            return true;
+    //        }
+    //    }
+
+    //    return false;
+    //}
 }

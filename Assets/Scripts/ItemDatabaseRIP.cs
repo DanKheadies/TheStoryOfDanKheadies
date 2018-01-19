@@ -16,6 +16,9 @@ public class ItemDatabase : MonoBehaviour
     private List<Item> database = new List<Item>();
     private JsonData itemData;
 
+    public string filePath;
+    public string result;
+
     void Awake()
     {
         itemData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/Items.json"));
