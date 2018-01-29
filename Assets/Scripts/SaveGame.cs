@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  11/15/2017
+// Last:  01/23/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -14,12 +14,15 @@ public class SaveGame : MonoBehaviour
     public Camera savedCamera;
     public CameraFollow camFollow;
     public GameObject savedPlayer;
+    public Inventory inv;
+    public Item tempItem;
     public MenuControl menuCont;
     public Scene scene;
     public UIManager uiMan;
     public VolumeManager savedVol;
 
     public float savedVolume;
+    private string savedItem;
 
     void Start()
     {
@@ -27,10 +30,13 @@ public class SaveGame : MonoBehaviour
         camFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
         savedCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         savedPlayer = GameObject.FindGameObjectWithTag("Player");
+        inv = GameObject.FindObjectOfType<Inventory>().GetComponent<Inventory>();
         menuCont = GetComponent<MenuControl>();
         scene = SceneManager.GetActiveScene();
         savedVol = FindObjectOfType<VolumeManager>();
+        tempItem = ScriptableObject.CreateInstance<Item>();
         uiMan = FindObjectOfType<UIManager>();
+
 
         // Avoid console error when no player object is present
         if (scene.name != "Showdown" ||
@@ -51,6 +57,12 @@ public class SaveGame : MonoBehaviour
         PlayerPrefs.SetFloat("P_y", savedPlayer.transform.position.y);
         PlayerPrefs.SetInt("AnandaCoord", (int)camFollow.currentCoords);
         PlayerPrefs.SetFloat("Brio", savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio);
+        
+        for (int i = 0; i < inv.items.Count; i++)
+        {
+            PlayerPrefs.SetString("Item" + i, inv.items[i].ToString());
+            PlayerPrefs.SetInt("Item Total", i+1);
+        }
 
         // Check saved values
         //Debug.Log("Cam: (" + PlayerPrefs.GetFloat("Cam_x") + "," + PlayerPrefs.GetFloat("Cam_y") + ")");
@@ -109,6 +121,14 @@ public class SaveGame : MonoBehaviour
             //float posY = Mathf.SmoothDamp(savedCamera.transform.position.y, savedPlayer.transform.position.y, ref camFollow.smoothVelocity.y, camFollow.smoothTime);
             //savedCamera.transform.position = new Vector3(posX, posY, -10);
 
+            for (int i = 0; i < PlayerPrefs.GetInt("Item Total"); i++)
+            {
+                savedItem = PlayerPrefs.GetString("Item" + i);
+                savedItem = savedItem.Substring(0, savedItem.Length - 7);
+
+                tempItem = (Item)Resources.Load("Items/" + savedItem);
+                Inventory.instance.Add(tempItem);
+            }
         }
         else
         {
@@ -125,6 +145,15 @@ public class SaveGame : MonoBehaviour
             savedCamera.transform.position = new Vector3(posX, posY, -10);
 
             camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord");
+            
+            for (int i = 0; i < PlayerPrefs.GetInt("Item Total"); i++)
+            {
+                savedItem = PlayerPrefs.GetString("Item" + i);
+                savedItem = savedItem.Substring(0, savedItem.Length - 7);
+
+                tempItem = (Item)Resources.Load("Items/" + savedItem);
+                Inventory.instance.Add(tempItem);
+            }
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/18/2017
-// Last:  09/16/2017
+// Last:  01/21/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -17,8 +17,8 @@ public class CannabisPlant : MonoBehaviour
     public GameObject player;
     private GameObject purpleBud;
     private GameObject whiteBud;
-    private Inventory inv;
-    public InventoryItemTemplate item;
+    public Inventory inv;
+    public Item item;
     private TouchControls touches;
 
     public bool bHasBud;
@@ -30,15 +30,15 @@ public class CannabisPlant : MonoBehaviour
 
     public string[] HasBud;
     public string[] NoBud;
+    public string[] outOfSpace;
 
     void Start()
     {
         // Initializers
         anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         greenBud = GameObject.Find("Cannabis.Bud.Green");
-        orangeBud = GameObject.Find("Cannabis.Bud.Orange");
         inv = GameObject.Find("Inventory").GetComponent<Inventory>();
-        //item = InventoryItemTemplate.FindObjectOfType<InventoryItemTemplate>();
+        orangeBud = GameObject.Find("Cannabis.Bud.Orange");
         player = GameObject.FindGameObjectWithTag("Player");
         purpleBud = GameObject.Find("Cannabis.Bud.Purple");
         theDM = FindObjectOfType<DialogueManager>();
@@ -68,7 +68,8 @@ public class CannabisPlant : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Space) ||
                 touches.bAction)
             {
-                if (bHasBud)
+                if (bHasBud &&
+                    inv.items.Count < inv.totalItems)
                 {
                     anim.Play("Acquire");
                     
@@ -76,41 +77,37 @@ public class CannabisPlant : MonoBehaviour
                     if (this.bGreen)
                     {
                         greenBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
-                        Debug.Log("Collecting " + item.itemName);
-                        Inventory.instance.Adding(item);
-                        Debug.Log("Adding " + greenBud.transform.name + " to inventory");
-                        //inv.AddItem(0);
+                        Inventory.instance.Add(item);
                     }
                     else if (this.bOrange)
                     {
                         orangeBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
-                        Debug.Log("Collecting " + orangeBud.transform.name);
-                        Inventory.instance.Adding(item);
-                        Debug.Log("Adding " + orangeBud.transform.name + " to inventory");
-                        //inv.AddItem(2);
+                        Inventory.instance.Add(item);
+
                     }
                     else if (this.bPurple)
                     {
                         purpleBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
-                        Debug.Log("Collecting " + purpleBud.transform.name);
-                        Inventory.instance.Adding(item);
-                        Debug.Log("Adding " + purpleBud.transform.name + " to inventory");
-                        //inv.AddItem(1);
+                        Inventory.instance.Add(item);
                     }
                     else if (this.bWhite)
                     {
                         whiteBud.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                        Debug.Log("Collecting " + whiteBud.transform.name);
-                        Inventory.instance.Adding(item);
-                        Debug.Log("Adding " + whiteBud.transform.name + " to inventory");
-                        //inv.AddItem(3);
+                        Inventory.instance.Add(item);
                     }
-
+                    
                     theDM.dialogueLines = new string[HasBud.Length];
                     theDM.dialogueLines = HasBud;
                     theDM.ShowDialogue();
 
                     this.bHasBud = false;
+                }
+                else if (bHasBud &&
+                    inv.items.Count >= inv.totalItems)
+                {
+                    string[] outOfSpace = { "Rats.. We have no more space for stuff." };
+                    theDM.dialogueLines = outOfSpace;
+                    theDM.ShowDialogue();
                 }
                 else
                 {

@@ -2,7 +2,7 @@
 // Authors: Asbjorn Thirslund (Brackeys)
 // Contributors: David W. Corso
 // Start: 01/18/2018
-// Last:  01/19/2018
+// Last:  01/29/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -10,27 +10,27 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    public Transform itemsParent;
     public GameObject inventoryUI;
-    GameObject pauseScreen;
+    private Inventory inventory;
+    private InventorySlot[] slots;
+    public Transform itemsParent;
+    public Transform itemMenu;
 
-    Inventory inventory;
 
-    InventorySlot[] slots;
-
-	void Start()
+    void Start()
     {
         inventory = Inventory.instance;
         inventory.onItemChangedCallback += UpdateUI;
+        itemMenu = GameObject.Find("ItemMenu").transform;
 
-        pauseScreen = GameObject.Find("PauseScreen");
+        itemMenu.gameObject.GetComponent<CanvasGroup>().alpha = 0;
 
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
-	}
+    }
 
     void Update()
     {
-        if(Input.GetButtonDown("Inventory"))
+        if (Input.GetButtonDown("Inventory"))
         {
             // Short-cut (b & i) to show hide inventory
             // Need to do more w/ Pause Screen logic
@@ -41,18 +41,18 @@ public class InventoryUI : MonoBehaviour
 
     void UpdateUI()
     {
-        Debug.Log("Updating UI");
-        
         for (int i = 0; i < slots.Length; i++)
         {
-            if (i < inventory.items2.Count)
+            if (i < inventory.items.Count)
             {
-                slots[i].AddItem(inventory.items2[i]);
+                slots[i].AddItem(inventory.items[i]);
             }
             else
             {
                 slots[i].ClearSlot();
             }
+
+            slots[i].itemId = i;
         }
     }
 }
