@@ -140,7 +140,7 @@ public class NPCMovement : MonoBehaviour
         }
 
         // Move if there is no dialogue prompt
-        if (!dMan.dialogueActive)
+        if (!dMan.bDialogueActive)
         {
             bCanMove = true;
         }

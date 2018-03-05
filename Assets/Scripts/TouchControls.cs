@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  09/17/2017
+// Last:  03/03/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -14,10 +14,11 @@ public class TouchControls : MonoBehaviour
     private PlayerMovement thePlayer;
 
     public bool bAction;
-    private bool bDown;
-    private bool bLeft;
-    private bool bRight;
-    private bool bUp;
+    public bool bBaction;
+    public bool bDown;
+    public bool bLeft;
+    public bool bRight;
+    public bool bUp;
 
 
     void Start ()
@@ -26,6 +27,7 @@ public class TouchControls : MonoBehaviour
         thePlayer = FindObjectOfType<PlayerMovement>();
 
         bAction = false;
+        bBaction = false;
         bDown = false;
         bLeft = false;
         bRight = false;
@@ -66,14 +68,16 @@ public class TouchControls : MonoBehaviour
         bAction = false;
     }
 
-    // Boosting / secondary button flags
+    // Baction (boosting / secondary) button flags
     public void StartBoosting()
     {
         thePlayer.bBoosting = true;
+        bBaction = true;
     }
     public void StopBoosting()
     {
         thePlayer.bBoosting = false;
+        bBaction = false;
     }
 
     // Movement / arrow button flags

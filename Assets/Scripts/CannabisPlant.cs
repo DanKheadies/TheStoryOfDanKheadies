@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/18/2017
-// Last:  01/21/2018
+// Last:  03/03/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using UnityEngine;
 public class CannabisPlant : MonoBehaviour
 {
     private Animator anim;
-    private DialogueManager theDM;
+    private DialogueManager dMan;
     private GameObject greenBud;
     private GameObject orangeBud;
     public GameObject player;
@@ -20,7 +20,9 @@ public class CannabisPlant : MonoBehaviour
     public Inventory inv;
     public Item item;
     private TouchControls touches;
+    private Touch[] touches2;
 
+    public bool bAcquiring;
     public bool bHasBud;
 
     public bool bGreen;
@@ -36,12 +38,12 @@ public class CannabisPlant : MonoBehaviour
     {
         // Initializers
         anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        dMan = FindObjectOfType<DialogueManager>();
         greenBud = GameObject.Find("Cannabis.Bud.Green");
         inv = GameObject.Find("Inventory").GetComponent<Inventory>();
         orangeBud = GameObject.Find("Cannabis.Bud.Orange");
         player = GameObject.FindGameObjectWithTag("Player");
         purpleBud = GameObject.Find("Cannabis.Bud.Purple");
-        theDM = FindObjectOfType<DialogueManager>();
         touches = FindObjectOfType<TouchControls>();
         whiteBud = GameObject.Find("Cannabis.Bud.White");
 
@@ -58,21 +60,26 @@ public class CannabisPlant : MonoBehaviour
 
     void Update()
     {
-
+        
     }
 
     void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (Input.GetKeyUp(KeyCode.Space) ||
-                touches.bAction)
+            if ((!dMan.bPauseDialogue && !bAcquiring && Input.GetButtonUp("Action")) ||
+                (!dMan.bPauseDialogue && !bAcquiring && touches.bAction))
             {
+                // bAcquiring prevents the dialogue from cycling too quickily, i.e. prevent "Has bud" & "No bud" in one 'click'
+                bAcquiring = false;
+
                 if (bHasBud &&
                     inv.items.Count < inv.totalItems)
                 {
+                    bAcquiring = true;
+
                     anim.Play("Acquire");
-                    
+
                     // Display and add bud to inventory
                     if (this.bGreen)
                     {
@@ -96,28 +103,30 @@ public class CannabisPlant : MonoBehaviour
                         Inventory.instance.Add(item);
                     }
                     
-                    theDM.dialogueLines = new string[HasBud.Length];
-                    theDM.dialogueLines = HasBud;
-                    theDM.ShowDialogue();
+                    dMan.dialogueLines = new string[HasBud.Length];
+                    dMan.dialogueLines = HasBud;
+                    dMan.ShowDialogue();
+                    Debug.Log("Acquiring Dialogue");
 
                     this.bHasBud = false;
+                    //this.GetComponent<Collider2D>().enabled = false;
                 }
                 else if (bHasBud &&
                     inv.items.Count >= inv.totalItems)
                 {
                     string[] outOfSpace = { "Rats.. We have no more space for stuff." };
-                    theDM.dialogueLines = outOfSpace;
-                    theDM.ShowDialogue();
+                    dMan.dialogueLines = outOfSpace;
+                    dMan.ShowDialogue();
                 }
                 else
                 {
-                    theDM.dialogueLines = new string[NoBud.Length];
-                    theDM.dialogueLines = NoBud;
-                    theDM.ShowDialogue();
+                    dMan.dialogueLines = new string[NoBud.Length];
+                    dMan.dialogueLines = NoBud;
+                    dMan.ShowDialogue();
+                    Debug.Log("No Bud Dialogue");
                 }
 
                 touches.bAction = false;
-                
             }
         }
     }

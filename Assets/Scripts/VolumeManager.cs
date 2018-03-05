@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/23/2017
-// Last:  09/17/2017
+// Last:  02/13/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ public class VolumeManager : MonoBehaviour
     public VolumeController[] vcObjects;
 
     public float currentVolumeLevel;
-    public float defaultVolume = 0.5f;
+    public float defaultVolume = 0.333f;
     public float maxVolumeLevel = 1.0f;
     public float minVolumeLevel = 0.0f;
 
@@ -28,10 +28,22 @@ public class VolumeManager : MonoBehaviour
         scene = SceneManager.GetActiveScene();
 
         // Scene Conditions
-        if (scene.name == "MainMenu")
+        if (scene.name == "MainMenu" ||
+            scene.name == "MainMenu_Animation")
         {
             // Initializers
             vcObjects = FindObjectsOfType<VolumeController>();
+
+            if (scene.name == "MainMenu")
+            {
+                //saved = GameObject.Find("Menu_Controller").GetComponent<SaveGame>();
+            }
+            else if (scene.name == "MainMenu_Animation")
+            {
+                //saved = GameObject.Find("MenuAnimation_Controller").GetComponent<SaveGame>();
+            }
+
+            GetAndSetVolume();
         }
         else
         {
@@ -40,22 +52,7 @@ public class VolumeManager : MonoBehaviour
             slider = GameObject.FindGameObjectWithTag("VolumeSlider").GetComponent<Slider>();
             vcObjects = FindObjectsOfType<VolumeController>();
 
-            // Sets initial volume based off saved data
-            if (!PlayerPrefs.HasKey("Volume"))
-            {
-                currentVolumeLevel = defaultVolume;
-            }
-            else
-            {
-                currentVolumeLevel = PlayerPrefs.GetFloat("Volume");
-                slider.value = currentVolumeLevel;
-            }
-            
-            // Sets all volume control objects to the current / saved volume
-            for (int i = 0; i < vcObjects.Length; i++)
-            {
-                vcObjects[i].SetAudioLevel(currentVolumeLevel);
-            }
+            GetAndSetVolume();
         }
 	}
 	
@@ -94,6 +91,35 @@ public class VolumeManager : MonoBehaviour
             {
                 currentVolumeLevel = minVolumeLevel;
             }
+        }
+    }
+
+    public void GetAndSetVolume ()
+    {
+        // Sets initial volume based off saved data
+        if (!PlayerPrefs.HasKey("Volume"))
+        {
+            currentVolumeLevel = defaultVolume;
+        }
+        else
+        {
+            currentVolumeLevel = PlayerPrefs.GetFloat("Volume");
+
+            if (scene.name == "MainMenu" ||
+                scene.name == "MainMenu_Animation")
+            {
+
+            }
+            else
+            {
+                slider.value = currentVolumeLevel;
+            }
+        }
+        
+        // Sets all volume control objects to the current / saved volume
+        for (int i = 0; i < vcObjects.Length; i++)
+        {
+            vcObjects[i].SetAudioLevel(currentVolumeLevel);
         }
     }
 

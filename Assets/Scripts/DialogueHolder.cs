@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  09/24/2017
+// Last:  03/03/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -28,12 +28,11 @@ public class DialogueHolder : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (Input.GetKeyUp(KeyCode.Space) ||
-                touches.bAction ||
-                Input.GetMouseButtonDown(0))
+            if (!dMan.bPauseDialogue && Input.GetButtonUp("Action") ||
+                !dMan.bPauseDialogue && touches.bAction)
             {
                 // Opens Dialogue Manager and uses NPC's first line
-                if (!dMan.dialogueActive)
+                if (!dMan.bDialogueActive)
                 {
                     dMan.dialogueLines = dialogueLines;
                     dMan.currentLine = 0;
@@ -54,7 +53,7 @@ public class DialogueHolder : MonoBehaviour
             }
             
             // Keeps NPC moving if no dialogue
-            if (!dMan.dialogueActive)
+            if (!dMan.bDialogueActive)
             {
                 anim.Play("NPC Movement");
             }

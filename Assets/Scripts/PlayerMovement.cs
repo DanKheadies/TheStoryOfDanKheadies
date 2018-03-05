@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  09/29/2017
+// Last:  03/03/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -56,11 +56,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Set boosting
-        if (Input.GetButtonDown("Boost") || Input.GetButtonDown("Boost2"))
+        if (Input.GetButtonDown("BAction"))
         {
             bBoosting = true;
         }
-        else if (Input.GetButtonUp("Boost") || Input.GetButtonUp("Boost2"))
+        else if (Input.GetButtonUp("BAction"))
         {
             bBoosting = false;
         }
@@ -69,8 +69,9 @@ public class PlayerMovement : MonoBehaviour
     public void MovePlayer()
     {
         // Unit's Project Settings -> Input
-        //Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        Move(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical"));
+        Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        //Move(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical"));
+        
     }
 
     public void Move(float xInput, float yInput) 

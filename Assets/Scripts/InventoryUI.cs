@@ -26,11 +26,13 @@ public class InventoryUI : MonoBehaviour
         itemMenu.gameObject.GetComponent<CanvasGroup>().alpha = 0;
 
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+
+        UpdateUI();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Inventory"))
+        if (Input.GetButton("Inventory"))
         {
             // Short-cut (b & i) to show hide inventory
             // Need to do more w/ Pause Screen logic

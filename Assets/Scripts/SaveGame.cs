@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  01/23/2018
+// Last:  02/14/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -20,28 +20,51 @@ public class SaveGame : MonoBehaviour
     public Scene scene;
     public UIManager uiMan;
     public VolumeManager savedVol;
-
-    public float savedVolume;
+    
     private string savedItem;
 
     void Start()
     {
         // Initializers
-        camFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
-        savedCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        savedPlayer = GameObject.FindGameObjectWithTag("Player");
-        inv = GameObject.FindObjectOfType<Inventory>().GetComponent<Inventory>();
-        menuCont = GetComponent<MenuControl>();
         scene = SceneManager.GetActiveScene();
-        savedVol = FindObjectOfType<VolumeManager>();
-        tempItem = ScriptableObject.CreateInstance<Item>();
-        uiMan = FindObjectOfType<UIManager>();
+
+        if (scene.name == "MainMenu" ||
+            scene.name == "MainMenu_Animation")
+        {
+            //savedVol = FindObjectOfType<VolumeManager>();
+            //Debug.Log("Vol: " + PlayerPrefs.GetFloat("Volume"));
+        }
+        else if (scene.name == "Showdown")
+        {
+            savedPlayer = GameObject.FindGameObjectWithTag("Player");
+            inv = GameObject.FindObjectOfType<Inventory>().GetComponent<Inventory>();
+            menuCont = GetComponent<MenuControl>();
+            savedVol = FindObjectOfType<VolumeManager>();
+            tempItem = ScriptableObject.CreateInstance<Item>();
+            uiMan = FindObjectOfType<UIManager>();
+        }
+        else
+        {
+            camFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
+            savedCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+            savedPlayer = GameObject.FindGameObjectWithTag("Player");
+            inv = GameObject.FindObjectOfType<Inventory>().GetComponent<Inventory>();
+            menuCont = GetComponent<MenuControl>();
+            savedVol = FindObjectOfType<VolumeManager>();
+            tempItem = ScriptableObject.CreateInstance<Item>();
+            uiMan = FindObjectOfType<UIManager>();
+        }
 
 
         // Avoid console error when no player object is present
-        if (scene.name != "Showdown" ||
-            scene.name != "MainMenu_Animation" ||
-            scene.name != "MainMenu")
+        if (scene.name == "MainMenu" ||
+            scene.name == "MainMenu_Animation" ||
+            scene.name == "Showdown")
+        {
+            // Here b/c I have to do the logic this way?
+            // Debug.Log("No saved data");
+        }
+        else
         {
             // Load any saved player data
             GetSavedGame();
@@ -78,7 +101,7 @@ public class SaveGame : MonoBehaviour
         PlayerPrefs.SetFloat("Volume", savedVol.currentVolumeLevel); // Called in VolumeManager
 
         // Check saved values
-        Debug.Log("Vol: " + PlayerPrefs.GetFloat("Volume"));
+        // Debug.Log("Vol: " + PlayerPrefs.GetFloat("Volume"));
     }
 
     // Saves UI controls' opacity and  data
@@ -104,7 +127,7 @@ public class SaveGame : MonoBehaviour
     public void GetSavedGame()
     {
         // Temp delete all for testing
-        //PlayerPrefs.DeleteAll();
+        // PlayerPrefs.DeleteAll();
 
         // Use initial values if no saved data
         if (PlayerPrefs.GetInt("AnandaCoord") == 0)
@@ -156,13 +179,4 @@ public class SaveGame : MonoBehaviour
             }
         }
     }
-
-    //public void QuitGame(bool bQuit)
-    //{
-    //    if (bQuit)
-    //    {
-    //        Time.timeScale = 1;
-    //        menuCont.LoadScene("MainMenu_Animation");
-    //    }
-    //}
 }

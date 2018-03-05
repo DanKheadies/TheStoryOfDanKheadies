@@ -87,7 +87,7 @@ public class UIManager : MonoBehaviour
         brioBar.value = playerBrio.playerCurrentBrio;
         brioText.text = "BR:  " + (int)(playerBrio.playerCurrentBrio) + " / " + (int)(playerBrio.playerMaxBrio);
 
-        if (dMan.dialogueActive)
+        if (dMan.bDialogueActive)
         {
             //brioBar.GetComponent<Renderer>().enabled = !brioBar.GetComponent<Renderer>().enabled;
             sliderCanvas.interactable = false;

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  07/16/2017
+// Last:  03/03/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using UnityEngine;
 public class QuestTrigger : MonoBehaviour
 {
     private Animator anim;
-    private DialogueManager theDM;
+    private DialogueManager dMan;
     private QuestManager theQM;
     private SpriteRenderer spRend;
 
@@ -24,8 +24,8 @@ public class QuestTrigger : MonoBehaviour
 	void Start ()
     {
         anim = GetComponentInParent<Animator>();
+        dMan = FindObjectOfType<DialogueManager>();
         spRend = gameObject.GetComponentInParent<SpriteRenderer>();
-        theDM = FindObjectOfType<DialogueManager>();
         theQM = FindObjectOfType<QuestManager>();	
 	}
 	
@@ -72,7 +72,7 @@ public class QuestTrigger : MonoBehaviour
             }
         }
 
-        if (spRend && !theDM.dialogueActive)
+        if (spRend && !dMan.bDialogueActive)
         {
             anim.Play("NPC Movement");
         }

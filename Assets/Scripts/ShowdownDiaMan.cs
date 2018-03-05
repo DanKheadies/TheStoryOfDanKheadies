@@ -16,8 +16,9 @@ public class ShowdownDiaMan : MonoBehaviour
     public Camera showdownCamera;
     public GameObject dbox;
     public Text dText;
+    private TouchControls touches;
 
-    public bool dialogueActive;
+    public bool bDialogueActive;
 
     private float screenHeight;
     private float screenWidth;
@@ -37,6 +38,7 @@ public class ShowdownDiaMan : MonoBehaviour
         // Initializers
         aspectUtil = GetComponent<AspectUtility>();
         showdownCamera = Camera.main;
+        touches = FindObjectOfType<TouchControls>();
 
         // Size w/ respect to AspectUtility.cs
         showdownCamera.orthographicSize = aspectUtil._wantedAspectRatio;
@@ -65,8 +67,9 @@ public class ShowdownDiaMan : MonoBehaviour
         }
 
         // Advance active dialogues
-        if (dialogueActive && Input.GetKeyDown(KeyCode.Space) ||
-            dialogueActive && Input.GetMouseButtonDown(0))
+        if (bDialogueActive && Input.GetKeyDown(KeyCode.Space) ||
+            bDialogueActive && Input.GetMouseButtonDown(0) ||
+            bDialogueActive && touches.bAction)
         {
             currentLine++;
         }
@@ -75,7 +78,7 @@ public class ShowdownDiaMan : MonoBehaviour
         if (currentLine >= dialogueLines.Length)
         {
             dbox.SetActive(false);
-            dialogueActive = false;
+            bDialogueActive = false;
 
             currentLine = 0;
         }
@@ -87,7 +90,7 @@ public class ShowdownDiaMan : MonoBehaviour
     public void ShowDialogue()
     {
         // Displays the dialogue box
-        dialogueActive = true;
+        bDialogueActive = true;
         dbox.SetActive(true);
     }
 

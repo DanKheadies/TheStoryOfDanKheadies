@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  09/18/2017
+// Last:  03/03/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -26,8 +26,10 @@ public class DialogueManager : MonoBehaviour
     private UIManager uiMan;
 
     private bool bTempControlActive;
-    public bool dialogueActive;
+    public bool bDialogueActive;
+    public bool bPauseDialogue;
 
+    private float pauseTime;
     private float screenHeight;
     private float screenWidth;
     private float rtLeft;
@@ -52,6 +54,9 @@ public class DialogueManager : MonoBehaviour
         SFXMan = FindObjectOfType<SFXManager>();
         touches = FindObjectOfType<TouchControls>();
         uiMan = FindObjectOfType<UIManager>();
+
+        bPauseDialogue = false;
+        pauseTime = 0.25f;
 
         if (scene.name == "Showdown")
         {
@@ -82,8 +87,8 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Advance active dialogues
-        if (dialogueActive && Input.GetKeyDown(KeyCode.Space) ||
-            dialogueActive && Input.GetMouseButtonDown(0))
+        if (bDialogueActive && Input.GetButtonDown("Action") ||
+            bDialogueActive && touches.bAction)
         {
             currentLine++;
         }
@@ -91,8 +96,11 @@ public class DialogueManager : MonoBehaviour
         // End of dialogue => reset everything
         if (currentLine >= dialogueLines.Length)
         {
+            // Mini-pause on triggering the same dialogue
+            pauseDialogue();
+
             dbox.SetActive(false);
-            dialogueActive = false;
+            bDialogueActive = false;
 
             currentLine = 0;
 
@@ -128,12 +136,21 @@ public class DialogueManager : MonoBehaviour
         //    Debug.Log("A:" + oCamera.myCam.pixelRect);
         //    Debug.Log("(" + Screen.width + ", " + Screen.height + ")");
         //}
+
+        if (bPauseDialogue)
+        {
+            pauseTime -= Time.deltaTime;
+            if (pauseTime < 0)
+            {
+                unpauseDialogue();
+            }
+        }
     }
 
     public void ShowDialogue()
     {
         // Displays the dialogue box
-        dialogueActive = true;
+        bDialogueActive = true;
         dbox.SetActive(true);
 
         // Sound Effect
@@ -215,5 +232,16 @@ public class DialogueManager : MonoBehaviour
 
         dText.rectTransform.anchoredPosition = new Vector2((-(rtRight - rtLeft) / 2), ((rtBottom / 2) - (rtTop / 2)));
         dText.rectTransform.sizeDelta = new Vector2(-(rtLeft + rtRight), -(rtTop + rtBottom));
+    }
+
+    public void pauseDialogue()
+    {
+        bPauseDialogue = true;
+    }
+
+    public void unpauseDialogue()
+    {
+        bPauseDialogue = false;
+        pauseTime = 0.25f;
     }
 }

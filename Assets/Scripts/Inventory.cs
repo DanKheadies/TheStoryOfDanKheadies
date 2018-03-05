@@ -97,7 +97,7 @@ public class Inventory : MonoBehaviour
                 selectedItem = items[i];
             }
         }
-
+        
         return selectedItem;
     }
 }

@@ -74,7 +74,7 @@ public class PlayerBrioManager : MonoBehaviour
     public void BasicRestorePlayer()
     {
         diffMaxAndCurrent = playerMaxBrio - playerCurrentBrio;
-        if ((playerCurrentBrio < diffMaxAndCurrent) && !dMan.dialogueActive)
+        if ((playerCurrentBrio < diffMaxAndCurrent) && !dMan.bDialogueActive)
         {
             playerCurrentBrio += 0.01f;
         }
