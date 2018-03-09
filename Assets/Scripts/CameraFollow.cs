@@ -25,6 +25,7 @@ public class CameraFollow : MonoBehaviour
     [System.Flags]
     public enum AnandaCoords : int
     {
+        // None = 0,
         BatteryNE = 1,
         BatteryNW = 2,
         BatterySE = 3,

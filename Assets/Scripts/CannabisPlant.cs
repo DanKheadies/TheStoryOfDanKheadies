@@ -20,9 +20,10 @@ public class CannabisPlant : MonoBehaviour
     public Inventory inv;
     public Item item;
     private TouchControls touches;
-    private Touch[] touches2;
 
-    public bool bAcquiring;
+    public bool bAcquiring; // UX -- Prevents fast dialogue cycle (see below)
+    public bool bAcquired; // Checks & Balances
+    public bool bDoneAcquiring; // Checks & Balances
     public bool bHasBud;
 
     public bool bGreen;
@@ -47,6 +48,9 @@ public class CannabisPlant : MonoBehaviour
         touches = FindObjectOfType<TouchControls>();
         whiteBud = GameObject.Find("Cannabis.Bud.White");
 
+        bAcquired = false;
+        bDoneAcquiring = false;
+
 
         if (Random.Range(0.0f, 1.0f) > 0.66f)
         {
@@ -60,7 +64,16 @@ public class CannabisPlant : MonoBehaviour
 
     void Update()
     {
-        
+        if (bAcquired && dMan.bDialogueActive)
+        {
+            bAcquired = false;
+            bDoneAcquiring = true;
+        }
+        if (!dMan.bDialogueActive && !bAcquired && bDoneAcquiring)
+        {
+            HideBud();
+            bDoneAcquiring = false;
+        }
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -106,10 +119,8 @@ public class CannabisPlant : MonoBehaviour
                     dMan.dialogueLines = new string[HasBud.Length];
                     dMan.dialogueLines = HasBud;
                     dMan.ShowDialogue();
-                    Debug.Log("Acquiring Dialogue");
 
                     this.bHasBud = false;
-                    //this.GetComponent<Collider2D>().enabled = false;
                 }
                 else if (bHasBud &&
                     inv.items.Count >= inv.totalItems)
@@ -123,31 +134,11 @@ public class CannabisPlant : MonoBehaviour
                     dMan.dialogueLines = new string[NoBud.Length];
                     dMan.dialogueLines = NoBud;
                     dMan.ShowDialogue();
-                    Debug.Log("No Bud Dialogue");
                 }
 
+                bAcquired = true;
                 touches.bAction = false;
             }
-        }
-    }
-
-    void DisplayBud()
-    {
-        if (this.bGreen)
-        {
-            greenBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
-        }
-        else if (this.bOrange)
-        {
-            orangeBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
-        }
-        else if (this.bPurple)
-        {
-            purpleBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
-        }
-        else if (this.bWhite)
-        {
-            whiteBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
         }
     }
 

@@ -28,20 +28,11 @@ public class VolumeManager : MonoBehaviour
         scene = SceneManager.GetActiveScene();
 
         // Scene Conditions
-        if (scene.name == "MainMenu" ||
-            scene.name == "MainMenu_Animation")
+        if (scene.name == "MainMenu")
         {
             // Initializers
             vcObjects = FindObjectsOfType<VolumeController>();
-
-            if (scene.name == "MainMenu")
-            {
-                //saved = GameObject.Find("Menu_Controller").GetComponent<SaveGame>();
-            }
-            else if (scene.name == "MainMenu_Animation")
-            {
-                //saved = GameObject.Find("MenuAnimation_Controller").GetComponent<SaveGame>();
-            }
+            saved = GameObject.Find("Menu_Controller").GetComponent<SaveGame>();
 
             GetAndSetVolume();
         }
@@ -74,6 +65,8 @@ public class VolumeManager : MonoBehaviour
             {
                 currentVolumeLevel = maxVolumeLevel;
             }
+
+            saved.SavingVolume();
         }
         // Decrease volume w/ keyboard
         else if (Input.GetKeyUp(KeyCode.Minus))
@@ -91,6 +84,8 @@ public class VolumeManager : MonoBehaviour
             {
                 currentVolumeLevel = minVolumeLevel;
             }
+
+            saved.SavingVolume();
         }
     }
 
@@ -105,8 +100,8 @@ public class VolumeManager : MonoBehaviour
         {
             currentVolumeLevel = PlayerPrefs.GetFloat("Volume");
 
-            if (scene.name == "MainMenu" ||
-                scene.name == "MainMenu_Animation")
+            // Adjusts the slider to the saved volume and voids error
+            if (scene.name == "MainMenu")
             {
 
             }

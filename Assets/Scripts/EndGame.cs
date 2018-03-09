@@ -10,20 +10,14 @@ using UnityEngine.SceneManagement;
 
 public class EndGame : MonoBehaviour
 {
-    public MenuControl menuCont;
-
-    void Start ()
+    public void EndApp()
     {
-        // Initializers
-        menuCont = GetComponent<MenuControl>();
+        Application.Quit();
     }
 
-    public void QuitGame(bool bQuit)
+    public void GoToMainMenu()
     {
-        if (bQuit)
-        {
-            Time.timeScale = 1;
-            menuCont.LoadScene("MainMenu_Animation");
-        }
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
     }
 }

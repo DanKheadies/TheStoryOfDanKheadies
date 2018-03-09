@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/03/2018
+// Last:  03/07/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,19 +13,20 @@ using UnityEngine.SceneManagement;
 public class DialogueManager : MonoBehaviour
 {
     public AspectUtility aspectUtil;
-    private Animator anim;
+    public Animator anim;
     public CameraFollow oCamera;
-    private CannabisPlant cannaP;
+    //public CannabisPlant cannaP;
+    //public Chp1 chp1;
     public GameObject dbox;
     public ImageStrobe imgStrobe;
-    private PlayerMovement thePlayer;
+    public PlayerMovement thePlayer;
     private Scene scene;
     private SFXManager SFXMan;
     public Text dText;
-    private TouchControls touches;
-    private UIManager uiMan;
+    public TouchControls touches;
+    public UIManager uiMan;
 
-    private bool bTempControlActive;
+    public bool bTempControlActive;
     public bool bDialogueActive;
     public bool bPauseDialogue;
 
@@ -45,18 +46,27 @@ public class DialogueManager : MonoBehaviour
 	void Start ()
     {
         // Initializers
-        aspectUtil = GetComponent<AspectUtility>();
-        cannaP = FindObjectOfType<CannabisPlant>();
-        oCamera = FindObjectOfType<CameraFollow>();
-        scene = SceneManager.GetActiveScene();
         thePlayer = FindObjectOfType<PlayerMovement>();
         anim = thePlayer.GetComponent<Animator>();
+        aspectUtil = GetComponent<AspectUtility>();
+        oCamera = FindObjectOfType<CameraFollow>();
+        scene = SceneManager.GetActiveScene();
         SFXMan = FindObjectOfType<SFXManager>();
         touches = FindObjectOfType<TouchControls>();
         uiMan = FindObjectOfType<UIManager>();
 
+        // DC TODO -- In Chp1.cs, create public cannaP and have dMan reach out to it and get it, then remove from this file
+        // As well as this segement below
+        if (scene.name == "Chp1")
+        {
+            //cannaP = FindObjectOfType<CannabisPlant>();
+        }
+
+        // UX -- Prevents immediately reopening a dialogue while moving / talking
         bPauseDialogue = false;
         pauseTime = 0.25f;
+
+        bDialogueActive = false;
 
         if (scene.name == "Showdown")
         {
@@ -85,10 +95,10 @@ public class DialogueManager : MonoBehaviour
                 ConfigureParameters();
             }
         }
-
+        
         // Advance active dialogues
-        if (bDialogueActive && Input.GetButtonDown("Action") ||
-            bDialogueActive && touches.bAction)
+        if ((bDialogueActive && Input.GetButtonDown("Action")) ||
+            (bDialogueActive && touches.bAction))
         {
             currentLine++;
         }
@@ -124,7 +134,14 @@ public class DialogueManager : MonoBehaviour
             }
 
             // Hide Items
-            cannaP.HideBud();
+            if (scene.name == "Chp0")
+            {
+                // Hide goggles
+            }
+            else if (scene.name == "Chp1")
+            {
+                //cannaP.HideBud();
+            }
         }
 
         // Set current text
@@ -152,12 +169,13 @@ public class DialogueManager : MonoBehaviour
         // Displays the dialogue box
         bDialogueActive = true;
         dbox.SetActive(true);
+        dbox.transform.localScale = Vector3.one;
 
         // Sound Effect
         SFXMan.dialogueMedium.PlayOneShot(SFXMan.dialogueMedium.clip);
 
         // Stops the player's movement
-        thePlayer.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+        thePlayer.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         anim.SetBool("bIsWalking", false);
         touches.UnpressedAllArrows();
         thePlayer.bStopPlayerMovement = true;

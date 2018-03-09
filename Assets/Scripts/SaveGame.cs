@@ -28,11 +28,10 @@ public class SaveGame : MonoBehaviour
         // Initializers
         scene = SceneManager.GetActiveScene();
 
-        if (scene.name == "MainMenu" ||
-            scene.name == "MainMenu_Animation")
+        if (scene.name == "MainMenu")
         {
-            //savedVol = FindObjectOfType<VolumeManager>();
-            //Debug.Log("Vol: " + PlayerPrefs.GetFloat("Volume"));
+            savedVol = FindObjectOfType<VolumeManager>();
+            Debug.Log("Vol: " + PlayerPrefs.GetFloat("Volume"));
         }
         else if (scene.name == "Showdown")
         {
@@ -58,7 +57,6 @@ public class SaveGame : MonoBehaviour
 
         // Avoid console error when no player object is present
         if (scene.name == "MainMenu" ||
-            scene.name == "MainMenu_Animation" ||
             scene.name == "Showdown")
         {
             // Here b/c I have to do the logic this way?
@@ -74,6 +72,8 @@ public class SaveGame : MonoBehaviour
     // Saves *majority* of user data
     public void SavingGame(bool bQuit)
     {
+        PlayerPrefs.SetInt("Saved", 1);
+        PlayerPrefs.SetString("Chapter", scene.name);
         PlayerPrefs.SetFloat("Cam_x", savedCamera.transform.position.x);
         PlayerPrefs.SetFloat("Cam_y", savedCamera.transform.position.y);
         PlayerPrefs.SetFloat("P_x", savedPlayer.transform.position.x);
@@ -88,11 +88,13 @@ public class SaveGame : MonoBehaviour
         }
 
         // Check saved values
-        //Debug.Log("Cam: (" + PlayerPrefs.GetFloat("Cam_x") + "," + PlayerPrefs.GetFloat("Cam_y") + ")");
-        //Debug.Log("Dan: (" + PlayerPrefs.GetFloat("P_x") + "," + PlayerPrefs.GetFloat("P_y") + ")");
-        //Debug.Log("Loc: " + PlayerPrefs.GetInt("AnandaCoord"));
-        //Debug.Log("Loc: " + (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord"));
-        //Debug.Log("Bri: " + PlayerPrefs.GetFloat("Brio"));
+        Debug.Log("Sav: " + PlayerPrefs.GetInt("Saved"));
+        Debug.Log("Sce: " + PlayerPrefs.GetString("Chapter"));
+        Debug.Log("Cam: (" + PlayerPrefs.GetFloat("Cam_x") + "," + PlayerPrefs.GetFloat("Cam_y") + ")");
+        Debug.Log("Dan: (" + PlayerPrefs.GetFloat("P_x") + "," + PlayerPrefs.GetFloat("P_y") + ")");
+        Debug.Log("Loc: " + PlayerPrefs.GetInt("AnandaCoord"));
+        Debug.Log("Loc: " + ((CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord")).ToString());
+        Debug.Log("Bri: " + PlayerPrefs.GetFloat("Brio"));
     }
 
     // Saves UI Volume data
@@ -127,31 +129,12 @@ public class SaveGame : MonoBehaviour
     public void GetSavedGame()
     {
         // Temp delete all for testing
-        // PlayerPrefs.DeleteAll();
-
+        //PlayerPrefs.DeleteAll();
+        
         // Use initial values if no saved data
-        if (PlayerPrefs.GetInt("AnandaCoord") == 0)
+        if (PlayerPrefs.GetInt("AnandaCoords") == 0)
         {
-            savedPlayer.transform.position = new Vector2(-13, -8);
-
-            savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio = savedPlayer.GetComponent<PlayerBrioManager>().playerMaxBrio;
-            // DC 08/26/2017 -- Weird bug that gives 5 Brio every time you Save & Quit and then Start
-
-            camFollow.currentCoords = CameraFollow.AnandaCoords.Home;
-
-            savedCamera.transform.position = new Vector2(-13, -8);
-            //float posX = Mathf.SmoothDamp(savedCamera.transform.position.x, savedPlayer.transform.position.x, ref camFollow.smoothVelocity.x, camFollow.smoothTime);
-            //float posY = Mathf.SmoothDamp(savedCamera.transform.position.y, savedPlayer.transform.position.y, ref camFollow.smoothVelocity.y, camFollow.smoothTime);
-            //savedCamera.transform.position = new Vector3(posX, posY, -10);
-
-            for (int i = 0; i < PlayerPrefs.GetInt("Item Total"); i++)
-            {
-                savedItem = PlayerPrefs.GetString("Item" + i);
-                savedItem = savedItem.Substring(0, savedItem.Length - 7);
-
-                tempItem = (Item)Resources.Load("Items/" + savedItem);
-                Inventory.instance.Add(tempItem);
-            }
+            savedPlayer.transform.position = new Vector2(1.45f, 3.33f);
         }
         else
         {

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  07/01/2017
+// Last:  03/06/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -23,8 +23,7 @@ public class SceneTransitioner : MonoBehaviour
     void Update()
     {
         // Quick skip on loading screens / scenes
-        if ((scene.name == "LogoSplash" || 
-             scene.name == "MainMenu_Animation") 
+        if ((scene.name == "LogoSplash") 
             && Input.anyKeyDown)
         {
             SceneManager.LoadScene(loadLevel);

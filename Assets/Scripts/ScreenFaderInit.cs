@@ -6,15 +6,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Screen Fader Initializer => sits a gameobject above the fader object
 public class ScreenFaderInit : MonoBehaviour
 {
-    public GameObject screenFader;
+    public ScreenFader sFader;
 
     void Start()
     {
-        screenFader.SetActive(true);
+        // Initializer
+        sFader = GameObject.FindObjectOfType<ScreenFader>().GetComponent<ScreenFader>();
+
+        sFader.GetComponent<Transform>().transform.localScale = Vector3.one;
+        sFader.GetComponent<Image>().color = new Color(0.0f / 255.0f, 0.0f / 255.0f, 0.0f / 255.0f, 255.0f / 255.0f);
     }
 
 }

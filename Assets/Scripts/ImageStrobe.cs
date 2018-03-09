@@ -14,6 +14,7 @@ public class ImageStrobe : MonoBehaviour
     private Image image;
 
     public bool bCoRunning;
+    public bool bHide;
 
     public int pulseTime;
 
@@ -28,7 +29,7 @@ public class ImageStrobe : MonoBehaviour
 
     private void Update()
     {
-        if (!bCoRunning)
+        if (!bCoRunning && !bHide)
         {
             StartCoroutine("Strobe");
         }
