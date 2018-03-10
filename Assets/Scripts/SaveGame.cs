@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/14/2018
+// Last:  03/10/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +16,6 @@ public class SaveGame : MonoBehaviour
     public GameObject savedPlayer;
     public Inventory inv;
     public Item tempItem;
-    public MenuControl menuCont;
     public Scene scene;
     public UIManager uiMan;
     public VolumeManager savedVol;
@@ -31,13 +30,11 @@ public class SaveGame : MonoBehaviour
         if (scene.name == "MainMenu")
         {
             savedVol = FindObjectOfType<VolumeManager>();
-            Debug.Log("Vol: " + PlayerPrefs.GetFloat("Volume"));
         }
         else if (scene.name == "Showdown")
         {
             savedPlayer = GameObject.FindGameObjectWithTag("Player");
             inv = GameObject.FindObjectOfType<Inventory>().GetComponent<Inventory>();
-            menuCont = GetComponent<MenuControl>();
             savedVol = FindObjectOfType<VolumeManager>();
             tempItem = ScriptableObject.CreateInstance<Item>();
             uiMan = FindObjectOfType<UIManager>();
@@ -48,25 +45,15 @@ public class SaveGame : MonoBehaviour
             savedCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
             savedPlayer = GameObject.FindGameObjectWithTag("Player");
             inv = GameObject.FindObjectOfType<Inventory>().GetComponent<Inventory>();
-            menuCont = GetComponent<MenuControl>();
             savedVol = FindObjectOfType<VolumeManager>();
             tempItem = ScriptableObject.CreateInstance<Item>();
             uiMan = FindObjectOfType<UIManager>();
         }
+    }
 
-
-        // Avoid console error when no player object is present
-        if (scene.name == "MainMenu" ||
-            scene.name == "Showdown")
-        {
-            // Here b/c I have to do the logic this way?
-            // Debug.Log("No saved data");
-        }
-        else
-        {
-            // Load any saved player data
-            GetSavedGame();
-        }
+    public void RerunStart()
+    {
+        Start();
     }
 
     // Saves *majority* of user data
@@ -88,13 +75,13 @@ public class SaveGame : MonoBehaviour
         }
 
         // Check saved values
-        Debug.Log("Sav: " + PlayerPrefs.GetInt("Saved"));
-        Debug.Log("Sce: " + PlayerPrefs.GetString("Chapter"));
-        Debug.Log("Cam: (" + PlayerPrefs.GetFloat("Cam_x") + "," + PlayerPrefs.GetFloat("Cam_y") + ")");
-        Debug.Log("Dan: (" + PlayerPrefs.GetFloat("P_x") + "," + PlayerPrefs.GetFloat("P_y") + ")");
-        Debug.Log("Loc: " + PlayerPrefs.GetInt("AnandaCoord"));
-        Debug.Log("Loc: " + ((CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord")).ToString());
-        Debug.Log("Bri: " + PlayerPrefs.GetFloat("Brio"));
+        //Debug.Log("Sav: " + PlayerPrefs.GetInt("Saved"));
+        //Debug.Log("Sce: " + PlayerPrefs.GetString("Chapter"));
+        //Debug.Log("Cam: (" + PlayerPrefs.GetFloat("Cam_x") + "," + PlayerPrefs.GetFloat("Cam_y") + ")");
+        //Debug.Log("Dan: (" + PlayerPrefs.GetFloat("P_x") + "," + PlayerPrefs.GetFloat("P_y") + ")");
+        //Debug.Log("Loc: " + PlayerPrefs.GetInt("AnandaCoord"));
+        //Debug.Log("Loc: " + ((CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord")).ToString());
+        //Debug.Log("Bri: " + PlayerPrefs.GetFloat("Brio"));
     }
 
     // Saves UI Volume data
@@ -125,41 +112,42 @@ public class SaveGame : MonoBehaviour
         Debug.Log("Act: " + PlayerPrefs.GetInt("ControlsActive"));
     }
 
+    // Temp save inventory for switching scenes
+    public void SaveInventoryTransfer()
+    {
+        for (int i = 0; i < inv.items.Count; i++)
+        {
+            PlayerPrefs.SetString("TransferItem" + i, inv.items[i].ToString());
+            PlayerPrefs.SetInt("Transfer Item Total", i + 1);
+        }
+    }
+
     // Loads *all* user data at the start
     public void GetSavedGame()
     {
         // Temp delete all for testing
         //PlayerPrefs.DeleteAll();
         
-        // Use initial values if no saved data
-        if (PlayerPrefs.GetInt("AnandaCoords") == 0)
-        {
-            savedPlayer.transform.position = new Vector2(1.45f, 3.33f);
-        }
-        else
-        {
-            savedPlayer.transform.position = new Vector2(
-                PlayerPrefs.GetFloat("P_x"),
-                PlayerPrefs.GetFloat("P_y"));
+        savedPlayer.transform.position = new Vector2(
+            PlayerPrefs.GetFloat("P_x"),
+            PlayerPrefs.GetFloat("P_y"));
 
-            savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio = PlayerPrefs.GetFloat("Brio");
-            // DC 08/26/2017 -- Weird bug that gives 5 Brio every time you Save & Quit and then Start
+        savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio = PlayerPrefs.GetFloat("Brio");
+        // DC 08/26/2017 -- Weird bug that gives 5 Brio every time you Save & Quit and then Start
 
-            savedCamera.transform.position = new Vector2(PlayerPrefs.GetFloat("Cam_x"), PlayerPrefs.GetFloat("Cam_y"));
-            float posX = Mathf.SmoothDamp(savedCamera.transform.position.x, savedPlayer.transform.position.x, ref camFollow.smoothVelocity.x, camFollow.smoothTime);
-            float posY = Mathf.SmoothDamp(savedCamera.transform.position.y, savedPlayer.transform.position.y, ref camFollow.smoothVelocity.y, camFollow.smoothTime);
-            savedCamera.transform.position = new Vector3(posX, posY, -10);
+        savedCamera.transform.position = new Vector2(PlayerPrefs.GetFloat("Cam_x"), PlayerPrefs.GetFloat("Cam_y"));
+        float posX = Mathf.SmoothDamp(savedCamera.transform.position.x, savedPlayer.transform.position.x, ref camFollow.smoothVelocity.x, camFollow.smoothTime);
+        float posY = Mathf.SmoothDamp(savedCamera.transform.position.y, savedPlayer.transform.position.y, ref camFollow.smoothVelocity.y, camFollow.smoothTime);
+        savedCamera.transform.position = new Vector3(posX, posY, -10);
 
-            camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord");
-            
-            for (int i = 0; i < PlayerPrefs.GetInt("Item Total"); i++)
-            {
-                savedItem = PlayerPrefs.GetString("Item" + i);
-                savedItem = savedItem.Substring(0, savedItem.Length - 7);
-
-                tempItem = (Item)Resources.Load("Items/" + savedItem);
-                Inventory.instance.Add(tempItem);
-            }
-        }
+        camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord");
+        
+        //for (int i = 0; i < PlayerPrefs.GetInt("Item Total"); i++)
+        //{
+        //    savedItem = PlayerPrefs.GetString("Item" + i);
+        //    savedItem = savedItem.Substring(0, savedItem.Length - 7);
+        //    tempItem = (Item)Resources.Load("Items/" + savedItem);
+        //    inv.Add(tempItem);
+        //}
     }
 }

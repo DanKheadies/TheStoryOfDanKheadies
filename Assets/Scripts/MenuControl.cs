@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/08/2018
+// Last:  03/10/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +24,7 @@ public class MenuControl : MonoBehaviour
 
     void Start()
     {
+        // Initializers
         endB = GameObject.Find("End_Button");
         goOnB = GameObject.Find("Go_On_Button");
         newB = GameObject.Find("New_Button");
@@ -38,9 +39,6 @@ public class MenuControl : MonoBehaviour
             goOnB.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
             newB.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         }
-
-        Debug.Log("Loc: " + ((CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord")).ToString());
-        //savedScene = ((CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord")).ToString();
     }
 
     public void GoToScene()

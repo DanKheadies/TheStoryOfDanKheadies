@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/07/2018
+// Last:  03/10/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -15,8 +15,6 @@ public class DialogueManager : MonoBehaviour
     public AspectUtility aspectUtil;
     public Animator anim;
     public CameraFollow oCamera;
-    //public CannabisPlant cannaP;
-    //public Chp1 chp1;
     public GameObject dbox;
     public ImageStrobe imgStrobe;
     public PlayerMovement thePlayer;
@@ -55,27 +53,17 @@ public class DialogueManager : MonoBehaviour
         touches = FindObjectOfType<TouchControls>();
         uiMan = FindObjectOfType<UIManager>();
 
-        // DC TODO -- In Chp1.cs, create public cannaP and have dMan reach out to it and get it, then remove from this file
-        // As well as this segement below
-        if (scene.name == "Chp1")
-        {
-            //cannaP = FindObjectOfType<CannabisPlant>();
-        }
-
-        // UX -- Prevents immediately reopening a dialogue while moving / talking
-        bPauseDialogue = false;
+        bDialogueActive = false;
+        bPauseDialogue = false; // UX -- Prevents immediately reopening a dialogue while moving / talking
         pauseTime = 0.25f;
 
-        bDialogueActive = false;
 
         if (scene.name == "Showdown")
         {
-            // Debug.Log("Showndow");
             ConfigureShowdownParameters();
         }
         else
         {
-            // Debug.Log("Normal");
             ConfigureParameters();
         }
     }
@@ -131,16 +119,6 @@ public class DialogueManager : MonoBehaviour
                 {
                     touches.GetComponent<Canvas>().enabled = true;
                 }
-            }
-
-            // Hide Items
-            if (scene.name == "Chp0")
-            {
-                // Hide goggles
-            }
-            else if (scene.name == "Chp1")
-            {
-                //cannaP.HideBud();
             }
         }
 

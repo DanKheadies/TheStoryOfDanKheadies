@@ -18,7 +18,6 @@ public class ImageStrobe : MonoBehaviour
 
     public int pulseTime;
 
-
 	private IEnumerator Start()
     {
         image = GetComponent<Image>();

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/03/2018
+// Last:  03/10/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -28,8 +28,8 @@ public class DialogueHolder : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (!dMan.bPauseDialogue && Input.GetButtonUp("Action") ||
-                !dMan.bPauseDialogue && touches.bAction)
+            if ((!dMan.bPauseDialogue && Input.GetButtonUp("Action")) ||
+                (!dMan.bPauseDialogue && touches.bAction))
             {
                 // Opens Dialogue Manager and uses NPC's first line
                 if (!dMan.bDialogueActive)

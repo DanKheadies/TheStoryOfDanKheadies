@@ -2,7 +2,7 @@
 // Authors: Asbjorn Thirslund (Brackeys)
 // Contributors: David W. Corso
 // Start: 01/18/2018
-// Last:  01/29/2018
+// Last:  03/10/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -44,12 +44,18 @@ public class Inventory : MonoBehaviour
         totalItems = 20;
     }
 
+    public void RerunStart()
+    {
+        Start();
+    }
+
     public bool Add(Item item)
     {
         if (!item.isDefault)
         {
             if (items.Count >= totalItems)
             {
+                Debug.Log(items.Count);
                 Debug.Log("Not enough room.");
                 return false;
             }
@@ -76,7 +82,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void Remove (Item item)
+    public void Remove(Item item)
     {
         items.Remove(item);
 
@@ -99,5 +105,30 @@ public class Inventory : MonoBehaviour
         }
         
         return selectedItem;
+    }
+
+    // Could be a Save Game function
+    public void LoadInventory(string type)
+    {
+        if (type == "transfer")
+        {
+            for (int i = 0; i < PlayerPrefs.GetInt("Transfer Item Total"); i++)
+            {
+                string savedItem = PlayerPrefs.GetString("TransferItem" + i);
+                savedItem = savedItem.Substring(0, savedItem.Length - 7);
+                Item tempItem = (Item)Resources.Load("Items/" + savedItem);
+                Add(tempItem);
+            }
+        }
+        else if (type == "saved")
+        {
+            for (int i = 0; i < PlayerPrefs.GetInt("Item Total"); i++)
+            {
+                string savedItem = PlayerPrefs.GetString("Item" + i);
+                savedItem = savedItem.Substring(0, savedItem.Length - 7);
+                Item tempItem = (Item)Resources.Load("Items/" + savedItem);
+                Add(tempItem);
+            }
+        }
     }
 }

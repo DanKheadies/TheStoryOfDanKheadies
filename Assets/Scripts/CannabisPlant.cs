@@ -51,7 +51,6 @@ public class CannabisPlant : MonoBehaviour
         bAcquired = false;
         bDoneAcquiring = false;
 
-
         if (Random.Range(0.0f, 1.0f) > 0.66f)
         {
             bHasBud = true;
