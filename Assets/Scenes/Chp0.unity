@@ -1029,6 +1029,7 @@ GameObject:
   - component: {fileID: 239687294}
   - component: {fileID: 239687293}
   - component: {fileID: 239687296}
+  - component: {fileID: 239687297}
   - component: {fileID: 239687295}
   m_Layer: 5
   m_Name: Dialogue_Box
@@ -1049,6 +1050,7 @@ RectTransform:
   m_Children:
   - {fileID: 1830455786}
   - {fileID: 1675528880}
+  - {fileID: 707512138}
   m_Father: {fileID: 1880181856}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1076,7 +1078,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 43fa14f6bed814a46bd80586db75f760, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a1fdb450f5bcb224e8ba9e2124c38e6e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1122,6 +1124,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingImage: {fileID: 1675528881}
+  bFadeIn: 1
+  bFadeOut: 0
+  preFadeInDelay: 3
+  fadeInTime: 0
+  postFadeInDelay: 0
+  preFadeOutDelay: 0
+  fadeOutTime: 0
+  postFadeOutDelay: 0
+--- !u!114 &239687297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 239687291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf8e5330dd2b50488498e059aeec265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadingImage: {fileID: 707512139}
   bFadeIn: 1
   bFadeOut: 0
   preFadeInDelay: 3
@@ -3071,59 +3093,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &501103964
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 501103965}
-  - component: {fileID: 501103966}
-  m_Layer: 0
-  m_Name: Quest 3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &501103965
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 501103964}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2041127069}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &501103966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 501103964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efbf76c65fdcf6a4f87e30f35e1df6ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inv: {fileID: 0}
-  theQM: {fileID: 2041127070}
-  tempItem: {fileID: 0}
-  questNumber: 3
-  beginText:
-  - Oi, Dan ma boy! I was hoping one of you
-  - youngins was free. I'm in need of some
-  - green. Would you be a dear and grab me
-  - some smoochy woochy poochy please?
-  endText:
-  - Hot day! You came through Dan!
-  - Thank you child. Thank you, thank you!
-  - I love me some smoochy poochy...
 --- !u!1001 &523819039
 Prefab:
   m_ObjectHideFlags: 0
@@ -4856,6 +4825,74 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224785247633783230, guid: 82badb65272650f4eb2e52b8b62b6a74,
     type: 2}
   m_PrefabInternal: {fileID: 706902914}
+--- !u!1 &707512137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 707512138}
+  - component: {fileID: 707512140}
+  - component: {fileID: 707512139}
+  m_Layer: 5
+  m_Name: Dialogue_Picture
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &707512138
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 707512137}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 239687292}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &707512139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 707512137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 710e70b27c6a48e46a87153c454122b2, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &707512140
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 707512137}
 --- !u!1 &716541017
 GameObject:
   m_ObjectHideFlags: 0
@@ -6539,6 +6576,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   dMan: {fileID: 0}
   contArrow: {fileID: 0}
+  dBox: {fileID: 0}
   HUD: {fileID: 0}
   sFaderAnim: {fileID: 0}
   inv: {fileID: 0}
@@ -11590,9 +11628,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efbf76c65fdcf6a4f87e30f35e1df6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inv: {fileID: 0}
-  theQM: {fileID: 2041127070}
-  tempItem: {fileID: 0}
+  dMan: {fileID: 0}
+  qMan: {fileID: 0}
+  portPic: {fileID: 21300000, guid: cb0a295efb692dc4d967fcbe460a2fb7, type: 3}
+  bHasStarted: 0
+  bHasEnded: 0
   questNumber: 0
   beginText:
   - Quest started!
@@ -12017,56 +12057,6 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!1 &1609771950
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1609771951}
-  - component: {fileID: 1609771952}
-  m_Layer: 0
-  m_Name: Quest 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1609771951
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1609771950}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2041127069}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1609771952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1609771950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efbf76c65fdcf6a4f87e30f35e1df6ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inv: {fileID: 0}
-  theQM: {fileID: 2041127070}
-  tempItem: {fileID: 0}
-  questNumber: 2
-  beginText:
-  - Eekk!! it's Dan! Go away DAN!
-  - Yea, go hang out in the dirt patch or
-  - something...
-  endText:
-  - Well that was dumb...
 --- !u!1 &1612366095
 GameObject:
   m_ObjectHideFlags: 0
@@ -12668,7 +12658,7 @@ GameObject:
   - component: {fileID: 1675528881}
   - component: {fileID: 1675528883}
   m_Layer: 5
-  m_Name: ContinueArrow
+  m_Name: Dialogue_Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12956,6 +12946,7 @@ MonoBehaviour:
   player: {fileID: 0}
   inv: {fileID: 0}
   item: {fileID: 11400000, guid: d5e579a6bf48b3d45aff3b1f0cff9d11, type: 2}
+  portPic: {fileID: 21300000, guid: 49e8f42895c3f5a499dd582fc44be623, type: 3}
   bAcquired: 0
   bDoneAcquiring: 0
   AcquireItem:
@@ -14048,7 +14039,7 @@ GameObject:
   - component: {fileID: 1830455788}
   - component: {fileID: 1830455787}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Dialogue_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14098,7 +14089,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 42
     m_MaxSize: 64
-    m_Alignment: 0
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
@@ -14278,11 +14269,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d54c8da22bff46419731d3bba7bae75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portPic: {fileID: 21300000, guid: e32757818df741845b5e40cada8e7bae, type: 3}
   dialogue: Annyong!
   dialogueLines:
-  - We're so excited that you're starting
-  - school this year. It's going to be more fun
-  - than you dreamed it would be!
+  - We're so excited that you're starting school this year.
+  - It's going to be more fun than you dreamed!
 --- !u!4 &1853946922 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4612985395679942, guid: ef59e36a70d3c58418fd1e0bedab6b0e,
@@ -14483,10 +14474,12 @@ MonoBehaviour:
   aspectUtil: {fileID: 0}
   anim: {fileID: 0}
   oCamera: {fileID: 0}
-  dbox: {fileID: 239687291}
-  imgStrobe: {fileID: 1675528883}
+  dBox: {fileID: 0}
+  dPic: {fileID: 0}
+  imgStrobe: {fileID: 0}
   thePlayer: {fileID: 0}
-  dText: {fileID: 1830455787}
+  portPic: {fileID: 0}
+  dText: {fileID: 0}
   touches: {fileID: 0}
   uiMan: {fileID: 0}
   bTempControlActive: 0
@@ -15721,12 +15714,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d54c8da22bff46419731d3bba7bae75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portPic: {fileID: 21300000, guid: e0f0ab040ffbe4e47b92489a70935512, type: 3}
   dialogue: Annyong!
   dialogueLines:
-  - Hurry up and head out Dan. You always want
-  - to be on time. Go straight East to the
-  - Campus's main building. There's no reason to
-  - lolligag..
+  - Hurry up and head out Dan. You always want to be on time.
+  - Go straight East to the Campus's main building.
+  - There's no reason to lolligag..
 --- !u!1 &2026078649
 GameObject:
   m_ObjectHideFlags: 0
@@ -15786,8 +15779,6 @@ Transform:
   m_Children:
   - {fileID: 1553098095}
   - {fileID: 2063539471}
-  - {fileID: 1609771951}
-  - {fileID: 501103965}
   m_Father: {fileID: 841729766}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15806,8 +15797,8 @@ MonoBehaviour:
   quests:
   - {fileID: 1553098096}
   - {fileID: 2063539472}
-  - {fileID: 1609771952}
-  - {fileID: 501103966}
+  - {fileID: 0}
+  - {fileID: 0}
   questsCompleted: 
 --- !u!1 &2041298338
 GameObject:
@@ -15910,9 +15901,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efbf76c65fdcf6a4f87e30f35e1df6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inv: {fileID: 0}
-  theQM: {fileID: 2041127070}
-  tempItem: {fileID: 0}
+  dMan: {fileID: 0}
+  qMan: {fileID: 0}
+  portPic: {fileID: 21300000, guid: cb0a295efb692dc4d967fcbe460a2fb7, type: 3}
+  bHasStarted: 0
+  bHasEnded: 0
   questNumber: 1
   beginText:
   - Quest started.

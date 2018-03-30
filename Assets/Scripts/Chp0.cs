@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  03/10/2018
+// Last:  03/22/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ public class Chp0 : MonoBehaviour
     public Camera mainCamera;
     public DialogueManager dMan;
     public GameObject contArrow;
+    public GameObject dBox;
     public GameObject HUD;
     public GameObject sFaderAnim;
     public Inventory inv;
@@ -35,7 +36,8 @@ public class Chp0 : MonoBehaviour
     void Start()
     {
         // Initializers
-        contArrow = GameObject.Find("ContinueArrow");
+        contArrow = GameObject.Find("Dialogue_Arrow");
+        dBox = GameObject.Find("Dialogue_Box");
         dMan = FindObjectOfType<DialogueManager>();
         HUD = GameObject.Find("HUD");
         inv = FindObjectOfType<Inventory>();
@@ -65,13 +67,12 @@ public class Chp0 : MonoBehaviour
                 "Dan.",
                 "Dan...",
                 "Dan!",
-                "Wake up Dan or you'll be late for your first",
-                "day of school."
+                "Wake up Dan or you'll be late for your first day of school."
             };
 
             dMan.dialogueLines = dialogueLines;
             dMan.currentLine = 0;
-            dMan.dbox.transform.localScale = Vector3.one;
+            dBox.transform.localScale = Vector3.one;
         }
         // Chapter 0 Saved Game
         else

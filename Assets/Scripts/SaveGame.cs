@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/10/2018
+// Last:  03/30/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -66,6 +66,7 @@ public class SaveGame : MonoBehaviour
         PlayerPrefs.SetFloat("P_x", savedPlayer.transform.position.x);
         PlayerPrefs.SetFloat("P_y", savedPlayer.transform.position.y);
         PlayerPrefs.SetInt("AnandaCoord", (int)camFollow.currentCoords);
+        PlayerPrefs.SetFloat("BrioMax", savedPlayer.GetComponent<PlayerBrioManager>().playerMaxBrio);
         PlayerPrefs.SetFloat("Brio", savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio);
         
         for (int i = 0; i < inv.items.Count; i++)
@@ -81,6 +82,7 @@ public class SaveGame : MonoBehaviour
         //Debug.Log("Dan: (" + PlayerPrefs.GetFloat("P_x") + "," + PlayerPrefs.GetFloat("P_y") + ")");
         //Debug.Log("Loc: " + PlayerPrefs.GetInt("AnandaCoord"));
         //Debug.Log("Loc: " + ((CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord")).ToString());
+        //Debug.Log("MxB: " + PlayerPrefs.GetFloat("BrioMax"));
         //Debug.Log("Bri: " + PlayerPrefs.GetFloat("Brio"));
     }
 
@@ -132,8 +134,10 @@ public class SaveGame : MonoBehaviour
             PlayerPrefs.GetFloat("P_x"),
             PlayerPrefs.GetFloat("P_y"));
 
+        savedPlayer.GetComponent<PlayerBrioManager>().playerMaxBrio = PlayerPrefs.GetFloat("BrioMax");
         savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio = PlayerPrefs.GetFloat("Brio");
         // DC 08/26/2017 -- Weird bug that gives 5 Brio every time you Save & Quit and then Start
+        // DC 03/30/2018 -- It went away?
 
         savedCamera.transform.position = new Vector2(PlayerPrefs.GetFloat("Cam_x"), PlayerPrefs.GetFloat("Cam_y"));
         float posX = Mathf.SmoothDamp(savedCamera.transform.position.x, savedPlayer.transform.position.x, ref camFollow.smoothVelocity.x, camFollow.smoothTime);

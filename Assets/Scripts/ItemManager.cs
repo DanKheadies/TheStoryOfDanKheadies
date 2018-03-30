@@ -17,6 +17,7 @@ public class ItemManager : MonoBehaviour
     public Inventory inv;
     public Item item;
     private Scene scene;
+    public Sprite portPic;
     private TouchControls touches;
 
     private GameObject greenBud;
@@ -110,13 +111,15 @@ public class ItemManager : MonoBehaviour
                         this.GetComponent<BoxCollider2D>().enabled = false;
                         this.transform.localScale = Vector2.zero;
                     }
-                    
+
+                    dMan.portPic = portPic;
                     dMan.dialogueLines = new string[AcquireItem.Length];
                     dMan.dialogueLines = AcquireItem;
                     dMan.ShowDialogue();
                 }
                 else if (inv.items.Count >= inv.totalItems)
                 {
+                    dMan.portPic = portPic;
                     string[] outOfSpace = { "Rats.. We have no more space for stuff." };
                     dMan.dialogueLines = outOfSpace;
                     dMan.ShowDialogue();

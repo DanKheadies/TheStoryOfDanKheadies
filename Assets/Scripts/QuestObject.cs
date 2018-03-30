@@ -1,58 +1,52 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  03/04/2018
+// Last:  03/25/2018
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// 
+// Settings for the Quest object
 public class QuestObject : MonoBehaviour
 {
-    public Inventory inv;
-    public QuestManager theQM;
+    public DialogueManager dMan;
+    public QuestManager qMan;
+    public Sprite portPic;
 
-    public Item tempItem;
-    private string invItem;
+    public bool bHasStarted;
+    public bool bHasEnded;
 
     public int questNumber;
 
     public string[] beginText;
     public string[] endText;
-    
-	void Start ()
+
+    void Start()
     {
-        inv = GameObject.FindObjectOfType<Inventory>().GetComponent<Inventory>();
-    }
-	
-	void Update ()
-    {
-		
-	}
+        // Initializers
+        dMan = FindObjectOfType<DialogueManager>();
+        qMan = FindObjectOfType<QuestManager>();
+    } 
 
     public void BeginQuest()
     {
-        theQM.ShowQuestText(beginText); 
+        if (!bHasStarted)
+        {
+            dMan.portPic = portPic;
+            qMan.ShowQuestText(beginText);
+            bHasStarted = true;
+        }
     }
 
     public void EndQuest()
     {
-        theQM.ShowQuestText(endText);
-        theQM.questsCompleted[questNumber] = true;
-        gameObject.SetActive(false);
-    }
-
-    public void CollectionQuest()
-    {
-        for (int i = 0; i < PlayerPrefs.GetInt("Item Total"); i++)
+        if (!bHasEnded)
         {
-            invItem = PlayerPrefs.GetString("Item" + i);
-            invItem = invItem.Substring(0, invItem.Length - 7);
-
-            tempItem = (Item)Resources.Load("Items/" + invItem);
-            Inventory.instance.Add(tempItem);
-            Debug.Log(tempItem.itemName);
+            dMan.portPic = portPic;
+            qMan.ShowQuestText(endText);
+            qMan.questsCompleted[questNumber] = true;
+            bHasEnded = true;
         }
     }
 }

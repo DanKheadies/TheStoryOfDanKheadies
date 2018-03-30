@@ -3,7 +3,7 @@ guid: bf5b504c7f4aa9f4f81003208adee0d3
 timeCreated: 1506297884
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: mesh_0001
     100002: mesh_0002
@@ -55,6 +55,11 @@ ModelImporter:
     100094: //RootNode
     100096: mesh_0048
     100098: mesh_0049
+    100100: mesh_0050
+    100102: mesh_0051
+    100104: mesh_0052
+    100106: mesh_0053
+    100108: mesh_0054
     400000: mesh_0001
     400002: mesh_0002
     400004: mesh_0003
@@ -105,6 +110,11 @@ ModelImporter:
     400094: //RootNode
     400096: mesh_0048
     400098: mesh_0049
+    400100: mesh_0050
+    400102: mesh_0051
+    400104: mesh_0052
+    400106: mesh_0053
+    400108: mesh_0054
     2300000: mesh_0001
     2300002: mesh_0002
     2300004: mesh_0003
@@ -154,6 +164,11 @@ ModelImporter:
     2300092: mesh_0047
     2300094: mesh_0048
     2300096: mesh_0049
+    2300098: mesh_0050
+    2300100: mesh_0051
+    2300102: mesh_0052
+    2300104: mesh_0053
+    2300106: mesh_0054
     3300000: mesh_0001
     3300002: mesh_0002
     3300004: mesh_0003
@@ -203,6 +218,11 @@ ModelImporter:
     3300092: mesh_0047
     3300094: mesh_0048
     3300096: mesh_0049
+    3300098: mesh_0050
+    3300100: mesh_0051
+    3300102: mesh_0052
+    3300104: mesh_0053
+    3300106: mesh_0054
     4300000: mesh_0001
     4300002: mesh_0002
     4300004: mesh_0003
@@ -252,6 +272,11 @@ ModelImporter:
     4300092: mesh_0047
     4300094: mesh_0048
     4300096: mesh_0049
+    4300098: mesh_0050
+    4300100: mesh_0051
+    4300102: mesh_0052
+    4300104: mesh_0053
+    4300106: mesh_0054
     11400000: mesh_0001
     11400002: mesh_0002
     11400004: mesh_0003
@@ -301,26 +326,37 @@ ModelImporter:
     11400092: mesh_0047
     11400094: mesh_0048
     11400096: mesh_0049
+    11400098: mesh_0050
+    11400100: mesh_0051
+    11400102: mesh_0052
+    11400104: mesh_0053
+    11400106: mesh_0054
+  externalObjects: {}
   materials:
     importMaterials: 0
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 0
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -328,13 +364,18 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -344,6 +385,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 2
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

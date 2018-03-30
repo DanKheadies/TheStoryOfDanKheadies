@@ -1,18 +1,18 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  03/03/2018
+// Last:  03/10/2018
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// 
+// Handles NPC and zone quest interactions
 public class QuestTrigger : MonoBehaviour
 {
     private Animator anim;
     private DialogueManager dMan;
-    private QuestManager theQM;
+    private QuestManager qMan;
     private SpriteRenderer spRend;
 
     public bool beginQuest;
@@ -26,7 +26,7 @@ public class QuestTrigger : MonoBehaviour
         anim = GetComponentInParent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
         spRend = gameObject.GetComponentInParent<SpriteRenderer>();
-        theQM = FindObjectOfType<QuestManager>();	
+        qMan = FindObjectOfType<QuestManager>();
 	}
 	
 	void Update ()
@@ -36,11 +36,13 @@ public class QuestTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Drives NPC interaction
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (!theQM.questsCompleted[questNumber])
+            if (!qMan.questsCompleted[questNumber])
             {
-                if (beginQuest && !theQM.quests[questNumber].gameObject.activeSelf)
+                // Bool set on GameObject directs NPC interaction
+                if (beginQuest)
                 {
                     if (spRend)
                     {
@@ -48,11 +50,11 @@ public class QuestTrigger : MonoBehaviour
                     }
                     
                     // Quest Text
-                    theQM.quests[questNumber].gameObject.SetActive(true);
-                    theQM.quests[questNumber].BeginQuest();
+                    //qMan.quests[questNumber].gameObject.SetActive(true);
+                    qMan.quests[questNumber].BeginQuest();
                 }
 
-                if (endQuest && theQM.quests[questNumber].gameObject.activeSelf)
+                if (endQuest)
                 {
                     if (spRend)
                     {
@@ -66,12 +68,13 @@ public class QuestTrigger : MonoBehaviour
                     }
 
                     // Quest Text
-                    theQM.quests[questNumber].gameObject.SetActive(false);
-                    theQM.quests[questNumber].EndQuest();
+                    //qMan.quests[questNumber].gameObject.SetActive(false);
+                    qMan.quests[questNumber].EndQuest();
                 }
             }
         }
 
+        // Reset NPC
         if (spRend && !dMan.bDialogueActive)
         {
             anim.Play("NPC Movement");

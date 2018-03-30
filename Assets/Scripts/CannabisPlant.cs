@@ -19,6 +19,7 @@ public class CannabisPlant : MonoBehaviour
     private GameObject whiteBud;
     public Inventory inv;
     public Item item;
+    public Sprite portPic;
     private TouchControls touches;
 
     public bool bAcquiring; // UX -- Prevents fast dialogue cycle (see below)
@@ -114,7 +115,8 @@ public class CannabisPlant : MonoBehaviour
                         whiteBud.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
                         Inventory.instance.Add(item);
                     }
-                    
+
+                    dMan.portPic = portPic;
                     dMan.dialogueLines = new string[HasBud.Length];
                     dMan.dialogueLines = HasBud;
                     dMan.ShowDialogue();
@@ -124,12 +126,14 @@ public class CannabisPlant : MonoBehaviour
                 else if (bHasBud &&
                     inv.items.Count >= inv.totalItems)
                 {
+                    dMan.portPic = portPic;
                     string[] outOfSpace = { "Rats.. We have no more space for stuff." };
                     dMan.dialogueLines = outOfSpace;
                     dMan.ShowDialogue();
                 }
                 else
                 {
+                    dMan.portPic = portPic;
                     dMan.dialogueLines = new string[NoBud.Length];
                     dMan.dialogueLines = NoBud;
                     dMan.ShowDialogue();

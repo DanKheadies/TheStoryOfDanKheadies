@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/03/2018
+// Last:  03/10/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -678,7 +678,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.CompareTag("Door"))
         {
             SFXMan.openDoor2.PlayOneShot(SFXMan.openDoor2.clip);
-            Destroy(collision.gameObject);
+            collision.gameObject.transform.localScale = Vector3.zero;
         }
     }
 }

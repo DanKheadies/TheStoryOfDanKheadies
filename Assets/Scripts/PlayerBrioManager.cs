@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  09/24/2017
+// Last:  03/30/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +12,7 @@ public class PlayerBrioManager : MonoBehaviour
 {
     private Animator anim;
     private DialogueManager dMan;
+    public Sprite portPic;
 
     public float diffMaxAndCurrent;
     public float playerMaxBrio;
@@ -24,6 +25,16 @@ public class PlayerBrioManager : MonoBehaviour
         // Initializers
         anim = GetComponent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
+
+        // Setting the Max Brio
+        if (PlayerPrefs.GetInt("Saved") == 1)
+        {
+            playerMaxBrio = PlayerPrefs.GetFloat("BrioMax");
+        }
+        else
+        {
+            playerMaxBrio = 50;
+        }
 
         // Give player full Brio if none
         if (playerCurrentBrio == 0)
@@ -45,6 +56,7 @@ public class PlayerBrioManager : MonoBehaviour
             // Opens Dialogue Manager and gives a warning
             anim.SetBool("bIsWalking", false);
             dMan.dialogueLines = warningLines;
+            dMan.portPic = portPic;
             dMan.ShowDialogue();
             playerCurrentBrio = 1;
         }
@@ -84,5 +96,11 @@ public class PlayerBrioManager : MonoBehaviour
     public void SetMaxBrio()
     {
         playerCurrentBrio = playerMaxBrio;
+    }
+
+    // Increase the Max Brio
+    public void IncreaseMaxBrio(float increaseAmount)
+    {
+        playerMaxBrio = playerMaxBrio + increaseAmount;
     }
 }

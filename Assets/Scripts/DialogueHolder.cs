@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/10/2018
+// Last:  03/25/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +12,7 @@ public class DialogueHolder : MonoBehaviour
 {
     private Animator anim;
     private DialogueManager dMan;
+    public Sprite portPic;
     private TouchControls touches;
 
     public string dialogue;
@@ -34,6 +35,7 @@ public class DialogueHolder : MonoBehaviour
                 // Opens Dialogue Manager and uses NPC's first line
                 if (!dMan.bDialogueActive)
                 {
+                    dMan.portPic = portPic;
                     dMan.dialogueLines = dialogueLines;
                     dMan.currentLine = 0;
                     dMan.ShowDialogue();
