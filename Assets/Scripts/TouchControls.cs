@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/03/2018
+// Last:  04/07/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -62,10 +62,13 @@ public class TouchControls : MonoBehaviour
     public void StartAction()
     {
         bAction = true;
+        StartCoroutine(DelayedStop());
     }
-    public void StopAction()
+    IEnumerator DelayedStop()
     {
+        yield return new WaitForSeconds(0.1f);
         bAction = false;
+        StopCoroutine(DelayedStop());
     }
 
     // Baction (boosting / secondary) button flags

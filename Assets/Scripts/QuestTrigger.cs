@@ -28,11 +28,6 @@ public class QuestTrigger : MonoBehaviour
         spRend = gameObject.GetComponentInParent<SpriteRenderer>();
         qMan = FindObjectOfType<QuestManager>();
 	}
-	
-	void Update ()
-    {
-        
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

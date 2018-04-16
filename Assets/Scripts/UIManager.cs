@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  11/15/2017
+// Last:  04/16/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public CanvasGroup contOpacCan;
     public CanvasGroup sliderCanvas;
     public DialogueManager dMan;
+    public OptionsManager oMan;
     public PlayerBrioManager playerBrio;
     public Scene currScene;
     public Slider brioBar;
@@ -42,6 +43,7 @@ public class UIManager : MonoBehaviour
         conTog = GameObject.Find("ShowButtonsToggle").GetComponent<Toggle>();
         currScene = SceneManager.GetActiveScene();
         dMan = GameObject.FindObjectOfType<DialogueManager>();
+        oMan = GameObject.FindObjectOfType<OptionsManager>();
         sliderCanvas = GetComponent<CanvasGroup>();
         touches = FindObjectOfType<TouchControls>();
         
@@ -70,6 +72,7 @@ public class UIManager : MonoBehaviour
         // Sets initial opacity based off saved data
         if (!PlayerPrefs.HasKey("ControlsOpac"))
         {
+            currentContOpac = 1.0f;
             contOpacSlider.value = 1.0f;
             contOpacCan.alpha = 1.0f;
         }
@@ -87,7 +90,7 @@ public class UIManager : MonoBehaviour
         brioBar.value = playerBrio.playerCurrentBrio;
         brioText.text = "BR:  " + (int)(playerBrio.playerCurrentBrio) + " / " + (int)(playerBrio.playerMaxBrio);
 
-        if (dMan.bDialogueActive)
+        if (dMan.bDialogueActive && !oMan.bOptionsActive)
         {
             //brioBar.GetComponent<Renderer>().enabled = !brioBar.GetComponent<Renderer>().enabled;
             sliderCanvas.interactable = false;
@@ -101,6 +104,7 @@ public class UIManager : MonoBehaviour
 
         if (!bControlsActive)
         {
+            Debug.Log("off bro");
             touches.GetComponent<Canvas>().enabled = false;
         }
     }

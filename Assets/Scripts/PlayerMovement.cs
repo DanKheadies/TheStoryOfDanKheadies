@@ -70,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
     {
         // Unit's Project Settings -> Input
         Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        //Move(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical"));
         
     }
 
@@ -110,9 +109,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void CollisionBundle()
+    public void CollisionBundle() // Note: order is important
     {
-        // Note: order is important
         // Reset Camera dimension / ratio incase screen size changed at all (e.g. WebGL Fullscreen)
         aspectUtil.Awake();
 

@@ -110,8 +110,8 @@ public class SaveGame : MonoBehaviour
         }
 
         // Check saved values
-        Debug.Log("Opa: " + PlayerPrefs.GetFloat("ControlsOpac"));
-        Debug.Log("Act: " + PlayerPrefs.GetInt("ControlsActive"));
+        //Debug.Log("Opa: " + PlayerPrefs.GetFloat("ControlsOpac"));
+        //Debug.Log("Act: " + PlayerPrefs.GetInt("ControlsActive"));
     }
 
     // Temp save inventory for switching scenes

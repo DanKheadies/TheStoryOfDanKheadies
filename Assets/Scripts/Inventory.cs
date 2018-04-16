@@ -2,7 +2,7 @@
 // Authors: Asbjorn Thirslund (Brackeys)
 // Contributors: David W. Corso
 // Start: 01/18/2018
-// Last:  03/10/2018
+// Last:  04/02/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -37,11 +37,15 @@ public class Inventory : MonoBehaviour
     public int selectedItemId;
     public int totalItems;
 
+    public bool bUpdateItemCount;
+
     void Start()
     {
         // Initializers
         items = new List<Item>();
         totalItems = 20;
+
+        bUpdateItemCount = false;
     }
 
     public void RerunStart()
@@ -68,6 +72,8 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        bUpdateItemCount = true;
+
         return true;
     }
 
@@ -80,6 +86,8 @@ public class Inventory : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        bUpdateItemCount = true;
     }
 
     public void Remove(Item item)
@@ -92,6 +100,8 @@ public class Inventory : MonoBehaviour
         {
             onItemChangedCallback.Invoke();
         }
+
+        bUpdateItemCount = true;
     }
 
     public Item GetSelectedItemById (int itemId)

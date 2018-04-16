@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/27/2018
-// Last:  03/30/2018
+// Last:  04/06/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -66,10 +66,8 @@ public class Chp1RaceQuest : MonoBehaviour
         {
             GameObject.Find("Race_End").GetComponent<QuestTrigger>().endQuest = true;
         }
-    }
 
-    public void OnTriggerStay2D(Collider2D collision)
-    {
+        // Shrink player's hitbox while within the race area
         if (this.gameObject.name == "Race_Perimeter" && collision.gameObject.CompareTag("Player"))
         {
             thePlayer.GetComponent<PolygonCollider2D>().points = racePoints;
@@ -78,6 +76,7 @@ public class Chp1RaceQuest : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D collision)
     {
+        // Reset the player's hitbox to normal when outside the race area
         if (this.gameObject.name == "Race_Perimeter" && collision.gameObject.CompareTag("Player"))
         {
             thePlayer.GetComponent<PolygonCollider2D>().points = ogPoints;

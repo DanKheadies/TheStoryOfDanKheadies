@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  03/08/2018
+// Last:  04/07/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -26,8 +26,10 @@ public class ItemManager : MonoBehaviour
     private GameObject whiteBud;
     private GameObject vrGoggles;
 
-    public bool bAcquired;
-    public bool bDoneAcquiring;
+    public bool bAcquired; // Checks & Balances
+    public bool bDoneAcquiring; // Checks & Balances
+    public bool bHasEntered;
+    public bool bHasExited;
 
     public string[] AcquireItem;
 
@@ -43,7 +45,10 @@ public class ItemManager : MonoBehaviour
 
         bAcquired = false;
         bDoneAcquiring = false;
+        bHasEntered = false;
+        bHasExited = true;
 
+        // 04/07/2018 DC TODO -- Extract to individual scene files
         if (scene.name == "Chp0")
         {
             vrGoggles = GameObject.Find("VR.Goggles");
@@ -60,6 +65,12 @@ public class ItemManager : MonoBehaviour
 
     void Update()
     {
+        if ((bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && Input.GetButtonUp("Action")) ||
+            (bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && touches.bAction))
+        {
+            InteractWithItem();
+        }
+
         if (bAcquired && dMan.bDialogueActive)
         {
             bAcquired = false;
@@ -72,63 +83,74 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    void OnTriggerStay2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if ((!dMan.bPauseDialogue && Input.GetButtonUp("Action")) ||
-                (!dMan.bPauseDialogue && touches.bAction))
-            {
-                if (inv.items.Count < inv.totalItems)
-                {
-                    anim.Play("Acquire");
-
-                    // Display and add item to inventory
-                    if (this.name == "Cannabis.Bud.Green")
-                    {
-                        greenBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
-                        Inventory.instance.Add(item);
-                    }
-                    else if (this.name == "Cannabis.Bud.Orange")
-                    {
-                        orangeBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
-                        Inventory.instance.Add(item);
-                    }
-                    else if (this.name == "Cannabis.Bud.Purple")
-                    {
-                        purpleBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
-                        Inventory.instance.Add(item);
-                    }
-                    else if (this.name == "Cannabis.Bud.White")
-                    {
-                        whiteBud.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                        Inventory.instance.Add(item);
-                    }
-                    else if (this.name == "VR.Goggles")
-                    {
-                        vrGoggles.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                        Inventory.instance.Add(item);
-                        this.GetComponent<BoxCollider2D>().enabled = false;
-                        this.transform.localScale = Vector2.zero;
-                    }
-
-                    dMan.portPic = portPic;
-                    dMan.dialogueLines = new string[AcquireItem.Length];
-                    dMan.dialogueLines = AcquireItem;
-                    dMan.ShowDialogue();
-                }
-                else if (inv.items.Count >= inv.totalItems)
-                {
-                    dMan.portPic = portPic;
-                    string[] outOfSpace = { "Rats.. We have no more space for stuff." };
-                    dMan.dialogueLines = outOfSpace;
-                    dMan.ShowDialogue();
-                }
-
-                bAcquired = true;
-                touches.bAction = false;
-            }
+            bHasEntered = true;
+            bHasExited = false;
         }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            bHasEntered = false;
+            bHasExited = true;
+        }
+    }
+
+    public void InteractWithItem()
+    {
+        if (inv.items.Count < inv.totalItems)
+        {
+            anim.Play("Acquire");
+
+            // Display and add item to inventory
+            if (this.name == "Cannabis.Bud.Green")
+            {
+                greenBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+                Inventory.instance.Add(item);
+            }
+            else if (this.name == "Cannabis.Bud.Orange")
+            {
+                orangeBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+                Inventory.instance.Add(item);
+            }
+            else if (this.name == "Cannabis.Bud.Purple")
+            {
+                purpleBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+                Inventory.instance.Add(item);
+            }
+            else if (this.name == "Cannabis.Bud.White")
+            {
+                whiteBud.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                Inventory.instance.Add(item);
+            }
+            else if (this.name == "VR.Goggles")
+            {
+                vrGoggles.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                Inventory.instance.Add(item);
+                this.GetComponent<BoxCollider2D>().enabled = false;
+                this.transform.localScale = Vector2.zero;
+            }
+
+            dMan.portPic = portPic;
+            dMan.dialogueLines = new string[AcquireItem.Length];
+            dMan.dialogueLines = AcquireItem;
+            dMan.ShowDialogue();
+        }
+        else if (inv.items.Count >= inv.totalItems)
+        {
+            dMan.portPic = portPic;
+            string[] outOfSpace = { "Rats.. We have no more space for stuff." };
+            dMan.dialogueLines = outOfSpace;
+            dMan.ShowDialogue();
+        }
+
+        bAcquired = true;
+        touches.bAction = false;
     }
 
     public void HideItem()

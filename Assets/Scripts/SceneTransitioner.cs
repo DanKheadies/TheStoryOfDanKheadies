@@ -47,6 +47,7 @@ public class SceneTransitioner : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Save the current inventory and load it up for the next scene
         GameObject.FindObjectOfType<SaveGame>().SaveInventoryTransfer();
         SceneManager.LoadScene(loadLevel);
     }

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/25/2018
+// Last:  04/06/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,9 +11,13 @@ using UnityEngine;
 public class DialogueHolder : MonoBehaviour
 {
     private Animator anim;
+    public Collider2D colliEnter;
     private DialogueManager dMan;
     public Sprite portPic;
     private TouchControls touches;
+
+    public bool bHasEntered;
+    public bool bHasExited;
 
     public string dialogue;
     public string[] dialogueLines;
@@ -23,43 +27,76 @@ public class DialogueHolder : MonoBehaviour
         anim = GetComponentInParent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
         touches = FindObjectOfType<TouchControls>();
-	}
 
-    void OnTriggerStay2D(Collider2D collision)
+        bHasEntered = false;
+        bHasExited = true;
+    }
+
+    void Update ()
+    {
+        if ((bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && Input.GetButtonUp("Action")) ||
+            (bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && touches.bAction))
+        {
+            TalkWithNPC(colliEnter);
+        }
+    } 
+
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if ((!dMan.bPauseDialogue && Input.GetButtonUp("Action")) ||
-                (!dMan.bPauseDialogue && touches.bAction))
-            {
-                // Opens Dialogue Manager and uses NPC's first line
-                if (!dMan.bDialogueActive)
-                {
-                    dMan.portPic = portPic;
-                    dMan.dialogueLines = dialogueLines;
-                    dMan.currentLine = 0;
-                    dMan.ShowDialogue();
-                }
+            bHasEntered = true;
+            bHasExited = false;
 
-                // Stop NPC movement
-                if (transform.parent.GetComponent<NPCMovement>() != null)
-                {
-                    transform.parent.GetComponent<NPCMovement>().bCanMove = false;
-                }
+            colliEnter = collision;
+        }
+    }
 
-                // NPC looks at player
-                OrientNPC(collision);
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            bHasEntered = false;
+            bHasExited = true;
 
-                // Stop UI controls / actions 
-                touches.bAction = false;
-            }
+            colliEnter = null;
             
-            // Keeps NPC moving if no dialogue
+            // Restores NPC movement
             if (!dMan.bDialogueActive)
             {
                 anim.Play("NPC Movement");
             }
         }
+    }
+
+    void TalkWithNPC(Collider2D collision)
+    {
+        // Opens Dialogue Manager and uses NPC's first line
+        if (!dMan.bDialogueActive)
+        {
+            dMan.portPic = portPic;
+            dMan.dialogueLines = dialogueLines;
+            dMan.currentLine = 0;
+            dMan.ShowDialogue();
+
+            // Activates Options Holder if any options
+            if (this.GetComponent<OptionsHolder>())
+            {
+                this.GetComponent<OptionsHolder>().PrepareOptions();
+            }
+        }
+
+        // Stop NPC movement
+        if (transform.parent.GetComponent<NPCMovement>() != null)
+        {
+            transform.parent.GetComponent<NPCMovement>().bCanMove = false;
+        }
+
+        // NPC looks at player
+        OrientNPC(collision);
+
+        // Stop UI controls / actions 
+        touches.bAction = false;
     }
 
     void OrientNPC(Collider2D collision)

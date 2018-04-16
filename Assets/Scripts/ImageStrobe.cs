@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  09/24/2017
+// Last:  04/07/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,8 +13,8 @@ public class ImageStrobe : MonoBehaviour
 {
     private Image image;
 
-    public bool bCoRunning;
-    public bool bHide;
+    public bool bStartStrobe;
+    public bool bStopStrobe;
 
     public int pulseTime;
 
@@ -23,22 +23,27 @@ public class ImageStrobe : MonoBehaviour
         image = GetComponent<Image>();
         yield return null;
 
-        bCoRunning = false;
+        bStartStrobe = false;
+        bStopStrobe = false;
     }
 
     private void Update()
     {
-        if (!bCoRunning && !bHide)
+        if (bStartStrobe)
         {
             StartCoroutine("Strobe");
+            bStartStrobe = false;
+        }
+        else if (bStopStrobe)
+        {
+            StopCoroutine("Strobe");
+            bStopStrobe = false;
         }
 
     }
 
     IEnumerator Strobe()
     {
-        bCoRunning = true;
-
         for (int i = 1; i > 0; i++)
         {
             image.canvasRenderer.SetAlpha(1.0f);

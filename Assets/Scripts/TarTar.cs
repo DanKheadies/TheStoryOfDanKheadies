@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/29/2018
-// Last:  03/30/2018
+// Last:  04/02/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +30,15 @@ public class TarTar : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            thePlayer.GetComponent<PlayerMovement>().moveSpeed = 1.0f;
+            // UX: return reduced speed and after X time, go full speed
+            thePlayer.GetComponent<PlayerMovement>().moveSpeed = 0.333f;
+            StartCoroutine(FullSpeed());
         }
+    }
+
+    IEnumerator FullSpeed()
+    {
+        yield return new WaitForSeconds(0.333f);
+        thePlayer.GetComponent<PlayerMovement>().moveSpeed = 1.0f;
     }
 }

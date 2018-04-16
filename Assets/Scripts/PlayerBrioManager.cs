@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/30/2018
+// Last:  04/16/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -51,6 +51,7 @@ public class PlayerBrioManager : MonoBehaviour
 	void Update ()
     {
         // Warning Message when Brio is out
+        // DC 04/16/2018 -- Runs and hides at the start; should stop?
         if (playerCurrentBrio <= 0)
         {
             // Opens Dialogue Manager and gives a warning

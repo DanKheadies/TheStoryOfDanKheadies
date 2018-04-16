@@ -1,11 +1,12 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  03/22/2018
+// Last:  04/16/2018
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Contains all Chapter 0 quests, items, and elements
 public class Chp0 : MonoBehaviour
@@ -16,11 +17,12 @@ public class Chp0 : MonoBehaviour
     public GameObject dBox;
     public GameObject HUD;
     public GameObject sFaderAnim;
+    public GameObject thePlayer;
     public Inventory inv;
     public MusicManager mMan;
     public SaveGame sGame;
     private SFXManager SFXMan;
-    public GameObject thePlayer;
+    public Text dText;
     public TouchControls touches;
 
     private bool bAvoidUpdate;
@@ -39,6 +41,7 @@ public class Chp0 : MonoBehaviour
         contArrow = GameObject.Find("Dialogue_Arrow");
         dBox = GameObject.Find("Dialogue_Box");
         dMan = FindObjectOfType<DialogueManager>();
+        dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
         HUD = GameObject.Find("HUD");
         inv = FindObjectOfType<Inventory>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -62,7 +65,7 @@ public class Chp0 : MonoBehaviour
             mMan.bMusicCanPlay = false;
             thePlayer.transform.position = new Vector2(1.45f, 3.33f);
             mainCamera.transform.position = new Vector2(1.45f, 3.33f);
-
+            
             dialogueLines = new string[] {
                 "Dan.",
                 "Dan...",
@@ -72,6 +75,7 @@ public class Chp0 : MonoBehaviour
 
             dMan.dialogueLines = dialogueLines;
             dMan.currentLine = 0;
+            dText.text = dialogueLines[dMan.currentLine];
             dBox.transform.localScale = Vector3.one;
         }
         // Chapter 0 Saved Game
@@ -94,7 +98,7 @@ public class Chp0 : MonoBehaviour
             if (strobeTimer <= 0)
             {
                 bStartGame = true;
-                contArrow.GetComponent<ImageStrobe>().bHide = false;
+                contArrow.GetComponent<ImageStrobe>().bStartStrobe = true;
                 dMan.bDialogueActive = true;
 
                 // Sound Effect
