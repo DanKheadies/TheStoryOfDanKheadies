@@ -14,6 +14,9 @@ public class ScreenOrientation : MonoBehaviour
     public DialogueManager dMan;
     public DeviceOrientation devOr;
     public OptionsManager oMan;
+
+    public bool bIsFull;
+    public bool bSizingChange;
     
 	void Start ()
     {
@@ -22,15 +25,36 @@ public class ScreenOrientation : MonoBehaviour
         devOr = Input.deviceOrientation;
         dMan = FindObjectOfType<DialogueManager>();
         oMan = FindObjectOfType<OptionsManager>();
+
+        bIsFull = Screen.fullScreen;
+        bSizingChange = false;
 	}
 	
 	void Update ()
     {
-		if (Input.deviceOrientation != devOr)
+		if (Input.deviceOrientation != devOr ||
+            Screen.autorotateToLandscapeLeft ||
+            Screen.autorotateToLandscapeRight ||
+            Screen.autorotateToPortrait || 
+            Screen.autorotateToPortraitUpsideDown ||
+            bSizingChange)
         {
-            aspectUtil.Awake();
-            dMan.ConfigureParameters();
-            oMan.ConfigureParameters();
+            ResetParameters();
+
+            bSizingChange = false;
         }
-	}
+
+        if (bIsFull != Screen.fullScreen)
+        {
+            bIsFull = Screen.fullScreen;
+            bSizingChange = true;
+        }
+    }
+
+    public void ResetParameters()
+    {
+        aspectUtil.Awake();
+        dMan.ConfigureParameters();
+        oMan.ConfigureParameters();
+    }
 }

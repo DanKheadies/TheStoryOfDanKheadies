@@ -41,7 +41,7 @@ public class DialogueHolder : MonoBehaviour
         }
     } 
 
-    void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -52,7 +52,7 @@ public class DialogueHolder : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+    public void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {

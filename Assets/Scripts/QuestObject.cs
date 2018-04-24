@@ -16,6 +16,7 @@ public class QuestObject : MonoBehaviour
 
     public bool bHasStarted;
     public bool bHasEnded;
+    public bool bHasCollected;
 
     public int questNumber;
 

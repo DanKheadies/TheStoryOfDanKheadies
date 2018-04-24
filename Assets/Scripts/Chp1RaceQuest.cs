@@ -80,6 +80,16 @@ public class Chp1RaceQuest : MonoBehaviour
         if (this.gameObject.name == "Race_Perimeter" && collision.gameObject.CompareTag("Player"))
         {
             thePlayer.GetComponent<PolygonCollider2D>().points = ogPoints;
+
+            chp1.quest1.GetComponent<QuestObject>().bHasStarted = false; // DC TODO -- error prone?
+            chp1.raceTimer = 0f;
+
+            raceCP1.transform.localScale = Vector3.zero;
+            raceCP2.transform.localScale = Vector3.zero;
+            raceCP3.transform.localScale = Vector3.zero;
+            raceCP4.transform.localScale = Vector3.zero;
+
+            GameObject.Find("Race_End").GetComponent<QuestTrigger>().endQuest = false;
         }
     }
 }

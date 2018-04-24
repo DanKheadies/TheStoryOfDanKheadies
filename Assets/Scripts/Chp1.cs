@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  04/16/2018
+// Last:  04/23/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -14,16 +14,20 @@ public class Chp1 : MonoBehaviour
     public CameraFollow camFollow;
     public CannabisPlant cannaP;
     public DialogueManager dMan;
+    public GameObject kid2;
     public GameObject oldMan1;
+    public GameObject parent2;
     public GameObject quest0;
     public GameObject quest1;
     public GameObject quest2;
     public GameObject quest3;
+    public GameObject questTrigger2;
     public GameObject thePlayer;
     public Inventory inv;
     public QuestManager qMan;
     public SaveGame sGame;
 
+    public bool bAvoidUpdateQ0;
     public bool bAvoidUpdateQ1;
     public bool bAvoidUpdateQ2;
     public bool bAvoidUpdateQ3;
@@ -33,6 +37,8 @@ public class Chp1 : MonoBehaviour
     public float timer;
     public float raceTimer;
 
+    public string savedQuestsValue;
+
     void Start()
     {
         // Initializers
@@ -40,10 +46,14 @@ public class Chp1 : MonoBehaviour
         cannaP = GameObject.FindGameObjectWithTag("SmoochyWoochyPoochy").GetComponent<CannabisPlant>();
         dMan = FindObjectOfType<DialogueManager>();
         inv = FindObjectOfType<Inventory>();
+        kid2 = GameObject.Find("Kid2");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         oldMan1 = GameObject.Find("OldMan1");
+        parent2 = GameObject.Find("Parent.2");
         qMan = FindObjectOfType<QuestManager>();
+        questTrigger2 = GameObject.Find("QT_2");
         thePlayer = GameObject.FindGameObjectWithTag("Player");
+        savedQuestsValue = PlayerPrefs.GetString("Chp1Quests");
         sGame = FindObjectOfType<SaveGame>();
 
         inv.RerunStart();
@@ -53,10 +63,6 @@ public class Chp1 : MonoBehaviour
         quest2 = GameObject.Find("Quest_2");
         quest3 = GameObject.Find("Quest_3");
 
-        bAvoidUpdateQ1 = false;
-        bAvoidUpdateQ2 = false;
-        bAvoidUpdateQ3 = false;
-        bContainsItem = false;
         timer = 0.33f;
         raceTimer = 0f;
 
@@ -97,20 +103,31 @@ public class Chp1 : MonoBehaviour
             }
         }
 
-        // Quest 1
+        // Quest 0 -- Q&A 1 Reward
+        if (!quest0.GetComponent<QuestObject>().bHasCollected &&
+            quest0.GetComponent<QuestObject>().bHasEnded &&
+            (int)camFollow.currentCoords == 0)
+        {
+            //if (kid2.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+            //    dMan.bDialogueActive)
+            //{
+            //    Quest0Reward();
+            //}
+        }
+
+        // Quest 1 -- Race Start -> Start Timer
         if (quest1.GetComponent<QuestObject>().bHasStarted &&
             !quest1.GetComponent<QuestObject>().bHasEnded)
         {
             raceTimer += Time.deltaTime;
         }
 
-        // Quest 1
+        // Quest 1 -- Race End -> Check Race Time & Assign Dialogue
         if (quest1.GetComponent<QuestObject>().bHasEnded &&
             !dMan.bDialogueActive &&
             !bAvoidUpdateQ1)
         {
             bAvoidUpdateQ1 = true;
-            GameObject kid2 = GameObject.Find("Kid2");
             kid2.transform.GetChild(0).gameObject.SetActive(false);
             kid2.transform.GetChild(1).gameObject.SetActive(true);
 
@@ -126,28 +143,33 @@ public class Chp1 : MonoBehaviour
             }
             else if (raceTimer <= 30 && raceTimer > 10)
             {
-                string raceTimeText = "You ran that in " + raceTimer + " seconds.";
-
                 kid2.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
-                    "Good race Dan! " + raceTimeText,
-                    "Keep practicing and improving, and maybe one day, you'll beat my time!"
+                    "Good race Dan! You ran that in " + raceTimer + " seconds.",
+                    "Keep practicing and improving. Maybe you'll beat my time!"
                 };
             }
             else
             {
-                string raceTimeText = "You finished after " + raceTimer + " seconds.";
-
-                kid2.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
-                    "Well.. You made it... " + raceTimeText,
+                    kid2.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
+                    "Well.. You made it... You finished after " + raceTimer + " seconds.",
                     "Keep training Dan. It's good for you!"
                 };
             }
-
-            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
-            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
         }
 
-        // Quest 2
+        // Quest 1 -- Race Reward
+        if (!quest1.GetComponent<QuestObject>().bHasCollected &&
+            quest1.GetComponent<QuestObject>().bHasEnded &&
+            (int)camFollow.currentCoords == 32)
+        {
+            if (kid2.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+                dMan.bDialogueActive)
+            {
+                Quest1Reward();
+            }
+        }
+
+        // Quest 2 -- Search Start
         if (quest2.GetComponent<QuestObject>().bHasStarted &&
             !dMan.bDialogueActive &&
             !bAvoidUpdateQ2)
@@ -157,7 +179,16 @@ public class Chp1 : MonoBehaviour
             GameObject.Find("TreeHouseDoor").transform.localScale = Vector3.one;
         }
 
-        // Quest 3
+        // Quest 2 -- Search Reward
+        if (!quest2.GetComponent<QuestObject>().bHasCollected && 
+            quest2.GetComponent<QuestObject>().bHasEnded &&
+            (int)camFollow.currentCoords == 23)
+        {
+            Quest2Reward();
+            
+        }
+
+        // Quest 3 -- Item Check
         if (quest3.GetComponent<QuestObject>().bHasStarted &&
             inv.bUpdateItemCount &&
             !bAvoidUpdateQ3)
@@ -193,15 +224,13 @@ public class Chp1 : MonoBehaviour
             inv.bUpdateItemCount = false;
         }
         
-        // Quest 3
+        // Quest 3 -- Item Reward & Removal
         if (quest3.GetComponent<QuestObject>().bHasEnded &&
             !bAvoidUpdateQ3)
         {
             if (quest3.GetComponent<QuestObject>().bHasEnded)
             {
-                thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
-                thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
-
+                Quest3Reward();
                 bAvoidUpdateQ3 = true;
             }
 
@@ -217,7 +246,50 @@ public class Chp1 : MonoBehaviour
                     bTempCheck = false;
                 }
             }
-            
+        }
+    }
+
+    public void Quest0Reward()
+    {
+        if (!quest0.GetComponent<QuestObject>().bHasCollected)
+        {
+            //thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
+            //thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
+
+            quest0.GetComponent<QuestObject>().bHasCollected = true;
+        }
+    }
+
+    public void Quest1Reward()
+    {
+        if (!quest1.GetComponent<QuestObject>().bHasCollected)
+        {
+            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
+            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
+
+            quest1.GetComponent<QuestObject>().bHasCollected = true;
+        }
+    }
+
+    public void Quest2Reward()
+    {
+        if (!quest2.GetComponent<QuestObject>().bHasCollected)
+        {
+            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
+            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(5);
+
+            quest2.GetComponent<QuestObject>().bHasCollected = true;
+        }
+    }
+
+    public void Quest3Reward()
+    {
+        if (!quest3.GetComponent<QuestObject>().bHasCollected)
+        {
+            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
+            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(5);
+
+            quest3.GetComponent<QuestObject>().bHasCollected = true;
         }
     }
 
@@ -226,13 +298,20 @@ public class Chp1 : MonoBehaviour
         // 0 = TBStarted
         // 1 = TBEnded
         // 2 = Complete
-        string savedQuestsValue = PlayerPrefs.GetString("Chp1Quests");
+        // 3 = Collected
+        savedQuestsValue = PlayerPrefs.GetString("Chp1Quests");
 
         for (int i = 0; i < savedQuestsValue.Length; i++)
         {
             GameObject Quest = GameObject.Find("Quest_" + i);
 
-            if (savedQuestsValue.Substring(i, 1) == 2.ToString())
+            if (savedQuestsValue.Substring(i, 1) == 3.ToString())
+            {
+                Quest.GetComponent<QuestObject>().bHasCollected = true;
+                Quest.GetComponent<QuestObject>().bHasEnded = true;
+                Quest.GetComponent<QuestObject>().bHasStarted = true;
+            }
+            else if (savedQuestsValue.Substring(i, 1) == 2.ToString())
             {
                 Quest.GetComponent<QuestObject>().bHasEnded = true;
                 Quest.GetComponent<QuestObject>().bHasStarted = true;
@@ -251,13 +330,18 @@ public class Chp1 : MonoBehaviour
         // 0 = TBStarted
         // 1 = TBEnded
         // 2 = Complete
+        // 3 = Collected
         string savedQuestsValue = "";
 
         for (int i = 0; i < qMan.quests.Length; i++)
         {
             savedQuestsValue += i;
 
-            if (qMan.quests[i].bHasEnded)
+            if (qMan.quests[i].bHasCollected)
+            {
+                savedQuestsValue = savedQuestsValue.Remove(i, 1).Insert(i, "3");
+            }
+            else if (qMan.quests[i].bHasEnded)
             {
                 savedQuestsValue = savedQuestsValue.Remove(i, 1).Insert(i, "2");
             }
