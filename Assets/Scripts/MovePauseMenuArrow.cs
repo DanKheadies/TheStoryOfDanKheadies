@@ -94,8 +94,8 @@ public class MovePauseMenuArrow : MonoBehaviour
         if (pauseMenu.gameObject.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.S) ||
-                Input.GetKeyDown(KeyCode.DownArrow) ||
-                touches.bDown)
+                Input.GetKeyDown(KeyCode.DownArrow)) //||
+                //touches.bDown) DC TODO -- Fix touches w/ arrow movement (also, see OptionsMenu)
             {
                 if (currentPosition == ArrowPos.GoOn)
                 {
@@ -138,8 +138,8 @@ public class MovePauseMenuArrow : MonoBehaviour
                 }
             }
             else if (Input.GetKeyDown(KeyCode.W) ||
-                     Input.GetKeyDown(KeyCode.UpArrow) ||
-                     touches.bUp)
+                     Input.GetKeyDown(KeyCode.UpArrow)) //||
+                      //touches.bUp) DC TODO -- Fix touches w/ arrow movement (also, see OptionsMenu)
             {
                 if (currentPosition == ArrowPos.Quit)
                 {

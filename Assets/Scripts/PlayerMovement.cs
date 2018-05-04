@@ -50,7 +50,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!bStopPlayerMovement)
+        if (bStopPlayerMovement)
+        {
+            movementVector = new Vector2(0, 0);
+            rBody.velocity = new Vector2(0, 0);
+        }
+        else
         {
             MovePlayer();
         }

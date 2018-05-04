@@ -13,14 +13,16 @@ public class CameraFollow : MonoBehaviour
     public AspectUtility aspectUtil;
     public Camera myCam;
     public GameObject player;
+    public Vector2 minCamPos;
+    public Vector2 maxCamPos;
+    public Vector2 smoothVelocity;
 
-    public bool bHome = false;
-    public bool bField = false;
-    public bool bFarm = false;
-    public bool bPlay = false;
-    public bool bCampus = false;
-
-    public bool bUpdateOn = true;
+    public bool bHome;
+    public bool bField;
+    public bool bFarm;
+    public bool bPlay;
+    public bool bCampus;
+    public bool bUpdateOn;
 
     [System.Flags]
     public enum AnandaCoords : int
@@ -66,14 +68,12 @@ public class CameraFollow : MonoBehaviour
 
     public AnandaCoords currentCoords;
 
-    public float smoothTime = 0.2f;
-
-    public Vector2 minCamPos;
-    public Vector2 maxCamPos;
-    public Vector2 smoothVelocity = new Vector2(0.2f, 0.2f);
+    public float smoothTime;
+    public float derp;
 
     void Start ()
     {
+        // Initializers
         aspectUtil = GetComponent<AspectUtility>();
         myCam = GetComponent<Camera>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -84,6 +84,17 @@ public class CameraFollow : MonoBehaviour
 
         // Size w/ respect to AspectUtility.cs
         myCam.orthographicSize = aspectUtil._wantedAspectRatio;
+        
+        bHome = false;
+        bField = false;
+        bFarm = false;
+        bPlay = false;
+        bCampus = false;
+        bUpdateOn = true;
+
+        derp = -10f;
+        smoothTime = 0.2f;
+        smoothVelocity = new Vector2(0.2f, 0.2f);
     }
 
     void Update ()
@@ -99,7 +110,7 @@ public class CameraFollow : MonoBehaviour
             // Camera follows the player with a slight delay 
             float posX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x, ref smoothVelocity.x, smoothTime);
             float posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y, ref smoothVelocity.y, smoothTime);
-            transform.position = new Vector3(posX, posY, -10);
+            transform.position = new Vector3(posX, posY, derp);
 
             // Camera bounds per area
             // Areas listed alphabetically
@@ -402,7 +413,7 @@ public class CameraFollow : MonoBehaviour
                     transform.position.y,
                     (minCamPos.y + 5.12f * -2.0f),
                     (maxCamPos.y + 5.12f * -2.0f)),
-                -10);
+                derp);
             }
             else if (currentCoords == AnandaCoords.HousesE)
             {

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/16/2018
+// Last:  04/28/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +15,8 @@ public class DialogueManager : MonoBehaviour
     public Animator anim;
     public CameraFollow mainCamera;
     public GameObject dBox;
+    public Image dArrow;
+    public Image dFrame;
     public Image dPic;
     public ImageStrobe imgStrobe;
     public OptionsManager oMan;
@@ -32,27 +34,40 @@ public class DialogueManager : MonoBehaviour
     private float pauseTime;
     private float screenHeight;
     private float screenWidth;
-    private float rtLeft;
-    private float rtRight;
-    private float rtTop;
-    private float rtBottom;
-    private float ptLeft;
-    private float ptRight;
-    private float ptTop;
-    private float ptBottom;
+
+    //private float rtLeft;
+    //private float rtRight;
+    //private float rtTop;
+    //private float rtBottom;
+    //private float ptLeft;
+    //private float ptRight;
+    //private float ptTop;
+    //private float ptBottom;
+
+    // Arrays follow CSS rules for orientation
+    // [0] = top
+    // [1] = right
+    // [2] = bottom
+    // [3] = left
+    private float[] dArrowPoints;
+    private float[] dFramePoints;
+    private float[] dPicPoints;
+    private float[] dTextPoints;
 
     public int currentLine;
 
     public string[] dialogueLines;
 
-    
-	void Start ()
+
+    void Start()
     {
         // Initializers
         thePlayer = FindObjectOfType<PlayerMovement>();
         anim = thePlayer.GetComponent<Animator>();
-        aspectUtil = GetComponent<AspectUtility>();
+        aspectUtil = GameObject.Find("Main Camera").GetComponent<AspectUtility>();
+        dArrow = GameObject.Find("Dialogue_Arrow").GetComponent<Image>();
         dBox = GameObject.Find("Dialogue_Box");
+        dFrame = GameObject.Find("Dialogue_Frame").GetComponent<Image>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
         dPic = GameObject.Find("Dialogue_Picture").GetComponent<Image>();
         imgStrobe = GameObject.Find("Dialogue_Arrow").GetComponent<ImageStrobe>();
@@ -64,14 +79,18 @@ public class DialogueManager : MonoBehaviour
 
         bDialogueActive = false;
         bPauseDialogue = false; // UX -- Prevents immediately reopening a dialogue while moving / talking
-        pauseTime = 0.25f;
+        pauseTime = 0.333f;
 
+        dArrowPoints = new float[4];
+        dFramePoints = new float[4];
+        dPicPoints = new float[4];
+        dTextPoints = new float[4];
 
         ConfigureParameters();
     }
-	
 
-	void Update ()
+
+    void Update()
     {
         if (bPauseDialogue)
         {
@@ -83,9 +102,9 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Advance active dialogues
-        if ((bDialogueActive && Input.GetButtonDown("Action")) ||
-            (bDialogueActive && Input.GetButtonDown("DialogueAction")) ||
-            (bDialogueActive && touches.bAction))
+        if ((bDialogueActive && !bPauseDialogue && Input.GetButtonDown("Action")) ||
+            (bDialogueActive && !bPauseDialogue && Input.GetButtonDown("DialogueAction")) ||
+            (bDialogueActive && !bPauseDialogue && touches.bAction))
         {
             if (currentLine < dialogueLines.Length)
             {
@@ -115,12 +134,12 @@ public class DialogueManager : MonoBehaviour
             ConfigureParameters();
         }
 
-        // Check sizing stuff
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    Debug.Log("A:" + mainCamera.myCam.pixelRect);
-        //    Debug.Log("(" + Screen.width + ", " + Screen.height + ")");
-        //}
+        //Check sizing stuff
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log("A:" + mainCamera.myCam.pixelRect);
+            Debug.Log("(" + Screen.width + ", " + Screen.height + ")");
+        }
     }
 
     public void ResetDialogue()
@@ -145,7 +164,7 @@ public class DialogueManager : MonoBehaviour
         {
             touches.GetComponent<Canvas>().enabled = true;
         }
-    } 
+    }
 
     public void ShowDialogue()
     {
@@ -170,11 +189,11 @@ public class DialogueManager : MonoBehaviour
         thePlayer.bStopPlayerMovement = true;
 
         // Checks (& hides) UI controls
-        bTempControlActive = uiMan.bControlsActive;
-        if (uiMan.bControlsActive)
-        {
-            touches.GetComponent<Canvas>().enabled = false;
-        }
+        //bTempControlActive = uiMan.bControlsActive;
+        //if (uiMan.bControlsActive)
+        //{
+        //    touches.GetComponent<Canvas>().enabled = false;
+        //}
     }
 
     public void ConfigureParameters()
@@ -186,39 +205,89 @@ public class DialogueManager : MonoBehaviour
         if (screenWidth > mainCamera.myCam.pixelWidth)
         {
             // Height => change in height affects variables
-            rtLeft = 0.00001599f * (screenHeight * screenHeight) + 0.2902f * screenHeight + 3.027f;
-            rtRight = 0.00001165f * (screenHeight * screenHeight) + 0.1030f * screenHeight + 1.719f;
-            rtTop = 0.000008856f * (screenHeight * screenHeight) + 0.03531f * screenHeight + 0.5884f;
-            rtBottom = -0.000003886f * (screenHeight * screenHeight) + 0.7015f * screenHeight + 0.5588f;
+            //rtLeft = 0.00001599f * (screenHeight * screenHeight) + 0.2902f * screenHeight + 3.027f;
+            //rtRight = 0.00001165f * (screenHeight * screenHeight) + 0.1030f * screenHeight + 1.719f;
+            //rtTop = 0.000008856f * (screenHeight * screenHeight) + 0.03531f * screenHeight + 0.5884f;
+            //rtBottom = -0.000003886f * (screenHeight * screenHeight) + 0.7015f * screenHeight + 0.5588f;
 
-            ptLeft = 0.000005286f * (screenHeight * screenHeight) + 0.04938f * screenHeight + 0.2483f;
-            ptRight = 0.000004195f * (screenHeight * screenHeight) + 0.8573f * screenHeight + 1.704f;
-            ptTop = 0.000005689f * (screenHeight * screenHeight) + 0.05098f * screenHeight + 0.9569f;
-            ptBottom = 0.000007448f * (screenHeight * screenHeight) + 0.7089f * screenHeight + 1.419f;
-            
+            //ptLeft = 0.000005286f * (screenHeight * screenHeight) + 0.04938f * screenHeight + 0.2483f;
+            //ptRight = 0.000004195f * (screenHeight * screenHeight) + 0.8573f * screenHeight + 1.704f;
+            //ptTop = 0.000005689f * (screenHeight * screenHeight) + 0.05098f * screenHeight + 0.9569f;
+            //ptBottom = 0.000007448f * (screenHeight * screenHeight) + 0.7089f * screenHeight + 1.419f;
+
+
+            dArrowPoints[0] = 0f;
+            dArrowPoints[1] = 0.001657f * (screenHeight * screenHeight) - 2.604f * screenHeight + 1230f;
+            dArrowPoints[2] = 0f;
+            dArrowPoints[3] = 0.001657f * (screenHeight * screenHeight) - 2.604f * screenHeight + 1230f;
+
+            dFramePoints[0] = 0f;
+            dFramePoints[1] = 0.001657f * (screenHeight * screenHeight) - 2.604f * screenHeight + 1230f;
+            dFramePoints[2] = 0f;
+            dFramePoints[3] = 0.001657f * (screenHeight * screenHeight) - 2.604f * screenHeight + 1230f;
+
+            dPicPoints[0] = 0.000005689f * (screenHeight * screenHeight) + 0.05098f * screenHeight + 0.9569f;
+            dPicPoints[1] = 0.000004195f * (screenHeight * screenHeight) + 0.8573f * screenHeight + 1.704f;
+            dPicPoints[2] = 0.000007448f * (screenHeight * screenHeight) + 0.7089f * screenHeight + 1.419f;
+            dPicPoints[3] = 0.000005286f * (screenHeight * screenHeight) + 0.04938f * screenHeight + 0.2483f;
+
+            dTextPoints[0] = 0.000008856f * (screenHeight * screenHeight) + 0.03531f * screenHeight + 0.5884f;
+            dTextPoints[1] = 0.00001165f * (screenHeight * screenHeight) + 0.1030f * screenHeight + 1.719f;
+            dTextPoints[2] = -0.000003886f * (screenHeight * screenHeight) + 0.7015f * screenHeight + 0.5588f;
+            dTextPoints[3] = 0.00001599f * (screenHeight * screenHeight) + 0.2902f * screenHeight + 3.027f;
+
             dText.fontSize = (int)(-0.00001528f * (screenHeight * screenHeight) + 0.09002f * screenHeight - 3.201f);
+            dText.fontSize = (int)(0.00003463f * (screenHeight * screenHeight) - 0.05137f * screenHeight + 55.89f);
         }
         else
         {
             // Width => change in width affects variables 
-            rtLeft = -0.000005696f * (screenWidth * screenWidth) + 0.2767f * screenWidth - 3.120f;
-            rtRight = -0.00001282f * (screenWidth * screenWidth) + 0.1149f * screenWidth - 2.470f;
-            rtTop = 0.03699f * screenWidth - 0.3986f;
-            rtBottom = 0.6134f * screenWidth - 0.1730f;
+            //rtLeft = -0.000005696f * (screenWidth * screenWidth) + 0.2767f * screenWidth - 3.120f;
+            //rtRight = -0.00001282f * (screenWidth * screenWidth) + 0.1149f * screenWidth - 2.470f;
+            //rtTop = 0.03699f * screenWidth - 0.3986f;
+            //rtBottom = 0.6134f * screenWidth - 0.1730f;
 
-            ptLeft = -0.000005696f * (screenWidth * screenWidth) + 0.05120f * screenWidth - 1.013f;
-            ptRight = 0.000009398f * (screenWidth * screenWidth) + 0.7461f * screenWidth + 1.400f;
-            ptTop = 0.000004272f * (screenWidth * screenWidth) + 0.04543f * screenWidth + 0.7437f;
-            ptBottom = 0.000001794f * (screenWidth * screenWidth) + 0.6249f * screenWidth - 0.04518f;
-            
+            //ptLeft = -0.000005696f * (screenWidth * screenWidth) + 0.05120f * screenWidth - 1.013f;
+            //ptRight = 0.000009398f * (screenWidth * screenWidth) + 0.7461f * screenWidth + 1.400f;
+            //ptTop = 0.000004272f * (screenWidth * screenWidth) + 0.04543f * screenWidth + 0.7437f;
+            //ptBottom = 0.000001794f * (screenWidth * screenWidth) + 0.6249f * screenWidth - 0.04518f;
+
+
+            dArrowPoints[0] = 0f;
+            dArrowPoints[1] = -0.0005348f * (screenWidth * screenWidth) + 0.8013f * screenWidth - 123.2f;
+            dArrowPoints[2] = 0f;
+            dArrowPoints[3] = -0.0005348f * (screenWidth * screenWidth) + 0.8013f * screenWidth - 123.2f;
+
+            dFramePoints[0] = 0f;
+            dFramePoints[1] = -0.0005348f * (screenWidth * screenWidth) + 0.8013f * screenWidth - 123.2f;
+            dFramePoints[2] = 0f;
+            dFramePoints[3] = -0.0005348f * (screenWidth * screenWidth) + 0.8013f * screenWidth - 123.2f;
+
+            dPicPoints[0] = -0.00001248f * (screenWidth * screenWidth) + 0.03960f * screenWidth + 7.529f;
+            dPicPoints[1] = -0.00007569f * (screenWidth * screenWidth) + 0.4277f * screenWidth + 172.6f;
+            dPicPoints[2] = 0.0005866f * (screenWidth * screenWidth) - 1.617f * screenWidth + 1542f;
+            dPicPoints[3] = 0.000002924f * (screenWidth * screenWidth) + 0.01351f * screenWidth + 14.90f;
+
+            dTextPoints[0] = 0.00001195f * (screenWidth * screenWidth) - 0.01724f * screenWidth + 28.34f;
+            dTextPoints[1] = -0.0005597f * (screenWidth * screenWidth) + 0.8003f * screenWidth - 50.14f;
+            dTextPoints[2] = 0.0003136f * (screenWidth * screenWidth) - 0.4462f * screenWidth + 519.1f;
+            dTextPoints[3] = -0.0004518f * (screenWidth * screenWidth) + 0.6457f * screenWidth + 103.3f;
+
             dText.fontSize = (int)(0.000005696f * (screenWidth * screenWidth) + 0.05977f * screenWidth + 0.8173f);
+            dText.fontSize = (int)(0.00003463f * (screenWidth * screenWidth) - 0.05137f * screenWidth + 55.89f);
         }
-        
-        dText.rectTransform.anchoredPosition = new Vector2((-(rtRight - rtLeft) / 2), ((rtBottom / 2) - (rtTop / 2)));
-        dText.rectTransform.sizeDelta = new Vector2(-(rtLeft + rtRight), -(rtTop + rtBottom));
-        
-        dPic.rectTransform.anchoredPosition = new Vector2((-(ptRight - ptLeft) / 2), ((ptBottom / 2) - (ptTop / 2)));
-        dPic.rectTransform.sizeDelta = new Vector2(-(ptLeft + ptRight), -(ptTop + ptBottom));
+
+        dArrow.rectTransform.anchoredPosition = new Vector2((-(dArrowPoints[1] - dArrowPoints[3]) / 2), ((dArrowPoints[2] / 2) - (dArrowPoints[0] / 2)));
+        dArrow.rectTransform.sizeDelta = new Vector2(-(dArrowPoints[3] + dArrowPoints[1]), -(dArrowPoints[0] + dArrowPoints[2]));
+
+        dFrame.rectTransform.anchoredPosition = new Vector2((-(dFramePoints[1] - dFramePoints[3]) / 2), ((dFramePoints[2] / 2) - (dFramePoints[0] / 2)));
+        dFrame.rectTransform.sizeDelta = new Vector2(-(dFramePoints[3] + dFramePoints[1]), -(dFramePoints[0] + dFramePoints[2]));
+
+        dPic.rectTransform.anchoredPosition = new Vector2((-(dPicPoints[1] - dPicPoints[3]) / 2), ((dPicPoints[2] / 2) - (dPicPoints[0] / 2)));
+        dPic.rectTransform.sizeDelta = new Vector2(-(dPicPoints[3] + dPicPoints[1]), -(dPicPoints[0] + dPicPoints[2]));
+
+        dText.rectTransform.anchoredPosition = new Vector2((-(dTextPoints[1] - dTextPoints[3]) / 2), ((dTextPoints[2] / 2) - (dTextPoints[0] / 2)));
+        dText.rectTransform.sizeDelta = new Vector2(-(dTextPoints[3] + dTextPoints[1]), -(dTextPoints[0] + dTextPoints[2]));
     }
 
     public void PauseDialogue()
@@ -229,6 +298,6 @@ public class DialogueManager : MonoBehaviour
     public void UnpauseDialogue()
     {
         bPauseDialogue = false;
-        pauseTime = 0.25f;
+        pauseTime = 0.333f;
     }
 }

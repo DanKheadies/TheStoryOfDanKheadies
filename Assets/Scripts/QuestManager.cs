@@ -45,6 +45,7 @@ public class QuestManager : MonoBehaviour
     {
         dMan.dialogueLines = new string[questText.Length];
         dMan.dialogueLines = questText;
+        dMan.PauseDialogue();
         dMan.ShowDialogue();
     }
 }

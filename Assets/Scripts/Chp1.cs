@@ -24,6 +24,7 @@ public class Chp1 : MonoBehaviour
     public GameObject questTrigger2;
     public GameObject thePlayer;
     public Inventory inv;
+    public OptionsManager oMan;
     public QuestManager qMan;
     public SaveGame sGame;
 
@@ -49,6 +50,7 @@ public class Chp1 : MonoBehaviour
         kid2 = GameObject.Find("Kid2");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         oldMan1 = GameObject.Find("OldMan1");
+        oMan = GameObject.FindObjectOfType<OptionsManager>();
         parent2 = GameObject.Find("Parent.2");
         qMan = FindObjectOfType<QuestManager>();
         questTrigger2 = GameObject.Find("QT_2");
@@ -291,6 +293,28 @@ public class Chp1 : MonoBehaviour
 
             quest3.GetComponent<QuestObject>().bHasCollected = true;
         }
+    }
+
+    public void Quest0Dialogue1Opt1()
+    {
+        // Yes play a game
+        // Start Quest
+        oMan.ResetOptions();
+        // Start Truth or Elaborate Lie prompt
+
+    }
+    public void Quest0Dialogue1Opt2()
+    {
+        // No play a game
+        oMan.ResetOptions();
+    }
+    public void Quest0Dialogue2()
+    {
+        // Picks Truth or Elaborate Lie
+        // Finish Quest & dialogue
+        oMan.ResetOptions();
+        // Revert dialogue to standard convo / text
+
     }
 
     public void LoadQuests()

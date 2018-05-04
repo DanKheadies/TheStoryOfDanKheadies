@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 // Pause the game & bring up the menu
 public class PauseGame : MonoBehaviour
 {
+    public OptionsManager oMan;
     public Scene scene;
     public Transform controlsMenu;
     public Transform pauseMenu;
@@ -22,6 +23,7 @@ public class PauseGame : MonoBehaviour
     void Start ()
     {
         // Initializers
+        oMan = GameObject.FindObjectOfType<OptionsManager>();
         pauseTrans = GameObject.FindGameObjectWithTag("Pause").GetComponent<Transform>();
         pauseMenu = GameObject.Find("PauseMenu").transform;
         stuffMenu = GameObject.Find("StuffMenu").transform;
@@ -59,6 +61,7 @@ public class PauseGame : MonoBehaviour
         }
         else
         {
+            oMan.bPauseOptions = true;
             pauseTrans.gameObject.SetActive(false);
             Time.timeScale = 1;
         }

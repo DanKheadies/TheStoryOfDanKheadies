@@ -12,8 +12,11 @@ using UnityEngine.SceneManagement;
 // Manage Overworld UI Display
 public class UIManager : MonoBehaviour
 {
+    public Camera mainCamera;
+    public Canvas HUD;
+    public Canvas dHUD;
     public CanvasGroup contOpacCan;
-    public CanvasGroup sliderCanvas;
+    public CanvasGroup hudCanvas;
     public DialogueManager dMan;
     public OptionsManager oMan;
     public PlayerBrioManager playerBrio;
@@ -42,11 +45,19 @@ public class UIManager : MonoBehaviour
         contOpacSlider = GameObject.Find("ShowButtonsSlider").GetComponent<Slider>();
         conTog = GameObject.Find("ShowButtonsToggle").GetComponent<Toggle>();
         currScene = SceneManager.GetActiveScene();
+        dHUD = GameObject.Find("Dialogue_HUD").GetComponent<Canvas>();
         dMan = GameObject.FindObjectOfType<DialogueManager>();
+        HUD = GetComponent<Canvas>();
+        hudCanvas = GetComponent<CanvasGroup>();
+        mainCamera = GameObject.FindObjectOfType<Camera>().GetComponent<Camera>();
         oMan = GameObject.FindObjectOfType<OptionsManager>();
-        sliderCanvas = GetComponent<CanvasGroup>();
         touches = FindObjectOfType<TouchControls>();
-        
+
+        // Set HUD & Dialogue
+        dHUD.renderMode = RenderMode.ScreenSpaceCamera;
+        dHUD.worldCamera = mainCamera.GetComponent<Camera>();
+        HUD.renderMode = RenderMode.ScreenSpaceOverlay;
+
 
         // Sets initial activation off saved data
         if (!PlayerPrefs.HasKey("ControlsActive"))
@@ -83,28 +94,28 @@ public class UIManager : MonoBehaviour
             contOpacCan.alpha = currentContOpac;
         }
     }
-	
-	void Update ()
+
+    // 04/26/2018 DC -- TODO: clean up this update to be used less
+    void Update ()
     {
         brioBar.maxValue = playerBrio.playerMaxBrio;
         brioBar.value = playerBrio.playerCurrentBrio;
         brioText.text = "BR:  " + (int)(playerBrio.playerCurrentBrio) + " / " + (int)(playerBrio.playerMaxBrio);
 
-        if (dMan.bDialogueActive && !oMan.bOptionsActive)
-        {
-            //brioBar.GetComponent<Renderer>().enabled = !brioBar.GetComponent<Renderer>().enabled;
-            sliderCanvas.interactable = false;
-            sliderCanvas.alpha = 0.0f;
-        }
-        else
-        {
-            sliderCanvas.interactable = true;
-            sliderCanvas.alpha = 1.0f;
-        }
+        //if (dMan.bDialogueActive && !oMan.bOptionsActive)
+        //{
+        //    //brioBar.GetComponent<Renderer>().enabled = !brioBar.GetComponent<Renderer>().enabled;
+        //    hudCanvas.interactable = false;
+        //    hudCanvas.alpha = 0.0f;
+        //}
+        //else
+        //{
+        //    hudCanvas.interactable = true;
+        //    hudCanvas.alpha = 1.0f;
+        //}
 
         if (!bControlsActive)
         {
-            Debug.Log("off bro");
             touches.GetComponent<Canvas>().enabled = false;
         }
     }
