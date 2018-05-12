@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/28/2018
+// Last:  05/11/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -31,24 +31,15 @@ public class DialogueManager : MonoBehaviour
     public bool bDialogueActive;
     public bool bPauseDialogue;
 
+    private float cameraHeight;
+    private float cameraWidth;
     private float pauseTime;
-    private float screenHeight;
-    private float screenWidth;
-
-    //private float rtLeft;
-    //private float rtRight;
-    //private float rtTop;
-    //private float rtBottom;
-    //private float ptLeft;
-    //private float ptRight;
-    //private float ptTop;
-    //private float ptBottom;
 
     // Arrays follow CSS rules for orientation
-    // [0] = top
-    // [1] = right
-    // [2] = bottom
-    // [3] = left
+    // [0] = x
+    // [1] = y
+    // [2] = width
+    // [3] = height
     private float[] dArrowPoints;
     private float[] dFramePoints;
     private float[] dPicPoints;
@@ -135,11 +126,12 @@ public class DialogueManager : MonoBehaviour
         }
 
         //Check sizing stuff
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log("A:" + mainCamera.myCam.pixelRect);
-            Debug.Log("(" + Screen.width + ", " + Screen.height + ")");
-        }
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    Debug.Log("Cam rect:" + mainCamera.GetComponent<Camera>().rect);
+        //    Debug.Log("Cam width:" + mainCamera.GetComponent<Camera>().rect.width);
+        //    Debug.Log("Cam height:" + mainCamera.GetComponent<Camera>().rect.height);
+        //}
     }
 
     public void ResetDialogue()
@@ -160,10 +152,7 @@ public class DialogueManager : MonoBehaviour
         anim.Play("Idle");
 
         // Show controls if visible
-        if (bTempControlActive)
-        {
-            touches.GetComponent<Canvas>().enabled = true;
-        }
+        touches.transform.localScale = Vector3.one;
     }
 
     public void ShowDialogue()
@@ -188,106 +177,78 @@ public class DialogueManager : MonoBehaviour
         touches.UnpressedAllArrows();
         thePlayer.bStopPlayerMovement = true;
 
-        // Checks (& hides) UI controls
-        //bTempControlActive = uiMan.bControlsActive;
-        //if (uiMan.bControlsActive)
-        //{
-        //    touches.GetComponent<Canvas>().enabled = false;
-        //}
+        // Hides UI controls
+        touches.transform.localScale = Vector3.zero;
     }
 
     public void ConfigureParameters()
     {
-        screenHeight = Screen.height;
-        screenWidth = Screen.width;
+        cameraHeight = mainCamera.GetComponent<Camera>().rect.height;
+        cameraWidth = mainCamera.GetComponent<Camera>().rect.width;
 
         // UI Image & Text Positioning and Sizing based off camera size vs device size
-        if (screenWidth > mainCamera.myCam.pixelWidth)
+        if (Screen.width > mainCamera.GetComponent<Camera>().pixelWidth)
         {
-            // Height => change in height affects variables
-            //rtLeft = 0.00001599f * (screenHeight * screenHeight) + 0.2902f * screenHeight + 3.027f;
-            //rtRight = 0.00001165f * (screenHeight * screenHeight) + 0.1030f * screenHeight + 1.719f;
-            //rtTop = 0.000008856f * (screenHeight * screenHeight) + 0.03531f * screenHeight + 0.5884f;
-            //rtBottom = -0.000003886f * (screenHeight * screenHeight) + 0.7015f * screenHeight + 0.5588f;
-
-            //ptLeft = 0.000005286f * (screenHeight * screenHeight) + 0.04938f * screenHeight + 0.2483f;
-            //ptRight = 0.000004195f * (screenHeight * screenHeight) + 0.8573f * screenHeight + 1.704f;
-            //ptTop = 0.000005689f * (screenHeight * screenHeight) + 0.05098f * screenHeight + 0.9569f;
-            //ptBottom = 0.000007448f * (screenHeight * screenHeight) + 0.7089f * screenHeight + 1.419f;
-
-
+            // Height => change in height affects variables, so look at the width of the camera
             dArrowPoints[0] = 0f;
-            dArrowPoints[1] = 0.001657f * (screenHeight * screenHeight) - 2.604f * screenHeight + 1230f;
-            dArrowPoints[2] = 0f;
-            dArrowPoints[3] = 0.001657f * (screenHeight * screenHeight) - 2.604f * screenHeight + 1230f;
-
+            dArrowPoints[1] = 0f;
+            dArrowPoints[2] = (-204.2f * (cameraWidth * cameraWidth) + 682.6f * cameraWidth + 166.0f) * 1.142857f;
+            dArrowPoints[3] = -204.2f * (cameraWidth * cameraWidth) + 682.6f * cameraWidth + 166.0f;
+            
             dFramePoints[0] = 0f;
-            dFramePoints[1] = 0.001657f * (screenHeight * screenHeight) - 2.604f * screenHeight + 1230f;
-            dFramePoints[2] = 0f;
-            dFramePoints[3] = 0.001657f * (screenHeight * screenHeight) - 2.604f * screenHeight + 1230f;
+            dFramePoints[1] = 0f;
+            dFramePoints[2] = (-204.2f * (cameraWidth * cameraWidth) + 682.6f * cameraWidth + 166.0f) * 1.142857f;
+            dFramePoints[3] = -204.2f * (cameraWidth * cameraWidth) + 682.6f * cameraWidth + 166.0f;
 
-            dPicPoints[0] = 0.000005689f * (screenHeight * screenHeight) + 0.05098f * screenHeight + 0.9569f;
-            dPicPoints[1] = 0.000004195f * (screenHeight * screenHeight) + 0.8573f * screenHeight + 1.704f;
-            dPicPoints[2] = 0.000007448f * (screenHeight * screenHeight) + 0.7089f * screenHeight + 1.419f;
-            dPicPoints[3] = 0.000005286f * (screenHeight * screenHeight) + 0.04938f * screenHeight + 0.2483f;
+            dPicPoints[0] = 94.21f * (cameraWidth * cameraWidth) - 290.1f * cameraWidth - 64.71f;
+            dPicPoints[1] = -71.54f * (cameraWidth * cameraWidth) + 231.9f * cameraWidth + 52.86f;
+            dPicPoints[2] = -42.35f * (cameraWidth * cameraWidth) + 152.6f * cameraWidth + 38.30f;
+            dPicPoints[3] = -42.35f * (cameraWidth * cameraWidth) + 152.6f * cameraWidth + 38.30f;
 
-            dTextPoints[0] = 0.000008856f * (screenHeight * screenHeight) + 0.03531f * screenHeight + 0.5884f;
-            dTextPoints[1] = 0.00001165f * (screenHeight * screenHeight) + 0.1030f * screenHeight + 1.719f;
-            dTextPoints[2] = -0.000003886f * (screenHeight * screenHeight) + 0.7015f * screenHeight + 0.5588f;
-            dTextPoints[3] = 0.00001599f * (screenHeight * screenHeight) + 0.2902f * screenHeight + 3.027f;
+            dTextPoints[0] = -17.79f * (cameraWidth * cameraWidth) + 60.12f * cameraWidth + 17.46f;
+            dTextPoints[1] = -67.45f * (cameraWidth * cameraWidth) + 226.5f * cameraWidth + 53.70f;
+            dTextPoints[2] = -150.9f * (cameraWidth * cameraWidth) + 503.3f * cameraWidth + 118.9f;
+            dTextPoints[3] = -47.90f * (cameraWidth * cameraWidth) + 171.6f * cameraWidth + 42.95f;
 
-            dText.fontSize = (int)(-0.00001528f * (screenHeight * screenHeight) + 0.09002f * screenHeight - 3.201f);
-            dText.fontSize = (int)(0.00003463f * (screenHeight * screenHeight) - 0.05137f * screenHeight + 55.89f);
+            dText.fontSize = (int)(-6.132f * (cameraWidth * cameraWidth) + 38.80f * cameraWidth + 15.76f);
         }
         else
         {
-            // Width => change in width affects variables 
-            //rtLeft = -0.000005696f * (screenWidth * screenWidth) + 0.2767f * screenWidth - 3.120f;
-            //rtRight = -0.00001282f * (screenWidth * screenWidth) + 0.1149f * screenWidth - 2.470f;
-            //rtTop = 0.03699f * screenWidth - 0.3986f;
-            //rtBottom = 0.6134f * screenWidth - 0.1730f;
-
-            //ptLeft = -0.000005696f * (screenWidth * screenWidth) + 0.05120f * screenWidth - 1.013f;
-            //ptRight = 0.000009398f * (screenWidth * screenWidth) + 0.7461f * screenWidth + 1.400f;
-            //ptTop = 0.000004272f * (screenWidth * screenWidth) + 0.04543f * screenWidth + 0.7437f;
-            //ptBottom = 0.000001794f * (screenWidth * screenWidth) + 0.6249f * screenWidth - 0.04518f;
-
-
+            // Width => change in width affects variables, so look at the height of the camera
             dArrowPoints[0] = 0f;
-            dArrowPoints[1] = -0.0005348f * (screenWidth * screenWidth) + 0.8013f * screenWidth - 123.2f;
-            dArrowPoints[2] = 0f;
-            dArrowPoints[3] = -0.0005348f * (screenWidth * screenWidth) + 0.8013f * screenWidth - 123.2f;
+            dArrowPoints[1] = 533.3f * (cameraHeight * cameraHeight) - 1274f * cameraHeight + 738.9f;
+            dArrowPoints[2] = -198.5f * (cameraHeight * cameraHeight) + 733.5f * cameraHeight + 205.3f;
+            dArrowPoints[3] = (-198.5f * (cameraHeight * cameraHeight) + 733.5f * cameraHeight + 205.3f) / 1.142857f;
 
             dFramePoints[0] = 0f;
-            dFramePoints[1] = -0.0005348f * (screenWidth * screenWidth) + 0.8013f * screenWidth - 123.2f;
-            dFramePoints[2] = 0f;
-            dFramePoints[3] = -0.0005348f * (screenWidth * screenWidth) + 0.8013f * screenWidth - 123.2f;
+            dFramePoints[1] = 533.3f * (cameraHeight * cameraHeight) - 1274f * cameraHeight + 738.9f;
+            dFramePoints[2] = -198.5f * (cameraHeight * cameraHeight) + 733.5f * cameraHeight + 205.3f;
+            dFramePoints[3] = (-198.5f * (cameraHeight * cameraHeight) + 733.5f * cameraHeight + 205.3f) / 1.142857f;
 
-            dPicPoints[0] = -0.00001248f * (screenWidth * screenWidth) + 0.03960f * screenWidth + 7.529f;
-            dPicPoints[1] = -0.00007569f * (screenWidth * screenWidth) + 0.4277f * screenWidth + 172.6f;
-            dPicPoints[2] = 0.0005866f * (screenWidth * screenWidth) - 1.617f * screenWidth + 1542f;
-            dPicPoints[3] = 0.000002924f * (screenWidth * screenWidth) + 0.01351f * screenWidth + 14.90f;
+            dPicPoints[0] = 70.80f * (cameraHeight * cameraHeight) - 260.5f * cameraHeight - 72.74f;
+            dPicPoints[1] = 483.3f * (cameraHeight * cameraHeight) - 1070f * cameraHeight + 799.8f;
+            dPicPoints[2] = -35.93f * (cameraHeight * cameraHeight) + 143.9f * cameraHeight + 41.46f;
+            dPicPoints[3] = -35.93f * (cameraHeight * cameraHeight) + 143.9f * cameraHeight + 41.46f;
 
-            dTextPoints[0] = 0.00001195f * (screenWidth * screenWidth) - 0.01724f * screenWidth + 28.34f;
-            dTextPoints[1] = -0.0005597f * (screenWidth * screenWidth) + 0.8003f * screenWidth - 50.14f;
-            dTextPoints[2] = 0.0003136f * (screenWidth * screenWidth) - 0.4462f * screenWidth + 519.1f;
-            dTextPoints[3] = -0.0004518f * (screenWidth * screenWidth) + 0.6457f * screenWidth + 103.3f;
-
-            dText.fontSize = (int)(0.000005696f * (screenWidth * screenWidth) + 0.05977f * screenWidth + 0.8173f);
-            dText.fontSize = (int)(0.00003463f * (screenWidth * screenWidth) - 0.05137f * screenWidth + 55.89f);
+            dTextPoints[0] = -4.963f * (cameraHeight * cameraHeight) + 44.29f * cameraHeight + 23.76f;
+            dTextPoints[1] = 494.4f * (cameraHeight * cameraHeight) - 1081f * cameraHeight + 802.1f;
+            dTextPoints[2] = -114.1f * (cameraHeight * cameraHeight) + 452.0f * cameraHeight + 131.5f;
+            dTextPoints[3] = -39.92f * (cameraHeight * cameraHeight) + 167.9f * cameraHeight + 43.11f;
+            
+            dText.fontSize = (int)(2.432f * (cameraHeight * cameraHeight) + 25.84f * cameraHeight + 20.05f);
         }
 
-        dArrow.rectTransform.anchoredPosition = new Vector2((-(dArrowPoints[1] - dArrowPoints[3]) / 2), ((dArrowPoints[2] / 2) - (dArrowPoints[0] / 2)));
-        dArrow.rectTransform.sizeDelta = new Vector2(-(dArrowPoints[3] + dArrowPoints[1]), -(dArrowPoints[0] + dArrowPoints[2]));
+        dArrow.rectTransform.anchoredPosition = new Vector2(dArrowPoints[0], dArrowPoints[1]);
+        dArrow.rectTransform.sizeDelta = new Vector2(dArrowPoints[2], dArrowPoints[3]);
 
-        dFrame.rectTransform.anchoredPosition = new Vector2((-(dFramePoints[1] - dFramePoints[3]) / 2), ((dFramePoints[2] / 2) - (dFramePoints[0] / 2)));
-        dFrame.rectTransform.sizeDelta = new Vector2(-(dFramePoints[3] + dFramePoints[1]), -(dFramePoints[0] + dFramePoints[2]));
+        dFrame.rectTransform.anchoredPosition = new Vector2(dFramePoints[0], dFramePoints[1]);
+        dFrame.rectTransform.sizeDelta = new Vector2(dFramePoints[2], dFramePoints[3]);
 
-        dPic.rectTransform.anchoredPosition = new Vector2((-(dPicPoints[1] - dPicPoints[3]) / 2), ((dPicPoints[2] / 2) - (dPicPoints[0] / 2)));
-        dPic.rectTransform.sizeDelta = new Vector2(-(dPicPoints[3] + dPicPoints[1]), -(dPicPoints[0] + dPicPoints[2]));
+        dPic.rectTransform.anchoredPosition = new Vector2(dPicPoints[0], dPicPoints[1]);
+        dPic.rectTransform.sizeDelta = new Vector2(dPicPoints[2], dPicPoints[3]);
 
-        dText.rectTransform.anchoredPosition = new Vector2((-(dTextPoints[1] - dTextPoints[3]) / 2), ((dTextPoints[2] / 2) - (dTextPoints[0] / 2)));
-        dText.rectTransform.sizeDelta = new Vector2(-(dTextPoints[3] + dTextPoints[1]), -(dTextPoints[0] + dTextPoints[2]));
+        dText.rectTransform.anchoredPosition = new Vector2(dTextPoints[0], dTextPoints[1]);
+        dText.rectTransform.sizeDelta = new Vector2(dTextPoints[2], dTextPoints[3]);
     }
 
     public void PauseDialogue()

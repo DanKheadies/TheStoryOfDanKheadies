@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/10/2018
+// Last:  05/11/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -52,8 +52,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (bStopPlayerMovement)
         {
-            movementVector = new Vector2(0, 0);
-            rBody.velocity = new Vector2(0, 0);
+            movementVector = Vector2.zero;
+            rBody.velocity = Vector2.zero;
+        }
+        else if (touches.bDown || touches.bLeft || touches.bRight || touches.bUp)
+        {
+            // No action; just need to avoid MovePlayer() here b/c it's cancelling out
+            // the Touches script by passing in Move(0,0) while touches passes Move(X,Y)
         }
         else
         {
@@ -104,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
             if (movementVector != Vector2.zero)
             {
                 playerBrioMan.FatiguePlayer(0.1f);
+                uiMan.bUpdateBrio = true;
             }
         }
         // 1x Move Speed

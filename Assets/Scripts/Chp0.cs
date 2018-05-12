@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  04/16/2018
+// Last:  05/11/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +17,7 @@ public class Chp0 : MonoBehaviour
     public GameObject dBox;
     public GameObject HUD;
     public GameObject sFaderAnim;
+    public GameObject sFaderAnimDia;
     public GameObject thePlayer;
     public Inventory inv;
     public MusicManager mMan;
@@ -47,7 +48,8 @@ public class Chp0 : MonoBehaviour
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         mMan = FindObjectOfType<MusicManager>();
         sGame = FindObjectOfType<SaveGame>();
-        sFaderAnim = GameObject.FindGameObjectWithTag("Fader");
+        sFaderAnim = GameObject.Find("Screen_Fader");
+        sFaderAnimDia = GameObject.Find("Screen_Fader_Dialogue");
         SFXMan = FindObjectOfType<SFXManager>();
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         touches = FindObjectOfType<TouchControls>();
@@ -61,7 +63,9 @@ public class Chp0 : MonoBehaviour
         if (PlayerPrefs.GetString("Chapter") != "Chp0")
         {
             dMan.bDialogueActive = false;
-            HUD.GetComponent<Canvas>().enabled = false;
+            //HUD.GetComponent<Canvas>().enabled = false;
+            HUD.transform.GetChild(3).localScale = Vector3.zero; // DC TODO
+            HUD.transform.GetChild(4).localScale = Vector3.zero; // DC TODO
             mMan.bMusicCanPlay = false;
             thePlayer.transform.position = new Vector2(1.45f, 3.33f);
             mainCamera.transform.position = new Vector2(1.45f, 3.33f);
@@ -77,6 +81,7 @@ public class Chp0 : MonoBehaviour
             dMan.currentLine = 0;
             dText.text = dialogueLines[dMan.currentLine];
             dBox.transform.localScale = Vector3.one;
+            sFaderAnimDia.GetComponent<Animator>().enabled = true;
         }
         // Chapter 0 Saved Game
         else
@@ -115,7 +120,9 @@ public class Chp0 : MonoBehaviour
         // New Game -- Activate music, UI, and fade after dialogue concludes
 		if (!dMan.bDialogueActive && !bAvoidUpdate && bStartGame)
         {
-            HUD.GetComponent<Canvas>().enabled = true;
+            //HUD.GetComponent<Canvas>().enabled = true;
+            HUD.transform.GetChild(3).localScale = Vector3.one; // DC TODO
+            HUD.transform.GetChild(4).localScale = Vector3.one; // DC TODO
             mMan.bMusicCanPlay = true;
             sFaderAnim.GetComponent<Animator>().enabled = true;
 

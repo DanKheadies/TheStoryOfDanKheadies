@@ -1,11 +1,12 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  04/23/2018
+// Last:  05/11/2018
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Contains all Chapter 1 quests, items, and elements
 public class Chp1 : MonoBehaviour
@@ -14,6 +15,8 @@ public class Chp1 : MonoBehaviour
     public CameraFollow camFollow;
     public CannabisPlant cannaP;
     public DialogueManager dMan;
+    public GameObject dArrow;
+    public GameObject dBox;
     public GameObject kid2;
     public GameObject oldMan1;
     public GameObject parent2;
@@ -24,9 +27,12 @@ public class Chp1 : MonoBehaviour
     public GameObject questTrigger2;
     public GameObject thePlayer;
     public Inventory inv;
+    public MoveOptionsMenuArrow moveOptsArw;
     public OptionsManager oMan;
     public QuestManager qMan;
     public SaveGame sGame;
+    public Text dText;
+    public UIManager uiMan;
 
     public bool bAvoidUpdateQ0;
     public bool bAvoidUpdateQ1;
@@ -45,10 +51,14 @@ public class Chp1 : MonoBehaviour
         // Initializers
         camFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
         cannaP = GameObject.FindGameObjectWithTag("SmoochyWoochyPoochy").GetComponent<CannabisPlant>();
+        dArrow = GameObject.Find("Dialogue_Arrow");
+        dBox = GameObject.Find("Dialogue_Box");
         dMan = FindObjectOfType<DialogueManager>();
+        dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
         inv = FindObjectOfType<Inventory>();
         kid2 = GameObject.Find("Kid2");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
         oldMan1 = GameObject.Find("OldMan1");
         oMan = GameObject.FindObjectOfType<OptionsManager>();
         parent2 = GameObject.Find("Parent.2");
@@ -57,6 +67,7 @@ public class Chp1 : MonoBehaviour
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         savedQuestsValue = PlayerPrefs.GetString("Chp1Quests");
         sGame = FindObjectOfType<SaveGame>();
+        uiMan = FindObjectOfType<UIManager>();
 
         inv.RerunStart();
 
@@ -106,16 +117,7 @@ public class Chp1 : MonoBehaviour
         }
 
         // Quest 0 -- Q&A 1 Reward
-        if (!quest0.GetComponent<QuestObject>().bHasCollected &&
-            quest0.GetComponent<QuestObject>().bHasEnded &&
-            (int)camFollow.currentCoords == 0)
-        {
-            //if (kid2.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
-            //    dMan.bDialogueActive)
-            //{
-            //    Quest0Reward();
-            //}
-        }
+        // see below
 
         // Quest 1 -- Race Start -> Start Timer
         if (quest1.GetComponent<QuestObject>().bHasStarted &&
@@ -255,8 +257,9 @@ public class Chp1 : MonoBehaviour
     {
         if (!quest0.GetComponent<QuestObject>().bHasCollected)
         {
-            //thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
-            //thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
+            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
+            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
+            uiMan.bUpdateBrio = true;
 
             quest0.GetComponent<QuestObject>().bHasCollected = true;
         }
@@ -268,6 +271,7 @@ public class Chp1 : MonoBehaviour
         {
             thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
+            uiMan.bUpdateBrio = true;
 
             quest1.GetComponent<QuestObject>().bHasCollected = true;
         }
@@ -279,6 +283,7 @@ public class Chp1 : MonoBehaviour
         {
             thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(5);
+            uiMan.bUpdateBrio = true;
 
             quest2.GetComponent<QuestObject>().bHasCollected = true;
         }
@@ -290,31 +295,66 @@ public class Chp1 : MonoBehaviour
         {
             thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(5);
+            uiMan.bUpdateBrio = true;
 
             quest3.GetComponent<QuestObject>().bHasCollected = true;
         }
     }
 
+    public void QuestDialogueCheck()
+    {
+        if (parent2.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+            moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
+        {
+            oMan.ResetOptions();
+            Quest0Dialogue1Opt1();
+        }
+        else if (parent2.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+            moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
+        {
+            oMan.ResetOptions();
+            Quest0Dialogue1Opt2();
+        }
+        else if (parent2.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+            (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1) ||
+            (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
+        {
+            oMan.ResetOptions();
+            Quest0Dialogue2();
+        }
+    }
+
     public void Quest0Dialogue1Opt1()
     {
-        // Yes play a game
-        // Start Quest
-        oMan.ResetOptions();
-        // Start Truth or Elaborate Lie prompt
+        // Yes -- Play
+        // Quest Trigger -> Quest Object text will render first; then we activate the next round of dialogue / options
+        // 05/11/2018 DC TODO -- Improve so that options can follow options (when coupled with a quest)
 
+        parent2.transform.GetChild(0).gameObject.SetActive(false);
+        parent2.transform.GetChild(1).gameObject.SetActive(true);
     }
+
     public void Quest0Dialogue1Opt2()
     {
         // No play a game
-        oMan.ResetOptions();
+        dMan.dialogueLines = new string[] {
+                "Hmm.. Perhaps later..."
+            };
+        dMan.currentLine = 0;
+        dText.text = dMan.dialogueLines[dMan.currentLine];
+        dMan.ShowDialogue();
+        dArrow.GetComponent<ImageStrobe>().bStartStrobe = true; // DC TODO -- Not strobing?
     }
+
     public void Quest0Dialogue2()
     {
-        // Picks Truth or Elaborate Lie
-        // Finish Quest & dialogue
-        oMan.ResetOptions();
-        // Revert dialogue to standard convo / text
+        // 05/11/2018 DC TODO -- Add divergent options, i.e. different text per option selected
 
+        parent2.transform.GetChild(1).gameObject.SetActive(false);
+        parent2.transform.GetChild(2).gameObject.SetActive(true);
+
+        // Quest 0 -- Q&A 1 Reward
+        Quest0Reward();
     }
 
     public void LoadQuests()

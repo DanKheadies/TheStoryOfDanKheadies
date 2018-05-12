@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/23/2018
-// Last:  04/23/2018
+// Last:  05/11/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -79,19 +79,19 @@ public class MoveOptionsMenuArrow : MonoBehaviour
                 Input.GetKeyDown(KeyCode.DownArrow)) //||
                 //touches.bDown) DC TODO -- Fix touches w/ arrow movement (also, see PauseMenu)
             {
-                if (currentPosition == ArrowPos.Opt1) // And has 2 or more options
+                if (currentPosition == ArrowPos.Opt1 && oMan.tempOptsCount > 1)
                 {
                     currentPosition = ArrowPos.Opt2;
                     ClearAllArrows();
                     Opt2Arw.transform.localScale = new Vector3(1, 1, 1);
                 }
-                else if (currentPosition == ArrowPos.Opt2) // And has 3 or more options
+                else if (currentPosition == ArrowPos.Opt2 && oMan.tempOptsCount > 2)
                 {
                     currentPosition = ArrowPos.Opt3;
                     ClearAllArrows();
                     Opt3Arw.transform.localScale = new Vector3(1, 1, 1);
                 }
-                else if (currentPosition == ArrowPos.Opt3) // And has 4 options
+                else if (currentPosition == ArrowPos.Opt3 && oMan.tempOptsCount > 3)
                 {
                     currentPosition = ArrowPos.Opt4;
                     ClearAllArrows();

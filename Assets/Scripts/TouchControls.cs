@@ -37,22 +37,22 @@ public class TouchControls : MonoBehaviour
     void Update ()
     {
         // Moving the player based off arrow flags
-        if (bLeft)
+        if (bLeft && !thePlayer.bStopPlayerMovement)
         {
             thePlayer.Move(-1.0f, 0.0f);
         }
 
-        if (bRight)
+        if (bRight && !thePlayer.bStopPlayerMovement)
         {
             thePlayer.Move(1.0f, 0.0f);
         }
 
-        if (bUp)
+        if (bUp && !thePlayer.bStopPlayerMovement)
         {
             thePlayer.Move(0.0f, 1.0f);
         }
 
-        if (bDown)
+        if (bDown && !thePlayer.bStopPlayerMovement)
         {
             thePlayer.Move(0.0f, -1.0f);
         }
@@ -87,45 +87,37 @@ public class TouchControls : MonoBehaviour
     public void PressedLeftArrow()
     {
         bLeft = true;
-        thePlayer.bStopPlayerMovement = true;
     }
     public void UnpressedLeftArrow()
     {
         bLeft = false;
-        thePlayer.bStopPlayerMovement = false;
     }
 
     public void PressedRightArrow()
     {
         bRight = true;
-        thePlayer.bStopPlayerMovement = true;
     }
     public void UnpressedRightArrow()
     {
         bRight = false;
-        thePlayer.bStopPlayerMovement = false;
     }
 
     public void PressedUpArrow()
     {
         bUp = true;
-        thePlayer.bStopPlayerMovement = true;
     }
     public void UnpressedUpArrow()
     {
         bUp = false;
-        thePlayer.bStopPlayerMovement = false;
     }
 
     public void PressedDownArrow()
     {
         bDown = true;
-        thePlayer.bStopPlayerMovement = true;
     }
     public void UnpressedDownArrow()
     {
         bDown = false;
-        thePlayer.bStopPlayerMovement = false;
     }
 
     // Clear all movement / arrow buttons

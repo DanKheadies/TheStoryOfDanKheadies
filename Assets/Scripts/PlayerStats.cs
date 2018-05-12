@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  07/16/2017
+// Last:  05/11/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +11,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public PlayerBrioManager thePlayerBrio;
+    public UIManager uiMan;
 
     public int currentBrio;
     public int currentCog;
@@ -35,10 +36,10 @@ public class PlayerStats : MonoBehaviour
 	
 	void Update ()
     {
-		if (currentExp >= toLevelUp[currentLevel])
-        {
-            LevelUp();
-        }
+		//if (currentExp >= toLevelUp[currentLevel])
+  //      {
+  //          LevelUp();
+  //      }
 	}
 
     public void AddExperience(int experienceToAdd)
@@ -57,5 +58,6 @@ public class PlayerStats : MonoBehaviour
         // Update Brio Bar & add extra
         thePlayerBrio.playerMaxBrio = currentBrio;
         thePlayerBrio.playerCurrentBrio += currentBrio - brioLevels[currentLevel - 1];
+        uiMan.bUpdateBrio = true;
     }
 }

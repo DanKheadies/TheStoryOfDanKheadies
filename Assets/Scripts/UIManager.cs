@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/16/2018
+// Last:  05/11/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     public TouchControls touches;
 
     public bool bControlsActive;
+    public bool bUpdateBrio;
 
     public float currentContOpac;
 
@@ -52,11 +53,6 @@ public class UIManager : MonoBehaviour
         mainCamera = GameObject.FindObjectOfType<Camera>().GetComponent<Camera>();
         oMan = GameObject.FindObjectOfType<OptionsManager>();
         touches = FindObjectOfType<TouchControls>();
-
-        // Set HUD & Dialogue
-        dHUD.renderMode = RenderMode.ScreenSpaceCamera;
-        dHUD.worldCamera = mainCamera.GetComponent<Camera>();
-        HUD.renderMode = RenderMode.ScreenSpaceOverlay;
 
 
         // Sets initial activation off saved data
@@ -93,14 +89,21 @@ public class UIManager : MonoBehaviour
             contOpacSlider.value = currentContOpac;
             contOpacCan.alpha = currentContOpac;
         }
-    }
 
-    // 04/26/2018 DC -- TODO: clean up this update to be used less
+        // Sets brio bar
+        bUpdateBrio = true;
+    }
+    
     void Update ()
     {
-        brioBar.maxValue = playerBrio.playerMaxBrio;
-        brioBar.value = playerBrio.playerCurrentBrio;
-        brioText.text = "BR:  " + (int)(playerBrio.playerCurrentBrio) + " / " + (int)(playerBrio.playerMaxBrio);
+        if (bUpdateBrio)
+        {
+            brioBar.maxValue = playerBrio.playerMaxBrio;
+            brioBar.value = playerBrio.playerCurrentBrio;
+            brioText.text = "BR:  " + (int)(playerBrio.playerCurrentBrio) + " / " + (int)(playerBrio.playerMaxBrio);
+
+            bUpdateBrio = false;
+        }
 
         //if (dMan.bDialogueActive && !oMan.bOptionsActive)
         //{

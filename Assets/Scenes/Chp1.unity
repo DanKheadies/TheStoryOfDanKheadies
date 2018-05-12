@@ -1306,10 +1306,10 @@ RectTransform:
   m_Father: {fileID: 753927715}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20, y: -67.5}
-  m_SizeDelta: {x: -890, y: -432}
+  m_SizeDelta: {x: 76, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &27810821
 MonoBehaviour:
@@ -1363,7 +1363,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1880181860}
-        m_MethodName: ResetOptions
+        m_MethodName: CheckAndAssignClickedValue
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 841729771}
+        m_MethodName: QuestDialogueCheck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1372,7 +1383,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &27810823
@@ -1700,7 +1711,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &46970151
 GameObject:
@@ -3865,8 +3876,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   options:
-  - Yes
-  - No
+  - Truth
+  - Elaborate Lie
 --- !u!114 &136251389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3926,8 +3937,11 @@ MonoBehaviour:
   bHasExited: 0
   dialogue: Annyong!
   dialogueLines:
-  - 'Ohhh Danny boyy.. '
-  - The pipes, the pipes are caAaAalling...
+  - Oi, think you're ready? Well again..
+  - 'Truth or Elaborate Lie: There is only one true god, cognition.'
+  - 'And by the power of holy awareness, he sent his only son, meta-cognition '
+  - to save us from our sins.
+  - What say you Dan?
 --- !u!1 &139785221
 GameObject:
   m_ObjectHideFlags: 0
@@ -10000,7 +10014,6 @@ GameObject:
   m_Component:
   - component: {fileID: 309509855}
   - component: {fileID: 309509856}
-  - component: {fileID: 309509857}
   - component: {fileID: 309509858}
   m_Layer: 0
   m_Name: DialogueZone
@@ -10042,22 +10055,6 @@ MonoBehaviour:
   - Hey Dan, what's really hood?
   - If you go by the Field, please tell my mum that I've soiled myself.
   - Again...
---- !u!114 &309509857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 309509854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e170fc8c9217ef40a0a7f1de9e47582, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  options:
-  - Alpha
-  - Beta
-  - Gamma
-  - Delta
 --- !u!60 &309509858
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -11711,7 +11708,6 @@ GameObject:
   - component: {fileID: 343439910}
   - component: {fileID: 343439909}
   - component: {fileID: 343439908}
-  - component: {fileID: 343439907}
   m_Layer: 0
   m_Name: DialogueZone3
   m_TagString: Untagged
@@ -11732,20 +11728,6 @@ Transform:
   m_Father: {fileID: 1780482141}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &343439907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 343439905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e170fc8c9217ef40a0a7f1de9e47582, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  options:
-  - Yes
-  - No
 --- !u!114 &343439908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11757,8 +11739,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181ddc14ac81eed4daec3af3e0b231e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beginQuest: 1
-  endQuest: 0
+  beginQuest: 0
+  endQuest: 1
   questNumber: 0
 --- !u!60 &343439909
 PolygonCollider2D:
@@ -17324,7 +17306,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &479853393
 GameObject:
@@ -29586,7 +29568,7 @@ RectTransform:
   - {fileID: 1742935450}
   - {fileID: 1842308868}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -29605,6 +29587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sFader: {fileID: 0}
+  sFaderDia: {fileID: 0}
 --- !u!114 &783566141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29630,6 +29613,7 @@ MonoBehaviour:
   conTog: {fileID: 0}
   touches: {fileID: 0}
   bControlsActive: 0
+  bUpdateBrio: 0
   currentContOpac: 0
 --- !u!225 &783566142
 CanvasGroup:
@@ -29760,7 +29744,6 @@ MonoBehaviour:
   bUpdateOn: 1
   currentCoords: 0
   smoothTime: 0.2
-  derp: 0
 --- !u!114 &785134235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30600,10 +30583,10 @@ RectTransform:
   m_Father: {fileID: 239687292}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 966, y: 496}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &807953643
 MonoBehaviour:
@@ -32074,7 +32057,7 @@ Transform:
   m_Children:
   - {fileID: 2052798314}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &833281790
 GameObject:
@@ -32557,7 +32540,7 @@ Transform:
   - {fileID: 1409479661}
   - {fileID: 113998944}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &841729767
 MonoBehaviour:
@@ -32571,6 +32554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thePlayerBrio: {fileID: 0}
+  uiMan: {fileID: 0}
   currentBrio: 0
   currentCog: 0
   currentExp: 0
@@ -32641,6 +32625,8 @@ MonoBehaviour:
   camFollow: {fileID: 0}
   cannaP: {fileID: 0}
   dMan: {fileID: 0}
+  dArrow: {fileID: 0}
+  dBox: {fileID: 0}
   kid2: {fileID: 0}
   oldMan1: {fileID: 0}
   parent2: {fileID: 0}
@@ -32651,9 +32637,12 @@ MonoBehaviour:
   questTrigger2: {fileID: 0}
   thePlayer: {fileID: 0}
   inv: {fileID: 0}
+  moveOptsArw: {fileID: 0}
   oMan: {fileID: 0}
   qMan: {fileID: 0}
   sGame: {fileID: 0}
+  dText: {fileID: 0}
+  uiMan: {fileID: 0}
   bAvoidUpdateQ0: 0
   bAvoidUpdateQ1: 0
   bAvoidUpdateQ2: 0
@@ -34573,6 +34562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portPic: {fileID: 21300000, guid: 49e8f42895c3f5a499dd582fc44be623, type: 3}
+  uiMan: {fileID: 0}
   diffMaxAndCurrent: 0
   playerMaxBrio: 50
   playerCurrentBrio: 0
@@ -34691,7 +34681,7 @@ Transform:
   - {fileID: 147586402}
   - {fileID: 22948933}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &875949251
 PolygonCollider2D:
@@ -40881,10 +40871,10 @@ RectTransform:
   m_Father: {fileID: 753927715}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 284.5, y: -95}
-  m_SizeDelta: {x: -1124, y: -451}
+  m_SizeDelta: {x: -158, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1039732625
 MonoBehaviour:
@@ -41091,10 +41081,10 @@ RectTransform:
   m_Father: {fileID: 753927715}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20, y: -25}
-  m_SizeDelta: {x: -890, y: -432}
+  m_SizeDelta: {x: 76, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1045590912
 MonoBehaviour:
@@ -41148,7 +41138,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1880181860}
-        m_MethodName: Testicle
+        m_MethodName: CheckAndAssignClickedValue
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 841729771}
+        m_MethodName: QuestDialogueCheck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -44943,10 +44944,10 @@ RectTransform:
   m_Father: {fileID: 753927715}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20, y: -95}
-  m_SizeDelta: {x: -890, y: -432}
+  m_SizeDelta: {x: 76, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1148272200
 MonoBehaviour:
@@ -45000,7 +45001,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1880181860}
-        m_MethodName: ResetOptions
+        m_MethodName: CheckAndAssignClickedValue
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 841729771}
+        m_MethodName: QuestDialogueCheck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -45009,7 +45021,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1148272202
@@ -47163,8 +47175,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   options:
-  - Yes
-  - No
+  - Sure!
+  - Meh..
 --- !u!1 &1211224819
 GameObject:
   m_ObjectHideFlags: 0
@@ -49367,7 +49379,7 @@ Transform:
   - {fileID: 1268622703}
   - {fileID: 260808835}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1265591790
 GameObject:
@@ -49788,10 +49800,10 @@ RectTransform:
   m_Father: {fileID: 753927715}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20, y: 10}
-  m_SizeDelta: {x: -890, y: -432}
+  m_SizeDelta: {x: 76, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1285703837
 MonoBehaviour:
@@ -49845,7 +49857,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1880181860}
-        m_MethodName: ResetOptions
+        m_MethodName: CheckAndAssignClickedValue
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 841729771}
+        m_MethodName: QuestDialogueCheck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -49854,7 +49877,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1285703839
@@ -49974,10 +49997,10 @@ RectTransform:
   m_Father: {fileID: 753927715}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 284.5, y: -25}
-  m_SizeDelta: {x: -1124, y: -451}
+  m_SizeDelta: {x: -158, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1290191233
 MonoBehaviour:
@@ -52035,7 +52058,7 @@ Transform:
   - {fileID: 2046021622}
   - {fileID: 951055867}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1370055028
 GameObject:
@@ -60129,10 +60152,14 @@ MonoBehaviour:
   bHasCollected: 0
   questNumber: 0
   beginText:
-  - Oh Dan, sorry mah boy! I fogot, there's no school today!
-  - Whelp... While you're here, lets play a game! What do you say?
+  - Alright D, the name of the game is Truth or Elaborate Lie.
+  - 'Truth or Elaborate Lie: There is only one true god, cognition.'
+  - 'And by the power of holy awareness, he sent his only son, meta-cognition '
+  - to save us from our sins.
+  - Think on that and get back to me with your answer.
   endText:
-  - Huzzah! You completed the quest!
+  - Interesting.. That's 1 vote for Truth, and 1 for Elaborate Lie.
+  - More science is needed! Excuse me Dan while I go.. work in the lab.
 --- !u!1001 &1553332571
 Prefab:
   m_ObjectHideFlags: 0
@@ -63379,10 +63406,10 @@ RectTransform:
   m_Father: {fileID: 753927715}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 284.5, y: -60}
-  m_SizeDelta: {x: -1124, y: -451}
+  m_SizeDelta: {x: -158, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1629390313
 MonoBehaviour:
@@ -65139,10 +65166,10 @@ RectTransform:
   m_Father: {fileID: 239687292}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 966, y: 496}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1675528881
 MonoBehaviour:
@@ -65354,98 +65381,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1677331112}
---- !u!1 &1677728395
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1677728396}
-  - component: {fileID: 1677728399}
-  - component: {fileID: 1677728398}
-  - component: {fileID: 1677728397}
-  m_Layer: 0
-  m_Name: DialogueZone4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1677728396
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1677728395}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1780482141}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1677728397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1677728395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 181ddc14ac81eed4daec3af3e0b231e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beginQuest: 1
-  endQuest: 0
-  questNumber: 0
---- !u!60 &1677728398
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1677728395}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.0005865097, y: 0.25744724}
-      - {x: 0.25175986, y: 0.0010722479}
-      - {x: 0.0001227061, y: -0.25014114}
-      - {x: -0.25205263, y: -0.005599022}
---- !u!114 &1677728399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1677728395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d54c8da22bff46419731d3bba7bae75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliEnter: {fileID: 0}
-  portPic: {fileID: 21300000, guid: e0f0ab040ffbe4e47b92489a70935512, type: 3}
-  bHasEntered: 0
-  bHasExited: 0
-  dialogue: Annyong!
-  dialogueLines:
-  - 'Ohhh Danny boyy.. '
-  - The pipes, the pipes are caAaAalling...
 --- !u!1 &1682797196
 GameObject:
   m_ObjectHideFlags: 0
@@ -65998,10 +65933,10 @@ RectTransform:
   m_Father: {fileID: 239687292}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 314, y: 164}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1448, y: 332}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1701939775
 MonoBehaviour:
@@ -67224,7 +67159,7 @@ Transform:
   - {fileID: 538491581}
   - {fileID: 1522735696}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1753979942
 GameObject:
@@ -68310,99 +68245,6 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1773302332
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1773302336}
-  - component: {fileID: 1773302335}
-  - component: {fileID: 1773302334}
-  - component: {fileID: 1773302333}
-  m_Layer: 5
-  m_Name: Dialogue_HU
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1773302333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1773302332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &1773302334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1773302332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
---- !u!223 &1773302335
-Canvas:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1773302332}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 1
-  m_Camera: {fileID: 785134232}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 1
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 100
-  m_TargetDisplay: 0
---- !u!224 &1773302336
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1773302332}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
 --- !u!1 &1776577758
 GameObject:
   m_ObjectHideFlags: 0
@@ -68666,7 +68508,6 @@ Transform:
   - {fileID: 1210206615}
   - {fileID: 136251387}
   - {fileID: 343439906}
-  - {fileID: 1677728396}
   m_Father: {fileID: 538491581}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -70060,10 +69901,10 @@ RectTransform:
   m_Father: {fileID: 239687292}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 966, y: 496}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1830455787
 MonoBehaviour:
@@ -72780,11 +72621,13 @@ MonoBehaviour:
   o4Arw: {fileID: 0}
   o4Text: {fileID: 0}
   oFrame: {fileID: 0}
+  moveOptsArw: {fileID: 0}
   touches: {fileID: 0}
   bDiaToOpts: 0
   bOptionsActive: 0
   bPauseOptions: 0
   bTempControlActive: 0
+  tempOptsCount: 0
   options: []
 --- !u!1 &1881588752
 GameObject:
@@ -78349,7 +78192,7 @@ Transform:
   - {fileID: 1125628162}
   - {fileID: 1028020712}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2026261796
 GameObject:
@@ -79782,10 +79625,10 @@ RectTransform:
   m_Father: {fileID: 753927715}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 314, y: 164}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 966, y: 496}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2063399891
 MonoBehaviour:
@@ -81366,10 +81209,10 @@ RectTransform:
   m_Father: {fileID: 753927715}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 284.5, y: 10}
-  m_SizeDelta: {x: -1124, y: -451}
+  m_SizeDelta: {x: -158, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2111404278
 MonoBehaviour:

@@ -69,7 +69,6 @@ public class CameraFollow : MonoBehaviour
     public AnandaCoords currentCoords;
 
     public float smoothTime;
-    public float derp;
 
     void Start ()
     {
@@ -92,7 +91,6 @@ public class CameraFollow : MonoBehaviour
         bCampus = false;
         bUpdateOn = true;
 
-        derp = -10f;
         smoothTime = 0.2f;
         smoothVelocity = new Vector2(0.2f, 0.2f);
     }
@@ -110,7 +108,7 @@ public class CameraFollow : MonoBehaviour
             // Camera follows the player with a slight delay 
             float posX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x, ref smoothVelocity.x, smoothTime);
             float posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y, ref smoothVelocity.y, smoothTime);
-            transform.position = new Vector3(posX, posY, derp);
+            transform.position = new Vector3(posX, posY, -10f);
 
             // Camera bounds per area
             // Areas listed alphabetically
@@ -413,7 +411,7 @@ public class CameraFollow : MonoBehaviour
                     transform.position.y,
                     (minCamPos.y + 5.12f * -2.0f),
                     (maxCamPos.y + 5.12f * -2.0f)),
-                derp);
+                -10);
             }
             else if (currentCoords == AnandaCoords.HousesE)
             {
