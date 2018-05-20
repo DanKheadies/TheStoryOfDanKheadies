@@ -72,6 +72,7 @@ public class PlayerBrioManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.X))
         {
             RestorePlayer(50);
+            uiMan.bUpdateBrio = true;
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  05/11/2018
+// Last:  05/20/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +17,7 @@ public class Chp1 : MonoBehaviour
     public DialogueManager dMan;
     public GameObject dArrow;
     public GameObject dBox;
+    public GameObject greatTree;
     public GameObject kid2;
     public GameObject oldMan1;
     public GameObject parent2;
@@ -34,6 +35,7 @@ public class Chp1 : MonoBehaviour
     public Text dText;
     public UIManager uiMan;
 
+    public bool bAvoidGreatTreeConvo;
     public bool bAvoidUpdateQ0;
     public bool bAvoidUpdateQ1;
     public bool bAvoidUpdateQ2;
@@ -55,6 +57,7 @@ public class Chp1 : MonoBehaviour
         dBox = GameObject.Find("Dialogue_Box");
         dMan = FindObjectOfType<DialogueManager>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
+        greatTree = GameObject.Find("GreatTree");
         inv = FindObjectOfType<Inventory>();
         kid2 = GameObject.Find("Kid2");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -303,24 +306,60 @@ public class Chp1 : MonoBehaviour
 
     public void QuestDialogueCheck()
     {
+        // Quest 0 - Dialogue 1 - Option 1
         if (parent2.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
         {
             oMan.ResetOptions();
             Quest0Dialogue1Opt1();
         }
+        // Quest 0 - Dialogue 1 - Option 2
         else if (parent2.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
-            moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
         {
             oMan.ResetOptions();
             Quest0Dialogue1Opt2();
         }
+        // Quest 0 - Dialogue 2 - Option *
         else if (parent2.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
-            (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1) ||
-            (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
+                (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
         {
             oMan.ResetOptions();
             Quest0Dialogue2();
+        }
+        // Quest 5 - Dialogue 1 - Option *
+        else if (greatTree.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+                (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
+        {
+            oMan.ResetOptions();
+            Quest5Dialogue2();
+        }
+        // Quest 5 - Dialogue 2 - Option *
+        else if (greatTree.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+                (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
+        {
+            oMan.ResetOptions();
+            Quest5Dialogue3();
+        }
+        // Quest 5 - Dialogue 3 - Option *
+        else if (greatTree.transform.GetChild(2).GetComponent<DialogueHolder>().bHasEntered &&
+                (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3))
+        {
+            oMan.ResetOptions();
+            Quest5Dialogue4();
+        }
+        // Quest 5 - Dialogue 4 - Option *
+        else if (greatTree.transform.GetChild(3).GetComponent<DialogueHolder>().bHasEntered &&
+                (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3))
+        {
+            oMan.ResetOptions();
         }
     }
 
@@ -355,6 +394,30 @@ public class Chp1 : MonoBehaviour
 
         // Quest 0 -- Q&A 1 Reward
         Quest0Reward();
+    }
+
+    public void Quest5Dialogue2()
+    {
+        greatTree.transform.GetChild(0).gameObject.SetActive(false);
+        greatTree.transform.GetChild(1).gameObject.SetActive(true);
+
+        greatTree.transform.GetChild(1).GetComponent<DialogueHolder>().bContinueDialogue = true;
+    }
+
+    public void Quest5Dialogue3()
+    {
+        greatTree.transform.GetChild(1).gameObject.SetActive(false);
+        greatTree.transform.GetChild(2).gameObject.SetActive(true);
+
+        greatTree.transform.GetChild(2).GetComponent<DialogueHolder>().bContinueDialogue = true;
+    }
+
+    public void Quest5Dialogue4()
+    {
+        greatTree.transform.GetChild(2).gameObject.SetActive(false);
+        greatTree.transform.GetChild(3).gameObject.SetActive(true);
+
+        greatTree.transform.GetChild(3).GetComponent<DialogueHolder>().bContinueDialogue = true;
     }
 
     public void LoadQuests()

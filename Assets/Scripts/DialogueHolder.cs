@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/06/2018
+// Last:  05/20/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +16,7 @@ public class DialogueHolder : MonoBehaviour
     public Sprite portPic;
     private TouchControls touches;
 
+    public bool bContinueDialogue;
     public bool bHasEntered;
     public bool bHasExited;
 
@@ -39,6 +40,11 @@ public class DialogueHolder : MonoBehaviour
         {
             TalkWithNPC(colliEnter);
         }
+        else if (bContinueDialogue)
+        {
+            TalkWithNPC(colliEnter);
+            bContinueDialogue = false;
+        }
     } 
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -61,8 +67,8 @@ public class DialogueHolder : MonoBehaviour
 
             colliEnter = null;
             
-            // Restores NPC movement
-            if (!dMan.bDialogueActive)
+            // Restores NPC movement if it has animation/animator
+            if (!dMan.bDialogueActive && this.transform.parent.GetComponent<Animator>() != null)
             {
                 anim.Play("NPC Movement");
             }
@@ -92,8 +98,11 @@ public class DialogueHolder : MonoBehaviour
             transform.parent.GetComponent<NPCMovement>().bCanMove = false;
         }
 
-        // NPC looks at player
-        OrientNPC(collision);
+        // NPC looks at player if there's an animation/animator
+        if (this.transform.parent.GetComponent<Animator>() != null)
+        {
+            OrientNPC(collision);
+        }
 
         // Stop UI controls / actions 
         touches.bAction = false;

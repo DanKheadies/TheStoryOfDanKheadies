@@ -124,7 +124,6 @@ GameObject:
   - component: {fileID: 13392201}
   - component: {fileID: 13392200}
   - component: {fileID: 13392199}
-  - component: {fileID: 13392202}
   m_Layer: 5
   m_Name: A
   m_TagString: Untagged
@@ -189,7 +188,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 13392200}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 531937442}
+        m_MethodName: StartAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &13392200
@@ -225,53 +235,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 13392197}
---- !u!114 &13392202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 13392197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 531937442}
-          m_MethodName: StartAction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 531937442}
-          m_MethodName: StopAction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!1 &37409526
 GameObject:
   m_ObjectHideFlags: 0
@@ -5885,6 +5848,7 @@ MonoBehaviour:
   conTog: {fileID: 0}
   touches: {fileID: 0}
   bControlsActive: 0
+  bUpdateBrio: 0
   currentContOpac: 0
 --- !u!225 &783566142
 CanvasGroup:
@@ -6903,6 +6867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thePlayerBrio: {fileID: 0}
+  uiMan: {fileID: 0}
   currentBrio: 0
   currentCog: 0
   currentExp: 0
@@ -7175,6 +7140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portPic: {fileID: 0}
+  uiMan: {fileID: 0}
   diffMaxAndCurrent: 0
   playerMaxBrio: 50
   playerCurrentBrio: 0
@@ -14128,7 +14094,7 @@ MonoBehaviour:
   player: {fileID: 0}
   inv: {fileID: 0}
   item: {fileID: 11400000, guid: d5e579a6bf48b3d45aff3b1f0cff9d11, type: 2}
-  portPic: {fileID: 21300000, guid: 49e8f42895c3f5a499dd582fc44be623, type: 3}
+  portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   bAcquired: 0
   bDoneAcquiring: 0
   bHasEntered: 0
@@ -15511,7 +15477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliEnter: {fileID: 0}
-  portPic: {fileID: 21300000, guid: e32757818df741845b5e40cada8e7bae, type: 3}
+  portPic: {fileID: 21300000, guid: 1281d20e4fb58294ea33ee8e6face7c9, type: 3}
   bHasEntered: 0
   bHasExited: 0
   dialogue: Annyong!
@@ -15719,11 +15685,13 @@ MonoBehaviour:
   o4Arw: {fileID: 0}
   o4Text: {fileID: 0}
   oFrame: {fileID: 0}
+  moveOptsArw: {fileID: 0}
   touches: {fileID: 0}
   bDiaToOpts: 0
   bOptionsActive: 0
   bPauseOptions: 0
   bTempControlActive: 0
+  tempOptsCount: 0
   options: []
 --- !u!114 &1865790888
 MonoBehaviour:
@@ -17162,7 +17130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliEnter: {fileID: 0}
-  portPic: {fileID: 21300000, guid: e0f0ab040ffbe4e47b92489a70935512, type: 3}
+  portPic: {fileID: 21300000, guid: bc128c9f05e4f814d98a26a221fc95fe, type: 3}
   bHasEntered: 0
   bHasExited: 0
   dialogue: Annyong!
