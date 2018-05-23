@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  05/20/2018
+// Last:  05/23/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,12 +21,14 @@ public class Chp1 : MonoBehaviour
     public GameObject kid2;
     public GameObject oldMan1;
     public GameObject parent2;
+    public GameObject person1;
     public GameObject quest0;
     public GameObject quest1;
     public GameObject quest2;
     public GameObject quest3;
     public GameObject questTrigger2;
     public GameObject thePlayer;
+    public GameObject warpMinesweeper;
     public Inventory inv;
     public MoveOptionsMenuArrow moveOptsArw;
     public OptionsManager oMan;
@@ -65,11 +67,13 @@ public class Chp1 : MonoBehaviour
         oldMan1 = GameObject.Find("OldMan1");
         oMan = GameObject.FindObjectOfType<OptionsManager>();
         parent2 = GameObject.Find("Parent.2");
+        person1 = GameObject.Find("Person.1");
         qMan = FindObjectOfType<QuestManager>();
         questTrigger2 = GameObject.Find("QT_2");
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         savedQuestsValue = PlayerPrefs.GetString("Chp1Quests");
         sGame = FindObjectOfType<SaveGame>();
+        warpMinesweeper = GameObject.Find("Chp1.to.Minesweeper");
         uiMan = FindObjectOfType<UIManager>();
 
         inv.RerunStart();
@@ -361,6 +365,20 @@ public class Chp1 : MonoBehaviour
         {
             oMan.ResetOptions();
         }
+        // Quest 6 - Dialogue 1 - Option 1
+        if (person1.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+            moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
+        {
+            oMan.ResetOptions();
+            Quest6Dialogue1Opt1();
+        }
+        // Quest 6 - Dialogue 1 - Option 2
+        else if (person1.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
+        {
+            oMan.ResetOptions();
+            Quest6Dialogue1Opt2();
+        }
     }
 
     public void Quest0Dialogue1Opt1()
@@ -418,6 +436,26 @@ public class Chp1 : MonoBehaviour
         greatTree.transform.GetChild(3).gameObject.SetActive(true);
 
         greatTree.transform.GetChild(3).GetComponent<DialogueHolder>().bContinueDialogue = true;
+    }
+
+    public void Quest6Dialogue1Opt1()
+    {
+        // yes play a game
+        warpMinesweeper.GetComponent<BoxCollider2D>().enabled = true;
+
+        // DC TODO -- offer difficulty choices
+    }
+
+    public void Quest6Dialogue1Opt2()
+    {
+        // No play a game
+        dMan.dialogueLines = new string[] {
+                "Sure.. Perhaps later..."
+            };
+        dMan.currentLine = 0;
+        dText.text = dMan.dialogueLines[dMan.currentLine];
+        dMan.ShowDialogue();
+        dArrow.GetComponent<ImageStrobe>().bStartStrobe = true; // DC TODO -- Not strobing?
     }
 
     public void LoadQuests()

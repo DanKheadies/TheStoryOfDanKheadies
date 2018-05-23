@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/08/2018
-// Last:  05/11/2018
+// Last:  05/22/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -360,6 +360,6 @@ public class OptionsManager : MonoBehaviour
     public void UnpauseOptions()
     {
         bPauseOptions = false;
-        pauseTime = 0.5f;
+        pauseTime = 0.333f;
     }
 }

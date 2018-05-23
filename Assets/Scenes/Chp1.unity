@@ -5885,6 +5885,60 @@ PolygonCollider2D:
       - {x: 0.87067217, y: 0.22413372}
       - {x: 0.8700555, y: -0.4090869}
       - {x: -0.69546753, y: -0.40908054}
+--- !u!1 &190270236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 190270237}
+  - component: {fileID: 190270238}
+  m_Layer: 0
+  m_Name: BoundWoodsMain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &190270237
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 190270236}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -21.52, y: -4.39, z: 0}
+  m_LocalScale: {x: 0.89646, y: 0.94286996, z: 1.6769799}
+  m_Children: []
+  m_Father: {fileID: 1522735696}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &190270238
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 190270236}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &192756412
 GameObject:
   m_ObjectHideFlags: 0
@@ -6627,7 +6681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904ae2bfc8472134f9c91ac302574b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkZone: {fileID: 0}
+  walkZone: {fileID: 190270238}
   bCanMove: 0
   moveSpeed: 0
   waitTime: 1.5
@@ -24885,6 +24939,80 @@ PolygonCollider2D:
       - {x: 0.87067217, y: 0.22413372}
       - {x: 0.8700555, y: -0.4090869}
       - {x: -0.69546753, y: -0.40908054}
+--- !u!1 &672920307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 672920308}
+  - component: {fileID: 672920310}
+  - component: {fileID: 672920309}
+  m_Layer: 0
+  m_Name: Chp1.to.Minesweeper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &672920308
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 672920307}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.281, y: -6.93, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1265214909}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &672920309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 672920307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b56044d191f45f449c828fa834b1b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneTitle: {fileID: 0}
+  sceneSubtitle: {fileID: 0}
+  bAvoidUpdate: 0
+  bLoadScene: 0
+  bNeedsTimer: 0
+  timeToLoad: 0.001
+  AlphaLoad: SceneTransitioner
+  BetaLoad: Minesweeper
+--- !u!61 &672920310
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 672920307}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.07536566, y: 0.00000023841858}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.54181933, y: 0.43142557}
+  m_EdgeRadius: 0
 --- !u!1 &679933219
 GameObject:
   m_ObjectHideFlags: 0
@@ -29970,11 +30098,6 @@ MonoBehaviour:
   minCamPos: {x: 0, y: 0}
   maxCamPos: {x: 0, y: 0}
   smoothVelocity: {x: 0.2, y: 0.2}
-  bHome: 0
-  bField: 0
-  bFarm: 0
-  bPlay: 0
-  bCampus: 0
   bUpdateOn: 1
   currentCoords: 0
   smoothTime: 0.2
@@ -32866,12 +32989,14 @@ MonoBehaviour:
   kid2: {fileID: 0}
   oldMan1: {fileID: 0}
   parent2: {fileID: 0}
+  person1: {fileID: 0}
   quest0: {fileID: 0}
   quest1: {fileID: 0}
   quest2: {fileID: 0}
   quest3: {fileID: 0}
   questTrigger2: {fileID: 0}
   thePlayer: {fileID: 0}
+  warpMinesweeper: {fileID: 0}
   inv: {fileID: 0}
   moveOptsArw: {fileID: 0}
   oMan: {fileID: 0}
@@ -49610,6 +49735,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 672920308}
   - {fileID: 1268622703}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -49731,7 +49857,7 @@ Transform:
   - {fileID: 383398730}
   - {fileID: 780199923}
   m_Father: {fileID: 1265214909}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1273662840
 GameObject:
@@ -51950,10 +52076,8 @@ MonoBehaviour:
   bHasExited: 0
   dialogue: Annyong!
   dialogueLines:
-  - Yo. So...
-  - Everything here is empty* and boring...
-  - You can run around if you'd like. Press X for more brio.
-  - But seriously, there's nothing out here. Come back later!
+  - Ho Dan! Interested in playing some hide and seek?
+  - I'll ask the developer to set it up. Come back later!
 --- !u!1 &1353218526
 GameObject:
   m_ObjectHideFlags: 0
@@ -58845,6 +58969,7 @@ Transform:
   - {fileID: 1860913737}
   - {fileID: 1799801307}
   - {fileID: 1824042509}
+  - {fileID: 190270237}
   m_Father: {fileID: 1750694530}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -58856,8 +58981,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1525022429}
-  - component: {fileID: 1525022431}
   - component: {fileID: 1525022430}
+  - component: {fileID: 1525022431}
+  - component: {fileID: 1525022432}
   m_Layer: 0
   m_Name: DialogueZone
   m_TagString: Untagged
@@ -58925,7 +59051,21 @@ MonoBehaviour:
   dialogue: Annyong!
   dialogueLines:
   - Ho Dan! I'm just finishing up my new game.
-  - Come back later, and I should be finished.
+  - Care to test it out for me?
+--- !u!114 &1525022432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1525022428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e170fc8c9217ef40a0a7f1de9e47582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options:
+  - Sure. Let's play!
+  - Nah, perhaps later...
 --- !u!1 &1525987353
 GameObject:
   m_ObjectHideFlags: 0

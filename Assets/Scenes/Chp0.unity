@@ -5971,11 +5971,6 @@ MonoBehaviour:
   minCamPos: {x: 0, y: 0}
   maxCamPos: {x: 0, y: 0}
   smoothVelocity: {x: 0.2, y: 0.2}
-  bHome: 0
-  bField: 0
-  bFarm: 0
-  bPlay: 0
-  bCampus: 0
   bUpdateOn: 1
   currentCoords: 0
   smoothTime: 0.2
@@ -11701,9 +11696,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b56044d191f45f449c828fa834b1b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneTitle: {fileID: 0}
+  sceneSubtitle: {fileID: 0}
+  bAvoidUpdate: 0
+  bLoadScene: 0
   bNeedsTimer: 0
   timeToLoad: 0.001
-  loadLevel: Chp1
+  AlphaLoad: SceneTransitioner
+  BetaLoad: Chp1
 --- !u!61 &1437950029
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15478,6 +15478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliEnter: {fileID: 0}
   portPic: {fileID: 21300000, guid: 1281d20e4fb58294ea33ee8e6face7c9, type: 3}
+  bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
   dialogue: Annyong!
@@ -17131,6 +17132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliEnter: {fileID: 0}
   portPic: {fileID: 21300000, guid: bc128c9f05e4f814d98a26a221fc95fe, type: 3}
+  bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
   dialogue: Annyong!

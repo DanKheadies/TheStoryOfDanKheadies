@@ -2,23 +2,40 @@
 // Authors: Eric Haines
 // Contributors: David W. Corso
 // Start: --/--/----
-// Last:  06/25/2017
+// Last:  05/21/2018
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class AspectUtility : MonoBehaviour {
+public class AspectUtility : MonoBehaviour
+{
+    private static Camera cam;
+    private static Camera backgroundCam;
+    private Scene scene;
 
-    public float _wantedAspectRatio = 1.142857f;
     static float wantedAspectRatio;
-    static Camera cam;
-    static Camera backgroundCam;
+    public float _wantedAspectRatio;
 
     // DC 06/25/2017 -- Call to refresh the camera / screen display
     public void Awake()
     {
+        // Initializers
+        scene = SceneManager.GetActiveScene();
         cam = GetComponent<Camera>();
+
+        if (scene.name == "Minesweeper")
+        {
+            wantedAspectRatio = 2.285714f;
+            _wantedAspectRatio = 2.285714f;
+        }
+        else
+        {
+            wantedAspectRatio = 1.142857f;
+            _wantedAspectRatio = 1.142857f;
+        }
+
         if (!cam)
         {
             cam = Camera.main;
@@ -28,7 +45,7 @@ public class AspectUtility : MonoBehaviour {
             Debug.LogError("No camera available");
             return;
         }
-        wantedAspectRatio = _wantedAspectRatio;
+        
         SetCamera();
     }
 

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  09/29/2017
+// Last:  05/21/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -16,12 +16,7 @@ public class CameraFollow : MonoBehaviour
     public Vector2 minCamPos;
     public Vector2 maxCamPos;
     public Vector2 smoothVelocity;
-
-    public bool bHome;
-    public bool bField;
-    public bool bFarm;
-    public bool bPlay;
-    public bool bCampus;
+    
     public bool bUpdateOn;
 
     [System.Flags]
@@ -84,11 +79,6 @@ public class CameraFollow : MonoBehaviour
         // Size w/ respect to AspectUtility.cs
         myCam.orthographicSize = aspectUtil._wantedAspectRatio;
         
-        bHome = false;
-        bField = false;
-        bFarm = false;
-        bPlay = false;
-        bCampus = false;
         bUpdateOn = true;
 
         smoothTime = 0.2f;

@@ -124,6 +124,12 @@ public class SaveGame : MonoBehaviour
         }
     }
 
+    // Temp save next load for switching scenes
+    public void SaveSceneLoadTransfer(string scene)
+    {
+        PlayerPrefs.SetString("TransferScene", scene);
+    }
+
     // Loads *all* user data at the start
     public void GetSavedGame()
     {

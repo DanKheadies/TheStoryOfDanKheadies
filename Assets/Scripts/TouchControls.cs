@@ -7,11 +7,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 // Controls the actions & display of the GUI input
 public class TouchControls : MonoBehaviour
 {
     private PlayerMovement thePlayer;
+    private Scene scene;
 
     public bool bAction;
     public bool bBaction;
@@ -24,6 +26,7 @@ public class TouchControls : MonoBehaviour
     void Start ()
     {
         // Initializers
+        scene = SceneManager.GetActiveScene();
         thePlayer = FindObjectOfType<PlayerMovement>();
 
         bAction = false;
@@ -74,13 +77,25 @@ public class TouchControls : MonoBehaviour
     // Baction (boosting / secondary) button flags
     public void StartBoosting()
     {
-        thePlayer.bBoosting = true;
+        if (scene.name != "Minesweeper")
+        {
+            thePlayer.bBoosting = true;
+        }
         bBaction = true;
     }
     public void StopBoosting()
     {
-        thePlayer.bBoosting = false;
+        if (scene.name != "Minesweeper")
+        {
+            thePlayer.bBoosting = false;
+        }
         bBaction = false;
+    }
+
+    // Baction (flag / secondary) button flags
+    public void StartSecondary()
+    {
+
     }
 
     // Movement / arrow button flags

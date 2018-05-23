@@ -89,6 +89,7 @@ public class Chp0 : MonoBehaviour
             inv.RerunStart();
             sGame.RerunStart();
             sGame.GetSavedGame();
+            sFaderAnimDia.GetComponent<Animator>().enabled = true;
             bGetInventory = true;
             timer = 0.33f;
         }

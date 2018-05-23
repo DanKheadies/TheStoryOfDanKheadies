@@ -1,13 +1,14 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  05/11/2018
+// Last:  05/22/2018
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.SceneManagement;
 
 // Control Player movement and overworld transition areas
 public class PlayerMovement : MonoBehaviour
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerBrioManager playerBrioMan;
     public PolygonCollider2D playerCollider;
     public Rigidbody2D rBody;
+    public Scene scene;
     private SFXManager SFXMan;
     private TouchControls touches;
     private UIManager uiMan;
@@ -40,12 +42,21 @@ public class PlayerMovement : MonoBehaviour
         playerBrioMan = GetComponent<PlayerBrioManager>();
         playerCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
+        scene = SceneManager.GetActiveScene();
         SFXMan = FindObjectOfType<SFXManager>();
         touches = FindObjectOfType<TouchControls>();
         uiMan = FindObjectOfType<UIManager>();
 
         bBoosting = false;
-        moveSpeed = 1.0f;
+
+        if (scene.name == "Minesweeper")
+        {
+            moveSpeed = 3.0f;
+        }
+        else
+        {
+            moveSpeed = 1.0f;
+        }
     }
 
     void Update()
