@@ -57,7 +57,7 @@ public class SaveGame : MonoBehaviour
     }
 
     // Saves *majority* of user data
-    public void SavingGame(bool bQuit)
+    public void SavingGame()
     {
         PlayerPrefs.SetInt("Saved", 1);
         PlayerPrefs.SetString("Chapter", scene.name);
@@ -122,6 +122,16 @@ public class SaveGame : MonoBehaviour
             PlayerPrefs.SetString("TransferItem" + i, inv.items[i].ToString());
             PlayerPrefs.SetInt("Transfer Item Total", i + 1);
         }
+    }
+
+    // Temp save position when leaving and returning to main world
+    public void SavePositionTransfer()
+    {
+        PlayerPrefs.SetFloat("TransferCam_x", savedCamera.transform.position.x);
+        PlayerPrefs.SetFloat("TransferCam_y", savedCamera.transform.position.y);
+        PlayerPrefs.SetFloat("TransferP_x", savedPlayer.transform.position.x);
+        PlayerPrefs.SetFloat("TransferP_y", savedPlayer.transform.position.y);
+        PlayerPrefs.SetInt("TransferAnandaCoord", (int)camFollow.currentCoords);
     }
 
     // Temp save next load for switching scenes

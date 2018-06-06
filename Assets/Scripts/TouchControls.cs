@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/07/2018
+// Last:  06/06/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -77,25 +77,13 @@ public class TouchControls : MonoBehaviour
     // Baction (boosting / secondary) button flags
     public void StartBoosting()
     {
-        if (scene.name != "Minesweeper")
-        {
-            thePlayer.bBoosting = true;
-        }
+        thePlayer.bBoosting = true;
         bBaction = true;
     }
     public void StopBoosting()
     {
-        if (scene.name != "Minesweeper")
-        {
-            thePlayer.bBoosting = false;
-        }
+        thePlayer.bBoosting = false;
         bBaction = false;
-    }
-
-    // Baction (flag / secondary) button flags
-    public void StartSecondary()
-    {
-
     }
 
     // Movement / arrow button flags

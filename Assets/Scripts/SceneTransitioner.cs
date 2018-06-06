@@ -13,9 +13,11 @@ using UnityEngine.UI;
 // Transition amongst Unity Scenes
 public class SceneTransitioner : MonoBehaviour
 {
+    public SaveGame save;
     public Scene scene;
     public Text sceneTitle;
     public Text sceneSubtitle;
+    //public TouchControls touches;
 
     public bool bAvoidUpdate;
     public bool bLoadScene;
@@ -63,8 +65,11 @@ public class SceneTransitioner : MonoBehaviour
     // Trigger and timer for loading screens / scenes
     private IEnumerator Start()
     {
+        // Initializers
+        save = GameObject.FindObjectOfType<SaveGame>().GetComponent<SaveGame>();
         scene = SceneManager.GetActiveScene();
-        
+        //touches = GameObject.Find("GUIControls").GetComponent<TouchControls>();
+
         CheckScenesToLoad();
 
         if (bNeedsTimer)
@@ -81,11 +86,28 @@ public class SceneTransitioner : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Save the current inventory and load it up for the next scene
-            GameObject.FindObjectOfType<SaveGame>().SaveInventoryTransfer();
-            GameObject.FindObjectOfType<SaveGame>().SaveSceneLoadTransfer(BetaLoad);
-            SceneManager.LoadScene(AlphaLoad);
+            // Do SceneTransitioner Animation then load
+            GameObject.Find("SceneTransitioner").GetComponent<Animator>().enabled = true;
+
+            // Stops the player's movement
+            collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            collision.gameObject.GetComponent<Animator>().SetBool("bIsWalking", false);  
+            //touches.UnpressedAllArrows();
+            collision.gameObject.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+
+            StartCoroutine(SaveTransitionLoad());
         }
+    }
+
+    IEnumerator SaveTransitionLoad()
+    {
+        yield return new WaitForSeconds(2);
+
+        // Save the current inventory, position, and scene and load it up for the next scene
+        save.SaveInventoryTransfer();
+        save.SavePositionTransfer(); // DC TODO -- How to activate and load these?
+        save.SaveSceneLoadTransfer(BetaLoad);
+        SceneManager.LoadScene(AlphaLoad);
     }
 
     IEnumerator LoadNewScene()
@@ -93,6 +115,8 @@ public class SceneTransitioner : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         AsyncOperation async = SceneManager.LoadSceneAsync(BetaLoad);
+
+        // DC TODO -- Save the player's location, brio, etc. in tempSave and warp them back to spot
 
         while (!async.isDone)
         {

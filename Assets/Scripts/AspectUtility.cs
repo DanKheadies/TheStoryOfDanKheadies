@@ -2,7 +2,7 @@
 // Authors: Eric Haines
 // Contributors: David W. Corso
 // Start: --/--/----
-// Last:  05/21/2018
+// Last:  06/03/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -27,14 +27,14 @@ public class AspectUtility : MonoBehaviour
 
         if (scene.name == "Minesweeper")
         {
-            wantedAspectRatio = 2.285714f;
             _wantedAspectRatio = 2.285714f;
         }
         else
         {
-            wantedAspectRatio = 1.142857f;
             _wantedAspectRatio = 1.142857f;
         }
+
+        wantedAspectRatio = 1.142857f;
 
         if (!cam)
         {

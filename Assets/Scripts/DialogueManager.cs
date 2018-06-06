@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public AspectUtility aspectUtil;
-    public Animator anim;
+    public Animator anim; // rename to playerAnim?
     public CameraFollow mainCamera;
     public GameObject dBox;
     public Image dArrow;

@@ -1,17 +1,19 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  05/11/2018
+// Last:  06/06/2018
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // Manage the Player's Brio
 public class PlayerBrioManager : MonoBehaviour
 {
     private Animator anim;
     private DialogueManager dMan;
+    public Scene scene;
     public Sprite portPic;
     public UIManager uiMan;
 
@@ -26,6 +28,7 @@ public class PlayerBrioManager : MonoBehaviour
         // Initializers
         anim = GetComponent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
+        scene = SceneManager.GetActiveScene();
         uiMan = FindObjectOfType<UIManager>();
 
         // Setting the brio
@@ -66,7 +69,11 @@ public class PlayerBrioManager : MonoBehaviour
             playerCurrentBrio = 1;
         }
         
-        BasicRestorePlayer();
+        // Stop basic brio restore on certain scenes
+        if (scene.name != "Minesweeper")
+        {
+            BasicRestorePlayer();
+        }
 
         // Temp solution to give Brio
         if (Input.GetKeyUp(KeyCode.X))
@@ -88,7 +95,7 @@ public class PlayerBrioManager : MonoBehaviour
         playerCurrentBrio += brioToGive;
     }
 
-    // Adds Brio
+    // Adds Brio once below half (temp algo)
     public void BasicRestorePlayer()
     {
         diffMaxAndCurrent = playerMaxBrio - playerCurrentBrio;

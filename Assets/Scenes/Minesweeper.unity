@@ -342,6 +342,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -359,9 +362,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &4388046
 BoxCollider2D:
@@ -372,7 +372,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -689,6 +689,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -706,9 +709,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &15258386
 BoxCollider2D:
@@ -719,7 +719,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -821,6 +821,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -838,9 +841,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &18138127
 BoxCollider2D:
@@ -851,7 +851,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1072,6 +1072,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -1089,9 +1092,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &26248033
 BoxCollider2D:
@@ -1102,7 +1102,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1346,6 +1346,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -1363,9 +1366,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &52825655
 BoxCollider2D:
@@ -1376,7 +1376,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1436,6 +1436,81 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &54128083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 54128084}
+  - component: {fileID: 54128086}
+  - component: {fileID: 54128085}
+  m_Layer: 0
+  m_Name: Right
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &54128084
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 54128083}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.6275, y: -2.12, z: 0}
+  m_LocalScale: {x: 1, y: 4.8, z: 1}
+  m_Children: []
+  m_Father: {fileID: 785183562}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &54128085
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 54128083}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!50 &54128086
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 54128083}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &54473443
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,6 +1553,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -1495,9 +1573,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &54473446
 BoxCollider2D:
@@ -1508,7 +1583,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1610,6 +1685,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -1627,9 +1705,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &61071699
 BoxCollider2D:
@@ -1640,7 +1715,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1742,6 +1817,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -1759,9 +1837,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &63436085
 BoxCollider2D:
@@ -1772,7 +1847,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1874,6 +1949,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -1891,9 +1969,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &69980096
 BoxCollider2D:
@@ -1904,7 +1979,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2006,6 +2081,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -2023,9 +2101,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &77567229
 BoxCollider2D:
@@ -2036,7 +2111,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2138,6 +2213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -2155,9 +2233,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &96589973
 BoxCollider2D:
@@ -2168,7 +2243,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2270,6 +2345,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -2287,9 +2365,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &110473070
 BoxCollider2D:
@@ -2300,7 +2375,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2402,6 +2477,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -2419,9 +2497,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &112137985
 BoxCollider2D:
@@ -2432,7 +2507,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2534,6 +2609,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -2551,9 +2629,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &112439014
 BoxCollider2D:
@@ -2564,7 +2639,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2666,6 +2741,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -2683,9 +2761,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &121752127
 BoxCollider2D:
@@ -2696,7 +2771,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2856,8 +2931,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-      - m_Target: {fileID: 0}
-        m_MethodName: QuestDialogueCheck
+      - m_Target: {fileID: 2074391686}
+        m_MethodName: MinesweeperDialogueCheck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3046,6 +3121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -3063,9 +3141,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &147097724
 BoxCollider2D:
@@ -3076,7 +3151,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3178,6 +3253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -3195,9 +3273,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &149592132
 BoxCollider2D:
@@ -3208,7 +3283,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3591,8 +3666,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-      - m_Target: {fileID: 0}
-        m_MethodName: QuestDialogueCheck
+      - m_Target: {fileID: 2074391686}
+        m_MethodName: MinesweeperDialogueCheck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3679,6 +3754,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -3696,9 +3774,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &166068365
 BoxCollider2D:
@@ -3709,7 +3784,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3811,6 +3886,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -3828,9 +3906,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &183082283
 BoxCollider2D:
@@ -3841,7 +3916,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3943,6 +4018,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -3960,9 +4038,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &183394438
 BoxCollider2D:
@@ -3973,7 +4048,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -4143,6 +4218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -4160,9 +4238,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &203461235
 BoxCollider2D:
@@ -4173,7 +4248,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -4304,6 +4379,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -4321,9 +4399,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &232349347
 BoxCollider2D:
@@ -4334,7 +4409,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -4694,6 +4769,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -4711,9 +4789,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &263618791
 BoxCollider2D:
@@ -4724,7 +4799,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -4826,6 +4901,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -4843,9 +4921,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &270877820
 BoxCollider2D:
@@ -4856,7 +4931,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5321,6 +5396,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -5338,9 +5416,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &280991254
 BoxCollider2D:
@@ -5351,7 +5426,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5453,6 +5528,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -5470,9 +5548,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &281058118
 BoxCollider2D:
@@ -5483,7 +5558,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5585,6 +5660,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -5602,9 +5680,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &293720163
 BoxCollider2D:
@@ -5615,7 +5690,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5785,6 +5860,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -5802,9 +5880,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &306528884
 BoxCollider2D:
@@ -5815,7 +5890,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5917,6 +5992,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -5934,9 +6012,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &306633680
 BoxCollider2D:
@@ -5947,7 +6022,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -6049,6 +6124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -6066,9 +6144,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &317429426
 BoxCollider2D:
@@ -6079,7 +6154,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -6139,6 +6214,81 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &337251671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 337251672}
+  - component: {fileID: 337251674}
+  - component: {fileID: 337251673}
+  m_Layer: 0
+  m_Name: Top
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &337251672
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 337251671}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.05, y: 0.565, z: 0}
+  m_LocalScale: {x: 4.8, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 785183562}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &337251673
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 337251671}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!50 &337251674
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 337251671}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &345614909
 GameObject:
   m_ObjectHideFlags: 0
@@ -6416,6 +6566,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -6433,9 +6586,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &357082931
 BoxCollider2D:
@@ -6446,7 +6596,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -6813,6 +6963,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -6830,9 +6983,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &378113444
 BoxCollider2D:
@@ -6843,7 +6993,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -7013,6 +7163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -7030,9 +7183,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &385069317
 BoxCollider2D:
@@ -7043,7 +7193,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -7331,6 +7481,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -7348,9 +7501,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &409127624
 BoxCollider2D:
@@ -7361,7 +7511,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -7642,6 +7792,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -7659,9 +7812,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &420399369
 BoxCollider2D:
@@ -7672,7 +7822,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -8295,6 +8445,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -8312,9 +8465,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &441557963
 BoxCollider2D:
@@ -8325,7 +8475,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -8432,6 +8582,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -8449,9 +8602,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &450764503
 BoxCollider2D:
@@ -8462,7 +8612,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -8683,6 +8833,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -8700,9 +8853,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &465833734
 BoxCollider2D:
@@ -8713,7 +8863,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9153,6 +9303,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -9170,9 +9323,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &477445423
 BoxCollider2D:
@@ -9183,7 +9333,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9285,6 +9435,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -9302,9 +9455,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &477577794
 BoxCollider2D:
@@ -9315,7 +9465,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9504,6 +9654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -9521,9 +9674,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &499390765
 BoxCollider2D:
@@ -9534,7 +9684,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9636,6 +9786,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -9653,9 +9806,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &499834506
 BoxCollider2D:
@@ -9666,7 +9816,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9768,6 +9918,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -9785,9 +9938,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &512054247
 BoxCollider2D:
@@ -9798,7 +9948,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9905,6 +10055,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -9922,9 +10075,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &515853349
 BoxCollider2D:
@@ -9935,7 +10085,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -10190,6 +10340,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -10207,9 +10360,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &520783243
 BoxCollider2D:
@@ -10220,7 +10370,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -10322,6 +10472,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -10339,9 +10492,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &525398554
 BoxCollider2D:
@@ -10352,7 +10502,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -10454,6 +10604,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -10471,9 +10624,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &527038173
 BoxCollider2D:
@@ -10484,7 +10634,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -11065,6 +11215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -11082,9 +11235,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &546894204
 BoxCollider2D:
@@ -11095,7 +11245,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -11197,6 +11347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -11214,9 +11367,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &554053396
 BoxCollider2D:
@@ -11227,7 +11377,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -11454,6 +11604,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -11471,9 +11624,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &555251699
 BoxCollider2D:
@@ -11484,7 +11634,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -12016,6 +12166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -12033,9 +12186,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &567759272
 BoxCollider2D:
@@ -12046,7 +12196,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -12290,6 +12440,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -12307,9 +12460,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &581996855
 BoxCollider2D:
@@ -12320,7 +12470,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -12643,6 +12793,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -12660,9 +12813,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &601518768
 BoxCollider2D:
@@ -12673,7 +12823,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -12775,6 +12925,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -12792,9 +12945,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &618835070
 BoxCollider2D:
@@ -12805,7 +12955,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -12965,8 +13115,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-      - m_Target: {fileID: 0}
-        m_MethodName: QuestDialogueCheck
+      - m_Target: {fileID: 2074391686}
+        m_MethodName: MinesweeperDialogueCheck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13121,6 +13271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -13138,9 +13291,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &638142821
 BoxCollider2D:
@@ -13151,7 +13301,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -13253,6 +13403,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -13270,9 +13423,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &644471018
 BoxCollider2D:
@@ -13283,7 +13433,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -13385,6 +13535,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -13402,9 +13555,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &646960360
 BoxCollider2D:
@@ -13415,7 +13565,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -13586,6 +13736,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -13603,10 +13756,82 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
+--- !u!1 &659912786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 659912787}
+  - component: {fileID: 659912789}
+  - component: {fileID: 659912788}
+  m_Layer: 0
+  m_Name: Bottom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &659912787
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 659912786}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.05, y: -4.65, z: 0}
+  m_LocalScale: {x: 4.8, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 785183562}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &659912788
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 659912786}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!50 &659912789
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 659912786}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &669675726
 GameObject:
   m_ObjectHideFlags: 0
@@ -13683,6 +13908,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -13700,9 +13928,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &673501353
 BoxCollider2D:
@@ -13713,7 +13938,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -13883,6 +14108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -13900,9 +14128,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &685544002
 BoxCollider2D:
@@ -13913,7 +14138,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -14020,6 +14245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -14037,9 +14265,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &724156279
 BoxCollider2D:
@@ -14050,7 +14275,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -14220,6 +14445,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -14237,9 +14465,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &746104459
 BoxCollider2D:
@@ -14250,7 +14475,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -14370,7 +14595,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &756991005
 GameObject:
@@ -14489,7 +14714,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &766972395
 GameObject:
@@ -14626,6 +14851,96 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 766972395}
+--- !u!1 &769264860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 769264861}
+  - component: {fileID: 769264864}
+  - component: {fileID: 769264863}
+  - component: {fileID: 769264862}
+  m_Layer: 0
+  m_Name: DialogueZone2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &769264861
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 769264860}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.00000023841858, y: 0.00000023841858, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1411698415}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &769264862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 769264860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e170fc8c9217ef40a0a7f1de9e47582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options:
+  - Sure, I'll play again.
+  - Nah, I'm good for now.
+--- !u!114 &769264863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 769264860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d54c8da22bff46419731d3bba7bae75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliEnter: {fileID: 0}
+  portPic: {fileID: 21300000, guid: b9a7fea6747b7f544a4b817add47c0fb, type: 3}
+  bContinueDialogue: 0
+  bHasEntered: 0
+  bHasExited: 0
+  dialogue: Annyong!
+  dialogueLines:
+  - Ka BOOM! You is dedz.
+  - Care to play again?
+--- !u!61 &769264864
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 769264860}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.64855576, y: 0.5764942}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 17.382034, y: 17.334}
+  m_EdgeRadius: 0
 --- !u!1 &769457241
 GameObject:
   m_ObjectHideFlags: 0
@@ -14766,6 +15081,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -14783,9 +15101,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &772882406
 BoxCollider2D:
@@ -14796,7 +15111,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -14856,6 +15171,38 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &785183561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 785183562}
+  m_Layer: 0
+  m_Name: Boundry
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &785183562
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 785183561}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 12.043, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_Children:
+  - {fileID: 659912787}
+  - {fileID: 1858766970}
+  - {fileID: 54128084}
+  - {fileID: 337251672}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &793781094
 GameObject:
   m_ObjectHideFlags: 0
@@ -14898,6 +15245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -14915,9 +15265,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &793781097
 BoxCollider2D:
@@ -14928,7 +15275,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -15104,6 +15451,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -15121,9 +15471,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &803118830
 BoxCollider2D:
@@ -15134,7 +15481,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -15671,6 +16018,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -15688,9 +16038,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &818104902
 BoxCollider2D:
@@ -15701,7 +16048,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -15803,6 +16150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -15820,9 +16170,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &825676816
 BoxCollider2D:
@@ -15833,7 +16180,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -15935,6 +16282,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -15952,9 +16302,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &827098965
 BoxCollider2D:
@@ -15965,7 +16312,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -16067,6 +16414,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -16084,9 +16434,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &830245552
 BoxCollider2D:
@@ -16199,6 +16546,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -16216,9 +16566,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &836449544
 BoxCollider2D:
@@ -16229,7 +16576,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -16450,6 +16797,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -16467,9 +16817,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &848281155
 BoxCollider2D:
@@ -16480,7 +16827,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -16582,6 +16929,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -16599,9 +16949,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &850197072
 BoxCollider2D:
@@ -16612,7 +16959,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -16714,6 +17061,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -16731,9 +17081,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &871761885
 BoxCollider2D:
@@ -16744,7 +17091,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -16846,6 +17193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -16863,9 +17213,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &871867991
 BoxCollider2D:
@@ -16876,7 +17223,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -17089,6 +17436,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -17106,9 +17456,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &874066807
 BoxCollider2D:
@@ -17119,7 +17466,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -17221,6 +17568,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -17238,9 +17588,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &879639065
 BoxCollider2D:
@@ -17251,7 +17598,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -17474,6 +17821,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -17491,9 +17841,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &897327795
 BoxCollider2D:
@@ -17504,7 +17851,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -17680,6 +18027,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -17697,9 +18047,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &933157464
 BoxCollider2D:
@@ -17710,7 +18057,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -17812,6 +18159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -17829,9 +18179,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &956454973
 BoxCollider2D:
@@ -17842,7 +18189,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -17944,6 +18291,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -17961,9 +18311,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &959733853
 BoxCollider2D:
@@ -17974,7 +18321,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -18076,6 +18423,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -18093,9 +18443,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &964112412
 BoxCollider2D:
@@ -18106,7 +18453,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -18282,6 +18629,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -18299,9 +18649,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &965280771
 BoxCollider2D:
@@ -18312,7 +18659,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -18419,6 +18766,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -18436,9 +18786,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &985856116
 BoxCollider2D:
@@ -18449,7 +18796,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -18551,6 +18898,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -18568,9 +18918,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &989816843
 BoxCollider2D:
@@ -18581,7 +18928,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -18683,6 +19030,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -18700,9 +19050,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &998501875
 BoxCollider2D:
@@ -18713,7 +19060,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -19188,6 +19535,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -19205,9 +19555,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1027035894
 BoxCollider2D:
@@ -19218,7 +19565,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -19433,6 +19780,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -19450,9 +19800,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1032060296
 BoxCollider2D:
@@ -19463,7 +19810,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -19688,6 +20035,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -19705,9 +20055,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1042488991
 BoxCollider2D:
@@ -19718,7 +20065,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -19889,6 +20236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -19906,9 +20256,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1048294320
 BoxCollider2D:
@@ -19919,7 +20266,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -20201,8 +20548,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-      - m_Target: {fileID: 0}
-        m_MethodName: QuestDialogueCheck
+      - m_Target: {fileID: 2074391686}
+        m_MethodName: MinesweeperDialogueCheck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20502,6 +20849,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -20519,9 +20869,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1090319488
 BoxCollider2D:
@@ -20532,7 +20879,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -20634,6 +20981,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -20651,9 +21001,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1100724674
 BoxCollider2D:
@@ -20664,7 +21011,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -20766,6 +21113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -20783,9 +21133,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1101634835
 BoxCollider2D:
@@ -20796,7 +21143,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -20966,6 +21313,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -20983,9 +21333,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1106605087
 BoxCollider2D:
@@ -20996,7 +21343,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -21098,6 +21445,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -21115,9 +21465,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1122328160
 BoxCollider2D:
@@ -21128,7 +21475,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -21383,6 +21730,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -21400,9 +21750,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1135176239
 BoxCollider2D:
@@ -21413,7 +21760,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -21893,6 +22240,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -21910,9 +22260,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1162722217
 BoxCollider2D:
@@ -21923,7 +22270,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -22064,6 +22411,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -22081,9 +22431,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1177058906
 BoxCollider2D:
@@ -22094,7 +22441,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -22342,6 +22689,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -22359,9 +22709,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1185488896
 BoxCollider2D:
@@ -22372,7 +22719,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -22553,6 +22900,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -22570,9 +22920,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1210138897
 BoxCollider2D:
@@ -22583,7 +22930,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -22685,6 +23032,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -22702,9 +23052,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1215502637
 BoxCollider2D:
@@ -22715,7 +23062,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -22817,6 +23164,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -22834,9 +23184,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1235284575
 BoxCollider2D:
@@ -22847,7 +23194,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -23129,7 +23476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -23335,6 +23682,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -23352,9 +23702,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1261306116
 BoxCollider2D:
@@ -23365,7 +23712,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -23541,6 +23888,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -23558,9 +23908,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1266221306
 BoxCollider2D:
@@ -23571,7 +23918,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -23992,6 +24339,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -24009,9 +24359,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1313245064
 BoxCollider2D:
@@ -24022,7 +24369,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -24124,6 +24471,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -24141,9 +24491,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1313985489
 BoxCollider2D:
@@ -24154,7 +24501,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -24324,6 +24671,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -24341,9 +24691,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1322816695
 BoxCollider2D:
@@ -24354,7 +24701,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -24456,6 +24803,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -24473,9 +24823,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1324524085
 BoxCollider2D:
@@ -24486,7 +24833,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -24656,6 +25003,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -24673,9 +25023,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1343633621
 BoxCollider2D:
@@ -24686,7 +25033,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -24788,6 +25135,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -24805,9 +25155,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1354878123
 BoxCollider2D:
@@ -24818,7 +25165,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -24920,6 +25267,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -24937,9 +25287,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1361711568
 BoxCollider2D:
@@ -24950,7 +25297,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -25137,6 +25484,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -25154,9 +25504,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1370082577
 BoxCollider2D:
@@ -25167,7 +25514,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -25227,6 +25574,35 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1404586702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1404586703}
+  m_Layer: 0
+  m_Name: WarpZones
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1404586703
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1404586702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2039617090}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1411698414
 GameObject:
   m_ObjectHideFlags: 0
@@ -25235,11 +25611,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1411698415}
-  - component: {fileID: 1411698420}
-  - component: {fileID: 1411698419}
-  - component: {fileID: 1411698418}
-  - component: {fileID: 1411698417}
-  - component: {fileID: 1411698416}
   m_Layer: 0
   m_Name: Person.1
   m_TagString: Untagged
@@ -25254,137 +25625,14 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1411698414}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.737, y: -9.649, z: 0}
+  m_LocalPosition: {x: 3.122, y: 2.791, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1727094824}
+  - {fileID: 769264861}
   m_Father: {fileID: 1494280798}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1411698416
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1411698414}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 333e26bf93b22414797720c6bbccb48c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &1411698417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1411698414}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 904ae2bfc8472134f9c91ac302574b3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkZone: {fileID: 0}
-  bCanMove: 0
-  moveSpeed: 0.5
-  waitTime: 3
-  walkTime: 1
-  minWalkPoint: {x: 0, y: 0}
-  maxWalkPoint: {x: 0, y: 0}
---- !u!61 &1411698418
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1411698414}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.26}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.14, y: 0.22}
-  m_EdgeRadius: 0
---- !u!50 &1411698419
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1411698414}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 10000
-  m_LinearDrag: 1
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!212 &1411698420
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1411698414}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 9
-  m_Sprite: {fileID: 21300000, guid: 530bf9bf8651b3d46814a50696ed7e05, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
 --- !u!1 &1412831429
 GameObject:
   m_ObjectHideFlags: 0
@@ -25396,7 +25644,6 @@ GameObject:
   - component: {fileID: 1412831434}
   - component: {fileID: 1412831433}
   - component: {fileID: 1412831432}
-  - component: {fileID: 1412831431}
   m_Layer: 5
   m_Name: Save
   m_TagString: Untagged
@@ -25423,18 +25670,6 @@ RectTransform:
   m_AnchoredPosition: {x: 25, y: 120}
   m_SizeDelta: {x: 232, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1412831431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1412831429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eff89bd2117f644396f1e667f96977d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonText: {fileID: 1258773689}
 --- !u!114 &1412831432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25473,40 +25708,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1412831433}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2074391688}
-        m_MethodName: SavingGame
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-      - m_Target: {fileID: 1258773689}
-        m_MethodName: set_text
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Saved
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: SaveQuests
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1412831433
@@ -25934,6 +26136,97 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 82badb65272650f4eb2e52b8b62b6a74, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1444730139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1444730140}
+  - component: {fileID: 1444730142}
+  - component: {fileID: 1444730141}
+  m_Layer: 0
+  m_Name: SceneTransitioner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1444730140
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1444730139}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1820261577}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1444730141
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1444730139}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 017dc0ad1a3abb1468a9f7a66b46add4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!212 &1444730142
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1444730139}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 100
+  m_Sprite: {fileID: 21300000, guid: 626a2e20aa626174dac0f748faf590be, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.6, y: 1.4}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &1451310277
 GameObject:
   m_ObjectHideFlags: 0
@@ -25976,6 +26269,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -25993,9 +26289,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1451310280
 BoxCollider2D:
@@ -26006,7 +26299,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -26108,6 +26401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -26125,9 +26421,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1453255050
 BoxCollider2D:
@@ -26138,7 +26431,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -26240,6 +26533,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -26257,9 +26553,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1457691558
 BoxCollider2D:
@@ -26270,7 +26563,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -26372,6 +26665,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -26389,9 +26685,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1465338449
 BoxCollider2D:
@@ -26402,7 +26695,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -26652,6 +26945,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -26669,9 +26965,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1479443363
 BoxCollider2D:
@@ -26682,7 +26975,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -26885,6 +27178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -26902,9 +27198,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1500585851
 BoxCollider2D:
@@ -26915,7 +27208,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -27017,6 +27310,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -27034,9 +27330,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1503539817
 BoxCollider2D:
@@ -27047,7 +27340,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -27217,6 +27510,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -27234,9 +27530,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1522621749
 BoxCollider2D:
@@ -27247,7 +27540,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -27349,6 +27642,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -27366,9 +27662,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1523182369
 BoxCollider2D:
@@ -27379,7 +27672,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -27481,6 +27774,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -27498,9 +27794,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1544667259
 BoxCollider2D:
@@ -27511,7 +27804,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -27793,6 +28086,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -27810,9 +28106,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1568850321
 BoxCollider2D:
@@ -27823,7 +28116,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -28004,6 +28297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -28021,9 +28317,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1579036371
 BoxCollider2D:
@@ -28034,7 +28327,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -28327,6 +28620,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -28344,9 +28640,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1639599625
 BoxCollider2D:
@@ -28357,7 +28650,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -28459,6 +28752,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -28476,9 +28772,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1646588409
 BoxCollider2D:
@@ -28489,7 +28782,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -28591,6 +28884,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -28608,9 +28904,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1653542070
 BoxCollider2D:
@@ -28621,7 +28914,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -28831,6 +29124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -28848,9 +29144,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1657740746
 BoxCollider2D:
@@ -28861,7 +29154,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -29432,6 +29725,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -29449,9 +29745,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1681621673
 BoxCollider2D:
@@ -29462,7 +29755,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -29598,6 +29891,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -29615,9 +29911,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1689221317
 BoxCollider2D:
@@ -29628,7 +29921,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -29730,6 +30023,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -29747,9 +30043,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1702086629
 BoxCollider2D:
@@ -29760,7 +30053,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -29862,6 +30155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -29879,9 +30175,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1711852413
 BoxCollider2D:
@@ -29892,7 +30185,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -29994,6 +30287,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -30011,9 +30307,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1715812753
 BoxCollider2D:
@@ -30024,7 +30317,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -30126,6 +30419,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -30143,9 +30439,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1720417128
 BoxCollider2D:
@@ -30156,7 +30449,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -30298,15 +30591,16 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1727094824}
-  - component: {fileID: 1727094826}
   - component: {fileID: 1727094825}
+  - component: {fileID: 1727094826}
+  - component: {fileID: 1727094827}
   m_Layer: 0
-  m_Name: DialogueZone
+  m_Name: DialogueZone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1727094824
 Transform:
   m_ObjectHideFlags: 0
@@ -30320,8 +30614,8 @@ Transform:
   m_Father: {fileID: 1411698415}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &1727094825
-PolygonCollider2D:
+--- !u!61 &1727094825
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -30332,7 +30626,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.64855576, y: 0.5764942}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -30342,12 +30636,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.0005865097, y: 0.25744724}
-      - {x: 0.25175986, y: 0.0010722479}
-      - {x: 0.0001227061, y: -0.25014114}
-      - {x: -0.25205263, y: -0.005599022}
+  serializedVersion: 2
+  m_Size: {x: 17.382034, y: 17.334}
+  m_EdgeRadius: 0
 --- !u!114 &1727094826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30366,8 +30657,22 @@ MonoBehaviour:
   bHasExited: 0
   dialogue: Annyong!
   dialogueLines:
-  - Ho Dan! I'm just finishing up my new game.
-  - Come back later, and I should be finished.
+  - Hey you did it, GG!
+  - Care to play again?
+--- !u!114 &1727094827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1727094823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e170fc8c9217ef40a0a7f1de9e47582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options:
+  - Sure, I'll play again.
+  - Nah, I'm good for now.
 --- !u!1 &1727259829
 GameObject:
   m_ObjectHideFlags: 0
@@ -30556,6 +30861,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -30573,9 +30881,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1756526444
 BoxCollider2D:
@@ -30586,7 +30891,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -30735,6 +31040,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -30752,9 +31060,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1773627668
 BoxCollider2D:
@@ -30765,7 +31070,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -30867,6 +31172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -30884,9 +31192,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1782598772
 BoxCollider2D:
@@ -30897,7 +31202,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -30999,6 +31304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -31016,9 +31324,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1784588307
 BoxCollider2D:
@@ -31029,7 +31334,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -31252,6 +31557,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -31269,9 +31577,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1787012161
 BoxCollider2D:
@@ -31282,7 +31587,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -31720,6 +32025,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -31737,9 +32045,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1816449971
 BoxCollider2D:
@@ -31750,7 +32055,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -32021,7 +32326,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.75, y: 6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1444730140}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32135,6 +32441,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -32152,9 +32461,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1826633872
 BoxCollider2D:
@@ -32165,7 +32471,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -32267,6 +32573,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -32284,9 +32593,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1837537892
 BoxCollider2D:
@@ -32297,7 +32603,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -32399,6 +32705,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -32416,9 +32725,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1840654562
 BoxCollider2D:
@@ -32429,7 +32735,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -32531,6 +32837,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -32548,9 +32857,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1846037756
 BoxCollider2D:
@@ -32561,7 +32867,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -32663,6 +32969,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -32680,9 +32989,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1850975546
 BoxCollider2D:
@@ -32693,7 +32999,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -32853,6 +33159,81 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 82badb65272650f4eb2e52b8b62b6a74, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1858766969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1858766970}
+  - component: {fileID: 1858766972}
+  - component: {fileID: 1858766971}
+  m_Layer: 0
+  m_Name: Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1858766970
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1858766969}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.63, y: -2.12, z: 0}
+  m_LocalScale: {x: 1, y: 4.807509, z: 1}
+  m_Children: []
+  m_Father: {fileID: 785183562}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1858766971
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1858766969}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!50 &1858766972
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1858766969}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &1858780604
 GameObject:
   m_ObjectHideFlags: 0
@@ -32963,6 +33344,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -32980,9 +33364,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1878418764
 BoxCollider2D:
@@ -32993,7 +33374,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -33214,6 +33595,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -33231,9 +33615,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1898347787
 BoxCollider2D:
@@ -33244,7 +33625,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -33346,6 +33727,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -33363,9 +33747,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1907055701
 BoxCollider2D:
@@ -33376,7 +33757,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -33597,6 +33978,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -33614,9 +33998,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1912273619
 BoxCollider2D:
@@ -33627,7 +34008,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -33734,6 +34115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -33751,9 +34135,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1929731688
 BoxCollider2D:
@@ -33764,7 +34145,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -33861,8 +34242,8 @@ MonoBehaviour:
   diffMaxAndCurrent: 0
   playerMaxBrio: 50
   playerCurrentBrio: 0
---- !u!60 &1933751391
-PolygonCollider2D:
+--- !u!61 &1933751391
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -33870,10 +34251,10 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.00020255148, y: -0.03996233}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -33883,16 +34264,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.02710998, y: 0.03953314}
-      - {x: -0.059855938, y: -0.018257856}
-      - {x: -0.059855938, y: -0.07932615}
-      - {x: -0.02942729, y: -0.119999886}
-      - {x: 0.030029655, y: -0.119999886}
-      - {x: 0.059923768, y: -0.07857442}
-      - {x: 0.0604192, y: -0.01980853}
-      - {x: 0.029678464, y: 0.03953314}
+  serializedVersion: 2
+  m_Size: {x: 0.08058901, y: 0.099442795}
+  m_EdgeRadius: 0
 --- !u!114 &1933751392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33940,7 +34314,7 @@ Animator:
   m_GameObject: {fileID: 1933751389}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7ab127bf345dce3489c6e6f2aec8c15d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0c742c5ecc8548e488c985cb730875d4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -33982,7 +34356,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 2238a86355dc02e4aac9351a90b2ae47, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 958519d2948ca294ead90bbb1c1005dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -33999,7 +34373,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1933751389}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 12.043, z: 0}
+  m_LocalPosition: {x: -0.04, y: 12.11, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -34047,6 +34421,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -34064,9 +34441,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1934294974
 BoxCollider2D:
@@ -34077,7 +34451,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -34179,6 +34553,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -34196,9 +34573,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1945677565
 BoxCollider2D:
@@ -34209,7 +34583,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -34311,6 +34685,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -34328,9 +34705,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1951195002
 BoxCollider2D:
@@ -34341,7 +34715,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -34443,6 +34817,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -34460,9 +34837,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1966276398
 BoxCollider2D:
@@ -34473,7 +34847,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -34649,6 +35023,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -34666,9 +35043,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1984467004
 BoxCollider2D:
@@ -34679,7 +35053,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -34855,6 +35229,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -34872,9 +35249,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1985930828
 BoxCollider2D:
@@ -34885,7 +35259,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -35163,6 +35537,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -35180,9 +35557,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &1999311570
 BoxCollider2D:
@@ -35193,7 +35567,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -35393,6 +35767,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -35410,9 +35787,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &2013817691
 BoxCollider2D:
@@ -35423,7 +35797,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -35741,6 +36115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -35758,9 +36135,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &2029571756
 BoxCollider2D:
@@ -35771,7 +36145,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -35899,6 +36273,80 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2032669548}
+--- !u!1 &2039617089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2039617090}
+  - component: {fileID: 2039617092}
+  - component: {fileID: 2039617091}
+  m_Layer: 0
+  m_Name: Minesweeper.to.Chp1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2039617090
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2039617089}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.52, y: 6.54, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1404586703}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2039617091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2039617089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b56044d191f45f449c828fa834b1b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneTitle: {fileID: 0}
+  sceneSubtitle: {fileID: 0}
+  bAvoidUpdate: 0
+  bLoadScene: 0
+  bNeedsTimer: 0
+  timeToLoad: 0.001
+  AlphaLoad: SceneTransitioner
+  BetaLoad: Chp1
+--- !u!61 &2039617092
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2039617089}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.52270603, y: -0.51796913}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 13.114201, y: 13.0509205}
+  m_EdgeRadius: 0
 --- !u!1 &2043023595
 GameObject:
   m_ObjectHideFlags: 0
@@ -35941,6 +36389,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -35958,9 +36409,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &2043023598
 BoxCollider2D:
@@ -35971,7 +36419,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -36073,6 +36521,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -36090,9 +36541,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &2046012707
 BoxCollider2D:
@@ -36103,7 +36551,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -36205,6 +36653,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -36222,9 +36673,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &2049998064
 BoxCollider2D:
@@ -36235,7 +36683,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -36443,6 +36891,7 @@ GameObject:
   - component: {fileID: 2074391689}
   - component: {fileID: 2074391688}
   - component: {fileID: 2074391687}
+  - component: {fileID: 2074391686}
   m_Layer: 0
   m_Name: Game_Controller
   m_TagString: Untagged
@@ -36450,6 +36899,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2074391686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2074391685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80287ee43da3758468cbc1ed8f0e0b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  person1: {fileID: 0}
+  thePlayer: {fileID: 0}
+  warpMinesweeper: {fileID: 0}
+  moveOptsArw: {fileID: 0}
+  oMan: {fileID: 0}
+  brio: {fileID: 0}
+  uiMan: {fileID: 0}
+  bAvoidUpdate: 0
+  bHasWon: 0
+  bHasLost: 0
+  bPauseFlagging: 0
+  bReset: 0
 --- !u!114 &2074391687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36533,7 +37007,7 @@ Transform:
   - {fileID: 2090163998}
   - {fileID: 1758505870}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2076129493
 GameObject:
@@ -36651,6 +37125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -36668,9 +37145,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &2076395893
 BoxCollider2D:
@@ -36681,7 +37155,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -37051,6 +37525,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -37068,9 +37545,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &2100582492
 BoxCollider2D:
@@ -37081,7 +37555,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -37183,6 +37657,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -37200,9 +37677,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &2101411550
 BoxCollider2D:
@@ -37213,7 +37687,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -37315,6 +37789,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -37332,9 +37809,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &2109502712
 BoxCollider2D:
@@ -37345,7 +37819,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -37447,6 +37921,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -37464,9 +37941,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &2120867809
 BoxCollider2D:
@@ -37477,7 +37951,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -37579,6 +38053,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -37596,9 +38073,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &2130647451
 BoxCollider2D:
@@ -37609,7 +38083,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -37711,6 +38185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -37728,9 +38205,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &2130973431
 BoxCollider2D:
@@ -37741,7 +38215,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -37843,6 +38317,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5bee6f923834d4b9a823abd214aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dMan: {fileID: 0}
+  pause: {fileID: 0}
+  ms: {fileID: 0}
   emptyTextures:
   - {fileID: 21300000, guid: fccc33dd66a8014489970916af6e9790, type: 3}
   - {fileID: 21300000, guid: 033df8f28deb437448e2956054a02761, type: 3}
@@ -37860,9 +38337,6 @@ MonoBehaviour:
   bHasEntered: 0
   bHasExited: 0
   bIsMine: 0
-  bLostGame: 0
-  bPauseFlagging: 0
-  bWonGame: 0
   mineProbability: 0
 --- !u!61 &2146856311
 BoxCollider2D:
@@ -37873,7 +38347,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

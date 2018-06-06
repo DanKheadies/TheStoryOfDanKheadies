@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/08/2017
-// Last:  03/03/2018
+// Last:  06/06/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -99,11 +99,11 @@ public class MovePauseMenuArrow : MonoBehaviour
             {
                 if (currentPosition == ArrowPos.GoOn)
                 {
-                    if (scene.name == "Showdown")
+                    if (scene.name == "Minesweeper")
                     {
-                        currentPosition = ArrowPos.Sound;
+                        currentPosition = ArrowPos.Stuff;
                         ClearAllArrows();
-                        SoundArw.transform.localScale = new Vector3(1, 1, 1);
+                        StuffArw.transform.localScale = new Vector3(1, 1, 1);
                     }
                     else
                     {
@@ -156,7 +156,13 @@ public class MovePauseMenuArrow : MonoBehaviour
                 }
                 else if (currentPosition == ArrowPos.Sound)
                 {
-                    if (scene.name == "Showdown")
+                    currentPosition = ArrowPos.Stuff;
+                    ClearAllArrows();
+                    StuffArw.transform.localScale = new Vector3(1, 1, 1);
+                }
+                else if (currentPosition == ArrowPos.Stuff)
+                {
+                    if (scene.name == "Minesweeper")
                     {
                         currentPosition = ArrowPos.GoOn;
                         ClearAllArrows();
@@ -164,16 +170,10 @@ public class MovePauseMenuArrow : MonoBehaviour
                     }
                     else
                     {
-                        currentPosition = ArrowPos.Stuff;
+                        currentPosition = ArrowPos.Save;
                         ClearAllArrows();
-                        StuffArw.transform.localScale = new Vector3(1, 1, 1);
+                        SaveArw.transform.localScale = new Vector3(1, 1, 1);
                     }
-                }
-                else if (currentPosition == ArrowPos.Stuff)
-                {
-                    currentPosition = ArrowPos.Save;
-                    ClearAllArrows();
-                    SaveArw.transform.localScale = new Vector3(1, 1, 1);
 
                 }
                 else if (currentPosition == ArrowPos.Save)

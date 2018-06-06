@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  05/23/2018
+// Last:  06/03/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -42,7 +42,10 @@ public class Chp1 : MonoBehaviour
     public bool bAvoidUpdateQ1;
     public bool bAvoidUpdateQ2;
     public bool bAvoidUpdateQ3;
-    public bool bContainsItem;
+
+    public bool bContainsQ3Item;
+    public bool bContainsQ6Item;
+
     public bool bGetInventory;
 
     public float timer;
@@ -205,7 +208,7 @@ public class Chp1 : MonoBehaviour
             !bAvoidUpdateQ3)
         {
             // Assume not present unless we find it
-            bContainsItem = false;
+            bContainsQ3Item = false;
 
             for (int i = 0; i < inv.items.Count; i++)
             {
@@ -213,18 +216,18 @@ public class Chp1 : MonoBehaviour
                 
                 if (item == "Cannabis.Bud.SmoochyWoochyPoochy (Item)")
                 {
-                    bContainsItem = true;
+                    bContainsQ3Item = true;
                 }
             }
 
-            if (bContainsItem)
+            if (bContainsQ3Item)
             {
                 oldMan1.transform.GetChild(0).gameObject.SetActive(false);
                 oldMan1.transform.GetChild(1).gameObject.SetActive(true);
 
                 oldMan1.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = true;
             }
-            else if (!bContainsItem)
+            else if (!bContainsQ3Item)
             {
                 oldMan1.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = false;
 
@@ -258,6 +261,9 @@ public class Chp1 : MonoBehaviour
                 }
             }
         }
+
+        // Quest 6 -- Minesweeper
+        // Require Particle Visors
     }
 
     public void Quest0Reward()
@@ -441,9 +447,37 @@ public class Chp1 : MonoBehaviour
     public void Quest6Dialogue1Opt1()
     {
         // yes play a game
-        warpMinesweeper.GetComponent<BoxCollider2D>().enabled = true;
-
         // DC TODO -- offer difficulty choices
+
+        for (int i = 0; i < inv.items.Count; i++)
+        {
+            string item = inv.items[i].ToString();
+
+            if (item == "VR.Goggles (Item)")
+            {
+                bContainsQ6Item = true;
+            }
+        }
+        
+        if (bContainsQ6Item)
+        {
+            warpMinesweeper.GetComponent<BoxCollider2D>().enabled = true;
+
+            // Stop the player from bringing up the dialog again
+            dMan.gameObject.SetActive(false);
+        }
+        else
+        {
+            // No play a game
+            dMan.dialogueLines = new string[] {
+                "Oh, well.. You'll need Particle Visors to play.",
+                "Come back when you have some."
+            };
+            dMan.currentLine = 0;
+            dText.text = dMan.dialogueLines[dMan.currentLine];
+            dMan.ShowDialogue();
+            dArrow.GetComponent<ImageStrobe>().bStartStrobe = true; // DC TODO -- Not strobing?
+        }
     }
 
     public void Quest6Dialogue1Opt2()
