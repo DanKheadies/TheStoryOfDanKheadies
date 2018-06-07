@@ -2,13 +2,14 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  06/06/2018
+// Last:  06/07/2018
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Main Minesweeper logic
 public class Minesweeper : MonoBehaviour
 {
     public DialogueManager dMan;
@@ -16,11 +17,15 @@ public class Minesweeper : MonoBehaviour
     public GameObject person1;
     public GameObject thePlayer;
     public GameObject warpMinesweeper;
+    public Inventory inv;
     public MoveOptionsMenuArrow moveOptsArw;
     public OptionsManager oMan;
     public PlayerBrioManager brio;
+    public SaveGame save;
     public UIManager uiMan;
 
+    public bool bAvoidInvestigating;
+    public bool bAvoidInvestionUpdate;
     public bool bAvoidUpdate;
     public bool bHasWon;
     public bool bHasLost;
@@ -28,26 +33,70 @@ public class Minesweeper : MonoBehaviour
     public bool bReset;
 
     private float pauseTimer;
+    public float timer;
 
     void Start ()
     {
         // Initializers
         brio = GameObject.FindObjectOfType<PlayerBrioManager>();
         dMan = GameObject.FindObjectOfType<DialogueManager>();
+        inv = GameObject.FindObjectOfType<Inventory>();
         moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
         oMan = GameObject.FindObjectOfType<OptionsManager>();
         pause = GameObject.FindGameObjectWithTag("Pause");
         person1 = GameObject.Find("Person.1");
+        save = GameObject.FindObjectOfType<SaveGame>();
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         warpMinesweeper = GameObject.Find("Minesweeper.to.Chp1");
         uiMan = FindObjectOfType<UIManager>();
         
         pauseTimer = 0.333f;
+        timer = 0.333f;
     }
 	
-
 	void Update ()
     {
+        // 06/07/2018 DC -- Volume Bug
+        //                  Volume kept creeping up / on while playing; no ideas why
+
+        // Transfer -- Load inventory
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+
+            if (timer <= 0)
+            {
+                inv.LoadInventory("transfer");
+
+                // Reset Transfer
+                PlayerPrefs.SetInt("Transferring", 0);
+            }
+        }
+
+        if ((pause.transform.localScale == Vector3.one ||
+             dMan.bDialogueActive) &&
+             !bAvoidInvestionUpdate)
+        {
+            bAvoidInvestigating = true;
+            bAvoidInvestionUpdate = true;
+        }
+
+        // Avoid investigating when paused or dialogue up (w/ spacebar still down)
+        if ((pause.transform.localScale == Vector3.zero &&
+            !dMan.bDialogueActive) &&
+            bAvoidInvestionUpdate)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                // Avoid reseting the booleans until spacebar is let up
+            }
+            else
+            {
+                bAvoidInvestigating = false;
+                bAvoidInvestionUpdate = false;
+            }
+        }
+
         // Avoid spamming flags
         if (bPauseFlagging)
         {
@@ -58,7 +107,8 @@ public class Minesweeper : MonoBehaviour
             }
         }
 
-        if (bHasLost && !bAvoidUpdate)
+        if (bHasLost && 
+            !bAvoidUpdate)
         {
             Lose();
 
@@ -66,7 +116,8 @@ public class Minesweeper : MonoBehaviour
             bAvoidUpdate = true;
         }
         
-        if (bHasWon && !bAvoidUpdate)
+        if (bHasWon && 
+            !bAvoidUpdate)
         {
             Win();
 
@@ -76,11 +127,19 @@ public class Minesweeper : MonoBehaviour
         
         // Lose brio every X seconds while playing
         if (brio.playerCurrentBrio > 1 &&
-            !pause.activeSelf &&
+            pause.transform.localScale != Vector3.one &&
+            !dMan.bDialogueActive &&
             (!bHasLost || !bHasWon))
         {
-            brio.FatiguePlayer(0.0025f);
-            uiMan.bUpdateBrio = true;
+            if (warpMinesweeper.GetComponent<SceneTransitioner>().bAnimationToTransitionScene)
+            {
+                // Avoid losing brio if scene transition animation is going
+            }
+            else
+            {
+                brio.FatiguePlayer(0.0025f);
+                uiMan.bUpdateBrio = true;
+            }
         }
 
         // 06/06/2018 DC -- If out of brio, should the game end?
@@ -88,7 +147,6 @@ public class Minesweeper : MonoBehaviour
 
     public void Win()
     {
-        Debug.Log("win");
         // Ask the player if they want to play again
         person1.transform.GetChild(0).gameObject.SetActive(true);
         person1.transform.GetChild(0).GetComponent<DialogueHolder>().bContinueDialogue = true;
@@ -120,9 +178,9 @@ public class Minesweeper : MonoBehaviour
             // Reset
             oMan.ResetOptions();
 
-            bReset = true;
             bHasLost = false;
             bHasWon = false;
+            bReset = true;
         }
         // Win or Lose - Option 2
         else if ((person1.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered ||
@@ -131,7 +189,14 @@ public class Minesweeper : MonoBehaviour
         {
             oMan.ResetOptions();
             warpMinesweeper.GetComponent<BoxCollider2D>().enabled = true;
-            
+            warpMinesweeper.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
+
+            // Save Transfer Values
+            save.SaveBrioTransfer();
+            save.SaveInventoryTransfer();
+            PlayerPrefs.SetInt("Transferring", 1);
+            PlayerPrefs.SetString("TransferScene", warpMinesweeper.GetComponent<SceneTransitioner>().BetaLoad);
+
             // Stop the player from bringing up the dialog again
             dMan.gameObject.SetActive(false);
         }

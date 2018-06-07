@@ -73,7 +73,7 @@ public class MoveOptionsMenuArrow : MonoBehaviour
 
         if (oMan.bOptionsActive &&
             !oMan.bPauseOptions &&
-            !pauseScreen.activeSelf)
+            pauseScreen.transform.localScale == Vector3.zero)
         {
             if (Input.GetKeyDown(KeyCode.S) ||
                 Input.GetKeyDown(KeyCode.DownArrow)) //||

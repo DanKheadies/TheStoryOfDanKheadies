@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso, Asbjorn Thirslund (Brackeys), Austin (AwfulMedia / GameGrind)
 // Start: 01/18/2018
-// Last:  01/29/2018
+// Last:  06/07/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -58,6 +58,9 @@ public class InventorySlot : MonoBehaviour
         itemMenu.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
         itemMenu.gameObject.GetComponent<CanvasGroup>().interactable = false;
         itemMenu.gameObject.GetComponent<CanvasGroup>().alpha = 0;
+
+        // 06/07/2018 DC -- On Remove, need to update to stop Error when running PlayerPrefs check
+        //                  Needs to reupdate the TransferItemTotal & ItemTotal
     }
 
     public void UseItem()

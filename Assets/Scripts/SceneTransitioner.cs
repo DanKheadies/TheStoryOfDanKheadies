@@ -13,15 +13,13 @@ using UnityEngine.UI;
 // Transition amongst Unity Scenes
 public class SceneTransitioner : MonoBehaviour
 {
-    public SaveGame save;
     public Scene scene;
     public Text sceneTitle;
     public Text sceneSubtitle;
-    //public TouchControls touches;
 
-    public bool bAvoidUpdate;
     public bool bLoadScene;
     public bool bNeedsTimer;
+    public bool bAnimationToTransitionScene;
 
     public float timeToLoad;
 
@@ -43,21 +41,30 @@ public class SceneTransitioner : MonoBehaviour
             if (!bLoadScene)
             {
                 bLoadScene = true;
-                sceneSubtitle.text = "derping yo";
+
+                switch (BetaLoad)
+                {
+                    case "Chp1":
+                        sceneTitle.text = "Chapter 1";
+                        sceneSubtitle.text = "In the beginning...";
+                        break;
+                    case "Minesweeper":
+                        sceneTitle.text = "Minesweeper";
+                        sceneSubtitle.text = "Boom baby...";
+                        break;
+                    default:
+                        sceneTitle.text = "n_n";
+                        sceneSubtitle.text = "Loading some scene...";
+                        break;
+                }
+
                 StartCoroutine(LoadNewScene());
             }
 
             if (bLoadScene)
             {
                 // Animation
-                sceneSubtitle.color = new Color(sceneSubtitle.color.r, sceneSubtitle.color.g, sceneSubtitle.color.b, Mathf.PingPong(Time.time, 1));
-            }
-
-            if (!bAvoidUpdate)
-            {
-                CheckScenesToLoad();
-
-                bAvoidUpdate = true;
+                //sceneSubtitle.color = new Color(sceneSubtitle.color.r, sceneSubtitle.color.g, sceneSubtitle.color.b, Mathf.PingPong(Time.time, 1));
             }
         }
     }
@@ -66,9 +73,7 @@ public class SceneTransitioner : MonoBehaviour
     private IEnumerator Start()
     {
         // Initializers
-        save = GameObject.FindObjectOfType<SaveGame>().GetComponent<SaveGame>();
         scene = SceneManager.GetActiveScene();
-        //touches = GameObject.Find("GUIControls").GetComponent<TouchControls>();
 
         CheckScenesToLoad();
 
@@ -91,22 +96,17 @@ public class SceneTransitioner : MonoBehaviour
 
             // Stops the player's movement
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            collision.gameObject.GetComponent<Animator>().SetBool("bIsWalking", false);  
-            //touches.UnpressedAllArrows();
+            collision.gameObject.GetComponent<Animator>().SetBool("bIsWalking", false);
             collision.gameObject.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
 
-            StartCoroutine(SaveTransitionLoad());
+            StartCoroutine(DelayedTransition());
         }
     }
 
-    IEnumerator SaveTransitionLoad()
+    IEnumerator DelayedTransition()
     {
         yield return new WaitForSeconds(2);
 
-        // Save the current inventory, position, and scene and load it up for the next scene
-        save.SaveInventoryTransfer();
-        save.SavePositionTransfer(); // DC TODO -- How to activate and load these?
-        save.SaveSceneLoadTransfer(BetaLoad);
         SceneManager.LoadScene(AlphaLoad);
     }
 
@@ -115,8 +115,6 @@ public class SceneTransitioner : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         AsyncOperation async = SceneManager.LoadSceneAsync(BetaLoad);
-
-        // DC TODO -- Save the player's location, brio, etc. in tempSave and warp them back to spot
 
         while (!async.isDone)
         {
@@ -131,7 +129,11 @@ public class SceneTransitioner : MonoBehaviour
             AlphaLoad = "SceneTransitioner";
         }
 
-        if (BetaLoad == "" || BetaLoad == null)
+        if (scene.name == "LogoSplash")
+        {
+
+        }
+        else if (BetaLoad == "" || BetaLoad == null)
         {
             BetaLoad = PlayerPrefs.GetString("TransferScene");
         }

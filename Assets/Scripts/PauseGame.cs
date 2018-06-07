@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/26/2017
-// Last:  09/24/2017
+// Last:  06/07/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -29,12 +29,6 @@ public class PauseGame : MonoBehaviour
         stuffMenu = GameObject.Find("StuffMenu").transform;
         soundMenu = GameObject.Find("SoundMenu").transform;
         controlsMenu = GameObject.Find("ControlsMenu").transform;
-
-        // Hide Pause screen
-        pauseTrans.gameObject.SetActive(false);
-
-        // Set Pause screen scale (workaround: set to 0,0,0 in Unity to see the GameScene
-        pauseTrans.transform.localScale = new Vector3(1, 1, 1);
     } 
 
 	void Update ()
@@ -47,22 +41,20 @@ public class PauseGame : MonoBehaviour
 
     public void Pause()
     {
-        if (pauseTrans.gameObject.activeInHierarchy == false)
+        if (pauseTrans.localScale != Vector3.one)
         {
-            if (pauseMenu.gameObject.activeInHierarchy == false)
-            {
-                pauseMenu.gameObject.SetActive(true);
-                stuffMenu.gameObject.SetActive(false);
-                soundMenu.gameObject.SetActive(false);
-                controlsMenu.gameObject.SetActive(false);
-            }
-            pauseTrans.gameObject.SetActive(true);
+            pauseMenu.transform.localScale = new Vector3(1, 1, 1);
+            stuffMenu.transform.localScale = new Vector3(0, 0, 0);
+            soundMenu.transform.localScale = new Vector3(0, 0, 0);
+            controlsMenu.transform.localScale = new Vector3(0, 0, 0);
+
+            pauseTrans.transform.localScale = new Vector3(1, 1, 1);
             Time.timeScale = 0;
         }
         else
         {
             oMan.bPauseOptions = true;
-            pauseTrans.gameObject.SetActive(false);
+            pauseTrans.transform.localScale = new Vector3(0, 0, 0);
             Time.timeScale = 1;
         }
     }
@@ -71,13 +63,13 @@ public class PauseGame : MonoBehaviour
     {
         if (bOpen)
         {
-            stuffMenu.gameObject.SetActive(true);
-            pauseMenu.gameObject.SetActive(false);
+            stuffMenu.transform.localScale = new Vector3(1, 1, 1);
+            pauseMenu.transform.localScale = new Vector3(0, 0, 0);
         }
         else
         {
-            stuffMenu.gameObject.SetActive(false);
-            pauseMenu.gameObject.SetActive(true);
+            stuffMenu.transform.localScale = new Vector3(0, 0, 0);
+            pauseMenu.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
@@ -85,13 +77,13 @@ public class PauseGame : MonoBehaviour
     {
         if (bOpen)
         {
-            soundMenu.gameObject.SetActive(true);
-            pauseMenu.gameObject.SetActive(false);
+            soundMenu.transform.localScale = new Vector3(1, 1, 1);
+            pauseMenu.transform.localScale = new Vector3(0, 0, 0);
         }
         else
         {
-            soundMenu.gameObject.SetActive(false);
-            pauseMenu.gameObject.SetActive(true);
+            soundMenu.transform.localScale = new Vector3(0, 0, 0);
+            pauseMenu.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
@@ -99,13 +91,13 @@ public class PauseGame : MonoBehaviour
     {
         if (bOpen)
         {
-            controlsMenu.gameObject.SetActive(true);
-            pauseMenu.gameObject.SetActive(false);
+            controlsMenu.transform.localScale = new Vector3(1, 1, 1);
+            pauseMenu.transform.localScale = new Vector3(0, 0, 0);
         }
         else
         {
-            controlsMenu.gameObject.SetActive(false);
-            pauseMenu.gameObject.SetActive(true);
+            controlsMenu.transform.localScale = new Vector3(0, 0, 0);
+            pauseMenu.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 }

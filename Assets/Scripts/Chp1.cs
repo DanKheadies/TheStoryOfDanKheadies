@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  06/03/2018
+// Last:  06/07/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -33,7 +33,7 @@ public class Chp1 : MonoBehaviour
     public MoveOptionsMenuArrow moveOptsArw;
     public OptionsManager oMan;
     public QuestManager qMan;
-    public SaveGame sGame;
+    public SaveGame save;
     public Text dText;
     public UIManager uiMan;
 
@@ -75,7 +75,7 @@ public class Chp1 : MonoBehaviour
         questTrigger2 = GameObject.Find("QT_2");
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         savedQuestsValue = PlayerPrefs.GetString("Chp1Quests");
-        sGame = FindObjectOfType<SaveGame>();
+        save = FindObjectOfType<SaveGame>();
         warpMinesweeper = GameObject.Find("Chp1.to.Minesweeper");
         uiMan = FindObjectOfType<UIManager>();
 
@@ -86,7 +86,7 @@ public class Chp1 : MonoBehaviour
         quest2 = GameObject.Find("Quest_2");
         quest3 = GameObject.Find("Quest_3");
 
-        timer = 0.33f;
+        timer = 0.333f;
         raceTimer = 0f;
 
         // Chapter 1 -- First Time
@@ -95,34 +95,55 @@ public class Chp1 : MonoBehaviour
             thePlayer.transform.position = new Vector2(-13.68f, -7.625f);
             mainCamera.transform.position = new Vector2(-13.68f, -7.625f);
             camFollow.currentCoords = CameraFollow.AnandaCoords.Home;
+            // see Update timer for inventory load
+        }
+        // Chapter 1 -- Transferring to MiniGames
+        else if (PlayerPrefs.GetInt("Transferring") == 1)
+        {
+            save.RerunStart();
+            save.GetTransferData();
+            LoadQuests();
+            inv.bUpdateItemCount = true;
+            // see Update timer for inventory load
         }
         // Chapter 1 -- Saved Game
         else
         {
-            sGame.RerunStart();
-            sGame.GetSavedGame();
+            save.RerunStart();
+            save.GetSavedGame();
             LoadQuests();
             inv.bUpdateItemCount = true;
+            // see Update timer for inventory load
         }
     }
 
     void Update()
     {
-        // Saved Game -- Load inventory
+        // Load Inventory -- Saved vs. Transfer
         if (timer > 0)
         {
             timer -= Time.deltaTime;
 
             if (timer <= 0)
             {
+                // From Chp0
                 if (PlayerPrefs.GetString("Chapter") != "Chp1")
                 {
                     inv.LoadInventory("transfer");
                 }
+                // From a minigame
+                else if (PlayerPrefs.GetInt("Transferring") == 1)
+                {
+                    inv.LoadInventory("transfer");
+                }
+                // From saved 
                 else
                 {
                     inv.LoadInventory("saved");
                 }
+
+                // Reset Transfer
+                PlayerPrefs.SetInt("Transferring", 0);
             }
         }
 
@@ -261,9 +282,6 @@ public class Chp1 : MonoBehaviour
                 }
             }
         }
-
-        // Quest 6 -- Minesweeper
-        // Require Particle Visors
     }
 
     public void Quest0Reward()
@@ -462,6 +480,14 @@ public class Chp1 : MonoBehaviour
         if (bContainsQ6Item)
         {
             warpMinesweeper.GetComponent<BoxCollider2D>().enabled = true;
+            warpMinesweeper.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
+
+            // Save Transfer Values 
+            save.SaveBrioTransfer();
+            save.SaveInventoryTransfer();
+            save.SavePositionTransfer();
+            PlayerPrefs.SetInt("Transferring", 1);
+            PlayerPrefs.SetString("TransferScene", warpMinesweeper.GetComponent<SceneTransitioner>().BetaLoad);
 
             // Stop the player from bringing up the dialog again
             dMan.gameObject.SetActive(false);

@@ -25073,7 +25073,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneTitle: {fileID: 0}
   sceneSubtitle: {fileID: 0}
-  bAvoidUpdate: 0
   bLoadScene: 0
   bNeedsTimer: 0
   timeToLoad: 0.001
@@ -33093,7 +33092,7 @@ MonoBehaviour:
   moveOptsArw: {fileID: 0}
   oMan: {fileID: 0}
   qMan: {fileID: 0}
-  sGame: {fileID: 0}
+  save: {fileID: 0}
   dText: {fileID: 0}
   uiMan: {fileID: 0}
   bAvoidGreatTreeConvo: 0
@@ -35016,6 +35015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dbcdea81b173eb4c805bbaa2921d616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pause: {fileID: 0}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   uiMan: {fileID: 0}
   diffMaxAndCurrent: 0

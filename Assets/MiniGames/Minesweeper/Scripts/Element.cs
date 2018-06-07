@@ -2,13 +2,13 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 05/20/2018
-// Last:  06/04/2018
+// Last:  06/07/2018
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Info
+// Minesweeper Units / Elements / Squares behavior
 public class Element : MonoBehaviour
 {
     public DialogueManager dMan;
@@ -20,13 +20,14 @@ public class Element : MonoBehaviour
     public Sprite mineTexture;
     public TouchControls touches;
 
+    public bool bAvoidUpdate;
     public bool bHasEntered;
     public bool bHasExited;
     public bool bIsMine;
 
     public float mineProbability;
 
-    void Start ()
+    void Start()
     {
         // Initializers
         dMan = GameObject.FindObjectOfType<DialogueManager>();
@@ -38,9 +39,9 @@ public class Element : MonoBehaviour
         mineProbability = 0.15f; // DC TODO set different skill levels
 
         Initialize();
-	}
+    }
 
-    private void Update()
+    void Update()
     {
 
         //if (Input.GetKeyUp(KeyCode.R))
@@ -49,13 +50,16 @@ public class Element : MonoBehaviour
         //    StartCoroutine(ResetElements());
         //}
 
+        if (false)
+        {
+
+        }
+
         if (bHasEntered &&
-           //!dMan.bDialogueActive && 
-           //!pause.activeSelf && // DC TODO -- Bug when Pause gets deactivated; prob need a boolean 
+            ms.bAvoidInvestigating == false &&
            (Input.GetKeyUp(KeyCode.Space) || touches.bAction))
         {
             InvestigateElement();
-            // DC TODO -- Avoid investigating when dialogue or pause screen is up (and then closing)
         }
 
         if (bHasEntered &&
@@ -67,7 +71,6 @@ public class Element : MonoBehaviour
 
         if (ms.bReset)
         {
-            Debug.Log("Element's reset update");
             StartCoroutine(ResetElements());
         }
     } 
@@ -120,10 +123,16 @@ public class Element : MonoBehaviour
 
     private void OnMouseOver()
     {
+        // "Reset" the mouse click after pause or dialogue
+        if ((pause.transform.localScale == Vector3.zero &&
+             !dMan.bDialogueActive) &&
+             Input.GetMouseButtonDown(0)) 
+        {
+            ms.bAvoidInvestigating = false;
+        }
+
         if (Input.GetMouseButtonUp(0) &&
-            //!dMan.bDialogueActive && 
-            //!pause.activeSelf && // DC TODO -- Bug when Pause gets deactivated; prob need a boolean
-            true)
+            ms.bAvoidInvestigating == false)
         {
             InvestigateElement();
         }
@@ -175,18 +184,8 @@ public class Element : MonoBehaviour
         ms.PauseFlagging();
     }
 
-    //public void Reset()
-    //{
-    //    Debug.Log("resetting");
-
-    //    Initialize();
-    //    GetComponent<SpriteRenderer>().sprite = defaultTexture;
-    //}
-
     IEnumerator ResetElements()
     {
-        Debug.Log("resetting");
-
         Initialize();
         GetComponent<SpriteRenderer>().sprite = defaultTexture;
         ms.ResetGame();

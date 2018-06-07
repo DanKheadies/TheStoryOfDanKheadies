@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/08/2017
-// Last:  06/06/2018
+// Last:  06/07/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -90,8 +90,8 @@ public class MovePauseMenuArrow : MonoBehaviour
         //    );
         //Debug.Log(newfloat);
         //Debug.Log((int)currentPosition);
-
-        if (pauseMenu.gameObject.activeSelf)
+        
+        if (pauseMenu.localScale == Vector3.one)
         {
             if (Input.GetKeyDown(KeyCode.S) ||
                 Input.GetKeyDown(KeyCode.DownArrow)) //||
@@ -231,7 +231,7 @@ public class MovePauseMenuArrow : MonoBehaviour
 
     public void ClearAllArrows()
     {
-        if (pauseMenu.gameObject.activeSelf)
+        if (pauseMenu.localScale == Vector3.one)
         {
             GoOnArw.transform.localScale = new Vector3(0, 0, 0);
             SaveArw.transform.localScale = new Vector3(0, 0, 0);

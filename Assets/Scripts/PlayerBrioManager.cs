@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/06/2018
+// Last:  06/07/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ public class PlayerBrioManager : MonoBehaviour
 {
     private Animator anim;
     private DialogueManager dMan;
+    public GameObject pause;
     public Scene scene;
     public Sprite portPic;
     public UIManager uiMan;
@@ -28,11 +29,17 @@ public class PlayerBrioManager : MonoBehaviour
         // Initializers
         anim = GetComponent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
+        pause = GameObject.FindGameObjectWithTag("Pause");
         scene = SceneManager.GetActiveScene();
         uiMan = FindObjectOfType<UIManager>();
 
         // Setting the brio
-        if (PlayerPrefs.GetInt("Saved") == 1)
+        if (PlayerPrefs.GetInt("Transferring") == 1)
+        {
+            playerMaxBrio = PlayerPrefs.GetFloat("TransferBrioMax");
+            playerCurrentBrio = PlayerPrefs.GetFloat("TransferBrio");
+        }
+        else if (PlayerPrefs.GetInt("Saved") == 1)
         {
             playerMaxBrio = PlayerPrefs.GetFloat("BrioMax");
             playerCurrentBrio = PlayerPrefs.GetFloat("Brio");
@@ -42,12 +49,6 @@ public class PlayerBrioManager : MonoBehaviour
             playerMaxBrio = 50;
             playerCurrentBrio = 50;
         }
-
-        // Give player full Brio if none
-        //if (playerCurrentBrio == 0)
-        //{
-        //    playerCurrentBrio = playerMaxBrio;
-        //}
 
         // Set warning dialogue
         warningLines = new string[2];
@@ -69,8 +70,14 @@ public class PlayerBrioManager : MonoBehaviour
             playerCurrentBrio = 1;
         }
         
-        // Stop basic brio restore on certain scenes
-        if (scene.name != "Minesweeper")
+        // Restore on certain scenes / conditions
+        if (pause.transform.localScale == Vector3.one ||
+            dMan.bDialogueActive ||
+            GameObject.FindObjectOfType<SceneTransitioner>().bAnimationToTransitionScene == true)
+        {
+            // Avoid basic restore
+        }
+        else if (scene.name == "Chp1")
         {
             BasicRestorePlayer();
         }

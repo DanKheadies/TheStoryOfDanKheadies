@@ -2,7 +2,7 @@
 // Authors: Asbjorn Thirslund (Brackeys)
 // Contributors: David W. Corso
 // Start: 01/18/2018
-// Last:  04/02/2018
+// Last:  06/07/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -117,12 +117,12 @@ public class Inventory : MonoBehaviour
         return selectedItem;
     }
 
-    // Could be a Save Game function
+    // To be a Save Game function?
     public void LoadInventory(string type)
     {
         if (type == "transfer")
         {
-            for (int i = 0; i < PlayerPrefs.GetInt("Transfer Item Total"); i++)
+            for (int i = 0; i < PlayerPrefs.GetInt("TransferItemTotal"); i++)
             {
                 string savedItem = PlayerPrefs.GetString("TransferItem" + i);
                 savedItem = savedItem.Substring(0, savedItem.Length - 7);
@@ -132,7 +132,7 @@ public class Inventory : MonoBehaviour
         }
         else if (type == "saved")
         {
-            for (int i = 0; i < PlayerPrefs.GetInt("Item Total"); i++)
+            for (int i = 0; i < PlayerPrefs.GetInt("ItemTotal"); i++)
             {
                 string savedItem = PlayerPrefs.GetString("Item" + i);
                 savedItem = savedItem.Substring(0, savedItem.Length - 7);
