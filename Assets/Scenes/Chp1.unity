@@ -18819,7 +18819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dMan: {fileID: 0}
   qMan: {fileID: 0}
-  portPic: {fileID: 21300000, guid: 81c6afedd7758fc438269a50e458cc16, type: 3}
+  portPic: {fileID: 21300000, guid: 388689f62e4c3d74d84ec6c846a532d8, type: 3}
   bHasStarted: 0
   bHasEnded: 0
   bHasCollected: 0
@@ -25075,6 +25075,7 @@ MonoBehaviour:
   sceneSubtitle: {fileID: 0}
   bLoadScene: 0
   bNeedsTimer: 0
+  bAnimationToTransitionScene: 0
   timeToLoad: 0.001
   AlphaLoad: SceneTransitioner
   BetaLoad: Minesweeper
@@ -31502,7 +31503,6 @@ GameObject:
   - component: {fileID: 816724290}
   - component: {fileID: 816724292}
   - component: {fileID: 816724293}
-  - component: {fileID: 816724294}
   - component: {fileID: 816724291}
   m_Layer: 0
   m_Name: DialogueZone2
@@ -31586,21 +31586,6 @@ MonoBehaviour:
   dialogueLines:
   - Hot day! You came through Dan! Thank you child. Thank you!
   - I love me some smoochy woochy poochy...
---- !u!114 &816724294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 816724289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e170fc8c9217ef40a0a7f1de9e47582, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  options:
-  - Daco
-  - Taco
-  - Flame
 --- !u!1 &818855629
 GameObject:
   m_ObjectHideFlags: 0
@@ -60961,7 +60946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dMan: {fileID: 0}
   qMan: {fileID: 0}
-  portPic: {fileID: 21300000, guid: e0f0ab040ffbe4e47b92489a70935512, type: 3}
+  portPic: {fileID: 21300000, guid: bc128c9f05e4f814d98a26a221fc95fe, type: 3}
   bHasStarted: 0
   bHasEnded: 0
   bHasCollected: 0
@@ -80519,7 +80504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dMan: {fileID: 0}
   qMan: {fileID: 0}
-  portPic: {fileID: 21300000, guid: 1ae19798c9ce8404480bb4ddb003db6c, type: 3}
+  portPic: {fileID: 21300000, guid: 1061423b04c49694381b5aaaa8757c24, type: 3}
   bHasStarted: 0
   bHasEnded: 0
   bHasCollected: 0

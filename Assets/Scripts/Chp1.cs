@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  06/07/2018
+// Last:  07/29/2018
 
 using System.Collections;
 using System.Collections.Generic;
@@ -98,6 +98,7 @@ public class Chp1 : MonoBehaviour
             // see Update timer for inventory load
         }
         // Chapter 1 -- Transferring to MiniGames
+        // DC 07/29/2018 -- Something off here: if player never saves, they spawn at house, but if they save, they spawn in front of NPC
         else if (PlayerPrefs.GetInt("Transferring") == 1)
         {
             save.RerunStart();

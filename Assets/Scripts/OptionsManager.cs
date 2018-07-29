@@ -1,7 +1,10 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/08/2018
-// Last:  05/22/2018
+// Last:  07/29/2018
+
+// IMPORTANT:
+// 1) Bug -- Dialogues are breaking when there are multiple prompts, e.g. GreatTree & Dad
 
 using System.Collections;
 using System.Collections.Generic;
