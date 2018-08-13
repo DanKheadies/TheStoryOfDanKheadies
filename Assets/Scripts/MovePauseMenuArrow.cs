@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/08/2017
-// Last:  06/07/2018
+// Last:  08/12/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -31,9 +29,7 @@ public class MovePauseMenuArrow : MonoBehaviour
     private GameObject QuitArw;
 
     private Scene scene;
-
     private TouchControls touches;
-
     private Transform pauseMenu;
 
 
@@ -103,38 +99,38 @@ public class MovePauseMenuArrow : MonoBehaviour
                     {
                         currentPosition = ArrowPos.Stuff;
                         ClearAllArrows();
-                        StuffArw.transform.localScale = new Vector3(1, 1, 1);
+                        StuffArw.transform.localScale = Vector3.one;
                     }
                     else
                     {
                         currentPosition = ArrowPos.Save;
                         ClearAllArrows();
-                        SaveArw.transform.localScale = new Vector3(1, 1, 1);
+                        SaveArw.transform.localScale = Vector3.one;
                     }
                 }
                 else if (currentPosition == ArrowPos.Save)
                 {
                     currentPosition = ArrowPos.Stuff;
                     ClearAllArrows();
-                    StuffArw.transform.localScale = new Vector3(1, 1, 1);
+                    StuffArw.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == ArrowPos.Stuff)
                 {
                     currentPosition = ArrowPos.Sound;
                     ClearAllArrows();
-                    SoundArw.transform.localScale = new Vector3(1, 1, 1);
+                    SoundArw.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == ArrowPos.Sound)
                 {
                     currentPosition = ArrowPos.Controls;
                     ClearAllArrows();
-                    ControlsArw.transform.localScale = new Vector3(1, 1, 1);
+                    ControlsArw.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == ArrowPos.Controls)
                 {
                     currentPosition = ArrowPos.Quit;
                     ClearAllArrows();
-                    QuitArw.transform.localScale = new Vector3(1, 1, 1);
+                    QuitArw.transform.localScale = Vector3.one;
                 }
             }
             else if (Input.GetKeyDown(KeyCode.W) ||
@@ -145,20 +141,20 @@ public class MovePauseMenuArrow : MonoBehaviour
                 {
                     currentPosition = ArrowPos.Controls;
                     ClearAllArrows();
-                    ControlsArw.transform.localScale = new Vector3(1, 1, 1);
+                    ControlsArw.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == ArrowPos.Controls)
                 {
                     currentPosition = ArrowPos.Sound;
                     ClearAllArrows();
-                    SoundArw.transform.localScale = new Vector3(1, 1, 1);
+                    SoundArw.transform.localScale = Vector3.one;
 
                 }
                 else if (currentPosition == ArrowPos.Sound)
                 {
                     currentPosition = ArrowPos.Stuff;
                     ClearAllArrows();
-                    StuffArw.transform.localScale = new Vector3(1, 1, 1);
+                    StuffArw.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == ArrowPos.Stuff)
                 {
@@ -166,13 +162,13 @@ public class MovePauseMenuArrow : MonoBehaviour
                     {
                         currentPosition = ArrowPos.GoOn;
                         ClearAllArrows();
-                        GoOnArw.transform.localScale = new Vector3(1, 1, 1);
+                        GoOnArw.transform.localScale = Vector3.one;
                     }
                     else
                     {
                         currentPosition = ArrowPos.Save;
                         ClearAllArrows();
-                        SaveArw.transform.localScale = new Vector3(1, 1, 1);
+                        SaveArw.transform.localScale = Vector3.one;
                     }
 
                 }
@@ -180,11 +176,10 @@ public class MovePauseMenuArrow : MonoBehaviour
                 {
                     currentPosition = ArrowPos.GoOn;
                     ClearAllArrows();
-                    GoOnArw.transform.localScale = new Vector3(1, 1, 1);
+                    GoOnArw.transform.localScale = Vector3.one;
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Space) ||
-                     Input.GetKeyDown(KeyCode.Return) ||
+            else if (Input.GetButtonDown("Action") ||
                      touches.bAction)
             {
                 if (currentPosition == ArrowPos.GoOn)
@@ -225,6 +220,7 @@ public class MovePauseMenuArrow : MonoBehaviour
                      touches.bBaction)
             {
                 SaveBtn.GetComponentInChildren<Text>().text = "Save";
+                ResetArrows();
             }
         }
     }
@@ -233,15 +229,28 @@ public class MovePauseMenuArrow : MonoBehaviour
     {
         if (pauseMenu.localScale == Vector3.one)
         {
-            GoOnArw.transform.localScale = new Vector3(0, 0, 0);
-            SaveArw.transform.localScale = new Vector3(0, 0, 0);
-            KogabiArw.transform.localScale = new Vector3(0, 0, 0);
-            StuffArw.transform.localScale = new Vector3(0, 0, 0);
-            MapArw.transform.localScale = new Vector3(0, 0, 0);
-            SoundArw.transform.localScale = new Vector3(0, 0, 0);
-            ControlsArw.transform.localScale = new Vector3(0, 0, 0);
-            QuitArw.transform.localScale = new Vector3(0, 0, 0);
+            GoOnArw.transform.localScale = Vector3.zero;
+            SaveArw.transform.localScale = Vector3.zero;
+            KogabiArw.transform.localScale = Vector3.zero;
+            StuffArw.transform.localScale = Vector3.zero;
+            MapArw.transform.localScale = Vector3.zero;
+            SoundArw.transform.localScale = Vector3.zero;
+            ControlsArw.transform.localScale = Vector3.zero;
+            QuitArw.transform.localScale = Vector3.zero;
         }
     }
-                
+
+    public void ResetArrows()
+    {
+        GoOnArw.transform.localScale = Vector3.one;
+        SaveArw.transform.localScale = Vector3.zero;
+        KogabiArw.transform.localScale = Vector3.zero;
+        StuffArw.transform.localScale = Vector3.zero;
+        MapArw.transform.localScale = Vector3.zero;
+        SoundArw.transform.localScale = Vector3.zero;
+        ControlsArw.transform.localScale = Vector3.zero;
+        QuitArw.transform.localScale = Vector3.zero;
+
+        currentPosition = ArrowPos.GoOn;
+    }
 }

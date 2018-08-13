@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/18/2017
-// Last:  04/07/2018
+// Last:  08/12/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // Assigns plants Cannabis Objects
@@ -109,10 +107,10 @@ public class CannabisPlant : MonoBehaviour
 
     public void HideBud()
     {
-        greenBud.GetComponent<Transform>().localScale = new Vector3(0, 0, 0);
-        orangeBud.GetComponent<Transform>().localScale = new Vector3(0, 0, 0);
-        purpleBud.GetComponent<Transform>().localScale = new Vector3(0, 0, 0);
-        whiteBud.GetComponent<Transform>().localScale = new Vector3(0, 0, 0);
+        greenBud.GetComponent<Transform>().localScale = Vector3.zero;
+        orangeBud.GetComponent<Transform>().localScale = Vector3.zero;
+        purpleBud.GetComponent<Transform>().localScale = Vector3.zero;
+        whiteBud.GetComponent<Transform>().localScale = Vector3.zero;
     }
 
     public void InteractWithPlant()
@@ -130,18 +128,18 @@ public class CannabisPlant : MonoBehaviour
             // Display and add bud to inventory
             if (this.bGreen)
             {
-                greenBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+                greenBud.GetComponent<Transform>().localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
             else if (this.bOrange)
             {
-                orangeBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+                orangeBud.GetComponent<Transform>().localScale = Vector3.one;
                 Inventory.instance.Add(item);
 
             }
             else if (this.bPurple)
             {
-                purpleBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+                purpleBud.GetComponent<Transform>().localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
             else if (this.bWhite)

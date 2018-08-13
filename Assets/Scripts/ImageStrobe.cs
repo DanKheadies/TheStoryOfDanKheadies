@@ -1,10 +1,9 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/07/2018
+// Last:  08/12/2018
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,7 +38,6 @@ public class ImageStrobe : MonoBehaviour
             StopCoroutine("Strobe");
             bStopStrobe = false;
         }
-
     }
 
     IEnumerator Strobe()

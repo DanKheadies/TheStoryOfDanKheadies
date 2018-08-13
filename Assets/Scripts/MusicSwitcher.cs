@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/23/2017
-// Last:  09/24/2017
+// Last:  08/13/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // Switch the track / music based on zone or scene change
@@ -12,25 +10,12 @@ public class MusicSwitcher : MonoBehaviour
 {
     private MusicManager theMan;
 
-    //public bool bSwitchOnStart;
-
     public int newTrack;
 
 	void Start ()
     {
         // Initializers
-        theMan = FindObjectOfType<MusicManager>();	
-
-
-        //if (bSwitchOnStart)
-        //{
-        //    theMan.SwitchTrack(newTrack);
-        //}
-	}
-	
-	void Update ()
-    {
-		
+        theMan = FindObjectOfType<MusicManager>();
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)

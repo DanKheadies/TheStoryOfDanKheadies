@@ -1,34 +1,30 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  09/18/2017
+// Last:  08/13/2017
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // Slide overworld camera and player during area transitions
 public class CameraSlider : MonoBehaviour
 {
-    private Animator anim;
+    private Animator pAnim;
     private CameraFollow mainCamera;
     private GameObject player;
-    private PlayerMovement playerMovement;
+    private PlayerMovement pMove;
     private TouchControls touches;
-    //private UIManager uiMan;
 
     public bool bTempControlActive;
 
     void Start()
     {
-        // Initializers (order)
-        player = GameObject.FindGameObjectWithTag("Player");
-
-        anim = player.GetComponent<Animator>();
+        // Initializers
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
-        playerMovement = player.GetComponent<PlayerMovement>();
+        pAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        pMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         touches = FindObjectOfType<TouchControls>();
-        //uiMan = FindObjectOfType<UIManager>();
     }
 
     // Slide the overworld camera when transitioning areas
@@ -62,9 +58,9 @@ public class CameraSlider : MonoBehaviour
         }
 
         // Return the player's movement / state
-        anim.speed = 1.0f;
-        playerMovement.bStopPlayerMovement = false;
-        playerMovement.playerCollider.enabled = true;
+        pAnim.speed = 1.0f;
+        pMove.bStopPlayerMovement = false;
+        pMove.playerCollider.enabled = true;
 
         // Checks (& resumes) UI controls
         if (bTempControlActive)

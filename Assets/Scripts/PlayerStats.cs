@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  05/11/2018
+// Last:  08/13/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // Manage the Player's Levels & Stats
@@ -36,11 +34,11 @@ public class PlayerStats : MonoBehaviour
 	
 	void Update ()
     {
-		//if (currentExp >= toLevelUp[currentLevel])
-  //      {
-  //          LevelUp();
-  //      }
-	}
+        //if (currentExp >= toLevelUp[currentLevel])
+        //{
+        //    LevelUp();
+        //}
+    }
 
     public void AddExperience(int experienceToAdd)
     {

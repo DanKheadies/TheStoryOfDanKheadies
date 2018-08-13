@@ -1,10 +1,9 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/29/2017
+// Last:  08/13/2018
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,34 +11,36 @@ using UnityEngine.SceneManagement;
 public class ScreenFader : MonoBehaviour
 {
     private Animator anim;
-    private Animator playerAnim;
-    private PlayerMovement playerMovement;
+    private Animator pAnim;
+    private PlayerMovement pMove;
     private Scene scene;
+
+    public bool bAvoidAniComp;
 
     void Start () {
         anim = GetComponent<Animator>();
-        playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
-        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        pAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        pMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
 	
     public IEnumerator FadeToClear()
     {
-        playerMovement.bStopPlayerMovement = true;
+        pMove.bStopPlayerMovement = true;
         anim.SetTrigger("FadeIn");
-        while (playerMovement.bStopPlayerMovement)
+        while (pMove.bStopPlayerMovement)
         {
-            playerAnim.SetBool("bIsWalking", false);
+            pAnim.SetBool("bIsWalking", false);
             yield return null;
         }
     }
 
     public IEnumerator FadeToBlack()
     {
-        playerMovement.bStopPlayerMovement = true;
+        pMove.bStopPlayerMovement = true;
         anim.SetTrigger("FadeOut");
-        while (playerMovement.bStopPlayerMovement)
+        while (pMove.bStopPlayerMovement)
         {
-            playerAnim.SetBool("bIsWalking", false);
+            pAnim.SetBool("bIsWalking", false);
             yield return null;
         }
     }
@@ -49,9 +50,9 @@ public class ScreenFader : MonoBehaviour
     {
         scene = SceneManager.GetActiveScene();
 
-        if (scene.name != "Showdown")
+        if (scene.name != "Showdown" && !bAvoidAniComp)
         {
-            playerMovement.bStopPlayerMovement = false;
+            pMove.bStopPlayerMovement = false;
         }
     }
 }

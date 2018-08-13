@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/27/2018
-// Last:  04/06/2018
+// Last:  08/12/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // Contains stuff n things for Chp1 Race Quest

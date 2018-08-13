@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  07/29/2018
+// Last:  08/12/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,7 +46,7 @@ public class Chp1 : MonoBehaviour
 
     public bool bGetInventory;
 
-    public float timer;
+    public float invTimer;
     public float raceTimer;
 
     public string savedQuestsValue;
@@ -86,19 +84,19 @@ public class Chp1 : MonoBehaviour
         quest2 = GameObject.Find("Quest_2");
         quest3 = GameObject.Find("Quest_3");
 
-        timer = 0.333f;
+        invTimer = 0.333f;
         raceTimer = 0f;
 
         // Chapter 1 -- First Time
-        if (PlayerPrefs.GetString("Chapter") != "Chp1")
+        if (PlayerPrefs.GetString("Chapter") != "Chp1" &&
+            PlayerPrefs.GetInt("TransferAnandaCoord") == 0)
         {
             thePlayer.transform.position = new Vector2(-13.68f, -7.625f);
             mainCamera.transform.position = new Vector2(-13.68f, -7.625f);
             camFollow.currentCoords = CameraFollow.AnandaCoords.Home;
             // see Update timer for inventory load
         }
-        // Chapter 1 -- Transferring to MiniGames
-        // DC 07/29/2018 -- Something off here: if player never saves, they spawn at house, but if they save, they spawn in front of NPC
+        // Chapter 1 -- Transferring from a mini-game
         else if (PlayerPrefs.GetInt("Transferring") == 1)
         {
             save.RerunStart();
@@ -106,6 +104,11 @@ public class Chp1 : MonoBehaviour
             LoadQuests();
             inv.bUpdateItemCount = true;
             // see Update timer for inventory load
+
+            // Set player & camera position
+            thePlayer.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferP_x"), PlayerPrefs.GetFloat("TransferP_y"));
+            mainCamera.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferCam_x"), PlayerPrefs.GetFloat("TransferCam_y"));
+            camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("TransferAnandaCoord");
         }
         // Chapter 1 -- Saved Game
         else
@@ -121,19 +124,15 @@ public class Chp1 : MonoBehaviour
     void Update()
     {
         // Load Inventory -- Saved vs. Transfer
-        if (timer > 0)
+        if (invTimer > 0)
         {
-            timer -= Time.deltaTime;
+            invTimer -= Time.deltaTime;
 
-            if (timer <= 0)
+            if (invTimer <= 0)
             {
                 // From Chp0
-                if (PlayerPrefs.GetString("Chapter") != "Chp1")
-                {
-                    inv.LoadInventory("transfer");
-                }
-                // From a minigame
-                else if (PlayerPrefs.GetInt("Transferring") == 1)
+                if (PlayerPrefs.GetString("Chapter") != "Chp1" ||
+                    PlayerPrefs.GetInt("Transferring") == 1)
                 {
                     inv.LoadInventory("transfer");
                 }
@@ -337,6 +336,7 @@ public class Chp1 : MonoBehaviour
     {
         // Quest 0 - Dialogue 1 - Option 1
         if (parent2.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+            parent2.transform.GetChild(0).gameObject.activeSelf &&
             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
         {
             oMan.ResetOptions();
@@ -344,6 +344,7 @@ public class Chp1 : MonoBehaviour
         }
         // Quest 0 - Dialogue 1 - Option 2
         else if (parent2.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+                 parent2.transform.GetChild(0).gameObject.activeSelf &&
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
         {
             oMan.ResetOptions();
@@ -351,6 +352,7 @@ public class Chp1 : MonoBehaviour
         }
         // Quest 0 - Dialogue 2 - Option *
         else if (parent2.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+                 parent2.transform.GetChild(1).gameObject.activeSelf &&
                 (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
         {
@@ -359,6 +361,7 @@ public class Chp1 : MonoBehaviour
         }
         // Quest 5 - Dialogue 1 - Option *
         else if (greatTree.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+                 greatTree.transform.GetChild(0).gameObject.activeSelf &&
                 (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
         {
@@ -367,6 +370,7 @@ public class Chp1 : MonoBehaviour
         }
         // Quest 5 - Dialogue 2 - Option *
         else if (greatTree.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+                 greatTree.transform.GetChild(1).gameObject.activeSelf &&
                 (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
         {
@@ -375,6 +379,7 @@ public class Chp1 : MonoBehaviour
         }
         // Quest 5 - Dialogue 3 - Option *
         else if (greatTree.transform.GetChild(2).GetComponent<DialogueHolder>().bHasEntered &&
+                 greatTree.transform.GetChild(2).gameObject.activeSelf &&
                 (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3))
@@ -384,6 +389,7 @@ public class Chp1 : MonoBehaviour
         }
         // Quest 5 - Dialogue 4 - Option *
         else if (greatTree.transform.GetChild(3).GetComponent<DialogueHolder>().bHasEntered &&
+                 greatTree.transform.GetChild(3).gameObject.activeSelf &&
                 (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3))
@@ -392,6 +398,7 @@ public class Chp1 : MonoBehaviour
         }
         // Quest 6 - Dialogue 1 - Option 1
         if (person1.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+            person1.transform.GetChild(0).gameObject.activeSelf &&
             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
         {
             oMan.ResetOptions();
@@ -399,6 +406,7 @@ public class Chp1 : MonoBehaviour
         }
         // Quest 6 - Dialogue 1 - Option 2
         else if (person1.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+                 person1.transform.GetChild(0).gameObject.activeSelf &&
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
         {
             oMan.ResetOptions();
@@ -414,6 +422,8 @@ public class Chp1 : MonoBehaviour
 
         parent2.transform.GetChild(0).gameObject.SetActive(false);
         parent2.transform.GetChild(1).gameObject.SetActive(true);
+
+        parent2.transform.GetChild(1).GetComponent<DialogueHolder>().bContinueDialogue = true;
     }
 
     public void Quest0Dialogue1Opt2()
@@ -425,7 +435,7 @@ public class Chp1 : MonoBehaviour
         dMan.currentLine = 0;
         dText.text = dMan.dialogueLines[dMan.currentLine];
         dMan.ShowDialogue();
-        dArrow.GetComponent<ImageStrobe>().bStartStrobe = true; // DC TODO -- Not strobing?
+        dArrow.GetComponent<ImageStrobe>().bStartStrobe = true;
     }
 
     public void Quest0Dialogue2()
@@ -437,6 +447,9 @@ public class Chp1 : MonoBehaviour
 
         // Quest 0 -- Q&A 1 Reward
         Quest0Reward();
+
+        // DC 08/12/2018 -- Have dad walk downstairs and stay there to "work" w/ VR googles and dan k.
+        // DC 08/13/2018 -- Dad keeps twisting and turning instead of still looking at dan
     }
 
     public void Quest5Dialogue2()
@@ -492,6 +505,13 @@ public class Chp1 : MonoBehaviour
 
             // Stop the player from bringing up the dialog again
             dMan.gameObject.SetActive(false);
+
+            // Stop Dan from moving
+            thePlayer.GetComponent<Animator>().enabled = false;
+
+            // Stop NPCs from moving
+            person1.GetComponent<NPCMovement>().moveSpeed = 0;
+            person1.GetComponent<Animator>().enabled = false;
         }
         else
         {

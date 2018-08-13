@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/24/2017
-// Last:  07/24/2017
+// Last:  08/13/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // Control the music / sound volume

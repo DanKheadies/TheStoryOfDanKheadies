@@ -1,17 +1,15 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/07/2018
+// Last:  08/13/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // Manage the Player's Brio
 public class PlayerBrioManager : MonoBehaviour
 {
-    private Animator anim;
+    private Animator pAnim;
     private DialogueManager dMan;
     public GameObject pause;
     public Scene scene;
@@ -27,8 +25,8 @@ public class PlayerBrioManager : MonoBehaviour
     void Start ()
     {
         // Initializers
-        anim = GetComponent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
+        pAnim = GetComponent<Animator>();
         pause = GameObject.FindGameObjectWithTag("Pause");
         scene = SceneManager.GetActiveScene();
         uiMan = FindObjectOfType<UIManager>();
@@ -59,14 +57,13 @@ public class PlayerBrioManager : MonoBehaviour
 	void Update ()
     {
         // Warning Message when Brio is out
-        // DC 04/16/2018 -- Runs and hides at the start; should stop?
         if (playerCurrentBrio <= 0)
         {
             // Opens Dialogue Manager and gives a warning
-            anim.SetBool("bIsWalking", false);
             dMan.dialogueLines = warningLines;
             dMan.portPic = portPic;
             dMan.ShowDialogue();
+            pAnim.SetBool("bIsWalking", false);
             playerCurrentBrio = 1;
         }
         

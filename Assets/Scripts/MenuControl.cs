@@ -1,13 +1,10 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/10/2018
+// Last:  08/12/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 // For Buttons only: transition scene or quiting game
 public class MenuControl : MonoBehaviour
@@ -45,9 +42,9 @@ public class MenuControl : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        if (PlayerPrefs.GetString("Chapter") == "Chp1")
+        if (PlayerPrefs.GetString("Chapter") != "")
         {
-            SceneManager.LoadScene("Chp1");
+            SceneManager.LoadScene(PlayerPrefs.GetString("Chapter"));
         }
         else
         {

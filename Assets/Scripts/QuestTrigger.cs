@@ -1,16 +1,14 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  03/10/2018
+// Last:  08/13/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // Handles NPC and zone quest interactions
 public class QuestTrigger : MonoBehaviour
 {
-    private Animator anim;
+    private Animator npcAnim;
     private DialogueManager dMan;
     private QuestManager qMan;
     private SpriteRenderer spRend;
@@ -23,8 +21,9 @@ public class QuestTrigger : MonoBehaviour
 
 	void Start ()
     {
-        anim = GetComponentInParent<Animator>();
+        // Initializers
         dMan = FindObjectOfType<DialogueManager>();
+        npcAnim = GetComponentInParent<Animator>();
         spRend = gameObject.GetComponentInParent<SpriteRenderer>();
         qMan = FindObjectOfType<QuestManager>();
 	}
@@ -45,7 +44,6 @@ public class QuestTrigger : MonoBehaviour
                     }
                     
                     // Quest Text
-                    //qMan.quests[questNumber].gameObject.SetActive(true);
                     qMan.quests[questNumber].BeginQuest();
                 }
 
@@ -63,7 +61,6 @@ public class QuestTrigger : MonoBehaviour
                     }
 
                     // Quest Text
-                    //qMan.quests[questNumber].gameObject.SetActive(false);
                     qMan.quests[questNumber].EndQuest();
                 }
             }
@@ -72,7 +69,7 @@ public class QuestTrigger : MonoBehaviour
         // Reset NPC
         if (spRend && !dMan.bDialogueActive)
         {
-            anim.Play("NPC Movement");
+            npcAnim.Play("NPC Movement");
         }
     }
 
@@ -83,28 +80,28 @@ public class QuestTrigger : MonoBehaviour
             (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
              Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
         {
-            anim.Play("Down");
+            npcAnim.Play("Down");
         }
         //// NPC below Player
         else if ((transform.parent.position.y < collision.transform.position.y) &&
             (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
              Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
         {
-            anim.Play("Up");
+            npcAnim.Play("Up");
         }
         //// NPC to the right of Player
         else if ((transform.parent.position.x > collision.transform.position.x) &&
             (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
              Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
         {
-            anim.Play("Left");
+            npcAnim.Play("Left");
         }
         //// NPC to the left of Player
         else if ((transform.parent.position.x < collision.transform.position.x) &&
             (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
              Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
         {
-            anim.Play("Right");
+            npcAnim.Play("Right");
         }
     }
 }

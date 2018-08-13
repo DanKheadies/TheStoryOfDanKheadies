@@ -2,12 +2,9 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  06/07/2018
+// Last:  08/11/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 // Main Minesweeper logic
 public class Minesweeper : MonoBehaviour
@@ -38,14 +35,14 @@ public class Minesweeper : MonoBehaviour
     void Start ()
     {
         // Initializers
-        brio = GameObject.FindObjectOfType<PlayerBrioManager>();
-        dMan = GameObject.FindObjectOfType<DialogueManager>();
-        inv = GameObject.FindObjectOfType<Inventory>();
+        brio = FindObjectOfType<PlayerBrioManager>();
+        dMan = FindObjectOfType<DialogueManager>();
+        inv = FindObjectOfType<Inventory>();
         moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
-        oMan = GameObject.FindObjectOfType<OptionsManager>();
+        oMan = FindObjectOfType<OptionsManager>();
         pause = GameObject.FindGameObjectWithTag("Pause");
         person1 = GameObject.Find("Person.1");
-        save = GameObject.FindObjectOfType<SaveGame>();
+        save = FindObjectOfType<SaveGame>();
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         warpMinesweeper = GameObject.Find("Minesweeper.to.Chp1");
         uiMan = FindObjectOfType<UIManager>();
@@ -170,7 +167,7 @@ public class Minesweeper : MonoBehaviour
 
     public void MinesweeperDialogueCheck()
     {
-        // Win or Lose - Option 1
+        // Win or Lose - Option 1 - Play again
         if ((person1.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered ||
              person1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered) &&
              moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
@@ -182,7 +179,7 @@ public class Minesweeper : MonoBehaviour
             bHasWon = false;
             bReset = true;
         }
-        // Win or Lose - Option 2
+        // Win or Lose - Option 2 - Stop playing
         else if ((person1.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered ||
                   person1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered) &&
                   moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
@@ -196,6 +193,9 @@ public class Minesweeper : MonoBehaviour
             save.SaveInventoryTransfer();
             PlayerPrefs.SetInt("Transferring", 1);
             PlayerPrefs.SetString("TransferScene", warpMinesweeper.GetComponent<SceneTransitioner>().BetaLoad);
+
+            // Stop Dan from moving
+            thePlayer.GetComponent<Animator>().enabled = false;
 
             // Stop the player from bringing up the dialog again
             dMan.gameObject.SetActive(false);

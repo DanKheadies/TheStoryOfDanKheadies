@@ -1,13 +1,11 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/25/2017
+// Last:  08/12/2018
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 // Fades images / sprites for animations and scene transitions (i.e. loading screens)
 public class ImageFader : MonoBehaviour

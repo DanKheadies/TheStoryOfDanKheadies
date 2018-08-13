@@ -2,10 +2,8 @@
 // Authors: Asbjorn Thirslund (Brackeys)
 // Contributors: David W. Corso
 // Start: 01/18/2018
-// Last:  01/29/2018
+// Last:  08/12/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryUI : MonoBehaviour

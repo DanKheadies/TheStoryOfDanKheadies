@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/26/2017
-// Last:  06/07/2018
+// Last:  08/12/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class PauseGame : MonoBehaviour
 {
     public OptionsManager oMan;
+    public PlayerMovement pMove;
     public Scene scene;
     public Transform controlsMenu;
     public Transform pauseMenu;
@@ -23,7 +22,8 @@ public class PauseGame : MonoBehaviour
     void Start ()
     {
         // Initializers
-        oMan = GameObject.FindObjectOfType<OptionsManager>();
+        oMan = FindObjectOfType<OptionsManager>();
+        pMove = FindObjectOfType<PlayerMovement>();
         pauseTrans = GameObject.FindGameObjectWithTag("Pause").GetComponent<Transform>();
         pauseMenu = GameObject.Find("PauseMenu").transform;
         stuffMenu = GameObject.Find("StuffMenu").transform;
@@ -43,19 +43,23 @@ public class PauseGame : MonoBehaviour
     {
         if (pauseTrans.localScale != Vector3.one)
         {
-            pauseMenu.transform.localScale = new Vector3(1, 1, 1);
-            stuffMenu.transform.localScale = new Vector3(0, 0, 0);
-            soundMenu.transform.localScale = new Vector3(0, 0, 0);
-            controlsMenu.transform.localScale = new Vector3(0, 0, 0);
+            pauseMenu.transform.localScale = Vector3.one;
+            stuffMenu.transform.localScale = Vector3.zero;
+            soundMenu.transform.localScale = Vector3.zero;
+            controlsMenu.transform.localScale = Vector3.zero;
 
-            pauseTrans.transform.localScale = new Vector3(1, 1, 1);
+            pauseTrans.transform.localScale = Vector3.one;
             Time.timeScale = 0;
+
+            pMove.bStopPlayerMovement = true;
         }
         else
         {
             oMan.bPauseOptions = true;
-            pauseTrans.transform.localScale = new Vector3(0, 0, 0);
+            pauseTrans.transform.localScale = Vector3.zero;
             Time.timeScale = 1;
+
+            pMove.bStopPlayerMovement = false;
         }
     }
 
@@ -63,13 +67,13 @@ public class PauseGame : MonoBehaviour
     {
         if (bOpen)
         {
-            stuffMenu.transform.localScale = new Vector3(1, 1, 1);
-            pauseMenu.transform.localScale = new Vector3(0, 0, 0);
+            stuffMenu.transform.localScale = Vector3.one;
+            pauseMenu.transform.localScale = Vector3.zero;
         }
         else
         {
-            stuffMenu.transform.localScale = new Vector3(0, 0, 0);
-            pauseMenu.transform.localScale = new Vector3(1, 1, 1);
+            stuffMenu.transform.localScale = Vector3.zero;
+            pauseMenu.transform.localScale = Vector3.one;
         }
     }
 
@@ -77,13 +81,13 @@ public class PauseGame : MonoBehaviour
     {
         if (bOpen)
         {
-            soundMenu.transform.localScale = new Vector3(1, 1, 1);
-            pauseMenu.transform.localScale = new Vector3(0, 0, 0);
+            soundMenu.transform.localScale = Vector3.one;
+            pauseMenu.transform.localScale = Vector3.zero;
         }
         else
         {
-            soundMenu.transform.localScale = new Vector3(0, 0, 0);
-            pauseMenu.transform.localScale = new Vector3(1, 1, 1);
+            soundMenu.transform.localScale = Vector3.zero;
+            pauseMenu.transform.localScale = Vector3.one;
         }
     }
 
@@ -91,13 +95,13 @@ public class PauseGame : MonoBehaviour
     {
         if (bOpen)
         {
-            controlsMenu.transform.localScale = new Vector3(1, 1, 1);
-            pauseMenu.transform.localScale = new Vector3(0, 0, 0);
+            controlsMenu.transform.localScale = Vector3.one;
+            pauseMenu.transform.localScale = Vector3.zero;
         }
         else
         {
-            controlsMenu.transform.localScale = new Vector3(0, 0, 0);
-            pauseMenu.transform.localScale = new Vector3(1, 1, 1);
+            controlsMenu.transform.localScale = Vector3.zero;
+            pauseMenu.transform.localScale = Vector3.one;
         }
     }
 }

@@ -1,17 +1,15 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  04/07/2018
+// Last:  08/12/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // Assigns plants Cannabis Objects
 public class ItemManager : MonoBehaviour
 {
-    private Animator anim;
+    private Animator pAnim;
     private DialogueManager dMan;
     public GameObject player;
     public Inventory inv;
@@ -36,9 +34,9 @@ public class ItemManager : MonoBehaviour
     void Start()
     {
         // Initializers
-        anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
         inv = GameObject.Find("Inventory").GetComponent<Inventory>();
+        pAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         scene = SceneManager.GetActiveScene();
         touches = FindObjectOfType<TouchControls>();
@@ -105,22 +103,22 @@ public class ItemManager : MonoBehaviour
     {
         if (inv.items.Count < inv.totalItems)
         {
-            anim.Play("Acquire");
+            pAnim.Play("Acquire");
 
             // Display and add item to inventory
             if (this.name == "Cannabis.Bud.Green")
             {
-                greenBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+                greenBud.GetComponent<Transform>().localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
             else if (this.name == "Cannabis.Bud.Orange")
             {
-                orangeBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+                orangeBud.GetComponent<Transform>().localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
             else if (this.name == "Cannabis.Bud.Purple")
             {
-                purpleBud.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+                purpleBud.GetComponent<Transform>().localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
             else if (this.name == "Cannabis.Bud.White")
@@ -157,15 +155,15 @@ public class ItemManager : MonoBehaviour
     {
         if (scene.name == "Chp0")
         {
-            vrGoggles.GetComponent<Transform>().localScale = new Vector3(0, 0, 0);
+            vrGoggles.GetComponent<Transform>().localScale = Vector3.zero;
         }
         else if (scene.name == "Chp1")
         {
-            greenBud.GetComponent<Transform>().localScale = new Vector3(0, 0, 0);
-            orangeBud.GetComponent<Transform>().localScale = new Vector3(0, 0, 0);
-            purpleBud.GetComponent<Transform>().localScale = new Vector3(0, 0, 0);
-            whiteBud.GetComponent<Transform>().localScale = new Vector3(0, 0, 0);
-            vrGoggles.GetComponent<Transform>().localScale = new Vector3(0, 0, 0);
+            greenBud.GetComponent<Transform>().localScale = Vector3.zero;
+            orangeBud.GetComponent<Transform>().localScale = Vector3.zero;
+            purpleBud.GetComponent<Transform>().localScale = Vector3.zero;
+            whiteBud.GetComponent<Transform>().localScale = Vector3.zero;
+            vrGoggles.GetComponent<Transform>().localScale = Vector3.zero;
         }
     }
 }

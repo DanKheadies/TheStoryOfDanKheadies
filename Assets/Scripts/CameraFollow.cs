@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  05/21/2018
+// Last:  08/11/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // Overworld Camera with bounds for each area
@@ -582,21 +580,4 @@ public class CameraFollow : MonoBehaviour
             }
         }
     }
-
-    //private bool HasFlag (AnandaCoords flags)
-    //{
-    //    return (currentCoords & flags) != 0;
-    //}
-
-    //private void SetFlag(AnandaCoords flags, bool val)
-    //{
-    //    if (val == true)
-    //    {
-    //        currentCoords |= flags;
-    //    }
-    //    else
-    //    {
-    //        currentCoords &= ~flags;
-    //    }
-    //}
 }

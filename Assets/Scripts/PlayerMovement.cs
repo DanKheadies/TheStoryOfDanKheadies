@@ -1,19 +1,15 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  05/22/2018
+// Last:  08/13/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.SceneManagement;
 
 // Control Player movement and overworld transition areas
 public class PlayerMovement : MonoBehaviour
 {
-    public Animator anim;
+    public Animator pAnim;
     private AspectUtility aspectUtil;
     private CameraFollow cameraFollow;
     private CameraSlider cameraSlider;
@@ -35,10 +31,10 @@ public class PlayerMovement : MonoBehaviour
 	void Start ()
     {
         // Initializers
-        anim = GetComponent<Animator>();
         aspectUtil = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AspectUtility>();
         cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
         cameraSlider = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraSlider>();
+        pAnim = GetComponent<Animator>();
         playerBrioMan = GetComponent<PlayerBrioManager>();
         playerCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
@@ -91,7 +87,6 @@ public class PlayerMovement : MonoBehaviour
     {
         // Unit's Project Settings -> Input
         Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        
     }
 
     public void Move(float xInput, float yInput) 
@@ -101,20 +96,20 @@ public class PlayerMovement : MonoBehaviour
         // Animate movement
         if (movementVector != Vector2.zero)
         {
-            anim.SetBool("bIsWalking", true);
-            anim.SetFloat("Input_X", movementVector.x);
-            anim.SetFloat("Input_Y", movementVector.y);
+            pAnim.SetBool("bIsWalking", true);
+            pAnim.SetFloat("Input_X", movementVector.x);
+            pAnim.SetFloat("Input_Y", movementVector.y);
         }
         else
         {
-            anim.SetBool("bIsWalking", false);
+            pAnim.SetBool("bIsWalking", false);
         }
 
         // 2x Move Speed
         if (bBoosting)
         {
             rBody.velocity = movementVector * 2;
-            anim.speed = 2.0f;
+            pAnim.speed = 2.0f;
 
             // Use Brio
             if (movementVector != Vector2.zero)
@@ -127,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rBody.velocity = movementVector;
-            anim.speed = 1.0f;
+            pAnim.speed = 1.0f;
         }
     }
 
@@ -137,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
         aspectUtil.Awake();
 
         // "Stop" player animation
-        anim.speed = 0.001f;
+        pAnim.speed = 0.001f;
 
         // Unsync and stop camera tracking
         cameraFollow.currentCoords = 0;

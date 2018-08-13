@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  06/07/2018
+// Last:  08/11/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,12 +15,15 @@ public class Chp0 : MonoBehaviour
     public DialogueManager dMan;
     public GameObject contArrow;
     public GameObject dBox;
+    public GameObject guiConts;
     public GameObject HUD;
+    public GameObject pauseButton;
     public GameObject sFaderAnim;
     public GameObject sFaderAnimDia;
     public GameObject thePlayer;
     public Inventory inv;
     public MusicManager mMan;
+    public NPCMovement[] npcMove;
     public SaveGame save;
     public SceneTransitioner sceneTrans;
     private SFXManager SFXMan;
@@ -33,10 +34,9 @@ public class Chp0 : MonoBehaviour
     public bool bGetInventory;
     private bool bStartGame;
 
+    public float invTimer;
     public float strobeTimer;
-    public float timer;
-
-    public string dialogue;
+    
     public string[] dialogueLines;
 
     void Start()
@@ -46,10 +46,13 @@ public class Chp0 : MonoBehaviour
         dBox = GameObject.Find("Dialogue_Box");
         dMan = FindObjectOfType<DialogueManager>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
+        guiConts = GameObject.Find("GUIControls");
         HUD = GameObject.Find("HUD");
         inv = FindObjectOfType<Inventory>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         mMan = FindObjectOfType<MusicManager>();
+        npcMove = FindObjectsOfType<NPCMovement>();
+        pauseButton = GameObject.Find("PauseButton");
         playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<PolygonCollider2D>();
         save = FindObjectOfType<SaveGame>();
         sceneTrans = FindObjectOfType<SceneTransitioner>();
@@ -59,44 +62,55 @@ public class Chp0 : MonoBehaviour
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         touches = FindObjectOfType<TouchControls>();
         warpCollider = GameObject.Find("Chp0.to.Chp1").GetComponent<BoxCollider2D>();
-
-        bAvoidUpdate = false;
-        bGetInventory = false;
-        bStartGame = false;
+        
         strobeTimer = 3.0f;
 
         // Chapter 0 New Game -- Wake Up Dialogue, i.e. hide everything and fade in the dialogue
         if (PlayerPrefs.GetString("Chapter") != "Chp0")
         {
-            dMan.bDialogueActive = false;
-            HUD.transform.GetChild(3).localScale = Vector3.zero; // DC TODO
-            HUD.transform.GetChild(4).localScale = Vector3.zero; // DC TODO
+            // Hide UI & music
+            guiConts.transform.localScale = Vector3.zero;
             mMan.bMusicCanPlay = false;
-            thePlayer.transform.position = new Vector2(1.45f, 3.33f);
+            pauseButton.transform.localScale = Vector3.zero;
+
+            // Set player
             mainCamera.transform.position = new Vector2(1.45f, 3.33f);
+            thePlayer.transform.position = new Vector2(1.45f, 3.33f);
             
+            // Set dialogue & dialogue elements
             dialogueLines = new string[] {
                 "Dan.",
                 "Dan...",
                 "Dan!",
                 "Wake up Dan or you'll be late for your first day of school."
             };
-
             dMan.dialogueLines = dialogueLines;
             dMan.currentLine = 0;
             dText.text = dialogueLines[dMan.currentLine];
             dBox.transform.localScale = Vector3.one;
+
+            // Stops the player's movement
+            thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+
+            // Fade in
             sFaderAnimDia.GetComponent<Animator>().enabled = true;
         }
         // Chapter 0 Saved Game
         else
         {
+            // Initialize
             inv.RerunStart();
             save.RerunStart();
+
+            // Get saved info
             save.GetSavedGame();
-            sFaderAnimDia.GetComponent<Animator>().enabled = true;
             bGetInventory = true;
-            timer = 0.33f;
+
+            // Cue timer to get saved inventory info
+            invTimer = 0.333f;
+
+            // Fade in
+            sFaderAnimDia.GetComponent<Animator>().enabled = true;
         }
     }
 	
@@ -107,6 +121,7 @@ public class Chp0 : MonoBehaviour
             PlayerPrefs.GetInt("Saved") == 0)
         {
             strobeTimer -= Time.deltaTime;
+
             if (strobeTimer <= 0)
             {
                 bStartGame = true;
@@ -115,12 +130,6 @@ public class Chp0 : MonoBehaviour
 
                 // Sound Effect
                 SFXMan.dialogueMedium.PlayOneShot(SFXMan.dialogueMedium.clip);
-
-                // Stops the player's movement
-                dMan.thePlayer.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                dMan.anim.SetBool("bIsWalking", false);
-                touches.UnpressedAllArrows();
-                dMan.thePlayer.bStopPlayerMovement = true;
             }
         }
 
@@ -129,9 +138,11 @@ public class Chp0 : MonoBehaviour
             !bAvoidUpdate && 
             bStartGame)
         {
-            HUD.transform.GetChild(3).localScale = Vector3.one; // DC TODO
-            HUD.transform.GetChild(4).localScale = Vector3.one; // DC TODO
+            // Display UI & music
+            guiConts.transform.localScale = Vector3.one;
             mMan.bMusicCanPlay = true;
+            pauseButton.transform.localScale = Vector3.one;
+            
             sFaderAnim.GetComponent<Animator>().enabled = true;
 
             // Change to avoid running this logic
@@ -151,32 +162,42 @@ public class Chp0 : MonoBehaviour
         }
 
         // Saved Game -- Load inventory
-        if (bGetInventory && 
-            timer > 0)
+        if (bGetInventory &&
+            invTimer > 0)
         {
-            timer -= Time.deltaTime;
+            invTimer -= Time.deltaTime;
 
-            if (timer <= 0)
+            if (invTimer <= 0)
             {
                 inv.LoadInventory("saved");
                 bGetInventory = false;
             }
         }
 
-        // Save transfer values
+        // Save transfer values and transition to next scene
         if (playerCollider.IsTouching(warpCollider))
         {
+            // Transition animation
             sceneTrans.bAnimationToTransitionScene = true;
 
+            // Save info
             save.SaveBrioTransfer();
             save.SaveInventoryTransfer();
             PlayerPrefs.SetInt("Transferring", 1);
             PlayerPrefs.SetString("TransferScene", sceneTrans.BetaLoad);
 
-            // Stop the player from bringing up the dialog again
+            // Stop the player from bringing up the dialogue again
             dMan.gameObject.SetActive(false);
 
-            // 06/07/2018 DC -- Stop NPCs from moving
+            // Stop Dan from moving
+            thePlayer.GetComponent<Animator>().enabled = false;
+
+            // Stop NPCs from moving
+            for (int i = 0; i < npcMove.Length; i++)
+            {
+                npcMove[i].moveSpeed = 0;
+                npcMove[i].GetComponent<Animator>().enabled = false;
+            }
         }
     }
 }

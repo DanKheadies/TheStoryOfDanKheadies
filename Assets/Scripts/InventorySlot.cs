@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso, Asbjorn Thirslund (Brackeys), Austin (AwfulMedia / GameGrind)
 // Start: 01/18/2018
-// Last:  06/07/2018
+// Last:  08/12/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 

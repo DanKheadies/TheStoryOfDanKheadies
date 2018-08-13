@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 01/29/2018
-// Last:  01/29/2018
+// Last:  08/12/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -50,8 +48,7 @@ public class MoveItemMenuArrow : MonoBehaviour
         itemMenu = GameObject.Find("ItemMenu").transform;
         scene = SceneManager.GetActiveScene();
         touches = FindObjectOfType<TouchControls>();
-
-
+        
         currentPosition = ItemArrowPos.Use;
     }
 
@@ -94,8 +91,7 @@ public class MoveItemMenuArrow : MonoBehaviour
 
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Space) ||
-                     Input.GetKeyDown(KeyCode.Return) ||
+            else if (Input.GetButtonDown("Action") ||
                      touches.bAction)
             {
                 if (currentPosition == ItemArrowPos.Use)
@@ -118,9 +114,18 @@ public class MoveItemMenuArrow : MonoBehaviour
     {
         if (itemMenu.gameObject.GetComponent<CanvasGroup>().alpha == 1)
         {
-            UseArw.transform.localScale = new Vector3(0, 0, 0);
-            DropArw.transform.localScale = new Vector3(0, 0, 0);
-            BackArw.transform.localScale = new Vector3(0, 0, 0);
+            UseArw.transform.localScale = Vector3.zero;
+            DropArw.transform.localScale = Vector3.zero;
+            BackArw.transform.localScale = Vector3.zero;
         }
     }
+
+    public void ResetArrowPos()
+    {
+        DropArw.transform.localScale = Vector3.zero;
+        BackArw.transform.localScale = Vector3.zero;
+
+        UseArw.transform.localScale = Vector3.one;
+        currentPosition = ItemArrowPos.Use;
+    } 
 }

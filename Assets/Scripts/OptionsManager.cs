@@ -1,13 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/08/2018
-// Last:  07/29/2018
+// Last:  08/13/2018
 
-// IMPORTANT:
-// 1) Bug -- Dialogues are breaking when there are multiple prompts, e.g. GreatTree & Dad
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +11,9 @@ public class OptionsManager : MonoBehaviour
 {
     public CameraFollow mainCamera;
     public DialogueManager dMan;
+    public GameObject brioBar;
     public GameObject oBox;
+    public GameObject pauseButtOpac;
     public Image o1Arw;
     public Image o1Text;
     public Image o2Arw;
@@ -61,6 +58,7 @@ public class OptionsManager : MonoBehaviour
     void Start()
     {
         // Initializers
+        brioBar = GameObject.Find("BrioBar");
         dMan = FindObjectOfType<DialogueManager>();
         mainCamera = FindObjectOfType<CameraFollow>();
         moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
@@ -74,6 +72,7 @@ public class OptionsManager : MonoBehaviour
         o4Text = GameObject.Find("Opt4").GetComponent<Image>();
         oFrame = GameObject.Find("Options_Frame").GetComponent<Image>();
         oBox = GameObject.Find("Options_Box");
+        pauseButtOpac = GameObject.Find("PauseButtonOpacity");
         touches = FindObjectOfType<TouchControls>();
 
         // DC TODO -- Default is false?
@@ -120,7 +119,7 @@ public class OptionsManager : MonoBehaviour
         bOptionsActive = true;
         oBox.transform.localScale = Vector3.one;
 
-        // text options
+        // Text options
         for (int i = 0; i < options.Length; i++)
         {
             GameObject optText = GameObject.Find("Opt" + (i + 1) + "_Text");
@@ -132,8 +131,8 @@ public class OptionsManager : MonoBehaviour
         touches.transform.localScale = Vector3.one;
 
         // Hide Brio Bar & Pause Button (Overlay)
-        touches.transform.GetChild(7).localScale = Vector3.zero; // DC TODO
-        touches.transform.GetChild(8).localScale = Vector3.zero; // DC TODO
+        brioBar.transform.localScale = Vector3.zero;
+        pauseButtOpac.transform.localScale = Vector3.zero;
 
         PauseOptions();
     }
@@ -154,8 +153,8 @@ public class OptionsManager : MonoBehaviour
         
         dMan.ResetDialogue();
 
-        touches.transform.GetChild(7).localScale = Vector3.one; // DC TODO
-        touches.transform.GetChild(8).localScale = Vector3.one; // DC TODO
+        brioBar.transform.localScale = Vector3.one;
+        pauseButtOpac.transform.localScale = Vector3.one;
     }
 
     public void CheckAndAssignClickedValue(int option)

@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/07/2018
+// Last:  08/13/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -34,7 +32,7 @@ public class SaveGame : MonoBehaviour
         else if (scene.name == "Showdown")
         {
             savedPlayer = GameObject.FindGameObjectWithTag("Player");
-            inv = GameObject.FindObjectOfType<Inventory>().GetComponent<Inventory>();
+            inv = FindObjectOfType<Inventory>().GetComponent<Inventory>();
             savedVol = FindObjectOfType<VolumeManager>();
             tempItem = ScriptableObject.CreateInstance<Item>();
             uiMan = FindObjectOfType<UIManager>();
@@ -44,7 +42,7 @@ public class SaveGame : MonoBehaviour
             camFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
             savedCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
             savedPlayer = GameObject.FindGameObjectWithTag("Player");
-            inv = GameObject.FindObjectOfType<Inventory>().GetComponent<Inventory>();
+            inv = FindObjectOfType<Inventory>().GetComponent<Inventory>();
             savedVol = FindObjectOfType<VolumeManager>();
             tempItem = ScriptableObject.CreateInstance<Item>();
             uiMan = FindObjectOfType<UIManager>();

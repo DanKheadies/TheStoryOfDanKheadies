@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  05/11/2018
+// Last:  08/13/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -47,11 +45,11 @@ public class UIManager : MonoBehaviour
         conTog = GameObject.Find("ShowButtonsToggle").GetComponent<Toggle>();
         currScene = SceneManager.GetActiveScene();
         dHUD = GameObject.Find("Dialogue_HUD").GetComponent<Canvas>();
-        dMan = GameObject.FindObjectOfType<DialogueManager>();
+        dMan = FindObjectOfType<DialogueManager>();
         HUD = GetComponent<Canvas>();
         hudCanvas = GetComponent<CanvasGroup>();
-        mainCamera = GameObject.FindObjectOfType<Camera>().GetComponent<Camera>();
-        oMan = GameObject.FindObjectOfType<OptionsManager>();
+        mainCamera = FindObjectOfType<Camera>().GetComponent<Camera>();
+        oMan = FindObjectOfType<OptionsManager>();
         touches = FindObjectOfType<TouchControls>();
 
 
@@ -144,7 +142,4 @@ public class UIManager : MonoBehaviour
             bControlsActive = true;
         }
     }
-
-    // Adjusts the volume slider based off keyboard input
-    // DC 11/14/2017 -- TODO: Adjusts the volume slider based off keyboard input
 }

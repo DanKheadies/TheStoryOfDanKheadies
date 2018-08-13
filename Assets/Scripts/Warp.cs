@@ -1,18 +1,18 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/08/2018
+// Last:  08/13/2018
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // Warps player around the scene
 public class Warp : MonoBehaviour
 {
-    public Animator anim;
+    public Animator pAnim;
     public CameraFollow cFollow;
     public PlayerMovement thePlayer;
+    public ScreenFader sFader;
     public TouchControls touches;
     public Transform warpTarget;
 
@@ -22,8 +22,9 @@ public class Warp : MonoBehaviour
     {
         // Initializers
         thePlayer = FindObjectOfType<PlayerMovement>();
-        anim = thePlayer.GetComponent<Animator>();
         cFollow = FindObjectOfType<CameraFollow>();
+        pAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        sFader = GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>();
         touches = FindObjectOfType<TouchControls>();
 
         // AnandaCoord = Warp.Location; set in app
@@ -35,21 +36,20 @@ public class Warp : MonoBehaviour
         if (other.tag == "Player")
         {
             // Stops the player's movement
+            pAnim.SetBool("bIsWalking", false);
             thePlayer.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            anim.SetBool("bIsWalking", false);
-            touches.UnpressedAllArrows();
             thePlayer.bStopPlayerMovement = true;
+            touches.UnpressedAllArrows();
 
             // Access Screen Fader and fade
-            ScreenFader sf = GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>();
 
-            yield return StartCoroutine(sf.FadeToBlack());
+            yield return StartCoroutine(sFader.FadeToBlack());
 
             cFollow.currentCoords = (CameraFollow.AnandaCoords)AnandaCoord;
             other.gameObject.transform.position = warpTarget.position;
             Camera.main.transform.position = warpTarget.position;
 
-            yield return StartCoroutine(sf.FadeToClear());
+            yield return StartCoroutine(sFader.FadeToClear());
         }
     }
 }

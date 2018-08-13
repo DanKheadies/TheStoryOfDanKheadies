@@ -2,10 +2,8 @@
 // Authors: Eric Haines
 // Contributors: David W. Corso
 // Start: --/--/----
-// Last:  06/03/2018
+// Last:  08/11/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

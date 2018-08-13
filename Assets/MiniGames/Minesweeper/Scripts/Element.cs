@@ -2,10 +2,9 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 05/20/2018
-// Last:  06/07/2018
+// Last:  08/13/2018
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // Minesweeper Units / Elements / Squares behavior

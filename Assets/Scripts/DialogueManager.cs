@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  05/11/2018
+// Last:  08/12/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +10,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public AspectUtility aspectUtil;
-    public Animator anim; // rename to playerAnim?
+    public Animator pAnim;
     public CameraFollow mainCamera;
     public GameObject dBox;
     public Image dArrow;
@@ -20,7 +18,7 @@ public class DialogueManager : MonoBehaviour
     public Image dPic;
     public ImageStrobe imgStrobe;
     public OptionsManager oMan;
-    public PlayerMovement thePlayer;
+    public PlayerMovement pMove;
     private SFXManager SFXMan;
     public Sprite portPic;
     public Text dText;
@@ -53,8 +51,6 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         // Initializers
-        thePlayer = FindObjectOfType<PlayerMovement>();
-        anim = thePlayer.GetComponent<Animator>();
         aspectUtil = GameObject.Find("Main Camera").GetComponent<AspectUtility>();
         dArrow = GameObject.Find("Dialogue_Arrow").GetComponent<Image>();
         dBox = GameObject.Find("Dialogue_Box");
@@ -64,6 +60,8 @@ public class DialogueManager : MonoBehaviour
         imgStrobe = GameObject.Find("Dialogue_Arrow").GetComponent<ImageStrobe>();
         mainCamera = FindObjectOfType<CameraFollow>();
         oMan = FindObjectOfType<OptionsManager>();
+        pAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        pMove = FindObjectOfType<PlayerMovement>();
         SFXMan = FindObjectOfType<SFXManager>();
         touches = FindObjectOfType<TouchControls>();
         uiMan = FindObjectOfType<UIManager>();
@@ -148,8 +146,8 @@ public class DialogueManager : MonoBehaviour
         imgStrobe.bStopStrobe = true;
 
         // Reactivate the player
-        thePlayer.bStopPlayerMovement = false;
-        anim.Play("Idle");
+        pMove.bStopPlayerMovement = false;
+        pAnim.Play("Idle");
 
         // Show controls if visible
         touches.transform.localScale = Vector3.one;
@@ -172,10 +170,10 @@ public class DialogueManager : MonoBehaviour
         SFXMan.dialogueMedium.PlayOneShot(SFXMan.dialogueMedium.clip);
 
         // Stops the player's movement
-        thePlayer.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        anim.SetBool("bIsWalking", false);
+        pMove.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        pAnim.SetBool("bIsWalking", false);
         touches.UnpressedAllArrows();
-        thePlayer.bStopPlayerMovement = true;
+        pMove.bStopPlayerMovement = true;
 
         // Hides UI controls
         touches.transform.localScale = Vector3.zero;

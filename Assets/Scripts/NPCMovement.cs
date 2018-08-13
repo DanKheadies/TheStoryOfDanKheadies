@@ -1,19 +1,20 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/25/2017
+// Last:  08/13/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // Controls NPC movements, constraints, and dialogue
 public class NPCMovement : MonoBehaviour
 {
-    private Animator anim;
+    private Animator npcAnim;
     public Collider2D walkZone;
     private DialogueManager dMan;
-    private Rigidbody2D NPCRigidBody;
+    private Rigidbody2D npcRigidBody;
+    private Vector2 lastMove;
+    public Vector2 minWalkPoint;
+    public Vector2 maxWalkPoint;
 
     public bool bCanMove;
     private bool bHasWalkZone;
@@ -27,16 +28,12 @@ public class NPCMovement : MonoBehaviour
 
     private int walkDirection;
 
-    private Vector2 lastMove;
-    public Vector2 minWalkPoint;
-    public Vector2 maxWalkPoint;
-
     void Start ()
     {
         // Initializers
-        anim = GetComponent<Animator>();
-        NPCRigidBody = GetComponent<Rigidbody2D>();
         dMan = FindObjectOfType<DialogueManager>();
+        npcAnim = GetComponent<Animator>();
+        npcRigidBody = GetComponent<Rigidbody2D>();
 
         waitCounter = waitTime;
         walkCounter = walkTime;
@@ -58,14 +55,14 @@ public class NPCMovement : MonoBehaviour
 	void Update ()
     {
         // Basic movement
-		if (bIsWalking == true)
+		if (bIsWalking)
         {
             walkCounter -= Time.deltaTime;
 
             switch (walkDirection)
             {
                 case 0:
-                    NPCRigidBody.velocity = new Vector2(0, moveSpeed);
+                    npcRigidBody.velocity = new Vector2(0, moveSpeed);
                     bIsWalking = true;
 
                     if (bHasWalkZone && transform.position.y > (maxWalkPoint.y - 0.25))
@@ -76,7 +73,7 @@ public class NPCMovement : MonoBehaviour
                     break;
 
                 case 1:
-                    NPCRigidBody.velocity = new Vector2(moveSpeed, 0);
+                    npcRigidBody.velocity = new Vector2(moveSpeed, 0);
                     bIsWalking = true;
 
                     if (bHasWalkZone && transform.position.x > (maxWalkPoint.x - 0.25))
@@ -87,7 +84,7 @@ public class NPCMovement : MonoBehaviour
                     break;
 
                 case 2:
-                    NPCRigidBody.velocity = new Vector2(0, -moveSpeed);
+                    npcRigidBody.velocity = new Vector2(0, -moveSpeed);
                     bIsWalking = true;
 
                     if (bHasWalkZone && transform.position.y < (minWalkPoint.y + 0.25))
@@ -98,7 +95,7 @@ public class NPCMovement : MonoBehaviour
                     break;
 
                 case 3:
-                    NPCRigidBody.velocity = new Vector2(-moveSpeed, 0);
+                    npcRigidBody.velocity = new Vector2(-moveSpeed, 0);
                     bIsWalking = true;
 
                     if (bHasWalkZone && transform.position.x < (minWalkPoint.x + 0.25))
@@ -110,18 +107,18 @@ public class NPCMovement : MonoBehaviour
             }
 
             // Animate movement
-            if (NPCRigidBody.velocity != Vector2.zero)
+            if (npcRigidBody.velocity != Vector2.zero)
             {
-                anim.SetBool("bIsWalking", true);
-                anim.SetFloat("MoveX", NPCRigidBody.velocity.x);
-                anim.SetFloat("MoveY", NPCRigidBody.velocity.y);
+                npcAnim.SetBool("bIsWalking", true);
+                npcAnim.SetFloat("MoveX", npcRigidBody.velocity.x);
+                npcAnim.SetFloat("MoveY", npcRigidBody.velocity.y);
             }
 
             // Denotes standing & resets walk counter
             if (walkCounter < 0)
             {
                 bIsWalking = false;
-                anim.SetBool("bIsWalking", false);
+                npcAnim.SetBool("bIsWalking", false);
                 waitCounter = waitTime;
             }
         }
@@ -130,7 +127,7 @@ public class NPCMovement : MonoBehaviour
             // Wait countdown
             waitCounter -= Time.deltaTime;
 
-            NPCRigidBody.velocity = Vector2.zero;
+            npcRigidBody.velocity = Vector2.zero;
 
             // Trigger to walk
             if (waitCounter < 0)
@@ -152,7 +149,7 @@ public class NPCMovement : MonoBehaviour
         // Stop movement
         if (!bCanMove)
         {
-            NPCRigidBody.velocity = Vector2.zero;
+            npcRigidBody.velocity = Vector2.zero;
             return;
         }
     }

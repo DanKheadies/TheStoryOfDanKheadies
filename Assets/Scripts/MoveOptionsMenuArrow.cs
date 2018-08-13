@@ -1,10 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/23/2018
-// Last:  05/11/2018
+// Last:  08/12/2018
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -83,19 +81,19 @@ public class MoveOptionsMenuArrow : MonoBehaviour
                 {
                     currentPosition = ArrowPos.Opt2;
                     ClearAllArrows();
-                    Opt2Arw.transform.localScale = new Vector3(1, 1, 1);
+                    Opt2Arw.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == ArrowPos.Opt2 && oMan.tempOptsCount > 2)
                 {
                     currentPosition = ArrowPos.Opt3;
                     ClearAllArrows();
-                    Opt3Arw.transform.localScale = new Vector3(1, 1, 1);
+                    Opt3Arw.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == ArrowPos.Opt3 && oMan.tempOptsCount > 3)
                 {
                     currentPosition = ArrowPos.Opt4;
                     ClearAllArrows();
-                    Opt4Arw.transform.localScale = new Vector3(1, 1, 1);
+                    Opt4Arw.transform.localScale = Vector3.one;
                 }
             }
             else if (Input.GetKeyDown(KeyCode.W) ||
@@ -106,23 +104,22 @@ public class MoveOptionsMenuArrow : MonoBehaviour
                 {
                     currentPosition = ArrowPos.Opt3;
                     ClearAllArrows();
-                    Opt3Arw.transform.localScale = new Vector3(1, 1, 1);
+                    Opt3Arw.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == ArrowPos.Opt3)
                 {
                     currentPosition = ArrowPos.Opt2;
                     ClearAllArrows();
-                    Opt2Arw.transform.localScale = new Vector3(1, 1, 1);
+                    Opt2Arw.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == ArrowPos.Opt2)
                 {
                     currentPosition = ArrowPos.Opt1;
                     ClearAllArrows();
-                    Opt1Arw.transform.localScale = new Vector3(1, 1, 1);
+                    Opt1Arw.transform.localScale = Vector3.one;
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Space) ||
-                     Input.GetKeyDown(KeyCode.Return) ||
+            else if (Input.GetButtonDown("Action") ||
                      touches.bAction)
             {
                 if (currentPosition == ArrowPos.Opt1)
@@ -151,19 +148,19 @@ public class MoveOptionsMenuArrow : MonoBehaviour
     {
         if (oMan.bOptionsActive)
         {
-            Opt1Arw.transform.localScale = new Vector3(0, 0, 0);
-            Opt2Arw.transform.localScale = new Vector3(0, 0, 0);
-            Opt3Arw.transform.localScale = new Vector3(0, 0, 0);
-            Opt4Arw.transform.localScale = new Vector3(0, 0, 0);
+            Opt1Arw.transform.localScale = Vector3.zero;
+            Opt2Arw.transform.localScale = Vector3.zero;
+            Opt3Arw.transform.localScale = Vector3.zero;
+            Opt4Arw.transform.localScale = Vector3.zero;
         }
     }
 
     public void ResetArrows()
     {
-        Opt1Arw.transform.localScale = new Vector3(1, 1, 1);
-        Opt2Arw.transform.localScale = new Vector3(0, 0, 0);
-        Opt3Arw.transform.localScale = new Vector3(0, 0, 0);
-        Opt4Arw.transform.localScale = new Vector3(0, 0, 0);
+        Opt1Arw.transform.localScale = Vector3.one;
+        Opt2Arw.transform.localScale = Vector3.zero;
+        Opt3Arw.transform.localScale = Vector3.zero;
+        Opt4Arw.transform.localScale = Vector3.zero;
 
         currentPosition = ArrowPos.Opt1;
     }

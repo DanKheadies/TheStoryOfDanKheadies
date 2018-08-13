@@ -2,10 +2,9 @@
 // Authors: David W. Corso
 // Contributors: Nick Pettit
 // Start: 04/20/2017
-// Last:  05/23/2018
+// Last:  08/13/2018
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
