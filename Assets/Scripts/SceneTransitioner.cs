@@ -24,7 +24,6 @@ public class SceneTransitioner : MonoBehaviour
 
     public string AlphaLoad;
     public string BetaLoad;
-    
 
     void Update()
     {
@@ -50,6 +49,10 @@ public class SceneTransitioner : MonoBehaviour
                     case "Minesweeper":
                         sceneTitle.text = "Minesweeper";
                         sceneSubtitle.text = "Boom baby...";
+                        break;
+                    case "GuessWhoColluded":
+                        sceneTitle.text = "Guess Who...";
+                        sceneSubtitle.text = "Colluded?";
                         break;
                     default:
                         sceneTitle.text = "n_n";
@@ -95,8 +98,12 @@ public class SceneTransitioner : MonoBehaviour
 
             // Stops the player's movement
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            collision.gameObject.GetComponent<Animator>().SetBool("bIsWalking", false);
             collision.gameObject.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+
+            if (scene.name != "GuessWhoColluded")
+            {
+                collision.gameObject.GetComponent<Animator>().SetBool("bIsWalking", false);
+            }
 
             StartCoroutine(DelayedTransition());
         }

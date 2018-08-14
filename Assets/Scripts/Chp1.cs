@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  08/12/2018
+// Last:  08/13/2018
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,10 +26,12 @@ public class Chp1 : MonoBehaviour
     public GameObject quest3;
     public GameObject questTrigger2;
     public GameObject thePlayer;
+    public GameObject warpGWC;
     public GameObject warpMinesweeper;
     public Inventory inv;
     public MoveOptionsMenuArrow moveOptsArw;
     public OptionsManager oMan;
+    public PolygonCollider2D pColli;
     public QuestManager qMan;
     public SaveGame save;
     public Text dText;
@@ -66,7 +68,7 @@ public class Chp1 : MonoBehaviour
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
         oldMan1 = GameObject.Find("OldMan1");
-        oMan = GameObject.FindObjectOfType<OptionsManager>();
+        oMan = FindObjectOfType<OptionsManager>();
         parent2 = GameObject.Find("Parent.2");
         person1 = GameObject.Find("Person.1");
         qMan = FindObjectOfType<QuestManager>();
@@ -74,6 +76,7 @@ public class Chp1 : MonoBehaviour
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         savedQuestsValue = PlayerPrefs.GetString("Chp1Quests");
         save = FindObjectOfType<SaveGame>();
+        warpGWC = GameObject.Find("Chp1.to.GuessWhoColluded");
         warpMinesweeper = GameObject.Find("Chp1.to.Minesweeper");
         uiMan = FindObjectOfType<UIManager>();
 
@@ -106,7 +109,7 @@ public class Chp1 : MonoBehaviour
             // see Update timer for inventory load
 
             // Set player & camera position
-            thePlayer.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferP_x"), PlayerPrefs.GetFloat("TransferP_y"));
+            thePlayer.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferP_x"), (PlayerPrefs.GetFloat("TransferP_y") - 0.05f));
             mainCamera.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferCam_x"), PlayerPrefs.GetFloat("TransferCam_y"));
             camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("TransferAnandaCoord");
         }
@@ -281,6 +284,29 @@ public class Chp1 : MonoBehaviour
                     bTempCheck = false;
                 }
             }
+        }
+
+        // Minigame -- Guess Who Colluded?
+        if (thePlayer.GetComponent<PolygonCollider2D>().IsTouching(warpGWC.GetComponent<BoxCollider2D>()))
+        {
+            // Transition animation
+            warpGWC.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
+
+            // Save info
+            save.SaveBrioTransfer();
+            save.SaveInventoryTransfer();
+            save.SavePositionTransfer();
+            PlayerPrefs.SetInt("Transferring", 1);
+            PlayerPrefs.SetString("TransferScene", warpGWC.GetComponent<SceneTransitioner>().BetaLoad);
+
+            // Stop the player from bringing up the dialogue again
+            dMan.gameObject.SetActive(false);
+
+            // Stop Dan from moving
+            thePlayer.GetComponent<Animator>().enabled = false;
+
+            // Stop NPCs from moving
+            person1.GetComponent<Animator>().enabled = false;
         }
     }
 

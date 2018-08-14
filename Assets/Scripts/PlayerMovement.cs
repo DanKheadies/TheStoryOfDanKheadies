@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 // Control Player movement and overworld transition areas
 public class PlayerMovement : MonoBehaviour
 {
-    public Animator pAnim;
+    private Animator pAnim;
     private AspectUtility aspectUtil;
     private CameraFollow cameraFollow;
     private CameraSlider cameraSlider;
@@ -19,11 +19,13 @@ public class PlayerMovement : MonoBehaviour
     public Scene scene;
     private SFXManager SFXMan;
     private TouchControls touches;
+    private Transform trans;
     private UIManager uiMan;
     public Vector2 movementVector;
 
-    public bool bStopPlayerMovement;
     public bool bBoosting;
+    public bool bGWCUpdate;
+    public bool bStopPlayerMovement;
 
     public float moveSpeed;
     
@@ -33,17 +35,26 @@ public class PlayerMovement : MonoBehaviour
         // Initializers
         aspectUtil = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AspectUtility>();
         cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
-        cameraSlider = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraSlider>();
-        pAnim = GetComponent<Animator>();
         playerBrioMan = GetComponent<PlayerBrioManager>();
         playerCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
         scene = SceneManager.GetActiveScene();
         SFXMan = FindObjectOfType<SFXManager>();
         touches = FindObjectOfType<TouchControls>();
+        trans = GetComponent<Transform>();
         uiMan = FindObjectOfType<UIManager>();
 
-        bBoosting = false;
+        if (scene.name != "GuessWhoColluded")
+        {
+            cameraSlider = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraSlider>();
+            pAnim = GetComponent<Animator>();
+        }
+        else
+        {
+            trans = GetComponent<Transform>();
+
+            bGWCUpdate = true;
+        }
 
         if (scene.name == "Minesweeper")
         {
@@ -67,19 +78,43 @@ public class PlayerMovement : MonoBehaviour
             // No action; just need to avoid MovePlayer() here b/c it's cancelling out
             // the Touches script by passing in Move(0,0) while touches passes Move(X,Y)
         }
+        else if (scene.name == "GuessWhoColluded")
+        {
+            if (bGWCUpdate)
+            {
+                GWCMovePlayer();
+            }
+
+            if (Input.GetAxisRaw("Horizontal") != 0)
+            {
+                bGWCUpdate = false;
+            }
+            else if (Input.GetAxisRaw("Vertical") != 0)
+            {
+                bGWCUpdate = false;
+            }
+            else
+            {
+                bGWCUpdate = true;
+            }
+        }
         else
         {
             MovePlayer();
         }
 
         // Set boosting
-        if (Input.GetButtonDown("BAction"))
+        if (scene.name != "GuessWhoColluded")
         {
-            bBoosting = true;
-        }
-        else if (Input.GetButtonUp("BAction"))
-        {
-            bBoosting = false;
+            if (Input.GetButton("BAction") ||
+                touches.bBaction)
+            {
+                bBoosting = true;
+            }
+            else
+            {
+                bBoosting = false;
+            }
         }
     }
 
@@ -126,13 +161,45 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void GWCMovePlayer()
+    {
+        GWCMove(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+    }
+
+    public void GWCMove(float xInput, float yInput)
+    {
+        if (trans.position.x == 0 && xInput < 0)
+        {
+            rBody.position = new Vector2(0, rBody.position.y + (2 * yInput));
+        }
+        else if (trans.position.x == 10 && xInput > 0)
+        {
+            rBody.position = new Vector2(10, rBody.position.y + (2 * yInput));
+        }
+        else if (trans.position.y == 0 && yInput > 0)
+        {
+            rBody.position = new Vector2(rBody.position.x + (2 * xInput), 0);
+        }
+        else if (trans.position.y == -6 && yInput < 0)
+        {
+            rBody.position = new Vector2(rBody.position.x + (2 * xInput), -6);
+        }
+        else
+        {
+            rBody.position = new Vector2(rBody.position.x + (2 * xInput), rBody.position.y + (2 * yInput));
+        }
+    }
+
     public void CollisionBundle() // Note: order is important
     {
         // Reset Camera dimension / ratio incase screen size changed at all (e.g. WebGL Fullscreen)
         aspectUtil.Awake();
 
         // "Stop" player animation
-        pAnim.speed = 0.001f;
+        if (scene.name != "GuessWhoColluded")
+        {
+            pAnim.speed = 0.001f;
+        }
 
         // Unsync and stop camera tracking
         cameraFollow.currentCoords = 0;
@@ -692,7 +759,7 @@ public class PlayerMovement : MonoBehaviour
         // Overworld Warps
         if (collision.CompareTag("Door"))
         {
-            SFXMan.openDoor2.PlayOneShot(SFXMan.openDoor2.clip);
+            SFXMan.sounds[3].PlayOneShot(SFXMan.sounds[3].clip);
             collision.gameObject.transform.localScale = Vector3.zero;
         }
     }

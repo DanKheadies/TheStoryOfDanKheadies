@@ -120,7 +120,7 @@ public class MoveOptionsMenuArrow : MonoBehaviour
                 }
             }
             else if (Input.GetButtonDown("Action") ||
-                     touches.bAction)
+                     touches.bAaction)
             {
                 if (currentPosition == ArrowPos.Opt1)
                 {

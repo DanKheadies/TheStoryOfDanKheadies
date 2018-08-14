@@ -69,7 +69,7 @@ public class ShowdownDiaMan : MonoBehaviour
         // Advance active dialogues
         if ((bDialogueActive && Input.GetKeyDown(KeyCode.Space)) ||
             (bDialogueActive && Input.GetMouseButtonDown(0)) ||
-            (bDialogueActive && touches.bAction))
+            (bDialogueActive && touches.bAaction))
         {
             currentLine++;
         }

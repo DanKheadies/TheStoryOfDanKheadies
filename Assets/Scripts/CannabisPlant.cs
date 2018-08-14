@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/18/2017
-// Last:  08/12/2018
+// Last:  08/13/2018
 
 using UnityEngine;
 
@@ -68,7 +68,7 @@ public class CannabisPlant : MonoBehaviour
     void Update()
     {
         if ((bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && !bFreeze && Input.GetButtonUp("Action")) ||
-            (bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && !bFreeze && touches.bAction))
+            (bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && !bFreeze && touches.bAaction))
         {
             InteractWithPlant();
         }
@@ -149,7 +149,6 @@ public class CannabisPlant : MonoBehaviour
             }
 
             dMan.portPic = portPic;
-            dMan.dialogueLines = new string[HasBud.Length];
             dMan.dialogueLines = HasBud;
             dMan.ShowDialogue();
 
@@ -166,13 +165,12 @@ public class CannabisPlant : MonoBehaviour
         else
         {
             dMan.portPic = portPic;
-            dMan.dialogueLines = new string[NoBud.Length];
             dMan.dialogueLines = NoBud;
             dMan.ShowDialogue();
         }
 
         bAcquired = true;
-        touches.bAction = false;
+        touches.bAaction = false;
     }
 }
 

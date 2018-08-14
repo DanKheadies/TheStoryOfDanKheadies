@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  08/11/2018
+// Last:  08/13/2018
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,9 +9,8 @@ using UnityEngine.UI;
 // Contains all Chapter 0 quests, items, and elements
 public class Chp0 : MonoBehaviour
 {
-    public Camera mainCamera;
-    public PolygonCollider2D playerCollider;
     public BoxCollider2D warpCollider;
+    public Camera mainCamera;
     public DialogueManager dMan;
     public GameObject contArrow;
     public GameObject dBox;
@@ -24,6 +23,7 @@ public class Chp0 : MonoBehaviour
     public Inventory inv;
     public MusicManager mMan;
     public NPCMovement[] npcMove;
+    public PolygonCollider2D playerCollider;
     public SaveGame save;
     public SceneTransitioner sceneTrans;
     private SFXManager SFXMan;
@@ -129,7 +129,7 @@ public class Chp0 : MonoBehaviour
                 dMan.bDialogueActive = true;
 
                 // Sound Effect
-                SFXMan.dialogueMedium.PlayOneShot(SFXMan.dialogueMedium.clip);
+                SFXMan.sounds[2].PlayOneShot(SFXMan.sounds[2].clip);
             }
         }
 

@@ -26,10 +26,14 @@ public class PlayerBrioManager : MonoBehaviour
     {
         // Initializers
         dMan = FindObjectOfType<DialogueManager>();
-        pAnim = GetComponent<Animator>();
         pause = GameObject.FindGameObjectWithTag("Pause");
         scene = SceneManager.GetActiveScene();
         uiMan = FindObjectOfType<UIManager>();
+
+        if (scene.name != "GuessWhoColluded")
+        {
+            pAnim = GetComponent<Animator>();
+        }
 
         // Setting the brio
         if (PlayerPrefs.GetInt("Transferring") == 1)
@@ -63,14 +67,17 @@ public class PlayerBrioManager : MonoBehaviour
             dMan.dialogueLines = warningLines;
             dMan.portPic = portPic;
             dMan.ShowDialogue();
-            pAnim.SetBool("bIsWalking", false);
+            if (scene.name != "GuessWhoColluded")
+            {
+                pAnim.SetBool("bIsWalking", false);
+            }
             playerCurrentBrio = 1;
         }
         
         // Restore on certain scenes / conditions
         if (pause.transform.localScale == Vector3.one ||
             dMan.bDialogueActive ||
-            GameObject.FindObjectOfType<SceneTransitioner>().bAnimationToTransitionScene == true)
+            FindObjectOfType<SceneTransitioner>().bAnimationToTransitionScene == true)
         {
             // Avoid basic restore
         }

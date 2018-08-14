@@ -56,7 +56,7 @@ public class Element : MonoBehaviour
 
         if (bHasEntered &&
             ms.bAvoidInvestigating == false &&
-           (Input.GetKeyUp(KeyCode.Space) || touches.bAction))
+           (Input.GetKeyUp(KeyCode.Space) || touches.bAaction))
         {
             InvestigateElement();
         }

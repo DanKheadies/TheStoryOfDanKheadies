@@ -1,16 +1,17 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/12/2018
+// Last:  08/13/2018
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 // Controls where dialogues are displayed
 public class DialogueManager : MonoBehaviour
 {
     public AspectUtility aspectUtil;
-    public Animator pAnim;
+    private Animator pAnim;
     public CameraFollow mainCamera;
     public GameObject dBox;
     public Image dArrow;
@@ -19,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     public ImageStrobe imgStrobe;
     public OptionsManager oMan;
     public PlayerMovement pMove;
+    public Scene scene;
     private SFXManager SFXMan;
     public Sprite portPic;
     public Text dText;
@@ -60,11 +62,17 @@ public class DialogueManager : MonoBehaviour
         imgStrobe = GameObject.Find("Dialogue_Arrow").GetComponent<ImageStrobe>();
         mainCamera = FindObjectOfType<CameraFollow>();
         oMan = FindObjectOfType<OptionsManager>();
-        pAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         pMove = FindObjectOfType<PlayerMovement>();
+        scene = SceneManager.GetActiveScene();
         SFXMan = FindObjectOfType<SFXManager>();
         touches = FindObjectOfType<TouchControls>();
         uiMan = FindObjectOfType<UIManager>();
+
+        // Avoid loading animator if none present in scene
+        if (scene.name != "GuessWhoColluded")
+        {
+            pAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        }
 
         bDialogueActive = false;
         bPauseDialogue = false; // UX -- Prevents immediately reopening a dialogue while moving / talking
@@ -92,8 +100,9 @@ public class DialogueManager : MonoBehaviour
 
         // Advance active dialogues
         if ((bDialogueActive && !bPauseDialogue && Input.GetButtonDown("Action")) ||
-            (bDialogueActive && !bPauseDialogue && Input.GetButtonDown("DialogueAction")) ||
-            (bDialogueActive && !bPauseDialogue && touches.bAction))
+            (bDialogueActive && !bPauseDialogue && Input.GetButtonDown("DialogueAction")))
+        // DC 08/13/2018 TODO
+        // || (bDialogueActive && !bPauseDialogue && touches.bAaction)
         {
             if (currentLine < dialogueLines.Length)
             {
@@ -115,6 +124,12 @@ public class DialogueManager : MonoBehaviour
         else if (!oMan.bOptionsActive && currentLine >= dialogueLines.Length)
         {
             ResetDialogue();
+
+            // DC TODO
+            //if (scene.name == "GuessWhoColluded")
+            //{
+            //    touches.transform.localScale = Vector3.zero;
+            //}
         }
 
         // Temp: Update Camera display / aspect ratio
@@ -147,7 +162,10 @@ public class DialogueManager : MonoBehaviour
 
         // Reactivate the player
         pMove.bStopPlayerMovement = false;
-        pAnim.Play("Idle");
+        if (scene.name != "GuessWhoColluded")
+        {
+            pAnim.Play("Idle");
+        }
 
         // Show controls if visible
         touches.transform.localScale = Vector3.one;
@@ -167,11 +185,14 @@ public class DialogueManager : MonoBehaviour
         imgStrobe.bStartStrobe = true;
 
         // Sound Effect
-        SFXMan.dialogueMedium.PlayOneShot(SFXMan.dialogueMedium.clip);
+        SFXMan.sounds[2].PlayOneShot(SFXMan.sounds[2].clip);
 
         // Stops the player's movement
         pMove.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        pAnim.SetBool("bIsWalking", false);
+        if (scene.name != "GuessWhoColluded")
+        {
+            pAnim.SetBool("bIsWalking", false);
+        }
         touches.UnpressedAllArrows();
         pMove.bStopPlayerMovement = true;
 

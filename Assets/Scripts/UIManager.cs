@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     public DialogueManager dMan;
     public OptionsManager oMan;
     public PlayerBrioManager playerBrio;
-    public Scene currScene;
+    public Scene scene;
     public Slider brioBar;
     public Slider contOpacSlider;
     public Text brioText;
@@ -34,22 +34,20 @@ public class UIManager : MonoBehaviour
     void Start ()
     {
         // Initializers
-        if (currScene.name != "Showdown2")
-        {
-            playerBrio = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBrioManager>();
-        }
         brioBar = GameObject.Find("BrioBar").GetComponent<Slider>();
         brioText = GameObject.Find("BrioText").GetComponent<Text>();
         contOpacCan = GameObject.Find("GUIControls").GetComponent<CanvasGroup>();
         contOpacSlider = GameObject.Find("ShowButtonsSlider").GetComponent<Slider>();
         conTog = GameObject.Find("ShowButtonsToggle").GetComponent<Toggle>();
-        currScene = SceneManager.GetActiveScene();
+        scene = SceneManager.GetActiveScene();
         dHUD = GameObject.Find("Dialogue_HUD").GetComponent<Canvas>();
         dMan = FindObjectOfType<DialogueManager>();
         HUD = GetComponent<Canvas>();
         hudCanvas = GetComponent<CanvasGroup>();
         mainCamera = FindObjectOfType<Camera>().GetComponent<Camera>();
         oMan = FindObjectOfType<OptionsManager>();
+        playerBrio = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBrioManager>();
+        scene = SceneManager.GetActiveScene();
         touches = FindObjectOfType<TouchControls>();
 
 

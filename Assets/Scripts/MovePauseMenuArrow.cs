@@ -95,7 +95,8 @@ public class MovePauseMenuArrow : MonoBehaviour
             {
                 if (currentPosition == ArrowPos.GoOn)
                 {
-                    if (scene.name == "Minesweeper")
+                    if (scene.name == "Minesweeper" ||
+                        scene.name == "GuessWhoColluded")
                     {
                         currentPosition = ArrowPos.Stuff;
                         ClearAllArrows();
@@ -158,7 +159,8 @@ public class MovePauseMenuArrow : MonoBehaviour
                 }
                 else if (currentPosition == ArrowPos.Stuff)
                 {
-                    if (scene.name == "Minesweeper")
+                    if (scene.name == "Minesweeper" ||
+                        scene.name == "GuessWhoColluded")
                     {
                         currentPosition = ArrowPos.GoOn;
                         ClearAllArrows();
@@ -180,7 +182,7 @@ public class MovePauseMenuArrow : MonoBehaviour
                 }
             }
             else if (Input.GetButtonDown("Action") ||
-                     touches.bAction)
+                     touches.bAaction)
             {
                 if (currentPosition == ArrowPos.GoOn)
                 {

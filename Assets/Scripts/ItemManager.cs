@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  08/12/2018
+// Last:  08/13/2018
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -64,7 +64,7 @@ public class ItemManager : MonoBehaviour
     void Update()
     {
         if ((bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && Input.GetButtonUp("Action")) ||
-            (bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && touches.bAction))
+            (bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && touches.bAaction))
         {
             InteractWithItem();
         }
@@ -135,7 +135,6 @@ public class ItemManager : MonoBehaviour
             }
 
             dMan.portPic = portPic;
-            dMan.dialogueLines = new string[AcquireItem.Length];
             dMan.dialogueLines = AcquireItem;
             dMan.ShowDialogue();
         }
@@ -148,7 +147,7 @@ public class ItemManager : MonoBehaviour
         }
 
         bAcquired = true;
-        touches.bAction = false;
+        touches.bAaction = false;
     }
 
     public void HideItem()

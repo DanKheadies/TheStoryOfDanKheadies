@@ -16,7 +16,7 @@ public class AspectUtility : MonoBehaviour
     static float wantedAspectRatio;
     public float _wantedAspectRatio;
 
-    // DC 06/25/2017 -- Call to refresh the camera / screen display
+    // Call to refresh the camera / screen display
     public void Awake()
     {
         // Initializers

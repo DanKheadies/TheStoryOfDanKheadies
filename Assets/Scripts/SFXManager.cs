@@ -8,10 +8,7 @@ using UnityEngine;
 // Manage audio sound effects
 public class SFXManager : MonoBehaviour
 {
-    public AudioSource dialogueHigh;
-    public AudioSource dialogueLow;
-    public AudioSource dialogueMedium;
-    public AudioSource openDoor2;
+    public AudioSource[] sounds;
 
     private static bool bSFXManExists;
 
@@ -20,11 +17,6 @@ public class SFXManager : MonoBehaviour
         if (!bSFXManExists)
         {
             bSFXManExists = true;
-        }
-        else
-        {
-            //Debug.Log("SFX");
-            //Destroy(gameObject);
         }
 	}
 }

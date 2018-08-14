@@ -19,7 +19,8 @@ public class ScreenFaderInit : MonoBehaviour
         // Initializer
         scene = SceneManager.GetActiveScene();
 
-        if (scene.name == "Chp0")
+        if (scene.name == "Chp0" ||
+            scene.name == "GuessWhoColluded")
         {
             sFader = GameObject.Find("Screen_Fader").GetComponent<ScreenFader>();
             sFaderDia = GameObject.Find("Screen_Fader_Dialogue").GetComponent<ScreenFader>();

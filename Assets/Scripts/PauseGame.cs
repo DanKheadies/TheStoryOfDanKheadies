@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/26/2017
-// Last:  08/12/2018
+// Last:  08/13/2018
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,6 +12,8 @@ public class PauseGame : MonoBehaviour
     public OptionsManager oMan;
     public PlayerMovement pMove;
     public Scene scene;
+    public TouchControls touches;
+    public Transform gwcMenu;
     public Transform controlsMenu;
     public Transform pauseMenu;
     public Transform pauseTrans;
@@ -29,6 +31,13 @@ public class PauseGame : MonoBehaviour
         stuffMenu = GameObject.Find("StuffMenu").transform;
         soundMenu = GameObject.Find("SoundMenu").transform;
         controlsMenu = GameObject.Find("ControlsMenu").transform;
+        scene = SceneManager.GetActiveScene();
+        touches = FindObjectOfType<TouchControls>();
+
+        if (scene.name == "GuessWhoColluded")
+        {
+            gwcMenu = GameObject.Find("GWCMenu").transform;
+        }
     } 
 
 	void Update ()
@@ -48,6 +57,11 @@ public class PauseGame : MonoBehaviour
             soundMenu.transform.localScale = Vector3.zero;
             controlsMenu.transform.localScale = Vector3.zero;
 
+            if (scene.name == "GuessWhoColluded")
+            {
+                gwcMenu.transform.localScale = Vector3.one;
+            }
+
             pauseTrans.transform.localScale = Vector3.one;
             Time.timeScale = 0;
 
@@ -55,6 +69,8 @@ public class PauseGame : MonoBehaviour
         }
         else
         {
+            touches.bUIactive = false;
+
             oMan.bPauseOptions = true;
             pauseTrans.transform.localScale = Vector3.zero;
             Time.timeScale = 1;
@@ -69,11 +85,21 @@ public class PauseGame : MonoBehaviour
         {
             stuffMenu.transform.localScale = Vector3.one;
             pauseMenu.transform.localScale = Vector3.zero;
+
+            if (scene.name == "GuessWhoColluded")
+            {
+                gwcMenu.transform.localScale = Vector3.zero;
+            }
         }
         else
         {
             stuffMenu.transform.localScale = Vector3.zero;
             pauseMenu.transform.localScale = Vector3.one;
+
+            if (scene.name == "GuessWhoColluded")
+            {
+                gwcMenu.transform.localScale = Vector3.one;
+            }
         }
     }
 
@@ -83,11 +109,21 @@ public class PauseGame : MonoBehaviour
         {
             soundMenu.transform.localScale = Vector3.one;
             pauseMenu.transform.localScale = Vector3.zero;
+
+            if (scene.name == "GuessWhoColluded")
+            {
+                gwcMenu.transform.localScale = Vector3.zero;
+            }
         }
         else
         {
             soundMenu.transform.localScale = Vector3.zero;
             pauseMenu.transform.localScale = Vector3.one;
+
+            if (scene.name == "GuessWhoColluded")
+            {
+                gwcMenu.transform.localScale = Vector3.one;
+            }
         }
     }
 
@@ -97,11 +133,21 @@ public class PauseGame : MonoBehaviour
         {
             controlsMenu.transform.localScale = Vector3.one;
             pauseMenu.transform.localScale = Vector3.zero;
+
+            if (scene.name == "GuessWhoColluded")
+            {
+                gwcMenu.transform.localScale = Vector3.zero;
+            }
         }
         else
         {
             controlsMenu.transform.localScale = Vector3.zero;
             pauseMenu.transform.localScale = Vector3.one;
+
+            if (scene.name == "GuessWhoColluded")
+            {
+                gwcMenu.transform.localScale = Vector3.one;
+            }
         }
     }
 }

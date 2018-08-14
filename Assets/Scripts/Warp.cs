@@ -41,14 +41,17 @@ public class Warp : MonoBehaviour
             thePlayer.bStopPlayerMovement = true;
             touches.UnpressedAllArrows();
 
-            // Access Screen Fader and fade
+            // Stop player interaction
+            // DC 08/13/2018
 
+            // Fade out
             yield return StartCoroutine(sFader.FadeToBlack());
 
             cFollow.currentCoords = (CameraFollow.AnandaCoords)AnandaCoord;
             other.gameObject.transform.position = warpTarget.position;
             Camera.main.transform.position = warpTarget.position;
-
+            
+            // Fade in
             yield return StartCoroutine(sFader.FadeToClear());
         }
     }

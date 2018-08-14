@@ -46,6 +46,7 @@ public class ScreenFader : MonoBehaviour
     }
 
     // Avoid console error when no player object is present
+    // DC TODO
     void AnimationComplete()
     {
         scene = SceneManager.GetActiveScene();

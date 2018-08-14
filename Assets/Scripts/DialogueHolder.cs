@@ -33,7 +33,7 @@ public class DialogueHolder : MonoBehaviour
     void Update ()
     {
         if ((bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && Input.GetButtonUp("Action")) ||
-            (bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && touches.bAction))
+            (bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && touches.bAaction))
         {
             TalkWithNPC(colliEnter);
         }
@@ -79,7 +79,6 @@ public class DialogueHolder : MonoBehaviour
         {
             dMan.portPic = portPic;
             dMan.dialogueLines = dialogueLines;
-            dMan.currentLine = 0;
             dMan.ShowDialogue();
 
             // Activates Options Holder if any options
@@ -102,7 +101,7 @@ public class DialogueHolder : MonoBehaviour
         }
 
         // Stop UI controls / actions 
-        touches.bAction = false;
+        touches.bAaction = false;
     }
 
     void OrientNPC(Collider2D collision)
