@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/13/2018
+// Last:  08/17/2018
 
 using System.Collections;
 using UnityEngine;
@@ -18,10 +18,16 @@ public class TouchControls : MonoBehaviour
     public bool bXaction;
     public bool bYaction;
     public bool bDown;
+    public bool bDownLeft;
+    public bool bDownRight;
     public bool bLeft;
     public bool bRight;
     public bool bUp;
+    public bool bUpLeft;
+    public bool bUpRight;
     public bool bUIactive;
+
+    public string lastDirection;
 
 
     void Start ()
@@ -31,60 +37,98 @@ public class TouchControls : MonoBehaviour
         scene = SceneManager.GetActiveScene();
     }
 
-    void Update ()
+    void Update()
     {
         // Moving the player based off arrow flags
-        if (bLeft && !pMove.bStopPlayerMovement)
+        if (pMove.bGWCUpdate &&
+            !pMove.bStopPlayerMovement &&
+            scene.name == "GuessWhoColluded")
         {
-            if (scene.name == "GuessWhoColluded" && 
-                pMove.bGWCUpdate)
-            {
-                pMove.GWCMove(-1.0f, 0.0f);
-                bLeft = false; // dis
-            }
-            else
-            {
-                pMove.Move(-1.0f, 0.0f);
-            }
-        }
-
-        if (bRight && !pMove.bStopPlayerMovement)
-        {
-            if (scene.name == "GuessWhoColluded" &&
-                pMove.bGWCUpdate)
-            {
-                pMove.GWCMove(1.0f, 0.0f);
-                bRight = false; // dis
-            }
-            else
-            {
-                pMove.Move(1.0f, 0.0f);
-            }
-        }
-
-        if (bUp && !pMove.bStopPlayerMovement)
-        {
-            if (scene.name == "GuessWhoColluded" &&
-                pMove.bGWCUpdate)
+            if (bUp)
             {
                 pMove.GWCMove(0.0f, 1.0f);
-                bUp = false; // dis
+                bUp = false;
             }
-            else
+
+            if (bLeft)
+            {
+                pMove.GWCMove(-1.0f, 0.0f);
+                bLeft = false;
+            }
+
+            if (bDown)
+            {
+                pMove.GWCMove(0.0f, -1.0f);
+                bDown = false;
+            }
+
+            if (bRight)
+            {
+                pMove.GWCMove(1.0f, 0.0f);
+                bRight = false;
+            }
+        }
+
+        if (!pMove.bStopPlayerMovement &&
+            bUIactive)
+        {
+            if (bUp)
             {
                 pMove.Move(0.0f, 1.0f);
             }
-        }
-
-        if (bDown && !pMove.bStopPlayerMovement)
-        {
-            if (scene.name == "GuessWhoColluded" &&
-                pMove.bGWCUpdate)
+            else if (bRight)
             {
-                pMove.GWCMove(0.0f, -1.0f);
-                bDown = false; // dis
+                pMove.Move(1.0f, 0.0f);
             }
-            else
+            else if (bLeft)
+            {
+                pMove.Move(-1.0f, 0.0f);
+            }
+            else if (bDown)
+            {
+                pMove.Move(0.0f, -1.0f);
+            }
+
+            if (bUpRight &&
+                lastDirection == "up")
+            {
+                pMove.Move(1.0f, 0.0f);
+            }
+            else if (bUpRight &&
+                     lastDirection == "right")
+            {
+                pMove.Move(0.0f, 1.0f);
+            }
+
+            if (bUpLeft &&
+                lastDirection == "up")
+            {
+                pMove.Move(-1.0f, 0.0f);
+            }
+            else if (bUpLeft &&
+                     lastDirection == "left")
+            {
+                pMove.Move(0.0f, 1.0f);
+            }
+
+            if (bDownLeft &&
+                lastDirection == "down")
+            {
+                pMove.Move(-1.0f, 0.0f);
+            }
+            else if (bDownLeft &&
+                     lastDirection == "left")
+            {
+                pMove.Move(0.0f, -1.0f);
+            }
+
+            if (bDownRight &&
+                lastDirection == "down")
+            {
+                pMove.Move(1.0f, 0.0f);
+            }
+            else if (bDownRight &&
+                     lastDirection == "right")
             {
                 pMove.Move(0.0f, -1.0f);
             }
@@ -112,13 +156,11 @@ public class TouchControls : MonoBehaviour
     {
         bAaction = true;
         bUIactive = true;
-        Debug.Log("a true");
     }
     public void aActionStop()
     {
         bAaction = false;
         bUIactive = false;
-        Debug.Log("a false");
     }
 
     // B button flagging
@@ -158,26 +200,18 @@ public class TouchControls : MonoBehaviour
     }
 
     // Movement / arrow button flags
-    public void PressedLeftArrow()
+    // Cartesian coordinate arrangement
+    public void PressedUpRightArrow()
     {
-        bLeft = true;
+        bUpRight = true;
         bUIactive = true;
     }
-    public void UnpressedLeftArrow()
+    public void UnpressedUpRightArrow()
     {
-        bLeft = false;
+        bUpRight = false;
         bUIactive = false;
-    }
 
-    public void PressedRightArrow()
-    {
-        bRight = true;
-        bUIactive = true;
-    }
-    public void UnpressedRightArrow()
-    {
-        bRight = false;
-        bUIactive = false;
+        lastDirection = "upRight";
     }
 
     public void PressedUpArrow()
@@ -189,6 +223,47 @@ public class TouchControls : MonoBehaviour
     {
         bUp = false;
         bUIactive = false;
+
+        lastDirection = "up";
+    }
+
+    public void PressedUpLeftArrow()
+    {
+        bUpLeft = true;
+        bUIactive = true;
+    }
+    public void UnpressedUpLeftArrow()
+    {
+        bUpLeft = false;
+        bUIactive = false;
+
+        lastDirection = "upLeft";
+    }
+
+    public void PressedLeftArrow()
+    {
+        bLeft = true;
+        bUIactive = true;
+    }
+    public void UnpressedLeftArrow()
+    {
+        bLeft = false;
+        bUIactive = false;
+
+        lastDirection = "left";
+    }
+
+    public void PressedDownLeftArrow()
+    {
+        bDownLeft = true;
+        bUIactive = true;
+    }
+    public void UnpressedDownLeftArrow()
+    {
+        bDownLeft = false;
+        bUIactive = false;
+
+        lastDirection = "downLeft";
     }
 
     public void PressedDownArrow()
@@ -200,21 +275,55 @@ public class TouchControls : MonoBehaviour
     {
         bDown = false;
         bUIactive = false;
+
+        lastDirection = "down";
+    }
+
+    public void PressedDownRightArrow()
+    {
+        bDownRight = true;
+        bUIactive = true;
+    }
+    public void UnpressedDownRightArrow()
+    {
+        bDownRight = false;
+        bUIactive = false;
+
+        lastDirection = "downRight";
+    }
+
+    public void PressedRightArrow()
+    {
+        bRight = true;
+        bUIactive = true;
+    }
+    public void UnpressedRightArrow()
+    {
+        bRight = false;
+        bUIactive = false;
+
+        lastDirection = "right";
     }
 
     // Clear all movement / arrow buttons
     public void UnpressedAllArrows()
     {
-        UnpressedDownArrow();
-        UnpressedLeftArrow();
-        UnpressedRightArrow();
+        UnpressedUpRightArrow();
         UnpressedUpArrow();
+        UnpressedUpLeftArrow();
+        UnpressedLeftArrow();
+        UnpressedDownLeftArrow();
+        UnpressedDownArrow();
+        UnpressedDownRightArrow();
+        UnpressedRightArrow();
     }
 
     // Vibrate on touch
     public void Vibrate()
     {
-        Handheld.Vibrate();
+        #if UNITY_ANDRIOD
+            Handheld.Vibrate();
+        #endif
     }
 
     public void UIActive()

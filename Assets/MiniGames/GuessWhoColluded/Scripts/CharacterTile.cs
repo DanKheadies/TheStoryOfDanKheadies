@@ -1,13 +1,14 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/13/2018
-// Last:  08/13/2018
+// Last:  08/26/2018
 
 using UnityEngine;
 
 // Logic for each character tile on the GWC board
 public class CharacterTile : MonoBehaviour
 {
+    public PauseGame pause;
     private TouchControls touches;
     public Transform tileChar;
     public Transform tileFlag;
@@ -28,6 +29,7 @@ public class CharacterTile : MonoBehaviour
     void Start()
     {
         // Initializers
+        pause = GameObject.Find("Game_Controller").GetComponent<PauseGame>();
         tileChar = gameObject.transform.GetChild(2);
         tileFlag = gameObject.transform.GetChild(3);
         tileIcon = gameObject.transform.GetChild(0);
@@ -43,15 +45,15 @@ public class CharacterTile : MonoBehaviour
     void Update()
     {
         // Flip tile
-        if ((bHasEntered && !bHasExited && Input.GetButtonDown("Action")) ||
-            (bHasEntered && !bHasExited && touches.bAaction))
+        if ((bHasEntered && !bHasExited && !pause.bPauseActive && Input.GetButtonDown("Action")) ||
+            (bHasEntered && !bHasExited && !pause.bPauseActive && touches.bAaction))
         {
             CheckAndFlip();
         }
 
         // Tile layer changer
-        if ((Input.GetKeyDown(KeyCode.LeftShift) && !bAvoidUpdate) ||
-            (Input.GetKeyDown(KeyCode.RightShift) && !bAvoidUpdate) ||
+        if ((Input.GetKeyDown(KeyCode.LeftShift) && !pause.bPauseActive && !bAvoidUpdate) ||
+            (Input.GetKeyDown(KeyCode.RightShift) && !pause.bPauseActive && !bAvoidUpdate) ||
             (touches.bBaction && !bAvoidUpdate))
         {
             if (bShowIcon)
@@ -85,8 +87,8 @@ public class CharacterTile : MonoBehaviour
         }
 
         // Reset tile layer changer for keyboard
-        if (Input.GetKeyUp(KeyCode.LeftShift) ||
-            Input.GetKeyUp(KeyCode.RightShift))
+        if ((Input.GetKeyUp(KeyCode.LeftShift) && !pause.bPauseActive) ||
+            (Input.GetKeyUp(KeyCode.RightShift) && !pause.bPauseActive))
         {
             bAvoidUpdate = false;
         }
@@ -104,6 +106,17 @@ public class CharacterTile : MonoBehaviour
         {
             bHasEntered = true;
             bHasExited = false;
+
+            // Updates the tile's polygon collider, which allows the user to click it while the "player" is over it
+            PolygonCollider2D currentPoints = GetComponent<PolygonCollider2D>();
+            Vector2[] tempArray = currentPoints.points;
+
+            for (int i = 0; i < tempArray.Length; i++)
+            {
+                tempArray[i].y += 0.001f;
+            }
+
+            currentPoints.points = tempArray;
         }
     }
 
@@ -113,6 +126,17 @@ public class CharacterTile : MonoBehaviour
         {
             bHasEntered = false;
             bHasExited = true;
+
+            // Updates the tile's polygon collider, which allows the user to click it while the "player" is over it
+            PolygonCollider2D currentPoints = GetComponent<PolygonCollider2D>();
+            Vector2[] tempArray = currentPoints.points;
+
+            for (int i = 0; i < tempArray.Length; i++)
+            {
+                tempArray[i].y -= 0.001f;
+            }
+
+            currentPoints.points = tempArray;
         }
     }
 

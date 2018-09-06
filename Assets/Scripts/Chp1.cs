@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  08/13/2018
+// Last:  09/06/2018
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +11,6 @@ public class Chp1 : MonoBehaviour
 {
     public Camera mainCamera;
     public CameraFollow camFollow;
-    public CannabisPlant cannaP;
     public DialogueManager dMan;
     public GameObject dArrow;
     public GameObject dBox;
@@ -20,10 +19,15 @@ public class Chp1 : MonoBehaviour
     public GameObject oldMan1;
     public GameObject parent2;
     public GameObject person1;
+    public GameObject pookieB1;
+    public GameObject pookieB2;
     public GameObject quest0;
     public GameObject quest1;
     public GameObject quest2;
     public GameObject quest3;
+    public GameObject quest4;
+    public GameObject quest7;
+    public GameObject quest8;
     public GameObject questTrigger2;
     public GameObject thePlayer;
     public GameObject warpGWC;
@@ -42,9 +46,20 @@ public class Chp1 : MonoBehaviour
     public bool bAvoidUpdateQ1;
     public bool bAvoidUpdateQ2;
     public bool bAvoidUpdateQ3;
+    public bool bAvoidUpdateQ4;
+    public bool bAvoidUpdateQ7;
+    public bool bAvoidUpdateQ8;
 
     public bool bContainsQ3Item;
     public bool bContainsQ6Item;
+    public bool bContainsQ7ItemGreen;
+    public bool bContainsQ7ItemOrange;
+    public bool bContainsQ7ItemPurple;
+    public bool bContainsQ7ItemWhite;
+    public bool bContainsQ8ItemGreen;
+    public bool bContainsQ8ItemOrange;
+    public bool bContainsQ8ItemPurple;
+    public bool bContainsQ8ItemWhite;
 
     public bool bGetInventory;
 
@@ -57,7 +72,6 @@ public class Chp1 : MonoBehaviour
     {
         // Initializers
         camFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
-        cannaP = GameObject.FindGameObjectWithTag("SmoochyWoochyPoochy").GetComponent<CannabisPlant>();
         dArrow = GameObject.Find("Dialogue_Arrow");
         dBox = GameObject.Find("Dialogue_Box");
         dMan = FindObjectOfType<DialogueManager>();
@@ -71,6 +85,8 @@ public class Chp1 : MonoBehaviour
         oMan = FindObjectOfType<OptionsManager>();
         parent2 = GameObject.Find("Parent.2");
         person1 = GameObject.Find("Person.1");
+        pookieB1 = GameObject.Find("PookieBear.1");
+        pookieB2 = GameObject.Find("PookieBear.2");
         qMan = FindObjectOfType<QuestManager>();
         questTrigger2 = GameObject.Find("QT_2");
         thePlayer = GameObject.FindGameObjectWithTag("Player");
@@ -86,6 +102,9 @@ public class Chp1 : MonoBehaviour
         quest1 = GameObject.Find("QuestManager").transform.GetChild(1).gameObject; // 03/29/18 DC -- Avoid Null Exception (wtf?)
         quest2 = GameObject.Find("Quest_2");
         quest3 = GameObject.Find("Quest_3");
+        quest4 = GameObject.Find("Quest_4");
+        quest7 = GameObject.Find("Quest_7");
+        quest8 = GameObject.Find("Quest_8");
 
         invTimer = 0.333f;
         raceTimer = 0f;
@@ -286,6 +305,79 @@ public class Chp1 : MonoBehaviour
             }
         }
 
+        // Quest 4 -- Manhunt
+        // TODO w/ kid in the woods
+
+        // Quest 7 -- Item Delivery
+        if (quest7.GetComponent<QuestObject>().bHasStarted &&
+            inv.bUpdateItemCount &&
+            !bAvoidUpdateQ7)
+        {
+            // Assume not present unless we find it
+            //bContainsQ4Item = false;
+
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+
+                // Green nug check
+                if (!bContainsQ7ItemGreen &&
+                   (item == "Cannabis.Bud.SmoochyWoochyPoochy (Item)" ||
+                    item == "Cannabis.Bud.NaturesCandy (Item)" ||
+                    item == "Cannabis.Bud.TheDevilsLettuce (Item)"))
+                {
+                    // activate option 1
+                    //pookieB1.GetComponent<OptionsHolder>().
+                    //bContainsQ4ItemGreen = true;
+                }
+
+                // White nug
+                if (!bContainsQ7ItemWhite &&
+                   (item == "Cannabis.Bud.CreeperBud (Item)" ||
+                    item == "Cannabis.Bud.MastaRoshi (Item)" ||
+                    item == "Cannabis.Bud.WhiteWalker (Item)"))
+                {
+                    // activate option 2
+                }
+
+                // Purple nug
+                if (!bContainsQ7ItemPurple &&
+                   (item == "Cannabis.Bud.GranPapasMedicine (Item)" ||
+                    item == "Cannabis.Bud.PurpleNurple (Item)" ||
+                    item == "Cannabis.Bud.RighteousBud (Item)"))
+                {
+                    // activate option 3
+                }
+
+                // Orange nug
+                if (!bContainsQ7ItemOrange &&
+                   (item == "Cannabis.Bud.BootyJuice (Item)" ||
+                    item == "Cannabis.Bud.Catnip (Item)" ||
+                    item == "Cannabis.Bud.SnoopLeone (Item)"))
+                {
+                    // activate option 4
+                }
+            }
+
+            //if (bContainsQ4Item)
+            //{
+            //    oldMan1.transform.GetChild(0).gameObject.SetActive(false);
+            //    oldMan1.transform.GetChild(1).gameObject.SetActive(true);
+
+            //    oldMan1.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = true;
+            //}
+            //else if (!bContainsQ4Item)
+            //{
+            //    oldMan1.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = false;
+
+            //    oldMan1.transform.GetChild(0).gameObject.SetActive(true);
+            //    oldMan1.transform.GetChild(1).gameObject.SetActive(false);
+            //}
+
+            inv.bUpdateItemCount = false;
+        }
+
+
         // Minigame -- Guess Who Colluded?
         if (thePlayer.GetComponent<PolygonCollider2D>().IsTouching(warpGWC.GetComponent<BoxCollider2D>()))
         {
@@ -355,6 +447,18 @@ public class Chp1 : MonoBehaviour
             uiMan.bUpdateBrio = true;
 
             quest3.GetComponent<QuestObject>().bHasCollected = true;
+        }
+    }
+
+    public void Quest4Reward()
+    {
+        if (!quest4.GetComponent<QuestObject>().bHasCollected)
+        {
+            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
+            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(5);
+            uiMan.bUpdateBrio = true;
+
+            quest4.GetComponent<QuestObject>().bHasCollected = true;
         }
     }
 
@@ -438,6 +542,91 @@ public class Chp1 : MonoBehaviour
             oMan.ResetOptions();
             Quest6Dialogue1Opt2();
         }
+        // Quest 7 - Dialogue 1 - Option *
+        else if (pookieB1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+                 pookieB1.transform.GetChild(1).gameObject.activeSelf &&
+                (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3 ||
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt4))
+        {
+            oMan.ResetOptions();
+            dMan.ResetDialogue();
+        }
+        else if (pookieB2.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+                 pookieB2.transform.GetChild(1).gameObject.activeSelf &&
+                (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3 ||
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt4))
+        {
+            oMan.ResetOptions();
+            dMan.ResetDialogue();
+        }
+        //// Quest 7 - Dialogue 1 - Option 1
+        //else if (pookieB1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+        //         pookieB1.transform.GetChild(1).gameObject.activeSelf &&
+        //         moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
+        //{
+        //    oMan.ResetOptions();
+
+        //    // Option 1 selected
+        //    // Remove nug
+        //    // Eating animation
+
+        //    // If correct nug
+        //    // Sit down, bug out, and remain sitting & smiling
+        //    // Quest complete -> quest reward
+        //    // Else keep walking
+        //}
+        //// Quest 7 - Dialogue 1 - Option 2
+        //else if (pookieB1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+        //         pookieB1.transform.GetChild(1).gameObject.activeSelf &&
+        //         moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
+        //{
+        //    oMan.ResetOptions();
+
+        //    // Option 2 selected
+        //    // Remove nug
+        //    // Eating animation
+
+        //    // If correct nug
+        //    // Sit down, bug out, and remain sitting & smiling
+        //    // Quest complete -> quest reward
+        //    // Else keep walking
+        //}
+        //// Quest 7 - Dialogue 1 - Option 3
+        //else if (pookieB1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+        //         pookieB1.transform.GetChild(1).gameObject.activeSelf &&
+        //         moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3)
+        //{
+        //    oMan.ResetOptions();
+
+        //    // Option 3 selected
+        //    // Remove nug
+        //    // Eating animation
+
+        //    // If correct nug
+        //    // Sit down, bug out, and remain sitting & smiling
+        //    // Quest complete -> quest reward
+        //    // Else keep walking
+        //}
+        //// Quest 7 - Dialogue 1 - Option 4
+        //else if (pookieB1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+        //         pookieB1.transform.GetChild(1).gameObject.activeSelf &&
+        //         moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt4)
+        //{
+        //    oMan.ResetOptions();
+
+        //    // Option 4 selected
+        //    // Remove nug
+        //    // Eating animation
+
+        //    // If correct nug
+        //    // Sit down, bug out, and remain sitting & smiling
+        //    // Quest complete -> quest reward
+        //    // Else keep walking
+        //}
     }
 
     public void Quest0Dialogue1Opt1()

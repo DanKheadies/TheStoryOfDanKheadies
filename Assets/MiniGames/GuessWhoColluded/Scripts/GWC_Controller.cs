@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  08/13/2018
+// Last:  08/26/2018
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -106,12 +106,13 @@ public class GWC_Controller : MonoBehaviour
         thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
 
         dialogueLines = new string[] {
-                "Can you guess who... colluded?"
+                "I want YOU.. to         Guess Who Colluded."
             };
 
         dMan.dialogueLines = dialogueLines;
         dMan.currentLine = 0;
         dText.text = dialogueLines[dMan.currentLine];
+        dPic.sprite = portPic[48];
         dBox.transform.localScale = Vector3.one;
         sFaderAnimDia.GetComponent<Animator>().enabled = true;
     }
@@ -387,5 +388,18 @@ public class GWC_Controller : MonoBehaviour
 
         // Stop the player from bringing up the dialog again
         dMan.gameObject.SetActive(false);
+    }
+    public void OpenKREAMinac()
+    {
+        #if !UNITY_WEBGL
+            Application.OpenURL("https://docs.google.com/document/d/1Q8-YiK7TAVkGBsrL_3F9a92JjTFYVCyLcg-RQNNKYkM/edit?usp=sharing");
+        #endif
+    }
+
+    public void OpenIcons()
+    {
+        #if !UNITY_WEBGL
+            Application.OpenURL("https://docs.google.com/document/d/1Q8-YiK7TAVkGBsrL_3F9a92JjTFYVCyLcg-RQNNKYkM/edit?usp=sharing#bookmark=id.2ukwna434o1k");
+        #endif
     }
 }

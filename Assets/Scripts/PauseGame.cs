@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/26/2017
-// Last:  08/13/2018
+// Last:  08/26/2018
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 // Pause the game & bring up the menu
 public class PauseGame : MonoBehaviour
 {
+    public MovePauseMenuArrow movePArw;
     public OptionsManager oMan;
     public PlayerMovement pMove;
     public Scene scene;
@@ -20,10 +21,12 @@ public class PauseGame : MonoBehaviour
     public Transform soundMenu;
     public Transform stuffMenu;
 
+    public bool bPauseActive;
 
     void Start ()
     {
         // Initializers
+        movePArw = GameObject.Find("PauseMenu").GetComponent<MovePauseMenuArrow>();
         oMan = FindObjectOfType<OptionsManager>();
         pMove = FindObjectOfType<PlayerMovement>();
         pauseTrans = GameObject.FindGameObjectWithTag("Pause").GetComponent<Transform>();
@@ -65,16 +68,18 @@ public class PauseGame : MonoBehaviour
             pauseTrans.transform.localScale = Vector3.one;
             Time.timeScale = 0;
 
+            bPauseActive = true;
             pMove.bStopPlayerMovement = true;
         }
         else
         {
-            touches.bUIactive = false;
-
             oMan.bPauseOptions = true;
             pauseTrans.transform.localScale = Vector3.zero;
             Time.timeScale = 1;
 
+            movePArw.ResetArrows();
+            
+            bPauseActive = false;
             pMove.bStopPlayerMovement = false;
         }
     }

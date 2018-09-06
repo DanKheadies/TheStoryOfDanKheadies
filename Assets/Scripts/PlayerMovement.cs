@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/13/2018
+// Last:  08/17/2018
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -73,7 +73,8 @@ public class PlayerMovement : MonoBehaviour
             movementVector = Vector2.zero;
             rBody.velocity = Vector2.zero;
         }
-        else if (touches.bDown || touches.bLeft || touches.bRight || touches.bUp)
+        else if (touches.bDown || touches.bLeft || touches.bRight || touches.bUp ||
+            touches.bUpRight || touches.bUpLeft || touches.bDownRight || touches.bDownLeft)
         {
             // No action; just need to avoid MovePlayer() here b/c it's cancelling out
             // the Touches script by passing in Move(0,0) while touches passes Move(X,Y)
