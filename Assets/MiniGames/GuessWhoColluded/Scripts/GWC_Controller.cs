@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  08/26/2018
+// Last:  10/04/2018
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,6 +44,7 @@ public class GWC_Controller : MonoBehaviour
     public UIManager uiMan;
 
     private bool bAvoidUpdate;
+    public bool bCanFlip;
     private bool bOptTeamSelect;
     private bool bOptOppSelect;
     private bool bStartGame;
@@ -186,6 +187,9 @@ public class GWC_Controller : MonoBehaviour
 
             // Change to avoid running this logic
             bAvoidUpdate = true;
+
+            // Allow tile flipping
+            bCanFlip = true;
         }
 
         // Zoom In -- Scroll Forward or press Y

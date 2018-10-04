@@ -1,13 +1,14 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/13/2018
-// Last:  08/26/2018
+// Last:  10/04/2018
 
 using UnityEngine;
 
 // Logic for each character tile on the GWC board
 public class CharacterTile : MonoBehaviour
 {
+    public GWC_Controller gwc;
     public PauseGame pause;
     private TouchControls touches;
     public Transform tileChar;
@@ -29,6 +30,7 @@ public class CharacterTile : MonoBehaviour
     void Start()
     {
         // Initializers
+        gwc = FindObjectOfType<GWC_Controller>();
         pause = GameObject.Find("Game_Controller").GetComponent<PauseGame>();
         tileChar = gameObject.transform.GetChild(2);
         tileFlag = gameObject.transform.GetChild(3);
@@ -45,16 +47,16 @@ public class CharacterTile : MonoBehaviour
     void Update()
     {
         // Flip tile
-        if ((bHasEntered && !bHasExited && !pause.bPauseActive && Input.GetButtonDown("Action")) ||
-            (bHasEntered && !bHasExited && !pause.bPauseActive && touches.bAaction))
+        if ((gwc.bCanFlip && bHasEntered && !bHasExited && !pause.bPauseActive && Input.GetButtonDown("Action")) ||
+            (gwc.bCanFlip && bHasEntered && !bHasExited && !pause.bPauseActive && touches.bAaction))
         {
             CheckAndFlip();
         }
 
         // Tile layer changer
-        if ((Input.GetKeyDown(KeyCode.LeftShift) && !pause.bPauseActive && !bAvoidUpdate) ||
-            (Input.GetKeyDown(KeyCode.RightShift) && !pause.bPauseActive && !bAvoidUpdate) ||
-            (touches.bBaction && !bAvoidUpdate))
+        if ((gwc.bCanFlip && Input.GetKeyDown(KeyCode.LeftShift) && !pause.bPauseActive && !bAvoidUpdate) ||
+            (gwc.bCanFlip && Input.GetKeyDown(KeyCode.RightShift) && !pause.bPauseActive && !bAvoidUpdate) ||
+            (gwc.bCanFlip && touches.bBaction && !bAvoidUpdate))
         {
             if (bShowIcon)
             {
@@ -160,14 +162,10 @@ public class CharacterTile : MonoBehaviour
         bHasFlipped = false;
     }
 
-    public void OnMouseUp()
+    public void OnMouseDown()
     {
-        // DC 08/10/2018 -- Unable to click wherever the 'player' is
-        // Exception: 
-        // Start of game before moving
-        // M: Pelosi & Rhee
-        // T: Trump Jr, Papa, Cohen, Pai, Oma
-        if (!touches.bUIactive)
+        if (gwc.bCanFlip && 
+            !touches.bUIactive)
         {
             CheckAndFlip();
         }

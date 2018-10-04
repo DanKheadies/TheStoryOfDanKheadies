@@ -125,6 +125,8 @@ public class SaveGame : MonoBehaviour
         Debug.Log("Con: " + PlayerPrefs.GetInt("ControlsActive"));
         Debug.Log("COp: " + PlayerPrefs.GetFloat("ControlsOpac"));
 
+        Debug.Log("C1Q: " + PlayerPrefs.GetString("Chp1Quests"));
+
         Debug.Log("Tran: " + PlayerPrefs.GetInt("Transferring"));
         Debug.Log("TSce: " + PlayerPrefs.GetInt("TransferScene"));
         Debug.Log("TCam: (" + PlayerPrefs.GetFloat("TransferCam_x") + "," + PlayerPrefs.GetFloat("TransferCam_y") + ")");
@@ -221,6 +223,20 @@ public class SaveGame : MonoBehaviour
         camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("TransferAnandaCoord");
 
         // See Chapter start for inventory getters
+    }
+
+    // Testing -- Delete all transfer
+    public void DeleteTransPrefs()
+    {
+        PlayerPrefs.DeleteKey("Transferring");
+        PlayerPrefs.DeleteKey("TransferScene");
+        PlayerPrefs.DeleteKey("TransferCam_x");
+        PlayerPrefs.DeleteKey("TransferCam_y");
+        PlayerPrefs.DeleteKey("TransferP_x");
+        PlayerPrefs.DeleteKey("TransferP_y");
+        PlayerPrefs.DeleteKey("TransferAnandaCoord");
+        PlayerPrefs.DeleteKey("TransferBrioMax");
+        PlayerPrefs.DeleteKey("TransferBrio");
     }
 
     // Testing -- Delete all values

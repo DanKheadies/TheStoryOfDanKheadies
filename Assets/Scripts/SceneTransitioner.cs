@@ -2,7 +2,7 @@
 // Authors: David W. Corso
 // Contributors: Nick Pettit
 // Start: 04/20/2017
-// Last:  08/13/2018
+// Last:  10/04/2018
 
 using System.Collections;
 using UnityEngine;
@@ -12,14 +12,17 @@ using UnityEngine.UI;
 // Transition amongst Unity Scenes
 public class SceneTransitioner : MonoBehaviour
 {
+    public Camera mainCamera;
     public Scene scene;
-    public Text sceneTitle;
     public Text sceneSubtitle;
+    public Text sceneTitle;
 
     public bool bLoadScene;
     public bool bNeedsTimer;
     public bool bAnimationToTransitionScene;
-
+    
+    private float cameraHeight;
+    private float cameraWidth;
     public float timeToLoad;
 
     public string AlphaLoad;
@@ -51,8 +54,8 @@ public class SceneTransitioner : MonoBehaviour
                         sceneSubtitle.text = "Boom baby...";
                         break;
                     case "GuessWhoColluded":
-                        sceneTitle.text = "Guess Who...";
-                        sceneSubtitle.text = "Colluded?";
+                        sceneTitle.text = "Guess Who";
+                        sceneSubtitle.text = "Colluded...";
                         break;
                     default:
                         sceneTitle.text = "n_n";
@@ -118,6 +121,28 @@ public class SceneTransitioner : MonoBehaviour
 
     IEnumerator LoadNewScene()
     {
+        // Initializers for text sizing
+        mainCamera = FindObjectOfType<Camera>();
+        cameraHeight = mainCamera.rect.height;
+        cameraWidth = mainCamera.rect.width;
+        sceneSubtitle = GameObject.Find("Scene_Subtitle").GetComponent<Text>();
+        sceneTitle = GameObject.Find("Scene_Title").GetComponent<Text>();
+
+        // UI Image & Text Positioning and Sizing based off camera size vs device size
+        // Subtitle is 2/3 the size of the title
+        if (Screen.width > mainCamera.pixelWidth)
+        {
+            // Height => change in height affects variables, so look at the width of the camera
+            sceneSubtitle.fontSize = (int)((-6.132f * (cameraWidth * cameraWidth) + 38.80f * cameraWidth + 15.76f) / 1.333f);
+            sceneTitle.fontSize = (int)(-6.132f * (cameraWidth * cameraWidth) + 38.80f * cameraWidth + 15.76f);
+        }
+        else
+        {
+            // Width => change in width affects variables, so look at the height of the camera
+            sceneSubtitle.fontSize = (int)((2.432f * (cameraHeight * cameraHeight) + 25.84f * cameraHeight + 20.05f) / 1.333f);
+            sceneTitle.fontSize = (int)(2.432f * (cameraHeight * cameraHeight) + 25.84f * cameraHeight + 20.05f);
+        }
+
         yield return new WaitForSeconds(3);
 
         AsyncOperation async = SceneManager.LoadSceneAsync(BetaLoad);

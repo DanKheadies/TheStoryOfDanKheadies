@@ -81,6 +81,7 @@ public class PauseGame : MonoBehaviour
             
             bPauseActive = false;
             pMove.bStopPlayerMovement = false;
+            touches.bUIactive = false;
         }
     }
 

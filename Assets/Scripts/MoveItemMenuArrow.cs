@@ -1,11 +1,13 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 01/29/2018
-// Last:  08/12/2018
+// Last:  10/04/2018
 
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
+// 10/04/2018 DC TODO -- Add a square around items for selection w/ arrow keys
 
 // To "move" and execute the arrows on the Item Menu
 public class MoveItemMenuArrow : MonoBehaviour

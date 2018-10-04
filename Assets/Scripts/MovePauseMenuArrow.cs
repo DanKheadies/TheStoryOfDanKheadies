@@ -53,6 +53,9 @@ public class MovePauseMenuArrow : MonoBehaviour
         Controls = -118,
         Quit = -165,
 
+        // 10/04/2018 DC TODO -- Prevent primary menu SPACE / ENTER action while sub-menu is up / being acted on
+        //AltMenu = 0,
+
         // For Guess Who Colluded
         KREAMinac = 1,
         MyCard = 2,

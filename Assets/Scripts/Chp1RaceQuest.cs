@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/27/2018
-// Last:  08/12/2018
+// Last:  10/04/2018
 
 using UnityEngine;
 
@@ -31,14 +31,14 @@ public class Chp1RaceQuest : MonoBehaviour
         ogPoints = thePlayer.GetComponent<PolygonCollider2D>().points;
         racePoints = new Vector2[]
         {
-            new Vector2 (-0.01978387f, 0.02383327f),
-            new Vector2 (-0.04101658f, -0.02035046f),
+            new Vector2 (-0.01978387f, -0.05918407f),
+            new Vector2 (-0.03884602f, -0.06940651f),
             new Vector2 (-0.03892326f, -0.0782795f),
             new Vector2 (-0.01896096f, -0.1022067f),
             new Vector2 (0.02479553f, -0.1032534f),
             new Vector2 (0.04108429f, -0.08171415f),
-            new Vector2 (0.03948593f, -0.01980829f),
-            new Vector2 (0.02235126f, 0.02383375f)
+            new Vector2 (0.03992081f, -0.06886387f),
+            new Vector2 (0.02495575f, -0.05951738f)
         };
     } 
 

@@ -82,7 +82,7 @@ public class Chp0 : MonoBehaviour
                 "Dan.",
                 "Dan...",
                 "Dan!",
-                "Wake up Dan or you'll be late for your first day of school."
+                "Wake up Dan or you'll be late for your first day of skewl."
             };
             dMan.dialogueLines = dialogueLines;
             dMan.currentLine = 0;

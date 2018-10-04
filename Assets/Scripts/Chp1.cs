@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  09/06/2018
+// Last:  10/04/2018
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +26,8 @@ public class Chp1 : MonoBehaviour
     public GameObject quest2;
     public GameObject quest3;
     public GameObject quest4;
+    public GameObject quest5;
+    public GameObject quest6;
     public GameObject quest7;
     public GameObject quest8;
     public GameObject questTrigger2;
@@ -47,6 +49,8 @@ public class Chp1 : MonoBehaviour
     public bool bAvoidUpdateQ2;
     public bool bAvoidUpdateQ3;
     public bool bAvoidUpdateQ4;
+  //public bool bAvoidUpdateQ5;
+  //public bool bAvoidUpdateQ6;
     public bool bAvoidUpdateQ7;
     public bool bAvoidUpdateQ8;
 
@@ -98,13 +102,17 @@ public class Chp1 : MonoBehaviour
 
         inv.RerunStart();
 
-        quest0 = GameObject.Find("Quest_0");
-        quest1 = GameObject.Find("QuestManager").transform.GetChild(1).gameObject; // 03/29/18 DC -- Avoid Null Exception (wtf?)
-        quest2 = GameObject.Find("Quest_2");
-        quest3 = GameObject.Find("Quest_3");
-        quest4 = GameObject.Find("Quest_4");
-        quest7 = GameObject.Find("Quest_7");
-        quest8 = GameObject.Find("Quest_8");
+        quest0 = GameObject.Find("Quest_0"); // Truth or Elaborate Lie w/ Parent2
+        //quest1 = GameObject.Find("QuestManager").transform.GetChild(1).gameObject; // 03/29/18 DC -- Avoid Null Exception (wtf?)
+        // fixed above?
+        quest1 = GameObject.Find("Quest_1"); // Race w/ Kid2
+        quest2 = GameObject.Find("Quest_2"); // Treehouse Search
+        quest3 = GameObject.Find("Quest_3"); // Item Check w/ OldMan1
+        quest4 = GameObject.Find("Quest_4"); // Hide & Seek w/ Kid4
+        quest5 = GameObject.Find("Quest_5"); // Talking to GreatTree
+        quest6 = GameObject.Find("Quest_6"); // Minesweeper
+        quest7 = GameObject.Find("Quest_7"); // PookieBear1
+        quest8 = GameObject.Find("Quest_8"); // PookieBear2
 
         invTimer = 0.333f;
         raceTimer = 0f;
@@ -146,6 +154,7 @@ public class Chp1 : MonoBehaviour
     void Update()
     {
         // Load Inventory -- Saved vs. Transfer
+        //  Reset Transition Data
         if (invTimer > 0)
         {
             invTimer -= Time.deltaTime;
@@ -166,20 +175,23 @@ public class Chp1 : MonoBehaviour
 
                 // Reset Transfer
                 PlayerPrefs.SetInt("Transferring", 0);
+
+                // Clear Transition data
+                save.DeleteTransPrefs();
             }
         }
 
-        // Quest 0 -- Q&A 1 Reward
+        // Quest 0 -- Truth or Elaborate Lie w/ Parent2
         // see below
 
-        // Quest 1 -- Race Start -> Start Timer
+        // Quest 1 -- Race w/ Kid2 -> Start Timer
         if (quest1.GetComponent<QuestObject>().bHasStarted &&
             !quest1.GetComponent<QuestObject>().bHasEnded)
         {
             raceTimer += Time.deltaTime;
         }
 
-        // Quest 1 -- Race End -> Check Race Time & Assign Dialogue
+        // Quest 1 -- Race w/ Kid2 -> End, Check Race Time, & Assign Dialogue
         if (quest1.GetComponent<QuestObject>().bHasEnded &&
             !dMan.bDialogueActive &&
             !bAvoidUpdateQ1)
@@ -214,7 +226,7 @@ public class Chp1 : MonoBehaviour
             }
         }
 
-        // Quest 1 -- Race Reward
+        // Quest 1 -- Race w/ Kid2 -> Reward
         if (!quest1.GetComponent<QuestObject>().bHasCollected &&
             quest1.GetComponent<QuestObject>().bHasEnded &&
             (int)camFollow.currentCoords == 32)
@@ -226,7 +238,7 @@ public class Chp1 : MonoBehaviour
             }
         }
 
-        // Quest 2 -- Search Start
+        // Quest 2 -- Treehouse Search -> Start
         if (quest2.GetComponent<QuestObject>().bHasStarted &&
             !dMan.bDialogueActive &&
             !bAvoidUpdateQ2)
@@ -236,7 +248,7 @@ public class Chp1 : MonoBehaviour
             GameObject.Find("TreeHouseDoor").transform.localScale = Vector3.one;
         }
 
-        // Quest 2 -- Search Reward
+        // Quest 2 -- Treehouse Search -> Reward
         if (!quest2.GetComponent<QuestObject>().bHasCollected && 
             quest2.GetComponent<QuestObject>().bHasEnded &&
             (int)camFollow.currentCoords == 23)
@@ -245,7 +257,7 @@ public class Chp1 : MonoBehaviour
             
         }
 
-        // Quest 3 -- Item Check
+        // Quest 3 -- Item Check w/ OldMan1 -> Check on inventory change
         if (quest3.GetComponent<QuestObject>().bHasStarted &&
             inv.bUpdateItemCount &&
             !bAvoidUpdateQ3)
@@ -280,8 +292,8 @@ public class Chp1 : MonoBehaviour
                 
             inv.bUpdateItemCount = false;
         }
-        
-        // Quest 3 -- Item Reward & Removal
+
+        // Quest 3 -- Item Check w/ OldMan1 -> Reward & Removal
         if (quest3.GetComponent<QuestObject>().bHasEnded &&
             !bAvoidUpdateQ3)
         {
@@ -305,10 +317,10 @@ public class Chp1 : MonoBehaviour
             }
         }
 
-        // Quest 4 -- Manhunt
+        // Quest 4 -- Manhunt w/ Kid4 -> TBD
         // TODO w/ kid in the woods
 
-        // Quest 7 -- Item Delivery
+        // Quest 7 -- Item Delivery w/ Man1 -> 
         if (quest7.GetComponent<QuestObject>().bHasStarted &&
             inv.bUpdateItemCount &&
             !bAvoidUpdateQ7)
@@ -378,7 +390,7 @@ public class Chp1 : MonoBehaviour
         }
 
 
-        // Minigame -- Guess Who Colluded?
+        // Minigame -- Guess Who Colluded
         if (thePlayer.GetComponent<PolygonCollider2D>().IsTouching(warpGWC.GetComponent<BoxCollider2D>()))
         {
             // Transition animation
