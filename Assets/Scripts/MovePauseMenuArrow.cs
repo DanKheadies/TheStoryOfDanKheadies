@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/08/2017
-// Last:  08/26/2018
+// Last:  10/21/2018
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,28 +10,28 @@ using UnityEngine.SceneManagement;
 // To "move" and execute the arrows on the Pause Menu
 public class MovePauseMenuArrow : MonoBehaviour
 {
+    private Button CollumBtn;
     private Button ControlsBtn;
     private Button GGBtn;
     private Button GoOnBtn;
     private Button IconsBtn;
     private Button KogabiBtn;
-    private Button KREAMBtn;
     private Button MapBtn;
-    private Button MyCardBtn;
     private Button QuitBtn;
+    private Button ResetBtn;
     private Button SaveBtn;
     private Button SoundBtn;
     private Button StuffBtn;
 
+    private GameObject CollumArw;
     private GameObject ControlsArw;
     private GameObject GGArw;
     private GameObject GoOnArw;
     private GameObject IconsArw;
     private GameObject KogabiArw;
-    private GameObject KREAMArw;
     private GameObject MapArw;
-    private GameObject MyCardArw;
     private GameObject QuitArw;
+    private GameObject ResetArw;
     private GameObject SaveArw;
     private GameObject SoundArw;
     private GameObject StuffArw;
@@ -57,9 +57,9 @@ public class MovePauseMenuArrow : MonoBehaviour
         //AltMenu = 0,
 
         // For Guess Who Colluded
-        KREAMinac = 1,
-        MyCard = 2,
-        Icons = 3,
+        Colluminac = 1,
+        Icons = 2,
+        Reset = 3,
         GG = 4
     }
 
@@ -94,15 +94,15 @@ public class MovePauseMenuArrow : MonoBehaviour
 
         if (scene.name == "GuessWhoColluded")
         {
+            CollumBtn = GameObject.Find("Colluminac").GetComponent<Button>();
             GGBtn = GameObject.Find("GG").GetComponent<Button>();
             IconsBtn = GameObject.Find("Icons").GetComponent<Button>();
-            KREAMBtn = GameObject.Find("KREAMinac").GetComponent<Button>();
-            MyCardBtn = GameObject.Find("MyCard").GetComponent<Button>();
+            ResetBtn = GameObject.Find("Reset").GetComponent<Button>();
 
+            CollumArw = GameObject.Find("ColluminacArw");
             GGArw = GameObject.Find("GGArw");
             IconsArw = GameObject.Find("IconsArw");
-            KREAMArw = GameObject.Find("KREAMinacArw");
-            MyCardArw = GameObject.Find("MyCardArw");
+            ResetArw = GameObject.Find("ResetArw");
         }
 
         currentPosition = ArrowPos.GoOn;
@@ -178,17 +178,23 @@ public class MovePauseMenuArrow : MonoBehaviour
                     else if (currentPosition == ArrowPos.Quit &&
                              bSecondaryMenu)
                     {
-                        currentPosition = ArrowPos.KREAMinac;
+                        currentPosition = ArrowPos.Colluminac;
                         ClearAllArrows();
-                        KREAMArw.transform.localScale = new Vector3(1, 1, 1);
+                        CollumArw.transform.localScale = new Vector3(1, 1, 1);
                     }
-                    else if (currentPosition == ArrowPos.KREAMinac)
+                    else if (currentPosition == ArrowPos.Colluminac)
                     {
                         currentPosition = ArrowPos.Icons;
                         ClearAllArrows();
                         IconsArw.transform.localScale = new Vector3(1, 1, 1);
                     }
                     else if (currentPosition == ArrowPos.Icons)
+                    {
+                        currentPosition = ArrowPos.Reset;
+                        ClearAllArrows();
+                        ResetArw.transform.localScale = new Vector3(1, 1, 1);
+                    }
+                    else if (currentPosition == ArrowPos.Reset)
                     {
                         currentPosition = ArrowPos.GG;
                         ClearAllArrows();
@@ -250,17 +256,23 @@ public class MovePauseMenuArrow : MonoBehaviour
                     // GWC only options
                     if (currentPosition == ArrowPos.GG)
                     {
+                        currentPosition = ArrowPos.Reset;
+                        ClearAllArrows();
+                        ResetArw.transform.localScale = Vector3.one;
+                    }
+                    else if (currentPosition == ArrowPos.Reset)
+                    {
                         currentPosition = ArrowPos.Icons;
                         ClearAllArrows();
                         IconsArw.transform.localScale = Vector3.one;
                     }
                     else if (currentPosition == ArrowPos.Icons)
                     {
-                        currentPosition = ArrowPos.KREAMinac;
+                        currentPosition = ArrowPos.Colluminac;
                         ClearAllArrows();
-                        KREAMArw.transform.localScale = Vector3.one;
+                        CollumArw.transform.localScale = Vector3.one;
                     }
-                    else if (currentPosition == ArrowPos.KREAMinac)
+                    else if (currentPosition == ArrowPos.Colluminac)
                     {
                         currentPosition = ArrowPos.Quit;
                         ClearAllArrows();
@@ -330,17 +342,17 @@ public class MovePauseMenuArrow : MonoBehaviour
                 // For Guess Who Colluded
                 if (scene.name == "GuessWhoColluded")
                 {
-                    if (currentPosition == ArrowPos.KREAMinac)
+                    if (currentPosition == ArrowPos.Colluminac)
                     {
-                        KREAMBtn.onClick.Invoke();
-                    }
-                    else if (currentPosition == ArrowPos.MyCard)
-                    {
-                        MyCardBtn.onClick.Invoke();
+                        CollumBtn.onClick.Invoke();
                     }
                     else if (currentPosition == ArrowPos.Icons)
                     {
                         IconsBtn.onClick.Invoke();
+                    }
+                    else if (currentPosition == ArrowPos.Reset)
+                    {
+                        ResetBtn.onClick.Invoke();
                     }
                     else if (currentPosition == ArrowPos.GG)
                     {
@@ -373,10 +385,10 @@ public class MovePauseMenuArrow : MonoBehaviour
 
             if (scene.name == "GuessWhoColluded")
             {
+                CollumArw.transform.localScale = Vector3.zero;
                 GGArw.transform.localScale = Vector3.zero;
                 IconsArw.transform.localScale = Vector3.zero;
-                KREAMArw.transform.localScale = Vector3.zero;
-                MyCardArw.transform.localScale = Vector3.zero;
+                ResetArw.transform.localScale = Vector3.zero;
             }
         }
     }
@@ -394,10 +406,10 @@ public class MovePauseMenuArrow : MonoBehaviour
 
         if (scene.name == "GuessWhoColluded")
         {
+            CollumArw.transform.localScale = Vector3.zero;
             GGArw.transform.localScale = Vector3.zero;
             IconsArw.transform.localScale = Vector3.zero;
-            KREAMArw.transform.localScale = Vector3.zero;
-            MyCardArw.transform.localScale = Vector3.zero;
+            ResetArw.transform.localScale = Vector3.zero;
         }
 
         GoOnArw.transform.localScale = Vector3.one;
