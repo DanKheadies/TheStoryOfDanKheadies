@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: 1c0c46c0b48d95e4fa690c456071e18c
-timeCreated: 1495433684
-licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     100002: mesh_0001
@@ -53,6 +51,12 @@ ModelImporter:
     100090: mesh_0045
     100092: mesh_0046
     100094: mesh_0047
+    100096: mesh_0048
+    100098: mesh_0049
+    100100: mesh_0050
+    100102: mesh_0051
+    100104: mesh_0052
+    100106: mesh_0053
     400000: //RootNode
     400002: mesh_0001
     400004: mesh_0002
@@ -101,6 +105,12 @@ ModelImporter:
     400090: mesh_0045
     400092: mesh_0046
     400094: mesh_0047
+    400096: mesh_0048
+    400098: mesh_0049
+    400100: mesh_0050
+    400102: mesh_0051
+    400104: mesh_0052
+    400106: mesh_0053
     2300000: mesh_0001
     2300002: mesh_0002
     2300004: mesh_0003
@@ -148,6 +158,12 @@ ModelImporter:
     2300088: mesh_0045
     2300090: mesh_0046
     2300092: mesh_0047
+    2300094: mesh_0048
+    2300096: mesh_0049
+    2300098: mesh_0050
+    2300100: mesh_0051
+    2300102: mesh_0052
+    2300104: mesh_0053
     3300000: mesh_0001
     3300002: mesh_0002
     3300004: mesh_0003
@@ -195,6 +211,12 @@ ModelImporter:
     3300088: mesh_0045
     3300090: mesh_0046
     3300092: mesh_0047
+    3300094: mesh_0048
+    3300096: mesh_0049
+    3300098: mesh_0050
+    3300100: mesh_0051
+    3300102: mesh_0052
+    3300104: mesh_0053
     4300000: mesh_0001
     4300002: mesh_0002
     4300004: mesh_0003
@@ -242,6 +264,12 @@ ModelImporter:
     4300088: mesh_0045
     4300090: mesh_0046
     4300092: mesh_0047
+    4300094: mesh_0048
+    4300096: mesh_0049
+    4300098: mesh_0050
+    4300100: mesh_0051
+    4300102: mesh_0052
+    4300104: mesh_0053
     11400000: mesh_0001
     11400002: mesh_0002
     11400004: mesh_0003
@@ -289,26 +317,39 @@ ModelImporter:
     11400088: mesh_0045
     11400090: mesh_0046
     11400092: mesh_0047
+    11400094: mesh_0048
+    11400096: mesh_0049
+    11400098: mesh_0050
+    11400100: mesh_0051
+    11400102: mesh_0052
+    11400104: mesh_0053
+  externalObjects: {}
   materials:
     importMaterials: 0
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 0
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -316,22 +357,30 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 2
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -346,7 +395,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
