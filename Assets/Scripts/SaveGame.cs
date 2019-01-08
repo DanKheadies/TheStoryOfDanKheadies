@@ -124,6 +124,7 @@ public class SaveGame : MonoBehaviour
         Debug.Log("Vol: " + PlayerPrefs.GetFloat("Volume"));
         Debug.Log("Con: " + PlayerPrefs.GetInt("ControlsActive"));
         Debug.Log("COp: " + PlayerPrefs.GetFloat("ControlsOpac"));
+        Debug.Log("CTy: " + PlayerPrefs.GetString("ControlsType"));
 
         Debug.Log("C1Q: " + PlayerPrefs.GetString("Chp1Quests"));
 
@@ -146,6 +147,7 @@ public class SaveGame : MonoBehaviour
     // Saves UI controls' opacity and  data
     public void SavingUIControls()
     {
+        PlayerPrefs.SetInt("ControlsDPad", uiMan.currentContDPad); // Called in UIManager
         PlayerPrefs.SetFloat("ControlsOpac", uiMan.currentContOpac); // Called in UIManager
 
         if (uiMan.bControlsActive)

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/13/2018
+// Last:  01/08/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     public CanvasGroup contOpacCan;
     public CanvasGroup hudCanvas;
     public DialogueManager dMan;
+    public GameObject[] dPads;
+    public GameObject[] joySticks;
     public OptionsManager oMan;
     public PlayerBrioManager playerBrio;
     public Scene scene;
@@ -23,12 +25,16 @@ public class UIManager : MonoBehaviour
     public Slider contOpacSlider;
     public Text brioText;
     public Toggle conTog;
+    public Toggle dPadTog;
     public TouchControls touches;
 
     public bool bControlsActive;
+    public bool bControlsDPad;
     public bool bUpdateBrio;
 
     public float currentContOpac;
+
+    public int currentContDPad;
 
 
     void Start ()
@@ -42,6 +48,9 @@ public class UIManager : MonoBehaviour
         scene = SceneManager.GetActiveScene();
         dHUD = GameObject.Find("Dialogue_HUD").GetComponent<Canvas>();
         dMan = FindObjectOfType<DialogueManager>();
+        dPads = GameObject.FindGameObjectsWithTag("D-Pad");
+        dPadTog = GameObject.Find("DPadControlToggle").GetComponent<Toggle>();
+        joySticks = GameObject.FindGameObjectsWithTag("Joystick");
         HUD = GetComponent<Canvas>();
         hudCanvas = GetComponent<CanvasGroup>();
         mainCamera = FindObjectOfType<Camera>().GetComponent<Camera>();
@@ -84,6 +93,33 @@ public class UIManager : MonoBehaviour
             currentContOpac = PlayerPrefs.GetFloat("ControlsOpac");
             contOpacSlider.value = currentContOpac;
             contOpacCan.alpha = currentContOpac;
+        }
+
+        // Sets initial control type based off saved data
+        if (!PlayerPrefs.HasKey("ControlsDPad"))
+        {
+            Debug.Log("no dpad saved");
+            currentContDPad = 1;
+            dPadTog.isOn = true;
+            bControlsDPad = true;
+        }
+        else
+        {
+            currentContDPad = PlayerPrefs.GetInt("ControlsDPad");
+
+            if (currentContDPad == 1)
+            {
+                Debug.Log("dpad saved");
+                dPadTog.isOn = true;
+                bControlsDPad = true;
+            }
+            else if (currentContDPad == 0)
+            {
+                Debug.Log("joystick saved");
+                dPadTog.isOn = false;
+                bControlsDPad = true;
+                ToggleDPadControl();
+            }
         }
 
         // Sets brio bar
@@ -138,6 +174,46 @@ public class UIManager : MonoBehaviour
         {
             touches.GetComponent<Canvas>().enabled = true;
             bControlsActive = true;
+        }
+    }
+
+    // Toggles the movement type control
+    public void ToggleDPadControl()
+    {
+        Debug.Log("running toggle");
+        if (bControlsDPad)
+        {
+            Debug.Log("dpad true");
+            foreach (GameObject dPad in dPads)
+            {
+                dPad.transform.localScale = Vector3.zero;
+                Debug.Log("turning off dpad");
+            }
+            foreach (GameObject joyStick in joySticks)
+            {
+                joyStick.transform.localScale = Vector3.one;
+                Debug.Log("turning on joyd");
+            }
+
+            bControlsDPad = false;
+            currentContDPad = 0;
+        }
+        else if (!bControlsDPad)
+        {
+            Debug.Log("dpad false");
+            foreach (GameObject dPad in dPads)
+            {
+                dPad.transform.localScale = Vector3.one;
+                Debug.Log("turning on dpad");
+            }
+            foreach (GameObject joyStick in joySticks)
+            {
+                joyStick.transform.localScale = Vector3.zero;
+                Debug.Log("turning off joyd");
+            }
+
+            bControlsDPad = true;
+            currentContDPad = 1;
         }
     }
 }

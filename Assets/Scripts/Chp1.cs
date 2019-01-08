@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  10/04/2018
+// Last:  01/05/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -244,8 +244,8 @@ public class Chp1 : MonoBehaviour
             !bAvoidUpdateQ2)
         {
             bAvoidUpdateQ2 = true;
-            GameObject.Find("TreeHouseDoor").GetComponent<BoxCollider2D>().isTrigger = false;
-            GameObject.Find("TreeHouseDoor").transform.localScale = Vector3.one;
+            GameObject.Find("HomeSWTreeDoor").GetComponent<BoxCollider2D>().isTrigger = false;
+            GameObject.Find("HomeSWTreeDoor").transform.localScale = Vector3.one;
         }
 
         // Quest 2 -- Treehouse Search -> Reward

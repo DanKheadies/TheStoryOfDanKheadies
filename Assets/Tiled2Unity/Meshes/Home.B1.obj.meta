@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: 35a0660a0d740df4aa8abdcf069f5ef6
-timeCreated: 1520398843
-licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     100002: mesh_0001
@@ -28,6 +26,17 @@ ModelImporter:
     100040: mesh_0020
     100042: mesh_0021
     100044: mesh_0022
+    100046: mesh_0023
+    100048: mesh_0024
+    100050: mesh_0025
+    100052: mesh_0026
+    100054: mesh_0027
+    100056: mesh_0028
+    100058: mesh_0029
+    100060: mesh_0030
+    100062: mesh_0031
+    100064: mesh_0032
+    100066: mesh_0033
     400000: //RootNode
     400002: mesh_0001
     400004: mesh_0002
@@ -51,6 +60,17 @@ ModelImporter:
     400040: mesh_0020
     400042: mesh_0021
     400044: mesh_0022
+    400046: mesh_0023
+    400048: mesh_0024
+    400050: mesh_0025
+    400052: mesh_0026
+    400054: mesh_0027
+    400056: mesh_0028
+    400058: mesh_0029
+    400060: mesh_0030
+    400062: mesh_0031
+    400064: mesh_0032
+    400066: mesh_0033
     2300000: mesh_0001
     2300002: mesh_0002
     2300004: mesh_0003
@@ -73,6 +93,17 @@ ModelImporter:
     2300038: mesh_0020
     2300040: mesh_0021
     2300042: mesh_0022
+    2300044: mesh_0023
+    2300046: mesh_0024
+    2300048: mesh_0025
+    2300050: mesh_0026
+    2300052: mesh_0027
+    2300054: mesh_0028
+    2300056: mesh_0029
+    2300058: mesh_0030
+    2300060: mesh_0031
+    2300062: mesh_0032
+    2300064: mesh_0033
     3300000: mesh_0001
     3300002: mesh_0002
     3300004: mesh_0003
@@ -95,6 +126,17 @@ ModelImporter:
     3300038: mesh_0020
     3300040: mesh_0021
     3300042: mesh_0022
+    3300044: mesh_0023
+    3300046: mesh_0024
+    3300048: mesh_0025
+    3300050: mesh_0026
+    3300052: mesh_0027
+    3300054: mesh_0028
+    3300056: mesh_0029
+    3300058: mesh_0030
+    3300060: mesh_0031
+    3300062: mesh_0032
+    3300064: mesh_0033
     4300000: mesh_0001
     4300002: mesh_0002
     4300004: mesh_0003
@@ -117,6 +159,17 @@ ModelImporter:
     4300038: mesh_0020
     4300040: mesh_0021
     4300042: mesh_0022
+    4300044: mesh_0023
+    4300046: mesh_0024
+    4300048: mesh_0025
+    4300050: mesh_0026
+    4300052: mesh_0027
+    4300054: mesh_0028
+    4300056: mesh_0029
+    4300058: mesh_0030
+    4300060: mesh_0031
+    4300062: mesh_0032
+    4300064: mesh_0033
     11400000: mesh_0001
     11400002: mesh_0002
     11400004: mesh_0003
@@ -139,26 +192,44 @@ ModelImporter:
     11400038: mesh_0020
     11400040: mesh_0021
     11400042: mesh_0022
+    11400044: mesh_0023
+    11400046: mesh_0024
+    11400048: mesh_0025
+    11400050: mesh_0026
+    11400052: mesh_0027
+    11400054: mesh_0028
+    11400056: mesh_0029
+    11400058: mesh_0030
+    11400060: mesh_0031
+    11400062: mesh_0032
+    11400064: mesh_0033
+  externalObjects: {}
   materials:
     importMaterials: 0
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 0
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -166,22 +237,34 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 0
     importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 2
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -196,7 +279,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

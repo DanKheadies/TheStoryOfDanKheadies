@@ -19,31 +19,31 @@
   <Prefab name="WoodsW" orientation="Orthogonal" staggerAxis="Y" staggerIndex="Odd" hexSideLength="0" numLayers="5" numTilesWide="128" numTilesHigh="128" tileWidth="8" tileHeight="8" exportScale="0.01" mapWidthInPixels="1024" mapHeightInPixels="1024" backgroundColor="#808080">
     <GameObject name="1.Background" x="0" y="0" z="0">
       <TileLayer opacity="1" offsetX="0" offsetY="0" />
-      <GameObject name="Plain" copy="mesh_0001" sortingLayerName="" sortingOrder="0" opacity="1" />
-      <GameObject name="Plain" copy="mesh_0002" sortingLayerName="" sortingOrder="0" opacity="1" />
+      <GameObject name="Plain" copy="mesh_0001" sortingLayerName="" sortingOrder="1" opacity="1" />
+      <GameObject name="Plain" copy="mesh_0002" sortingLayerName="" sortingOrder="1" opacity="1" />
     </GameObject>
     <GameObject name="5.Grass" x="0" y="0" z="0">
       <TileLayer opacity="1" offsetX="0" offsetY="0" />
-      <GameObject name="Grass.a" copy="mesh_0003" sortingLayerName="" sortingOrder="1" opacity="1" />
-      <GameObject name="Grass.b" copy="mesh_0004" sortingLayerName="" sortingOrder="1" opacity="1" />
-      <GameObject name="Plain" copy="mesh_0005" sortingLayerName="" sortingOrder="1" opacity="1" />
-      <GameObject name="Flower" copy="mesh_0006" sortingLayerName="" sortingOrder="1" opacity="1" />
+      <GameObject name="Grass.a" copy="mesh_0003" sortingLayerName="" sortingOrder="5" opacity="1" />
+      <GameObject name="Grass.b" copy="mesh_0004" sortingLayerName="" sortingOrder="5" opacity="1" />
+      <GameObject name="Plain" copy="mesh_0005" sortingLayerName="" sortingOrder="5" opacity="1" />
+      <GameObject name="Flower" copy="mesh_0006" sortingLayerName="" sortingOrder="5" opacity="1" />
     </GameObject>
     <GameObject name="15.TreeBelow" x="0" y="0" z="0">
       <TileLayer opacity="1" offsetX="0" offsetY="0" />
-      <GameObject name="Tree.1.B" copy="mesh_0007" sortingLayerName="" sortingOrder="2" opacity="1" />
+      <GameObject name="Tree.1.B" copy="mesh_0007" sortingLayerName="" sortingOrder="15" opacity="1" />
     </GameObject>
     <GameObject name="35.TreeAbove" x="0" y="0" z="0">
       <TileLayer opacity="1" offsetX="0" offsetY="0" />
-      <GameObject name="Tree.1.A" copy="mesh_0008" sortingLayerName="" sortingOrder="3" opacity="1" />
+      <GameObject name="Tree.1.A" copy="mesh_0008" sortingLayerName="" sortingOrder="35" opacity="1" />
     </GameObject>
     <GameObject name="50.Collision" x="0" y="0" z="0">
       <TileLayer opacity="0.45" offsetX="0" offsetY="0" />
-      <GameObject name="Full" copy="mesh_0009" sortingLayerName="" sortingOrder="4" opacity="0.45" />
-      <GameObject name="TopLeft" copy="mesh_0010" sortingLayerName="" sortingOrder="4" opacity="0.45" />
-      <GameObject name="TopRight" copy="mesh_0011" sortingLayerName="" sortingOrder="4" opacity="0.45" />
-      <GameObject name="BottomLeft" copy="mesh_0012" sortingLayerName="" sortingOrder="4" opacity="0.45" />
-      <GameObject name="BottomRight" copy="mesh_0013" sortingLayerName="" sortingOrder="4" opacity="0.45" />
+      <GameObject name="Full" copy="mesh_0009" sortingLayerName="" sortingOrder="50" opacity="0.45" />
+      <GameObject name="TopLeft" copy="mesh_0010" sortingLayerName="" sortingOrder="50" opacity="0.45" />
+      <GameObject name="TopRight" copy="mesh_0011" sortingLayerName="" sortingOrder="50" opacity="0.45" />
+      <GameObject name="BottomLeft" copy="mesh_0012" sortingLayerName="" sortingOrder="50" opacity="0.45" />
+      <GameObject name="BottomRight" copy="mesh_0013" sortingLayerName="" sortingOrder="50" opacity="0.45" />
       <GameObject name="Collision">
         <PolygonCollider2D>
           <Path>9.92,0 9.84,0 9.84,-0.01 9.91,-0.08 9.92,-0.08</Path>

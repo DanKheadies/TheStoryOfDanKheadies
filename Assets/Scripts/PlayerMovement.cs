@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/17/2018
+// Last:  01/07/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private AspectUtility aspectUtil;
     private CameraFollow cameraFollow;
     private CameraSlider cameraSlider;
+    private FixedJoystick fixJoystick;
+    private Joystick joystick;
     private PlayerBrioManager playerBrioMan;
     public PolygonCollider2D playerCollider;
     public Rigidbody2D rBody;
@@ -35,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
         // Initializers
         aspectUtil = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AspectUtility>();
         cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
+        fixJoystick = FindObjectOfType<FixedJoystick>();
+        joystick = FindObjectOfType<Joystick>();
         playerBrioMan = GetComponent<PlayerBrioManager>();
         playerCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
@@ -99,6 +103,10 @@ public class PlayerMovement : MonoBehaviour
                 bGWCUpdate = true;
             }
         }
+        else if (fixJoystick.bJoying)
+        {
+            MovePlayerWithJoy();
+        }
         else
         {
             MovePlayer();
@@ -123,6 +131,11 @@ public class PlayerMovement : MonoBehaviour
     {
         // Unit's Project Settings -> Input
         Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+    }
+
+    public void MovePlayerWithJoy()
+    {
+        Move(joystick.Horizontal, joystick.Vertical);
     }
 
     public void Move(float xInput, float yInput) 
@@ -765,10 +778,6 @@ public class PlayerMovement : MonoBehaviour
         {
             SFXMan.sounds[3].PlayOneShot(SFXMan.sounds[3].clip);
             collision.gameObject.transform.localScale = Vector3.zero;
-        }
-        else if (collision.CompareTag("LockedDoor"))
-        {
-
         }
     }
 }

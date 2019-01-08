@@ -2,7 +2,7 @@
 // Authors: valyard (https://github.com/valyard/UnityWebGLOpenLink)
 // Contributors: David W. Corso
 // Start: --/--/----
-// Last:  11/03/2018
+// Last:  01/05/2019
 
 using UnityEngine;
 using System.Runtime.InteropServices;
@@ -13,7 +13,7 @@ public class Link : MonoBehaviour
 
     private void Start()
     {
-        ColluminacLink = "https://docs.google.com/document/d/1Q8-YiK7TAVkGBsrL_3F9a92JjTFYVCyLcg-RQNNKYkM/edit?usp=sharing";
+        ColluminacLink = "http://guesswhocolluded.com/colluminac.html";
     }
 
     public void OpenLink()
