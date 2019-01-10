@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  08/11/2018
+// Last:  01/10/2019
 
 using UnityEngine;
 
@@ -83,6 +83,7 @@ public class Minesweeper : MonoBehaviour
             !dMan.bDialogueActive) &&
             bAvoidInvestionUpdate)
         {
+            // DC TODO 01/10/2019 -- Add touches and controller support
             if (Input.GetKey(KeyCode.Space))
             {
                 // Avoid reseting the booleans until spacebar is let up

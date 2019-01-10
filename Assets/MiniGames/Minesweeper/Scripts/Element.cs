@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 05/20/2018
-// Last:  08/13/2018
+// Last:  01/10/2019
 
 using System.Collections;
 using UnityEngine;
@@ -49,21 +49,27 @@ public class Element : MonoBehaviour
         //    StartCoroutine(ResetElements());
         //}
 
-        if (false)
-        {
+        // ??
+        //if (false)
+        //{
 
-        }
+        //}
 
         if (bHasEntered &&
             ms.bAvoidInvestigating == false &&
-           (Input.GetKeyUp(KeyCode.Space) || touches.bAaction))
+           (Input.GetKeyUp(KeyCode.Space) ||
+            Input.GetKeyUp(KeyCode.JoystickButton0) ||
+            touches.bAaction))
         {
             InvestigateElement();
         }
 
         if (bHasEntered &&
             !ms.bPauseFlagging &&
-           (Input.GetKeyUp(KeyCode.F) || touches.bBaction))
+           (Input.GetKeyUp(KeyCode.F) ||
+            Input.GetKeyUp(KeyCode.JoystickButton2) ||
+            Input.GetKeyUp(KeyCode.JoystickButton3) ||
+            touches.bBaction))
         {
             FlagElement();
         }

@@ -47,6 +47,8 @@ public class VolumeManager : MonoBehaviour
 	
 	void Update ()
     {
+        // TODO 01/10/2019 -- Allow controller to affect or something
+
         // Increase volume w/ keyboard
         if (Input.GetKeyUp(KeyCode.Equals))
         {

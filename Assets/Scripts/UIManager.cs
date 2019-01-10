@@ -98,7 +98,6 @@ public class UIManager : MonoBehaviour
         // Sets initial control type based off saved data
         if (!PlayerPrefs.HasKey("ControlsDPad"))
         {
-            Debug.Log("no dpad saved");
             currentContDPad = 1;
             dPadTog.isOn = true;
             bControlsDPad = true;
@@ -107,16 +106,20 @@ public class UIManager : MonoBehaviour
         {
             currentContDPad = PlayerPrefs.GetInt("ControlsDPad");
 
-            if (currentContDPad == 1)
+            // Set control type based off level
+            if (scene.name == "GuessWhoColluded")
             {
-                Debug.Log("dpad saved");
+                bControlsDPad = false;
+                ToggleDPadControl();
+            }
+            else if (currentContDPad == 1)
+            {
                 dPadTog.isOn = true;
                 bControlsDPad = true;
             }
             else if (currentContDPad == 0)
             {
-                Debug.Log("joystick saved");
-                dPadTog.isOn = false;
+                dPadTog.isOn = false; // Prob not necessary; gets called in function
                 bControlsDPad = true;
                 ToggleDPadControl();
             }
@@ -180,40 +183,51 @@ public class UIManager : MonoBehaviour
     // Toggles the movement type control
     public void ToggleDPadControl()
     {
-        Debug.Log("running toggle");
+        // If DPad, turn to Joystick
         if (bControlsDPad)
         {
-            Debug.Log("dpad true");
             foreach (GameObject dPad in dPads)
             {
                 dPad.transform.localScale = Vector3.zero;
-                Debug.Log("turning off dpad");
             }
             foreach (GameObject joyStick in joySticks)
             {
                 joyStick.transform.localScale = Vector3.one;
-                Debug.Log("turning on joyd");
             }
 
             bControlsDPad = false;
-            currentContDPad = 0;
+
+            if (scene.name == "GuessWhoColluded")
+            {
+                // Avoid setting the value so the original is remembered when going back
+            }
+            else
+            {
+                currentContDPad = 0;
+            }
         }
+        // If Joystick, turn to DPad
         else if (!bControlsDPad)
         {
-            Debug.Log("dpad false");
             foreach (GameObject dPad in dPads)
             {
                 dPad.transform.localScale = Vector3.one;
-                Debug.Log("turning on dpad");
             }
             foreach (GameObject joyStick in joySticks)
             {
                 joyStick.transform.localScale = Vector3.zero;
-                Debug.Log("turning off joyd");
             }
 
             bControlsDPad = true;
-            currentContDPad = 1;
+
+            if (scene.name == "GuessWhoColluded")
+            {
+                // Avoid setting the value so the original is remembered when going back
+            }
+            else
+            {
+                currentContDPad = 1;
+            }
         }
     }
 }

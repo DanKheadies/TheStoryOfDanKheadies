@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 01/29/2018
-// Last:  10/04/2018
+// Last:  01/10/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +25,10 @@ public class MoveItemMenuArrow : MonoBehaviour
     private TouchControls touches;
 
     private Transform itemMenu;
+
+    public bool bControllerLeft;
+    public bool bControllerRight;
+    public bool bFreezeControllerInput;
 
 
     public enum ItemArrowPos : int
@@ -58,10 +62,36 @@ public class MoveItemMenuArrow : MonoBehaviour
     {
         if (itemMenu.gameObject.GetComponent<CanvasGroup>().alpha == 1)
         {
+            // Controller Support 
+            // DC TODO 01/10/2019 -- temp bug where sub-pause menus not closing as expected
+            if (Input.GetAxis("Controller DPad Horizontal") == 0 &&
+               (!touches.bLeft &&
+                !touches.bRight))
+            {
+                bFreezeControllerInput = false;
+            }
+            else if (!bFreezeControllerInput &&
+                    (Input.GetAxis("Controller DPad Horizontal") > 0 ||
+                    touches.bDown))
+            {
+                bControllerRight = true;
+                bFreezeControllerInput = true;
+            }
+            else if (!bFreezeControllerInput &&
+                    (Input.GetAxis("Controller DPad Horizontal") < 0 ||
+                    touches.bUp))
+            {
+                bControllerLeft = true;
+                bFreezeControllerInput = true;
+            }
+
+            // DC TODO 01/10/2019 -- Finish for items
             if (Input.GetKeyDown(KeyCode.D) ||
                 Input.GetKeyDown(KeyCode.RightArrow) ||
-                touches.bRight)
+                bControllerRight)
             {
+                bControllerRight = false;
+
                 if (currentPosition == ItemArrowPos.Use)
                 {
                     currentPosition = ItemArrowPos.Drop;
@@ -77,8 +107,10 @@ public class MoveItemMenuArrow : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.A) ||
                      Input.GetKeyDown(KeyCode.LeftArrow) ||
-                     touches.bLeft)
+                     bControllerLeft)
             {
+                bControllerLeft = false;
+
                 if (currentPosition == ItemArrowPos.Back)
                 {
                     currentPosition = ItemArrowPos.Drop;
@@ -94,6 +126,7 @@ public class MoveItemMenuArrow : MonoBehaviour
                 }
             }
             else if (Input.GetButtonDown("Action") ||
+                     Input.GetKeyDown(KeyCode.JoystickButton0) ||
                      touches.bAaction)
             {
                 if (currentPosition == ItemArrowPos.Use)

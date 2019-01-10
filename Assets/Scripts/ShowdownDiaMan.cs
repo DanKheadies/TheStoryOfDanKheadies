@@ -51,7 +51,8 @@ public class ShowdownDiaMan : MonoBehaviour
     {
 
         // Temp: Update Camera display / aspect ratio
-        if (Input.GetKeyUp(KeyCode.R))
+        if (Input.GetKeyUp(KeyCode.R) ||
+            Input.GetKeyUp(KeyCode.JoystickButton6))
         {
             aspectUtil.Awake();
             ConfigureParameters();

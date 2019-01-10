@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/13/2018
+// Last:  01/10/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -87,7 +87,8 @@ public class PlayerBrioManager : MonoBehaviour
         }
 
         // Temp solution to give Brio
-        if (Input.GetKeyUp(KeyCode.X))
+        if (Input.GetKeyUp(KeyCode.X) ||
+            Input.GetKeyUp(KeyCode.JoystickButton2))
         {
             RestorePlayer(50);
             uiMan.bUpdateBrio = true;

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/13/2018
-// Last:  10/04/2018
+// Last:  01/10/2019
 
 using UnityEngine;
 
@@ -56,6 +56,8 @@ public class CharacterTile : MonoBehaviour
         // Tile layer changer
         if ((gwc.bCanFlip && Input.GetKeyDown(KeyCode.LeftShift) && !pause.bPauseActive && !bAvoidUpdate) ||
             (gwc.bCanFlip && Input.GetKeyDown(KeyCode.RightShift) && !pause.bPauseActive && !bAvoidUpdate) ||
+            (gwc.bCanFlip && Input.GetKeyDown(KeyCode.JoystickButton4) && !pause.bPauseActive && !bAvoidUpdate) ||
+            (gwc.bCanFlip && Input.GetKeyDown(KeyCode.JoystickButton5) && !pause.bPauseActive && !bAvoidUpdate) ||
             (gwc.bCanFlip && touches.bBaction && !bAvoidUpdate))
         {
             if (bShowIcon)
@@ -90,7 +92,9 @@ public class CharacterTile : MonoBehaviour
 
         // Reset tile layer changer for keyboard
         if ((Input.GetKeyUp(KeyCode.LeftShift) && !pause.bPauseActive) ||
-            (Input.GetKeyUp(KeyCode.RightShift) && !pause.bPauseActive))
+            (Input.GetKeyUp(KeyCode.RightShift) && !pause.bPauseActive) ||
+            (Input.GetKeyUp(KeyCode.JoystickButton4) && !pause.bPauseActive) ||
+            (Input.GetKeyUp(KeyCode.JoystickButton5) && !pause.bPauseActive))
         {
             bAvoidUpdate = false;
         }
