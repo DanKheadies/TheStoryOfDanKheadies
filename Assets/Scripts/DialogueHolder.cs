@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/12/2018
+// Last:  01/12/2019
 
 using UnityEngine;
 
@@ -22,6 +22,7 @@ public class DialogueHolder : MonoBehaviour
 
 	void Start ()
     {
+        // Initializers
         anim = GetComponentInParent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
         touches = FindObjectOfType<TouchControls>();

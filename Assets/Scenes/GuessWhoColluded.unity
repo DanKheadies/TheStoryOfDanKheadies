@@ -332,6 +332,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae4634517fc8b1a48a757fe6c48dfcbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bControllerDown: 0
+  bControllerUp: 0
+  bFreezeControllerInput: 0
   currentPosition: -1
 --- !u!114 &5717765
 MonoBehaviour:
@@ -2886,7 +2889,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1814653775}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -3244,6 +3247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6840184b681044db304f200b9a2fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bControllerDown: 0
+  bControllerUp: 0
+  bFreezeControllerInput: 0
   currentPosition: 165
   bSecondaryMenu: 0
 --- !u!114 &123391549
@@ -4732,6 +4738,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef692f097ab740a46921f8e698114232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bControllerLeft: 0
+  bControllerRight: 0
+  bFreezeControllerInput: 0
   currentPosition: -160
 --- !u!225 &176896024
 CanvasGroup:
@@ -22486,7 +22495,7 @@ RectTransform:
   - {fileID: 1736060230}
   - {fileID: 345167266}
   m_Father: {fileID: 1814653775}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -37066,7 +37075,7 @@ RectTransform:
   - {fileID: 1612324671}
   - {fileID: 711179589}
   m_Father: {fileID: 1814653775}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -45900,9 +45909,9 @@ RectTransform:
   - {fileID: 400296912}
   - {fileID: 628927111}
   - {fileID: 1644938507}
-  - {fileID: 1473249511}
   - {fileID: 111813905}
   - {fileID: 908197423}
+  - {fileID: 1473249511}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

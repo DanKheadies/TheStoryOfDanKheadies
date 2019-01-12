@@ -2998,6 +2998,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae4634517fc8b1a48a757fe6c48dfcbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bControllerDown: 0
+  bControllerUp: 0
+  bFreezeControllerInput: 0
   currentPosition: -1
 --- !u!114 &378443897
 MonoBehaviour:
@@ -6812,9 +6815,9 @@ RectTransform:
   - {fileID: 950456241}
   - {fileID: 1591163418}
   - {fileID: 1288803992}
-  - {fileID: 894013167}
   - {fileID: 1742935450}
   - {fileID: 1842308868}
+  - {fileID: 894013167}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8932,7 +8935,7 @@ RectTransform:
   - {fileID: 263035507}
   - {fileID: 2013632728}
   m_Father: {fileID: 783566139}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -17383,7 +17386,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 783566139}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -17791,6 +17794,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef692f097ab740a46921f8e698114232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bControllerLeft: 0
+  bControllerRight: 0
+  bFreezeControllerInput: 0
   currentPosition: -160
 --- !u!4 &1767414189 stripped
 Transform:
@@ -18816,7 +18822,7 @@ RectTransform:
   - {fileID: 454691605}
   - {fileID: 1256528335}
   m_Father: {fileID: 783566139}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -20150,6 +20156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6840184b681044db304f200b9a2fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bControllerDown: 0
+  bControllerUp: 0
+  bFreezeControllerInput: 0
   currentPosition: 165
   bSecondaryMenu: 0
 --- !u!1001 &1927009729

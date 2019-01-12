@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: bf5b504c7f4aa9f4f81003208adee0d3
-timeCreated: 1506297884
-licenseType: Free
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: mesh_0001
     100002: mesh_0002
@@ -60,6 +58,7 @@ ModelImporter:
     100104: mesh_0052
     100106: mesh_0053
     100108: mesh_0054
+    100110: mesh_0055
     400000: mesh_0001
     400002: mesh_0002
     400004: mesh_0003
@@ -115,6 +114,7 @@ ModelImporter:
     400104: mesh_0052
     400106: mesh_0053
     400108: mesh_0054
+    400110: mesh_0055
     2300000: mesh_0001
     2300002: mesh_0002
     2300004: mesh_0003
@@ -169,6 +169,7 @@ ModelImporter:
     2300102: mesh_0052
     2300104: mesh_0053
     2300106: mesh_0054
+    2300108: mesh_0055
     3300000: mesh_0001
     3300002: mesh_0002
     3300004: mesh_0003
@@ -223,6 +224,7 @@ ModelImporter:
     3300102: mesh_0052
     3300104: mesh_0053
     3300106: mesh_0054
+    3300108: mesh_0055
     4300000: mesh_0001
     4300002: mesh_0002
     4300004: mesh_0003
@@ -277,6 +279,7 @@ ModelImporter:
     4300102: mesh_0052
     4300104: mesh_0053
     4300106: mesh_0054
+    4300108: mesh_0055
     11400000: mesh_0001
     11400002: mesh_0002
     11400004: mesh_0003
@@ -331,6 +334,7 @@ ModelImporter:
     11400102: mesh_0052
     11400104: mesh_0053
     11400106: mesh_0054
+    11400108: mesh_0055
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -350,6 +354,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -364,6 +369,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
     importVisibility: 0
     importBlendShapes: 0
     importCameras: 0
@@ -381,11 +387,16 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 2
     normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -400,7 +411,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

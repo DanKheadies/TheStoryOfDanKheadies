@@ -1,10 +1,11 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  01/05/2019
+// Last:  01/12/2019
 
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 // Contains all Chapter 1 quests, items, and elements
 public class Chp1 : MonoBehaviour
@@ -16,6 +17,12 @@ public class Chp1 : MonoBehaviour
     public GameObject dBox;
     public GameObject greatTree;
     public GameObject kid2;
+    public GameObject kid4;
+    public GameObject kid5;
+    public GameObject kid6;
+    public GameObject kid7;
+    public GameObject kid8;
+    public GameObject kid9;
     public GameObject oldMan1;
     public GameObject parent2;
     public GameObject person1;
@@ -31,6 +38,7 @@ public class Chp1 : MonoBehaviour
     public GameObject quest7;
     public GameObject quest8;
     public GameObject questTrigger2;
+    public GameObject screenFader;
     public GameObject thePlayer;
     public GameObject warpGWC;
     public GameObject warpMinesweeper;
@@ -41,6 +49,7 @@ public class Chp1 : MonoBehaviour
     public QuestManager qMan;
     public SaveGame save;
     public Text dText;
+    public TouchControls touches;
     public UIManager uiMan;
 
     public bool bAvoidGreatTreeConvo;
@@ -49,8 +58,10 @@ public class Chp1 : MonoBehaviour
     public bool bAvoidUpdateQ2;
     public bool bAvoidUpdateQ3;
     public bool bAvoidUpdateQ4;
-  //public bool bAvoidUpdateQ5;
-  //public bool bAvoidUpdateQ6;
+    public bool bAvoidUpdateQ4counting;
+    public bool bAvoidUpdateQ4seeking;
+    //public bool bAvoidUpdateQ5;
+    //public bool bAvoidUpdateQ6;
     public bool bAvoidUpdateQ7;
     public bool bAvoidUpdateQ8;
 
@@ -65,11 +76,23 @@ public class Chp1 : MonoBehaviour
     public bool bContainsQ8ItemPurple;
     public bool bContainsQ8ItemWhite;
 
+    public bool bQ4Seeking;
+    public bool bFoundQ4Kid4;
+    public bool bFoundQ4Kid5;
+    public bool bFoundQ4Kid6;
+    public bool bFoundQ4Kid7;
+    public bool bFoundQ4Kid8;
+    public bool bFoundQ4Kid9;
+    public bool bFoundQ4All;
+
     public bool bGetInventory;
 
     public float invTimer;
     public float raceTimer;
 
+    public int bQ4KidCounter;
+
+    public string Q4LastKidFound;
     public string savedQuestsValue;
 
     void Start()
@@ -81,11 +104,18 @@ public class Chp1 : MonoBehaviour
         dMan = FindObjectOfType<DialogueManager>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
         greatTree = GameObject.Find("GreatTree");
+        touches = GameObject.Find("GUIControls").GetComponent<TouchControls>();
         inv = FindObjectOfType<Inventory>();
-        kid2 = GameObject.Find("Kid2");
+        kid2 = GameObject.Find("Kid.2");
+        kid4 = GameObject.Find("Kid.4");
+        kid5 = GameObject.Find("Kid.5");
+        kid6 = GameObject.Find("Kid.6");
+        kid7 = GameObject.Find("Kid.7");
+        kid8 = GameObject.Find("Kid.8");
+        kid9 = GameObject.Find("Kid.9");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
-        oldMan1 = GameObject.Find("OldMan1");
+        oldMan1 = GameObject.Find("OldMan.1");
         oMan = FindObjectOfType<OptionsManager>();
         parent2 = GameObject.Find("Parent.2");
         person1 = GameObject.Find("Person.1");
@@ -93,9 +123,10 @@ public class Chp1 : MonoBehaviour
         pookieB2 = GameObject.Find("PookieBear.2");
         qMan = FindObjectOfType<QuestManager>();
         questTrigger2 = GameObject.Find("QT_2");
-        thePlayer = GameObject.FindGameObjectWithTag("Player");
-        savedQuestsValue = PlayerPrefs.GetString("Chp1Quests");
         save = FindObjectOfType<SaveGame>();
+        savedQuestsValue = PlayerPrefs.GetString("Chp1Quests");
+        screenFader = GameObject.Find("Screen_Fader");
+        thePlayer = GameObject.FindGameObjectWithTag("Player");
         warpGWC = GameObject.Find("Chp1.to.GuessWhoColluded");
         warpMinesweeper = GameObject.Find("Chp1.to.Minesweeper");
         uiMan = FindObjectOfType<UIManager>();
@@ -103,8 +134,6 @@ public class Chp1 : MonoBehaviour
         inv.RerunStart();
 
         quest0 = GameObject.Find("Quest_0"); // Truth or Elaborate Lie w/ Parent2
-        //quest1 = GameObject.Find("QuestManager").transform.GetChild(1).gameObject; // 03/29/18 DC -- Avoid Null Exception (wtf?)
-        // fixed above?
         quest1 = GameObject.Find("Quest_1"); // Race w/ Kid2
         quest2 = GameObject.Find("Quest_2"); // Treehouse Search
         quest3 = GameObject.Find("Quest_3"); // Item Check w/ OldMan1
@@ -317,8 +346,133 @@ public class Chp1 : MonoBehaviour
             }
         }
 
-        // Quest 4 -- Manhunt w/ Kid4 -> TBD
-        // TODO w/ kid in the woods
+        // Quest 4 -- Hide & Seek w/ Kid4 (counting)
+        if (quest4.GetComponent<QuestObject>().bHasStarted &&
+            !dMan.bDialogueActive &&
+            !bAvoidUpdateQ4counting)
+        {
+            StartCoroutine(HideAndSeek());
+
+            // Avoid talking to Kid4
+            kid4.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+            kid4.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = true;
+
+            // Stops the player's movement
+            thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+
+            // Fade out
+            screenFader.GetComponent<Animator>().Play("FadeOut");
+
+            // Turn off GUI
+            touches.transform.localScale = Vector3.zero;
+        }
+
+        // Quest 4 -- Hide & Seek w/ Kid4 (start seeking)
+        if (quest4.GetComponent<QuestObject>().bHasStarted &&
+            !dMan.bDialogueActive &&
+            bQ4Seeking &&
+            !bAvoidUpdateQ4seeking)
+        {
+            // Fade in
+            screenFader.GetComponent<Animator>().SetBool("FadeIn", true);
+
+            // Resume the player's movement
+            thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = false;
+
+            bAvoidUpdateQ4seeking = true;
+        }
+
+        // Quest 4 -- Hide & Seek w/ Kid4 (seeking)
+        if (bQ4Seeking)
+        {
+            if (kid4.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+                !dMan.bDialogueActive &&
+                !bFoundQ4Kid4)
+            {
+                bFoundQ4Kid4 = true;
+                Q4LastKidFound = "Kid4";
+                bQ4KidCounter += 1;
+
+                HideAndSeekFoundKid();
+            }
+            else if (kid5.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+                !dMan.bDialogueActive &&
+                !bFoundQ4Kid5)
+            {
+                bFoundQ4Kid5 = true;
+                Q4LastKidFound = "Kid5";
+                bQ4KidCounter += 1;
+
+                HideAndSeekFoundKid();
+            }
+            else if (kid6.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+                !dMan.bDialogueActive &&
+                !bFoundQ4Kid6)
+            {
+                bFoundQ4Kid6 = true;
+                Q4LastKidFound = "Kid6";
+                bQ4KidCounter += 1;
+
+                HideAndSeekFoundKid();
+            }
+            else if (kid7.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+                !dMan.bDialogueActive &&
+                !bFoundQ4Kid7)
+            {
+                bFoundQ4Kid7 = true;
+                Q4LastKidFound = "Kid7";
+                bQ4KidCounter += 1;
+
+                HideAndSeekFoundKid();
+            }
+            else if (kid8.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+                !dMan.bDialogueActive &&
+                !bFoundQ4Kid8)
+            {
+                bFoundQ4Kid8 = true;
+                Q4LastKidFound = "Kid8";
+                bQ4KidCounter += 1;
+
+                HideAndSeekFoundKid();
+            }
+            else if (kid9.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+                !dMan.bDialogueActive &&
+                !bFoundQ4Kid9)
+            {
+                bFoundQ4Kid9 = true;
+                Q4LastKidFound = "Kid9";
+                bQ4KidCounter += 1;
+
+                HideAndSeekFoundKid();
+            }
+
+            if (mainCamera.GetComponent<CameraFollow>().currentCoords != CameraFollow.AnandaCoords.WoodsW)
+            {
+                Quest4Reset();
+            }
+        }
+
+        // Quest 4 -- Hide & Seek w/ Kid4 (finished)
+        if (quest4.GetComponent<QuestObject>().bHasStarted &&
+            !dMan.bDialogueActive &&
+            bQ4KidCounter == 6 &&
+            !bQ4Seeking &&
+            !bAvoidUpdateQ4)
+        {
+            StartCoroutine(HideAndSeekFinished());
+
+            // Stops the player's movement
+            thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+
+            // Fade out
+            screenFader.GetComponent<Animator>().Play("FadeOut");
+
+            // Turn off GUI
+            touches.transform.localScale = Vector3.zero;
+
+            Quest4Reward();
+            bAvoidUpdateQ4 = true;
+        }
 
         // Quest 7 -- Item Delivery w/ Man1 -> 
         if (quest7.GetComponent<QuestObject>().bHasStarted &&
@@ -466,8 +620,8 @@ public class Chp1 : MonoBehaviour
     {
         if (!quest4.GetComponent<QuestObject>().bHasCollected)
         {
-            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
-            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(5);
+            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(15);
+            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(20);
             uiMan.bUpdateBrio = true;
 
             quest4.GetComponent<QuestObject>().bHasCollected = true;
@@ -501,6 +655,26 @@ public class Chp1 : MonoBehaviour
             oMan.ResetOptions();
             Quest0Dialogue2();
         }
+
+
+        // Quest 4 - Dialogue 1 - Option 1
+        if (kid4.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+            kid4.transform.GetChild(0).gameObject.activeSelf &&
+            moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
+        {
+            oMan.ResetOptions();
+            Quest4Dialogue1Opt1();
+        }
+        // Quest 4 - Dialogue 1 - Option 2
+        else if (kid4.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+                 kid4.transform.GetChild(0).gameObject.activeSelf &&
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
+        {
+            oMan.ResetOptions();
+            Quest4Dialogue1Opt2();
+        }
+
+
         // Quest 5 - Dialogue 1 - Option *
         else if (greatTree.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
                  greatTree.transform.GetChild(0).gameObject.activeSelf &&
@@ -675,8 +849,224 @@ public class Chp1 : MonoBehaviour
         // Quest 0 -- Q&A 1 Reward
         Quest0Reward();
 
-        // DC 08/12/2018 -- Have dad walk downstairs and stay there to "work" w/ VR googles and dan k.
+        // DC 08/12/2018 -- Have dad walk to the shed and stay there to "work" w/ VR googles and dan k.
         // DC 08/13/2018 -- Dad keeps twisting and turning instead of still looking at dan
+    }
+
+    public void Quest4Dialogue1Opt1()
+    {
+        // Yes -- Play
+        kid4.transform.GetChild(0).gameObject.SetActive(false);
+        kid4.transform.GetChild(1).gameObject.SetActive(true);
+
+        // Avoid talking to Kid4
+        kid4.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+
+        thePlayer.transform.position = new Vector3(
+            thePlayer.transform.position.x + 0.001f,
+            thePlayer.transform.position.y + 0.001f,
+            thePlayer.transform.position.z
+        );
+    }
+
+    public void Quest4Dialogue1Opt2()
+    {
+        // No play a game
+        dMan.dialogueLines = new string[] {
+                "Hmm.. Perhaps later..."
+            };
+        dMan.currentLine = 0;
+        dText.text = dMan.dialogueLines[dMan.currentLine];
+        dMan.ShowDialogue();
+        dArrow.GetComponent<ImageStrobe>().bStartStrobe = true;
+    }
+
+    IEnumerator HideAndSeek()
+    {
+        yield return new WaitForSeconds(2);
+
+        // Move Kid4
+        kid4.transform.localPosition = new Vector2(7.429f, -7.797f);
+
+        // "Turn on" Kids 5-9
+        kid5.transform.localScale = Vector3.one;
+        kid6.transform.localScale = Vector3.one;
+        kid7.transform.localScale = Vector3.one;
+        kid8.transform.localScale = Vector3.one;
+        kid9.transform.localScale = Vector3.one;
+
+        // Need to reset each kid's box collider after first round (but why?)
+        kid5.GetComponent<BoxCollider2D>().isTrigger = true;
+        kid5.GetComponent<BoxCollider2D>().isTrigger = false;
+        kid6.GetComponent<BoxCollider2D>().isTrigger = true;
+        kid6.GetComponent<BoxCollider2D>().isTrigger = false;
+        kid7.GetComponent<BoxCollider2D>().isTrigger = true;
+        kid7.GetComponent<BoxCollider2D>().isTrigger = false;
+        kid8.GetComponent<BoxCollider2D>().isTrigger = true;
+        kid8.GetComponent<BoxCollider2D>().isTrigger = false;
+        kid9.GetComponent<BoxCollider2D>().isTrigger = true;
+        kid9.GetComponent<BoxCollider2D>().isTrigger = false;
+
+        // Set dialogue & dialogue elements
+        dMan.dialogueLines = new string[] {
+                "40..",
+                "41..",
+                "42... Game on!"
+            };
+        dMan.portPic = thePlayer.GetComponent<PlayerBrioManager>().portPic;
+        dMan.currentLine = 0;
+        dText.text = dMan.dialogueLines[dMan.currentLine];
+        dMan.ShowDialogue();
+        //dArrow.GetComponent<ImageStrobe>().bStartStrobe = true;
+        // DC TODO 01/11/2019 -- bStart/bStopStrobe should be fixed in dMan now
+        // Go thru the scripts & make sure bStopStrobe is set to true & bStartStrobe = false OR removed altogether
+
+        bAvoidUpdateQ4counting = true;
+        bQ4Seeking = true;
+    }
+
+    public void HideAndSeekFoundKid()
+    {
+        var tempCool = "";
+
+        for (int i = 0; i < bQ4KidCounter; i++)
+        {
+            if (i == 0)
+            {
+                tempCool = "Cool";
+            }
+            else
+            {
+                tempCool += " cool";
+            }
+        }
+
+        if (bQ4KidCounter < 6)
+        {
+            // Set dialogue & dialogue elements
+            dMan.dialogueLines = new string[] {
+                tempCool + ".. That's " + bQ4KidCounter + " of 6."
+            };
+            dMan.portPic = thePlayer.GetComponent<PlayerBrioManager>().portPic;
+            dMan.currentLine = 0;
+            dText.text = dMan.dialogueLines[dMan.currentLine];
+            dMan.ShowDialogue();
+        }
+        else
+        {
+            // Set dialogue & dialogue elements
+            dMan.dialogueLines = new string[] {
+                "Toit! Found all of you."
+            };
+            dMan.portPic = thePlayer.GetComponent<PlayerBrioManager>().portPic;
+            dMan.currentLine = 0;
+            dText.text = dMan.dialogueLines[dMan.currentLine];
+            dMan.ShowDialogue();
+
+            // Last kid talked to, dh.hasEntered = false
+            CheckAndDisableLastKidFound();
+
+            bQ4Seeking = false;
+            bFoundQ4All = true;
+        }
+    }
+
+    IEnumerator HideAndSeekFinished()
+    {
+        yield return new WaitForSeconds(2);
+
+        // Deactivate Kid4 DH (order matters?)
+        kid4.transform.GetChild(1).gameObject.SetActive(false);
+
+        // Move Kid4, Kid4's DH2, Dan & Camera
+        kid4.transform.localPosition = new Vector2(4.07f, -9.43f);
+        kid4.transform.GetChild(2).gameObject.transform.localPosition = new Vector2(0f, 0f);
+        thePlayer.transform.localPosition = new Vector2(-19.157f, -1.674f);
+        mainCamera.transform.localPosition = new Vector2(-19.157f, -1.674f);
+
+        // Activate Kid4 DH2 (order matters?)
+        kid4.transform.GetChild(2).gameObject.SetActive(true);
+
+        // "Turn off" Kids 5-9
+        kid5.transform.localScale = Vector3.zero;
+        kid6.transform.localScale = Vector3.zero;
+        kid7.transform.localScale = Vector3.zero;
+        kid8.transform.localScale = Vector3.zero;
+        kid9.transform.localScale = Vector3.zero;
+
+        // Fade in
+        screenFader.GetComponent<Animator>().SetBool("FadeIn", true);
+
+        bAvoidUpdateQ4counting = true;
+        bQ4Seeking = true;
+    }
+
+    public void CheckAndDisableLastKidFound()
+    {
+        if (Q4LastKidFound == "Kid4")
+        {
+            kid4.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        }
+        else if (Q4LastKidFound == "Kid5")
+        {
+            kid5.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        }
+        else if (Q4LastKidFound == "Kid6")
+        {
+            kid6.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        }
+        else if (Q4LastKidFound == "Kid7")
+        {
+            kid7.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        }
+        else if (Q4LastKidFound == "Kid8")
+        {
+            kid8.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        }
+        else if (Q4LastKidFound == "Kid9")
+        {
+            kid9.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        }
+    }
+    
+    public void Quest4Reset()
+    {
+        // Move Kid4 back to his spot
+        kid4.transform.localPosition = new Vector2(4.07f, -9.43f);
+
+        // Reset quest checks
+        bFoundQ4Kid4 = false;
+        bFoundQ4Kid5 = false;
+        bFoundQ4Kid6 = false;
+        bFoundQ4Kid7 = false;
+        bFoundQ4Kid8 = false;
+        bFoundQ4Kid9 = false;
+
+        // Reset Kid4 dialogues
+        kid4.transform.GetChild(1).gameObject.SetActive(false);
+        kid4.transform.GetChild(0).gameObject.SetActive(true);
+
+        // Reset Dialogue Holders
+        kid4.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+        kid5.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+        kid6.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+        kid7.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+        kid8.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+        kid9.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+
+        // Reset everything else
+        quest4.GetComponent<QuestObject>().bHasStarted = false;
+        bAvoidUpdateQ4counting = false;
+        bQ4Seeking = false;
+        bAvoidUpdateQ4seeking = false;
+        bQ4KidCounter = 0;
+
+        // "Turn off" Kids 5-9
+        kid5.transform.localScale = Vector3.zero;
+        kid6.transform.localScale = Vector3.zero;
+        kid7.transform.localScale = Vector3.zero;
+        kid8.transform.localScale = Vector3.zero;
+        kid9.transform.localScale = Vector3.zero;
     }
 
     public void Quest5Dialogue2()

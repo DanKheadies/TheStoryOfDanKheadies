@@ -150,6 +150,9 @@ public class DialogueManager : MonoBehaviour
 
     public void ResetDialogue()
     {
+        // Show controls if visible
+        touches.transform.localScale = Vector3.one;
+
         // Mini-pause on triggering the same dialogue
         PauseDialogue();
 
@@ -159,6 +162,7 @@ public class DialogueManager : MonoBehaviour
         currentLine = 0;
 
         // Reset ContinueArrow strobing
+        imgStrobe.bStartStrobe = false;
         imgStrobe.bStopStrobe = true;
 
         // Reactivate the player
@@ -167,9 +171,6 @@ public class DialogueManager : MonoBehaviour
         {
             pAnim.Play("Idle");
         }
-
-        // Show controls if visible
-        touches.transform.localScale = Vector3.one;
     }
 
     public void ShowDialogue()
@@ -183,6 +184,7 @@ public class DialogueManager : MonoBehaviour
         // Displays the dialogue box
         bDialogueActive = true;
         dBox.transform.localScale = Vector3.one;
+        imgStrobe.bStopStrobe = false;
         imgStrobe.bStartStrobe = true;
 
         // Sound Effect
