@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  08/13/2018
+// Last:  01/12/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -108,30 +108,28 @@ public class ItemManager : MonoBehaviour
             // Display and add item to inventory
             if (this.name == "Cannabis.Bud.Green")
             {
-                greenBud.GetComponent<Transform>().localScale = Vector3.one;
+                greenBud.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
             else if (this.name == "Cannabis.Bud.Orange")
             {
-                orangeBud.GetComponent<Transform>().localScale = Vector3.one;
+                orangeBud.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
             else if (this.name == "Cannabis.Bud.Purple")
             {
-                purpleBud.GetComponent<Transform>().localScale = Vector3.one;
+                purpleBud.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
             else if (this.name == "Cannabis.Bud.White")
             {
-                whiteBud.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                whiteBud.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
             else if (this.name == "VR.Goggles")
             {
-                vrGoggles.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                vrGoggles.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
-                this.GetComponent<BoxCollider2D>().enabled = false;
-                this.transform.localScale = Vector2.zero;
             }
 
             dMan.portPic = portPic;
@@ -154,15 +152,15 @@ public class ItemManager : MonoBehaviour
     {
         if (scene.name == "Chp0")
         {
-            vrGoggles.GetComponent<Transform>().localScale = Vector3.zero;
+            vrGoggles.transform.localScale = Vector3.zero;
         }
         else if (scene.name == "Chp1")
         {
-            greenBud.GetComponent<Transform>().localScale = Vector3.zero;
-            orangeBud.GetComponent<Transform>().localScale = Vector3.zero;
-            purpleBud.GetComponent<Transform>().localScale = Vector3.zero;
-            whiteBud.GetComponent<Transform>().localScale = Vector3.zero;
-            vrGoggles.GetComponent<Transform>().localScale = Vector3.zero;
+            greenBud.transform.localScale = Vector3.zero;
+            orangeBud.transform.localScale = Vector3.zero;
+            purpleBud.transform.localScale = Vector3.zero;
+            whiteBud.transform.localScale = Vector3.zero;
+            vrGoggles.transform.localScale = Vector3.zero;
         }
     }
 }

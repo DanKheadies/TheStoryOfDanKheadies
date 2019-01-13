@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  01/12/2019
+// Last:  01/13/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +23,7 @@ public class Chp1 : MonoBehaviour
     public GameObject kid7;
     public GameObject kid8;
     public GameObject kid9;
+    public GameObject man1;
     public GameObject oldMan1;
     public GameObject parent2;
     public GameObject person1;
@@ -64,6 +65,8 @@ public class Chp1 : MonoBehaviour
     //public bool bAvoidUpdateQ6;
     public bool bAvoidUpdateQ7;
     public bool bAvoidUpdateQ8;
+    public bool bAvoidUpdateQ7Q8DH;
+    public bool bAvoidUpdateQ7Q8;
 
     public bool bContainsQ3Item;
     public bool bContainsQ6Item;
@@ -90,9 +93,21 @@ public class Chp1 : MonoBehaviour
     public float invTimer;
     public float raceTimer;
 
-    public int bQ4KidCounter;
+    public int Q4KidCounter;
+    public int Q7GreenCounter;
+    public int Q7OrangeCounter;
+    public int Q7PurpleCounter;
+    public int Q7WhiteCounter;
+    public int Q8GreenCounter;
+    public int Q8OrangeCounter;
+    public int Q8PurpleCounter;
+    public int Q8WhiteCounter;
 
     public string Q4LastKidFound;
+    public string Q7Options;
+    public string Q7SelectedOption;
+    public string Q8Options;
+    public string Q8SelectedOption;
     public string savedQuestsValue;
 
     void Start()
@@ -114,6 +129,7 @@ public class Chp1 : MonoBehaviour
         kid8 = GameObject.Find("Kid.8");
         kid9 = GameObject.Find("Kid.9");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        man1 = GameObject.Find("Man.1");
         moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
         oldMan1 = GameObject.Find("OldMan.1");
         oMan = FindObjectOfType<OptionsManager>();
@@ -283,7 +299,7 @@ public class Chp1 : MonoBehaviour
             (int)camFollow.currentCoords == 23)
         {
             Quest2Reward();
-            
+
         }
 
         // Quest 3 -- Item Check w/ OldMan1 -> Check on inventory change
@@ -318,8 +334,6 @@ public class Chp1 : MonoBehaviour
                 oldMan1.transform.GetChild(0).gameObject.SetActive(true);
                 oldMan1.transform.GetChild(1).gameObject.SetActive(false);
             }
-                
-            inv.bUpdateItemCount = false;
         }
 
         // Quest 3 -- Item Check w/ OldMan1 -> Reward & Removal
@@ -391,7 +405,7 @@ public class Chp1 : MonoBehaviour
             {
                 bFoundQ4Kid4 = true;
                 Q4LastKidFound = "Kid4";
-                bQ4KidCounter += 1;
+                Q4KidCounter += 1;
 
                 HideAndSeekFoundKid();
             }
@@ -401,7 +415,7 @@ public class Chp1 : MonoBehaviour
             {
                 bFoundQ4Kid5 = true;
                 Q4LastKidFound = "Kid5";
-                bQ4KidCounter += 1;
+                Q4KidCounter += 1;
 
                 HideAndSeekFoundKid();
             }
@@ -411,7 +425,7 @@ public class Chp1 : MonoBehaviour
             {
                 bFoundQ4Kid6 = true;
                 Q4LastKidFound = "Kid6";
-                bQ4KidCounter += 1;
+                Q4KidCounter += 1;
 
                 HideAndSeekFoundKid();
             }
@@ -421,7 +435,7 @@ public class Chp1 : MonoBehaviour
             {
                 bFoundQ4Kid7 = true;
                 Q4LastKidFound = "Kid7";
-                bQ4KidCounter += 1;
+                Q4KidCounter += 1;
 
                 HideAndSeekFoundKid();
             }
@@ -431,7 +445,7 @@ public class Chp1 : MonoBehaviour
             {
                 bFoundQ4Kid8 = true;
                 Q4LastKidFound = "Kid8";
-                bQ4KidCounter += 1;
+                Q4KidCounter += 1;
 
                 HideAndSeekFoundKid();
             }
@@ -441,7 +455,7 @@ public class Chp1 : MonoBehaviour
             {
                 bFoundQ4Kid9 = true;
                 Q4LastKidFound = "Kid9";
-                bQ4KidCounter += 1;
+                Q4KidCounter += 1;
 
                 HideAndSeekFoundKid();
             }
@@ -455,7 +469,7 @@ public class Chp1 : MonoBehaviour
         // Quest 4 -- Hide & Seek w/ Kid4 (finished)
         if (quest4.GetComponent<QuestObject>().bHasStarted &&
             !dMan.bDialogueActive &&
-            bQ4KidCounter == 6 &&
+            Q4KidCounter == 6 &&
             !bQ4Seeking &&
             !bAvoidUpdateQ4)
         {
@@ -474,75 +488,521 @@ public class Chp1 : MonoBehaviour
             bAvoidUpdateQ4 = true;
         }
 
-        // Quest 7 -- Item Delivery w/ Man1 -> 
+        // Quest 7 -- Item Check & Options for PookieBear1
         if (quest7.GetComponent<QuestObject>().bHasStarted &&
             inv.bUpdateItemCount &&
             !bAvoidUpdateQ7)
         {
-            // Assume not present unless we find it
-            //bContainsQ4Item = false;
+            // Reset the counters
+            Q7GreenCounter = 0;
+            Q7OrangeCounter = 0;
+            Q7PurpleCounter = 0;
+            Q7WhiteCounter = 0;
 
+            // Check each item
             for (int i = 0; i < inv.items.Count; i++)
             {
                 string item = inv.items[i].ToString();
 
                 // Green nug check
-                if (!bContainsQ7ItemGreen &&
-                   (item == "Cannabis.Bud.SmoochyWoochyPoochy (Item)" ||
+                if (item == "Cannabis.Bud.SmoochyWoochyPoochy (Item)" ||
                     item == "Cannabis.Bud.NaturesCandy (Item)" ||
-                    item == "Cannabis.Bud.TheDevilsLettuce (Item)"))
+                    item == "Cannabis.Bud.TheDevilsLettuce (Item)")
                 {
-                    // activate option 1
-                    //pookieB1.GetComponent<OptionsHolder>().
-                    //bContainsQ4ItemGreen = true;
-                }
-
-                // White nug
-                if (!bContainsQ7ItemWhite &&
-                   (item == "Cannabis.Bud.CreeperBud (Item)" ||
-                    item == "Cannabis.Bud.MastaRoshi (Item)" ||
-                    item == "Cannabis.Bud.WhiteWalker (Item)"))
-                {
-                    // activate option 2
-                }
-
-                // Purple nug
-                if (!bContainsQ7ItemPurple &&
-                   (item == "Cannabis.Bud.GranPapasMedicine (Item)" ||
-                    item == "Cannabis.Bud.PurpleNurple (Item)" ||
-                    item == "Cannabis.Bud.RighteousBud (Item)"))
-                {
-                    // activate option 3
+                    Q7GreenCounter += 1;
                 }
 
                 // Orange nug
-                if (!bContainsQ7ItemOrange &&
-                   (item == "Cannabis.Bud.BootyJuice (Item)" ||
+                if (item == "Cannabis.Bud.BootyJuice (Item)" ||
                     item == "Cannabis.Bud.Catnip (Item)" ||
-                    item == "Cannabis.Bud.SnoopLeone (Item)"))
+                    item == "Cannabis.Bud.SnoopLeone (Item)")
                 {
-                    // activate option 4
+                    Q7OrangeCounter += 1;
+                }
+
+                // Purple nug
+                if (item == "Cannabis.Bud.GranPapasMedicine (Item)" ||
+                    item == "Cannabis.Bud.PurpleNurple (Item)" ||
+                    item == "Cannabis.Bud.RighteousBud (Item)")
+                {
+                    Q7PurpleCounter += 1;
+                }
+
+                // White nug
+                if (item == "Cannabis.Bud.CreeperBud (Item)" ||
+                    item == "Cannabis.Bud.MastaRoshi (Item)" ||
+                    item == "Cannabis.Bud.WhiteWalker (Item)")
+                {
+                    Q7WhiteCounter += 1;
                 }
             }
 
-            //if (bContainsQ4Item)
-            //{
-            //    oldMan1.transform.GetChild(0).gameObject.SetActive(false);
-            //    oldMan1.transform.GetChild(1).gameObject.SetActive(true);
+            if (Q7GreenCounter > 0)
+            {
+                bContainsQ7ItemGreen = true;
+            }
+            else
+            {
+                bContainsQ7ItemGreen = false;
+            }
 
-            //    oldMan1.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = true;
-            //}
-            //else if (!bContainsQ4Item)
-            //{
-            //    oldMan1.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = false;
+            if (Q7OrangeCounter > 0)
+            {
+                bContainsQ7ItemOrange = true;
+            }
+            else
+            {
+                bContainsQ7ItemOrange = false;
+            }
 
-            //    oldMan1.transform.GetChild(0).gameObject.SetActive(true);
-            //    oldMan1.transform.GetChild(1).gameObject.SetActive(false);
-            //}
+            if (Q7PurpleCounter > 0)
+            {
+                bContainsQ7ItemPurple = true;
+            }
+            else
+            {
+                bContainsQ7ItemPurple = false;
+            }
 
-            inv.bUpdateItemCount = false;
+            if (Q7WhiteCounter > 0)
+            {
+                bContainsQ7ItemWhite = true;
+            }
+            else
+            {
+                bContainsQ7ItemWhite = false;
+            }
+
+            // if one of them present, activate options handler on Pookie
+            if (bContainsQ7ItemGreen ||
+                bContainsQ7ItemOrange ||
+                bContainsQ7ItemPurple || 
+                bContainsQ7ItemWhite)
+            {
+                // Activate DH w/ OH
+                pookieB1.transform.GetChild(0).gameObject.SetActive(false);
+                pookieB1.transform.GetChild(1).gameObject.SetActive(true);
+
+                if (bContainsQ7ItemGreen &&
+                    bContainsQ7ItemOrange &&
+                    bContainsQ7ItemPurple &&
+                    bContainsQ7ItemWhite)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[4];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[3] = "Give em a white nug";
+
+                    Q7Options = "gopw";
+                }
+                else if (bContainsQ7ItemGreen &&
+                         bContainsQ7ItemPurple &&
+                         bContainsQ7ItemWhite)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+
+                    Q7Options = "gpw";
+                }
+                else if (bContainsQ7ItemGreen &&
+                         bContainsQ7ItemOrange &&
+                         bContainsQ7ItemWhite)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+
+                    Q7Options = "gow";
+                }
+                else if (bContainsQ7ItemGreen &&
+                         bContainsQ7ItemOrange &&
+                         bContainsQ7ItemPurple)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
+
+                    Q7Options = "gop";
+                }
+                else if (bContainsQ7ItemOrange &&
+                         bContainsQ7ItemPurple &&
+                         bContainsQ7ItemWhite)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+
+                    Q7Options = "opw";
+                }
+                else if (bContainsQ7ItemGreen &&
+                         bContainsQ7ItemOrange)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+
+                    Q7Options = "go";
+                }
+                else if (bContainsQ7ItemGreen &&
+                         bContainsQ7ItemPurple)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+
+                    Q7Options = "gp";
+                }
+                else if (bContainsQ7ItemGreen &&
+                         bContainsQ7ItemWhite)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+
+                    Q7Options = "gw";
+                }
+                else if (bContainsQ7ItemOrange &&
+                         bContainsQ7ItemPurple)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+
+                    Q7Options = "op";
+                }
+                else if (bContainsQ7ItemOrange &&
+                         bContainsQ7ItemWhite)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+
+                    Q7Options = "ow";
+                }
+                else if (bContainsQ7ItemPurple &&
+                         bContainsQ7ItemWhite)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+
+                    Q7Options = "pw";
+                }
+                else if (bContainsQ7ItemGreen)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+
+                    Q7Options = "g";
+                }
+                else if (bContainsQ7ItemOrange)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+
+                    Q7Options = "o";
+                }
+                else if (bContainsQ7ItemPurple)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
+
+                    Q7Options = "p";
+                }
+                else if (bContainsQ7ItemWhite)
+                {
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a white nug";
+
+                    Q7Options = "w";
+                }
+            }
+            else
+            {
+                // Activate DH (no OH)
+                pookieB1.transform.GetChild(0).gameObject.SetActive(true);
+                pookieB1.transform.GetChild(1).gameObject.SetActive(false);
+            }
+        }
+        
+        // Quest 8 -- Item Check & Options for PookieBear2
+        if (quest8.GetComponent<QuestObject>().bHasStarted &&
+            inv.bUpdateItemCount &&
+            !bAvoidUpdateQ8)
+        {
+            // Reset the counters
+            Q8GreenCounter = 0;
+            Q8OrangeCounter = 0;
+            Q8PurpleCounter = 0;
+            Q8WhiteCounter = 0;
+
+            // Check each item
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+
+                // Green nug check
+                if (item == "Cannabis.Bud.SmoochyWoochyPoochy (Item)" ||
+                    item == "Cannabis.Bud.NaturesCandy (Item)" ||
+                    item == "Cannabis.Bud.TheDevilsLettuce (Item)")
+                {
+                    Q8GreenCounter += 1;
+                }
+
+                // Orange nug
+                if (item == "Cannabis.Bud.BootyJuice (Item)" ||
+                    item == "Cannabis.Bud.Catnip (Item)" ||
+                    item == "Cannabis.Bud.SnoopLeone (Item)")
+                {
+                    Q8OrangeCounter += 1;
+                }
+
+                // Purple nug
+                if (item == "Cannabis.Bud.GranPapasMedicine (Item)" ||
+                    item == "Cannabis.Bud.PurpleNurple (Item)" ||
+                    item == "Cannabis.Bud.RighteousBud (Item)")
+                {
+                    Q8PurpleCounter += 1;
+                }
+
+                // White nug
+                if (item == "Cannabis.Bud.CreeperBud (Item)" ||
+                    item == "Cannabis.Bud.MastaRoshi (Item)" ||
+                    item == "Cannabis.Bud.WhiteWalker (Item)")
+                {
+                    Q8WhiteCounter += 1;
+                }
+            }
+
+            if (Q8GreenCounter > 0)
+            {
+                bContainsQ8ItemGreen = true;
+            }
+            else
+            {
+                bContainsQ8ItemGreen = false;
+            }
+
+            if (Q8OrangeCounter > 0)
+            {
+                bContainsQ8ItemOrange = true;
+            }
+            else
+            {
+                bContainsQ8ItemOrange = false;
+            }
+
+            if (Q8PurpleCounter > 0)
+            {
+                bContainsQ8ItemPurple = true;
+            }
+            else
+            {
+                bContainsQ8ItemPurple = false;
+            }
+
+            if (Q8WhiteCounter > 0)
+            {
+                bContainsQ8ItemWhite = true;
+            }
+            else
+            {
+                bContainsQ8ItemWhite = false;
+            }
+
+            // if one of them present, activate options handler on Pookie
+            if (bContainsQ8ItemGreen ||
+                bContainsQ8ItemOrange ||
+                bContainsQ8ItemPurple ||
+                bContainsQ8ItemWhite)
+            {
+                // Activate DH w/ OH
+                pookieB2.transform.GetChild(0).gameObject.SetActive(false);
+                pookieB2.transform.GetChild(1).gameObject.SetActive(true);
+
+                if (bContainsQ8ItemGreen &&
+                    bContainsQ8ItemOrange &&
+                    bContainsQ8ItemPurple &&
+                    bContainsQ8ItemWhite)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[4];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[3] = "Give em a white nug";
+
+                    Q8Options = "gopw";
+                }
+                else if (bContainsQ8ItemGreen &&
+                         bContainsQ8ItemPurple &&
+                         bContainsQ8ItemWhite)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+
+                    Q8Options = "gpw";
+                }
+                else if (bContainsQ8ItemGreen &&
+                         bContainsQ8ItemOrange &&
+                         bContainsQ8ItemWhite)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+
+                    Q8Options = "gow";
+                }
+                else if (bContainsQ8ItemGreen &&
+                         bContainsQ8ItemOrange &&
+                         bContainsQ8ItemPurple)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
+
+                    Q8Options = "gop";
+                }
+                else if (bContainsQ8ItemOrange &&
+                         bContainsQ8ItemPurple &&
+                         bContainsQ8ItemWhite)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+
+                    Q8Options = "opw";
+                }
+                else if (bContainsQ8ItemGreen &&
+                         bContainsQ8ItemOrange)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+
+                    Q8Options = "go";
+                }
+                else if (bContainsQ8ItemGreen &&
+                         bContainsQ8ItemPurple)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+
+                    Q8Options = "gp";
+                }
+                else if (bContainsQ8ItemGreen &&
+                         bContainsQ8ItemWhite)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+
+                    Q8Options = "gw";
+                }
+                else if (bContainsQ8ItemOrange &&
+                         bContainsQ8ItemPurple)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+
+                    Q8Options = "op";
+                }
+                else if (bContainsQ8ItemOrange &&
+                         bContainsQ8ItemWhite)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+
+                    Q8Options = "ow";
+                }
+                else if (bContainsQ8ItemPurple &&
+                         bContainsQ8ItemWhite)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+
+                    Q8Options = "pw";
+                }
+                else if (bContainsQ8ItemGreen)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+
+                    Q8Options = "g";
+                }
+                else if (bContainsQ8ItemOrange)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+
+                    Q8Options = "o";
+                }
+                else if (bContainsQ8ItemPurple)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
+
+                    Q8Options = "p";
+                }
+                else if (bContainsQ8ItemWhite)
+                {
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a white nug";
+
+                    Q8Options = "w";
+                }
+            }
+            else
+            {
+                // Activate DH (no OH)
+                pookieB2.transform.GetChild(0).gameObject.SetActive(true);
+                pookieB2.transform.GetChild(1).gameObject.SetActive(false);
+            }
         }
 
+        // Quest 7 & 8 -- Both Fed
+        if (bAvoidUpdateQ7 &&
+            bAvoidUpdateQ8 &&
+            !bAvoidUpdateQ7Q8)
+        {
+            if (!bAvoidUpdateQ7Q8DH)
+            {
+                man1.transform.GetChild(0).gameObject.SetActive(false);
+                man1.transform.GetChild(1).gameObject.SetActive(true);
+
+                bAvoidUpdateQ7Q8DH = true;
+            }
+
+            if (man1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+                dMan.bDialogueActive)
+            {
+                Quest7And8Reward();
+
+                bAvoidUpdateQ7Q8 = true;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log("localD: " + thePlayer.transform.localPosition);
+            Debug.Log("regulD: " + thePlayer.transform.position);
+            Debug.Log("localP: " + pookieB1.transform.localPosition);
+            Debug.Log("regulp: " + pookieB1.transform.position);
+        }
 
         // Minigame -- Guess Who Colluded
         if (thePlayer.GetComponent<PolygonCollider2D>().IsTouching(warpGWC.GetComponent<BoxCollider2D>()))
@@ -565,6 +1025,12 @@ public class Chp1 : MonoBehaviour
 
             // Stop NPCs from moving
             person1.GetComponent<Animator>().enabled = false;
+        }
+        
+        // Final Item Count Check (allows multiple conditions to be check)
+        if (inv.bUpdateItemCount)
+        {
+            inv.bUpdateItemCount = false;
         }
     }
 
@@ -628,6 +1094,20 @@ public class Chp1 : MonoBehaviour
         }
     }
 
+    public void Quest7And8Reward()
+    {
+        if (!quest7.GetComponent<QuestObject>().bHasCollected &&
+            !quest8.GetComponent<QuestObject>().bHasCollected)
+        {
+            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
+            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(25);
+            uiMan.bUpdateBrio = true;
+
+            quest7.GetComponent<QuestObject>().bHasCollected = true;
+            quest8.GetComponent<QuestObject>().bHasCollected = true;
+        }
+    }
+
     public void QuestDialogueCheck()
     {
         // Quest 0 - Dialogue 1 - Option 1
@@ -676,7 +1156,7 @@ public class Chp1 : MonoBehaviour
 
 
         // Quest 5 - Dialogue 1 - Option *
-        else if (greatTree.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+        if (greatTree.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
                  greatTree.transform.GetChild(0).gameObject.activeSelf &&
                 (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
@@ -712,6 +1192,8 @@ public class Chp1 : MonoBehaviour
         {
             oMan.ResetOptions();
         }
+
+
         // Quest 6 - Dialogue 1 - Option 1
         if (person1.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
             person1.transform.GetChild(0).gameObject.activeSelf &&
@@ -728,91 +1210,37 @@ public class Chp1 : MonoBehaviour
             oMan.ResetOptions();
             Quest6Dialogue1Opt2();
         }
+
+
         // Quest 7 - Dialogue 1 - Option *
-        else if (pookieB1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
-                 pookieB1.transform.GetChild(1).gameObject.activeSelf &&
-                (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
-                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
-                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3 ||
-                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt4))
+        if (pookieB1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+            pookieB1.transform.GetChild(1).gameObject.activeSelf &&
+            (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
+             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
+             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3 ||
+             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt4))
         {
+            Q7SelectedOption = moveOptsArw.currentPosition.ToString();
+
             oMan.ResetOptions();
             dMan.ResetDialogue();
+            Quest7Dialogue1Opt();
         }
-        else if (pookieB2.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
-                 pookieB2.transform.GetChild(1).gameObject.activeSelf &&
-                (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
-                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
-                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3 ||
-                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt4))
+
+        // Quest 8 - Dialogue 1 - Option *
+        if (pookieB2.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+            pookieB2.transform.GetChild(1).gameObject.activeSelf &&
+            (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
+             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
+             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3 ||
+             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt4))
         {
+            Q8SelectedOption = moveOptsArw.currentPosition.ToString();
+
             oMan.ResetOptions();
             dMan.ResetDialogue();
+            Quest8Dialogue1Opt();
         }
-        //// Quest 7 - Dialogue 1 - Option 1
-        //else if (pookieB1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
-        //         pookieB1.transform.GetChild(1).gameObject.activeSelf &&
-        //         moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
-        //{
-        //    oMan.ResetOptions();
-
-        //    // Option 1 selected
-        //    // Remove nug
-        //    // Eating animation
-
-        //    // If correct nug
-        //    // Sit down, bug out, and remain sitting & smiling
-        //    // Quest complete -> quest reward
-        //    // Else keep walking
-        //}
-        //// Quest 7 - Dialogue 1 - Option 2
-        //else if (pookieB1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
-        //         pookieB1.transform.GetChild(1).gameObject.activeSelf &&
-        //         moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
-        //{
-        //    oMan.ResetOptions();
-
-        //    // Option 2 selected
-        //    // Remove nug
-        //    // Eating animation
-
-        //    // If correct nug
-        //    // Sit down, bug out, and remain sitting & smiling
-        //    // Quest complete -> quest reward
-        //    // Else keep walking
-        //}
-        //// Quest 7 - Dialogue 1 - Option 3
-        //else if (pookieB1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
-        //         pookieB1.transform.GetChild(1).gameObject.activeSelf &&
-        //         moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3)
-        //{
-        //    oMan.ResetOptions();
-
-        //    // Option 3 selected
-        //    // Remove nug
-        //    // Eating animation
-
-        //    // If correct nug
-        //    // Sit down, bug out, and remain sitting & smiling
-        //    // Quest complete -> quest reward
-        //    // Else keep walking
-        //}
-        //// Quest 7 - Dialogue 1 - Option 4
-        //else if (pookieB1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
-        //         pookieB1.transform.GetChild(1).gameObject.activeSelf &&
-        //         moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt4)
-        //{
-        //    oMan.ResetOptions();
-
-        //    // Option 4 selected
-        //    // Remove nug
-        //    // Eating animation
-
-        //    // If correct nug
-        //    // Sit down, bug out, and remain sitting & smiling
-        //    // Quest complete -> quest reward
-        //    // Else keep walking
-        //}
     }
 
     public void Quest0Dialogue1Opt1()
@@ -929,7 +1357,7 @@ public class Chp1 : MonoBehaviour
     {
         var tempCool = "";
 
-        for (int i = 0; i < bQ4KidCounter; i++)
+        for (int i = 0; i < Q4KidCounter; i++)
         {
             if (i == 0)
             {
@@ -941,11 +1369,11 @@ public class Chp1 : MonoBehaviour
             }
         }
 
-        if (bQ4KidCounter < 6)
+        if (Q4KidCounter < 6)
         {
             // Set dialogue & dialogue elements
             dMan.dialogueLines = new string[] {
-                tempCool + ".. That's " + bQ4KidCounter + " of 6."
+                tempCool + ".. That's " + Q4KidCounter + " of 6."
             };
             dMan.portPic = thePlayer.GetComponent<PlayerBrioManager>().portPic;
             dMan.currentLine = 0;
@@ -1059,7 +1487,7 @@ public class Chp1 : MonoBehaviour
         bAvoidUpdateQ4counting = false;
         bQ4Seeking = false;
         bAvoidUpdateQ4seeking = false;
-        bQ4KidCounter = 0;
+        Q4KidCounter = 0;
 
         // "Turn off" Kids 5-9
         kid5.transform.localScale = Vector3.zero;
@@ -1154,6 +1582,260 @@ public class Chp1 : MonoBehaviour
         dText.text = dMan.dialogueLines[dMan.currentLine];
         dMan.ShowDialogue();
         dArrow.GetComponent<ImageStrobe>().bStartStrobe = true; // DC TODO -- Not strobing?
+    }
+
+    public void Quest7Dialogue1Opt()
+    {
+        // Get the selected option, i.e. OptX
+        char[] Q7SelectionChar = Q7SelectedOption.ToCharArray();
+        int Q7SelectionInt = Q7SelectionChar[3] - '1';
+
+        // Get the corresponding value, i.e. gopw
+        char[] Q7BudsChar = Q7Options.ToCharArray();
+
+        if (Q7BudsChar[Q7SelectionInt] == 'g')
+        {
+            // Remove green
+            bool bTempCheck = true;
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+
+                if ((item == "Cannabis.Bud.SmoochyWoochyPoochy (Item)" ||
+                     item == "Cannabis.Bud.NaturesCandy (Item)" ||
+                     item == "Cannabis.Bud.TheDevilsLettuce (Item)") && 
+                    bTempCheck)
+
+                {
+                    inv.Remove(inv.items[i]);
+                    inv.bUpdateItemCount = true;
+                    bTempCheck = false;
+                }
+            }
+        }
+        else if (Q7BudsChar[Q7SelectionInt] == 'o')
+        {
+            // Remove orange
+            bool bTempCheck = true;
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+
+                if ((item == "Cannabis.Bud.BootyJuice (Item)" ||
+                     item == "Cannabis.Bud.Catnip (Item)" ||
+                     item == "Cannabis.Bud.SnoopLeone (Item)") &&
+                    bTempCheck)
+
+                {
+                    inv.Remove(inv.items[i]);
+                    inv.bUpdateItemCount = true;
+                    bTempCheck = false;
+                }
+            }
+        }
+        else if (Q7BudsChar[Q7SelectionInt] == 'p')
+        {
+            // Remove purple
+            bool bTempCheck = true;
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+
+                if ((item == "Cannabis.Bud.GranPapasMedicine (Item)" ||
+                     item == "Cannabis.Bud.PurpleNurple (Item)" ||
+                     item == "Cannabis.Bud.RighteousBud (Item)") &&
+                    bTempCheck)
+
+                {
+                    inv.Remove(inv.items[i]);
+                    inv.bUpdateItemCount = true;
+                    bTempCheck = false;
+                }
+            }
+        }
+        else if (Q7BudsChar[Q7SelectionInt] == 'w')
+        {
+            // Remove white
+            bool bTempCheck = true;
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+
+                if ((item == "Cannabis.Bud.CreeperBud (Item)" ||
+                     item == "Cannabis.Bud.MastaRoshi (Item)" ||
+                     item == "Cannabis.Bud.WhiteWalker (Item)") &&
+                    bTempCheck)
+
+                {
+                    inv.Remove(inv.items[i]);
+                    inv.bUpdateItemCount = true;
+                    bTempCheck = false;
+                }
+            }
+        }
+
+        // Animate Pookie & stop moving
+        if (thePlayer.transform.position.x >= pookieB1.transform.position.x)
+        {
+            // DC TODO 01/13/2019 -- Can't get em to face right?
+            pookieB1.GetComponent<Animator>().Play("Eat Right");
+        }
+        else
+        {
+            pookieB1.GetComponent<Animator>().Play("Eat Left");
+        }
+
+        // Disable Pookie movement & dialogue
+        pookieB1.GetComponent<NPCMovement>().enabled = false;
+        pookieB1.transform.GetChild(1).gameObject.SetActive(false);
+
+        StartCoroutine(PookieBear1Animations());
+
+        bAvoidUpdateQ7 = true;
+    }
+
+    IEnumerator PookieBear1Animations()
+    {
+        pookieB1.GetComponent<Animator>().Play("Eat Left");
+
+        yield return new WaitForSeconds(2);
+
+        pookieB1.GetComponent<Animator>().Play("Sit Normal");
+
+        yield return new WaitForSeconds(3);
+
+        pookieB1.GetComponent<Animator>().Play("Sit Eyes");
+
+        yield return new WaitForSeconds(2);
+
+        pookieB1.GetComponent<Animator>().Play("Sit Happy");
+    }
+
+    public void Quest8Dialogue1Opt()
+    {
+        // Get the selected option, i.e. OptX
+        char[] Q8SelectionChar = Q8SelectedOption.ToCharArray();
+        int Q8SelectionInt = Q8SelectionChar[3] - '1';
+
+        // Get the corresponding value, i.e. gopw
+        char[] Q8BudsChar = Q8Options.ToCharArray();
+
+        if (Q8BudsChar[Q8SelectionInt] == 'g')
+        {
+            // Remove green
+            bool bTempCheck = true;
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+
+                if ((item == "Cannabis.Bud.SmoochyWoochyPoochy (Item)" ||
+                     item == "Cannabis.Bud.NaturesCandy (Item)" ||
+                     item == "Cannabis.Bud.TheDevilsLettuce (Item)") &&
+                    bTempCheck)
+
+                {
+                    inv.Remove(inv.items[i]);
+                    inv.bUpdateItemCount = true;
+                    bTempCheck = false;
+                }
+            }
+        }
+        else if (Q8BudsChar[Q8SelectionInt] == 'o')
+        {
+            // Remove orange
+            bool bTempCheck = true;
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+
+                if ((item == "Cannabis.Bud.BootyJuice (Item)" ||
+                     item == "Cannabis.Bud.Catnip (Item)" ||
+                     item == "Cannabis.Bud.SnoopLeone (Item)") &&
+                    bTempCheck)
+
+                {
+                    inv.Remove(inv.items[i]);
+                    inv.bUpdateItemCount = true;
+                    bTempCheck = false;
+                }
+            }
+        }
+        else if (Q8BudsChar[Q8SelectionInt] == 'p')
+        {
+            // Remove purple
+            bool bTempCheck = true;
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+
+                if ((item == "Cannabis.Bud.GranPapasMedicine (Item)" ||
+                     item == "Cannabis.Bud.PurpleNurple (Item)" ||
+                     item == "Cannabis.Bud.RighteousBud (Item)") &&
+                    bTempCheck)
+
+                {
+                    inv.Remove(inv.items[i]);
+                    inv.bUpdateItemCount = true;
+                    bTempCheck = false;
+                }
+            }
+        }
+        else if (Q8BudsChar[Q8SelectionInt] == 'w')
+        {
+            // Remove white
+            bool bTempCheck = true;
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+
+                if ((item == "Cannabis.Bud.CreeperBud (Item)" ||
+                     item == "Cannabis.Bud.MastaRoshi (Item)" ||
+                     item == "Cannabis.Bud.WhiteWalker (Item)") &&
+                    bTempCheck)
+
+                {
+                    inv.Remove(inv.items[i]);
+                    inv.bUpdateItemCount = true;
+                    bTempCheck = false;
+                }
+            }
+        }
+
+        // Animate Pookie & stop moving
+        if (thePlayer.transform.position.x >= pookieB2.transform.position.x)
+        {
+            // DC TODO 01/13/2019 -- Can't get em to face right?
+            pookieB2.GetComponent<Animator>().Play("Eat Right");
+        }
+        else
+        {
+            pookieB2.GetComponent<Animator>().Play("Eat Left");
+        }
+
+        // Disable Pookie movement & dialogue
+        pookieB2.GetComponent<NPCMovement>().enabled = false;
+        pookieB2.transform.GetChild(1).gameObject.SetActive(false);
+
+        StartCoroutine(PookieBear2Animations());
+
+        bAvoidUpdateQ8 = true;
+    }
+
+    IEnumerator PookieBear2Animations()
+    {
+        pookieB2.GetComponent<Animator>().Play("Eat Left");
+
+        yield return new WaitForSeconds(2);
+
+        pookieB2.GetComponent<Animator>().Play("Sit Normal");
+
+        yield return new WaitForSeconds(3);
+
+        pookieB2.GetComponent<Animator>().Play("Sit Eyes");
+
+        yield return new WaitForSeconds(2);
+
+        pookieB2.GetComponent<Animator>().Play("Sit Happy");
     }
 
     public void LoadQuests()
