@@ -13893,7 +13893,7 @@ GameObject:
   - component: {fileID: 316947530}
   m_Layer: 0
   m_Name: HomeSWTreeDoor
-  m_TagString: LockedDoor
+  m_TagString: UnlockedDoor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19611,6 +19611,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8088553133388783433, guid: 20a34eafd7e457842be9a42f8aacfabb,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20a34eafd7e457842be9a42f8aacfabb, type: 3}
@@ -25531,6 +25536,25 @@ PolygonCollider2D:
       - {x: 0.87067217, y: 0.22413372}
       - {x: 0.8700555, y: -0.4090869}
       - {x: -0.69546753, y: -0.40908054}
+--- !u!1 &559316863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1865707017857668364, guid: 20a34eafd7e457842be9a42f8aacfabb,
+    type: 3}
+  m_PrefabInstance: {fileID: 432523468}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &559316866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559316863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6817e57889f6f194a80e026f8de424ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thePlayer: {fileID: 0}
 --- !u!1 &560906717
 GameObject:
   m_ObjectHideFlags: 0
@@ -40161,8 +40185,6 @@ MonoBehaviour:
   dText: {fileID: 0}
   touches: {fileID: 0}
   uiMan: {fileID: 0}
-  bAvoidGreatTreeConvo: 0
-  bAvoidUpdateQ0: 0
   bAvoidUpdateQ1: 0
   bAvoidUpdateQ2: 0
   bAvoidUpdateQ3: 0
@@ -40171,6 +40193,7 @@ MonoBehaviour:
   bAvoidUpdateQ4seeking: 0
   bAvoidUpdateQ7: 0
   bAvoidUpdateQ8: 0
+  bAvoidUpdateQ7Q8Ini: 0
   bAvoidUpdateQ7Q8DH: 0
   bAvoidUpdateQ7Q8: 0
   bContainsQ3Item: 0
@@ -59890,8 +59913,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10000
-  m_LinearDrag: 1
+  m_Mass: 1000000
+  m_LinearDrag: 10000
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -66211,7 +66234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options:
   - Gay. You tease.
-  - So dumb Mr. Game developer.
+  - So dumb Mr. Game Developer.
   - I undestand you're busy Mr. Game Developer. Keep working! You got this!!
 --- !u!114 &1381386462
 MonoBehaviour:
@@ -66232,7 +66255,7 @@ MonoBehaviour:
   bHasExited: 0
   dialogueLines:
   - '*Leaves rustle in the wind.*'
-  - '*Cut scene about shit.*'
+  - '*Cut scene about some shizz.*'
 --- !u!60 &1381386463
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -86014,8 +86037,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10000
-  m_LinearDrag: 1000
+  m_Mass: 1000000
+  m_LinearDrag: 100000
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -100789,7 +100812,9 @@ MonoBehaviour:
   - {fileID: 853675778}
   - {fileID: 425401633}
   - {fileID: 1048636568}
-  questsCompleted: 
+  questsStarted: 
+  questsEnded: 
+  questsCollected: 
 --- !u!1 &2043717399
 GameObject:
   m_ObjectHideFlags: 0
@@ -101008,7 +101033,7 @@ GameObject:
   - component: {fileID: 2052798316}
   - component: {fileID: 2052798315}
   m_Layer: 0
-  m_Name: VR.Goggles
+  m_Name: HomeVRGoggles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

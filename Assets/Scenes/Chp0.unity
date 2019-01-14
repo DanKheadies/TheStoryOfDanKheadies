@@ -4254,7 +4254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 538491581}
   m_Layer: 0
-  m_Name: Chars
+  m_Name: Home.F1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4273,6 +4273,7 @@ Transform:
   m_Children:
   - {fileID: 1132203879}
   - {fileID: 579209528}
+  - {fileID: 2041298339}
   m_Father: {fileID: 1750694530}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14680,37 +14681,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1505345787}
   m_CullTransparentMesh: 0
---- !u!1 &1522735695
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1522735696}
-  m_Layer: 0
-  m_Name: Boundaries
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1522735696
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522735695}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2041298339}
-  m_Father: {fileID: 1750694530}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1526085140
 GameObject:
   m_ObjectHideFlags: 0
@@ -16697,7 +16667,7 @@ GameObject:
   - component: {fileID: 1704975328}
   - component: {fileID: 1704975329}
   m_Layer: 0
-  m_Name: VR.Goggles
+  m_Name: HomeVRGoggles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17623,7 +17593,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1750694530}
   m_Layer: 0
-  m_Name: NPCs
+  m_Name: NPCZones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17641,7 +17611,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 538491581}
-  - {fileID: 1522735696}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21281,7 +21250,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dMan: {fileID: 0}
   quests: []
-  questsCompleted: 
+  questsStarted: 
+  questsEnded: 
+  questsCollected: 
 --- !u!1 &2041298338
 GameObject:
   m_ObjectHideFlags: 0
@@ -21310,8 +21281,8 @@ Transform:
   m_LocalPosition: {x: -0.95300007, y: -2.211, z: 0}
   m_LocalScale: {x: 1.33, y: 1.33, z: 1}
   m_Children: []
-  m_Father: {fileID: 1522735696}
-  m_RootOrder: 0
+  m_Father: {fileID: 538491581}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &2041298340
 PolygonCollider2D:

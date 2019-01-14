@@ -1,12 +1,12 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  01/12/2019
+// Last:  01/13/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Assigns plants Cannabis Objects
+// Assigned to Interactable Objects (i.e. on an item)
 public class ItemManager : MonoBehaviour
 {
     private Animator pAnim;
@@ -40,11 +40,6 @@ public class ItemManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         scene = SceneManager.GetActiveScene();
         touches = FindObjectOfType<TouchControls>();
-
-        bAcquired = false;
-        bDoneAcquiring = false;
-        bHasEntered = false;
-        bHasExited = true;
 
         // 04/07/2018 DC TODO -- Extract to individual scene files
         if (scene.name == "Chp0")
@@ -126,10 +121,15 @@ public class ItemManager : MonoBehaviour
                 whiteBud.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
-            else if (this.name == "VR.Goggles")
+            else if (this.name == "HomeVRGoggles")
             {
                 vrGoggles.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
+                
+                // Disables the item's interactivity and "removes"
+                // Note: cannabis is taken care of in CannabisPlant.cs
+                this.GetComponent<BoxCollider2D>().enabled = false;
+                this.transform.localScale = Vector2.zero;
             }
 
             dMan.portPic = portPic;

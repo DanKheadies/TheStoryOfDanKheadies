@@ -2,7 +2,7 @@
 // Authors: valyard (https://github.com/valyard/UnityWebGLOpenLink)
 // Contributors: David W. Corso
 // Start: --/--/----
-// Last:  01/05/2019
+// Last:  01/13/2019
 
 using UnityEngine;
 using System.Runtime.InteropServices;
@@ -26,10 +26,16 @@ public class Link : MonoBehaviour
 		Application.ExternalEval("window.open('"+ ColluminacLink + "');");
 	}
 
-	public void OpenLinkJSPlugin()
-	{
-        openWindow(ColluminacLink);
-	}
+    // Opens links for non-Unity Editor Apps (i.e. standalone, webgl, etc.)
+    public void OpenLinkJSPlugin()
+    {
+        // DC 01/13/2019 -- Causes an error in Unity if this is active; avoid error by doing nothing here
+        // Will still open the link via alt code (above?)
+        if (!Application.isEditor)
+        {
+            openWindow(ColluminacLink);
+        }
+    }
 
     [DllImport("__Internal")]
 	private static extern void openWindow(string url);

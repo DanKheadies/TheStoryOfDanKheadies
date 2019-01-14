@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  08/13/2018
+// Last:  01/14/2019
 
 using UnityEngine;
 
@@ -11,12 +11,17 @@ public class QuestManager : MonoBehaviour
     public DialogueManager dMan;
     public QuestObject[] quests;
 
-    public bool[] questsCompleted;
+    public bool[] questsStarted;
+    public bool[] questsEnded;
+    public bool[] questsCollected;
 
-	void Start ()
+	void Awake ()
     {
-        questsCompleted = new bool[quests.Length];
-	}
+        // Initializers
+        questsStarted = new bool[quests.Length];
+        questsEnded = new bool[quests.Length];
+        questsCollected = new bool[quests.Length];
+    }
 	
 	void Update ()
     {

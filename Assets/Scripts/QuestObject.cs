@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  08/13/2018
+// Last:  01/14/2019
 
 using UnityEngine;
 
@@ -34,6 +34,7 @@ public class QuestObject : MonoBehaviour
         {
             dMan.portPic = portPic;
             qMan.ShowQuestText(beginText);
+            qMan.questsStarted[questNumber] = true;
             bHasStarted = true;
         }
     }
@@ -44,8 +45,17 @@ public class QuestObject : MonoBehaviour
         {
             dMan.portPic = portPic;
             qMan.ShowQuestText(endText);
-            qMan.questsCompleted[questNumber] = true;
+            qMan.questsEnded[questNumber] = true;
             bHasEnded = true;
+        }
+    }
+
+    public void CollectedQuest()
+    {
+        if (!bHasCollected)
+        {
+            qMan.questsCollected[questNumber] = true;
+            bHasCollected = true;
         }
     }
 }

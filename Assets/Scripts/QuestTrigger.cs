@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  08/13/2018
+// Last:  01/14/2019
 
 using UnityEngine;
 
@@ -33,7 +33,7 @@ public class QuestTrigger : MonoBehaviour
         // Drives NPC interaction
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (!qMan.questsCompleted[questNumber])
+            if (!qMan.questsCollected[questNumber])
             {
                 // Bool set on GameObject directs NPC interaction
                 if (beginQuest)

@@ -2,7 +2,9 @@
 // Authors: Asbjorn Thirslund (Brackeys)
 // Contributors: David W. Corso
 // Start: 01/18/2018
-// Last:  08/12/2018
+// Last:  01/14/2019
+
+// DC 01/14/2019 BUG -- Inventory doesn't like to be empty; continues to "hold onto" the last item
 
 using System.Collections.Generic;
 using UnityEngine;

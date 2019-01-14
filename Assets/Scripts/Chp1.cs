@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  01/13/2019
+// Last:  01/14/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,7 +34,7 @@ public class Chp1 : MonoBehaviour
     public GameObject quest2;
     public GameObject quest3;
     public GameObject quest4;
-    public GameObject quest5;
+    public GameObject quest5; // DC 01/14/2019 TODO -- Add talking to the GT as a quest
     public GameObject quest6;
     public GameObject quest7;
     public GameObject quest8;
@@ -52,9 +52,8 @@ public class Chp1 : MonoBehaviour
     public Text dText;
     public TouchControls touches;
     public UIManager uiMan;
-
-    public bool bAvoidGreatTreeConvo;
-    public bool bAvoidUpdateQ0;
+    
+    //public bool bAvoidUpdateQ0;
     public bool bAvoidUpdateQ1;
     public bool bAvoidUpdateQ2;
     public bool bAvoidUpdateQ3;
@@ -65,6 +64,7 @@ public class Chp1 : MonoBehaviour
     //public bool bAvoidUpdateQ6;
     public bool bAvoidUpdateQ7;
     public bool bAvoidUpdateQ8;
+    public bool bAvoidUpdateQ7Q8Ini;
     public bool bAvoidUpdateQ7Q8DH;
     public bool bAvoidUpdateQ7Q8;
 
@@ -199,7 +199,7 @@ public class Chp1 : MonoBehaviour
     void Update()
     {
         // Load Inventory -- Saved vs. Transfer
-        //  Reset Transition Data
+        // Reset Transition Data
         if (invTimer > 0)
         {
             invTimer -= Time.deltaTime;
@@ -242,12 +242,19 @@ public class Chp1 : MonoBehaviour
             !bAvoidUpdateQ1)
         {
             bAvoidUpdateQ1 = true;
+
             kid2.transform.GetChild(0).gameObject.SetActive(false);
             kid2.transform.GetChild(1).gameObject.SetActive(true);
 
             raceTimer = Mathf.Round(raceTimer);
-
-            if (raceTimer <= 10)
+            
+            if (raceTimer == 0) // Saved data condition
+            {
+                kid2.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
+                    "Feel free to keep practicing. It's always good to practice."
+                };
+            }
+            else if (raceTimer <= 10)
             {
                 kid2.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
                     "Holy goat nipples Batman.. How the.. Did you cheat?",
@@ -289,8 +296,13 @@ public class Chp1 : MonoBehaviour
             !bAvoidUpdateQ2)
         {
             bAvoidUpdateQ2 = true;
-            GameObject.Find("HomeSWTreeDoor").GetComponent<BoxCollider2D>().isTrigger = false;
+
+            // Disable door again & move Dan back (need isTrigger double-tap change?)
+            GameObject.Find("HomeSWTreeDoor").transform.tag = "LockedDoor";
             GameObject.Find("HomeSWTreeDoor").transform.localScale = Vector3.one;
+            GameObject.Find("HomeSWTreeDoor").GetComponent<BoxCollider2D>().isTrigger = false;
+            GameObject.Find("HomeSWTreeDoor").transform.GetChild(0).GetComponent<BoxCollider2D>().isTrigger = false;
+            GameObject.Find("HomeSWTreeDoor").transform.GetChild(0).GetComponent<BoxCollider2D>().isTrigger = true;
         }
 
         // Quest 2 -- Treehouse Search -> Reward
@@ -299,7 +311,6 @@ public class Chp1 : MonoBehaviour
             (int)camFollow.currentCoords == 23)
         {
             Quest2Reward();
-
         }
 
         // Quest 3 -- Item Check w/ OldMan1 -> Check on inventory change
@@ -327,7 +338,7 @@ public class Chp1 : MonoBehaviour
 
                 oldMan1.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = true;
             }
-            else if (!bContainsQ3Item)
+            else
             {
                 oldMan1.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = false;
 
@@ -337,14 +348,13 @@ public class Chp1 : MonoBehaviour
         }
 
         // Quest 3 -- Item Check w/ OldMan1 -> Reward & Removal
-        if (quest3.GetComponent<QuestObject>().bHasEnded &&
+        if (!quest3.GetComponent<QuestObject>().bHasCollected && 
+            quest3.GetComponent<QuestObject>().bHasEnded &&
             !bAvoidUpdateQ3)
         {
-            if (quest3.GetComponent<QuestObject>().bHasEnded)
-            {
-                Quest3Reward();
-                bAvoidUpdateQ3 = true;
-            }
+            bAvoidUpdateQ3 = true;
+
+            Quest3Reward();
 
             // Remove the bud
             bool bTempCheck = true;
@@ -473,6 +483,8 @@ public class Chp1 : MonoBehaviour
             !bQ4Seeking &&
             !bAvoidUpdateQ4)
         {
+            bAvoidUpdateQ4 = true;
+
             StartCoroutine(HideAndSeekFinished());
 
             // Stops the player's movement
@@ -483,9 +495,16 @@ public class Chp1 : MonoBehaviour
 
             // Turn off GUI
             touches.transform.localScale = Vector3.zero;
+        }
 
-            Quest4Reward();
-            bAvoidUpdateQ4 = true;
+        // Quest 7 & 8 -- Check current inventory
+        if (quest7.GetComponent<QuestObject>().bHasStarted &&
+            quest7.GetComponent<QuestObject>().bHasStarted &&
+            !bAvoidUpdateQ7Q8Ini)
+        {
+            bAvoidUpdateQ7Q8Ini = true;
+
+            inv.bUpdateItemCount = true;
         }
 
         // Quest 7 -- Item Check & Options for PookieBear1
@@ -590,7 +609,7 @@ public class Chp1 : MonoBehaviour
                 {
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[4];
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[3] = "Give em a white nug";
 
@@ -613,7 +632,7 @@ public class Chp1 : MonoBehaviour
                 {
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
 
                     Q7Options = "gow";
@@ -624,7 +643,7 @@ public class Chp1 : MonoBehaviour
                 {
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
 
                     Q7Options = "gop";
@@ -634,7 +653,7 @@ public class Chp1 : MonoBehaviour
                          bContainsQ7ItemWhite)
                 {
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
 
@@ -645,7 +664,7 @@ public class Chp1 : MonoBehaviour
                 {
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
 
                     Q7Options = "go";
                 }
@@ -671,7 +690,7 @@ public class Chp1 : MonoBehaviour
                          bContainsQ7ItemPurple)
                 {
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
 
                     Q7Options = "op";
@@ -680,7 +699,7 @@ public class Chp1 : MonoBehaviour
                          bContainsQ7ItemWhite)
                 {
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
 
                     Q7Options = "ow";
@@ -704,7 +723,7 @@ public class Chp1 : MonoBehaviour
                 else if (bContainsQ7ItemOrange)
                 {
                     pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
 
                     Q7Options = "o";
                 }
@@ -833,7 +852,7 @@ public class Chp1 : MonoBehaviour
                 {
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[4];
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[3] = "Give em a white nug";
 
@@ -856,7 +875,7 @@ public class Chp1 : MonoBehaviour
                 {
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
 
                     Q8Options = "gow";
@@ -867,7 +886,7 @@ public class Chp1 : MonoBehaviour
                 {
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
 
                     Q8Options = "gop";
@@ -877,7 +896,7 @@ public class Chp1 : MonoBehaviour
                          bContainsQ8ItemWhite)
                 {
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
 
@@ -888,7 +907,7 @@ public class Chp1 : MonoBehaviour
                 {
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
 
                     Q8Options = "go";
                 }
@@ -914,7 +933,7 @@ public class Chp1 : MonoBehaviour
                          bContainsQ8ItemPurple)
                 {
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
 
                     Q8Options = "op";
@@ -923,7 +942,7 @@ public class Chp1 : MonoBehaviour
                          bContainsQ8ItemWhite)
                 {
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
 
                     Q8Options = "ow";
@@ -947,7 +966,7 @@ public class Chp1 : MonoBehaviour
                 else if (bContainsQ8ItemOrange)
                 {
                     pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a orange nug";
+                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
 
                     Q8Options = "o";
                 }
@@ -1042,7 +1061,7 @@ public class Chp1 : MonoBehaviour
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
             uiMan.bUpdateBrio = true;
 
-            quest0.GetComponent<QuestObject>().bHasCollected = true;
+            quest0.GetComponent<QuestObject>().CollectedQuest();
         }
     }
 
@@ -1054,7 +1073,7 @@ public class Chp1 : MonoBehaviour
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
             uiMan.bUpdateBrio = true;
 
-            quest1.GetComponent<QuestObject>().bHasCollected = true;
+            quest1.GetComponent<QuestObject>().CollectedQuest();
         }
     }
 
@@ -1066,7 +1085,7 @@ public class Chp1 : MonoBehaviour
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(5);
             uiMan.bUpdateBrio = true;
 
-            quest2.GetComponent<QuestObject>().bHasCollected = true;
+            quest2.GetComponent<QuestObject>().CollectedQuest();
         }
     }
 
@@ -1078,7 +1097,7 @@ public class Chp1 : MonoBehaviour
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(5);
             uiMan.bUpdateBrio = true;
 
-            quest3.GetComponent<QuestObject>().bHasCollected = true;
+            quest3.GetComponent<QuestObject>().CollectedQuest();
         }
     }
 
@@ -1090,7 +1109,8 @@ public class Chp1 : MonoBehaviour
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(20);
             uiMan.bUpdateBrio = true;
 
-            quest4.GetComponent<QuestObject>().bHasCollected = true;
+            Debug.Log("collected");
+            quest4.GetComponent<QuestObject>().CollectedQuest();
         }
     }
 
@@ -1102,9 +1122,12 @@ public class Chp1 : MonoBehaviour
             thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(25);
             uiMan.bUpdateBrio = true;
+            
+            dMan.portPic = quest7.GetComponent<QuestObject>().portPic;
+            qMan.ShowQuestText(quest7.GetComponent<QuestObject>().endText);
 
-            quest7.GetComponent<QuestObject>().bHasCollected = true;
-            quest8.GetComponent<QuestObject>().bHasCollected = true;
+            quest7.GetComponent<QuestObject>().CollectedQuest();
+            quest8.GetComponent<QuestObject>().CollectedQuest();
         }
     }
 
@@ -1274,6 +1297,8 @@ public class Chp1 : MonoBehaviour
         parent2.transform.GetChild(1).gameObject.SetActive(false);
         parent2.transform.GetChild(2).gameObject.SetActive(true);
 
+        quest0.GetComponent<QuestObject>().EndQuest();
+
         // Quest 0 -- Q&A 1 Reward
         Quest0Reward();
 
@@ -1426,7 +1451,11 @@ public class Chp1 : MonoBehaviour
         screenFader.GetComponent<Animator>().SetBool("FadeIn", true);
 
         bAvoidUpdateQ4counting = true;
-        bQ4Seeking = true;
+        bAvoidUpdateQ4seeking = true;
+
+        yield return new WaitForSeconds(1);
+
+        Quest4Reward();
     }
 
     public void CheckAndDisableLastKidFound()
@@ -1691,13 +1720,14 @@ public class Chp1 : MonoBehaviour
 
         StartCoroutine(PookieBear1Animations());
 
+        quest7.GetComponent<QuestObject>().bHasEnded = true;
+        qMan.questsEnded[quest7.GetComponent<QuestObject>().questNumber] = true;
+
         bAvoidUpdateQ7 = true;
     }
 
     IEnumerator PookieBear1Animations()
     {
-        pookieB1.GetComponent<Animator>().Play("Eat Left");
-
         yield return new WaitForSeconds(2);
 
         pookieB1.GetComponent<Animator>().Play("Sit Normal");
@@ -1818,13 +1848,14 @@ public class Chp1 : MonoBehaviour
 
         StartCoroutine(PookieBear2Animations());
 
+        quest8.GetComponent<QuestObject>().bHasEnded = true;
+        qMan.questsEnded[quest8.GetComponent<QuestObject>().questNumber] = true;
+
         bAvoidUpdateQ8 = true;
     }
 
     IEnumerator PookieBear2Animations()
     {
-        pookieB2.GetComponent<Animator>().Play("Eat Left");
-
         yield return new WaitForSeconds(2);
 
         pookieB2.GetComponent<Animator>().Play("Sit Normal");
@@ -1840,9 +1871,9 @@ public class Chp1 : MonoBehaviour
 
     public void LoadQuests()
     {
-        // 0 = TBStarted
-        // 1 = TBEnded
-        // 2 = Complete
+        // 0 = Nothing
+        // 1 = Started
+        // 2 = Ended
         // 3 = Collected
         savedQuestsValue = PlayerPrefs.GetString("Chp1Quests");
 
@@ -1850,24 +1881,86 @@ public class Chp1 : MonoBehaviour
         {
             GameObject Quest = GameObject.Find("Quest_" + i);
 
-            if (savedQuestsValue.Substring(i, 1) == 3.ToString())
+            if (savedQuestsValue.Substring(i, 1) == "3")
             {
                 Quest.GetComponent<QuestObject>().bHasCollected = true;
                 Quest.GetComponent<QuestObject>().bHasEnded = true;
                 Quest.GetComponent<QuestObject>().bHasStarted = true;
+
+                qMan.questsCollected[i] = true;
+                qMan.questsEnded[i] = true;
+                qMan.questsStarted[i] = true;
             }
-            else if (savedQuestsValue.Substring(i, 1) == 2.ToString())
+            else if (savedQuestsValue.Substring(i, 1) == "2")
             {
                 Quest.GetComponent<QuestObject>().bHasEnded = true;
                 Quest.GetComponent<QuestObject>().bHasStarted = true;
+
+                qMan.questsEnded[i] = true;
+                qMan.questsStarted[i] = true;
             }
-            else if (savedQuestsValue.Substring(i, 1) == 1.ToString())
+            else if (savedQuestsValue.Substring(i, 1) == "1")
             {
                 Quest.GetComponent<QuestObject>().bHasStarted = true;
+                
+                qMan.questsStarted[i] = true;
             }
         }
 
         PlayerPrefs.SetString("Chp1Quests", savedQuestsValue);
+
+        // DC 01/13/2019 -- Most quests close themselves out in their update sections once the above are assigned
+        // These conditions are for the stranglers
+        if (savedQuestsValue.Substring(4, 1) == "3" ||
+            savedQuestsValue.Substring(4, 1) == "2")
+        {
+            bAvoidUpdateQ4 = true;
+            bAvoidUpdateQ4counting = true;
+            bAvoidUpdateQ4seeking = true;
+        }
+        else if (savedQuestsValue.Substring(4, 1) == "1")
+        {
+            quest4.GetComponent<QuestObject>().bHasStarted = false;
+        }
+
+        if (savedQuestsValue.Substring(7, 1) == "3" &&
+            savedQuestsValue.Substring(8, 1) == "3")
+        {
+            bAvoidUpdateQ7 = true;
+            bAvoidUpdateQ8 = true;
+            bAvoidUpdateQ7Q8DH = true;
+            bAvoidUpdateQ7Q8 = true;
+
+            // PookieBear 1 Satisfied
+            pookieB1.GetComponent<NPCMovement>().enabled = false;
+            pookieB1.transform.GetChild(1).gameObject.SetActive(false);
+            StartCoroutine(PookieBear1Animations());
+
+            // PookieBear 2 Satisfied
+            pookieB2.GetComponent<NPCMovement>().enabled = false;
+            pookieB2.transform.GetChild(1).gameObject.SetActive(false);
+            StartCoroutine(PookieBear2Animations());
+        }
+
+        if (savedQuestsValue.Substring(7, 1) == "2")
+        {
+            bAvoidUpdateQ7 = true;
+
+            // PookieBear 1 Satisfied
+            pookieB1.GetComponent<NPCMovement>().enabled = false;
+            pookieB1.transform.GetChild(1).gameObject.SetActive(false);
+            StartCoroutine(PookieBear1Animations());
+        }
+
+        if (savedQuestsValue.Substring(8, 1) == "2")
+        {
+            bAvoidUpdateQ8 = true;
+
+            // PookieBear 2 Satisfied
+            pookieB2.GetComponent<NPCMovement>().enabled = false;
+            pookieB2.transform.GetChild(1).gameObject.SetActive(false);
+            StartCoroutine(PookieBear2Animations());
+        }
     }
 
     public void SaveQuests()
