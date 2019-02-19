@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/13/2018
-// Last:  01/10/2019
+// Last:  02/14/2019
 
 using UnityEngine;
 
@@ -166,10 +166,11 @@ public class CharacterTile : MonoBehaviour
         bHasFlipped = false;
     }
 
-    public void OnMouseDown()
+    public void OnMouseUp()
     {
         if (gwc.bCanFlip && 
-            !touches.bUIactive)
+            !touches.bUIactive &&
+            !touches.bAvoidSubUIElements)
         {
             CheckAndFlip();
         }

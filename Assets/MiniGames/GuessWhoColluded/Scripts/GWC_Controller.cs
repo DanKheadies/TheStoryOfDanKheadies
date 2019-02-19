@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  01/10/2019
+// Last:  02/11/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +15,7 @@ public class GWC_Controller : MonoBehaviour
     public Camera mainCamera;
     public CameraFollow camFollow;
     public DialogueManager dMan;
+    public FixedJoystick fixedJoy;
     public GameObject contArrow;
     public GameObject dArrow;
     public GameObject dBox;
@@ -76,6 +77,7 @@ public class GWC_Controller : MonoBehaviour
         dMan = FindObjectOfType<DialogueManager>();
         dPic = GameObject.Find("Dialogue_Picture").GetComponent<Image>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
+        fixedJoy = FindObjectOfType<FixedJoystick>();
         guiConts = GameObject.Find("GUIControls");
         HUD = GameObject.Find("HUD");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -128,6 +130,9 @@ public class GWC_Controller : MonoBehaviour
         dPic.sprite = portPic[48];
         dBox.transform.localScale = Vector3.one;
         sFaderAnimDia.GetComponent<Animator>().enabled = true;
+
+        // Set virtual joystick
+        fixedJoy.JoystickPosition();
     }
 
     void Update()

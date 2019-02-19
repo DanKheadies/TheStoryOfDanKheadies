@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  01/14/2019
+// Last:  02/14/2019
 
 using UnityEngine;
 
@@ -46,9 +46,12 @@ public class QuestManager : MonoBehaviour
 
     public void ShowQuestText(string[] questText)
     {
-        dMan.dialogueLines = new string[questText.Length];
-        dMan.dialogueLines = questText;
-        dMan.PauseDialogue();
-        dMan.ShowDialogue();
+        if (questText.Length >= 1)
+        {
+            dMan.dialogueLines = new string[questText.Length];
+            dMan.dialogueLines = questText;
+            dMan.PauseDialogue();
+            dMan.ShowDialogue();
+        }
     }
 }

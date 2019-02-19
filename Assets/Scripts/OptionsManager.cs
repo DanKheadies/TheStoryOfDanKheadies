@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/08/2018
-// Last:  01/10/2019
+// Last:  02/14/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +11,7 @@ public class OptionsManager : MonoBehaviour
 {
     public CameraFollow mainCamera;
     public DialogueManager dMan;
+    public FixedJoystick fixedJoy;
     public GameObject brioBar;
     public GameObject oBox;
     public GameObject pauseButtOpac;
@@ -60,6 +61,7 @@ public class OptionsManager : MonoBehaviour
         // Initializers
         brioBar = GameObject.Find("BrioBar");
         dMan = FindObjectOfType<DialogueManager>();
+        fixedJoy = FindObjectOfType<FixedJoystick>();
         mainCamera = FindObjectOfType<CameraFollow>();
         moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
         o1Arw = GameObject.Find("Opt1Arw").GetComponent<Image>();
@@ -106,11 +108,12 @@ public class OptionsManager : MonoBehaviour
             }
         }
 
-        // Temp: Update Camera display / aspect ratio
+        // Temp: Update Camera display / aspect ratio & virtual joystick
         if (Input.GetKeyUp(KeyCode.R) ||
             Input.GetKeyUp(KeyCode.JoystickButton6))
         {
             ConfigureParameters();
+            fixedJoy.JoystickPosition();
         }
     }
 
@@ -135,6 +138,9 @@ public class OptionsManager : MonoBehaviour
         brioBar.transform.localScale = Vector3.zero;
         pauseButtOpac.transform.localScale = Vector3.zero;
 
+        // "Lock" Joystick to vertical direction
+        fixedJoy.joystickMode = JoystickMode.Vertical;
+
         PauseOptions();
     }
 
@@ -156,6 +162,8 @@ public class OptionsManager : MonoBehaviour
 
         brioBar.transform.localScale = Vector3.one;
         pauseButtOpac.transform.localScale = Vector3.one;
+        
+        fixedJoy.joystickMode = JoystickMode.AllAxis;
     }
 
     public void CheckAndAssignClickedValue(int option)

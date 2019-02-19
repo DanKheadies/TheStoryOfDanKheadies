@@ -2,7 +2,9 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  01/10/2019
+// Last:  02/13/2019
+
+// DC TODO -- Bring in QuestMananger & complete quest when won (but still able to keep playing for restored brio & not more brio)
 
 using UnityEngine;
 
@@ -10,6 +12,7 @@ using UnityEngine;
 public class Minesweeper : MonoBehaviour
 {
     public DialogueManager dMan;
+    public FixedJoystick fixedJoy;
     public GameObject pause;
     public GameObject person1;
     public GameObject thePlayer;
@@ -19,6 +22,7 @@ public class Minesweeper : MonoBehaviour
     public OptionsManager oMan;
     public PlayerBrioManager brio;
     public SaveGame save;
+    public TouchControls touches;
     public UIManager uiMan;
 
     public bool bAvoidInvestigating;
@@ -37,6 +41,7 @@ public class Minesweeper : MonoBehaviour
         // Initializers
         brio = FindObjectOfType<PlayerBrioManager>();
         dMan = FindObjectOfType<DialogueManager>();
+        fixedJoy = FindObjectOfType<FixedJoystick>();
         inv = FindObjectOfType<Inventory>();
         moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
         oMan = FindObjectOfType<OptionsManager>();
@@ -44,11 +49,16 @@ public class Minesweeper : MonoBehaviour
         person1 = GameObject.Find("Person.1");
         save = FindObjectOfType<SaveGame>();
         thePlayer = GameObject.FindGameObjectWithTag("Player");
+        touches = FindObjectOfType<TouchControls>();
         warpMinesweeper = GameObject.Find("Minesweeper.to.Chp1");
         uiMan = FindObjectOfType<UIManager>();
         
         pauseTimer = 0.333f;
         timer = 0.333f;
+
+        // Show GUI & set virtual joystick
+        touches.transform.localScale = Vector3.one;
+        fixedJoy.JoystickPosition();
     }
 	
 	void Update ()

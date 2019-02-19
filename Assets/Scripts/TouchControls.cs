@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/17/2018
+// Last:  02/14/2019
 
 using System.Collections;
 using UnityEngine;
@@ -25,6 +25,7 @@ public class TouchControls : MonoBehaviour
     public bool bUp;
     public bool bUpLeft;
     public bool bUpRight;
+    public bool bAvoidSubUIElements;
     public bool bUIactive;
 
     public string lastDirection;
@@ -321,9 +322,24 @@ public class TouchControls : MonoBehaviour
     // Vibrate on touch
     public void Vibrate()
     {
-        #if UNITY_ANDRIOD
+        #if UNITY_ANDROID
             Handheld.Vibrate();
         #endif
+
+        #if UNITY_IOS
+            Handheld.Vibrate();
+        #endif
+    }
+
+    // DC TODO 02/14/2019 -- Avoid & UIAct might be doing the same thing; see about consolidating
+    public void AvoidSubUIElements()
+    {
+        bAvoidSubUIElements = true;
+    }
+
+    public void StopAvoidSubUIElements()
+    {
+        bAvoidSubUIElements = false;
     }
 
     public void UIActive()

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  01/08/2019
+// Last:  02/18/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +20,12 @@ public class UIManager : MonoBehaviour
     public GameObject[] joySticks;
     public OptionsManager oMan;
     public PlayerBrioManager playerBrio;
+    public RectTransform controlsMenu;
+    public RectTransform gwcMenu;
+    public RectTransform iconsMenu;
+    public RectTransform pauseMenu;
+    public RectTransform soundMenu;
+    public RectTransform stuffMenu;
     public Scene scene;
     public Slider brioBar;
     public Slider contOpacSlider;
@@ -58,6 +64,21 @@ public class UIManager : MonoBehaviour
         playerBrio = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBrioManager>();
         scene = SceneManager.GetActiveScene();
         touches = FindObjectOfType<TouchControls>();
+
+        controlsMenu = GameObject.Find("ControlsMenu").GetComponent<RectTransform>();
+        pauseMenu = GameObject.Find("PauseMenu").GetComponent<RectTransform>();
+        soundMenu = GameObject.Find("SoundMenu").GetComponent<RectTransform>();
+        stuffMenu = GameObject.Find("StuffMenu").GetComponent<RectTransform>();
+
+        if (scene.name == "GuessWhoColluded")
+        {
+            gwcMenu = GameObject.Find("GWCMenu").GetComponent<RectTransform>();
+            iconsMenu = GameObject.Find("IconsMenu").GetComponent<RectTransform>();
+        }
+
+        
+
+
 
 
         // Sets initial activation off saved data
@@ -124,6 +145,10 @@ public class UIManager : MonoBehaviour
                 ToggleDPadControl();
             }
         }
+
+        // Sets menu position based off scene
+        CheckAndSetMenus();
+
 
         // Sets brio bar
         bUpdateBrio = true;
@@ -227,6 +252,74 @@ public class UIManager : MonoBehaviour
             else
             {
                 currentContDPad = 1;
+            }
+        }
+    }
+
+    public void CheckAndSetMenus()
+    {
+        // Width > height = center in the screen
+        if (Screen.width >= Screen.height)
+        {
+            controlsMenu.anchorMin = new Vector2(0.5f, 0.5f);
+            controlsMenu.anchorMax = new Vector2(0.5f, 0.5f);
+            controlsMenu.anchoredPosition = new Vector2(0, 0);
+
+            pauseMenu.anchorMin = new Vector2(0.5f, 0.5f);
+            pauseMenu.anchorMax = new Vector2(0.5f, 0.5f);
+            pauseMenu.anchoredPosition = new Vector2(0, 0);
+
+            soundMenu.anchorMin = new Vector2(0.5f, 0.5f);
+            soundMenu.anchorMax = new Vector2(0.5f, 0.5f);
+            soundMenu.anchoredPosition = new Vector2(0, 0);
+
+            stuffMenu.anchorMin = new Vector2(0.5f, 0.5f);
+            stuffMenu.anchorMax = new Vector2(0.5f, 0.5f);
+            stuffMenu.anchoredPosition = new Vector2(0, 0);
+
+            if (scene.name == "GuessWhoColluded")
+            {
+                gwcMenu.anchorMin = new Vector2(0.5f, 0.5f);
+                gwcMenu.anchorMax = new Vector2(0.5f, 0.5f);
+                gwcMenu.anchoredPosition = new Vector2(140f, 0);
+
+                iconsMenu.anchorMin = new Vector2(0.5f, 0.5f);
+                iconsMenu.anchorMax = new Vector2(0.5f, 0.5f);
+                iconsMenu.anchoredPosition = new Vector2(0, 0);
+
+                pauseMenu.anchoredPosition = new Vector2(-140f, 0);
+            }
+        }
+        // Height > width = stick to the top but below brio and menu button
+        else
+        {
+            controlsMenu.anchorMin = new Vector2(0.5f, 1f);
+            controlsMenu.anchorMax = new Vector2(0.5f, 1f);
+            controlsMenu.anchoredPosition = new Vector2(0, -275f);
+
+            pauseMenu.anchorMin = new Vector2(0.5f, 1f);
+            pauseMenu.anchorMax = new Vector2(0.5f, 1f);
+            pauseMenu.anchoredPosition = new Vector2(0, -275f);
+
+            soundMenu.anchorMin = new Vector2(0.5f, 1f);
+            soundMenu.anchorMax = new Vector2(0.5f, 1f);
+            soundMenu.anchoredPosition = new Vector2(0, -275f);
+
+            stuffMenu.anchorMin = new Vector2(0.5f, 1f);
+            stuffMenu.anchorMax = new Vector2(0.5f, 1f);
+            stuffMenu.anchoredPosition = new Vector2(0, -275f);
+
+            if (scene.name == "GuessWhoColluded")
+            {
+                gwcMenu.anchorMin = new Vector2(0.5f, 1f);
+                gwcMenu.anchorMax = new Vector2(0.5f, 1f);
+                gwcMenu.anchoredPosition = new Vector2(140f, -275f);
+
+                iconsMenu.anchorMin = new Vector2(0.5f, 1f);
+                iconsMenu.anchorMax = new Vector2(0.5f, 1f);
+                iconsMenu.anchoredPosition = new Vector2(0, -275f);
+
+                pauseMenu.anchoredPosition = new Vector2(-140f, -275f);
             }
         }
     }

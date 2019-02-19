@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  01/10/2019
+// Last:  02/18/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     public AspectUtility aspectUtil;
     private Animator pAnim;
     public CameraFollow mainCamera;
+    public FixedJoystick fixedJoy;
     public GameObject dBox;
     public Image dArrow;
     public Image dFrame;
@@ -53,12 +54,13 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         // Initializers
-        aspectUtil = GameObject.Find("Main Camera").GetComponent<AspectUtility>();
+        aspectUtil = FindObjectOfType<Camera>().GetComponent<AspectUtility>();
         dArrow = GameObject.Find("Dialogue_Arrow").GetComponent<Image>();
         dBox = GameObject.Find("Dialogue_Box");
         dFrame = GameObject.Find("Dialogue_Frame").GetComponent<Image>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
         dPic = GameObject.Find("Dialogue_Picture").GetComponent<Image>();
+        fixedJoy = FindObjectOfType<FixedJoystick>();
         imgStrobe = GameObject.Find("Dialogue_Arrow").GetComponent<ImageStrobe>();
         mainCamera = FindObjectOfType<CameraFollow>();
         oMan = FindObjectOfType<OptionsManager>();
@@ -132,11 +134,13 @@ public class DialogueManager : MonoBehaviour
             //}
         }
 
-        // Temp: Update Camera display / aspect ratio
+        // Temp: Update Camera display / aspect ratio & virtual joystick
         if (Input.GetKeyUp(KeyCode.R) ||
             Input.GetKeyUp(KeyCode.JoystickButton6))
         {
             ConfigureParameters();
+            fixedJoy.JoystickPosition();
+            uiMan.CheckAndSetMenus();
         }
 
         //Check sizing stuff

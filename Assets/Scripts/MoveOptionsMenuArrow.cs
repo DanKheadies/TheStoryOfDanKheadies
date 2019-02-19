@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/23/2018
-// Last:  01/10/2019
+// Last:  02/14/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +14,7 @@ public class MoveOptionsMenuArrow : MonoBehaviour
     private Button Opt2Btn;
     private Button Opt3Btn;
     private Button Opt4Btn;
+    private FixedJoystick fixedJoy;
     private GameObject Opt1Arw;
     private GameObject Opt2Arw;
     private GameObject Opt3Arw;
@@ -27,6 +28,7 @@ public class MoveOptionsMenuArrow : MonoBehaviour
     public bool bControllerDown;
     public bool bControllerUp;
     public bool bFreezeControllerInput;
+    public bool bFreezeVirtualInput;
 
 
     public enum ArrowPos : int
@@ -52,7 +54,8 @@ public class MoveOptionsMenuArrow : MonoBehaviour
         Opt3Arw = GameObject.Find("Opt3Arw");
         Opt4Arw = GameObject.Find("Opt4Arw");
 
-        oMan = GameObject.FindObjectOfType<OptionsManager>();
+        fixedJoy = FindObjectOfType<FixedJoystick>();
+        oMan = FindObjectOfType<OptionsManager>();
         optionsBox = GameObject.Find("Options_Box").transform;
         pauseScreen = GameObject.Find("PauseScreen");
         scene = SceneManager.GetActiveScene();
@@ -79,7 +82,6 @@ public class MoveOptionsMenuArrow : MonoBehaviour
         {
             // Controller Support 
             // DC TODO 01/10/2019 -- temp bug where sub-pause menus not closing as expected
-            // DC TODO 01/10/2019 -- virtual joystick should be able to select choices
             if (Input.GetAxis("Controller DPad Vertical") == 0 &&
                (!touches.bDown &&
                 !touches.bUp))
@@ -88,18 +90,41 @@ public class MoveOptionsMenuArrow : MonoBehaviour
             }
             else if (!bFreezeControllerInput &&
                     (Input.GetAxis("Controller DPad Vertical") > 0 ||
-                    touches.bDown))
+                     touches.bDown))
             {
                 bControllerDown = true;
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
                     (Input.GetAxis("Controller DPad Vertical") < 0 ||
-                    touches.bUp))
+                     touches.bUp))
             {
                 bControllerUp = true;
                 bFreezeControllerInput = true;
             }
+
+            // Virtual Joystick Support 
+            if (fixedJoy.Vertical == 0 &&
+               (!touches.bDown &&
+                !touches.bUp))
+            {
+                bFreezeVirtualInput = false;
+            }
+            else if (!bFreezeVirtualInput &&
+                    (fixedJoy.Vertical < 0 ||
+                     touches.bDown))
+            {
+                bControllerDown = true;
+                bFreezeVirtualInput = true;
+            }
+            else if (!bFreezeVirtualInput &&
+                    (fixedJoy.Vertical > 0 ||
+                     touches.bUp))
+            {
+                bControllerUp = true;
+                bFreezeVirtualInput = true;
+            }
+
 
             if (Input.GetKeyDown(KeyCode.S) ||
                 Input.GetKeyDown(KeyCode.DownArrow) ||

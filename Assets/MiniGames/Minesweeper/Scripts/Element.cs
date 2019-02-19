@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 05/20/2018
-// Last:  01/10/2019
+// Last:  02/14/2019
 
 using System.Collections;
 using UnityEngine;
@@ -137,7 +137,8 @@ public class Element : MonoBehaviour
         }
 
         if (Input.GetMouseButtonUp(0) &&
-            ms.bAvoidInvestigating == false)
+            !ms.bAvoidInvestigating &&
+            !touches.bAvoidSubUIElements)
         {
             InvestigateElement();
         }

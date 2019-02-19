@@ -2,7 +2,7 @@
 // Authors: David W. Corso
 // Contributors: Nick Pettit
 // Start: 04/20/2017
-// Last:  10/04/2018
+// Last:  02/18/2019
 
 using System.Collections;
 using UnityEngine;
@@ -46,20 +46,20 @@ public class SceneTransitioner : MonoBehaviour
                 switch (BetaLoad)
                 {
                     case "Chp1":
-                        sceneTitle.text = "Chapter 1";
-                        sceneSubtitle.text = "In the beginning...";
+                        sceneTitle.text = "Chapter 1\n";
+                        sceneSubtitle.text = "\nIn the beginning...";
                         break;
                     case "Minesweeper":
-                        sceneTitle.text = "Minesweeper";
-                        sceneSubtitle.text = "Boom baby...";
+                        sceneTitle.text = "Minesweeper\n";
+                        sceneSubtitle.text = "\nBoom baby...";
                         break;
                     case "GuessWhoColluded":
-                        sceneTitle.text = "Guess Who";
-                        sceneSubtitle.text = "Colluded...";
+                        sceneTitle.text = "Guess Who\n";
+                        sceneSubtitle.text = "\nColluded...";
                         break;
                     default:
-                        sceneTitle.text = "n_n";
-                        sceneSubtitle.text = "Loading some scene...";
+                        sceneTitle.text = "n_n\n";
+                        sceneSubtitle.text = "\nLoading some scene...";
                         break;
                 }
 
@@ -130,17 +130,22 @@ public class SceneTransitioner : MonoBehaviour
 
         // UI Image & Text Positioning and Sizing based off camera size vs device size
         // Subtitle is 2/3 the size of the title
-        if (Screen.width > mainCamera.pixelWidth)
+        // DC TODO 02/18/19 -- Should base font-size (int) off width & line-height (float) off height
+        if (Screen.width <= Screen.height)
         {
-            // Height => change in height affects variables, so look at the width of the camera
-            sceneSubtitle.fontSize = (int)((-6.132f * (cameraWidth * cameraWidth) + 38.80f * cameraWidth + 15.76f) / 1.333f);
-            sceneTitle.fontSize = (int)(-6.132f * (cameraWidth * cameraWidth) + 38.80f * cameraWidth + 15.76f);
+            // Height => change in height affects variables, so look at the height of the screen
+            sceneSubtitle.fontSize = (int)((0.00005494f * (Screen.height * Screen.height) + 0.01675f * (Screen.width) + 14.66f) * 0.666f);
+            sceneSubtitle.lineSpacing = (1f / 1864f) * (Screen.height) + (411f / 466f);
+            sceneTitle.fontSize = (int)(0.00005494f * (Screen.height * Screen.height) + 0.01675f * (Screen.width) + 14.66f);
+            sceneTitle.lineSpacing = (1f / 932f) * (Screen.height) + (178f / 233f);
         }
         else
         {
-            // Width => change in width affects variables, so look at the height of the camera
-            sceneSubtitle.fontSize = (int)((2.432f * (cameraHeight * cameraHeight) + 25.84f * cameraHeight + 20.05f) / 1.333f);
-            sceneTitle.fontSize = (int)(2.432f * (cameraHeight * cameraHeight) + 25.84f * cameraHeight + 20.05f);
+            // Width => change in width affects variables, so look at the width of screen
+            sceneSubtitle.fontSize = (int)((0.00006983f * (Screen.width * Screen.width) - 0.03739f * (Screen.width) + 42.37f) * 0.666f);
+            sceneSubtitle.lineSpacing = -0.0006676f * (Screen.width) + 2.4393f;
+            sceneTitle.fontSize = (int)(0.00006983f * (Screen.width * Screen.width) - 0.03739f * (Screen.width) + 42.37f);
+            sceneTitle.lineSpacing = (1f / 1498f) * (Screen.width) + (60f / 107f);
         }
 
         yield return new WaitForSeconds(3);

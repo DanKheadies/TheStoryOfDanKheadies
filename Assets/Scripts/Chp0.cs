@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  01/08/2019
+// Last:  02/11/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +12,7 @@ public class Chp0 : MonoBehaviour
     public BoxCollider2D warpCollider;
     public Camera mainCamera;
     public DialogueManager dMan;
+    public FixedJoystick fixedJoy;
     public GameObject contArrow;
     public GameObject dBox;
     public GameObject guiConts;
@@ -46,6 +47,7 @@ public class Chp0 : MonoBehaviour
         dBox = GameObject.Find("Dialogue_Box");
         dMan = FindObjectOfType<DialogueManager>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
+        fixedJoy = FindObjectOfType<FixedJoystick>();
         guiConts = GameObject.Find("GUIControls");
         HUD = GameObject.Find("HUD");
         inv = FindObjectOfType<Inventory>();
@@ -139,9 +141,10 @@ public class Chp0 : MonoBehaviour
             bStartGame)
         {
             // Display UI & music
-            guiConts.transform.localScale = Vector3.one;
             mMan.bMusicCanPlay = true;
             pauseButton.transform.localScale = Vector3.one;
+            guiConts.transform.localScale = Vector3.one;
+            fixedJoy.JoystickPosition();
             
             sFaderAnim.GetComponent<Animator>().enabled = true;
 
@@ -156,6 +159,8 @@ public class Chp0 : MonoBehaviour
         {
             mMan.bMusicCanPlay = true;
             sFaderAnim.GetComponent<Animator>().enabled = true;
+            guiConts.transform.localScale = Vector3.one;
+            fixedJoy.JoystickPosition();
 
             // Change to avoid running this logic
             bAvoidUpdate = true;

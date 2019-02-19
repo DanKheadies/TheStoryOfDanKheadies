@@ -1,22 +1,21 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
-// Authors: Unity Asset Store
+// Authors: Fenerax Studios (https://assetstore.unity.com/publishers/32730)
 // Contributors: David W. Corso
 // Start: --/--/----
-// Last:  01/07/2019
+// Last:  02/11/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class FixedJoystick : Joystick
 {
-    Vector2 joystickPosition = Vector2.zero;
-    private Camera cam = new Camera();
+    public Vector2 joystickPosition;
 
     public bool bJoying;
 
-    void Start()
+    public void JoystickPosition()
     {
-        joystickPosition = RectTransformUtility.WorldToScreenPoint(cam, background.position);
+        joystickPosition = RectTransformUtility.WorldToScreenPoint(null, background.position);
     }
 
     public override void OnDrag(PointerEventData eventData)

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  01/14/2019
+// Last:  02/14/2019
 
 using UnityEngine;
 
@@ -33,6 +33,8 @@ public class QuestTrigger : MonoBehaviour
         // Drives NPC interaction
         if (collision.gameObject.CompareTag("Player"))
         {
+            // DC TODO 02/13/19 -- Throws an error if a player saves & loads with in an NPC's dialogue zone
+            // Need to identify order of execution or utilize another variable to prevent
             if (!qMan.questsCollected[questNumber])
             {
                 // Bool set on GameObject directs NPC interaction

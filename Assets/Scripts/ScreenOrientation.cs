@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/02/2018
-// Last:  08/13/2018
+// Last:  02/11/2019
 
 using UnityEngine;
 
@@ -11,7 +11,9 @@ public class ScreenOrientation : MonoBehaviour
     public AspectUtility aspectUtil;
     public DialogueManager dMan;
     public DeviceOrientation devOr;
+    public FixedJoystick fixedJoy;
     public OptionsManager oMan;
+    public UIManager uMan;
 
     public bool bIsFull;
     public bool bSizingChange;
@@ -21,8 +23,10 @@ public class ScreenOrientation : MonoBehaviour
         // Initializers
         aspectUtil = GetComponent<AspectUtility>();
         devOr = Input.deviceOrientation;
+        fixedJoy = FindObjectOfType<FixedJoystick>();
         dMan = FindObjectOfType<DialogueManager>();
         oMan = FindObjectOfType<OptionsManager>();
+        uMan = FindObjectOfType<UIManager>();
 
         bIsFull = Screen.fullScreen;
         bSizingChange = false;
@@ -54,5 +58,7 @@ public class ScreenOrientation : MonoBehaviour
         aspectUtil.Awake();
         dMan.ConfigureParameters();
         oMan.ConfigureParameters();
+        fixedJoy.JoystickPosition();
+        uMan.CheckAndSetMenus();
     }
 }

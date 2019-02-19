@@ -54,6 +54,8 @@ public class PauseGame : MonoBehaviour
         stuffMenu.transform.localScale = Vector3.zero;
     } 
 
+    // DC TODO -- can set virtual joystick to only work in one plane (i.e. vertical)
+
 	void Update ()
     {
         if (Input.GetKeyUp(KeyCode.Escape) ||

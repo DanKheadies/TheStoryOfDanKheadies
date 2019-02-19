@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  01/14/2019
+// Last:  02/13/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +13,7 @@ public class Chp1 : MonoBehaviour
     public Camera mainCamera;
     public CameraFollow camFollow;
     public DialogueManager dMan;
+    public FixedJoystick fixedJoy;
     public GameObject dArrow;
     public GameObject dBox;
     public GameObject greatTree;
@@ -34,7 +35,7 @@ public class Chp1 : MonoBehaviour
     public GameObject quest2;
     public GameObject quest3;
     public GameObject quest4;
-    public GameObject quest5; // DC 01/14/2019 TODO -- Add talking to the GT as a quest
+    public GameObject quest5;
     public GameObject quest6;
     public GameObject quest7;
     public GameObject quest8;
@@ -118,6 +119,7 @@ public class Chp1 : MonoBehaviour
         dBox = GameObject.Find("Dialogue_Box");
         dMan = FindObjectOfType<DialogueManager>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
+        fixedJoy = FindObjectOfType<FixedJoystick>();
         greatTree = GameObject.Find("GreatTree");
         touches = GameObject.Find("GUIControls").GetComponent<TouchControls>();
         inv = FindObjectOfType<Inventory>();
@@ -162,6 +164,10 @@ public class Chp1 : MonoBehaviour
         invTimer = 0.333f;
         raceTimer = 0f;
 
+        // Show GUI & set virtual joystick
+        touches.transform.localScale = Vector3.one;
+        fixedJoy.JoystickPosition();
+
         // Chapter 1 -- First Time
         if (PlayerPrefs.GetString("Chapter") != "Chp1" &&
             PlayerPrefs.GetInt("TransferAnandaCoord") == 0)
@@ -193,6 +199,10 @@ public class Chp1 : MonoBehaviour
             LoadQuests();
             inv.bUpdateItemCount = true;
             // see Update timer for inventory load
+
+            Chp1QuestDialogueChecker();
+
+            // DC TODO 02/13/19 -- When saving / loading from PlaygroundW, it uses main song rather than JurassicBark
         }
     }
 
@@ -298,6 +308,7 @@ public class Chp1 : MonoBehaviour
             bAvoidUpdateQ2 = true;
 
             // Disable door again & move Dan back (need isTrigger double-tap change?)
+            // DC 02/12/19 -- Don't move back Dan here?
             GameObject.Find("HomeSWTreeDoor").transform.tag = "LockedDoor";
             GameObject.Find("HomeSWTreeDoor").transform.localScale = Vector3.one;
             GameObject.Find("HomeSWTreeDoor").GetComponent<BoxCollider2D>().isTrigger = false;
@@ -1108,9 +1119,20 @@ public class Chp1 : MonoBehaviour
             thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(15);
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(20);
             uiMan.bUpdateBrio = true;
-
-            Debug.Log("collected");
+            
             quest4.GetComponent<QuestObject>().CollectedQuest();
+        }
+    }
+
+    public void Quest5Reward()
+    {
+        if (!quest5.GetComponent<QuestObject>().bHasCollected)
+        {
+            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
+            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
+            uiMan.bUpdateBrio = true;
+            
+            quest5.GetComponent<QuestObject>().CollectedQuest();
         }
     }
 
@@ -1214,6 +1236,7 @@ public class Chp1 : MonoBehaviour
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3))
         {
             oMan.ResetOptions();
+            Quest5Reward();
         }
 
 
@@ -1336,6 +1359,8 @@ public class Chp1 : MonoBehaviour
 
     IEnumerator HideAndSeek()
     {
+        bAvoidUpdateQ4counting = true;
+
         yield return new WaitForSeconds(2);
 
         // Move Kid4
@@ -1374,7 +1399,6 @@ public class Chp1 : MonoBehaviour
         // DC TODO 01/11/2019 -- bStart/bStopStrobe should be fixed in dMan now
         // Go thru the scripts & make sure bStopStrobe is set to true & bStartStrobe = false OR removed altogether
 
-        bAvoidUpdateQ4counting = true;
         bQ4Seeking = true;
     }
 
@@ -1409,7 +1433,7 @@ public class Chp1 : MonoBehaviour
         {
             // Set dialogue & dialogue elements
             dMan.dialogueLines = new string[] {
-                "Toit! Found all of you."
+                "Shibby.. Found all of you."
             };
             dMan.portPic = thePlayer.GetComponent<PlayerBrioManager>().portPic;
             dMan.currentLine = 0;
@@ -1548,6 +1572,8 @@ public class Chp1 : MonoBehaviour
         greatTree.transform.GetChild(3).gameObject.SetActive(true);
 
         greatTree.transform.GetChild(3).GetComponent<DialogueHolder>().bContinueDialogue = true;
+
+        // derp
     }
 
     public void Quest6Dialogue1Opt1()
@@ -1869,6 +1895,61 @@ public class Chp1 : MonoBehaviour
         pookieB2.GetComponent<Animator>().Play("Sit Happy");
     }
 
+    public void Chp1QuestDialogueChecker()
+    {
+        // Q0
+        if (qMan.questsCollected[0])
+        {
+            parent2.transform.GetChild(0).gameObject.SetActive(false);
+            parent2.transform.GetChild(2).gameObject.SetActive(true);
+        }
+        else if (qMan.questsStarted[0])
+        {
+            parent2.transform.GetChild(0).gameObject.SetActive(false);
+            parent2.transform.GetChild(1).gameObject.SetActive(true);
+        }
+
+        // Q1
+        if (qMan.questsCollected[1])
+        {
+            bAvoidUpdateQ1 = true;
+            kid2.transform.GetChild(0).gameObject.SetActive(false);
+            kid2.transform.GetChild(1).gameObject.SetActive(true);
+        }
+
+        // Q3
+        if (qMan.questsCollected[3])
+        {
+            bAvoidUpdateQ3 = true;
+            oldMan1.transform.GetChild(0).gameObject.SetActive(false);
+            oldMan1.transform.GetChild(1).gameObject.SetActive(true);
+        }
+
+        // Q4
+        if (qMan.questsCollected[4])
+        {
+            kid4.transform.GetChild(0).gameObject.SetActive(false);
+            kid4.transform.GetChild(2).gameObject.SetActive(true);
+        }
+
+        // Q5
+        if (qMan.questsCollected[5])
+        {
+            greatTree.transform.GetChild(0).gameObject.SetActive(false);
+            greatTree.transform.GetChild(3).gameObject.SetActive(true);
+        }
+
+        // Q7 & Q8
+        if (qMan.questsCollected[7] ||
+            qMan.questsCollected[8])
+        {
+            man1.transform.GetChild(0).gameObject.SetActive(false);
+            man1.transform.GetChild(1).gameObject.SetActive(true);
+
+            // DC 02/13/19 -- "Bug" that allows pookie bears to get back up & look "normal" after quest complete, saved & quit, and then talked to again
+        }
+    }
+
     public void LoadQuests()
     {
         // 0 = Nothing
@@ -1910,7 +1991,7 @@ public class Chp1 : MonoBehaviour
         PlayerPrefs.SetString("Chp1Quests", savedQuestsValue);
 
         // DC 01/13/2019 -- Most quests close themselves out in their update sections once the above are assigned
-        // These conditions are for the stranglers
+        // These conditions are for the stragglers
         if (savedQuestsValue.Substring(4, 1) == "3" ||
             savedQuestsValue.Substring(4, 1) == "2")
         {
