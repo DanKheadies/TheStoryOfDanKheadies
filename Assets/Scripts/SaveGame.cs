@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  01/08/2019
+// Last:  02/21/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +15,7 @@ public class SaveGame : MonoBehaviour
     public Inventory inv;
     public Item tempItem;
     public Scene scene;
+    public TouchControls touches;
     public UIManager uiMan;
     public VolumeManager savedVol;
     
@@ -45,6 +46,7 @@ public class SaveGame : MonoBehaviour
             inv = FindObjectOfType<Inventory>().GetComponent<Inventory>();
             savedVol = FindObjectOfType<VolumeManager>();
             tempItem = ScriptableObject.CreateInstance<Item>();
+            touches = FindObjectOfType<TouchControls>();
             uiMan = FindObjectOfType<UIManager>();
         }
     }
@@ -149,6 +151,7 @@ public class SaveGame : MonoBehaviour
     {
         PlayerPrefs.SetInt("ControlsDPad", uiMan.currentContDPad); // Called in UIManager
         PlayerPrefs.SetFloat("ControlsOpac", uiMan.currentContOpac); // Called in UIManager
+        PlayerPrefs.SetInt("ControlsVibrate", touches.currentContVibe); // Called in TouchControls
 
         if (uiMan.bControlsActive)
         {

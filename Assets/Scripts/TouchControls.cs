@@ -1,17 +1,19 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/14/2019
+// Last:  02/21/2019
 
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 // Controls the actions & display of the GUI input
 public class TouchControls : MonoBehaviour
 {
     private PlayerMovement pMove;
     private Scene scene;
+    public Toggle vibeTog;
 
     public bool bAaction;
     public bool bBaction;
@@ -25,8 +27,12 @@ public class TouchControls : MonoBehaviour
     public bool bUp;
     public bool bUpLeft;
     public bool bUpRight;
+
     public bool bAvoidSubUIElements;
+    public bool bControlsVibrate;
     public bool bUIactive;
+
+    public int currentContVibe;
 
     public string lastDirection;
 
@@ -36,6 +42,32 @@ public class TouchControls : MonoBehaviour
         // Initializers
         pMove = FindObjectOfType<PlayerMovement>();
         scene = SceneManager.GetActiveScene();
+        vibeTog = GameObject.Find("VibrateToggle").GetComponent<Toggle>();
+
+        // Sets initial vibrate based off saved data
+        if (!PlayerPrefs.HasKey("ControlsVibrate"))
+        {
+            currentContVibe = 1;
+            vibeTog.isOn = true;
+            bControlsVibrate = true;
+        }
+        else
+        {
+            currentContVibe = PlayerPrefs.GetInt("ControlsVibrate");
+
+            // Set control type based off level
+            if (currentContVibe == 1)
+            {
+                vibeTog.isOn = true;
+                bControlsVibrate = true;
+            }
+            else if (currentContVibe == 0)
+            {
+                vibeTog.isOn = false; // Prob not necessary; gets called in function
+                bControlsVibrate = true;
+                ToggleVibrate();
+            }
+        }
     }
 
     void Update()
@@ -322,6 +354,8 @@ public class TouchControls : MonoBehaviour
     // Vibrate on touch
     public void Vibrate()
     {
+        if (bControlsVibrate)
+        {
         #if UNITY_ANDROID
             Handheld.Vibrate();
         #endif
@@ -329,6 +363,21 @@ public class TouchControls : MonoBehaviour
         #if UNITY_IOS
             Handheld.Vibrate();
         #endif
+        }
+    }
+
+    public void ToggleVibrate()
+    {
+        if (bControlsVibrate)
+        {
+            bControlsVibrate = false;
+            currentContVibe = 0;
+        }
+        else if (!bControlsVibrate)
+        {
+            bControlsVibrate = true;
+            currentContVibe = 1;
+        }
     }
 
     // DC TODO 02/14/2019 -- Avoid & UIAct might be doing the same thing; see about consolidating

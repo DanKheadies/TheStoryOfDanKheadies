@@ -1,11 +1,11 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/18/2019
+// Last:  02/21/2019
 
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 // Manage Overworld UI Display
 public class UIManager : MonoBehaviour
@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour
 
     void Start ()
     {
-        // Initializers
+        // Initializers 
         brioBar = GameObject.Find("BrioBar").GetComponent<Slider>();
         brioText = GameObject.Find("BrioText").GetComponent<Text>();
         contOpacCan = GameObject.Find("GUIControls").GetComponent<CanvasGroup>();
@@ -75,11 +75,6 @@ public class UIManager : MonoBehaviour
             gwcMenu = GameObject.Find("GWCMenu").GetComponent<RectTransform>();
             iconsMenu = GameObject.Find("IconsMenu").GetComponent<RectTransform>();
         }
-
-        
-
-
-
 
         // Sets initial activation off saved data
         if (!PlayerPrefs.HasKey("ControlsActive"))

@@ -2,7 +2,7 @@
 // Authors: David W. Corso
 // Contributors: Nick Pettit
 // Start: 04/20/2017
-// Last:  02/18/2019
+// Last:  02/21/2019
 
 using System.Collections;
 using UnityEngine;
@@ -131,22 +131,36 @@ public class SceneTransitioner : MonoBehaviour
         // UI Image & Text Positioning and Sizing based off camera size vs device size
         // Subtitle is 2/3 the size of the title
         // DC TODO 02/18/19 -- Should base font-size (int) off width & line-height (float) off height
-        if (Screen.width <= Screen.height)
-        {
-            // Height => change in height affects variables, so look at the height of the screen
-            sceneSubtitle.fontSize = (int)((0.00005494f * (Screen.height * Screen.height) + 0.01675f * (Screen.width) + 14.66f) * 0.666f);
-            sceneSubtitle.lineSpacing = (1f / 1864f) * (Screen.height) + (411f / 466f);
-            sceneTitle.fontSize = (int)(0.00005494f * (Screen.height * Screen.height) + 0.01675f * (Screen.width) + 14.66f);
-            sceneTitle.lineSpacing = (1f / 932f) * (Screen.height) + (178f / 233f);
-        }
-        else
-        {
-            // Width => change in width affects variables, so look at the width of screen
-            sceneSubtitle.fontSize = (int)((0.00006983f * (Screen.width * Screen.width) - 0.03739f * (Screen.width) + 42.37f) * 0.666f);
-            sceneSubtitle.lineSpacing = -0.0006676f * (Screen.width) + 2.4393f;
-            sceneTitle.fontSize = (int)(0.00006983f * (Screen.width * Screen.width) - 0.03739f * (Screen.width) + 42.37f);
-            sceneTitle.lineSpacing = (1f / 1498f) * (Screen.width) + (60f / 107f);
-        }
+        //if (Screen.width <= Screen.height)
+        //{
+        //    // Height => change in height affects variables, so look at the height of the screen
+        //    sceneSubtitle.fontSize = (int)((0.00005494f * (Screen.height * Screen.height) + 0.01675f * (Screen.width) + 14.66f) * 0.666f);
+        //    sceneSubtitle.lineSpacing = (1f / 1864f) * (Screen.height) + (411f / 466f);
+        //    sceneTitle.fontSize = (int)(0.00005494f * (Screen.height * Screen.height) + 0.01675f * (Screen.width) + 14.66f);
+        //    sceneTitle.lineSpacing = (1f / 932f) * (Screen.height) + (178f / 233f);
+        //}
+        //else
+        //{
+        //    // Width => change in width affects variables, so look at the width of screen
+        //    sceneSubtitle.fontSize = (int)((0.00006983f * (Screen.width * Screen.width) - 0.03739f * (Screen.width) + 42.37f) * 0.666f);
+        //    sceneSubtitle.lineSpacing = -0.0006676f * (Screen.width) + 2.4393f;
+        //    sceneTitle.fontSize = (int)(0.00006983f * (Screen.width * Screen.width) - 0.03739f * (Screen.width) + 42.37f);
+        //    sceneTitle.lineSpacing = (1f / 1498f) * (Screen.width) + (60f / 107f);
+        //}
+
+        sceneSubtitle.fontSize = (int)(((46f / 1161f) * Screen.width + (7838f / 387f)) * 0.666f);
+        sceneSubtitle.lineSpacing = (-5f / 4644f) * Screen.width + (4667f / 1548f);
+        sceneTitle.fontSize = (int)((46f / 1161f) * Screen.width + (7838f / 387f));
+        sceneTitle.lineSpacing = (-1f / 1935f) * Screen.width + (5101f / 2580f);
+
+        //Debug.Log("W: " + Screen.width);
+        // 1407
+        // 76, 1.25
+        // 51, 1.5
+
+        // 246
+        // 30, 1.85
+        // 20, 2.75
 
         yield return new WaitForSeconds(3);
 
