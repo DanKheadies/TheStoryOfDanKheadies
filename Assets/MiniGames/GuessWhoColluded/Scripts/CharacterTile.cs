@@ -10,7 +10,7 @@ public class CharacterTile : MonoBehaviour
 {
     public GWC_Controller gwc;
     public PauseGame pause;
-    private TouchControls touches;
+    public TouchControls touches;
     public Transform tileChar;
     public Transform tileFlag;
     public Transform tileIcon;
@@ -60,6 +60,8 @@ public class CharacterTile : MonoBehaviour
             (gwc.bCanFlip && Input.GetKeyDown(KeyCode.JoystickButton5) && !pause.bPauseActive && !bAvoidUpdate) ||
             (gwc.bCanFlip && touches.bBaction && !bAvoidUpdate))
         {
+            touches.Vibrate();
+
             if (bShowIcon)
             {
                 tileIcon.GetComponent<SpriteRenderer>().enabled = false;
@@ -178,6 +180,8 @@ public class CharacterTile : MonoBehaviour
 
     public void CheckAndFlip()
     {
+        touches.Vibrate();
+
         if (bHasFlipped)
         {
             ShowFront();

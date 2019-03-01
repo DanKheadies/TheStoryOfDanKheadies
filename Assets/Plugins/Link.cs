@@ -23,7 +23,8 @@ public class Link : MonoBehaviour
 
 	public void OpenLinkJS()
 	{
-		Application.ExternalEval("window.open('"+ ColluminacLink + "');");
+        // DC 02/22/2019 -- Deprecated; needed? Using OpenLink()
+		//Application.ExternalEval("window.open('"+ ColluminacLink + "');");
     }
 
     #if !UNITY_IOS

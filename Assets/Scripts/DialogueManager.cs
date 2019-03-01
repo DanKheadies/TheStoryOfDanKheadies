@@ -106,6 +106,8 @@ public class DialogueManager : MonoBehaviour
         // DC 08/13/2018 TODO
         // || (bDialogueActive && !bPauseDialogue && touches.bAaction)
         {
+            touches.Vibrate();
+
             if (currentLine < dialogueLines.Length)
             {
                 currentLine++;

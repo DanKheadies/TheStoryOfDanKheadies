@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 05/20/2018
-// Last:  02/14/2019
+// Last:  02/28/2019
 
 using System.Collections;
 using UnityEngine;
@@ -150,6 +150,8 @@ public class Element : MonoBehaviour
 
     public void InvestigateElement()
     {
+        touches.Vibrate();
+
         if (this.bIsMine)
         {
             // Show all mines
@@ -178,6 +180,8 @@ public class Element : MonoBehaviour
 
     public void FlagElement()
     {
+        touches.Vibrate();
+
         if (this.GetComponent<SpriteRenderer>().sprite == flagTexture)
         {
             GetComponent<SpriteRenderer>().sprite = defaultTexture;

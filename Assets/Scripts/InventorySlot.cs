@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso, Asbjorn Thirslund (Brackeys), Austin (AwfulMedia / GameGrind)
 // Start: 01/18/2018
-// Last:  08/12/2018
+// Last:  02/22/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +14,7 @@ public class InventorySlot : MonoBehaviour
     private Inventory inv;
     public Item item;
     private Transform itemMenu;
+    public TouchControls touches;
 
     public int itemId;
 
@@ -24,9 +25,11 @@ public class InventorySlot : MonoBehaviour
 
     void Start()
     {
+        // Initializers
         inv = GameObject.Find("Inventory").GetComponent<Inventory>();
         itemMenu = GameObject.Find("ItemMenu").transform;
         stuffBack = GameObject.Find("StuffBack").GetComponent<Button>();
+        touches = FindObjectOfType<TouchControls>();
     }
 
     public void AddItem (Item newItem)
@@ -73,6 +76,8 @@ public class InventorySlot : MonoBehaviour
         {
             if (bItemOpen)
             {
+                touches.Vibrate();
+
                 inv.selectedItemId = this.itemId;
 
                 PopulateItemMenu(item);
