@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  01/07/2019
+// Last:  03/15/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -221,7 +221,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Hide UI (if present) and prevent input
         cameraSlider.bTempControlActive = uiMan.bControlsActive;
-        touches.GetComponent<Canvas>().enabled = false;
+        touches.transform.localScale = Vector3.zero;
         touches.UnpressedAllArrows();
 
         // Prevent player movement

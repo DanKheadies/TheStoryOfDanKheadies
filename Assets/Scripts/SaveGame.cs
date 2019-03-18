@@ -149,6 +149,9 @@ public class SaveGame : MonoBehaviour
     // Saves UI controls' opacity and  data
     public void SavingUIControls()
     {
+        // DC TODO 3/1/19 -- Saving / loading controls having a problem on iPad (and iPhone?);
+        // Won't show when starting a new game; maybe need a hard reset there?
+        // Also, hiding on GWC & then loading up the game won't show em (see above i guess)
         PlayerPrefs.SetInt("ControlsDPad", uiMan.currentContDPad); // Called in UIManager
         PlayerPrefs.SetFloat("ControlsOpac", uiMan.currentContOpac); // Called in UIManager
         PlayerPrefs.SetInt("ControlsVibrate", touches.currentContVibe); // Called in TouchControls

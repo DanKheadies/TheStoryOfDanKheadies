@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/13/2018
-// Last:  02/14/2019
+// Last:  03/15/2019
 
 using UnityEngine;
 
@@ -170,7 +170,8 @@ public class CharacterTile : MonoBehaviour
 
     public void OnMouseUp()
     {
-        if (gwc.bCanFlip && 
+        if (gwc.bCanFlip &&
+            !pause.bPauseActive &&
             !touches.bUIactive &&
             !touches.bAvoidSubUIElements)
         {

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/13/2017
+// Last:  03/15/2019
 
 using System.Collections;
 using UnityEngine;
@@ -65,7 +65,7 @@ public class CameraSlider : MonoBehaviour
         // Checks (& resumes) UI controls
         if (bTempControlActive)
         {
-            touches.GetComponent<Canvas>().enabled = true;
+            touches.transform.localScale = Vector3.one;
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/21/2019
+// Last:  03/15/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -87,13 +87,13 @@ public class UIManager : MonoBehaviour
             {
                 bControlsActive = true;
                 conTog.isOn = true;
-                touches.GetComponent<Canvas>().enabled = true;
+                touches.transform.localScale = Vector3.one;
             }
             else
             {
                 bControlsActive = false;
                 conTog.isOn = false;
-                touches.GetComponent<Canvas>().enabled = false;
+                touches.transform.localScale = Vector3.zero;
             }
         }
 
@@ -174,7 +174,7 @@ public class UIManager : MonoBehaviour
 
         if (!bControlsActive)
         {
-            touches.GetComponent<Canvas>().enabled = false;
+            touches.transform.localScale = Vector3.zero;
         }
     }
 
@@ -190,12 +190,12 @@ public class UIManager : MonoBehaviour
     {
         if (bControlsActive)
         {
-            touches.GetComponent<Canvas>().enabled = false;
+            touches.transform.localScale = Vector3.zero;
             bControlsActive = false;
         }
         else if (!bControlsActive)
         {
-            touches.GetComponent<Canvas>().enabled = true;
+            touches.transform.localScale = Vector3.one;
             bControlsActive = true;
         }
     }

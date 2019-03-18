@@ -2,7 +2,7 @@
 // Authors: Unity (https://unity3d.com/learn/tutorials/topics/mobile-touch/pinch-zoom) (https://docs.unity3d.com/ScriptReference/Input.GetTouch.html)
 // Contributors: David W. Corso, JoaquinRD, alberto-lara
 // Start: 02/18/2019
-// Last:  02/28/2019
+// Last:  03/15/2019
 
 using UnityEngine;
 
@@ -40,7 +40,7 @@ public class GWCTouchControls : MonoBehaviour
         void Update()
     {
         // If GUI Controls are disabled
-        if (!touches.gameObject.GetComponent<Canvas>().enabled)
+        if (touches.transform.localScale == Vector3.zero)
         {
             // Swipe-Pan
             if (bReadyToPan &&
