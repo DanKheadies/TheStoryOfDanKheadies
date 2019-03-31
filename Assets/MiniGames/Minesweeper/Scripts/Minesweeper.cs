@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  02/13/2019
+// Last:  03/31/2019
 
 // DC TODO -- Bring in QuestMananger & complete quest when won (but still able to keep playing for restored brio & not more brio)
 
@@ -209,7 +209,7 @@ public class Minesweeper : MonoBehaviour
             thePlayer.GetComponent<Animator>().enabled = false;
 
             // Stop the player from bringing up the dialog again
-            dMan.gameObject.SetActive(false);
+            dMan.gameObject.transform.localScale = Vector3.zero;
         }
     }
 

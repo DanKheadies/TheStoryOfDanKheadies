@@ -2,7 +2,7 @@
 // Authors: Unity (https://unity3d.com/learn/tutorials/topics/mobile-touch/pinch-zoom) (https://docs.unity3d.com/ScriptReference/Input.GetTouch.html)
 // Contributors: David W. Corso, JoaquinRD, alberto-lara
 // Start: 02/18/2019
-// Last:  03/15/2019
+// Last:  03/31/2019
 
 using UnityEngine;
 
@@ -10,10 +10,10 @@ public class GWCTouchControls : MonoBehaviour
 {
     public AspectUtility aUtil;
     public Camera mainCamera;
+    public GameObject pause;
     public PlayerMovement pMove;
     public TouchControls touches;
-
-    //public bool bPanning;
+    
     public bool bReadyToPan;
 
     public float perspectiveZoomSpeed;
@@ -27,6 +27,7 @@ public class GWCTouchControls : MonoBehaviour
         // Initializers
         aUtil = FindObjectOfType<AspectUtility>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        pause = GameObject.Find("PauseScreen");
         pMove = FindObjectOfType<PlayerMovement>();
         touches = FindObjectOfType<TouchControls>();
 
@@ -40,7 +41,8 @@ public class GWCTouchControls : MonoBehaviour
         void Update()
     {
         // If GUI Controls are disabled
-        if (touches.transform.localScale == Vector3.zero)
+        if (touches.transform.localScale == Vector3.zero &&
+            pause.transform.localScale == Vector3.zero)
         {
             // Swipe-Pan
             if (bReadyToPan &&
@@ -49,8 +51,6 @@ public class GWCTouchControls : MonoBehaviour
                 bReadyToPan = false;
 
                 Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
-                //transform.Translate(-touchDeltaPosition.x * speed, -touchDeltaPosition.y * speed, 0);
-                //pMove.transform.Translate(touchDeltaPosition.x * speed * Time.deltaTime, touchDeltaPosition.y * speed * Time.deltaTime, 0);
 
                 // Convert touch panning to simple x & y input, i.e. GWCMove() in pMove
                 if (Mathf.Abs(touchDeltaPosition.x) > Mathf.Abs(touchDeltaPosition.y))
@@ -63,6 +63,8 @@ public class GWCTouchControls : MonoBehaviour
                     {
                         xInput = -1;
                     }
+
+                    pMove.GWCMove(xInput, 0);
                 }
                 else if (Mathf.Abs(touchDeltaPosition.x) < Mathf.Abs(touchDeltaPosition.y))
                 {
@@ -74,9 +76,9 @@ public class GWCTouchControls : MonoBehaviour
                     {
                         yInput = -1;
                     }
-                }
 
-                pMove.GWCMove(xInput, yInput);
+                    pMove.GWCMove(0, yInput);
+                }
             }
 
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
@@ -110,12 +112,9 @@ public class GWCTouchControls : MonoBehaviour
                     mainCamera.orthographicSize += deltaMagnitudeDiff * orthoZoomSpeed;
 
                     // Make sure the orthographic size never drops below zero.
-                    //mainCamera.orthographicSize = Mathf.Max(mainCamera.orthographicSize, 0.1f);
-                    mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, 0.875f, 5.75f);
-
-                    // dc todo -- if greather than or equal to max, readjust to slightly below to stop shaking
+                    mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, 0.875f, 5.642857f);
+                    
                     Debug.Log(mainCamera.orthographicSize);
-                    // dc todo -- 4th row & pause screen causes the seizers at max
                 }
                 // DC 02/22/2019 -- This "should" never run
                 else

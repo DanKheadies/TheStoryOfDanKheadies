@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  02/11/2019
+// Last:  03/31/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +13,7 @@ public class Chp0 : MonoBehaviour
     public Camera mainCamera;
     public DialogueManager dMan;
     public FixedJoystick fixedJoy;
-    public GameObject contArrow;
+    public GameObject dArrow;
     public GameObject dBox;
     public GameObject guiConts;
     public GameObject HUD;
@@ -43,7 +43,7 @@ public class Chp0 : MonoBehaviour
     void Start()
     {
         // Initializers
-        contArrow = GameObject.Find("Dialogue_Arrow");
+        dArrow = GameObject.Find("Dialogue_Arrow");
         dBox = GameObject.Find("Dialogue_Box");
         dMan = FindObjectOfType<DialogueManager>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
@@ -127,7 +127,7 @@ public class Chp0 : MonoBehaviour
             if (strobeTimer <= 0)
             {
                 bStartGame = true;
-                contArrow.GetComponent<ImageStrobe>().bStartStrobe = true;
+                dArrow.GetComponent<ImageStrobe>().StartCoroutine(dArrow.GetComponent<ImageStrobe>().Strobe());
                 dMan.bDialogueActive = true;
 
                 // Sound Effect
@@ -192,7 +192,7 @@ public class Chp0 : MonoBehaviour
             PlayerPrefs.SetString("TransferScene", sceneTrans.BetaLoad);
 
             // Stop the player from bringing up the dialogue again
-            dMan.gameObject.SetActive(false);
+            dMan.gameObject.transform.localScale = Vector3.zero;
 
             // Stop Dan from moving
             thePlayer.GetComponent<Animator>().enabled = false;

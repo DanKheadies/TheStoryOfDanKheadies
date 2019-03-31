@@ -1,15 +1,17 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/13/2018
-// Last:  03/15/2019
+// Last:  03/31/2019
 
 using UnityEngine;
 
 // Logic for each character tile on the GWC board
 public class CharacterTile : MonoBehaviour
 {
+    public DialogueManager dMan;
     public GWC_Controller gwc;
     public PauseGame pause;
+    public SinglePlayerLogic spLogic;
     public TouchControls touches;
     public Transform tileChar;
     public Transform tileFlag;
@@ -30,8 +32,10 @@ public class CharacterTile : MonoBehaviour
     void Start()
     {
         // Initializers
+        dMan = FindObjectOfType<DialogueManager>();
         gwc = FindObjectOfType<GWC_Controller>();
         pause = GameObject.Find("Game_Controller").GetComponent<PauseGame>();
+        spLogic = FindObjectOfType<SinglePlayerLogic>();
         tileChar = gameObject.transform.GetChild(2);
         tileFlag = gameObject.transform.GetChild(3);
         tileIcon = gameObject.transform.GetChild(0);
@@ -171,11 +175,18 @@ public class CharacterTile : MonoBehaviour
     public void OnMouseUp()
     {
         if (gwc.bCanFlip &&
+            !spLogic.bGuessingFTW &&
+            !dMan.bDialogueActive &&
             !pause.bPauseActive &&
             !touches.bUIactive &&
             !touches.bAvoidSubUIElements)
         {
             CheckAndFlip();
+        }
+        else if (spLogic.bGuessingFTW)
+        {
+            // Note: this runs before SPLogic Update
+            spLogic.nameFTW = gameObject.name;
         }
     }
 

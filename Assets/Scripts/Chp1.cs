@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  02/13/2019
+// Last:  03/31/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -1049,6 +1049,7 @@ public class Chp1 : MonoBehaviour
 
             // Stop the player from bringing up the dialogue again
             dMan.gameObject.SetActive(false);
+            //thePlayer.GetComponent<Animator>().enabled = false; // DC TODO -- needed? top one really stops the weirdness more than this
 
             // Stop Dan from moving
             thePlayer.GetComponent<Animator>().enabled = false;
@@ -1310,7 +1311,7 @@ public class Chp1 : MonoBehaviour
         dMan.currentLine = 0;
         dText.text = dMan.dialogueLines[dMan.currentLine];
         dMan.ShowDialogue();
-        dArrow.GetComponent<ImageStrobe>().bStartStrobe = true;
+        //dArrow.GetComponent<ImageStrobe>().StartCoroutine(dArrow.GetComponent<ImageStrobe>().Strobe()); // DC TODO -- needed?
     }
 
     public void Quest0Dialogue2()
@@ -1354,7 +1355,7 @@ public class Chp1 : MonoBehaviour
         dMan.currentLine = 0;
         dText.text = dMan.dialogueLines[dMan.currentLine];
         dMan.ShowDialogue();
-        dArrow.GetComponent<ImageStrobe>().bStartStrobe = true;
+        //dArrow.GetComponent<ImageStrobe>().StartCoroutine(dArrow.GetComponent<ImageStrobe>().Strobe()); // DC TODO -- needed?
     }
 
     IEnumerator HideAndSeek()
@@ -1604,10 +1605,11 @@ public class Chp1 : MonoBehaviour
             PlayerPrefs.SetString("TransferScene", warpMinesweeper.GetComponent<SceneTransitioner>().BetaLoad);
 
             // Stop the player from bringing up the dialog again
-            dMan.gameObject.SetActive(false);
+            dMan.gameObject.transform.localScale = Vector3.zero;
 
             // Stop Dan from moving
-            thePlayer.GetComponent<Animator>().enabled = false;
+            dMan.gameObject.SetActive(false);
+            //thePlayer.GetComponent<Animator>().enabled = false; // DC TODO -- needed? top one really stops the weirdness more than this
 
             // Stop NPCs from moving
             person1.GetComponent<NPCMovement>().moveSpeed = 0;
@@ -1623,7 +1625,7 @@ public class Chp1 : MonoBehaviour
             dMan.currentLine = 0;
             dText.text = dMan.dialogueLines[dMan.currentLine];
             dMan.ShowDialogue();
-            dArrow.GetComponent<ImageStrobe>().bStartStrobe = true; // DC TODO -- Not strobing?
+            //dArrow.GetComponent<ImageStrobe>().StartCoroutine(dArrow.GetComponent<ImageStrobe>().Strobe()); // DC TODO -- needed?
         }
     }
 
@@ -1636,7 +1638,7 @@ public class Chp1 : MonoBehaviour
         dMan.currentLine = 0;
         dText.text = dMan.dialogueLines[dMan.currentLine];
         dMan.ShowDialogue();
-        dArrow.GetComponent<ImageStrobe>().bStartStrobe = true; // DC TODO -- Not strobing?
+        //dArrow.GetComponent<ImageStrobe>().StartCoroutine(dArrow.GetComponent<ImageStrobe>().Strobe()); // DC TODO -- needed?
     }
 
     public void Quest7Dialogue1Opt()

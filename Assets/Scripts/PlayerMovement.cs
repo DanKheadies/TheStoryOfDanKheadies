@@ -212,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
         // "Stop" player animation
         if (scene.name != "GuessWhoColluded")
         {
-            pAnim.speed = 0.001f;
+            pAnim.speed = 0.0001f;
         }
 
         // Unsync and stop camera tracking

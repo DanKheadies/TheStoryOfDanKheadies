@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/12/2018
+// Last:  03/31/2018
 
 using System.Collections;
 using UnityEngine;
@@ -12,35 +12,16 @@ public class ImageStrobe : MonoBehaviour
 {
     private Image image;
 
-    public bool bStartStrobe;
-    public bool bStopStrobe;
-
     public int pulseTime;
 
-	private IEnumerator Start()
+	void Start()
     {
         image = GetComponent<Image>();
-        yield return null;
 
-        bStartStrobe = false;
-        bStopStrobe = false;
+        pulseTime = 1;
     }
 
-    private void Update()
-    {
-        if (bStartStrobe)
-        {
-            StartCoroutine("Strobe");
-            bStartStrobe = false;
-        }
-        else if (bStopStrobe)
-        {
-            StopCoroutine("Strobe");
-            bStopStrobe = false;
-        }
-    }
-
-    IEnumerator Strobe()
+    public IEnumerator Strobe()
     {
         for (int i = 1; i > 0; i++)
         {
@@ -49,5 +30,11 @@ public class ImageStrobe : MonoBehaviour
             image.canvasRenderer.SetAlpha(0.0f);
             yield return new WaitForSeconds(pulseTime);
         }
+    }
+
+    public IEnumerator StopStrobe()
+    {
+        image.canvasRenderer.SetAlpha(1.0f);
+        yield return new WaitForSeconds(0);
     }
 }

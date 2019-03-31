@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/18/2019
+// Last:  03/31/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,8 +14,8 @@ public class DialogueManager : MonoBehaviour
     private Animator pAnim;
     public CameraFollow mainCamera;
     public FixedJoystick fixedJoy;
+    public GameObject dArrow;
     public GameObject dBox;
-    public Image dArrow;
     public Image dFrame;
     public Image dPic;
     public ImageStrobe imgStrobe;
@@ -55,7 +55,7 @@ public class DialogueManager : MonoBehaviour
     {
         // Initializers
         aspectUtil = FindObjectOfType<Camera>().GetComponent<AspectUtility>();
-        dArrow = GameObject.Find("Dialogue_Arrow").GetComponent<Image>();
+        dArrow = GameObject.Find("Dialogue_Arrow");
         dBox = GameObject.Find("Dialogue_Box");
         dFrame = GameObject.Find("Dialogue_Frame").GetComponent<Image>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
@@ -167,9 +167,8 @@ public class DialogueManager : MonoBehaviour
 
         currentLine = 0;
 
-        // Reset ContinueArrow strobing
-        imgStrobe.bStartStrobe = false;
-        imgStrobe.bStopStrobe = true;
+        // Stop Arrow Strobing
+        StartCoroutine(dArrow.gameObject.GetComponent<ImageStrobe>().StopStrobe());
 
         // Reactivate the player
         pMove.bStopPlayerMovement = false;
@@ -187,11 +186,10 @@ public class DialogueManager : MonoBehaviour
         // Set current picture
         dPic.sprite = portPic;
 
-        // Displays the dialogue box
+        // Displays the dialogue box & strobing arrow
         bDialogueActive = true;
         dBox.transform.localScale = Vector3.one;
-        imgStrobe.bStopStrobe = false;
-        imgStrobe.bStartStrobe = true;
+        StartCoroutine(dArrow.gameObject.GetComponent<ImageStrobe>().Strobe());
 
         // Sound Effect
         SFXMan.sounds[2].PlayOneShot(SFXMan.sounds[2].clip);
@@ -266,8 +264,8 @@ public class DialogueManager : MonoBehaviour
             dText.fontSize = (int)(2.432f * (cameraHeight * cameraHeight) + 25.84f * cameraHeight + 20.05f);
         }
 
-        dArrow.rectTransform.anchoredPosition = new Vector2(dArrowPoints[0], dArrowPoints[1]);
-        dArrow.rectTransform.sizeDelta = new Vector2(dArrowPoints[2], dArrowPoints[3]);
+        dArrow.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(dArrowPoints[0], dArrowPoints[1]);
+        dArrow.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(dArrowPoints[2], dArrowPoints[3]);
 
         dFrame.rectTransform.anchoredPosition = new Vector2(dFramePoints[0], dFramePoints[1]);
         dFrame.rectTransform.sizeDelta = new Vector2(dFramePoints[2], dFramePoints[3]);
