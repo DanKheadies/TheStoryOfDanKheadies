@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/08/2017
-// Last:  01/10/2019
+// Last:  04/11/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -132,21 +132,21 @@ public class MovePauseMenuArrow : MonoBehaviour
             // DC TODO 01/10/2019 -- temp bug where sub-pause menus not closing as expected
             // DC TODO 01/10/2019 -- virtual joystick should be able to affect the menu
             if (Input.GetAxis("Controller DPad Vertical") == 0 &&
-               (!touches.bDown &&
-                !touches.bUp))
+                (!touches.bDown &&
+                 !touches.bUp))
             {
                 bFreezeControllerInput = false;
             }
             else if (!bFreezeControllerInput &&
-                    (Input.GetAxis("Controller DPad Vertical") > 0 ||
-                    touches.bDown))
+                     (Input.GetAxis("Controller DPad Vertical") > 0 ||
+                      touches.bDown))
             {
                 bControllerDown = true;
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
-                    (Input.GetAxis("Controller DPad Vertical") < 0 ||
-                    touches.bUp))
+                     (Input.GetAxis("Controller DPad Vertical") < 0 ||
+                      touches.bUp))
             {
                 bControllerUp = true;
                 bFreezeControllerInput = true;
@@ -394,6 +394,8 @@ public class MovePauseMenuArrow : MonoBehaviour
                         GGBtn.onClick.Invoke();
                     }
                 }
+
+                touches.bAaction = false;
             }
             else if (Input.GetKeyDown(KeyCode.Escape) ||
                      Input.GetKeyUp(KeyCode.JoystickButton7) ||
@@ -402,6 +404,8 @@ public class MovePauseMenuArrow : MonoBehaviour
             {
                 SaveBtn.GetComponentInChildren<Text>().text = "Save";
                 ResetArrows();
+
+                touches.bBaction = false;
             }
         }
     }

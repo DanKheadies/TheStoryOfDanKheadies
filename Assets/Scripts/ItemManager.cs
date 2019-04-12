@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  01/13/2019
+// Last:  04/11/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,20 +9,20 @@ using UnityEngine.SceneManagement;
 // Assigned to Interactable Objects (i.e. on an item)
 public class ItemManager : MonoBehaviour
 {
-    private Animator pAnim;
-    private DialogueManager dMan;
+    public Animator pAnim;
+    public DialogueManager dMan;
     public GameObject player;
     public Inventory inv;
     public Item item;
-    private Scene scene;
+    public Scene scene;
     public Sprite portPic;
-    private TouchControls touches;
+    public TouchControls touches;
 
-    private GameObject greenBud;
-    private GameObject orangeBud;
-    private GameObject purpleBud;
-    private GameObject whiteBud;
-    private GameObject vrGoggles;
+    public GameObject greenBud;
+    public GameObject orangeBud;
+    public GameObject purpleBud;
+    public GameObject whiteBud;
+    public GameObject vrGoggles;
 
     public bool bAcquired; // Checks & Balances
     public bool bDoneAcquiring; // Checks & Balances
@@ -58,18 +58,26 @@ public class ItemManager : MonoBehaviour
 
     void Update()
     {
-        if ((bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && Input.GetButtonUp("Action")) ||
-            (bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && touches.bAaction))
+        if (bHasEntered && 
+            !bHasExited && 
+            !dMan.bDialogueActive && 
+            !dMan.bPauseDialogue && 
+            (Input.GetButtonUp("Action") || // DC TODO
+             Input.GetButtonUp("DialogueAction") || // the mouse click and bAaction are causing conflicting problems
+             touches.bAaction)) // get rid of one and it
         {
             InteractWithItem();
         }
 
-        if (bAcquired && dMan.bDialogueActive)
+        if (bAcquired && 
+            dMan.bDialogueActive)
         {
             bAcquired = false;
             bDoneAcquiring = true;
         }
-        if (!dMan.bDialogueActive && !bAcquired && bDoneAcquiring)
+        if (!dMan.bDialogueActive && 
+            !bAcquired && 
+            bDoneAcquiring)
         {
             HideItem();
             bDoneAcquiring = false;

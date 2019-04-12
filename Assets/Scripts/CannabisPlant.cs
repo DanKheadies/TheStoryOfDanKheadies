@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/18/2017
-// Last:  08/13/2018
+// Last:  04/11/2019
 
 using UnityEngine;
 
@@ -67,19 +67,27 @@ public class CannabisPlant : MonoBehaviour
 
     void Update()
     {
-        if ((bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && !bFreeze && Input.GetButtonUp("Action")) ||
-            (bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && !bFreeze && touches.bAaction))
+        if (bHasEntered && 
+            !bHasExited && 
+            !dMan.bDialogueActive && 
+            !dMan.bPauseDialogue && 
+            !bFreeze && 
+            (Input.GetButtonUp("Action") ||
+             touches.bAaction))
         {
             InteractWithPlant();
         }
 
-        if (bAcquired && dMan.bDialogueActive)
+        if (bAcquired && 
+            dMan.bDialogueActive)
         {
             bAcquired = false;
             bDoneAcquiring = true;
         }
 
-        if (!dMan.bDialogueActive && !bAcquired && bDoneAcquiring)
+        if (!dMan.bDialogueActive && 
+            !bAcquired && 
+            bDoneAcquiring)
         {
             HideBud();
             bDoneAcquiring = false;

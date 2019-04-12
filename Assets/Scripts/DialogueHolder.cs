@@ -1,18 +1,18 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  01/12/2019
+// Last:  04/11/2019
 
 using UnityEngine;
 
 // Holds NPC text (in Unity)
 public class DialogueHolder : MonoBehaviour
 {
-    private Animator anim;
+    public Animator anim;
     public Collider2D colliEnter;
-    private DialogueManager dMan;
+    public DialogueManager dMan;
     public Sprite portPic;
-    private TouchControls touches;
+    public TouchControls touches;
 
     public bool bContinueDialogue;
     public bool bHasEntered;
@@ -33,8 +33,12 @@ public class DialogueHolder : MonoBehaviour
 
     void Update ()
     {
-        if ((bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && Input.GetButtonUp("Action")) ||
-            (bHasEntered && !bHasExited && !dMan.bDialogueActive && !dMan.bPauseDialogue && touches.bAaction))
+        if (bHasEntered && 
+            !bHasExited && 
+            !dMan.bDialogueActive && 
+            !dMan.bPauseDialogue && 
+            (Input.GetButtonUp("Action") ||
+             touches.bAaction))
         {
             TalkWithNPC(colliEnter);
         }
@@ -66,7 +70,8 @@ public class DialogueHolder : MonoBehaviour
             colliEnter = null;
             
             // Restores NPC movement if it has animation/animator
-            if (!dMan.bDialogueActive && this.transform.parent.GetComponent<Animator>() != null)
+            if (!dMan.bDialogueActive && 
+                transform.parent.GetComponent<Animator>() != null)
             {
                 anim.Play("NPC Movement");
             }
@@ -83,9 +88,9 @@ public class DialogueHolder : MonoBehaviour
             dMan.ShowDialogue();
 
             // Activates Options Holder if any options
-            if (this.GetComponent<OptionsHolder>())
+            if (GetComponent<OptionsHolder>())
             {
-                this.GetComponent<OptionsHolder>().PrepareOptions();
+                GetComponent<OptionsHolder>().PrepareOptions();
             }
         }
 
@@ -96,7 +101,7 @@ public class DialogueHolder : MonoBehaviour
         }
 
         // NPC looks at player if there's an animation/animator
-        if (this.transform.parent.GetComponent<Animator>() != null)
+        if (transform.parent.GetComponent<Animator>() != null)
         {
             OrientNPC(collision);
         }

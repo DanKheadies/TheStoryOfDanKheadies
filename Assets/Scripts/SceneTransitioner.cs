@@ -80,6 +80,9 @@ public class SceneTransitioner : MonoBehaviour
         // Initializers
         scene = SceneManager.GetActiveScene();
 
+        // DC TODO -- On load, need to set position, size, and/or scale of the SmokeRings gameobject to get it to render correctly
+        // Currently too small on mobile devices (iPad), and other config settings stretch / screw it up
+
         CheckScenesToLoad();
 
         if (bNeedsTimer)

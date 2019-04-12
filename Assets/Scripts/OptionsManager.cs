@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/08/2018
-// Last:  02/14/2019
+// Last:  04/11/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -131,9 +131,7 @@ public class OptionsManager : MonoBehaviour
             tempOptsCount += 1;
         }
 
-        // Shows UI controls
-        touches.transform.localScale = Vector3.one;
-
+        // DC TODO
         // Hide Brio Bar & Pause Button (Overlay)
         brioBar.transform.localScale = Vector3.zero;
         pauseButtOpac.transform.localScale = Vector3.zero;
@@ -160,6 +158,7 @@ public class OptionsManager : MonoBehaviour
         
         dMan.ResetDialogue();
 
+        // DC TODO
         brioBar.transform.localScale = Vector3.one;
         pauseButtOpac.transform.localScale = Vector3.one;
         
@@ -282,55 +281,61 @@ public class OptionsManager : MonoBehaviour
         {
             // Width => change in width affects variables
             o1TextPoints[0] = -98.04f * (cameraHeight * cameraHeight) + 163.9f * cameraHeight - 27.13f;
-            o1TextPoints[1] = 526.8f * (cameraHeight * cameraHeight) - 1248f * cameraHeight + 750.7f; 
+            o1TextPoints[1] = 526.8f * (cameraHeight * cameraHeight) - 1248f * cameraHeight + 750.7f - 6f; // DC TODO -- Edit to move down from top of screen 
             o1TextPoints[2] = 40.57f * (cameraHeight * cameraHeight) + 304.9f * cameraHeight + 253.1f; 
             o1TextPoints[3] = -33.75f * (cameraHeight * cameraHeight) + 99.98f * cameraHeight + 21.85f;
 
             o1ArwPoints[0] = -7.749f * (cameraHeight * cameraHeight) - 171.5f * cameraHeight - 122.2f;
-            o1ArwPoints[1] = 526.8f * (cameraHeight * cameraHeight) - 1248f * cameraHeight + 750.7f;
+            o1ArwPoints[1] = 526.8f * (cameraHeight * cameraHeight) - 1248f * cameraHeight + 750.7f - 6f; // DC TODO -- Edit to move down from top of screen
             o1ArwPoints[2] = -0.06944f * (cameraHeight * cameraHeight) + 30.87f * cameraHeight + 8.283f;
             o1ArwPoints[3] = -0.06944f * (cameraHeight * cameraHeight) + 30.87f * cameraHeight + 8.283f;
 
             o2TextPoints[0] = -98.04f * (cameraHeight * cameraHeight) + 163.9f * cameraHeight - 27.13f;
-            o2TextPoints[1] = 550.2f * (cameraHeight * cameraHeight) - 1337f * cameraHeight + 724.1f;
+            o2TextPoints[1] = 550.2f * (cameraHeight * cameraHeight) - 1337f * cameraHeight + 724.1f - 6f; // DC TODO -- Edit to move down from top of screen
             o2TextPoints[2] = 40.57f * (cameraHeight * cameraHeight) + 304.9f * cameraHeight + 253.1f;
             o2TextPoints[3] = -33.75f * (cameraHeight * cameraHeight) + 99.98f * cameraHeight + 21.85f;
 
             o2ArwPoints[0] = -7.749f * (cameraHeight * cameraHeight) - 171.5f * cameraHeight - 122.2f;
-            o2ArwPoints[1] = 550.2f * (cameraHeight * cameraHeight) - 1337f * cameraHeight + 724.1f;
+            o2ArwPoints[1] = 550.2f * (cameraHeight * cameraHeight) - 1337f * cameraHeight + 724.1f - 6f; // DC TODO -- Edit to move down from top of screen
             o2ArwPoints[2] = -0.06944f * (cameraHeight * cameraHeight) + 30.87f * cameraHeight + 8.283f;
             o2ArwPoints[3] = -0.06944f * (cameraHeight * cameraHeight) + 30.87f * cameraHeight + 8.283f;
 
             o3TextPoints[0] = -98.04f * (cameraHeight * cameraHeight) + 163.9f * cameraHeight - 27.13f;
-            o3TextPoints[1] = 592.0f * (cameraHeight * cameraHeight) - 1490f * cameraHeight + 682.0f;
+            o3TextPoints[1] = 592.0f * (cameraHeight * cameraHeight) - 1490f * cameraHeight + 682.0f - 6f; // DC TODO -- Edit to move down from top of screen
             o3TextPoints[2] = 40.57f * (cameraHeight * cameraHeight) + 304.9f * cameraHeight + 253.1f;
             o3TextPoints[3] = -9.508f * (cameraHeight * cameraHeight) + 110.6f * cameraHeight + 59.79f;
 
             o3ArwPoints[0] = -7.749f * (cameraHeight * cameraHeight) - 171.5f * cameraHeight - 122.2f;
-            o3ArwPoints[1] = 581.2f * (cameraHeight * cameraHeight) - 1435f * cameraHeight + 698.7f;
+            o3ArwPoints[1] = 581.2f * (cameraHeight * cameraHeight) - 1435f * cameraHeight + 698.7f - 6f; // DC TODO -- Edit to move down from top of screen
             o3ArwPoints[2] = -0.06944f * (cameraHeight * cameraHeight) + 30.87f * cameraHeight + 8.283f;
             o3ArwPoints[3] = -0.06944f * (cameraHeight * cameraHeight) + 30.87f * cameraHeight + 8.283f;
 
             o4TextPoints[0] = -98.04f * (cameraHeight * cameraHeight) + 163.9f * cameraHeight - 27.13f;
-            o4TextPoints[1] = 612.6f * (cameraHeight * cameraHeight) - 1537f * cameraHeight + 675.9f;
+            o4TextPoints[1] = 612.6f * (cameraHeight * cameraHeight) - 1537f * cameraHeight + 675.9f - 6f; // DC TODO -- Edit to move down from top of screen
             o4TextPoints[2] = 40.57f * (cameraHeight * cameraHeight) + 304.9f * cameraHeight + 253.1f;
             o4TextPoints[3] = -33.75f * (cameraHeight * cameraHeight) + 99.98f * cameraHeight + 21.85f;
 
             o4ArwPoints[0] = -7.749f * (cameraHeight * cameraHeight) - 171.5f * cameraHeight - 122.2f;
-            o4ArwPoints[1] = 612.6f * (cameraHeight * cameraHeight) - 1537f * cameraHeight + 675.9f;
+            o4ArwPoints[1] = 612.6f * (cameraHeight * cameraHeight) - 1537f * cameraHeight + 675.9f - 6f; // DC TODO -- Edit to move down from top of screen
             o4ArwPoints[2] = -0.06944f * (cameraHeight * cameraHeight) + 30.87f * cameraHeight + 8.283f;
             o4ArwPoints[3] = -0.06944f * (cameraHeight * cameraHeight) + 30.87f * cameraHeight + 8.283f;
 
             oFramePoints[0] = 0f;
-            oFramePoints[1] = 533.3f * (cameraHeight * cameraHeight) - 1274f * cameraHeight + 738.9f;
+            oFramePoints[1] = 533.3f * (cameraHeight * cameraHeight) - 1274f * cameraHeight + 738.9f - 6f; // DC TODO -- Edit to move down from top of screen
             oFramePoints[2] = -198.5f * (cameraHeight * cameraHeight) + 733.5f * cameraHeight + 205.3f;
             oFramePoints[3] = (-198.5f * (cameraHeight * cameraHeight) + 733.5f * cameraHeight + 205.3f) / 1.142857f;
 
-            o1Text.GetComponentInChildren<Text>().fontSize = (int)(2.432f * (cameraHeight * cameraHeight) + 25.84f * cameraHeight + 20.05f);
-            o2Text.GetComponentInChildren<Text>().fontSize = (int)(2.432f * (cameraHeight * cameraHeight) + 25.84f * cameraHeight + 20.05f);
-            o3Text.GetComponentInChildren<Text>().fontSize = (int)(2.432f * (cameraHeight * cameraHeight) + 25.84f * cameraHeight + 20.05f);
+            o1Text.GetComponentInChildren<Text>().fontSize = 
+            o2Text.GetComponentInChildren<Text>().fontSize = 
+            o3Text.GetComponentInChildren<Text>().fontSize = 
             o4Text.GetComponentInChildren<Text>().fontSize = (int)(2.432f * (cameraHeight * cameraHeight) + 25.84f * cameraHeight + 20.05f);
         }
+
+        // Jamma 8x16 Font Change
+        o1Text.GetComponentInChildren<Text>().fontSize = (int)(o1Text.GetComponentInChildren<Text>().fontSize * 0.75f);
+        o2Text.GetComponentInChildren<Text>().fontSize = (int)(o2Text.GetComponentInChildren<Text>().fontSize * 0.75f);
+        o3Text.GetComponentInChildren<Text>().fontSize = (int)(o3Text.GetComponentInChildren<Text>().fontSize * 0.75f);
+        o4Text.GetComponentInChildren<Text>().fontSize = (int)(o4Text.GetComponentInChildren<Text>().fontSize * 0.75f);
 
         // Text Options
         o1Text.rectTransform.anchoredPosition = new Vector2(o1TextPoints[0], o1TextPoints[1]);

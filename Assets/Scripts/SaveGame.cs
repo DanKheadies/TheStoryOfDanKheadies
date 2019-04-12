@@ -196,6 +196,7 @@ public class SaveGame : MonoBehaviour
     // Loads *all* user data at the start
     public void GetSavedGame()
     {
+        // Player
         savedPlayer.transform.position = new Vector2(
             PlayerPrefs.GetFloat("P_x"),
             PlayerPrefs.GetFloat("P_y"));
@@ -203,12 +204,15 @@ public class SaveGame : MonoBehaviour
         savedPlayer.GetComponent<PlayerBrioManager>().playerMaxBrio = PlayerPrefs.GetFloat("BrioMax");
         savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio = PlayerPrefs.GetFloat("Brio");
 
+        // Camera
         savedCamera.transform.position = new Vector2(PlayerPrefs.GetFloat("Cam_x"), PlayerPrefs.GetFloat("Cam_y"));
         float posX = Mathf.SmoothDamp(savedCamera.transform.position.x, savedPlayer.transform.position.x, ref camFollow.smoothVelocity.x, camFollow.smoothTime);
         float posY = Mathf.SmoothDamp(savedCamera.transform.position.y, savedPlayer.transform.position.y, ref camFollow.smoothVelocity.y, camFollow.smoothTime);
         savedCamera.transform.position = new Vector3(posX, posY, -10);
 
         camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord");
+
+        // See UIManager for UI getters
 
         // See Inventory for inventory getters
     }

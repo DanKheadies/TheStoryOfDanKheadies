@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  03/31/2019
+// Last:  04/11/2019
 
 using System.Collections;
 using UnityEngine;
@@ -19,7 +19,6 @@ public class GWC_Controller : MonoBehaviour
     public DialogueManager dMan;
     public FixedJoystick fixedJoy;
     public GameObject dBox;
-    public GameObject guiConts;
     public GameObject HUD;
     public GameObject muellerCards;
     public GameObject oBox;
@@ -92,7 +91,6 @@ public class GWC_Controller : MonoBehaviour
         dPic = GameObject.Find("Dialogue_Picture").GetComponent<Image>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
         fixedJoy = FindObjectOfType<FixedJoystick>();
-        guiConts = GameObject.Find("GUIControls");
         HUD = GameObject.Find("HUD");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         mMan = FindObjectOfType<MusicManager>();
@@ -131,15 +129,32 @@ public class GWC_Controller : MonoBehaviour
 
         // Initial prompt to pick a mode
         dMan.bDialogueActive = false;
-        guiConts.transform.localScale = Vector3.zero;
-        pauseBtn.transform.localScale = Vector3.zero;
         mMan.bMusicCanPlay = false;
 
         GWC_PromptRestrictions();
 
-        dialogueLines = new string[] {
+        // First time in minigame, give instructions
+        if (PlayerPrefs.GetInt("GivenDirectionsForGWC") == 0)
+        {
+            dialogueLines = new string[] {
+                "I want YOU.. to         Guess Who Colluded.",
+                "Like classic Guess Who, you'll be flipping tiles and guessing people.",
+                "Tap or click options when they appear below this text box.",
+                "Tap or click tiles to keep track of who your opponent is.",
+                "If you have trouble, click the menu icon in the top right.",
+                "It'll show you your character card, let you change settings, etc.",
+                "GLHF!"
+            };
+
+            // Avoid instructions
+            PlayerPrefs.SetInt("GivenDirectionsForGWC", 1);
+        }
+        else
+        {
+            dialogueLines = new string[] {
                 "I want YOU.. to         Guess Who Colluded."
             };
+        }
 
         dMan.dialogueLines = dialogueLines;
         dMan.currentLine = 0;
@@ -149,7 +164,7 @@ public class GWC_Controller : MonoBehaviour
         sFaderAnimDia.GetComponent<Animator>().enabled = true;
 
         // Set virtual joystick
-        fixedJoy.JoystickPosition();
+        //fixedJoy.JoystickPosition();
     }
 
     void Update()
@@ -188,53 +203,19 @@ public class GWC_Controller : MonoBehaviour
             GWC_OptionsResetter_2Q();
         }
 
-        //if (bOptTeamSelect &&
-        //    !dMan.bDialogueActive)
-        //{
-        //    thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
-
-        //    touches.transform.localScale = Vector3.zero;
-
-        //    dialogueLines = new string[] {
-        //        "First and first mostly, whose side are you on?"
-        //    };
-        //    // DC -- dman.ResetDialogue()?
-        //    dMan.dialogueLines = dialogueLines;
-        //    dMan.currentLine = 0;
-        //    dText.text = dialogueLines[dMan.currentLine];
-        //    dBox.transform.localScale = Vector3.one;
-        //    dMan.bDialogueActive = true;
-
-
-        //    optionsLines = new string[] {
-        //        "Team Trump",
-        //        "Team Mueller"
-        //    };
-
-        //    for (int i = 0; i < optionsLines.Length; i++)
-        //    {
-        //        GameObject optText = GameObject.Find("Opt" + (i + 1) + "_Text");
-        //        optText.GetComponentInChildren<Text>().text = optionsLines[i];
-        //        oMan.tempOptsCount += 1;
-        //    }
-
-        //    oMan.bDiaToOpts = true;
-        //    oMan.bOptionsActive = true;
-        //    oMan.HideThirdPlusOpt();
-        //    oBox.transform.localScale = Vector3.one;
-        //    oMan.PauseOptions();
-        //}
-
         // Begin play -- Activate music, UI, and fade after team selection
         if (!dMan.bDialogueActive &&
             !bAvoidUpdate &&
             bStartGame)
         {
             thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = false;
-            guiConts.transform.localScale = Vector3.one;
-            pauseBtn.transform.localScale = Vector3.one;
             mMan.bMusicCanPlay = true;
             sFaderAnim.GetComponent<Animator>().enabled = true;
+
+            if (uiMan.bControlsActive)
+            {
+                touches.transform.localScale = Vector3.one;
+            }
 
             // Change to avoid running this logic
             bAvoidUpdate = true;
@@ -338,9 +319,10 @@ public class GWC_Controller : MonoBehaviour
         }
 
         // Single Player - Player Guess
-        if (Input.GetMouseButton(0) &&
-            bAllowPlayerToGuess &&
-            !dMan.bDialogueActive)
+        if (bAllowPlayerToGuess &&
+            !dMan.bDialogueActive &&
+            (Input.GetMouseButton(0) ||
+             Input.GetKey(KeyCode.Space)))
         {
             buttonTimer += Time.deltaTime;
 
@@ -359,7 +341,9 @@ public class GWC_Controller : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonUp(0))
+        // Single Player - Reset Player Guess timer
+        if (Input.GetMouseButtonUp(0) ||
+            Input.GetKeyUp(KeyCode.Space))
         {
             buttonTimer = 0;
         }
@@ -774,7 +758,10 @@ public class GWC_Controller : MonoBehaviour
     {
         thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
 
-        touches.transform.localScale = Vector3.zero;
+        if (uiMan.bControlsActive)
+        {
+            touches.transform.localScale = Vector3.one;
+        }
     }
 
     public void GWC_DialogueRestter()
@@ -786,50 +773,27 @@ public class GWC_Controller : MonoBehaviour
         dMan.bDialogueActive = true;
     }
 
+    public void GWC_OptionsRestter()
+    {
+        oMan.tempOptsCount = 0;
+        oMan.options = optionsLines;
+        oMan.ShowOptions();
+    }
+
     public void GWC_OptionsResetter_2Q()
     {
-        for (int i = 0; i < optionsLines.Length; i++)
-        {
-            GameObject optText = GameObject.Find("Opt" + (i + 1) + "_Text");
-            optText.GetComponentInChildren<Text>().text = optionsLines[i];
-            oMan.tempOptsCount += 1;
-        }
-
-        oMan.bDiaToOpts = true;
-        oMan.bOptionsActive = true;
+        GWC_OptionsRestter();
         oMan.HideThirdPlusOpt();
-        oBox.transform.localScale = Vector3.one;
-        oMan.PauseOptions();
     }
 
     public void GWC_OptionsResetter_3Q()
     {
-        for (int i = 0; i < optionsLines.Length; i++)
-        {
-            GameObject optText = GameObject.Find("Opt" + (i + 1) + "_Text");
-            optText.GetComponentInChildren<Text>().text = optionsLines[i];
-            oMan.tempOptsCount += 1;
-        }
-
-        oMan.bDiaToOpts = true;
-        oMan.bOptionsActive = true;
+        GWC_OptionsRestter();
         oMan.HideFourthOpt();
-        oBox.transform.localScale = Vector3.one;
-        oMan.PauseOptions();
     }
 
     public void GWC_OptionsResetter_4Q()
     {
-        for (int i = 0; i < optionsLines.Length; i++)
-        {
-            GameObject optText = GameObject.Find("Opt" + (i + 1) + "_Text");
-            optText.GetComponentInChildren<Text>().text = optionsLines[i];
-            oMan.tempOptsCount += 1;
-        }
-
-        oMan.bDiaToOpts = true;
-        oMan.bOptionsActive = true;
-        oBox.transform.localScale = Vector3.one;
-        oMan.PauseOptions();
+        GWC_OptionsRestter();
     }
 }

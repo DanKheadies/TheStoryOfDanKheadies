@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/31/2019
-// Last:  03/31/2019
+// Last:  04/11/2019
 
 using System.Collections;
 using UnityEngine;
@@ -4683,7 +4683,7 @@ public class SinglePlayerLogic : MonoBehaviour
         }
 
         gwc.dialogueLines = new string[] {
-            "Umm.. Did you cheat?.. You know what, nevermind. Are you " + chars.characters[randomInt].charName + "?"
+            "Umm.. Did you cheat? Well whatever.. Are you " + chars.characters[randomInt].charName + "?"
         };
     }
 

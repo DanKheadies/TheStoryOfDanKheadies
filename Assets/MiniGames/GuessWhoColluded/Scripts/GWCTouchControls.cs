@@ -2,7 +2,7 @@
 // Authors: Unity (https://unity3d.com/learn/tutorials/topics/mobile-touch/pinch-zoom) (https://docs.unity3d.com/ScriptReference/Input.GetTouch.html)
 // Contributors: David W. Corso, JoaquinRD, alberto-lara
 // Start: 02/18/2019
-// Last:  03/31/2019
+// Last:  04/11/2019
 
 using UnityEngine;
 
@@ -57,11 +57,11 @@ public class GWCTouchControls : MonoBehaviour
                 {
                     if (touchDeltaPosition.x > 0)
                     {
-                        xInput = 1;
+                        xInput = -1;
                     }
                     else if (touchDeltaPosition.x < 0)
                     {
-                        xInput = -1;
+                        xInput = 1;
                     }
 
                     pMove.GWCMove(xInput, 0);
@@ -70,11 +70,11 @@ public class GWCTouchControls : MonoBehaviour
                 {
                     if (touchDeltaPosition.y > 0)
                     {
-                        yInput = 1;
+                        yInput = -1;
                     }
                     else if (touchDeltaPosition.y < 0)
                     {
-                        yInput = -1;
+                        yInput = 1;
                     }
 
                     pMove.GWCMove(0, yInput);

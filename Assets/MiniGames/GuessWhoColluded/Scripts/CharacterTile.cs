@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/13/2018
-// Last:  03/31/2019
+// Last:  04/11/2019
 
 using UnityEngine;
 
@@ -51,65 +51,50 @@ public class CharacterTile : MonoBehaviour
     void Update()
     {
         // Flip tile
-        if ((gwc.bCanFlip && bHasEntered && !bHasExited && !pause.bPauseActive && Input.GetButtonDown("Action")) ||
-            (gwc.bCanFlip && bHasEntered && !bHasExited && !pause.bPauseActive && touches.bAaction))
+        if (gwc.bCanFlip &&
+            bHasEntered &&
+            !bHasExited &&
+            !pause.bPauseActive &&
+            !dMan.bDialogueActive &&
+            !dMan.bPauseDialogue &&
+            (Input.GetButtonDown("Action") ||
+             touches.bAaction))
         {
             CheckAndFlip();
         }
 
         // Tile layer changer
-        if ((gwc.bCanFlip && Input.GetKeyDown(KeyCode.LeftShift) && !pause.bPauseActive && !bAvoidUpdate) ||
-            (gwc.bCanFlip && Input.GetKeyDown(KeyCode.RightShift) && !pause.bPauseActive && !bAvoidUpdate) ||
-            (gwc.bCanFlip && Input.GetKeyDown(KeyCode.JoystickButton4) && !pause.bPauseActive && !bAvoidUpdate) ||
-            (gwc.bCanFlip && Input.GetKeyDown(KeyCode.JoystickButton5) && !pause.bPauseActive && !bAvoidUpdate) ||
-            (gwc.bCanFlip && touches.bBaction && !bAvoidUpdate))
+        if (gwc.bCanFlip &&
+            !pause.bPauseActive &&
+            !bAvoidUpdate &&
+            (Input.GetKeyDown(KeyCode.LeftShift) ||
+             Input.GetKeyDown(KeyCode.RightShift) ||
+             Input.GetMouseButtonDown(1) ||
+             Input.GetKeyDown(KeyCode.JoystickButton4) ||
+             Input.GetKeyDown(KeyCode.JoystickButton5) ||
+             touches.bBaction))
         {
             touches.Vibrate();
 
-            if (bShowIcon)
-            {
-                tileIcon.GetComponent<SpriteRenderer>().enabled = false;
-                bShowIcon = false;
-            }
-            else if (bShowName)
-            {
-                tileName.GetComponent<SpriteRenderer>().enabled = false;
-                bShowName = false;
-            }
-            else if (bShowChar)
-            {
-                tileChar.GetComponent<SpriteRenderer>().enabled = false;
-                bShowChar = false;
-            }
-            else if (bShowFlag)
-            {
-                // Reset
-                tileIcon.GetComponent<SpriteRenderer>().enabled = true;
-                tileName.GetComponent<SpriteRenderer>().enabled = true;
-                tileChar.GetComponent<SpriteRenderer>().enabled = true;
-
-                bShowIcon = true;
-                bShowName = true;
-                bShowChar = true;
-            }
-
-            bAvoidUpdate = true;
+            FlipLayer();
         }
 
         // Reset tile layer changer for keyboard
-        if ((Input.GetKeyUp(KeyCode.LeftShift) && !pause.bPauseActive) ||
-            (Input.GetKeyUp(KeyCode.RightShift) && !pause.bPauseActive) ||
-            (Input.GetKeyUp(KeyCode.JoystickButton4) && !pause.bPauseActive) ||
-            (Input.GetKeyUp(KeyCode.JoystickButton5) && !pause.bPauseActive))
+        if (!pause.bPauseActive &&
+            (Input.GetKeyUp(KeyCode.LeftShift) ||
+             Input.GetKeyUp(KeyCode.RightShift) ||
+             Input.GetKeyUp(KeyCode.JoystickButton4) ||
+             Input.GetKeyUp(KeyCode.JoystickButton5)))
         {
             bAvoidUpdate = false;
         }
 
         // Reset tile layer changer for GUI B button
-        if (!touches.bBaction && bAvoidUpdate)
-        {
-            bAvoidUpdate = false;
-        }
+        //if (!touches.bBaction && 
+        //    bAvoidUpdate)
+        //{
+        //    bAvoidUpdate = false;
+        //}
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -170,6 +155,39 @@ public class CharacterTile : MonoBehaviour
         tileName.transform.localScale = Vector3.one;
 
         bHasFlipped = false;
+    }
+
+    public void FlipLayer()
+    {
+        if (bShowIcon)
+        {
+            tileIcon.GetComponent<SpriteRenderer>().enabled = false;
+            bShowIcon = false;
+        }
+        else if (bShowName)
+        {
+            tileName.GetComponent<SpriteRenderer>().enabled = false;
+            bShowName = false;
+        }
+        else if (bShowChar)
+        {
+            tileChar.GetComponent<SpriteRenderer>().enabled = false;
+            bShowChar = false;
+        }
+        else if (bShowFlag)
+        {
+            // Reset
+            tileIcon.GetComponent<SpriteRenderer>().enabled = true;
+            tileName.GetComponent<SpriteRenderer>().enabled = true;
+            tileChar.GetComponent<SpriteRenderer>().enabled = true;
+
+            bShowIcon = true;
+            bShowName = true;
+            bShowChar = true;
+        }
+
+        touches.bBaction = false;
+        //bAvoidUpdate = true;
     }
 
     public void OnMouseUp()

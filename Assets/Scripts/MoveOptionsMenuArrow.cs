@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/23/2018
-// Last:  02/14/2019
+// Last:  04/11/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,10 +44,10 @@ public class MoveOptionsMenuArrow : MonoBehaviour
     void Start()
     {
         // Initializers
-        Opt1Btn = GameObject.Find("Opt1").GetComponent<UnityEngine.UI.Button>();
-        Opt2Btn = GameObject.Find("Opt2").GetComponent<UnityEngine.UI.Button>();
-        Opt3Btn = GameObject.Find("Opt3").GetComponent<UnityEngine.UI.Button>();
-        Opt4Btn = GameObject.Find("Opt4").GetComponent<UnityEngine.UI.Button>();
+        Opt1Btn = GameObject.Find("Opt1").GetComponent<Button>();
+        Opt2Btn = GameObject.Find("Opt2").GetComponent<Button>();
+        Opt3Btn = GameObject.Find("Opt3").GetComponent<Button>();
+        Opt4Btn = GameObject.Find("Opt4").GetComponent<Button>();
 
         Opt1Arw = GameObject.Find("Opt1Arw");
         Opt2Arw = GameObject.Find("Opt2Arw");
@@ -83,21 +83,21 @@ public class MoveOptionsMenuArrow : MonoBehaviour
             // Controller Support 
             // DC TODO 01/10/2019 -- temp bug where sub-pause menus not closing as expected
             if (Input.GetAxis("Controller DPad Vertical") == 0 &&
-               (!touches.bDown &&
-                !touches.bUp))
+                (!touches.bDown &&
+                 !touches.bUp))
             {
                 bFreezeControllerInput = false;
             }
             else if (!bFreezeControllerInput &&
-                    (Input.GetAxis("Controller DPad Vertical") > 0 ||
-                     touches.bDown))
+                     (Input.GetAxis("Controller DPad Vertical") > 0 ||
+                      touches.bDown))
             {
                 bControllerDown = true;
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
-                    (Input.GetAxis("Controller DPad Vertical") < 0 ||
-                     touches.bUp))
+                     (Input.GetAxis("Controller DPad Vertical") < 0 ||
+                      touches.bUp))
             {
                 bControllerUp = true;
                 bFreezeControllerInput = true;
@@ -105,21 +105,21 @@ public class MoveOptionsMenuArrow : MonoBehaviour
 
             // Virtual Joystick Support 
             if (fixedJoy.Vertical == 0 &&
-               (!touches.bDown &&
-                !touches.bUp))
+                (!touches.bDown &&
+                 !touches.bUp))
             {
                 bFreezeVirtualInput = false;
             }
             else if (!bFreezeVirtualInput &&
-                    (fixedJoy.Vertical < 0 ||
-                     touches.bDown))
+                     (fixedJoy.Vertical < 0 ||
+                      touches.bDown))
             {
                 bControllerDown = true;
                 bFreezeVirtualInput = true;
             }
             else if (!bFreezeVirtualInput &&
-                    (fixedJoy.Vertical > 0 ||
-                     touches.bUp))
+                     (fixedJoy.Vertical > 0 ||
+                      touches.bUp))
             {
                 bControllerUp = true;
                 bFreezeVirtualInput = true;
@@ -132,19 +132,22 @@ public class MoveOptionsMenuArrow : MonoBehaviour
             {
                 bControllerDown = false;
 
-                if (currentPosition == ArrowPos.Opt1 && oMan.tempOptsCount > 1)
+                if (currentPosition == ArrowPos.Opt1 && 
+                    oMan.tempOptsCount > 1)
                 {
                     currentPosition = ArrowPos.Opt2;
                     ClearAllArrows();
                     Opt2Arw.transform.localScale = Vector3.one;
                 }
-                else if (currentPosition == ArrowPos.Opt2 && oMan.tempOptsCount > 2)
+                else if (currentPosition == ArrowPos.Opt2 && 
+                         oMan.tempOptsCount > 2)
                 {
                     currentPosition = ArrowPos.Opt3;
                     ClearAllArrows();
                     Opt3Arw.transform.localScale = Vector3.one;
                 }
-                else if (currentPosition == ArrowPos.Opt3 && oMan.tempOptsCount > 3)
+                else if (currentPosition == ArrowPos.Opt3 && 
+                         oMan.tempOptsCount > 3)
                 {
                     currentPosition = ArrowPos.Opt4;
                     ClearAllArrows();
@@ -177,6 +180,9 @@ public class MoveOptionsMenuArrow : MonoBehaviour
                 }
             }
             else if (Input.GetButtonDown("Action") ||
+                     // DC 04/12/2019 -- If Virtual buttons visible, have to double tap with mouse click to select the option
+                     // DC TODO -- See if this occurs on mobile
+                     //Input.GetButtonDown("DialogueAction") ||
                      Input.GetKeyDown(KeyCode.JoystickButton0) ||
                      touches.bAaction)
             {
@@ -196,6 +202,8 @@ public class MoveOptionsMenuArrow : MonoBehaviour
                 {
                     Opt4Btn.onClick.Invoke();
                 }
+
+                touches.bAaction = false;
 
                 ResetArrows();
             }

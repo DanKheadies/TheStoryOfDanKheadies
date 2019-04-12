@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 05/20/2018
-// Last:  02/28/2019
+// Last:  04/11/2019
 
 using System.Collections;
 using UnityEngine;
@@ -29,8 +29,8 @@ public class Element : MonoBehaviour
     void Start()
     {
         // Initializers
-        dMan = GameObject.FindObjectOfType<DialogueManager>();
-        ms = GameObject.FindObjectOfType<Minesweeper>();
+        dMan = FindObjectOfType<DialogueManager>();
+        ms = FindObjectOfType<Minesweeper>();
         pause = GameObject.FindGameObjectWithTag("Pause");
         touches = GameObject.Find("GUIControls").GetComponent<TouchControls>();
 
@@ -49,27 +49,23 @@ public class Element : MonoBehaviour
         //    StartCoroutine(ResetElements());
         //}
 
-        // ??
-        //if (false)
-        //{
-
-        //}
-
         if (bHasEntered &&
+            !dMan.bDialogueActive &&
             ms.bAvoidInvestigating == false &&
-           (Input.GetKeyUp(KeyCode.Space) ||
-            Input.GetKeyUp(KeyCode.JoystickButton0) ||
-            touches.bAaction))
+            (Input.GetKeyUp(KeyCode.Space) ||
+             Input.GetKeyUp(KeyCode.JoystickButton0) ||
+             touches.bAaction))
         {
             InvestigateElement();
         }
 
         if (bHasEntered &&
-            !ms.bPauseFlagging &&
-           (Input.GetKeyUp(KeyCode.F) ||
-            Input.GetKeyUp(KeyCode.JoystickButton2) ||
-            Input.GetKeyUp(KeyCode.JoystickButton3) ||
-            touches.bBaction))
+            !dMan.bDialogueActive &&
+            //!ms.bPauseFlagging &&
+            (Input.GetKeyUp(KeyCode.F) ||
+             Input.GetKeyUp(KeyCode.JoystickButton2) ||
+             Input.GetKeyUp(KeyCode.JoystickButton3) ||
+             touches.bBaction))
         {
             FlagElement();
         }
@@ -176,6 +172,8 @@ public class Element : MonoBehaviour
                 ms.bHasWon = true;
             }
         }
+
+        touches.bAaction = false;
     }
 
     public void FlagElement()
@@ -191,7 +189,8 @@ public class Element : MonoBehaviour
             GetComponent<SpriteRenderer>().sprite = flagTexture;
         }
 
-        ms.PauseFlagging();
+        touches.bBaction = false;
+        //ms.PauseFlagging();
     }
 
     IEnumerator ResetElements()

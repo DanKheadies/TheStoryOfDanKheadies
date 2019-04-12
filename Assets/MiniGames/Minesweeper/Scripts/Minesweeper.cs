@@ -2,26 +2,33 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  03/31/2019
+// Last:  04/11/2019
 
 // DC TODO -- Bring in QuestMananger & complete quest when won (but still able to keep playing for restored brio & not more brio)
 
 using UnityEngine;
+using UnityEngine.UI;
 
 // Main Minesweeper logic
 public class Minesweeper : MonoBehaviour
 {
     public DialogueManager dMan;
-    public FixedJoystick fixedJoy;
+    public GameObject dBox;
     public GameObject pause;
     public GameObject person1;
     public GameObject thePlayer;
     public GameObject warpMinesweeper;
+    public Image dPic;
+    public ImageStrobe dArrow;
     public Inventory inv;
     public MoveOptionsMenuArrow moveOptsArw;
+    public MusicManager mMan;
     public OptionsManager oMan;
     public PlayerBrioManager brio;
     public SaveGame save;
+    public SFXManager SFXMan;
+    public Sprite[] portPic;
+    public Text dText;
     public TouchControls touches;
     public UIManager uiMan;
 
@@ -34,31 +41,76 @@ public class Minesweeper : MonoBehaviour
     public bool bReset;
 
     private float pauseTimer;
+    public float strobeTimer;
     public float timer;
+
+    public string[] dialogueLines;
 
     void Start ()
     {
         // Initializers
         brio = FindObjectOfType<PlayerBrioManager>();
+        dArrow = GameObject.Find("Dialogue_Arrow").GetComponent<ImageStrobe>();
+        dBox = GameObject.Find("Dialogue_Box");
         dMan = FindObjectOfType<DialogueManager>();
-        fixedJoy = FindObjectOfType<FixedJoystick>();
+        dPic = GameObject.Find("Dialogue_Picture").GetComponent<Image>();
+        dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
         inv = FindObjectOfType<Inventory>();
+        mMan = FindObjectOfType<MusicManager>();
         moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
         oMan = FindObjectOfType<OptionsManager>();
         pause = GameObject.FindGameObjectWithTag("Pause");
         person1 = GameObject.Find("Person.1");
         save = FindObjectOfType<SaveGame>();
+        SFXMan = FindObjectOfType<SFXManager>();
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         touches = FindObjectOfType<TouchControls>();
         warpMinesweeper = GameObject.Find("Minesweeper.to.Chp1");
         uiMan = FindObjectOfType<UIManager>();
         
         pauseTimer = 0.333f;
+        strobeTimer = 1.0f;
         timer = 0.333f;
+        
+        // Initial prompt to pick a mode
+        dMan.bDialogueActive = false;
+        mMan.bMusicCanPlay = false;
 
-        // Show GUI & set virtual joystick
-        touches.transform.localScale = Vector3.one;
-        fixedJoy.JoystickPosition();
+        // Restrict player movement
+        thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+
+        // First time in minigame, give instructions
+        if (PlayerPrefs.GetInt("GivenDirectionsForMinesweeper") == 0)
+        {
+            dialogueLines = new string[] {
+                "Alright Dan, this is classic Minesweeper.",
+                "Knock a block to see if there's a mine under it.",
+                "A number means there are X mines near that block.",
+                "You can throw a flag on blocks you think are mines to avoid em.",
+                "And once you knock all the blocks without mines, you'll win!",
+                "Happy huntin.."
+            };
+
+            // Avoid instructions
+            PlayerPrefs.SetInt("GivenDirectionsForMinesweeper", 1);
+        }
+        else
+        {
+            dialogueLines = new string[] {
+                "Happy huntin Dan..",
+                "Happy asdfasdf ..",
+                "Happy you know..",
+                "Happy abc..",
+                "Happy redad..",
+                "Happy sdfsdfsdfsdfsdfsdf.."
+            };
+        }
+
+        dMan.dialogueLines = dialogueLines;
+        dMan.currentLine = 0;
+        dText.text = dialogueLines[dMan.currentLine];
+        dPic.sprite = portPic[0];
+        dBox.transform.localScale = Vector3.one;
     }
 	
 	void Update ()
@@ -77,6 +129,20 @@ public class Minesweeper : MonoBehaviour
 
                 // Reset Transfer
                 PlayerPrefs.SetInt("Transferring", 0);
+            }
+        }
+
+        if (strobeTimer > 0)
+        {
+            strobeTimer -= Time.deltaTime;
+
+            if (strobeTimer <= 0)
+            {
+                StartCoroutine(dArrow.Strobe());
+                dMan.bDialogueActive = true;
+
+                // Sound Effect
+                SFXMan.sounds[2].PlayOneShot(SFXMan.sounds[2].clip);
             }
         }
 
@@ -106,14 +172,14 @@ public class Minesweeper : MonoBehaviour
         }
 
         // Avoid spamming flags
-        if (bPauseFlagging)
-        {
-            pauseTimer -= Time.deltaTime;
-            if (pauseTimer <= 0)
-            {
-                UnpauseFlagging();
-            }
-        }
+        //if (bPauseFlagging)
+        //{
+        //    pauseTimer -= Time.deltaTime;
+        //    if (pauseTimer <= 0)
+        //    {
+        //        UnpauseFlagging();
+        //    }
+        //}
 
         if (bHasLost && 
             !bAvoidUpdate)
@@ -221,14 +287,14 @@ public class Minesweeper : MonoBehaviour
         bAvoidUpdate = false;
     }
 
-    public void PauseFlagging()
-    {
-        bPauseFlagging = true;
-    }
+    //public void PauseFlagging()
+    //{
+    //    bPauseFlagging = true;
+    //}
 
-    public void UnpauseFlagging()
-    {
-        bPauseFlagging = false;
-        pauseTimer = 0.333f;
-    }
+    //public void UnpauseFlagging()
+    //{
+    //    bPauseFlagging = false;
+    //    pauseTimer = 0.333f;
+    //}
 }

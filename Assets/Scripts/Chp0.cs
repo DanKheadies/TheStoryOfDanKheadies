@@ -15,7 +15,6 @@ public class Chp0 : MonoBehaviour
     public FixedJoystick fixedJoy;
     public GameObject dArrow;
     public GameObject dBox;
-    public GameObject guiConts;
     public GameObject HUD;
     public GameObject pauseButton;
     public GameObject sFaderAnim;
@@ -48,7 +47,6 @@ public class Chp0 : MonoBehaviour
         dMan = FindObjectOfType<DialogueManager>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
         fixedJoy = FindObjectOfType<FixedJoystick>();
-        guiConts = GameObject.Find("GUIControls");
         HUD = GameObject.Find("HUD");
         inv = FindObjectOfType<Inventory>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -71,7 +69,7 @@ public class Chp0 : MonoBehaviour
         if (PlayerPrefs.GetString("Chapter") != "Chp0")
         {
             // Hide UI & music
-            guiConts.transform.localScale = Vector3.zero;
+            touches.transform.localScale = Vector3.zero;
             mMan.bMusicCanPlay = false;
             pauseButton.transform.localScale = Vector3.zero;
 
@@ -140,15 +138,16 @@ public class Chp0 : MonoBehaviour
             !bAvoidUpdate && 
             bStartGame)
         {
-            // Display UI & music
+            // Start music
             mMan.bMusicCanPlay = true;
+
+            // Set UI
             pauseButton.transform.localScale = Vector3.one;
-            guiConts.transform.localScale = Vector3.one;
-            fixedJoy.JoystickPosition();
+            //fixedJoy.JoystickPosition();
             
+            // Fade in scene
             sFaderAnim.GetComponent<Animator>().enabled = true;
 
-            // Change to avoid running this logic
             bAvoidUpdate = true;
         }
         
@@ -157,12 +156,15 @@ public class Chp0 : MonoBehaviour
             PlayerPrefs.GetString("Chapter") == "Chp0" && 
             !bAvoidUpdate)
         {
+            // Start music
             mMan.bMusicCanPlay = true;
-            sFaderAnim.GetComponent<Animator>().enabled = true;
-            guiConts.transform.localScale = Vector3.one;
-            fixedJoy.JoystickPosition();
 
-            // Change to avoid running this logic
+            // Set UI
+            //fixedJoy.JoystickPosition();
+
+            // Fade in scene
+            sFaderAnim.GetComponent<Animator>().enabled = true;
+
             bAvoidUpdate = true;
         }
 

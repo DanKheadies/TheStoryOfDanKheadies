@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/15/2019
+// Last:  04/11/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     public CanvasGroup contOpacCan;
     public CanvasGroup hudCanvas;
     public DialogueManager dMan;
+    public FixedJoystick fixedJoy;
     public GameObject[] dPads;
     public GameObject[] joySticks;
     public OptionsManager oMan;
@@ -36,6 +37,7 @@ public class UIManager : MonoBehaviour
 
     public bool bControlsActive;
     public bool bControlsDPad;
+    public bool bMobileDevice;
     public bool bUpdateBrio;
 
     public float currentContOpac;
@@ -51,14 +53,14 @@ public class UIManager : MonoBehaviour
         contOpacCan = GameObject.Find("GUIControls").GetComponent<CanvasGroup>();
         contOpacSlider = GameObject.Find("ShowButtonsSlider").GetComponent<Slider>();
         conTog = GameObject.Find("ShowButtonsToggle").GetComponent<Toggle>();
-        scene = SceneManager.GetActiveScene();
         dHUD = GameObject.Find("Dialogue_HUD").GetComponent<Canvas>();
         dMan = FindObjectOfType<DialogueManager>();
         dPads = GameObject.FindGameObjectsWithTag("D-Pad");
         dPadTog = GameObject.Find("DPadControlToggle").GetComponent<Toggle>();
-        joySticks = GameObject.FindGameObjectsWithTag("Joystick");
+        fixedJoy = FindObjectOfType<FixedJoystick>();
         HUD = GetComponent<Canvas>();
         hudCanvas = GetComponent<CanvasGroup>();
+        joySticks = GameObject.FindGameObjectsWithTag("Joystick");
         mainCamera = FindObjectOfType<Camera>().GetComponent<Camera>();
         oMan = FindObjectOfType<OptionsManager>();
         playerBrio = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBrioManager>();
@@ -79,7 +81,26 @@ public class UIManager : MonoBehaviour
         // Sets initial activation off saved data
         if (!PlayerPrefs.HasKey("ControlsActive"))
         {
-            bControlsActive = true;
+            // Set based off device
+#if UNITY_IOS
+            bMobileDevice = true;
+#endif
+
+#if UNITY_ANDROID
+            bMobileDevice = true;
+#endif
+
+            // Show GUI Controls for Mobile Devices
+            if (bMobileDevice)
+            {
+                bControlsActive = true;
+                conTog.isOn = true;
+            }
+            else
+            {
+                bControlsActive = false;
+                conTog.isOn = false;
+            }
         }
         else
         {
@@ -87,13 +108,13 @@ public class UIManager : MonoBehaviour
             {
                 bControlsActive = true;
                 conTog.isOn = true;
-                touches.transform.localScale = Vector3.one;
+                DisplayControls();
             }
             else
             {
                 bControlsActive = false;
                 conTog.isOn = false;
-                touches.transform.localScale = Vector3.zero;
+                HideControls();
             }
         }
 
@@ -144,6 +165,8 @@ public class UIManager : MonoBehaviour
         // Sets menu position based off scene
         CheckAndSetMenus();
 
+        // Set virtual joystick
+        fixedJoy.JoystickPosition();
 
         // Sets brio bar
         bUpdateBrio = true;
@@ -160,22 +183,20 @@ public class UIManager : MonoBehaviour
             bUpdateBrio = false;
         }
 
-        //if (dMan.bDialogueActive && !oMan.bOptionsActive)
-        //{
-        //    //brioBar.GetComponent<Renderer>().enabled = !brioBar.GetComponent<Renderer>().enabled;
-        //    hudCanvas.interactable = false;
-        //    hudCanvas.alpha = 0.0f;
-        //}
-        //else
-        //{
-        //    hudCanvas.interactable = true;
-        //    hudCanvas.alpha = 1.0f;
-        //}
-
         if (!bControlsActive)
         {
-            touches.transform.localScale = Vector3.zero;
+            HideControls();
         }
+    }
+
+    public void DisplayControls()
+    {
+        touches.transform.localScale = Vector3.one;
+    }
+
+    public void HideControls()
+    {
+        touches.transform.localScale = Vector3.zero;
     }
 
     // Adjust the opacity of the UI controls
@@ -190,12 +211,12 @@ public class UIManager : MonoBehaviour
     {
         if (bControlsActive)
         {
-            touches.transform.localScale = Vector3.zero;
+            HideControls();
             bControlsActive = false;
         }
         else if (!bControlsActive)
         {
-            touches.transform.localScale = Vector3.one;
+            DisplayControls();
             bControlsActive = true;
         }
     }

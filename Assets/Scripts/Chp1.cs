@@ -165,8 +165,8 @@ public class Chp1 : MonoBehaviour
         raceTimer = 0f;
 
         // Show GUI & set virtual joystick
-        touches.transform.localScale = Vector3.one;
-        fixedJoy.JoystickPosition();
+        //touches.transform.localScale = Vector3.one;
+        //fixedJoy.JoystickPosition();
 
         // Chapter 1 -- First Time
         if (PlayerPrefs.GetString("Chapter") != "Chp1" &&

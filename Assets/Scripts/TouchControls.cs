@@ -172,21 +172,22 @@ public class TouchControls : MonoBehaviour
     //                  Using the aStart & aStop functions skip / cycle too quickly thru the first prompt
     //                  TODO: Figure out how to wrap this back in to just use aStart & aStop
     // Action button flags
-    public void StartAction()
-    {
-        bAaction = true;
-        StartCoroutine(DelayedStop());
-    }
-    IEnumerator DelayedStop()
-    {
-        yield return new WaitForSeconds(0.1f);
-        bAaction = false;
-        StopCoroutine(DelayedStop());
-    }
+    //public void StartAction()
+    //{
+    //    bAaction = true;
+    //    StartCoroutine(DelayedStop());
+    //}
+    //IEnumerator DelayedStop()
+    //{
+    //    yield return new WaitForSeconds(0.1f);
+    //    bAaction = false;
+    //    StopCoroutine(DelayedStop());
+    //}
 
     // A button flagging
     public void aActionStart()
     {
+        Debug.Log("action start");
         bAaction = true;
         bUIactive = true;
     }
