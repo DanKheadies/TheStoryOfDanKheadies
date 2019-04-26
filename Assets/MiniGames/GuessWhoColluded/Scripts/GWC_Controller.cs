@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  04/11/2019
+// Last:  04/25/2019
 
 using System.Collections;
 using UnityEngine;
@@ -17,12 +17,11 @@ public class GWC_Controller : MonoBehaviour
     public CameraFollow camFollow;
     public Characters chars;
     public DialogueManager dMan;
-    public FixedJoystick fixedJoy;
     public GameObject dBox;
     public GameObject HUD;
     public GameObject muellerCards;
     public GameObject oBox;
-    public GameObject pause;
+    public GameObject pauseScreen;
     public GameObject pauseBtn;
     public GameObject playerCard;
     public GameObject sceneTransAnim;
@@ -33,9 +32,11 @@ public class GWC_Controller : MonoBehaviour
     public GameObject warpGWC;
     public Image dPic;
     public ImageStrobe dArrow;
+    public Inventory inv;
     public MoveOptionsMenuArrow moveOptsArw;
     public MusicManager mMan;
     public OptionsManager oMan;
+    public PauseGame pause;
     public PlayerBrioManager brio;
     public SaveGame save;
     public Scene scene;
@@ -44,7 +45,7 @@ public class GWC_Controller : MonoBehaviour
     public Sprite[] portPic;
     public Text dText;
     public TouchControls touches;
-    public UIManager uiMan;
+    public UIManager uMan;
 
     public bool bAllowPlayerToGuess;
     public bool bAvoidUpdate;
@@ -65,6 +66,7 @@ public class GWC_Controller : MonoBehaviour
 
     public float buttonTimer;
     public float guessThreshold;
+    public float invTimer;
     public float musicTimer1;
     public float musicTimer2;
     public float strobeTimer;
@@ -90,16 +92,17 @@ public class GWC_Controller : MonoBehaviour
         dMan = FindObjectOfType<DialogueManager>();
         dPic = GameObject.Find("Dialogue_Picture").GetComponent<Image>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
-        fixedJoy = FindObjectOfType<FixedJoystick>();
         HUD = GameObject.Find("HUD");
+        inv = FindObjectOfType<Inventory>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         mMan = FindObjectOfType<MusicManager>();
         moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
         muellerCards = GameObject.Find("Mueller_Cards");
         oBox = GameObject.Find("Options_Box");
         oMan = FindObjectOfType<OptionsManager>();
-        pause = GameObject.FindGameObjectWithTag("Pause");
+        pause = FindObjectOfType<PauseGame>();
         pauseBtn = GameObject.Find("PauseButton");
+        pauseScreen = GameObject.FindGameObjectWithTag("Pause");
         playerCard = GameObject.Find("Player_Character_Card");
         save = FindObjectOfType<SaveGame>();
         scene = SceneManager.GetActiveScene();
@@ -112,11 +115,12 @@ public class GWC_Controller : MonoBehaviour
         touches = FindObjectOfType<TouchControls>();
         trumpCards = GameObject.Find("Trump_Cards");
         warpGWC = GameObject.Find("GuessWhoColluded.to.Chp1");
-        uiMan = FindObjectOfType<UIManager>();
+        uMan = FindObjectOfType<UIManager>();
 
         charTiles = new CharacterTile[24];
 
         guessThreshold = 1.25f;
+        invTimer = 0.333f;
         musicTimer1 = 5.39f;
         musicTimer2 = 1.05f;
         strobeTimer = 1.0f;
@@ -162,9 +166,6 @@ public class GWC_Controller : MonoBehaviour
         dPic.sprite = portPic[48];
         dBox.transform.localScale = Vector3.one;
         sFaderAnimDia.GetComponent<Animator>().enabled = true;
-
-        // Set virtual joystick
-        //fixedJoy.JoystickPosition();
     }
 
     void Update()
@@ -186,6 +187,20 @@ public class GWC_Controller : MonoBehaviour
             }
         }
 
+        // Transfer -- Load inventory
+        if (invTimer > 0)
+        {
+            invTimer -= Time.deltaTime;
+
+            if (invTimer <= 0)
+            {
+                inv.LoadInventory("transfer");
+
+                // Reset Transfer
+                PlayerPrefs.SetInt("Transferring", 0);
+            }
+        }
+
         if (bOptModeSelect &&
             !dMan.bDialogueActive)
         {
@@ -194,7 +209,7 @@ public class GWC_Controller : MonoBehaviour
             dialogueLines = new string[] {
                 "First and first mostly, who's playing?"
             };
-            GWC_DialogueRestter();
+            GWC_DialogueResetter();
 
             optionsLines = new string[] {
                 "Me (Single player)",
@@ -212,7 +227,7 @@ public class GWC_Controller : MonoBehaviour
             mMan.bMusicCanPlay = true;
             sFaderAnim.GetComponent<Animator>().enabled = true;
 
-            if (uiMan.bControlsActive)
+            if (uMan.bControlsActive)
             {
                 touches.transform.localScale = Vector3.one;
             }
@@ -268,39 +283,39 @@ public class GWC_Controller : MonoBehaviour
         }
 
         // Zoom In -- Scroll Forward or press Y
-        if ((Input.GetAxis("Mouse ScrollWheel") > 0 &&
-             mainCamera.orthographicSize >= aUtil._wantedAspectRatio) ||
-            (Input.GetKeyDown(KeyCode.Comma) &&
-             mainCamera.orthographicSize >= aUtil._wantedAspectRatio) ||
-            (Input.GetKeyDown(KeyCode.JoystickButton3) &&
-             mainCamera.orthographicSize >= aUtil._wantedAspectRatio) ||
-            (touches.bYaction &&
-             mainCamera.orthographicSize >= aUtil._wantedAspectRatio))
+        if (mainCamera.orthographicSize >= aUtil._wantedAspectRatio &&
+            !dMan.bDialogueActive &&
+            !pause.bPauseActive &&
+            !pause.bPausing &&
+            (Input.GetAxis("Mouse ScrollWheel") > 0 ||
+             Input.GetKeyDown(KeyCode.Comma) ||
+             Input.GetKeyDown(KeyCode.JoystickButton3) ||
+             touches.bYaction))
         {
             mainCamera.orthographicSize = mainCamera.orthographicSize - 0.25f;
             touches.bYaction = false;
 
             sceneTransAnim.transform.localScale = new Vector2
                 (sceneTransAnim.transform.localScale.x - 0.35f,
-                sceneTransAnim.transform.localScale.y - 0.35f);
+                 sceneTransAnim.transform.localScale.y - 0.35f);
         }
 
         // Zoom Out -- Scroll Back or press X
-        if ((Input.GetAxis("Mouse ScrollWheel") < 0 &&
-             mainCamera.orthographicSize < 5.5f) ||
-            (Input.GetKeyDown(KeyCode.Period) &&
-             mainCamera.orthographicSize < 5.5f) ||
-            (Input.GetKeyDown(KeyCode.JoystickButton2) &&
-             mainCamera.orthographicSize < 5.5f) ||
-            (touches.bXaction &&
-             mainCamera.orthographicSize < 5.5f))
+        if (mainCamera.orthographicSize < 5.642857f &&
+            !dMan.bDialogueActive &&
+            !pause.bPauseActive &&
+            !pause.bPausing &&
+            (Input.GetAxis("Mouse ScrollWheel") < 0 ||
+             Input.GetKeyDown(KeyCode.Period) ||
+             Input.GetKeyDown(KeyCode.JoystickButton2) ||
+             touches.bXaction))
         {
             mainCamera.orthographicSize = mainCamera.orthographicSize + 0.25f;
             touches.bXaction = false;
 
             sceneTransAnim.transform.localScale = new Vector2
                 (sceneTransAnim.transform.localScale.x + 0.35f,
-                sceneTransAnim.transform.localScale.y + 0.35f);
+                 sceneTransAnim.transform.localScale.y + 0.35f);
         }
 
         // Single Player - Reminder to Guess
@@ -315,14 +330,18 @@ public class GWC_Controller : MonoBehaviour
             dialogueLines = new string[] {
                 "And when you're ready, just hold down for a couple of seconds."
             };
-            GWC_DialogueRestter();
+            GWC_DialogueResetter();
         }
 
         // Single Player - Player Guess
         if (bAllowPlayerToGuess &&
             !dMan.bDialogueActive &&
-            (Input.GetMouseButton(0) ||
-             Input.GetKey(KeyCode.Space)))
+            (Input.GetKey(KeyCode.Space) ||
+             Input.GetKey(KeyCode.G) ||
+             Input.GetKeyDown(KeyCode.JoystickButton4) ||
+             Input.GetKeyDown(KeyCode.JoystickButton5) ||
+             (Input.GetMouseButton(0) &&
+              Input.touchCount < 2)))
         {
             buttonTimer += Time.deltaTime;
 
@@ -337,6 +356,8 @@ public class GWC_Controller : MonoBehaviour
                 {
                     IsPlayerGoodToGuess();
                 }
+
+                buttonTimer = 0;
             }
 
         }
@@ -348,6 +369,7 @@ public class GWC_Controller : MonoBehaviour
             buttonTimer = 0;
         }
     }
+
     IEnumerator StartFlipping()
     {
         yield return new WaitForSeconds(1.0f);
@@ -432,7 +454,7 @@ public class GWC_Controller : MonoBehaviour
             }
         }
 
-        GWC_DialogueRestter();
+        GWC_DialogueResetter();
         dPic.sprite = portPic[48];
 
         spLogic.bOppQ1 = true;
@@ -444,10 +466,20 @@ public class GWC_Controller : MonoBehaviour
 
         GWC_PromptRestrictions();
 
-        dialogueLines = new string[] {
+        if (bBoardReset)
+        {
+            dialogueLines = new string[] {
+                "Remember to think outside the box.. But not the tile."
+            };
+        }
+        else
+        {
+            dialogueLines = new string[] {
                 "Oh and don't forget about the Colluminac in the menu. GLHF"
             };
-        GWC_DialogueRestter();
+        }
+
+        GWC_DialogueResetter();
         dPic.sprite = portPic[48];
     }
 
@@ -488,7 +520,7 @@ public class GWC_Controller : MonoBehaviour
             dialogueLines = new string[] {
                 "Got it. Now more importantly, whose side are you on?"
             };
-            GWC_DialogueRestter();
+            GWC_DialogueResetter();
 
             optionsLines = new string[] {
                 "Team Trump",
@@ -511,7 +543,7 @@ public class GWC_Controller : MonoBehaviour
             dialogueLines = new string[] {
                 "But what to do, what to do... Are you going to.."
             };
-            GWC_DialogueRestter();
+            GWC_DialogueResetter();
 
             optionsLines = new string[] {
                 "Stop the leaks!",
@@ -663,7 +695,7 @@ public class GWC_Controller : MonoBehaviour
         dialogueLines = new string[] {
                 "Would you like to guess?"
             };
-        GWC_DialogueRestter();
+        GWC_DialogueResetter();
 
         optionsLines = new string[] {
                 "Yes",
@@ -674,6 +706,7 @@ public class GWC_Controller : MonoBehaviour
 
     public void GG()
     {
+        oMan.ResetOptions();
         warpGWC.GetComponent<BoxCollider2D>().enabled = true;
         warpGWC.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
 
@@ -686,7 +719,7 @@ public class GWC_Controller : MonoBehaviour
         // Stop Dan from moving
         thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
 
-        // Stop the player from bringing up the dialog again
+        // Remove and prevent dialog 
         dMan.gameObject.transform.localScale = Vector3.zero;
     }
 
@@ -699,15 +732,24 @@ public class GWC_Controller : MonoBehaviour
 
     public void ResetBoard()
     {
+        oMan.ResetOptions();
+
         // Hide current character card on Pause screen
         playerCard.gameObject.transform.GetChild(playerCharacter).localScale = Vector3.zero;
 
         bBoardReset = true;
         bCanFlip = false;
+        bIsPlayerG2G = false;
 
-        StartCoroutine(StartSingle(0.0f));
-
-        spLogic.ResetSingle();
+        if (bOptModeSingle)
+        {
+            spLogic.ResetSingle();
+            StartCoroutine(StartSingle(0.0f));
+        }
+        else
+        {
+            StartCoroutine(StartMulti());
+        }
 
         if (bOppMueller)
         {
@@ -758,22 +800,23 @@ public class GWC_Controller : MonoBehaviour
     {
         thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
 
-        if (uiMan.bControlsActive)
+        if (uMan.bControlsActive)
         {
             touches.transform.localScale = Vector3.one;
         }
     }
 
-    public void GWC_DialogueRestter()
+    public void GWC_DialogueResetter()
     {
         dMan.dialogueLines = dialogueLines;
         dMan.currentLine = 0;
         dText.text = dialogueLines[dMan.currentLine];
         dBox.transform.localScale = Vector3.one;
         dMan.bDialogueActive = true;
+        StartCoroutine(dMan.ResetStrobes());
     }
 
-    public void GWC_OptionsRestter()
+    public void GWC_OptionsResetter()
     {
         oMan.tempOptsCount = 0;
         oMan.options = optionsLines;
@@ -782,18 +825,18 @@ public class GWC_Controller : MonoBehaviour
 
     public void GWC_OptionsResetter_2Q()
     {
-        GWC_OptionsRestter();
+        GWC_OptionsResetter();
         oMan.HideThirdPlusOpt();
     }
 
     public void GWC_OptionsResetter_3Q()
     {
-        GWC_OptionsRestter();
+        GWC_OptionsResetter();
         oMan.HideFourthOpt();
     }
 
     public void GWC_OptionsResetter_4Q()
     {
-        GWC_OptionsRestter();
+        GWC_OptionsResetter();
     }
 }

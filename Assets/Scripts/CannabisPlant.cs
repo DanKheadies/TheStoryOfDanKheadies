@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/18/2017
-// Last:  04/11/2019
+// Last:  04/16/2019
 
 using UnityEngine;
 
@@ -12,13 +12,15 @@ public class CannabisPlant : MonoBehaviour
     private DialogueManager dMan;
     private GameObject greenBud;
     private GameObject orangeBud;
+    public PauseGame pause;
     public GameObject player;
     private GameObject purpleBud;
     private GameObject whiteBud;
     public Inventory inv;
     public Item item;
     public Sprite portPic;
-    private TouchControls touches;
+    public TouchControls touches;
+    public UIManager uMan;
 
     public bool bAcquired; // Checks & Balances
     public bool bDoneAcquiring; // Checks & Balances
@@ -44,9 +46,11 @@ public class CannabisPlant : MonoBehaviour
         greenBud = GameObject.Find("Cannabis.Bud.Green");
         inv = GameObject.Find("Inventory").GetComponent<Inventory>();
         orangeBud = GameObject.Find("Cannabis.Bud.Orange");
+        pause = FindObjectOfType<PauseGame>();
         player = GameObject.FindGameObjectWithTag("Player");
         purpleBud = GameObject.Find("Cannabis.Bud.Purple");
         touches = FindObjectOfType<TouchControls>();
+        uMan = FindObjectOfType<UIManager>();
         whiteBud = GameObject.Find("Cannabis.Bud.White");
 
         bAcquired = false;
@@ -68,12 +72,16 @@ public class CannabisPlant : MonoBehaviour
     void Update()
     {
         if (bHasEntered && 
-            !bHasExited && 
+            !bHasExited &&
+            !bFreeze &&
             !dMan.bDialogueActive && 
             !dMan.bPauseDialogue && 
-            !bFreeze && 
-            (Input.GetButtonUp("Action") ||
-             touches.bAaction))
+            !pause.bPausing &&
+            !pause.bPauseActive &&
+            (touches.bAaction ||
+             Input.GetButtonDown("Action") ||
+             (Input.GetButtonDown("DialogueAction") &&
+              !uMan.bControlsActive)))
         {
             InteractWithPlant();
         }
@@ -134,23 +142,23 @@ public class CannabisPlant : MonoBehaviour
             anim.Play("Acquire");
 
             // Display and add bud to inventory
-            if (this.bGreen)
+            if (bGreen)
             {
                 greenBud.GetComponent<Transform>().localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
-            else if (this.bOrange)
+            else if (bOrange)
             {
                 orangeBud.GetComponent<Transform>().localScale = Vector3.one;
                 Inventory.instance.Add(item);
 
             }
-            else if (this.bPurple)
+            else if (bPurple)
             {
                 purpleBud.GetComponent<Transform>().localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
-            else if (this.bWhite)
+            else if (bWhite)
             {
                 whiteBud.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 Inventory.instance.Add(item);
@@ -160,7 +168,7 @@ public class CannabisPlant : MonoBehaviour
             dMan.dialogueLines = HasBud;
             dMan.ShowDialogue();
 
-            this.bHasBud = false;
+            bHasBud = false;
         }
         else if (bHasBud &&
             inv.items.Count >= inv.totalItems)
@@ -178,6 +186,7 @@ public class CannabisPlant : MonoBehaviour
         }
 
         bAcquired = true;
+        dMan.PauseDialogue();
         touches.bAaction = false;
     }
 }

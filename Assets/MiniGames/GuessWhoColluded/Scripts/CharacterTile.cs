@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/13/2018
-// Last:  04/11/2019
+// Last:  04/25/2019
 
 using UnityEngine;
 
@@ -17,6 +17,7 @@ public class CharacterTile : MonoBehaviour
     public Transform tileFlag;
     public Transform tileIcon;
     public Transform tileName;
+    public UIManager uMan;
 
     public bool bAvoidUpdate;
     public bool bHasEntered;
@@ -41,6 +42,7 @@ public class CharacterTile : MonoBehaviour
         tileIcon = gameObject.transform.GetChild(0);
         tileName = gameObject.transform.GetChild(1);
         touches = FindObjectOfType<TouchControls>();
+        uMan = FindObjectOfType<UIManager>();
 
         bShowChar = true;
         bShowFlag = true;
@@ -52,6 +54,7 @@ public class CharacterTile : MonoBehaviour
     {
         // Flip tile
         if (gwc.bCanFlip &&
+            !spLogic.bGuessingFTW &&
             bHasEntered &&
             !bHasExited &&
             !pause.bPauseActive &&
@@ -65,14 +68,16 @@ public class CharacterTile : MonoBehaviour
 
         // Tile layer changer
         if (gwc.bCanFlip &&
+            !dMan.bDialogueActive &&
             !pause.bPauseActive &&
             !bAvoidUpdate &&
             (Input.GetKeyDown(KeyCode.LeftShift) ||
              Input.GetKeyDown(KeyCode.RightShift) ||
-             Input.GetMouseButtonDown(1) ||
              Input.GetKeyDown(KeyCode.JoystickButton4) ||
              Input.GetKeyDown(KeyCode.JoystickButton5) ||
-             touches.bBaction))
+             touches.bBaction ||
+             (Input.GetMouseButtonDown(1) &&
+              Input.touchCount < 2)))
         {
             touches.Vibrate();
 
@@ -84,17 +89,19 @@ public class CharacterTile : MonoBehaviour
             (Input.GetKeyUp(KeyCode.LeftShift) ||
              Input.GetKeyUp(KeyCode.RightShift) ||
              Input.GetKeyUp(KeyCode.JoystickButton4) ||
-             Input.GetKeyUp(KeyCode.JoystickButton5)))
+             Input.GetKeyUp(KeyCode.JoystickButton5) ||
+             (Input.GetMouseButtonUp(1) &&
+              !uMan.bMobileDevice)))
         {
             bAvoidUpdate = false;
         }
 
         // Reset tile layer changer for GUI B button
-        //if (!touches.bBaction && 
-        //    bAvoidUpdate)
-        //{
-        //    bAvoidUpdate = false;
-        //}
+        if (!touches.bBaction &&
+            bAvoidUpdate)
+        {
+            bAvoidUpdate = false;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -114,6 +121,8 @@ public class CharacterTile : MonoBehaviour
             }
 
             currentPoints.points = tempArray;
+
+            spLogic.goldRimNameFTW = gameObject.name;
         }
     }
 
@@ -185,9 +194,8 @@ public class CharacterTile : MonoBehaviour
             bShowName = true;
             bShowChar = true;
         }
-
-        touches.bBaction = false;
-        //bAvoidUpdate = true;
+        
+        bAvoidUpdate = true;
     }
 
     public void OnMouseUp()

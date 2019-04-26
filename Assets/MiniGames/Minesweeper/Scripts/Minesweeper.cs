@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  04/11/2019
+// Last:  04/22/2019
 
 // DC TODO -- Bring in QuestMananger & complete quest when won (but still able to keep playing for restored brio & not more brio)
 
@@ -97,12 +97,7 @@ public class Minesweeper : MonoBehaviour
         else
         {
             dialogueLines = new string[] {
-                "Happy huntin Dan..",
-                "Happy asdfasdf ..",
-                "Happy you know..",
-                "Happy abc..",
-                "Happy redad..",
-                "Happy sdfsdfsdfsdfsdfsdf.."
+                "Happy huntin Dan.."
             };
         }
 

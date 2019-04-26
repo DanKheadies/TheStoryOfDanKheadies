@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  04/11/2019
+// Last:  04/17/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,9 +14,11 @@ public class ItemManager : MonoBehaviour
     public GameObject player;
     public Inventory inv;
     public Item item;
+    public PauseGame pause;
     public Scene scene;
     public Sprite portPic;
     public TouchControls touches;
+    public UIManager uMan;
 
     public GameObject greenBud;
     public GameObject orangeBud;
@@ -37,9 +39,11 @@ public class ItemManager : MonoBehaviour
         dMan = FindObjectOfType<DialogueManager>();
         inv = GameObject.Find("Inventory").GetComponent<Inventory>();
         pAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        pause = FindObjectOfType<PauseGame>();
         player = GameObject.FindGameObjectWithTag("Player");
         scene = SceneManager.GetActiveScene();
         touches = FindObjectOfType<TouchControls>();
+        uMan = FindObjectOfType<UIManager>();
 
         // 04/07/2018 DC TODO -- Extract to individual scene files
         if (scene.name == "Chp0")
@@ -61,10 +65,13 @@ public class ItemManager : MonoBehaviour
         if (bHasEntered && 
             !bHasExited && 
             !dMan.bDialogueActive && 
-            !dMan.bPauseDialogue && 
-            (Input.GetButtonUp("Action") || // DC TODO
-             Input.GetButtonUp("DialogueAction") || // the mouse click and bAaction are causing conflicting problems
-             touches.bAaction)) // get rid of one and it
+            !dMan.bPauseDialogue &&
+            !pause.bPausing &&
+            !pause.bPauseActive &&
+            (touches.bAaction ||
+             Input.GetButtonDown("Action") ||
+             (Input.GetButtonDown("DialogueAction") &&
+              !uMan.bControlsActive)))
         {
             InteractWithItem();
         }
@@ -153,6 +160,7 @@ public class ItemManager : MonoBehaviour
         }
 
         bAcquired = true;
+        dMan.PauseDialogue();
         touches.bAaction = false;
     }
 

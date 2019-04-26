@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  03/31/2019
+// Last:  04/17/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,10 +29,11 @@ public class Chp0 : MonoBehaviour
     private SFXManager SFXMan;
     public Text dText;
     public TouchControls touches;
+    public UIManager uMan;
 
-    private bool bAvoidUpdate;
+    public bool bAvoidUpdate;
     public bool bGetInventory;
-    private bool bStartGame;
+    public bool bStartGame;
 
     public float invTimer;
     public float strobeTimer;
@@ -61,6 +62,7 @@ public class Chp0 : MonoBehaviour
         SFXMan = FindObjectOfType<SFXManager>();
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         touches = FindObjectOfType<TouchControls>();
+        uMan = FindObjectOfType<UIManager>();
         warpCollider = GameObject.Find("Chp0.to.Chp1").GetComponent<BoxCollider2D>();
         
         strobeTimer = 3.0f;
@@ -91,6 +93,9 @@ public class Chp0 : MonoBehaviour
 
             // Stops the player's movement
             thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+
+            // Allows tapping / clicking of the dialogue
+            uMan.bControlsActive = false;
 
             // Fade in
             sFaderAnimDia.GetComponent<Animator>().enabled = true;
@@ -143,7 +148,8 @@ public class Chp0 : MonoBehaviour
 
             // Set UI
             pauseButton.transform.localScale = Vector3.one;
-            //fixedJoy.JoystickPosition();
+            fixedJoy.JoystickPosition();
+            uMan.CheckIfMobile();
             
             // Fade in scene
             sFaderAnim.GetComponent<Animator>().enabled = true;
@@ -159,8 +165,12 @@ public class Chp0 : MonoBehaviour
             // Start music
             mMan.bMusicCanPlay = true;
 
-            // Set UI
-            //fixedJoy.JoystickPosition();
+            // Show UI
+            pauseButton.transform.localScale = Vector3.one;
+            if (uMan.bControlsActive)
+            {
+                touches.transform.localScale = Vector3.one;
+            }
 
             // Fade in scene
             sFaderAnim.GetComponent<Animator>().enabled = true;

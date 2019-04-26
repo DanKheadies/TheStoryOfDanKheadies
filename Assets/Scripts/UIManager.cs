@@ -1,8 +1,9 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/11/2019
+// Last:  04/22/2019
 
+//using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Camera mainCamera;
+    public CameraSlider camSlide;
     public Canvas HUD;
     public Canvas dHUD;
     public CanvasGroup contOpacCan;
@@ -50,6 +52,7 @@ public class UIManager : MonoBehaviour
         // Initializers 
         brioBar = GameObject.Find("BrioBar").GetComponent<Slider>();
         brioText = GameObject.Find("BrioText").GetComponent<Text>();
+        camSlide = FindObjectOfType<CameraSlider>();
         contOpacCan = GameObject.Find("GUIControls").GetComponent<CanvasGroup>();
         contOpacSlider = GameObject.Find("ShowButtonsSlider").GetComponent<Slider>();
         conTog = GameObject.Find("ShowButtonsToggle").GetComponent<Toggle>();
@@ -61,9 +64,9 @@ public class UIManager : MonoBehaviour
         HUD = GetComponent<Canvas>();
         hudCanvas = GetComponent<CanvasGroup>();
         joySticks = GameObject.FindGameObjectsWithTag("Joystick");
-        mainCamera = FindObjectOfType<Camera>().GetComponent<Camera>();
+        mainCamera = FindObjectOfType<Camera>();
         oMan = FindObjectOfType<OptionsManager>();
-        playerBrio = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBrioManager>();
+        playerBrio = FindObjectOfType<PlayerBrioManager>();
         scene = SceneManager.GetActiveScene();
         touches = FindObjectOfType<TouchControls>();
 
@@ -81,26 +84,7 @@ public class UIManager : MonoBehaviour
         // Sets initial activation off saved data
         if (!PlayerPrefs.HasKey("ControlsActive"))
         {
-            // Set based off device
-#if UNITY_IOS
-            bMobileDevice = true;
-#endif
-
-#if UNITY_ANDROID
-            bMobileDevice = true;
-#endif
-
-            // Show GUI Controls for Mobile Devices
-            if (bMobileDevice)
-            {
-                bControlsActive = true;
-                conTog.isOn = true;
-            }
-            else
-            {
-                bControlsActive = false;
-                conTog.isOn = false;
-            }
+            CheckIfMobile();
         }
         else
         {
@@ -183,6 +167,14 @@ public class UIManager : MonoBehaviour
             bUpdateBrio = false;
         }
 
+        //if (camSlide.bSlideDown ||
+        //    camSlide.bSlideLeft ||
+        //    camSlide.bSlideRight ||
+        //    camSlide.bSlideUp)
+        //{
+        //    StartCoroutine(DelayJoystickReturn());
+        //}
+
         if (!bControlsActive)
         {
             HideControls();
@@ -197,6 +189,34 @@ public class UIManager : MonoBehaviour
     public void HideControls()
     {
         touches.transform.localScale = Vector3.zero;
+    }
+
+    public void CheckIfMobile()
+    {
+        // Set based off device
+        #if !UNITY_EDITOR
+            #if UNITY_IOS
+                bMobileDevice = true;
+            #endif
+
+            #if UNITY_ANDROID
+                bMobileDevice = true;
+            #endif
+        #endif
+
+        // Show GUI Controls for Mobile Devices
+        if (bMobileDevice)
+        {
+            bControlsActive = true;
+            conTog.isOn = true;
+            DisplayControls();
+        }
+        else
+        {
+            bControlsActive = false;
+            conTog.isOn = false;
+            HideControls();
+        }
     }
 
     // Adjust the opacity of the UI controls
@@ -218,6 +238,8 @@ public class UIManager : MonoBehaviour
         {
             DisplayControls();
             bControlsActive = true;
+
+            fixedJoy.JoystickPosition();
         }
     }
 
@@ -237,6 +259,8 @@ public class UIManager : MonoBehaviour
             }
 
             bControlsDPad = false;
+            
+            fixedJoy.JoystickPosition();
 
             if (scene.name == "GuessWhoColluded")
             {
@@ -271,6 +295,12 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+
+    //public IEnumerator DelayJoystickReturn()
+    //{
+
+    //    yield return new WaitForSeconds(3.0f);
+    //}
 
     public void CheckAndSetMenus()
     {

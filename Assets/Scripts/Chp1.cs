@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  03/31/2019
+// Last:  04/25/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +13,6 @@ public class Chp1 : MonoBehaviour
     public Camera mainCamera;
     public CameraFollow camFollow;
     public DialogueManager dMan;
-    public FixedJoystick fixedJoy;
     public GameObject dArrow;
     public GameObject dBox;
     public GameObject greatTree;
@@ -47,12 +46,11 @@ public class Chp1 : MonoBehaviour
     public Inventory inv;
     public MoveOptionsMenuArrow moveOptsArw;
     public OptionsManager oMan;
-    public PolygonCollider2D pColli;
     public QuestManager qMan;
     public SaveGame save;
     public Text dText;
     public TouchControls touches;
-    public UIManager uiMan;
+    public UIManager uMan;
     
     //public bool bAvoidUpdateQ0;
     public bool bAvoidUpdateQ1;
@@ -93,6 +91,7 @@ public class Chp1 : MonoBehaviour
 
     public float invTimer;
     public float raceTimer;
+    public float transferAddedPosition;
 
     public int Q4KidCounter;
     public int Q7GreenCounter;
@@ -103,6 +102,7 @@ public class Chp1 : MonoBehaviour
     public int Q8OrangeCounter;
     public int Q8PurpleCounter;
     public int Q8WhiteCounter;
+    public int questCount;
 
     public string Q4LastKidFound;
     public string Q7Options;
@@ -119,7 +119,6 @@ public class Chp1 : MonoBehaviour
         dBox = GameObject.Find("Dialogue_Box");
         dMan = FindObjectOfType<DialogueManager>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
-        fixedJoy = FindObjectOfType<FixedJoystick>();
         greatTree = GameObject.Find("GreatTree");
         touches = GameObject.Find("GUIControls").GetComponent<TouchControls>();
         inv = FindObjectOfType<Inventory>();
@@ -142,12 +141,11 @@ public class Chp1 : MonoBehaviour
         qMan = FindObjectOfType<QuestManager>();
         questTrigger2 = GameObject.Find("QT_2");
         save = FindObjectOfType<SaveGame>();
-        savedQuestsValue = PlayerPrefs.GetString("Chp1Quests");
         screenFader = GameObject.Find("Screen_Fader");
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         warpGWC = GameObject.Find("Chp1.to.GuessWhoColluded");
         warpMinesweeper = GameObject.Find("Chp1.to.Minesweeper");
-        uiMan = FindObjectOfType<UIManager>();
+        uMan = FindObjectOfType<UIManager>();
 
         inv.RerunStart();
 
@@ -162,11 +160,10 @@ public class Chp1 : MonoBehaviour
         quest8 = GameObject.Find("Quest_8"); // PookieBear2
 
         invTimer = 0.333f;
+        questCount = 9;
         raceTimer = 0f;
 
-        // Show GUI & set virtual joystick
-        //touches.transform.localScale = Vector3.one;
-        //fixedJoy.JoystickPosition();
+        savedQuestsValue = "";
 
         // Chapter 1 -- First Time
         if (PlayerPrefs.GetString("Chapter") != "Chp1" &&
@@ -186,8 +183,11 @@ public class Chp1 : MonoBehaviour
             inv.bUpdateItemCount = true;
             // see Update timer for inventory load
 
+            // Show UI if mobile (assumes coming from GWC where they might be off)
+            // see Update timer for mobile check (needs time for uMan to load fully)
+            
             // Set player & camera position
-            thePlayer.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferP_x"), (PlayerPrefs.GetFloat("TransferP_y") - 0.05f));
+            thePlayer.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferP_x"), (PlayerPrefs.GetFloat("TransferP_y") - 0.1f));
             mainCamera.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferCam_x"), PlayerPrefs.GetFloat("TransferCam_y"));
             camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("TransferAnandaCoord");
         }
@@ -221,6 +221,8 @@ public class Chp1 : MonoBehaviour
                     PlayerPrefs.GetInt("Transferring") == 1)
                 {
                     inv.LoadInventory("transfer");
+
+                    uMan.CheckIfMobile();
                 }
                 // From saved 
                 else
@@ -306,6 +308,8 @@ public class Chp1 : MonoBehaviour
             !bAvoidUpdateQ2)
         {
             bAvoidUpdateQ2 = true;
+
+            questTrigger2.transform.GetChild(1).GetComponent<Transform>().localScale = new Vector3(0.2625f, 0.24937f, 1f);
 
             // Disable door again & move Dan back (need isTrigger double-tap change?)
             // DC 02/12/19 -- Don't move back Dan here?
@@ -1026,14 +1030,6 @@ public class Chp1 : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Debug.Log("localD: " + thePlayer.transform.localPosition);
-            Debug.Log("regulD: " + thePlayer.transform.position);
-            Debug.Log("localP: " + pookieB1.transform.localPosition);
-            Debug.Log("regulp: " + pookieB1.transform.position);
-        }
-
         // Minigame -- Guess Who Colluded
         if (thePlayer.GetComponent<PolygonCollider2D>().IsTouching(warpGWC.GetComponent<BoxCollider2D>()))
         {
@@ -1047,9 +1043,11 @@ public class Chp1 : MonoBehaviour
             PlayerPrefs.SetInt("Transferring", 1);
             PlayerPrefs.SetString("TransferScene", warpGWC.GetComponent<SceneTransitioner>().BetaLoad);
 
+            // Save Quests
+            SaveQuests();
+
             // Stop the player from bringing up the dialogue again
             dMan.gameObject.SetActive(false);
-            //thePlayer.GetComponent<Animator>().enabled = false; // DC TODO -- needed? top one really stops the weirdness more than this
 
             // Stop Dan from moving
             thePlayer.GetComponent<Animator>().enabled = false;
@@ -1071,7 +1069,7 @@ public class Chp1 : MonoBehaviour
         {
             thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
-            uiMan.bUpdateBrio = true;
+            uMan.bUpdateBrio = true;
 
             quest0.GetComponent<QuestObject>().CollectedQuest();
         }
@@ -1083,7 +1081,7 @@ public class Chp1 : MonoBehaviour
         {
             thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
-            uiMan.bUpdateBrio = true;
+            uMan.bUpdateBrio = true;
 
             quest1.GetComponent<QuestObject>().CollectedQuest();
         }
@@ -1095,7 +1093,7 @@ public class Chp1 : MonoBehaviour
         {
             thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(5);
-            uiMan.bUpdateBrio = true;
+            uMan.bUpdateBrio = true;
 
             quest2.GetComponent<QuestObject>().CollectedQuest();
         }
@@ -1107,7 +1105,7 @@ public class Chp1 : MonoBehaviour
         {
             thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(5);
-            uiMan.bUpdateBrio = true;
+            uMan.bUpdateBrio = true;
 
             quest3.GetComponent<QuestObject>().CollectedQuest();
         }
@@ -1119,7 +1117,7 @@ public class Chp1 : MonoBehaviour
         {
             thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(15);
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(20);
-            uiMan.bUpdateBrio = true;
+            uMan.bUpdateBrio = true;
             
             quest4.GetComponent<QuestObject>().CollectedQuest();
         }
@@ -1131,7 +1129,7 @@ public class Chp1 : MonoBehaviour
         {
             thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
-            uiMan.bUpdateBrio = true;
+            uMan.bUpdateBrio = true;
             
             quest5.GetComponent<QuestObject>().CollectedQuest();
         }
@@ -1144,7 +1142,7 @@ public class Chp1 : MonoBehaviour
         {
             thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
             thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(25);
-            uiMan.bUpdateBrio = true;
+            uMan.bUpdateBrio = true;
             
             dMan.portPic = quest7.GetComponent<QuestObject>().portPic;
             qMan.ShowQuestText(quest7.GetComponent<QuestObject>().endText);
@@ -1311,7 +1309,6 @@ public class Chp1 : MonoBehaviour
         dMan.currentLine = 0;
         dText.text = dMan.dialogueLines[dMan.currentLine];
         dMan.ShowDialogue();
-        //dArrow.GetComponent<ImageStrobe>().StartCoroutine(dArrow.GetComponent<ImageStrobe>().Strobe()); // DC TODO -- needed?
     }
 
     public void Quest0Dialogue2()
@@ -1355,7 +1352,6 @@ public class Chp1 : MonoBehaviour
         dMan.currentLine = 0;
         dText.text = dMan.dialogueLines[dMan.currentLine];
         dMan.ShowDialogue();
-        //dArrow.GetComponent<ImageStrobe>().StartCoroutine(dArrow.GetComponent<ImageStrobe>().Strobe()); // DC TODO -- needed?
     }
 
     IEnumerator HideAndSeek()
@@ -1396,9 +1392,12 @@ public class Chp1 : MonoBehaviour
         dMan.currentLine = 0;
         dText.text = dMan.dialogueLines[dMan.currentLine];
         dMan.ShowDialogue();
-        //dArrow.GetComponent<ImageStrobe>().bStartStrobe = true;
-        // DC TODO 01/11/2019 -- bStart/bStopStrobe should be fixed in dMan now
-        // Go thru the scripts & make sure bStopStrobe is set to true & bStartStrobe = false OR removed altogether
+
+        // Turn on GUI if present
+        if (uMan.bControlsActive)
+        {
+            touches.transform.localScale = Vector3.one;
+        }
 
         bQ4Seeking = true;
     }
@@ -1475,6 +1474,9 @@ public class Chp1 : MonoBehaviour
         // Fade in
         screenFader.GetComponent<Animator>().SetBool("FadeIn", true);
 
+        // Turn on GUI
+        touches.transform.localScale = Vector3.one;
+
         bAvoidUpdateQ4counting = true;
         bAvoidUpdateQ4seeking = true;
 
@@ -1542,6 +1544,7 @@ public class Chp1 : MonoBehaviour
         bQ4Seeking = false;
         bAvoidUpdateQ4seeking = false;
         Q4KidCounter = 0;
+        oMan.ResetOptions();
 
         // "Turn off" Kids 5-9
         kid5.transform.localScale = Vector3.zero;
@@ -1604,12 +1607,14 @@ public class Chp1 : MonoBehaviour
             PlayerPrefs.SetInt("Transferring", 1);
             PlayerPrefs.SetString("TransferScene", warpMinesweeper.GetComponent<SceneTransitioner>().BetaLoad);
 
-            // Stop the player from bringing up the dialog again
+            // Save Quests
+            SaveQuests();
+
+            // Stop the player from bringing up the dialog again 
             dMan.gameObject.transform.localScale = Vector3.zero;
 
             // Stop Dan from moving
             dMan.gameObject.SetActive(false);
-            //thePlayer.GetComponent<Animator>().enabled = false; // DC TODO -- needed? top one really stops the weirdness more than this
 
             // Stop NPCs from moving
             person1.GetComponent<NPCMovement>().moveSpeed = 0;
@@ -1625,7 +1630,6 @@ public class Chp1 : MonoBehaviour
             dMan.currentLine = 0;
             dText.text = dMan.dialogueLines[dMan.currentLine];
             dMan.ShowDialogue();
-            //dArrow.GetComponent<ImageStrobe>().StartCoroutine(dArrow.GetComponent<ImageStrobe>().Strobe()); // DC TODO -- needed?
         }
     }
 
@@ -1638,7 +1642,6 @@ public class Chp1 : MonoBehaviour
         dMan.currentLine = 0;
         dText.text = dMan.dialogueLines[dMan.currentLine];
         dMan.ShowDialogue();
-        //dArrow.GetComponent<ImageStrobe>().StartCoroutine(dArrow.GetComponent<ImageStrobe>().Strobe()); // DC TODO -- needed?
     }
 
     public void Quest7Dialogue1Opt()
@@ -1734,7 +1737,6 @@ public class Chp1 : MonoBehaviour
         // Animate Pookie & stop moving
         if (thePlayer.transform.position.x >= pookieB1.transform.position.x)
         {
-            // DC TODO 01/13/2019 -- Can't get em to face right?
             pookieB1.GetComponent<Animator>().Play("Eat Right");
         }
         else
@@ -1862,7 +1864,6 @@ public class Chp1 : MonoBehaviour
         // Animate Pookie & stop moving
         if (thePlayer.transform.position.x >= pookieB2.transform.position.x)
         {
-            // DC TODO 01/13/2019 -- Can't get em to face right?
             pookieB2.GetComponent<Animator>().Play("Eat Right");
         }
         else
@@ -2052,7 +2053,8 @@ public class Chp1 : MonoBehaviour
         // 1 = TBEnded
         // 2 = Complete
         // 3 = Collected
-        string savedQuestsValue = "";
+
+        savedQuestsValue = "";
 
         for (int i = 0; i < qMan.quests.Length; i++)
         {

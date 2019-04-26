@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/21/2019
+// Last:  04/22/2019
 
 using System.Collections;
 using UnityEngine;
@@ -168,26 +168,9 @@ public class TouchControls : MonoBehaviour
         }
     }
 
-    // DC 08/13/2018 -- Need this for Dialogue & Cannabis in Button - OnClick
-    //                  Using the aStart & aStop functions skip / cycle too quickly thru the first prompt
-    //                  TODO: Figure out how to wrap this back in to just use aStart & aStop
-    // Action button flags
-    //public void StartAction()
-    //{
-    //    bAaction = true;
-    //    StartCoroutine(DelayedStop());
-    //}
-    //IEnumerator DelayedStop()
-    //{
-    //    yield return new WaitForSeconds(0.1f);
-    //    bAaction = false;
-    //    StopCoroutine(DelayedStop());
-    //}
-
     // A button flagging
     public void aActionStart()
     {
-        Debug.Log("action start");
         bAaction = true;
         bUIactive = true;
     }
@@ -200,11 +183,13 @@ public class TouchControls : MonoBehaviour
     // B button flagging
     public void bActionStart()
     {
+        Debug.Log("B true");
         bBaction = true;
         bUIactive = true;
     }
     public void bActionStop()
     {
+        Debug.Log("B false");
         bBaction = false;
         bUIactive = false;
     }
@@ -355,16 +340,19 @@ public class TouchControls : MonoBehaviour
     // Vibrate on touch
     public void Vibrate()
     {
-        if (bControlsVibrate)
-        {
-        #if UNITY_ANDROID
-            Handheld.Vibrate();
-        #endif
+        // DC 04/16/2019 -- Avoid showing in UnityEditor Log
+        #if !UNITY_EDITOR
+            if (bControlsVibrate)
+                {
+                #if UNITY_ANDROID
+                    Handheld.Vibrate(); 
+                #endif
 
-        #if UNITY_IOS
-            Handheld.Vibrate();
+                #if UNITY_IOS
+                    Handheld.Vibrate();
+                #endif
+            }
         #endif
-        }
     }
 
     public void ToggleVibrate()

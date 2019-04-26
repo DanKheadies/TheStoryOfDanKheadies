@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/31/2019
-// Last:  04/11/2019
+// Last:  04/22/2019
 
 using System.Collections;
 using UnityEngine;
@@ -15,8 +15,11 @@ public class SinglePlayerLogic : MonoBehaviour
     public GWC_Controller gwc;
     public MoveOptionsMenuArrow moveOptsArw;
     public OptionsManager oMan;
+    public PauseGame pause;
+    public TouchControls touches;
 
     public bool bAvoidingQuickGuess;
+    public bool bAvoidingQuickFTWGuessOnKeyboardOrUI;
     public bool bCheckingBoard;
     public bool bGuessingFTW;
     public bool bGuessingTrait;
@@ -64,6 +67,7 @@ public class SinglePlayerLogic : MonoBehaviour
 
     public float pauseTime;
 
+    public string goldRimNameFTW;
     public string nameFTW;
     public string pAnswer1;
     public string pAnswer2;
@@ -83,6 +87,8 @@ public class SinglePlayerLogic : MonoBehaviour
         gwc = FindObjectOfType<GWC_Controller>();
         moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
         oMan = FindObjectOfType<OptionsManager>();
+        pause = FindObjectOfType<PauseGame>();
+        touches = FindObjectOfType<TouchControls>();
 
         bTraitClothingColorO1 = bTraitCountryO1 = bTraitHairColorO1 = bTraitHairLengthO1 = bTraitIconsO1 = bTraitSkinColorO1 = true;
 
@@ -126,7 +132,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Well played friend. Want to play again?"
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
             gwc.dPic.sprite = gwc.portPic[48];
 
             gwc.optionsLines = new string[] {
@@ -143,7 +149,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Congrats! Want to play again?"
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
             gwc.dPic.sprite = gwc.portPic[48];
 
             gwc.optionsLines = new string[] {
@@ -156,7 +162,8 @@ public class SinglePlayerLogic : MonoBehaviour
         // Single Player - Opponent's First Guess
         if (bOppQ1 &&
             !bPauseQuestion &&
-            !dMan.bDialogueActive)
+            !dMan.bDialogueActive &&
+            !gwc.bBoardReset)
         {
             gwc.GWC_PromptRestrictions();
 
@@ -169,7 +176,7 @@ public class SinglePlayerLogic : MonoBehaviour
                 OpponentTreeTwo(1);
             }
 
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
             gwc.dPic.sprite = gwc.portPic[48];
 
             gwc.optionsLines = new string[] {
@@ -182,8 +189,9 @@ public class SinglePlayerLogic : MonoBehaviour
         }
         // Single Player - Opponent's Second Guess
         else if (bOppQ2 &&
-            !bPauseQuestion &&
-            !dMan.bDialogueActive)
+                 !bPauseQuestion &&
+                 !dMan.bDialogueActive &&
+                 !gwc.bBoardReset)
         {
             gwc.GWC_PromptRestrictions();
 
@@ -196,7 +204,7 @@ public class SinglePlayerLogic : MonoBehaviour
                 OpponentTreeTwo(2);
             }
 
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
             gwc.dPic.sprite = gwc.portPic[48];
 
             gwc.optionsLines = new string[] {
@@ -209,8 +217,9 @@ public class SinglePlayerLogic : MonoBehaviour
         }
         // Single Player - Opponent's Third Guess
         else if (bOppQ3 &&
-            !bPauseQuestion &&
-            !dMan.bDialogueActive)
+                 !bPauseQuestion &&
+                 !dMan.bDialogueActive &&
+                 !gwc.bBoardReset)
         {
             gwc.GWC_PromptRestrictions();
 
@@ -223,7 +232,7 @@ public class SinglePlayerLogic : MonoBehaviour
                 OpponentTreeTwo(3);
             }
 
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
             gwc.dPic.sprite = gwc.portPic[48];
 
             gwc.optionsLines = new string[] {
@@ -236,8 +245,9 @@ public class SinglePlayerLogic : MonoBehaviour
         }
         // Single Player - Opponent's Fourth Guess
         else if (bOppQ4 &&
-            !bPauseQuestion &&
-            !dMan.bDialogueActive)
+                 !bPauseQuestion &&
+                 !dMan.bDialogueActive &&
+                 !gwc.bBoardReset)
         {
             gwc.GWC_PromptRestrictions();
 
@@ -250,7 +260,7 @@ public class SinglePlayerLogic : MonoBehaviour
                 OpponentTreeTwo(4);
             }
 
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
             gwc.dPic.sprite = gwc.portPic[48];
 
             gwc.optionsLines = new string[] {
@@ -263,8 +273,9 @@ public class SinglePlayerLogic : MonoBehaviour
         }
         // Single Player - Opponent's Fifth Guess
         else if (bOppQ5 &&
-            !bPauseQuestion &&
-            !dMan.bDialogueActive)
+                 !bPauseQuestion &&
+                 !dMan.bDialogueActive &&
+                 !gwc.bBoardReset)
         {
             gwc.GWC_PromptRestrictions();
 
@@ -277,7 +288,7 @@ public class SinglePlayerLogic : MonoBehaviour
                 OpponentTreeTwo(5);
             }
 
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
             gwc.dPic.sprite = gwc.portPic[48];
 
             gwc.optionsLines = new string[] {
@@ -290,8 +301,9 @@ public class SinglePlayerLogic : MonoBehaviour
         }
         // Single Player - Opponent's Sixth Guess
         else if (bOppQ6 &&
-            !bPauseQuestion &&
-            !dMan.bDialogueActive)
+                 !bPauseQuestion &&
+                 !dMan.bDialogueActive &&
+                 !gwc.bBoardReset)
         {
             gwc.GWC_PromptRestrictions();
 
@@ -304,7 +316,7 @@ public class SinglePlayerLogic : MonoBehaviour
                 OpponentTreeTwo(6);
             }
 
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
             gwc.dPic.sprite = gwc.portPic[48];
 
             gwc.optionsLines = new string[] {
@@ -361,7 +373,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Hmmm.. Should I ask him about.. " + npcTrait[traitInt] + "?"
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
             gwc.dPic.sprite = gwc.portPic[gwc.playerCharacter];
 
             gwc.optionsLines = new string[] {
@@ -386,7 +398,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Hmmm.. Time to make a guess..."
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
             gwc.dPic.sprite = gwc.portPic[gwc.playerCharacter];
 
             gwc.optionsLines = new string[] {
@@ -396,8 +408,10 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.GWC_OptionsResetter_2Q();
         }
 
-        // Guessing FTW
+        // Guessing FTW (mouse / tap)
         if (bGuessingFTW &&
+            !pause.bPauseActive &&
+            !pause.bPausing &&
             Input.GetMouseButtonUp(0))
         {
             if (nameFTW != "")
@@ -419,7 +433,7 @@ public class SinglePlayerLogic : MonoBehaviour
                     gwc.dialogueLines = new string[] {
                         "Dang, I am " + nameFTW + ".. Good guess'n."
                     };
-                    gwc.GWC_DialogueRestter();
+                    gwc.GWC_DialogueResetter();
                     gwc.dPic.sprite = gwc.portPic[48];
                 }
                 else
@@ -437,7 +451,7 @@ public class SinglePlayerLogic : MonoBehaviour
                     gwc.dialogueLines = new string[] {
                         "So sorry.. I am not " + nameFTW + "."
                     };
-                    gwc.GWC_DialogueRestter();
+                    gwc.GWC_DialogueResetter();
                     gwc.dPic.sprite = gwc.portPic[48];
 
                     bPlayerMidGuess = false;
@@ -450,6 +464,73 @@ public class SinglePlayerLogic : MonoBehaviour
                 nameFTW = "";
                 bGuessingFTW = false;
             }
+        }
+        else if (bGuessingFTW &&
+                 !pause.bPauseActive &&
+                 !pause.bPausing &&
+                 !bAvoidingQuickFTWGuessOnKeyboardOrUI &&
+                 (Input.GetButtonUp("Action") ||
+                  touches.bAaction))
+        {
+            bAvoidingQuickFTWGuessOnKeyboardOrUI = true;
+        }
+        // DC TODO -- Not the best user interaction on keyboard (and prob controller); this runs before dMan cycle 
+        // Guessing FTW (buttons)
+        else if (bGuessingFTW &&
+                 !pause.bPauseActive &&
+                 !pause.bPausing &&
+                 bAvoidingQuickFTWGuessOnKeyboardOrUI &&
+                 (Input.GetButtonUp("Action") ||
+                  touches.bAaction))
+        {
+            if (goldRimNameFTW == gwc.chars.characters[gwc.opponentCharacter].charGameName)
+            {
+                bPlayWins = true;
+
+                foreach (CharacterTraits character in gwc.chars.characters)
+                {
+                    if (character.charGameName == goldRimNameFTW)
+                    {
+                        goldRimNameFTW = character.charName;
+                    }
+                }
+
+                gwc.GWC_PromptRestrictions();
+
+                gwc.dialogueLines = new string[] {
+                    "Dang, I am " + goldRimNameFTW + ".. Good guess'n."
+                };
+                gwc.GWC_DialogueResetter();
+                gwc.dPic.sprite = gwc.portPic[48];
+            }
+            else
+            {
+                foreach (CharacterTraits character in gwc.chars.characters)
+                {
+                    if (character.charGameName == goldRimNameFTW)
+                    {
+                        goldRimNameFTW = character.charName;
+                    }
+                }
+
+                gwc.GWC_PromptRestrictions();
+
+                gwc.dialogueLines = new string[] {
+                    "So sorry.. I am not " + goldRimNameFTW + "."
+                };
+                gwc.GWC_DialogueResetter();
+                gwc.dPic.sprite = gwc.portPic[48];
+
+                bPlayerMidGuess = false;
+
+                PauseQuestion();
+                QuestionAdvancer();
+            }
+
+            // Reset
+            bAvoidingQuickFTWGuessOnKeyboardOrUI = false;
+            bGuessingFTW = false;
+            touches.bAaction = false;
         }
     }
 
@@ -670,7 +751,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Hmmm... Are you wearing anything.."
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
 
             if (bTraitClothingColorO1)
             {
@@ -706,7 +787,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Hmmm... Are you from.."
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
 
             if (bTraitCountryO1)
             {
@@ -733,7 +814,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Hmmm... Are you looking to.."
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
 
             gwc.optionsLines = new string[] {
                 "The left",
@@ -748,7 +829,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Hmmm... Are your eyes.."
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
 
             gwc.optionsLines = new string[] {
                 "Dark (brown / black)",
@@ -763,7 +844,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Hmmm... Are wearing any kind of glasses.."
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
 
             gwc.optionsLines = new string[] {
                 "Yea",
@@ -776,7 +857,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Hmmm... Do you have any facial hair.."
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
 
             gwc.optionsLines = new string[] {
                 "Yea",
@@ -789,7 +870,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Hmmm... Are you a.."
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
 
             gwc.optionsLines = new string[] {
                 "Man",
@@ -803,7 +884,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Hmmm... Is your hair color.."
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
 
             if (bTraitHairColorO1)
             {
@@ -841,7 +922,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Hmmm... Is your hair.."
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
 
             if (bTraitHairLengthO1)
             {
@@ -867,7 +948,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Hmmm..."
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
 
             if (bTraitIconsO1)
             {
@@ -925,7 +1006,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Hmmm... Is your skin.."
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
 
             if (bTraitSkinColorO1)
             {
@@ -953,7 +1034,7 @@ public class SinglePlayerLogic : MonoBehaviour
             gwc.dialogueLines = new string[] {
                 "Derp"
             };
-            gwc.GWC_DialogueRestter();
+            gwc.GWC_DialogueResetter();
 
             gwc.optionsLines = new string[] {
                 "Derp",
@@ -4712,6 +4793,7 @@ public class SinglePlayerLogic : MonoBehaviour
         bGuessingTrait = false;
         bOppGuessFTW = false;
         bOppWins = false;
+        bPauseQuestion = false;
         bPlayerMidGuess = false;
         bPlayQ1 = false;
         bPlayQ2 = false;
@@ -4735,7 +4817,7 @@ public class SinglePlayerLogic : MonoBehaviour
     {
         oMan.ResetOptions();
 
-        gwc.GWC_DialogueRestter();
+        gwc.GWC_DialogueResetter();
         gwc.dPic.sprite = gwc.portPic[48];
 
         PauseQuestion();

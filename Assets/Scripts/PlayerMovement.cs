@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  03/15/2019
+// Last:  04/25/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,11 +22,12 @@ public class PlayerMovement : MonoBehaviour
     private SFXManager SFXMan;
     private TouchControls touches;
     private Transform trans;
-    private UIManager uiMan;
+    private UIManager uMan;
     public Vector2 movementVector;
 
     public bool bBoosting;
     public bool bGWCUpdate;
+    public bool bIsMobile;
     public bool bStopPlayerMovement;
 
     public float moveSpeed;
@@ -35,22 +36,22 @@ public class PlayerMovement : MonoBehaviour
 	void Start ()
     {
         // Initializers
-        aspectUtil = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AspectUtility>();
-        cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
+        aspectUtil = FindObjectOfType<AspectUtility>();
+        cameraFollow = FindObjectOfType<CameraFollow>();
         fixJoystick = FindObjectOfType<FixedJoystick>();
         joystick = FindObjectOfType<Joystick>();
-        playerBrioMan = GetComponent<PlayerBrioManager>();
+        playerBrioMan = FindObjectOfType<PlayerBrioManager>();
         playerCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
         scene = SceneManager.GetActiveScene();
         SFXMan = FindObjectOfType<SFXManager>();
         touches = FindObjectOfType<TouchControls>();
         trans = GetComponent<Transform>();
-        uiMan = FindObjectOfType<UIManager>();
+        uMan = FindObjectOfType<UIManager>();
 
         if (scene.name != "GuessWhoColluded")
         {
-            cameraSlider = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraSlider>();
+            cameraSlider = FindObjectOfType<CameraSlider>();
             pAnim = GetComponent<Animator>();
         }
         else
@@ -77,8 +78,14 @@ public class PlayerMovement : MonoBehaviour
             movementVector = Vector2.zero;
             rBody.velocity = Vector2.zero;
         }
-        else if (touches.bDown || touches.bLeft || touches.bRight || touches.bUp ||
-            touches.bUpRight || touches.bUpLeft || touches.bDownRight || touches.bDownLeft)
+        else if (touches.bDown || 
+                 touches.bLeft || 
+                 touches.bRight || 
+                 touches.bUp ||
+                 touches.bUpRight || 
+                 touches.bUpLeft || 
+                 touches.bDownRight || 
+                 touches.bDownLeft)
         {
             // No action; just need to avoid MovePlayer() here b/c it's cancelling out
             // the Touches script by passing in Move(0,0) while touches passes Move(X,Y)
@@ -105,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (fixJoystick.bJoying)
         {
+            // DC TODO -- See if sliding; then restrict movement in that previous direction for 0.X seconds AFTER re-contact w/ Joystick
             MovePlayerWithJoy();
         }
         else
@@ -115,10 +123,26 @@ public class PlayerMovement : MonoBehaviour
         // Set boosting
         if (scene.name != "GuessWhoColluded")
         {
-            if (Input.GetButton("BAction") ||
-                touches.bBaction)
+            if (touches.bBaction ||
+                (Input.GetButton("BAction") &&
+                 !uMan.bMobileDevice))
             {
+                Debug.Log("boosting");
                 bBoosting = true;
+            }
+            else if (touches.bUIactive &&
+                     !touches.bBaction &&
+                     (touches.bDown ||
+                      touches.bDownLeft ||
+                      touches.bDownRight ||
+                      touches.bLeft ||
+                      touches.bRight ||
+                      touches.bUp ||
+                      touches.bUpLeft ||
+                      touches.bUpRight))
+            {
+                Debug.Log("should stop sprinting");
+                bBoosting = false;
             }
             else
             {
@@ -164,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
             if (movementVector != Vector2.zero)
             {
                 playerBrioMan.FatiguePlayer(0.1f);
-                uiMan.bUpdateBrio = true;
+                uMan.bUpdateBrio = true;
             }
         }
         // 1x Move Speed
@@ -220,7 +244,7 @@ public class PlayerMovement : MonoBehaviour
         cameraFollow.bUpdateOn = false;
 
         // Hide UI (if present) and prevent input
-        cameraSlider.bTempControlActive = uiMan.bControlsActive;
+        cameraSlider.bTempControlActive = uMan.bControlsActive;
         touches.transform.localScale = Vector3.zero;
         touches.UnpressedAllArrows();
 

@@ -2,7 +2,7 @@
 // Authors: Unity (https://unity3d.com/learn/tutorials/topics/mobile-touch/pinch-zoom) (https://docs.unity3d.com/ScriptReference/Input.GetTouch.html)
 // Contributors: David W. Corso, JoaquinRD, alberto-lara
 // Start: 02/18/2019
-// Last:  04/11/2019
+// Last:  04/25/2019
 
 using UnityEngine;
 
@@ -11,42 +11,54 @@ public class GWCTouchControls : MonoBehaviour
     public AspectUtility aUtil;
     public Camera mainCamera;
     public GameObject pause;
+    public GameObject sceneTransAnim;
+    public GWC_Controller gwc;
     public PlayerMovement pMove;
     public TouchControls touches;
     
     public bool bReadyToPan;
 
+    public float maxDoubleTapTime;
+    public float newTime;
     public float perspectiveZoomSpeed;
     public float orthoZoomSpeed;
     public float speed;
     public float xInput;
     public float yInput;
 
+    public int tapCount;
+
     void Start()
     {
         // Initializers
         aUtil = FindObjectOfType<AspectUtility>();
+        gwc = FindObjectOfType<GWC_Controller>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         pause = GameObject.Find("PauseScreen");
         pMove = FindObjectOfType<PlayerMovement>();
+        sceneTransAnim = GameObject.Find("SceneTransitioner");
         touches = FindObjectOfType<TouchControls>();
 
+        maxDoubleTapTime = 0.333f;
         perspectiveZoomSpeed = 0.1f;       // The rate of change of the field of view in perspective mode.
         orthoZoomSpeed = 0.0125f;          // The rate of change of the orthographic size in orthographic mode.
         speed = 0.05f;
-
+        tapCount = 0;
+        
         bReadyToPan = true;
     }
 
-        void Update()
+    void Update()
     {
         // If GUI Controls are disabled
-        if (touches.transform.localScale == Vector3.zero &&
+        if (gwc.bStartGame &&
+            touches.transform.localScale == Vector3.zero &&
             pause.transform.localScale == Vector3.zero)
         {
             // Swipe-Pan
             if (bReadyToPan &&
-                (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved))
+                (Input.touchCount == 1 && 
+                 Input.GetTouch(0).phase == TouchPhase.Moved))
             {
                 bReadyToPan = false;
 
@@ -81,9 +93,44 @@ public class GWCTouchControls : MonoBehaviour
                 }
             }
 
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+            // Reset Pan so it can act more like a "click" or button
+            if (!bReadyToPan && 
+                Input.touchCount == 1 && 
+                Input.GetTouch(0).phase == TouchPhase.Ended)
             {
                 bReadyToPan = true;
+            }
+
+            // Cycle Layers
+            // If there is a double tap on the device...
+            if (Input.touchCount == 1)
+            {
+                Touch touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Ended)
+                {
+                    tapCount += 1;
+                }
+
+                if (tapCount == 1)
+                {
+                    newTime = Time.time + maxDoubleTapTime;
+                }
+                else if (tapCount == 2 && Time.time <= newTime)
+                {
+                    for (int i = 0; i < gwc.charTiles.Length; i++)
+                    {
+                        gwc.charTiles[i].FlipLayer();
+                    }
+
+                    tapCount = 0;
+                }
+            }
+
+            //// Reset double tap timer
+            if (Time.time > newTime)
+            {
+                tapCount = 0;
             }
 
             // Pinch-Zoom
@@ -113,8 +160,6 @@ public class GWCTouchControls : MonoBehaviour
 
                     // Make sure the orthographic size never drops below zero.
                     mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, 0.875f, 5.642857f);
-                    
-                    Debug.Log(mainCamera.orthographicSize);
                 }
                 // DC 02/22/2019 -- This "should" never run
                 else
@@ -125,6 +170,11 @@ public class GWCTouchControls : MonoBehaviour
                     // Clamp the field of view to make sure it's between 0 and 180.
                     mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView, 0.1f, 179.9f);
                 }
+
+                // Adjust the scene transitioner
+                sceneTransAnim.transform.localScale = new Vector2
+                    (Mathf.Clamp((sceneTransAnim.transform.localScale.x + (deltaMagnitudeDiff * orthoZoomSpeed) * 1.5f), 1.5f, 9f),
+                     Mathf.Clamp((sceneTransAnim.transform.localScale.y + (deltaMagnitudeDiff * orthoZoomSpeed) * 1.5f), 1.5f, 9f));
             }
         }
     }

@@ -88,6 +88,9 @@ public class SaveGame : MonoBehaviour
             PlayerPrefs.SetString("Item" + i, inv.items[i].ToString());
             PlayerPrefs.SetInt("ItemTotal", i+1);
         }
+
+        SavingVolume();
+        SavingUIControls();
     }
 
     // Test to check saved values
@@ -143,18 +146,15 @@ public class SaveGame : MonoBehaviour
     // Saves UI Volume data
     public void SavingVolume()
     {
-        PlayerPrefs.SetFloat("Volume", savedVol.currentVolumeLevel); // Called in VolumeManager
+        PlayerPrefs.SetFloat("Volume", savedVol.currentVolumeLevel); // Also called in VolumeManager
     }
 
-    // Saves UI controls' opacity and  data
+    // Saves UI controls' opacity and data
     public void SavingUIControls()
     {
-        // DC TODO 3/1/19 -- Saving / loading controls having a problem on iPad (and iPhone?);
-        // Won't show when starting a new game; maybe need a hard reset there?
-        // Also, hiding on GWC & then loading up the game won't show em (see above i guess)
-        PlayerPrefs.SetInt("ControlsDPad", uiMan.currentContDPad); // Called in UIManager
-        PlayerPrefs.SetFloat("ControlsOpac", uiMan.currentContOpac); // Called in UIManager
-        PlayerPrefs.SetInt("ControlsVibrate", touches.currentContVibe); // Called in TouchControls
+        PlayerPrefs.SetInt("ControlsDPad", uiMan.currentContDPad); // Also called in UIManager
+        PlayerPrefs.SetFloat("ControlsOpac", uiMan.currentContOpac); // Also called in UIManager
+        PlayerPrefs.SetInt("ControlsVibrate", touches.currentContVibe); // Also called in TouchControls
 
         if (uiMan.bControlsActive)
         {
@@ -193,6 +193,12 @@ public class SaveGame : MonoBehaviour
         PlayerPrefs.SetFloat("TransferBrio", savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio);
     }
 
+    // Temp save UI controls' opacity and data
+    public void SaveUITransfer()
+    {
+        SavingUIControls();
+    }
+
     // Loads *all* user data at the start
     public void GetSavedGame()
     {
@@ -213,6 +219,8 @@ public class SaveGame : MonoBehaviour
         camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord");
 
         // See UIManager for UI getters
+
+        // See TouchControls for touches getters
 
         // See Inventory for inventory getters
     }
@@ -251,7 +259,7 @@ public class SaveGame : MonoBehaviour
         PlayerPrefs.DeleteKey("TransferBrio");
     }
 
-    // Testing -- Delete all values
+    // Delete all values
     public void DeleteAllPrefs()
     {
         PlayerPrefs.DeleteAll();

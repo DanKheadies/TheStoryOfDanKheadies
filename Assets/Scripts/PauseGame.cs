@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/26/2017
-// Last:  04/11/2019
+// Last:  04/22/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 // Pause the game & bring up the menu
 public class PauseGame : MonoBehaviour
 {
+    public DialogueManager dMan;
     public FixedJoystick fixedJoy;
     public MovePauseMenuArrow movePArw;
     public OptionsManager oMan;
@@ -30,6 +31,7 @@ public class PauseGame : MonoBehaviour
     {
         // Initializers
         controlsMenu = GameObject.Find("ControlsMenu").transform;
+        dMan = FindObjectOfType<DialogueManager>();
         fixedJoy = FindObjectOfType<FixedJoystick>();
         movePArw = GameObject.Find("PauseMenu").GetComponent<MovePauseMenuArrow>();
         oMan = FindObjectOfType<OptionsManager>();
@@ -108,14 +110,23 @@ public class PauseGame : MonoBehaviour
 
             pauseTrans.transform.localScale = Vector3.one;
             Time.timeScale = 0;
-            
-            bPausing = false;
-            bPauseActive = true;
-            pMove.bStopPlayerMovement = true;
-            touches.bUIactive = true;
 
             // "Lock" Joystick to vertical direction
             fixedJoy.joystickMode = JoystickMode.Vertical;
+
+            bPausing = false;
+            bPauseActive = true;
+            touches.bUIactive = true;
+
+            if (oMan.bOptionsActive ||
+                dMan.bDialogueActive)
+            {
+                pMove.bStopPlayerMovement = true;
+            }
+            else
+            {
+                pMove.bStopPlayerMovement = false;
+            }
         }
         else
         {
@@ -124,13 +135,22 @@ public class PauseGame : MonoBehaviour
             Time.timeScale = 1;
 
             movePArw.ResetArrows();
-            
+
+            // "Unlock" Joystick from vertical direction
+            fixedJoy.joystickMode = JoystickMode.AllAxis;
+
             bPauseActive = false;
-            pMove.bStopPlayerMovement = false;
             touches.bUIactive = false;
 
-            // "Unock" Joystick from vertical direction
-            fixedJoy.joystickMode = JoystickMode.AllAxis;
+            if (oMan.bOptionsActive ||
+                dMan.bDialogueActive)
+            {
+                pMove.bStopPlayerMovement = true;
+            }
+            else
+            {
+                pMove.bStopPlayerMovement = false;
+            }
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/11/2019
+// Last:  04/16/2019
 
 using UnityEngine;
 
@@ -11,8 +11,10 @@ public class DialogueHolder : MonoBehaviour
     public Animator anim;
     public Collider2D colliEnter;
     public DialogueManager dMan;
+    public PauseGame pause;
     public Sprite portPic;
     public TouchControls touches;
+    public UIManager uMan;
 
     public bool bContinueDialogue;
     public bool bHasEntered;
@@ -25,7 +27,9 @@ public class DialogueHolder : MonoBehaviour
         // Initializers
         anim = GetComponentInParent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
+        pause = FindObjectOfType<PauseGame>();
         touches = FindObjectOfType<TouchControls>();
+        uMan = FindObjectOfType<UIManager>();
 
         bHasEntered = false;
         bHasExited = true;
@@ -36,9 +40,13 @@ public class DialogueHolder : MonoBehaviour
         if (bHasEntered && 
             !bHasExited && 
             !dMan.bDialogueActive && 
-            !dMan.bPauseDialogue && 
-            (Input.GetButtonUp("Action") ||
-             touches.bAaction))
+            !dMan.bPauseDialogue &&
+            !pause.bPausing &&
+            !pause.bPauseActive &&
+            (touches.bAaction ||
+             Input.GetButtonDown("Action") ||
+             (Input.GetButtonDown("DialogueAction") &&
+              !uMan.bControlsActive)))
         {
             TalkWithNPC(colliEnter);
         }

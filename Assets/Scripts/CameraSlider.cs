@@ -15,6 +15,10 @@ public class CameraSlider : MonoBehaviour
     private PlayerMovement pMove;
     private TouchControls touches;
 
+    public bool bSlideDown;
+    public bool bSlideLeft;
+    public bool bSlideRight;
+    public bool bSlideUp;
     public bool bTempControlActive;
 
     void Start()
@@ -72,6 +76,8 @@ public class CameraSlider : MonoBehaviour
 
     public void SlideRight()
     {
+        bSlideRight = true;
+
         StartCoroutine(Slide(
             mainCamera.transform,
             (mainCamera.transform.position + new Vector3(2.555f, 0f)),
@@ -85,6 +91,8 @@ public class CameraSlider : MonoBehaviour
 
     public void SlideLeft()
     {
+        bSlideLeft = true;
+
         StartCoroutine(Slide(
             mainCamera.transform,
             (mainCamera.transform.position + new Vector3(-2.555f, 0f)),
@@ -98,6 +106,8 @@ public class CameraSlider : MonoBehaviour
 
     public void SlideUp()
     {
+        bSlideUp = true;
+
         StartCoroutine(Slide(
             mainCamera.transform,
             (mainCamera.transform.position + new Vector3(0f, 2.23f)),
@@ -111,6 +121,8 @@ public class CameraSlider : MonoBehaviour
 
     public void SlideDown()
     {
+        bSlideDown = true;
+
         StartCoroutine(Slide(
             mainCamera.transform,
             (mainCamera.transform.position + new Vector3(0f, -2.23f)),

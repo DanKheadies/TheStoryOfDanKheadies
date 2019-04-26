@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 05/20/2018
-// Last:  04/11/2019
+// Last:  04/25/2019
 
 using System.Collections;
 using UnityEngine;
@@ -11,8 +11,8 @@ using UnityEngine;
 public class Element : MonoBehaviour
 {
     public DialogueManager dMan;
-    public GameObject pause;
     public Minesweeper ms;
+    public PauseGame pause;
     public Sprite[] emptyTextures;
     public Sprite defaultTexture;
     public Sprite flagTexture;
@@ -31,7 +31,7 @@ public class Element : MonoBehaviour
         // Initializers
         dMan = FindObjectOfType<DialogueManager>();
         ms = FindObjectOfType<Minesweeper>();
-        pause = GameObject.FindGameObjectWithTag("Pause");
+        pause = FindObjectOfType<PauseGame>();
         touches = GameObject.Find("GUIControls").GetComponent<TouchControls>();
 
         //mineProbability = 0.01f;
@@ -61,7 +61,6 @@ public class Element : MonoBehaviour
 
         if (bHasEntered &&
             !dMan.bDialogueActive &&
-            //!ms.bPauseFlagging &&
             (Input.GetKeyUp(KeyCode.F) ||
              Input.GetKeyUp(KeyCode.JoystickButton2) ||
              Input.GetKeyUp(KeyCode.JoystickButton3) ||
@@ -134,11 +133,15 @@ public class Element : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) &&
             !ms.bAvoidInvestigating &&
+            !dMan.bDialogueActive &&
+            !pause.bPauseActive &&
             !touches.bAvoidSubUIElements)
         {
             InvestigateElement();
         }
-        else if (Input.GetMouseButtonUp(1))
+        else if (Input.GetMouseButtonUp(1) &&
+                 !pause.bPauseActive &&
+                 !dMan.bDialogueActive)
         {
             FlagElement();
         }
@@ -190,7 +193,6 @@ public class Element : MonoBehaviour
         }
 
         touches.bBaction = false;
-        //ms.PauseFlagging();
     }
 
     IEnumerator ResetElements()
