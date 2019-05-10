@@ -5949,6 +5949,7 @@ MonoBehaviour:
   hudCanvas: {fileID: 0}
   dMan: {fileID: 0}
   fixedJoy: {fileID: 0}
+  pauseButtOpac: {fileID: 0}
   dPads: []
   joySticks: []
   oMan: {fileID: 0}
@@ -7404,6 +7405,7 @@ MonoBehaviour:
   movementVector: {x: 0, y: 0}
   bBoosting: 0
   bGWCUpdate: 0
+  bIsMobile: 0
   bStopPlayerMovement: 0
   moveSpeed: 0
 --- !u!50 &875949247
@@ -13193,7 +13195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 2
+  - eventID: 4
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -14513,7 +14515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 2
+  - eventID: 4
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -16786,9 +16788,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   dMan: {fileID: 0}
   fixedJoy: {fileID: 0}
-  brioBar: {fileID: 0}
   oBox: {fileID: 0}
-  pauseButtOpac: {fileID: 0}
   o1Arw: {fileID: 0}
   o1Text: {fileID: 0}
   o2Arw: {fileID: 0}
@@ -16800,6 +16800,7 @@ MonoBehaviour:
   oFrame: {fileID: 0}
   moveOptsArw: {fileID: 0}
   touches: {fileID: 0}
+  uMan: {fileID: 0}
   bDiaToOpts: 0
   bOptionsActive: 0
   bPauseOptions: 0

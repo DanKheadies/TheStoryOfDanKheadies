@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/21/2019
+// Last:  05/09/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -129,7 +129,8 @@ public class SaveGame : MonoBehaviour
         Debug.Log("Vol: " + PlayerPrefs.GetFloat("Volume"));
         Debug.Log("Con: " + PlayerPrefs.GetInt("ControlsActive"));
         Debug.Log("COp: " + PlayerPrefs.GetFloat("ControlsOpac"));
-        Debug.Log("CTy: " + PlayerPrefs.GetString("ControlsType"));
+        Debug.Log("CDP: " + PlayerPrefs.GetString("ControlsDPad"));
+        Debug.Log("CVi: " + PlayerPrefs.GetString("ControlsVibrate"));
 
         Debug.Log("C1Q: " + PlayerPrefs.GetString("Chp1Quests"));
 

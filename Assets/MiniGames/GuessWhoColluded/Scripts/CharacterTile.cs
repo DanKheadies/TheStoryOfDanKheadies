@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/13/2018
-// Last:  04/25/2019
+// Last:  05/10/2019
 
 using UnityEngine;
 
@@ -204,7 +204,6 @@ public class CharacterTile : MonoBehaviour
             !spLogic.bGuessingFTW &&
             !dMan.bDialogueActive &&
             !pause.bPauseActive &&
-            !touches.bUIactive &&
             !touches.bAvoidSubUIElements)
         {
             CheckAndFlip();

@@ -34191,6 +34191,7 @@ MonoBehaviour:
   bFoundQ4Kid8: 0
   bFoundQ4Kid9: 0
   bFoundQ4All: 0
+  bQ3InitialCheck: 0
   bGetInventory: 0
   invTimer: 0
   raceTimer: 0
@@ -90612,10 +90613,55 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5655120152573923846, guid: fc57066e3389e2c4cb1320576bd12808,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655120154340658971, guid: fc57066e3389e2c4cb1320576bd12808,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655120154340658971, guid: fc57066e3389e2c4cb1320576bd12808,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2087698428}
+    - target: {fileID: 5655120154340658971, guid: fc57066e3389e2c4cb1320576bd12808,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Vibrate
+      objectReference: {fileID: 0}
     - target: {fileID: 5655120152377182132, guid: fc57066e3389e2c4cb1320576bd12808,
         type: 3}
-      propertyPath: m_Delegates.Array.size
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655120152377182132, guid: fc57066e3389e2c4cb1320576bd12808,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655120152377182132, guid: fc57066e3389e2c4cb1320576bd12808,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655120152377182132, guid: fc57066e3389e2c4cb1320576bd12808,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 875949246}
+    - target: {fileID: 5655120152377182132, guid: fc57066e3389e2c4cb1320576bd12808,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: MobileStopSprinting
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655120152377182132, guid: fc57066e3389e2c4cb1320576bd12808,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc57066e3389e2c4cb1320576bd12808, type: 3}

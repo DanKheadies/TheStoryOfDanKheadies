@@ -1,8 +1,9 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/08/2018
-// Last:  04/11/2019
+// Last:  05/01/2019
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,9 +13,7 @@ public class OptionsManager : MonoBehaviour
     public CameraFollow mainCamera;
     public DialogueManager dMan;
     public FixedJoystick fixedJoy;
-    public GameObject brioBar;
     public GameObject oBox;
-    public GameObject pauseButtOpac;
     public Image o1Arw;
     public Image o1Text;
     public Image o2Arw;
@@ -26,6 +25,7 @@ public class OptionsManager : MonoBehaviour
     public Image oFrame;
     public MoveOptionsMenuArrow moveOptsArw;
     public TouchControls touches;
+    public UIManager uMan;
 
     public bool bDiaToOpts;
     public bool bOptionsActive;
@@ -59,7 +59,6 @@ public class OptionsManager : MonoBehaviour
     void Start()
     {
         // Initializers
-        brioBar = GameObject.Find("BrioBar");
         dMan = FindObjectOfType<DialogueManager>();
         fixedJoy = FindObjectOfType<FixedJoystick>();
         mainCamera = FindObjectOfType<CameraFollow>();
@@ -74,8 +73,8 @@ public class OptionsManager : MonoBehaviour
         o4Text = GameObject.Find("Opt4").GetComponent<Image>();
         oFrame = GameObject.Find("Options_Frame").GetComponent<Image>();
         oBox = GameObject.Find("Options_Box");
-        pauseButtOpac = GameObject.Find("PauseButtonOpacity");
         touches = FindObjectOfType<TouchControls>();
+        uMan = FindObjectOfType<UIManager>();
 
         // DC TODO -- Default is false?
         bDiaToOpts = false;
@@ -130,11 +129,9 @@ public class OptionsManager : MonoBehaviour
             optText.GetComponentInChildren<Text>().text = options[i];
             tempOptsCount += 1;
         }
-
-        // DC TODO
+        
         // Hide Brio Bar & Pause Button (Overlay)
-        brioBar.transform.localScale = Vector3.zero;
-        pauseButtOpac.transform.localScale = Vector3.zero;
+        uMan.HideBrioAndButton();
 
         // "Lock" Joystick to vertical direction
         fixedJoy.joystickMode = JoystickMode.Vertical;
@@ -158,11 +155,20 @@ public class OptionsManager : MonoBehaviour
         
         dMan.ResetDialogue();
 
-        // DC TODO
-        brioBar.transform.localScale = Vector3.one;
-        pauseButtOpac.transform.localScale = Vector3.one;
+        StartCoroutine(WaitForDialogue());
         
         fixedJoy.joystickMode = JoystickMode.AllAxis;
+    }
+
+    public IEnumerator WaitForDialogue()
+    {
+        yield return new WaitForSeconds(0.0125f);
+
+        if (!bOptionsActive &&
+            !dMan.bDialogueActive)
+        {
+            uMan.ShowBrioAndButton();
+        }
     }
 
     public void CheckAndAssignClickedValue(int option)

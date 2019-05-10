@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/26/2017
-// Last:  04/22/2019
+// Last:  05/10/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -116,7 +116,6 @@ public class PauseGame : MonoBehaviour
 
             bPausing = false;
             bPauseActive = true;
-            touches.bUIactive = true;
 
             if (oMan.bOptionsActive ||
                 dMan.bDialogueActive)
@@ -140,7 +139,6 @@ public class PauseGame : MonoBehaviour
             fixedJoy.joystickMode = JoystickMode.AllAxis;
 
             bPauseActive = false;
-            touches.bUIactive = false;
 
             if (oMan.bOptionsActive ||
                 dMan.bDialogueActive)

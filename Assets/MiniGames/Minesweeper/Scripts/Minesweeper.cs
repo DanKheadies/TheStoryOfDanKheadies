@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  04/22/2019
+// Last:  05/10/2019
 
 // DC TODO -- Bring in QuestMananger & complete quest when won (but still able to keep playing for restored brio & not more brio)
 
@@ -106,13 +106,14 @@ public class Minesweeper : MonoBehaviour
         dText.text = dialogueLines[dMan.currentLine];
         dPic.sprite = portPic[0];
         dBox.transform.localScale = Vector3.one;
-    }
-	
-	void Update ()
-    {
-        // 06/07/2018 DC -- Volume Bug
-        //                  Volume kept creeping up / on while playing; no ideas why
 
+        // 05/10/2019 DC TODO 
+        // need to hide brio and button here (and restore once dialgoue goes away)
+        // need t oallow joystick to work on the options (chedk dpad too)
+    }
+
+    void Update ()
+    {
         // Transfer -- Load inventory
         if (timer > 0)
         {
@@ -165,16 +166,6 @@ public class Minesweeper : MonoBehaviour
                 bAvoidInvestionUpdate = false;
             }
         }
-
-        // Avoid spamming flags
-        //if (bPauseFlagging)
-        //{
-        //    pauseTimer -= Time.deltaTime;
-        //    if (pauseTimer <= 0)
-        //    {
-        //        UnpauseFlagging();
-        //    }
-        //}
 
         if (bHasLost && 
             !bAvoidUpdate)
@@ -281,15 +272,4 @@ public class Minesweeper : MonoBehaviour
 
         bAvoidUpdate = false;
     }
-
-    //public void PauseFlagging()
-    //{
-    //    bPauseFlagging = true;
-    //}
-
-    //public void UnpauseFlagging()
-    //{
-    //    bPauseFlagging = false;
-    //    pauseTimer = 0.333f;
-    //}
 }

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/25/2019
+// Last:  05/10/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -119,36 +119,6 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayer();
         }
-
-        // Set boosting
-        if (scene.name != "GuessWhoColluded")
-        {
-            if (touches.bBaction ||
-                (Input.GetButton("BAction") &&
-                 !uMan.bMobileDevice))
-            {
-                Debug.Log("boosting");
-                bBoosting = true;
-            }
-            else if (touches.bUIactive &&
-                     !touches.bBaction &&
-                     (touches.bDown ||
-                      touches.bDownLeft ||
-                      touches.bDownRight ||
-                      touches.bLeft ||
-                      touches.bRight ||
-                      touches.bUp ||
-                      touches.bUpLeft ||
-                      touches.bUpRight))
-            {
-                Debug.Log("should stop sprinting");
-                bBoosting = false;
-            }
-            else
-            {
-                bBoosting = false;
-            }
-        }
     }
 
     public void MovePlayer()
@@ -179,11 +149,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // 2x Move Speed
-        if (bBoosting)
+        if (touches.bBaction ||
+            (Input.GetButton("BAction") &&
+             !uMan.bMobileDevice))
         {
             rBody.velocity = movementVector * 2;
             pAnim.speed = 2.0f;
-
+            
             // Use Brio
             if (movementVector != Vector2.zero)
             {

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  04/25/2019
+// Last:  05/01/2019
 
 using System.Collections;
 using UnityEngine;
@@ -173,6 +173,12 @@ public class GWC_Controller : MonoBehaviour
         // New Game -- Dialogue activation & strobe arrow start
         if (strobeTimer > 0)
         {
+            // Script Pref -- Run uMan once after initial load in UIManager
+            if (strobeTimer == 1f)
+            {
+                uMan.HideBrioAndButton();
+            }
+
             strobeTimer -= Time.deltaTime;
 
             if (strobeTimer <= 0)
@@ -201,6 +207,7 @@ public class GWC_Controller : MonoBehaviour
             }
         }
 
+        // Mode Selection Prompt
         if (bOptModeSelect &&
             !dMan.bDialogueActive)
         {
@@ -813,6 +820,7 @@ public class GWC_Controller : MonoBehaviour
         dText.text = dialogueLines[dMan.currentLine];
         dBox.transform.localScale = Vector3.one;
         dMan.bDialogueActive = true;
+        uMan.HideBrioAndButton();
         StartCoroutine(dMan.ResetStrobes());
     }
 

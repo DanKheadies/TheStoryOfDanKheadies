@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  04/25/2019
+// Last:  05/10/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,7 +51,7 @@ public class Chp1 : MonoBehaviour
     public Text dText;
     public TouchControls touches;
     public UIManager uMan;
-    
+
     //public bool bAvoidUpdateQ0;
     public bool bAvoidUpdateQ1;
     public bool bAvoidUpdateQ2;
@@ -87,6 +87,7 @@ public class Chp1 : MonoBehaviour
     public bool bFoundQ4Kid9;
     public bool bFoundQ4All;
 
+    public bool bQ3InitialCheck;
     public bool bGetInventory;
 
     public float invTimer;
@@ -185,7 +186,7 @@ public class Chp1 : MonoBehaviour
 
             // Show UI if mobile (assumes coming from GWC where they might be off)
             // see Update timer for mobile check (needs time for uMan to load fully)
-            
+
             // Set player & camera position
             thePlayer.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferP_x"), (PlayerPrefs.GetFloat("TransferP_y") - 0.1f));
             mainCamera.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferCam_x"), PlayerPrefs.GetFloat("TransferCam_y"));
@@ -221,8 +222,6 @@ public class Chp1 : MonoBehaviour
                     PlayerPrefs.GetInt("Transferring") == 1)
                 {
                     inv.LoadInventory("transfer");
-
-                    uMan.CheckIfMobile();
                 }
                 // From saved 
                 else
@@ -259,7 +258,7 @@ public class Chp1 : MonoBehaviour
             kid2.transform.GetChild(1).gameObject.SetActive(true);
 
             raceTimer = Mathf.Round(raceTimer);
-            
+
             if (raceTimer == 0) // Saved data condition
             {
                 kid2.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
@@ -283,7 +282,7 @@ public class Chp1 : MonoBehaviour
             }
             else
             {
-                    kid2.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
+                kid2.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
                     "Well.. You made it... You finished after " + raceTimer + " seconds.",
                     "Keep training Dan. It's good for you!"
                 };
@@ -321,21 +320,27 @@ public class Chp1 : MonoBehaviour
         }
 
         // Quest 2 -- Treehouse Search -> Reward
-        if (!quest2.GetComponent<QuestObject>().bHasCollected && 
+        if (!quest2.GetComponent<QuestObject>().bHasCollected &&
             quest2.GetComponent<QuestObject>().bHasEnded &&
             (int)camFollow.currentCoords == 23)
         {
             Quest2Reward();
         }
 
+        // Quest 3 -- Item Check w/ OldMan1 -> Initial check
+        if (quest3.GetComponent<QuestObject>().bHasStarted &&
+            !bQ3InitialCheck)
+        {
+            bQ3InitialCheck = true;
+            inv.bUpdateItemCount = true;
+        }
+
         // Quest 3 -- Item Check w/ OldMan1 -> Check on inventory change
         if (quest3.GetComponent<QuestObject>().bHasStarted &&
-            inv.bUpdateItemCount &&
-            !bAvoidUpdateQ3)
+            !bAvoidUpdateQ3 &&
+            (inv.bUpdateItemCount || 
+             bContainsQ3Item))
         {
-            // Assume not present unless we find it
-            bContainsQ3Item = false;
-
             for (int i = 0; i < inv.items.Count; i++)
             {
                 string item = inv.items[i].ToString();
@@ -346,7 +351,8 @@ public class Chp1 : MonoBehaviour
                 }
             }
 
-            if (bContainsQ3Item)
+            if (bContainsQ3Item &&
+                !dMan.bDialogueActive)
             {
                 oldMan1.transform.GetChild(0).gameObject.SetActive(false);
                 oldMan1.transform.GetChild(1).gameObject.SetActive(true);
@@ -1323,8 +1329,8 @@ public class Chp1 : MonoBehaviour
         // Quest 0 -- Q&A 1 Reward
         Quest0Reward();
 
-        // DC 08/12/2018 -- Have dad walk to the shed and stay there to "work" w/ VR googles and dan k.
-        // DC 08/13/2018 -- Dad keeps twisting and turning instead of still looking at dan
+        // DC TODO 08/12/2018 -- Have dad walk to the shed and stay there to "work" w/ VR googles and dan k.
+        // DC TODO 08/13/2018 -- Dad keeps twisting and turning instead of still looking at dan
     }
 
     public void Quest4Dialogue1Opt1()

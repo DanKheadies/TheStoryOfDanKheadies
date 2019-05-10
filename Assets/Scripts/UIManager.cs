@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/22/2019
+// Last:  05/09/2019
 
 //using System.Collections;
 using UnityEngine;
@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     public CanvasGroup hudCanvas;
     public DialogueManager dMan;
     public FixedJoystick fixedJoy;
+    public GameObject pauseButtOpac;
     public GameObject[] dPads;
     public GameObject[] joySticks;
     public OptionsManager oMan;
@@ -66,6 +67,7 @@ public class UIManager : MonoBehaviour
         joySticks = GameObject.FindGameObjectsWithTag("Joystick");
         mainCamera = FindObjectOfType<Camera>();
         oMan = FindObjectOfType<OptionsManager>();
+        pauseButtOpac = GameObject.Find("PauseButtonOpacity");
         playerBrio = FindObjectOfType<PlayerBrioManager>();
         scene = SceneManager.GetActiveScene();
         touches = FindObjectOfType<TouchControls>();
@@ -81,7 +83,8 @@ public class UIManager : MonoBehaviour
             iconsMenu = GameObject.Find("IconsMenu").GetComponent<RectTransform>();
         }
 
-        // Sets initial activation off saved data
+        // Sets initial activation off saved data (or transfer, which always saves UI)
+        // In other words, this first IF only occurs on Chp0 - New Game
         if (!PlayerPrefs.HasKey("ControlsActive"))
         {
             CheckIfMobile();
@@ -90,19 +93,16 @@ public class UIManager : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("ControlsActive") == 1)
             {
-                bControlsActive = true;
-                conTog.isOn = true;
-                DisplayControls();
+                DisplayControls(); 
             }
             else
             {
-                bControlsActive = false;
-                conTog.isOn = false;
                 HideControls();
             }
         }
 
-        // Sets initial opacity based off saved data
+        // Sets initial opacity based off saved data (or transfer, which always saves UI)
+        // In other words, this first IF only occurs on Chp0 - New Game
         if (!PlayerPrefs.HasKey("ControlsOpac"))
         {
             currentContOpac = 1.0f;
@@ -116,41 +116,36 @@ public class UIManager : MonoBehaviour
             contOpacCan.alpha = currentContOpac;
         }
 
-        // Sets initial control type based off saved data
+        // Sets initial control type based off saved data (or transfer, which always saves UI)
+        // In other words, this first IF only occurs on Chp0 - New Game
         if (!PlayerPrefs.HasKey("ControlsDPad"))
         {
             currentContDPad = 1;
-            dPadTog.isOn = true;
-            bControlsDPad = true;
+            DisplayDPad();
         }
         else
         {
             currentContDPad = PlayerPrefs.GetInt("ControlsDPad");
 
             // Set control type based off level
+            // Always show DPad in GWC
             if (scene.name == "GuessWhoColluded")
             {
-                bControlsDPad = false;
-                ToggleDPadControl();
+                DisplayDPad();
+                currentContDPad = PlayerPrefs.GetInt("ControlsDPad"); // Reset to value pre-transfer
             }
             else if (currentContDPad == 1)
             {
-                dPadTog.isOn = true;
-                bControlsDPad = true;
+                DisplayDPad();
             }
             else if (currentContDPad == 0)
             {
-                dPadTog.isOn = false; // Prob not necessary; gets called in function
-                bControlsDPad = true;
-                ToggleDPadControl();
+                HideDPad();
             }
         }
 
         // Sets menu position based off scene
         CheckAndSetMenus();
-
-        // Set virtual joystick
-        fixedJoy.JoystickPosition();
 
         // Sets brio bar
         bUpdateBrio = true;
@@ -174,20 +169,21 @@ public class UIManager : MonoBehaviour
         //{
         //    StartCoroutine(DelayJoystickReturn());
         //}
-
-        if (!bControlsActive)
-        {
-            HideControls();
-        }
     }
 
     public void DisplayControls()
     {
+        bControlsActive = true;
+        conTog.isOn = true;
         touches.transform.localScale = Vector3.one;
+
+        fixedJoy.JoystickPosition();
     }
 
     public void HideControls()
     {
+        bControlsActive = false;
+        conTog.isOn = false;
         touches.transform.localScale = Vector3.zero;
     }
 
@@ -207,23 +203,8 @@ public class UIManager : MonoBehaviour
         // Show GUI Controls for Mobile Devices
         if (bMobileDevice)
         {
-            bControlsActive = true;
-            conTog.isOn = true;
             DisplayControls();
         }
-        else
-        {
-            bControlsActive = false;
-            conTog.isOn = false;
-            HideControls();
-        }
-    }
-
-    // Adjust the opacity of the UI controls
-    public void ContOpacSliderChange()
-    {
-        currentContOpac = contOpacSlider.value;
-        contOpacCan.alpha = currentContOpac;
     }
 
     // Toggles the UI controls
@@ -232,75 +213,102 @@ public class UIManager : MonoBehaviour
         if (bControlsActive)
         {
             HideControls();
-            bControlsActive = false;
         }
         else if (!bControlsActive)
         {
             DisplayControls();
-            bControlsActive = true;
-
-            fixedJoy.JoystickPosition();
         }
+    }
+
+    public void CheckAndSetControls()
+    {
+        if (bControlsActive)
+        {
+            DisplayControls();
+        }
+        else if (!bControlsActive)
+        {
+            HideControls();
+        }
+    }
+
+    public void DisplayDPad()
+    {
+        bControlsDPad = true;
+        currentContDPad = 1;
+        dPadTog.isOn = true;
+
+        foreach (GameObject dPad in dPads)
+        {
+            dPad.transform.localScale = Vector3.one;
+        }
+        foreach (GameObject joyStick in joySticks)
+        {
+            joyStick.transform.localScale = Vector3.zero;
+        }
+    }
+
+    public void HideDPad()
+    {
+        bControlsDPad = false;
+        currentContDPad = 0;
+        dPadTog.isOn = false;
+
+        foreach (GameObject dPad in dPads)
+        {
+            dPad.transform.localScale = Vector3.zero;
+        }
+        foreach (GameObject joyStick in joySticks)
+        {
+            joyStick.transform.localScale = Vector3.one;
+        }
+        
+        fixedJoy.JoystickPosition();
     }
 
     // Toggles the movement type control
     public void ToggleDPadControl()
     {
-        // If DPad, turn to Joystick
         if (bControlsDPad)
         {
-            foreach (GameObject dPad in dPads)
-            {
-                dPad.transform.localScale = Vector3.zero;
-            }
-            foreach (GameObject joyStick in joySticks)
-            {
-                joyStick.transform.localScale = Vector3.one;
-            }
-
-            bControlsDPad = false;
-            
-            fixedJoy.JoystickPosition();
-
-            if (scene.name == "GuessWhoColluded")
-            {
-                // Avoid setting the value so the original is remembered when going back
-            }
-            else
-            {
-                currentContDPad = 0;
-            }
+            HideDPad();
         }
-        // If Joystick, turn to DPad
         else if (!bControlsDPad)
         {
-            foreach (GameObject dPad in dPads)
-            {
-                dPad.transform.localScale = Vector3.one;
-            }
-            foreach (GameObject joyStick in joySticks)
-            {
-                joyStick.transform.localScale = Vector3.zero;
-            }
-
-            bControlsDPad = true;
-
-            if (scene.name == "GuessWhoColluded")
-            {
-                // Avoid setting the value so the original is remembered when going back
-            }
-            else
-            {
-                currentContDPad = 1;
-            }
+            DisplayDPad();
         }
     }
 
-    //public IEnumerator DelayJoystickReturn()
-    //{
+    public void CheckAndSetDPad()
+    {
+        if (bControlsDPad)
+        {
+            DisplayDPad();
+        }
+        else if (!bControlsDPad)
+        {
+            HideDPad();
+        }
+    }
 
-    //    yield return new WaitForSeconds(3.0f);
-    //}
+    public void HideBrioAndButton()
+    {
+        brioBar.gameObject.transform.localScale = Vector3.zero;
+        pauseButtOpac.transform.localScale = Vector3.zero;
+    }
+
+    public void ShowBrioAndButton()
+    {
+        brioBar.gameObject.transform.localScale = Vector3.one;
+        pauseButtOpac.transform.localScale = Vector3.one;
+    }
+
+    // Adjust the opacity of the UI controls
+    public void ContOpacSliderChange()
+    {
+        currentContOpac = contOpacSlider.value;
+        contOpacCan.alpha = currentContOpac;
+    }
 
     public void CheckAndSetMenus()
     {

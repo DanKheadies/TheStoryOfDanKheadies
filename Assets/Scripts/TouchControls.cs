@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/22/2019
+// Last:  05/10/2019
 
 using System.Collections;
 using UnityEngine;
@@ -37,7 +37,7 @@ public class TouchControls : MonoBehaviour
     public string lastDirection;
 
 
-    void Start ()
+    void Start()
     {
         // Initializers
         pMove = FindObjectOfType<PlayerMovement>();
@@ -177,21 +177,19 @@ public class TouchControls : MonoBehaviour
     public void aActionStop()
     {
         bAaction = false;
-        bUIactive = false;
+        CheckUIActive();
     }
 
     // B button flagging
     public void bActionStart()
     {
-        Debug.Log("B true");
         bBaction = true;
         bUIactive = true;
     }
     public void bActionStop()
     {
-        Debug.Log("B false");
         bBaction = false;
-        bUIactive = false;
+        CheckUIActive();
     }
 
     // X button flagging
@@ -203,7 +201,7 @@ public class TouchControls : MonoBehaviour
     public void xActionStop()
     {
         bXaction = false;
-        bUIactive = false;
+        CheckUIActive();
     }
 
     // Y button flagging
@@ -215,7 +213,7 @@ public class TouchControls : MonoBehaviour
     public void yActionStop()
     {
         bYaction = false;
-        bUIactive = false;
+        CheckUIActive();
     }
 
     // Movement / arrow button flags
@@ -228,7 +226,7 @@ public class TouchControls : MonoBehaviour
     public void UnpressedUpRightArrow()
     {
         bUpRight = false;
-        bUIactive = false;
+        CheckUIActive();
 
         lastDirection = "upRight";
     }
@@ -241,7 +239,7 @@ public class TouchControls : MonoBehaviour
     public void UnpressedUpArrow()
     {
         bUp = false;
-        bUIactive = false;
+        CheckUIActive();
 
         lastDirection = "up";
     }
@@ -254,7 +252,7 @@ public class TouchControls : MonoBehaviour
     public void UnpressedUpLeftArrow()
     {
         bUpLeft = false;
-        bUIactive = false;
+        CheckUIActive();
 
         lastDirection = "upLeft";
     }
@@ -267,7 +265,7 @@ public class TouchControls : MonoBehaviour
     public void UnpressedLeftArrow()
     {
         bLeft = false;
-        bUIactive = false;
+        CheckUIActive();
 
         lastDirection = "left";
     }
@@ -280,7 +278,7 @@ public class TouchControls : MonoBehaviour
     public void UnpressedDownLeftArrow()
     {
         bDownLeft = false;
-        bUIactive = false;
+        CheckUIActive();
 
         lastDirection = "downLeft";
     }
@@ -293,7 +291,7 @@ public class TouchControls : MonoBehaviour
     public void UnpressedDownArrow()
     {
         bDown = false;
-        bUIactive = false;
+        CheckUIActive();
 
         lastDirection = "down";
     }
@@ -306,7 +304,7 @@ public class TouchControls : MonoBehaviour
     public void UnpressedDownRightArrow()
     {
         bDownRight = false;
-        bUIactive = false;
+        CheckUIActive();
 
         lastDirection = "downRight";
     }
@@ -319,9 +317,32 @@ public class TouchControls : MonoBehaviour
     public void UnpressedRightArrow()
     {
         bRight = false;
-        bUIactive = false;
+        CheckUIActive();
 
         lastDirection = "right";
+    }
+
+    public void CheckUIActive()
+    {
+        if (bAaction ||
+            bBaction ||
+            bXaction ||
+            bYaction ||
+            bDown ||
+            bDownLeft ||
+            bDownRight ||
+            bLeft ||
+            bRight ||
+            bUp ||
+            bUpLeft ||
+            bUpRight)
+        {
+            bUIactive = true;
+        }
+        else
+        {
+            bUIactive = false;
+        }
     }
 
     // Clear all movement / arrow buttons

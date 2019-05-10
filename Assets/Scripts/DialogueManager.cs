@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/22/2019
+// Last:  05/01/2019
 
 using System.Collections;
 using UnityEngine;
@@ -190,11 +190,8 @@ public class DialogueManager : MonoBehaviour
             pAnim.Play("Idle");
         }
 
-        // Show controls if visible
-        if (uMan.bControlsActive)
-        {
-            touches.transform.localScale = Vector3.one; // DC TODO -- prob don't need
-        }
+        // Restore Brio & Button if no more dialogue
+        StartCoroutine(WaitForOptions());
     }
 
     public void ShowDialogue()
@@ -221,6 +218,20 @@ public class DialogueManager : MonoBehaviour
         }
         touches.UnpressedAllArrows();
         pMove.bStopPlayerMovement = true;
+
+        // Hide BrioBar & Pause Button (Opac)
+        uMan.HideBrioAndButton();
+    }
+
+    public IEnumerator WaitForOptions()
+    {
+        yield return new WaitForSeconds(0.0125f);
+
+        if (!bDialogueActive &&
+            !oMan.bOptionsActive)
+        {
+            uMan.ShowBrioAndButton();
+        }
     }
 
     public IEnumerator ResetStrobes()

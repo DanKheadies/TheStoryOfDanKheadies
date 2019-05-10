@@ -473,8 +473,7 @@ public class SinglePlayerLogic : MonoBehaviour
                   touches.bAaction))
         {
             bAvoidingQuickFTWGuessOnKeyboardOrUI = true;
-        }
-        // DC TODO -- Not the best user interaction on keyboard (and prob controller); this runs before dMan cycle 
+        } 
         // Guessing FTW (buttons)
         else if (bGuessingFTW &&
                  !pause.bPauseActive &&

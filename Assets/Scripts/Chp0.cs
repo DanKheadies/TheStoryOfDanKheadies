@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  04/17/2019
+// Last:  05/09/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -148,9 +148,8 @@ public class Chp0 : MonoBehaviour
 
             // Set UI
             pauseButton.transform.localScale = Vector3.one;
-            fixedJoy.JoystickPosition();
             uMan.CheckIfMobile();
-            
+
             // Fade in scene
             sFaderAnim.GetComponent<Animator>().enabled = true;
 
