@@ -16,7 +16,7 @@ public class SaveGame : MonoBehaviour
     public Item tempItem;
     public Scene scene;
     public TouchControls touches;
-    public UIManager uiMan;
+    public UIManager uMan;
     public VolumeManager savedVol;
     
     private string savedItem;
@@ -36,7 +36,7 @@ public class SaveGame : MonoBehaviour
             inv = FindObjectOfType<Inventory>().GetComponent<Inventory>();
             savedVol = FindObjectOfType<VolumeManager>();
             tempItem = ScriptableObject.CreateInstance<Item>();
-            uiMan = FindObjectOfType<UIManager>();
+            uMan = FindObjectOfType<UIManager>();
         }
         else
         {
@@ -47,7 +47,7 @@ public class SaveGame : MonoBehaviour
             savedVol = FindObjectOfType<VolumeManager>();
             tempItem = ScriptableObject.CreateInstance<Item>();
             touches = FindObjectOfType<TouchControls>();
-            uiMan = FindObjectOfType<UIManager>();
+            uMan = FindObjectOfType<UIManager>();
         }
     }
 
@@ -153,11 +153,11 @@ public class SaveGame : MonoBehaviour
     // Saves UI controls' opacity and data
     public void SavingUIControls()
     {
-        PlayerPrefs.SetInt("ControlsDPad", uiMan.currentContDPad); // Also called in UIManager
-        PlayerPrefs.SetFloat("ControlsOpac", uiMan.currentContOpac); // Also called in UIManager
+        PlayerPrefs.SetInt("ControlsDPad", uMan.currentContDPad); // Also called in UIManager
+        PlayerPrefs.SetFloat("ControlsOpac", uMan.currentContOpac); // Also called in UIManager
         PlayerPrefs.SetInt("ControlsVibrate", touches.currentContVibe); // Also called in TouchControls
 
-        if (uiMan.bControlsActive)
+        if (uMan.bControlsActive)
         {
             PlayerPrefs.SetInt("ControlsActive", 1);
         }

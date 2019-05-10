@@ -21,8 +21,8 @@ public class GWC_Controller : MonoBehaviour
     public GameObject HUD;
     public GameObject muellerCards;
     public GameObject oBox;
-    public GameObject pauseScreen;
     public GameObject pauseBtn;
+    public GameObject pauseScreen;
     public GameObject playerCard;
     public GameObject sceneTransAnim;
     public GameObject sFaderAnim;
@@ -539,7 +539,7 @@ public class GWC_Controller : MonoBehaviour
 
         // Dialogue 2 - Option 1 - Selected Trump
         else if (bOptTeamSelect &&
-            moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
         {
             bOptTeamSelect = false;
             bOptOppSelect = true;
@@ -807,10 +807,10 @@ public class GWC_Controller : MonoBehaviour
     {
         thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
 
-        if (uMan.bControlsActive)
-        {
-            touches.transform.localScale = Vector3.one;
-        }
+        //if (uMan.bControlsActive)
+        //{
+        //    touches.transform.localScale = Vector3.one;
+        //}
     }
 
     public void GWC_DialogueResetter()

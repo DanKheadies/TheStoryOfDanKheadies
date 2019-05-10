@@ -3,7 +3,6 @@
 // Start: 04/20/2017
 // Last:  05/10/2019
 
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -405,6 +404,7 @@ public class TouchControls : MonoBehaviour
     {
         bUIactive = true;
     }
+
     public void UIInactive()
     {
         bUIactive = false;

@@ -14,7 +14,7 @@ public class PlayerBrioManager : MonoBehaviour
     public GameObject pause;
     public Scene scene;
     public Sprite portPic;
-    public UIManager uiMan;
+    public UIManager uMan;
 
     public float diffMaxAndCurrent;
     public float playerMaxBrio;
@@ -28,7 +28,7 @@ public class PlayerBrioManager : MonoBehaviour
         dMan = FindObjectOfType<DialogueManager>();
         pause = GameObject.FindGameObjectWithTag("Pause");
         scene = SceneManager.GetActiveScene();
-        uiMan = FindObjectOfType<UIManager>();
+        uMan = FindObjectOfType<UIManager>();
 
         if (scene.name != "GuessWhoColluded")
         {
@@ -91,7 +91,7 @@ public class PlayerBrioManager : MonoBehaviour
             Input.GetKeyUp(KeyCode.JoystickButton2))
         {
             RestorePlayer(50);
-            uiMan.bUpdateBrio = true;
+            uMan.bUpdateBrio = true;
         }
     }
 
@@ -115,7 +115,7 @@ public class PlayerBrioManager : MonoBehaviour
         if ((playerCurrentBrio < diffMaxAndCurrent) && !dMan.bDialogueActive)
         {
             playerCurrentBrio += 0.01f;
-            uiMan.bUpdateBrio = true;
+            uMan.bUpdateBrio = true;
         }
     }
 

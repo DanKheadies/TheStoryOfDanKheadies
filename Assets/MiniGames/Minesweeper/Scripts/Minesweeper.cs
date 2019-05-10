@@ -30,7 +30,7 @@ public class Minesweeper : MonoBehaviour
     public Sprite[] portPic;
     public Text dText;
     public TouchControls touches;
-    public UIManager uiMan;
+    public UIManager uMan;
 
     public bool bAvoidInvestigating;
     public bool bAvoidInvestionUpdate;
@@ -66,7 +66,7 @@ public class Minesweeper : MonoBehaviour
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         touches = FindObjectOfType<TouchControls>();
         warpMinesweeper = GameObject.Find("Minesweeper.to.Chp1");
-        uiMan = FindObjectOfType<UIManager>();
+        uMan = FindObjectOfType<UIManager>();
         
         pauseTimer = 0.333f;
         strobeTimer = 1.0f;
@@ -198,7 +198,7 @@ public class Minesweeper : MonoBehaviour
             else
             {
                 brio.FatiguePlayer(0.0025f);
-                uiMan.bUpdateBrio = true;
+                uMan.bUpdateBrio = true;
             }
         }
 
@@ -216,7 +216,7 @@ public class Minesweeper : MonoBehaviour
         // Reward with brio (max cap & current)
         thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
         thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(15);
-        uiMan.bUpdateBrio = true;
+        uMan.bUpdateBrio = true;
     }
 
     public void Lose()

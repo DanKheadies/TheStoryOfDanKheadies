@@ -24,8 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform trans;
     private UIManager uMan;
     public Vector2 movementVector;
-
-    public bool bBoosting;
+    
     public bool bGWCUpdate;
     public bool bIsMobile;
     public bool bStopPlayerMovement;
@@ -217,7 +216,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Hide UI (if present) and prevent input
         cameraSlider.bTempControlActive = uMan.bControlsActive;
-        touches.transform.localScale = Vector3.zero;
+        touches.transform.localScale = Vector3.zero; // 05/10/2019 DC TODO -- Change this to uMan.HideControls()?
         touches.UnpressedAllArrows();
 
         // Prevent player movement

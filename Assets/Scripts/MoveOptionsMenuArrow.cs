@@ -182,7 +182,8 @@ public class MoveOptionsMenuArrow : MonoBehaviour
             else if (Input.GetButtonDown("Action") ||
                      // DC 04/12/2019 -- If Virtual buttons visible, have to double tap with mouse click to select the option
                      // DC TODO -- See if this occurs on mobile
-                     //Input.GetButtonDown("DialogueAction") ||
+                     // DC 05/10/2019 -- Mobile tSoDK is fine* (a couple of instances that it would 'bug' but I couldn't recreate purposefully)
+                     // Bug Breakdown: it "glitches" and resets the cursor and shows the same options again; unsure if it saves an answer at that point
                      Input.GetKeyDown(KeyCode.JoystickButton0) ||
                      touches.bAaction)
             {

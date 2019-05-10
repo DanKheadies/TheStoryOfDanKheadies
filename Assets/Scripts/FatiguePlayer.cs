@@ -8,7 +8,7 @@ using UnityEngine;
 // Means and methods to reduce the player's brio
 public class FatiguePlayer : MonoBehaviour
 {
-    public UIManager uiMan;
+    public UIManager uMan;
 
     public int negativeBrio;
 
@@ -17,7 +17,7 @@ public class FatiguePlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerBrioManager>().FatiguePlayer(negativeBrio);
-            uiMan.bUpdateBrio = true;
+            uMan.bUpdateBrio = true;
         }
     }
 }

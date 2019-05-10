@@ -9,7 +9,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public PlayerBrioManager thePlayerBrio;
-    public UIManager uiMan;
+    public UIManager uMan;
 
     public int currentBrio;
     public int currentCog;
@@ -56,6 +56,6 @@ public class PlayerStats : MonoBehaviour
         // Update Brio Bar & add extra
         thePlayerBrio.playerMaxBrio = currentBrio;
         thePlayerBrio.playerCurrentBrio += currentBrio - brioLevels[currentLevel - 1];
-        uiMan.bUpdateBrio = true;
+        uMan.bUpdateBrio = true;
     }
 }
