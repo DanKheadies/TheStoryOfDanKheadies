@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  05/01/2019
+// Last:  05/10/2019
 
 using System.Collections;
 using UnityEngine;
@@ -806,11 +806,6 @@ public class GWC_Controller : MonoBehaviour
     public void GWC_PromptRestrictions()
     {
         thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
-
-        //if (uMan.bControlsActive)
-        //{
-        //    touches.transform.localScale = Vector3.one;
-        //}
     }
 
     public void GWC_DialogueResetter()

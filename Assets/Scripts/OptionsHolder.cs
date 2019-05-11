@@ -1,25 +1,21 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/12/2018
-// Last:  08/13/2018
+// Last:  05/10/2019
 
 using UnityEngine;
 
 // Holds NPC options (in Unity)
 public class OptionsHolder : MonoBehaviour
 {
-    private DialogueManager dMan;
     private OptionsManager oMan;
-    private TouchControls touches;
 
     public string[] options;
 
     void Start()
     {
         // Initialize
-        dMan = FindObjectOfType<DialogueManager>();
         oMan = FindObjectOfType<OptionsManager>();
-        touches = FindObjectOfType<TouchControls>();
     }
 
     public void PrepareOptions()

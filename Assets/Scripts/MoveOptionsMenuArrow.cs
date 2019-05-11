@@ -1,11 +1,10 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/23/2018
-// Last:  04/11/2019
+// Last:  05/10/2019
 
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 // To "move" and execute the arrows on the Options Menu
 public class MoveOptionsMenuArrow : MonoBehaviour
@@ -21,9 +20,7 @@ public class MoveOptionsMenuArrow : MonoBehaviour
     private GameObject Opt4Arw;
     private GameObject pauseScreen;
     private OptionsManager oMan;
-    private Scene scene;
     private TouchControls touches;
-    private Transform optionsBox;
 
     public bool bControllerDown;
     public bool bControllerUp;
@@ -56,9 +53,7 @@ public class MoveOptionsMenuArrow : MonoBehaviour
 
         fixedJoy = FindObjectOfType<FixedJoystick>();
         oMan = FindObjectOfType<OptionsManager>();
-        optionsBox = GameObject.Find("Options_Box").transform;
         pauseScreen = GameObject.Find("PauseScreen");
-        scene = SceneManager.GetActiveScene();
         touches = FindObjectOfType<TouchControls>();
         
         currentPosition = ArrowPos.Opt1;
@@ -180,10 +175,6 @@ public class MoveOptionsMenuArrow : MonoBehaviour
                 }
             }
             else if (Input.GetButtonDown("Action") ||
-                     // DC 04/12/2019 -- If Virtual buttons visible, have to double tap with mouse click to select the option
-                     // DC TODO -- See if this occurs on mobile
-                     // DC 05/10/2019 -- Mobile tSoDK is fine* (a couple of instances that it would 'bug' but I couldn't recreate purposefully)
-                     // Bug Breakdown: it "glitches" and resets the cursor and shows the same options again; unsure if it saves an answer at that point
                      Input.GetKeyDown(KeyCode.JoystickButton0) ||
                      touches.bAaction)
             {

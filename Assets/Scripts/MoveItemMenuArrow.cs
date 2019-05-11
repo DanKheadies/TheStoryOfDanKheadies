@@ -1,11 +1,10 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 01/29/2018
-// Last:  04/11/2019
+// Last:  05/10/2019
 
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 // 10/04/2018 DC TODO -- Add a square around items for selection w/ arrow keys
 
@@ -19,8 +18,6 @@ public class MoveItemMenuArrow : MonoBehaviour
     private GameObject UseArw;
     private GameObject DropArw;
     private GameObject BackArw;
-
-    private Scene scene;
 
     private TouchControls touches;
 
@@ -52,7 +49,6 @@ public class MoveItemMenuArrow : MonoBehaviour
         BackArw = GameObject.Find("BackArw");
 
         itemMenu = GameObject.Find("ItemMenu").transform;
-        scene = SceneManager.GetActiveScene();
         touches = FindObjectOfType<TouchControls>();
         
         currentPosition = ItemArrowPos.Use;

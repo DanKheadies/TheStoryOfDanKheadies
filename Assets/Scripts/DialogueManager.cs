@@ -120,7 +120,11 @@ public class DialogueManager : MonoBehaviour
             {
                 currentLine++;
 
-                touches.bAaction = false;
+                // 05/10/2019 DC -- Avoids the GWC double tap bug
+                if (!oMan.bOptionsActive)
+                {
+                    touches.bAaction = false;
+                }
             }
         }
 
@@ -169,7 +173,7 @@ public class DialogueManager : MonoBehaviour
         // Show controls if visible
         if (uMan.bControlsActive)
         {
-            uMan.DisplayControls();
+            uMan.DisplayControls(); // DC TODO -- Not needed anymore?
         }
 
         // Mini-pause on triggering the same dialogue

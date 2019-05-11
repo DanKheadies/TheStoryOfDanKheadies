@@ -39,8 +39,7 @@ public class Minesweeper : MonoBehaviour
     public bool bHasLost;
     public bool bPauseFlagging;
     public bool bReset;
-
-    private float pauseTimer;
+    
     public float strobeTimer;
     public float timer;
 
@@ -68,7 +67,6 @@ public class Minesweeper : MonoBehaviour
         warpMinesweeper = GameObject.Find("Minesweeper.to.Chp1");
         uMan = FindObjectOfType<UIManager>();
         
-        pauseTimer = 0.333f;
         strobeTimer = 1.0f;
         timer = 0.333f;
         
