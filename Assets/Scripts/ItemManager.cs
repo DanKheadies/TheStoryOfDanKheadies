@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  04/17/2019
+// Last:  06/11/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,6 +26,8 @@ public class ItemManager : MonoBehaviour
     public GameObject whiteBud;
     public GameObject vrGoggles;
 
+    public GameObject homeVRGoggles;
+
     public bool bAcquired; // Checks & Balances
     public bool bDoneAcquiring; // Checks & Balances
     public bool bHasEntered;
@@ -37,7 +39,7 @@ public class ItemManager : MonoBehaviour
     {
         // Initializers
         dMan = FindObjectOfType<DialogueManager>();
-        inv = GameObject.Find("Inventory").GetComponent<Inventory>();
+        inv = FindObjectOfType<Inventory>();
         pAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         pause = FindObjectOfType<PauseGame>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -49,6 +51,8 @@ public class ItemManager : MonoBehaviour
         if (scene.name == "Chp0")
         {
             vrGoggles = GameObject.Find("VR.Goggles");
+
+            homeVRGoggles = GameObject.Find("HomeVRGoggles");
         }
         else if (scene.name == "Chp1")
         {
@@ -57,6 +61,23 @@ public class ItemManager : MonoBehaviour
             purpleBud = GameObject.Find("Cannabis.Bud.Purple");
             whiteBud = GameObject.Find("Cannabis.Bud.White");
             vrGoggles = GameObject.Find("VR.Goggles");
+
+            homeVRGoggles = GameObject.Find("HomeVRGoggles");
+        }
+
+        // Check for VR Goggles & hide if in inventory
+        if (scene.name == "Chp1")
+        {
+            for (int i = 0; i < PlayerPrefs.GetInt("ItemTotal"); i++)
+            {
+                string savedItem = PlayerPrefs.GetString("Item" + i);
+                savedItem = savedItem.Substring(0, savedItem.Length - 7);
+                
+                if (savedItem == "VR.Goggles")
+                {
+                    homeVRGoggles.transform.localScale = Vector3.zero;
+                }
+            }
         }
     }
 

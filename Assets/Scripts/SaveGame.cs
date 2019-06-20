@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  05/09/2019
+// Last:  06/11/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -82,11 +82,17 @@ public class SaveGame : MonoBehaviour
         PlayerPrefs.SetInt("AnandaCoord", (int)camFollow.currentCoords);
         PlayerPrefs.SetFloat("BrioMax", savedPlayer.GetComponent<PlayerBrioManager>().playerMaxBrio);
         PlayerPrefs.SetFloat("Brio", savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio);
-        
+
+        // Clear out the inventory prefs before saving again
+        PlayerPrefs.SetInt("ItemTotal", 0);
+        for (int i = 0; i < inv.totalItems; i++)
+        {
+            PlayerPrefs.SetString("Item" + i, "");
+        }
         for (int i = 0; i < inv.items.Count; i++)
         {
             PlayerPrefs.SetString("Item" + i, inv.items[i].ToString());
-            PlayerPrefs.SetInt("ItemTotal", i+1);
+            PlayerPrefs.SetInt("ItemTotal", i + 1);
         }
 
         SavingVolume();
@@ -104,27 +110,7 @@ public class SaveGame : MonoBehaviour
         Debug.Log("Loc: " + ((CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord")).ToString());
         Debug.Log("MxB: " + PlayerPrefs.GetFloat("BrioMax"));
         Debug.Log("Bri: " + PlayerPrefs.GetFloat("Brio"));
-
-        if (PlayerPrefs.GetInt("Transferring") == 1)
-        {
-            for (int i = 0; i < PlayerPrefs.GetInt("TransferItemTotal"); i++)
-            {
-                string savedItem = PlayerPrefs.GetString("TransferItem" + i);
-                savedItem = savedItem.Substring(0, savedItem.Length - 7);
-                Item tempItem = (Item)Resources.Load("Items/" + savedItem);
-                Debug.Log("TInv " + i + ": " + PlayerPrefs.GetString("TransferItem" + i, inv.items[i].ToString()));
-            }
-        }
-        else
-        {
-            for (int i = 0; i < PlayerPrefs.GetInt("ItemTotal"); i++)
-            {
-                string savedItem = PlayerPrefs.GetString("Item" + i);
-                savedItem = savedItem.Substring(0, savedItem.Length - 7);
-                Item tempItem = (Item)Resources.Load("Items/" + savedItem);
-                Debug.Log("Inv " + i + ": " + PlayerPrefs.GetString("Item" + i, inv.items[i].ToString()));
-            }
-        }
+        Debug.Log("VRG: " + PlayerPrefs.GetInt("HasVRGoggles"));
 
         Debug.Log("Vol: " + PlayerPrefs.GetFloat("Volume"));
         Debug.Log("Con: " + PlayerPrefs.GetInt("ControlsActive"));
@@ -134,6 +120,34 @@ public class SaveGame : MonoBehaviour
 
         Debug.Log("C1Q: " + PlayerPrefs.GetString("Chp1Quests"));
 
+        if (PlayerPrefs.GetInt("TransferItemTotal") > 0 ||
+            PlayerPrefs.GetInt("ItemTotal") > 0)
+        {
+            if (PlayerPrefs.GetInt("Transferring") == 1)
+            {
+                Debug.Log("TInv: " + PlayerPrefs.GetInt("TransferItemTotal"));
+
+                for (int i = 0; i < PlayerPrefs.GetInt("TransferItemTotal"); i++)
+                {
+                    string savedItem = PlayerPrefs.GetString("TransferItem" + i);
+                    savedItem = savedItem.Substring(0, savedItem.Length - 7);
+                    Item tempItem = (Item)Resources.Load("Items/" + savedItem);
+                    Debug.Log("TInv " + (i + 1) + ": " + PlayerPrefs.GetString("TransferItem" + i, inv.items[i].ToString()));
+                }
+            }
+            else
+            {
+                Debug.Log("Inv: " + PlayerPrefs.GetInt("ItemTotal"));
+
+                for (int i = 0; i < PlayerPrefs.GetInt("ItemTotal"); i++)
+                {
+                    string savedItem = PlayerPrefs.GetString("Item" + i);
+                    savedItem = savedItem.Substring(0, savedItem.Length - 7);
+                    Item tempItem = (Item)Resources.Load("Items/" + savedItem);
+                    Debug.Log("Inv " + (i + 1) + ": " + PlayerPrefs.GetString("Item" + i, inv.items[i].ToString()));
+                }
+            }
+        }
         Debug.Log("Tran: " + PlayerPrefs.GetInt("Transferring"));
         Debug.Log("TSce: " + PlayerPrefs.GetInt("TransferScene"));
         Debug.Log("TCam: (" + PlayerPrefs.GetFloat("TransferCam_x") + "," + PlayerPrefs.GetFloat("TransferCam_y") + ")");
@@ -258,6 +272,12 @@ public class SaveGame : MonoBehaviour
         PlayerPrefs.DeleteKey("TransferAnandaCoord");
         PlayerPrefs.DeleteKey("TransferBrioMax");
         PlayerPrefs.DeleteKey("TransferBrio");
+        
+        PlayerPrefs.DeleteKey("TransferItemTotal");
+        for (int i = 0; i < inv.totalItems; i++)
+        {
+            PlayerPrefs.DeleteKey("TransferItem" + i);
+        }
     }
 
     // Delete all values

@@ -15,6 +15,7 @@ public class Chp0 : MonoBehaviour
     public FixedJoystick fixedJoy;
     public GameObject dArrow;
     public GameObject dBox;
+    public GameObject homeVRGoggles;
     public GameObject HUD;
     public GameObject pauseButton;
     public GameObject sFaderAnim;
@@ -48,6 +49,7 @@ public class Chp0 : MonoBehaviour
         dMan = FindObjectOfType<DialogueManager>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
         fixedJoy = FindObjectOfType<FixedJoystick>();
+        homeVRGoggles = GameObject.Find("HomeVRGoggles");
         HUD = GameObject.Find("HUD");
         inv = FindObjectOfType<Inventory>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -187,6 +189,18 @@ public class Chp0 : MonoBehaviour
             {
                 inv.LoadInventory("saved");
                 bGetInventory = false;
+
+                // Item Check -- Check on VR Goggles to avoid farming
+                for (int i = 0; i < inv.items.Count; i++)
+                {
+                    string item = inv.items[i].ToString();
+                    item = item.Substring(0, item.Length - 7);
+
+                    if (item == "VR.Goggles")
+                    {
+                        homeVRGoggles.transform.localScale = Vector3.zero;
+                    }
+                }
             }
         }
 

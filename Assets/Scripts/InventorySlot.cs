@@ -13,6 +13,7 @@ public class InventorySlot : MonoBehaviour
     public Image icon;
     private Inventory inv;
     public Item item;
+    public FixedJoystick fixedJoy;
     private Transform itemMenu;
     public TouchControls touches;
 
@@ -26,6 +27,7 @@ public class InventorySlot : MonoBehaviour
     void Start()
     {
         // Initializers
+        fixedJoy = FindObjectOfType<FixedJoystick>();
         inv = GameObject.Find("Inventory").GetComponent<Inventory>();
         itemMenu = GameObject.Find("ItemMenu").transform;
         stuffBack = GameObject.Find("StuffBack").GetComponent<Button>();
@@ -78,6 +80,9 @@ public class InventorySlot : MonoBehaviour
             {
                 touches.Vibrate();
 
+                // "Lock" Joystick to horizontal direction
+                fixedJoy.joystickMode = JoystickMode.Horizontal;
+
                 inv.selectedItemId = this.itemId;
 
                 PopulateItemMenu(item);
@@ -89,6 +94,9 @@ public class InventorySlot : MonoBehaviour
             }
             else
             {
+                // "Unlock" Joystick from horizontal direction
+                fixedJoy.joystickMode = JoystickMode.AllAxis;
+
                 stuffBack.transform.localScale = Vector3.one;
                 itemMenu.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
                 itemMenu.gameObject.GetComponent<CanvasGroup>().interactable = false;

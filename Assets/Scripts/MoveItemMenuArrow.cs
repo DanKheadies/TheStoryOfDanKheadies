@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 01/29/2018
-// Last:  05/10/2019
+// Last:  06/20/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,13 +14,12 @@ public class MoveItemMenuArrow : MonoBehaviour
     private Button UseBtn;
     private Button DropBtn;
     private Button BackBtn;
-
     private GameObject UseArw;
     private GameObject DropArw;
     private GameObject BackArw;
-
+    private Joystick joystick;
+    private MoveStuffMenuArrow moveSMA;
     private TouchControls touches;
-
     private Transform itemMenu;
 
     public bool bControllerLeft;
@@ -49,6 +48,8 @@ public class MoveItemMenuArrow : MonoBehaviour
         BackArw = GameObject.Find("BackArw");
 
         itemMenu = GameObject.Find("ItemMenu").transform;
+        joystick = FindObjectOfType<Joystick>();
+        moveSMA = FindObjectOfType<MoveStuffMenuArrow>();
         touches = FindObjectOfType<TouchControls>();
         
         currentPosition = ItemArrowPos.Use;
@@ -59,29 +60,33 @@ public class MoveItemMenuArrow : MonoBehaviour
         if (itemMenu.gameObject.GetComponent<CanvasGroup>().alpha == 1)
         {
             // Controller Support 
-            // DC TODO 01/10/2019 -- temp bug where sub-pause menus not closing as expected
             if (Input.GetAxis("Controller DPad Horizontal") == 0 &&
-               (!touches.bLeft &&
-                !touches.bRight))
+                Input.GetAxis("Controller Joystick Horizontal") == 0 &&
+                joystick.Horizontal == 0 &&
+                (!touches.bLeft &&
+                 !touches.bRight))
             {
                 bFreezeControllerInput = false;
             }
             else if (!bFreezeControllerInput &&
                     (Input.GetAxis("Controller DPad Horizontal") > 0 ||
-                    touches.bDown))
+                     Input.GetAxis("Controller Joystick Horizontal") > 0 ||
+                     joystick.Horizontal > 0 ||
+                     touches.bRight))
             {
                 bControllerRight = true;
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
                     (Input.GetAxis("Controller DPad Horizontal") < 0 ||
-                    touches.bUp))
+                     Input.GetAxis("Controller Joystick Horizontal") < 0 ||
+                     joystick.Horizontal < 0 ||
+                     touches.bLeft))
             {
                 bControllerLeft = true;
                 bFreezeControllerInput = true;
             }
-
-            // DC TODO 01/10/2019 -- Finish for items
+            
             if (Input.GetKeyDown(KeyCode.D) ||
                 Input.GetKeyDown(KeyCode.RightArrow) ||
                 bControllerRight)
@@ -138,7 +143,18 @@ public class MoveItemMenuArrow : MonoBehaviour
                     BackBtn.onClick.Invoke();
                 }
 
+                moveSMA.bAllowSelection = false;
+                moveSMA.bAvoidAllower = false;
                 touches.bAaction = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) ||
+                     Input.GetKeyDown(KeyCode.JoystickButton7) ||
+                     Input.GetKeyDown(KeyCode.JoystickButton1) ||
+                     Input.GetButton("BAction") ||
+                     touches.bBaction)
+            {
+                ResetArrowPos();
+                itemMenu.gameObject.GetComponent<CanvasGroup>().alpha = 0;
             }
         }
     }

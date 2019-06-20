@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/26/2017
-// Last:  05/10/2019
+// Last:  06/11/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,6 +12,7 @@ public class PauseGame : MonoBehaviour
     public DialogueManager dMan;
     public FixedJoystick fixedJoy;
     public MovePauseMenuArrow movePArw;
+    public MoveStuffMenuArrow moveSMA;
     public OptionsManager oMan;
     public PlayerMovement pMove;
     public Scene scene;
@@ -33,7 +34,8 @@ public class PauseGame : MonoBehaviour
         controlsMenu = GameObject.Find("ControlsMenu").transform;
         dMan = FindObjectOfType<DialogueManager>();
         fixedJoy = FindObjectOfType<FixedJoystick>();
-        movePArw = GameObject.Find("PauseMenu").GetComponent<MovePauseMenuArrow>();
+        movePArw = FindObjectOfType<MovePauseMenuArrow>();
+        moveSMA = FindObjectOfType<MoveStuffMenuArrow>();
         oMan = FindObjectOfType<OptionsManager>();
         pauseMenu = GameObject.Find("PauseMenu").transform;
         pauseTrans = GameObject.FindGameObjectWithTag("Pause").GetComponent<Transform>();
@@ -62,7 +64,10 @@ public class PauseGame : MonoBehaviour
 	void Update ()
     {
         if (Input.GetKeyUp(KeyCode.Escape) ||
-            Input.GetKeyUp(KeyCode.JoystickButton7))
+            Input.GetKeyUp(KeyCode.JoystickButton7) ||
+            (bPauseActive &&
+             (touches.bBaction ||
+              Input.GetKeyUp(KeyCode.JoystickButton1))))
         {
             if (controlsMenu.transform.localScale == Vector3.one)
             {
@@ -85,12 +90,22 @@ public class PauseGame : MonoBehaviour
             {
                 Pause();
             }
+
+            if (touches.bBaction)
+            {
+                touches.bBaction = false;
+            }
         }
     }
 
     public void Pausing()
     {
         bPausing = true;
+    }
+
+    public void PausingDone()
+    {
+        bPausing = false;
     }
 
     public void Pause()
@@ -220,6 +235,9 @@ public class PauseGame : MonoBehaviour
     {
         if (bOpen)
         {
+            // "Unlock" Joystick from horizontal or vertical direction
+            fixedJoy.joystickMode = JoystickMode.AllAxis;
+
             stuffMenu.transform.localScale = Vector3.one;
             pauseMenu.transform.localScale = Vector3.zero;
 
@@ -230,8 +248,13 @@ public class PauseGame : MonoBehaviour
         }
         else
         {
+            // "Lock" Joystick to vertical direction
+            fixedJoy.joystickMode = JoystickMode.Horizontal;
+
             stuffMenu.transform.localScale = Vector3.zero;
             pauseMenu.transform.localScale = Vector3.one;
+
+            moveSMA.StuffMenuReset();
 
             if (scene.name == "GuessWhoColluded")
             {

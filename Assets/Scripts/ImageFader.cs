@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/12/2018
+// Last:  06/10/2019
 
 using System.Collections;
 using UnityEngine;
@@ -12,6 +12,7 @@ public class ImageFader : MonoBehaviour
 {
     public Image fadingImage;
 
+    public bool bFadeCycle;
     public bool bFadeIn;
     public bool bFadeOut;
 
@@ -24,7 +25,7 @@ public class ImageFader : MonoBehaviour
 
     private IEnumerator Start()
     {
-        if(bFadeIn == true)
+        if(bFadeIn)
         {
             fadingImage.canvasRenderer.SetAlpha(0.0f);
             yield return new WaitForSeconds(preFadeInDelay);
@@ -32,12 +33,28 @@ public class ImageFader : MonoBehaviour
             yield return new WaitForSeconds(postFadeInDelay);
         }
 
-        if(bFadeOut == true)
+        if(bFadeOut)
         {
             fadingImage.canvasRenderer.SetAlpha(1.0f);
             yield return new WaitForSeconds(preFadeOutDelay);
             FadeOut();
             yield return new WaitForSeconds(postFadeOutDelay);
+        }
+
+        if (bFadeCycle)
+        {
+            do
+            {
+                fadingImage.canvasRenderer.SetAlpha(0.0f);
+                yield return new WaitForSeconds(preFadeInDelay);
+                FadeIn();
+                yield return new WaitForSeconds(postFadeInDelay);
+                fadingImage.canvasRenderer.SetAlpha(1.0f);
+                yield return new WaitForSeconds(preFadeOutDelay);
+                FadeOut();
+                yield return new WaitForSeconds(postFadeOutDelay);
+
+            } while (bFadeCycle);
         }
     }
 

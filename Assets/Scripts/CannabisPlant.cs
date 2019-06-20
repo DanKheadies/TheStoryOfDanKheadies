@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/18/2017
-// Last:  04/16/2019
+// Last:  06/11/2019
 
 using UnityEngine;
 
@@ -44,7 +44,7 @@ public class CannabisPlant : MonoBehaviour
         anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         dMan = FindObjectOfType<DialogueManager>();
         greenBud = GameObject.Find("Cannabis.Bud.Green");
-        inv = GameObject.Find("Inventory").GetComponent<Inventory>();
+        inv = FindObjectOfType<Inventory>();
         orangeBud = GameObject.Find("Cannabis.Bud.Orange");
         pause = FindObjectOfType<PauseGame>();
         player = GameObject.FindGameObjectWithTag("Player");

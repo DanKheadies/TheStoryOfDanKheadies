@@ -2,7 +2,7 @@
 // Authors: Unity (https://unity3d.com/learn/tutorials/topics/mobile-touch/pinch-zoom) (https://docs.unity3d.com/ScriptReference/Input.GetTouch.html)
 // Contributors: David W. Corso, JoaquinRD, alberto-lara
 // Start: 02/18/2019
-// Last:  04/25/2019
+// Last:  06/10/2019
 
 using UnityEngine;
 
@@ -15,7 +15,8 @@ public class GWCTouchControls : MonoBehaviour
     public GWC_Controller gwc;
     public PlayerMovement pMove;
     public TouchControls touches;
-    
+
+    public bool bPinchZooming;
     public bool bReadyToPan;
 
     public float maxDoubleTapTime;
@@ -93,17 +94,11 @@ public class GWCTouchControls : MonoBehaviour
                 }
             }
 
-            // Reset Pan so it can act more like a "click" or button
-            if (!bReadyToPan && 
-                Input.touchCount == 1 && 
-                Input.GetTouch(0).phase == TouchPhase.Ended)
-            {
-                bReadyToPan = true;
-            }
-
             // Cycle Layers
-            // If there is a double tap on the device...
-            if (Input.touchCount == 1)
+            // If there is a double tap on the device... (and not on a character)
+            // 05/15/2019 -- checking bReadyToPan means they're not panning atm
+            if (Input.touchCount == 1 &&
+                bReadyToPan)
             {
                 Touch touch = Input.GetTouch(0);
 
@@ -127,7 +122,14 @@ public class GWCTouchControls : MonoBehaviour
                 }
             }
 
-            //// Reset double tap timer
+            // 06/09/2019 -- Keep here to run after Cycle check (avoids cycling while panning quickly)
+            if (Input.touchCount > 0 &&
+                Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                bReadyToPan = true;
+            }
+
+            // Reset double tap timer
             if (Time.time > newTime)
             {
                 tapCount = 0;
@@ -137,6 +139,8 @@ public class GWCTouchControls : MonoBehaviour
             // If there are two touches on the device...
             if (Input.touchCount == 2)
             {
+                bPinchZooming = true;
+
                 // Store both touches.
                 Touch touchZero = Input.GetTouch(0);
                 Touch touchOne = Input.GetTouch(1);
@@ -175,6 +179,12 @@ public class GWCTouchControls : MonoBehaviour
                 sceneTransAnim.transform.localScale = new Vector2
                     (Mathf.Clamp((sceneTransAnim.transform.localScale.x + (deltaMagnitudeDiff * orthoZoomSpeed) * 1.5f), 1.5f, 9f),
                      Mathf.Clamp((sceneTransAnim.transform.localScale.y + (deltaMagnitudeDiff * orthoZoomSpeed) * 1.5f), 1.5f, 9f));
+            }
+            // Reset check to help avoid flipping tiles via MouseUp
+            else if (Input.touchCount == 0 &&
+                     bPinchZooming)
+            {
+                bPinchZooming = false;
             }
         }
     }

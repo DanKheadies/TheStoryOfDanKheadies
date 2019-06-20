@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/08/2017
-// Last:  04/11/2019
+// Last:  06/19/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,6 +40,7 @@ public class MovePauseMenuArrow : MonoBehaviour
     private Scene scene;
     private TouchControls touches;
     private Transform pauseMenu;
+    private Transform pauseScreen;
 
     public bool bControllerDown;
     public bool bControllerUp;
@@ -76,7 +77,8 @@ public class MovePauseMenuArrow : MonoBehaviour
     {
         // Initializers
         joystick = FindObjectOfType<Joystick>();
-        pauseMenu = GameObject.Find("PauseScreen").transform;
+        pauseMenu = GameObject.Find("PauseMenu").transform;
+        pauseScreen = GameObject.Find("PauseScreen").transform;
         scene = SceneManager.GetActiveScene();
         touches = FindObjectOfType<TouchControls>();
 
@@ -116,22 +118,13 @@ public class MovePauseMenuArrow : MonoBehaviour
 	
 	void Update ()
     {
-        //Debug.Log((float)currentPosition);
-        //var newfloat = (float)currentPosition;
-        //Debug.Log(newfloat);
-        //PauseArrow.transform.position = new Vector2(
-        //    PauseArrow.transform.position.x,
-        //    (int)currentPosition
-        //    );
-        //Debug.Log(newfloat);
-        //Debug.Log((int)currentPosition);
-        
-        if (pauseMenu.localScale == Vector3.one)
+        if (pauseMenu.localScale == Vector3.one &&
+            pauseScreen.localScale == Vector3.one)
         {
             // Controller Support 
-            // DC TODO 01/10/2019 -- temp bug where sub-pause menus not closing as expected
-            // DC TODO 01/10/2019 -- virtual joystick should be able to affect the menu
             if (Input.GetAxis("Controller DPad Vertical") == 0 &&
+                Input.GetAxis("Controller Joystick Vertical") == 0 &&
+                joystick.Vertical == 0 &&
                 (!touches.bDown &&
                  !touches.bUp))
             {
@@ -139,6 +132,8 @@ public class MovePauseMenuArrow : MonoBehaviour
             }
             else if (!bFreezeControllerInput &&
                      (Input.GetAxis("Controller DPad Vertical") > 0 ||
+                      Input.GetAxis("Controller Joystick Vertical") < 0 ||
+                      joystick.Vertical < 0 ||
                       touches.bDown))
             {
                 bControllerDown = true;
@@ -146,6 +141,8 @@ public class MovePauseMenuArrow : MonoBehaviour
             }
             else if (!bFreezeControllerInput &&
                      (Input.GetAxis("Controller DPad Vertical") < 0 ||
+                      Input.GetAxis("Controller Joystick Vertical") > 0 ||
+                      joystick.Vertical > 0 ||
                       touches.bUp))
             {
                 bControllerUp = true;
@@ -398,14 +395,13 @@ public class MovePauseMenuArrow : MonoBehaviour
                 touches.bAaction = false;
             }
             else if (Input.GetKeyDown(KeyCode.Escape) ||
-                     Input.GetKeyUp(KeyCode.JoystickButton7) ||
+                     Input.GetKeyDown(KeyCode.JoystickButton7) ||
+                     Input.GetKeyDown(KeyCode.JoystickButton1) ||
                      Input.GetButton("BAction") ||
                      touches.bBaction)
             {
                 SaveBtn.GetComponentInChildren<Text>().text = "Save";
                 ResetArrows();
-
-                touches.bBaction = false;
             }
         }
     }

@@ -6932,7 +6932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thePlayerBrio: {fileID: 0}
-  uiMan: {fileID: 0}
+  uMan: {fileID: 0}
   currentBrio: 0
   currentCog: 0
   currentExp: 0
@@ -6991,7 +6991,7 @@ MonoBehaviour:
   scene:
     m_Handle: 0
   touches: {fileID: 0}
-  uiMan: {fileID: 0}
+  uMan: {fileID: 0}
   savedVol: {fileID: 0}
 --- !u!114 &841729770
 MonoBehaviour:
@@ -7382,7 +7382,7 @@ MonoBehaviour:
   scene:
     m_Handle: 0
   portPic: {fileID: 0}
-  uiMan: {fileID: 0}
+  uMan: {fileID: 0}
   diffMaxAndCurrent: 0
   playerMaxBrio: 50
   playerCurrentBrio: 0
@@ -7403,7 +7403,6 @@ MonoBehaviour:
   scene:
     m_Handle: 0
   movementVector: {x: 0, y: 0}
-  bBoosting: 0
   bGWCUpdate: 0
   bIsMobile: 0
   bStopPlayerMovement: 0
@@ -14845,6 +14844,23 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 841729768}
+          m_MethodName: PausingDone
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
 --- !u!1 &1742989106
 GameObject:
@@ -15735,6 +15751,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4745645437394654678, guid: c592e81eb5439e8419eeab02c94e0367,
         type: 3}
+      propertyPath: m_Delegates.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745645437394654678, guid: c592e81eb5439e8419eeab02c94e0367,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745645437394654678, guid: c592e81eb5439e8419eeab02c94e0367,
+        type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -15757,6 +15783,42 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745645437394654678, guid: c592e81eb5439e8419eeab02c94e0367,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[2].eventID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745645437394654678, guid: c592e81eb5439e8419eeab02c94e0367,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 841729768}
+    - target: {fileID: 4745645437394654678, guid: c592e81eb5439e8419eeab02c94e0367,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PausingDone
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745645437394654678, guid: c592e81eb5439e8419eeab02c94e0367,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745645437394654678, guid: c592e81eb5439e8419eeab02c94e0367,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745645437394654678, guid: c592e81eb5439e8419eeab02c94e0367,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745645437394654678, guid: c592e81eb5439e8419eeab02c94e0367,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_TypeName
+      value: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI, Version=1.0.0.0,
+        Culture=neutral, PublicKeyToken=null
       objectReference: {fileID: 0}
     - target: {fileID: 4745645437394654635, guid: c592e81eb5439e8419eeab02c94e0367,
         type: 3}
@@ -16799,7 +16861,6 @@ MonoBehaviour:
   o4Text: {fileID: 0}
   oFrame: {fileID: 0}
   moveOptsArw: {fileID: 0}
-  touches: {fileID: 0}
   uMan: {fileID: 0}
   bDiaToOpts: 0
   bOptionsActive: 0

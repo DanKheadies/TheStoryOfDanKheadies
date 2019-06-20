@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  05/10/2019
+// Last:  06/11/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +16,7 @@ public class Chp1 : MonoBehaviour
     public GameObject dArrow;
     public GameObject dBox;
     public GameObject greatTree;
+    public GameObject homeVRGoggles;
     public GameObject kid2;
     public GameObject kid4;
     public GameObject kid5;
@@ -25,6 +26,7 @@ public class Chp1 : MonoBehaviour
     public GameObject kid9;
     public GameObject man1;
     public GameObject oldMan1;
+    public GameObject parent1;
     public GameObject parent2;
     public GameObject person1;
     public GameObject pookieB1;
@@ -45,7 +47,9 @@ public class Chp1 : MonoBehaviour
     public GameObject warpMinesweeper;
     public Inventory inv;
     public MoveOptionsMenuArrow moveOptsArw;
+    public MusicManager mMan;
     public OptionsManager oMan;
+    public PauseGame pause;
     public QuestManager qMan;
     public SaveGame save;
     public Text dText;
@@ -89,6 +93,7 @@ public class Chp1 : MonoBehaviour
 
     public bool bQ3InitialCheck;
     public bool bGetInventory;
+    public bool bHasGoggles;
 
     public float invTimer;
     public float raceTimer;
@@ -115,13 +120,13 @@ public class Chp1 : MonoBehaviour
     void Start()
     {
         // Initializers
-        camFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
+        camFollow = FindObjectOfType<CameraFollow>();
         dArrow = GameObject.Find("Dialogue_Arrow");
         dBox = GameObject.Find("Dialogue_Box");
         dMan = FindObjectOfType<DialogueManager>();
         dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
         greatTree = GameObject.Find("GreatTree");
-        touches = GameObject.Find("GUIControls").GetComponent<TouchControls>();
+        homeVRGoggles = GameObject.Find("HomeVRGoggles");
         inv = FindObjectOfType<Inventory>();
         kid2 = GameObject.Find("Kid.2");
         kid4 = GameObject.Find("Kid.4");
@@ -130,12 +135,15 @@ public class Chp1 : MonoBehaviour
         kid7 = GameObject.Find("Kid.7");
         kid8 = GameObject.Find("Kid.8");
         kid9 = GameObject.Find("Kid.9");
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        mainCamera = FindObjectOfType<Camera>();
         man1 = GameObject.Find("Man.1");
+        mMan = FindObjectOfType<MusicManager>();
         moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
         oldMan1 = GameObject.Find("OldMan.1");
         oMan = FindObjectOfType<OptionsManager>();
+        parent1 = GameObject.Find("Parent.1");
         parent2 = GameObject.Find("Parent.2");
+        pause = FindObjectOfType<PauseGame>();
         person1 = GameObject.Find("Person.1");
         pookieB1 = GameObject.Find("PookieBear.1");
         pookieB2 = GameObject.Find("PookieBear.2");
@@ -144,6 +152,7 @@ public class Chp1 : MonoBehaviour
         save = FindObjectOfType<SaveGame>();
         screenFader = GameObject.Find("Screen_Fader");
         thePlayer = GameObject.FindGameObjectWithTag("Player");
+        touches = FindObjectOfType<TouchControls>();
         warpGWC = GameObject.Find("Chp1.to.GuessWhoColluded");
         warpMinesweeper = GameObject.Find("Chp1.to.Minesweeper");
         uMan = FindObjectOfType<UIManager>();
@@ -203,7 +212,11 @@ public class Chp1 : MonoBehaviour
 
             Chp1QuestDialogueChecker();
 
-            // DC TODO 02/13/19 -- When saving / loading from PlaygroundW, it uses main song rather than JurassicBark
+            // When loading from PlaygroundW, play Jurassic Dank
+            if (camFollow.currentCoords == (CameraFollow.AnandaCoords)32)
+            {
+                mMan.SwitchTrack(1);
+            }
         }
     }
 
@@ -237,12 +250,45 @@ public class Chp1 : MonoBehaviour
             }
         }
 
+        // Item Check -- VR Goggles Prompts Parent1's response
+        if (inv.bUpdateItemCount)
+        {
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+                item = item.Substring(0, item.Length - 7);
+
+                if (item == "VR.Goggles")
+                {
+                    bHasGoggles = true;
+                }
+            }
+
+            if (bHasGoggles)
+            {
+                parent1.transform.GetChild(0).gameObject.SetActive(true);
+                parent1.transform.GetChild(1).gameObject.SetActive(false);
+
+                homeVRGoggles.transform.localScale = Vector3.zero;
+            }
+            else
+            {
+                parent1.transform.GetChild(0).gameObject.SetActive(false);
+                parent1.transform.GetChild(1).gameObject.SetActive(true);
+
+                homeVRGoggles.transform.localScale = Vector3.one;
+            }
+
+            bHasGoggles = false;
+        }
+
         // Quest 0 -- Truth or Elaborate Lie w/ Parent2
         // see below
 
         // Quest 1 -- Race w/ Kid2 -> Start Timer
         if (quest1.GetComponent<QuestObject>().bHasStarted &&
-            !quest1.GetComponent<QuestObject>().bHasEnded)
+            !quest1.GetComponent<QuestObject>().bHasEnded &&
+            !pause.bPauseActive)
         {
             raceTimer += Time.deltaTime;
         }
