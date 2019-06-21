@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  05/09/2019
+// Last:  06/20/2019
 
 //using System.Collections;
 using UnityEngine;
@@ -204,6 +204,10 @@ public class UIManager : MonoBehaviour
         if (bMobileDevice)
         {
             DisplayControls();
+        }
+        else
+        {
+            HideControls();
         }
     }
 

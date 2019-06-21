@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/23/2018
-// Last:  05/10/2019
+// Last:  06/20/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,12 +13,12 @@ public class MoveOptionsMenuArrow : MonoBehaviour
     private Button Opt2Btn;
     private Button Opt3Btn;
     private Button Opt4Btn;
-    private FixedJoystick fixedJoy;
     private GameObject Opt1Arw;
     private GameObject Opt2Arw;
     private GameObject Opt3Arw;
     private GameObject Opt4Arw;
     private GameObject pauseScreen;
+    private Joystick joystick;
     private OptionsManager oMan;
     private TouchControls touches;
 
@@ -50,8 +50,8 @@ public class MoveOptionsMenuArrow : MonoBehaviour
         Opt2Arw = GameObject.Find("Opt2Arw");
         Opt3Arw = GameObject.Find("Opt3Arw");
         Opt4Arw = GameObject.Find("Opt4Arw");
-
-        fixedJoy = FindObjectOfType<FixedJoystick>();
+        
+        joystick = FindObjectOfType<Joystick>();
         oMan = FindObjectOfType<OptionsManager>();
         pauseScreen = GameObject.Find("PauseScreen");
         touches = FindObjectOfType<TouchControls>();
@@ -61,23 +61,14 @@ public class MoveOptionsMenuArrow : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log((float)currentPosition);
-        //var newfloat = (float)currentPosition;
-        //Debug.Log(newfloat);
-        //PauseArrow.transform.position = new Vector2(
-        //    PauseArrow.transform.position.x,
-        //    (int)currentPosition
-        //    );
-        //Debug.Log(newfloat);
-        //Debug.Log((int)currentPosition);
-
         if (oMan.bOptionsActive &&
             !oMan.bPauseOptions &&
             pauseScreen.transform.localScale == Vector3.zero)
         {
             // Controller Support 
-            // DC TODO 01/10/2019 -- temp bug where sub-pause menus not closing as expected
             if (Input.GetAxis("Controller DPad Vertical") == 0 &&
+                Input.GetAxis("Controller Joystick Vertical") == 0 &&
+                joystick.Vertical == 0 &&
                 (!touches.bDown &&
                  !touches.bUp))
             {
@@ -85,41 +76,24 @@ public class MoveOptionsMenuArrow : MonoBehaviour
             }
             else if (!bFreezeControllerInput &&
                      (Input.GetAxis("Controller DPad Vertical") > 0 ||
-                      touches.bDown))
+                      Input.GetAxis("Controller Joystick Vertical") < 0 ||
+                      touches.bDown ||
+                      (Mathf.Abs(joystick.Vertical) > Mathf.Abs(joystick.Horizontal) &&
+                       joystick.Vertical < 0)))
             {
                 bControllerDown = true;
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
                      (Input.GetAxis("Controller DPad Vertical") < 0 ||
-                      touches.bUp))
+                      Input.GetAxis("Controller Joystick Vertical") > 0 ||
+                      touches.bUp ||
+                      (Mathf.Abs(joystick.Vertical) > Mathf.Abs(joystick.Horizontal) &&
+                       joystick.Vertical > 0)))
             {
                 bControllerUp = true;
                 bFreezeControllerInput = true;
             }
-
-            // Virtual Joystick Support 
-            if (fixedJoy.Vertical == 0 &&
-                (!touches.bDown &&
-                 !touches.bUp))
-            {
-                bFreezeVirtualInput = false;
-            }
-            else if (!bFreezeVirtualInput &&
-                     (fixedJoy.Vertical < 0 ||
-                      touches.bDown))
-            {
-                bControllerDown = true;
-                bFreezeVirtualInput = true;
-            }
-            else if (!bFreezeVirtualInput &&
-                     (fixedJoy.Vertical > 0 ||
-                      touches.bUp))
-            {
-                bControllerUp = true;
-                bFreezeVirtualInput = true;
-            }
-
 
             if (Input.GetKeyDown(KeyCode.S) ||
                 Input.GetKeyDown(KeyCode.DownArrow) ||

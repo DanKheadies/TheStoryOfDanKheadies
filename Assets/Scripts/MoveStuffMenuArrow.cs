@@ -3,7 +3,6 @@
 // Start: 06/18/2019
 // Last:  06/20/2019
 
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 

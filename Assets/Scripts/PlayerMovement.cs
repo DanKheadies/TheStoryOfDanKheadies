@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  05/10/2019
+// Last:  06/20/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
     public bool bStopPlayerMovement;
 
     public float moveSpeed;
+
+    public string[] controllers;
     
 
 	void Start ()
@@ -68,10 +70,16 @@ public class PlayerMovement : MonoBehaviour
         {
             moveSpeed = 1.0f;
         }
+
+        controllers = Input.GetJoystickNames();
     }
 
     void Update()
     {
+        // 06/20/19 DC TODO -- Have to constantly update controllers
+        // Would prefer to call once when controller turns on / connects
+        controllers = Input.GetJoystickNames();
+
         if (bStopPlayerMovement)
         {
             movementVector = Vector2.zero;
@@ -114,6 +122,10 @@ public class PlayerMovement : MonoBehaviour
             // DC TODO -- See if sliding; then restrict movement in that previous direction for 0.X seconds AFTER re-contact w/ Joystick
             MovePlayerWithJoy();
         }
+        else if (!string.IsNullOrEmpty(controllers[0]))
+        {
+            MovePlayerWithController();
+        }
         else
         {
             MovePlayer();
@@ -122,8 +134,25 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovePlayer()
     {
-        // Unit's Project Settings -> Input
         Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+    }
+
+    public void MovePlayerWithController()
+    {
+        if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
+            Input.GetAxis("Controller Joystick Vertical") != 0)
+        {
+            Move(Input.GetAxis("Controller Joystick Horizontal"), Input.GetAxis("Controller Joystick Vertical"));
+        }
+        else if (Input.GetAxis("Controller DPad Horizontal") != 0 ||
+                 Input.GetAxis("Controller DPad Vertical") != 0)
+        {
+            Move(Input.GetAxis("Controller DPad Horizontal"), (-1 * Input.GetAxis("Controller DPad Vertical")));
+        }
+        else
+        {
+            Move(0, 0);
+        }
     }
 
     public void MovePlayerWithJoy()

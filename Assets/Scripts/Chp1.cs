@@ -250,6 +250,8 @@ public class Chp1 : MonoBehaviour
             }
         }
 
+        // 06/20/19 DC TODO -- Drop goggles in Chp0 and they can't be gotten again (can see, but can't get)
+        // Occurs even after getting another item
         // Item Check -- VR Goggles Prompts Parent1's response
         if (inv.bUpdateItemCount)
         {
