@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/13/2018
-// Last:  06/10/2019
+// Last:  06/27/2019
 
 using UnityEngine;
 
@@ -75,8 +75,7 @@ public class CharacterTile : MonoBehaviour
             !bAvoidUpdate &&
             (Input.GetKeyDown(KeyCode.LeftShift) ||
              Input.GetKeyDown(KeyCode.RightShift) ||
-             Input.GetKeyDown(KeyCode.JoystickButton4) ||
-             Input.GetKeyDown(KeyCode.JoystickButton5) ||
+             Input.GetKeyDown(KeyCode.JoystickButton1) ||
              touches.bBaction ||
              (Input.GetMouseButtonDown(1) &&
               Input.touchCount < 2)))
@@ -90,8 +89,7 @@ public class CharacterTile : MonoBehaviour
         if (!pause.bPauseActive &&
             (Input.GetKeyUp(KeyCode.LeftShift) ||
              Input.GetKeyUp(KeyCode.RightShift) ||
-             Input.GetKeyUp(KeyCode.JoystickButton4) ||
-             Input.GetKeyUp(KeyCode.JoystickButton5) ||
+             Input.GetKeyUp(KeyCode.JoystickButton1) ||
              (Input.GetMouseButtonUp(1) &&
               !uMan.bMobileDevice)))
         {

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/08/2017
-// Last:  06/19/2019
+// Last:  06/27/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,6 +36,7 @@ public class MovePauseMenuArrow : MonoBehaviour
     private GameObject SoundArw;
     private GameObject StuffArw;
 
+    private CanvasGroup itemMenuAlpha;
     private Joystick joystick;
     private Scene scene;
     private TouchControls touches;
@@ -76,6 +77,7 @@ public class MovePauseMenuArrow : MonoBehaviour
     void Start()
     {
         // Initializers
+        itemMenuAlpha = GameObject.Find("ItemMenu").GetComponent<CanvasGroup>();
         joystick = FindObjectOfType<Joystick>();
         pauseMenu = GameObject.Find("PauseMenu").transform;
         pauseScreen = GameObject.Find("PauseScreen").transform;
@@ -119,7 +121,8 @@ public class MovePauseMenuArrow : MonoBehaviour
 	void Update ()
     {
         if (pauseMenu.localScale == Vector3.one &&
-            pauseScreen.localScale == Vector3.one)
+            pauseScreen.localScale == Vector3.one &&
+            itemMenuAlpha.alpha == 0)
         {
             // Controller Support 
             if (Input.GetAxis("Controller DPad Vertical") == 0 &&

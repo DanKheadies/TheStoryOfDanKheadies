@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/26/2017
-// Last:  06/11/2019
+// Last:  06/27/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 // Pause the game & bring up the menu
 public class PauseGame : MonoBehaviour
 {
+    public CanvasGroup itemMenuCanvas;
     public DialogueManager dMan;
     public FixedJoystick fixedJoy;
     public MovePauseMenuArrow movePArw;
@@ -23,6 +24,7 @@ public class PauseGame : MonoBehaviour
     public Transform pauseMenu;
     public Transform pauseTrans;
     public Transform soundMenu;
+    public Transform stuffBack;
     public Transform stuffMenu;
 
     public bool bPauseActive;
@@ -34,6 +36,7 @@ public class PauseGame : MonoBehaviour
         controlsMenu = GameObject.Find("ControlsMenu").transform;
         dMan = FindObjectOfType<DialogueManager>();
         fixedJoy = FindObjectOfType<FixedJoystick>();
+        itemMenuCanvas = GameObject.Find("ItemMenu").GetComponent<CanvasGroup>();
         movePArw = FindObjectOfType<MovePauseMenuArrow>();
         moveSMA = FindObjectOfType<MoveStuffMenuArrow>();
         oMan = FindObjectOfType<OptionsManager>();
@@ -42,6 +45,7 @@ public class PauseGame : MonoBehaviour
         pMove = FindObjectOfType<PlayerMovement>();
         scene = SceneManager.GetActiveScene();
         soundMenu = GameObject.Find("SoundMenu").transform;
+        stuffBack = GameObject.Find("StuffBack").transform;
         stuffMenu = GameObject.Find("StuffMenu").transform;
         touches = FindObjectOfType<TouchControls>();
 
@@ -76,6 +80,16 @@ public class PauseGame : MonoBehaviour
             else if (soundMenu.transform.localScale == Vector3.one)
             {
                 Sound(false);
+            }
+            else if (itemMenuCanvas.alpha == 1)
+            {
+                // "Unlock" Joystick from horizontal direction
+                fixedJoy.joystickMode = JoystickMode.AllAxis;
+
+                stuffBack.localScale = Vector3.one;
+                itemMenuCanvas.alpha = 0;
+                itemMenuCanvas.interactable = false;
+                itemMenuCanvas.blocksRaycasts = false;
             }
             else if (stuffMenu.transform.localScale == Vector3.one)
             {
@@ -249,7 +263,7 @@ public class PauseGame : MonoBehaviour
         else
         {
             // "Lock" Joystick to vertical direction
-            fixedJoy.joystickMode = JoystickMode.Horizontal;
+            fixedJoy.joystickMode = JoystickMode.Vertical;
 
             stuffMenu.transform.localScale = Vector3.zero;
             pauseMenu.transform.localScale = Vector3.one;

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  05/10/2019
+// Last:  06/29/2019
 
 using System.Collections;
 using UnityEngine;
@@ -345,8 +345,8 @@ public class GWC_Controller : MonoBehaviour
             !dMan.bDialogueActive &&
             (Input.GetKey(KeyCode.Space) ||
              Input.GetKey(KeyCode.G) ||
-             Input.GetKeyDown(KeyCode.JoystickButton4) ||
-             Input.GetKeyDown(KeyCode.JoystickButton5) ||
+             Mathf.Abs(Input.GetAxis("Controller Left Trigger")) > 0 ||
+             Mathf.Abs(Input.GetAxis("Controller Right Trigger")) > 0 ||
              (Input.GetMouseButton(0) &&
               Input.touchCount < 2)))
         {

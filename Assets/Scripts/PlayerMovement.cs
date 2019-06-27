@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/20/2019
+// Last:  06/26/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,12 +24,16 @@ public class PlayerMovement : MonoBehaviour
     private Transform trans;
     private UIManager uMan;
     public Vector2 movementVector;
-    
+
+    public bool bControllerConnected;
     public bool bGWCUpdate;
+    public bool bIsControlling;
     public bool bIsMobile;
     public bool bStopPlayerMovement;
 
     public float moveSpeed;
+    public float xInput;
+    public float yInput;
 
     public string[] controllers;
     
@@ -76,9 +80,36 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // 06/20/19 DC TODO -- Have to constantly update controllers
-        // Would prefer to call once when controller turns on / connects
+        // Controller Support
         controllers = Input.GetJoystickNames();
+        if (controllers.Length > 0)
+        {
+            //Iterate over every element
+            for (int i = 0; i < controllers.Length; ++i)
+            {
+                //Check if the string is empty or not
+                if (!string.IsNullOrEmpty(controllers[i]))
+                {
+                    bControllerConnected = true;
+
+                    if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
+                        Input.GetAxis("Controller Joystick Vertical") != 0 ||
+                        Input.GetAxis("Controller DPad Horizontal") != 0 ||
+                        Input.GetAxis("Controller DPad Vertical") != 0)
+                    {
+                        bIsControlling = true;
+                    }
+                    else
+                    {
+                        bIsControlling = false;
+                    }
+                }
+                else
+                {
+                    bControllerConnected = false;
+                }
+            }
+        }
 
         if (bStopPlayerMovement)
         {
@@ -99,42 +130,22 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (scene.name == "GuessWhoColluded")
         {
-            if (bGWCUpdate)
-            {
-                GWCMovePlayer();
-            }
-
-            if (Input.GetAxisRaw("Horizontal") != 0)
-            {
-                bGWCUpdate = false;
-            }
-            else if (Input.GetAxisRaw("Vertical") != 0)
-            {
-                bGWCUpdate = false;
-            }
-            else
-            {
-                bGWCUpdate = true;
-            }
+            GWCMovePlayer();
         }
         else if (fixJoystick.bJoying)
         {
-            // DC TODO -- See if sliding; then restrict movement in that previous direction for 0.X seconds AFTER re-contact w/ Joystick
-            MovePlayerWithJoy();
+            // DC TODO -- See if sliding; then restrict movement in that previous direction for 
+            //            0.X seconds AFTER re-contact w/ Joystick
+            Move(joystick.Horizontal, joystick.Vertical);
         }
-        else if (!string.IsNullOrEmpty(controllers[0]))
+        else if (bIsControlling)
         {
             MovePlayerWithController();
         }
         else
         {
-            MovePlayer();
+            Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         }
-    }
-
-    public void MovePlayer()
-    {
-        Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
     public void MovePlayerWithController()
@@ -153,11 +164,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Move(0, 0);
         }
-    }
-
-    public void MovePlayerWithJoy()
-    {
-        Move(joystick.Horizontal, joystick.Vertical);
     }
 
     public void Move(float xInput, float yInput) 
@@ -181,6 +187,7 @@ public class PlayerMovement : MonoBehaviour
             (Input.GetButton("BAction") &&
              !uMan.bMobileDevice))
         {
+            Debug.Log("2x");
             rBody.velocity = movementVector * 2;
             pAnim.speed = 2.0f;
             
@@ -201,7 +208,104 @@ public class PlayerMovement : MonoBehaviour
 
     public void GWCMovePlayer()
     {
-        GWCMove(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if (bControllerConnected && 
+            bIsControlling)
+        {
+            if (bGWCUpdate)
+            {
+                GWCMovePlayerWithController();
+            }
+
+            if (bIsControlling)
+            {
+                bGWCUpdate = false;
+            }
+            else
+            {
+                bGWCUpdate = true;
+            }
+        }
+        else if (fixJoystick.bJoying)
+        {
+            if (bGWCUpdate)
+            {
+                GWCMoveViaJoystick(joystick.Horizontal, joystick.Vertical);
+            }
+
+            if (fixJoystick.bJoying)
+            {
+                bGWCUpdate = false;
+            }
+            else
+            {
+                bGWCUpdate = true;
+            }
+        }
+        else
+        {
+            if (bGWCUpdate)
+            {
+                GWCMove(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            }
+
+            if (Input.GetAxisRaw("Horizontal") != 0 ||
+                Input.GetAxisRaw("Vertical") != 0)
+            {
+                bGWCUpdate = false;
+            }
+            else
+            {
+                bGWCUpdate = true;
+            }
+        }
+    }
+
+    public void GWCMovePlayerWithController()
+    {
+        if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
+            Input.GetAxis("Controller Joystick Vertical") != 0)
+        {
+            GWCMoveViaJoystick(Input.GetAxis("Controller Joystick Horizontal"), Input.GetAxis("Controller Joystick Vertical"));
+        }
+        else if (Input.GetAxis("Controller DPad Horizontal") != 0 ||
+                 Input.GetAxis("Controller DPad Vertical") != 0)
+        {
+            GWCMove(Input.GetAxis("Controller DPad Horizontal"), (-1 * Input.GetAxis("Controller DPad Vertical")));
+        }
+        else
+        {
+            GWCMove(0, 0);
+        }
+    }
+
+    public void GWCMoveViaJoystick(float horiInput, float vertInput)
+    {
+        if (Mathf.Abs(horiInput) > Mathf.Abs(vertInput))
+        {
+            if (horiInput > 0)
+            {
+                xInput = 1;
+            }
+            else if (horiInput < 0)
+            {
+                xInput = -1;
+            }
+
+            GWCMove(xInput, 0);
+        }
+        else if (Mathf.Abs(horiInput) < Mathf.Abs(vertInput))
+        {
+            if (vertInput > 0)
+            {
+                yInput = 1;
+            }
+            else if (vertInput < 0)
+            {
+                yInput = -1;
+            }
+
+            GWCMove(0, yInput);
+        }
     }
 
     public void GWCMove(float xInput, float yInput)

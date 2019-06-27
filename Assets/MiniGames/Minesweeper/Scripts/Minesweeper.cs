@@ -105,9 +105,8 @@ public class Minesweeper : MonoBehaviour
         dPic.sprite = portPic[0];
         dBox.transform.localScale = Vector3.one;
 
-        // 05/10/2019 DC TODO 
-        // need to hide brio and button here (and restore once dialgoue goes away)
-        // need t oallow joystick to work on the options (chedk dpad too)
+        // Hide BrioBar & Pause Button (Opac)
+        uMan.HideBrioAndButton();
     }
 
     void Update ()

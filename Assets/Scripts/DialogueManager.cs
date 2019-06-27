@@ -173,7 +173,7 @@ public class DialogueManager : MonoBehaviour
         // Show controls if visible
         if (uMan.bControlsActive)
         {
-            uMan.DisplayControls(); // DC TODO -- Not needed anymore?
+            uMan.DisplayControls();
         }
 
         // Mini-pause on triggering the same dialogue

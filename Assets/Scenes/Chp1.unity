@@ -34058,6 +34058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e93e9399f0fdc84fa14d2c900d0f00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemMenuCanvas: {fileID: 0}
   dMan: {fileID: 0}
   fixedJoy: {fileID: 0}
   movePArw: {fileID: 0}
@@ -34073,6 +34074,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   pauseTrans: {fileID: 0}
   soundMenu: {fileID: 0}
+  stuffBack: {fileID: 0}
   stuffMenu: {fileID: 0}
   bPauseActive: 0
   bPausing: 0
@@ -36284,10 +36286,14 @@ MonoBehaviour:
   scene:
     m_Handle: 0
   movementVector: {x: 0, y: 0}
+  bControllerConnected: 0
   bGWCUpdate: 0
+  bIsControlling: 0
   bIsMobile: 0
   bStopPlayerMovement: 0
   moveSpeed: 0
+  xInput: 0
+  yInput: 0
   controllers: []
 --- !u!50 &875949247
 Rigidbody2D:

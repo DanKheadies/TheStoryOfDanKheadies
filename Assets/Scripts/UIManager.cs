@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/20/2019
+// Last:  06/27/2019
 
 //using System.Collections;
 using UnityEngine;
@@ -127,14 +127,7 @@ public class UIManager : MonoBehaviour
         {
             currentContDPad = PlayerPrefs.GetInt("ControlsDPad");
 
-            // Set control type based off level
-            // Always show DPad in GWC
-            if (scene.name == "GuessWhoColluded")
-            {
-                DisplayDPad();
-                currentContDPad = PlayerPrefs.GetInt("ControlsDPad"); // Reset to value pre-transfer
-            }
-            else if (currentContDPad == 1)
+            if (currentContDPad == 1)
             {
                 DisplayDPad();
             }

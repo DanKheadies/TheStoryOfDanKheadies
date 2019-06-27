@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 05/20/2018
-// Last:  04/25/2019
+// Last:  06/26/2019
 
 using System.Collections;
 using UnityEngine;
@@ -62,8 +62,7 @@ public class Element : MonoBehaviour
         if (bHasEntered &&
             !dMan.bDialogueActive &&
             (Input.GetKeyUp(KeyCode.F) ||
-             Input.GetKeyUp(KeyCode.JoystickButton2) ||
-             Input.GetKeyUp(KeyCode.JoystickButton3) ||
+             Input.GetKeyUp(KeyCode.JoystickButton1) ||
              touches.bBaction))
         {
             FlagElement();

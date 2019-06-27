@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  06/11/2019
+// Last:  06/27/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -235,6 +235,8 @@ public class Chp1 : MonoBehaviour
                     PlayerPrefs.GetInt("Transferring") == 1)
                 {
                     inv.LoadInventory("transfer");
+
+                    uMan.CheckIfMobile();
                 }
                 // From saved 
                 else
