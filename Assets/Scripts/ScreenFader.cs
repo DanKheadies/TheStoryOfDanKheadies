@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/13/2018
+// Last:  06/28/2019
 
 using System.Collections;
 using UnityEngine;
@@ -45,15 +45,9 @@ public class ScreenFader : MonoBehaviour
         }
     }
 
-    // Avoid console error when no player object is present
-    // DC TODO
+    // DC 06/28/19 -- Keep to avoid console error
     void AnimationComplete()
     {
-        scene = SceneManager.GetActiveScene();
-
-        if (scene.name != "Showdown" && !bAvoidAniComp)
-        {
-            pMove.bStopPlayerMovement = false;
-        }
+        // Does nothing
     }
 }

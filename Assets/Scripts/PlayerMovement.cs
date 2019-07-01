@@ -187,7 +187,6 @@ public class PlayerMovement : MonoBehaviour
             (Input.GetButton("BAction") &&
              !uMan.bMobileDevice))
         {
-            Debug.Log("2x");
             rBody.velocity = movementVector * 2;
             pAnim.speed = 2.0f;
             

@@ -145,16 +145,7 @@ public class PauseGame : MonoBehaviour
 
             bPausing = false;
             bPauseActive = true;
-
-            if (oMan.bOptionsActive ||
-                dMan.bDialogueActive)
-            {
-                pMove.bStopPlayerMovement = true;
-            }
-            else
-            {
-                pMove.bStopPlayerMovement = false;
-            }
+            pMove.bStopPlayerMovement = true;
         }
         else
         {

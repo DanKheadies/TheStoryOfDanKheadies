@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/13/2018
+// Last:  06/28/2019
 
 using System.Collections;
 using UnityEngine;
@@ -41,18 +41,20 @@ public class Warp : MonoBehaviour
             thePlayer.bStopPlayerMovement = true;
             touches.UnpressedAllArrows();
 
-            // Stop player interaction
-            // DC 08/13/2018
-
             // Fade out
-            yield return StartCoroutine(sFader.FadeToBlack());
+            StartCoroutine(sFader.FadeToBlack());
+
+            yield return new WaitForSeconds(1.0f);
 
             cFollow.currentCoords = (CameraFollow.AnandaCoords)AnandaCoord;
             other.gameObject.transform.position = warpTarget.position;
             Camera.main.transform.position = warpTarget.position;
-            
+
             // Fade in
-            yield return StartCoroutine(sFader.FadeToClear());
+            StartCoroutine(sFader.FadeToClear());
+            
+            yield return new WaitForSeconds(1.0f);
+            thePlayer.bStopPlayerMovement = false;
         }
     }
 }
