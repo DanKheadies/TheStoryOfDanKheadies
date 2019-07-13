@@ -27,6 +27,10 @@ public class AspectUtility : MonoBehaviour
         {
             _wantedAspectRatio = 2.285714f;
         }
+        else if (scene.name == "Immunis")
+        {
+            _wantedAspectRatio = 75f;
+        }
         else
         {
             _wantedAspectRatio = 1.142857f;
