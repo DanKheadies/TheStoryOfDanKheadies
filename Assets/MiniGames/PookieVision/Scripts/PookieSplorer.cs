@@ -10,10 +10,18 @@ public class PookieSplorer : MonoBehaviour
 {
     public Material mat;
     public Vector2 pos;
-    public float scale, angle, color, symmetry;
+    public float scale, angle, color, symmetry, repeat, speed;
+    public bool bCycling;
 
     private Vector2 smoothPos;
     private float smoothScale, smoothAngle;
+
+    private void Start()
+    {
+        color = 0.5f;
+        repeat = 10f;
+        speed = 0.45f;
+    }
 
     private void UpdateShader()
     {
@@ -37,32 +45,54 @@ public class PookieSplorer : MonoBehaviour
 
         mat.SetVector("_Area", new Vector4(smoothPos.x, smoothPos.y, scaleX, scaleY));
         mat.SetFloat("_Angle", smoothAngle);
-        //mat.SetFloat("_Color", smoothColor);
         mat.SetFloat("_Color", color);
+        mat.SetFloat("_Repeat", repeat);
+        mat.SetFloat("_Speed", speed);
         mat.SetFloat("_Symmetry", symmetry);
-
-        // if (scale > 100,00) { scale = 2.268991e-08; }
-        // .00000000001
     }
 
     private void HandleInputs()
     {
+        // Zoom Out
         if (Input.GetKey(KeyCode.I) ||
             (Input.GetAxis("Controller Right Trigger") > 0))
         {
-            scale *= .99f;
+            if (scale > 0.00000001f)
+            {
+                scale *= .99f;
+            }
+            // Jump to max zoomed-out level
+            else
+            {
+                scale = 75000f;
+            }
         }
+        // Zoom In
         else if (Input.GetKey(KeyCode.K) ||
                  (Input.GetAxis("Controller Left Trigger") > 0))
         {
-            scale *= 1.01f;
+            if (scale < 75000f)
+            {
+                scale *= 1.01f;
+            }
+            // Jump to max zoomed-in level
+            else
+            {
+                scale = 0.00000001f;
+                smoothScale = Mathf.Lerp(scale, scale, 0.0333f);
+                pos.x = -0.7500075f;
+                pos.y = 0.003150068f;
+                mat.SetVector("_Area", new Vector4(pos.x, pos.y, scale, scale));
+            }
         }
 
+        // Rotate Left
         if (Input.GetKey(KeyCode.J) ||
             Input.GetButton("Controller Left Bumper"))
         {
             angle -= 0.01f;
         }
+        // Rotate Right
         else if (Input.GetKey(KeyCode.L) ||
                  Input.GetButton("Controller Right Bumper"))
         {
@@ -74,12 +104,14 @@ public class PookieSplorer : MonoBehaviour
         float c = Mathf.Cos(angle);
         dir = new Vector2(dir.x * c, dir.x * s);
 
+        // Move Left
         if (Input.GetKey(KeyCode.A) ||
             Input.GetAxis("Controller Joystick Horizontal") < 0 ||
             Input.GetAxis("Controller DPad Horizontal") < 0)
         {
             pos -= dir;
         }
+        // Move Right
         else if (Input.GetKey(KeyCode.D) ||
                  Input.GetAxis("Controller Joystick Horizontal") > 0 ||
                  Input.GetAxis("Controller DPad Horizontal") > 0)
@@ -89,12 +121,14 @@ public class PookieSplorer : MonoBehaviour
 
         dir = new Vector2(-dir.y, dir.x);
 
+        // Move Down
         if (Input.GetKey(KeyCode.S) ||
             Input.GetAxis("Controller Joystick Vertical") < 0 ||
             Input.GetAxis("Controller DPad Vertical") > 0)
         {
             pos -= dir;
         }
+        // Move Up
         else if (Input.GetKey(KeyCode.W) ||
                  Input.GetAxis("Controller Joystick Vertical") > 0 ||
                  Input.GetAxis("Controller DPad Vertical") < 0)
@@ -102,7 +136,7 @@ public class PookieSplorer : MonoBehaviour
             pos += dir;
         }
 
-
+        // Cycle Colors
         if (Input.GetKey(KeyCode.U) ||
             Input.GetButton("Controller Top Button"))
         {
@@ -120,7 +154,7 @@ public class PookieSplorer : MonoBehaviour
             }
         }
 
-
+        // Cycle 
         if (Input.GetKey(KeyCode.E) ||
             Input.GetButton("Controller Right Button"))
         {
@@ -137,11 +171,28 @@ public class PookieSplorer : MonoBehaviour
                 symmetry += 0.1f;
             }
         }
+
+        if (Input.GetKey(KeyCode.R) ||
+            Input.GetButton("Controller Select Button"))
+        {
+            ResetShader();
+        }
     }
 
     void FixedUpdate()
     {
         HandleInputs();
         UpdateShader();
+    }
+
+    void ResetShader()
+    {
+        pos.x = -0.82f;
+        pos.y = 0.011675f;
+        scale = 4.083985f;
+        angle = 1.575f;
+        color = 0.5f;
+        repeat = 10f;
+        symmetry = 0f;
     }
 }

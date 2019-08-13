@@ -4,6 +4,7 @@
 /[Bb]uild/
 /[Bb]uilds/
 /Assets/AssetStoreTools*
+/Assets/Standard Assets*
 
 # Visual Studio 2015 cache directory
 /.vs/
@@ -22,9 +23,14 @@ ExportedObj/
 *.booproj
 *.svd
 *.pdb
+*.mdb
+*.opendb
+*.VC.db
 
 # Unity3D generated meta files
 *.pidb.meta
+*.pdb.meta
+*.mdb.meta
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt

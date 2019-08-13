@@ -7,9 +7,9 @@
 			_MaxIter("Iterations", range(4, 1000)) = 255
 			_Angle("Angle", range(-3.1415, 3.1415)) = 0
 			_Color("Color", range(0, 1)) = 0.5
-			_Repeat("Repeat", float) = 1
-			_Speed("Speed", float) = 1
-			_Symmetry("Symmetry", range(0, 1)) = 1
+			_Repeat("Repeat", range(0, 20)) = 10
+			_Speed("Speed", range(-1, 1)) = 0
+			_Symmetry("Symmetry", range(0, 1)) = 0
     }
     SubShader
     {

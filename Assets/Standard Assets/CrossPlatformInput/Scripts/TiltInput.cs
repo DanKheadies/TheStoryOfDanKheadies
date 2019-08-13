@@ -1,9 +1,3 @@
-// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
-// Authors: Unity?
-// Contributors: David W. Corso
-// Start: --/--/----
-// Last:  02/09/2019
-
 using System;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -110,44 +104,42 @@ namespace UnityStandardAssets.CrossPlatformInput.Inspector
     [CustomPropertyDrawer(typeof (TiltInput.AxisMapping))]
     public class TiltInputAxisStylePropertyDrawer : PropertyDrawer
     {
-        // DC 02/09/2019 -- Commenting out b/c it throws errors
-        // TODO -- Figure out if this is need and if so, how to activate
-        //public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-        //{
-        //    EditorGUI.BeginProperty(position, label, property);
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            EditorGUI.BeginProperty(position, label, property);
 
-        //    float x = position.x;
-        //    float y = position.y;
-        //    float inspectorWidth = position.width;
+            float x = position.x;
+            float y = position.y;
+            float inspectorWidth = position.width;
 
-        //    // Don't make child fields be indented
-        //    var indent = EditorGUI.indentLevel;
-        //    EditorGUI.indentLevel = 0;
+            // Don't make child fields be indented
+            var indent = EditorGUI.indentLevel;
+            EditorGUI.indentLevel = 0;
 
-        //    var props = new[] {"type", "axisName"};
-        //    var widths = new[] {.4f, .6f};
-        //    if (property.FindPropertyRelative("type").enumValueIndex > 0)
-        //    {
-        //        // hide name if not a named axis
-        //        props = new[] {"type"};
-        //        widths = new[] {1f};
-        //    }
-        //    const float lineHeight = 18;
-        //    for (int n = 0; n < props.Length; ++n)
-        //    {
-        //        float w = widths[n]*inspectorWidth;
+            var props = new[] {"type", "axisName"};
+            var widths = new[] {.4f, .6f};
+            if (property.FindPropertyRelative("type").enumValueIndex > 0)
+            {
+                // hide name if not a named axis
+                props = new[] {"type"};
+                widths = new[] {1f};
+            }
+            const float lineHeight = 18;
+            for (int n = 0; n < props.Length; ++n)
+            {
+                float w = widths[n]*inspectorWidth;
 
-        //        // Calculate rects
-        //        Rect rect = new Rect(x, y, w, lineHeight);
-        //        x += w;
+                // Calculate rects
+                Rect rect = new Rect(x, y, w, lineHeight);
+                x += w;
 
-        //        EditorGUI.PropertyField(rect, property.FindPropertyRelative(props[n]), GUIContent.none);
-        //    }
+                EditorGUI.PropertyField(rect, property.FindPropertyRelative(props[n]), GUIContent.none);
+            }
 
-        //    // Set indent back to what it was
-        //    EditorGUI.indentLevel = indent;
-        //    EditorGUI.EndProperty();
-        //}
+            // Set indent back to what it was
+            EditorGUI.indentLevel = indent;
+            EditorGUI.EndProperty();
+        }
     }
 #endif
 }
