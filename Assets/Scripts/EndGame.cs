@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/08/2017
-// Last:  10/04/2018
+// Last:  08/17/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,7 +18,7 @@ public class EndGame : MonoBehaviour
     public void EndApp()
     {
         save.DeleteTransPrefs();
-
+        
         Application.Quit();
     }
 

@@ -1,14 +1,14 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  08/13/2018
+// Last:  08/18/2019
 
 using UnityEngine;
 
 // Manage the Player's Levels & Stats
 public class PlayerStats : MonoBehaviour
 {
-    public PlayerBrioManager thePlayerBrio;
+    public PlayerBrioManager playerBrio;
     public UIManager uMan;
 
     public int currentBrio;
@@ -24,21 +24,10 @@ public class PlayerStats : MonoBehaviour
 
 	void Start ()
     {
-        // Initializers
-        thePlayerBrio = FindObjectOfType<PlayerBrioManager>();
-
         currentBrio = brioLevels[0];
         currentCog = cogLevels[0];
         currentPhys = physLevels[0];
 	}
-	
-	void Update ()
-    {
-        //if (currentExp >= toLevelUp[currentLevel])
-        //{
-        //    LevelUp();
-        //}
-    }
 
     public void AddExperience(int experienceToAdd)
     {
@@ -54,8 +43,8 @@ public class PlayerStats : MonoBehaviour
         currentPhys = physLevels[currentLevel];
 
         // Update Brio Bar & add extra
-        thePlayerBrio.playerMaxBrio = currentBrio;
-        thePlayerBrio.playerCurrentBrio += currentBrio - brioLevels[currentLevel - 1];
+        playerBrio.playerMaxBrio = currentBrio;
+        playerBrio.playerCurrentBrio += currentBrio - brioLevels[currentLevel - 1];
         uMan.bUpdateBrio = true;
     }
 }

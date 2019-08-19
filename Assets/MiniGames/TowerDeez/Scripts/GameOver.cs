@@ -1,8 +1,8 @@
-﻿// CC 4.0 International License: Attribution--Holistic3d.com & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Brackeys & HolisticGaming.com--NonCommercial--ShareALike
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 10/25/2016
-// Last:  08/12/2019
+// Last:  08/15/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +10,9 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
+    public SceneFader sceneFader;
     public Text roundsText;
+    public string menuSceneName = "TD_Menu";
 
     void OnEnable()
     {
@@ -19,11 +21,11 @@ public class GameOver : MonoBehaviour
 
     public void Retry()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
     }
 
     public void End()
     {
-        Debug.Log("GG no RE");
+        sceneFader.FadeTo(menuSceneName);
     }
 }

@@ -1,8 +1,8 @@
-﻿// CC 4.0 International License: Attribution--Holistic3d.com & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Brackeys & HolisticGaming.com--NonCommercial--ShareALike
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 07/21/2016
-// Last:  08/12/2019
+// Last:  08/16/2019
 
 using UnityEngine;
 
@@ -121,8 +121,11 @@ public class Turret : MonoBehaviour
 
     void Laser()
     {
-        targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
-        targetEnemy.Slow(slowAmount);
+        if (targetEnemy.health > 0)
+            targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
+        
+        if (!targetEnemy.isBoss)
+            targetEnemy.Slow(slowAmount);
 
         if (!lineRenderer.enabled)
         {

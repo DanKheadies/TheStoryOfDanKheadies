@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/24/2017
-// Last:  08/13/2018
+// Last:  08/18/2018
 
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class VolumeController : MonoBehaviour
 {
     public AudioSource theAudio;
 
-    private float audioLevel;
+    public float audioLevel;
     public float defaultAudio;
 
 	void Start ()

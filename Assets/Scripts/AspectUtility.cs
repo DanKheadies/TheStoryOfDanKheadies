@@ -2,16 +2,16 @@
 // Authors: Eric Haines
 // Contributors: David W. Corso
 // Start: --/--/----
-// Last:  08/11/2018
+// Last:  08/17/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class AspectUtility : MonoBehaviour
 {
-    private static Camera cam;
-    private static Camera backgroundCam;
-    private Scene scene;
+    public static Camera cam;
+    public static Camera backgroundCam;
+    public Scene scene;
 
     static float wantedAspectRatio;
     public float _wantedAspectRatio;
@@ -29,7 +29,11 @@ public class AspectUtility : MonoBehaviour
         }
         else if (scene.name == "Immunis")
         {
-            _wantedAspectRatio = 75f;
+            _wantedAspectRatio = 2.285714f;
+        }
+        else if (scene.name == "PookieVision")
+        {
+            _wantedAspectRatio = 1f;
         }
         else
         {

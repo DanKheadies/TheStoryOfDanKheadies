@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  01/14/2019
+// Last:  08/18/2019
 
 using UnityEngine;
 
@@ -20,13 +20,6 @@ public class QuestObject : MonoBehaviour
 
     public string[] beginText;
     public string[] endText;
-
-    void Start()
-    {
-        // Initializers
-        dMan = FindObjectOfType<DialogueManager>();
-        qMan = FindObjectOfType<QuestManager>();
-    } 
 
     public void BeginQuest()
     {

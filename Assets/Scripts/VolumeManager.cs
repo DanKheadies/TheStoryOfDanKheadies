@@ -1,17 +1,15 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/23/2017
-// Last:  08/13/2018
+// Last:  08/18/2019
 
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 // Set & control the overall volume
 public class VolumeManager : MonoBehaviour
 {
     public SaveGame saved;
-    public Scene scene;
     public Slider slider;
     public VolumeController[] vcObjects;
 
@@ -23,26 +21,9 @@ public class VolumeManager : MonoBehaviour
 	void Start ()
     {
         // Initializers
-        scene = SceneManager.GetActiveScene();
+        vcObjects = FindObjectsOfType<VolumeController>();
 
-        // Scene Conditions
-        if (scene.name == "MainMenu")
-        {
-            // Initializers
-            vcObjects = FindObjectsOfType<VolumeController>();
-            saved = GameObject.Find("Menu_Controller").GetComponent<SaveGame>();
-
-            GetAndSetVolume();
-        }
-        else
-        {
-            // Initializers
-            saved = GameObject.Find("Game_Controller").GetComponent<SaveGame>();
-            slider = GameObject.FindGameObjectWithTag("VolumeSlider").GetComponent<Slider>();
-            vcObjects = FindObjectsOfType<VolumeController>();
-
-            GetAndSetVolume();
-        }
+        GetAndSetVolume();
 	}
 	
 	void Update ()
@@ -101,11 +82,7 @@ public class VolumeManager : MonoBehaviour
             currentVolumeLevel = PlayerPrefs.GetFloat("Volume");
 
             // Adjusts the slider to the saved volume and voids error
-            if (scene.name == "MainMenu")
-            {
-
-            }
-            else
+            if (slider != null)
             {
                 slider.value = currentVolumeLevel;
             }

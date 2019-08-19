@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 01/29/2018
-// Last:  06/27/2019
+// Last:  08/18/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,16 +9,16 @@ using UnityEngine.UI;
 // To "move" and execute the arrows on the Item Menu
 public class MoveItemMenuArrow : MonoBehaviour
 {
-    private Button UseBtn;
-    private Button DropBtn;
-    private Button BackBtn;
-    private GameObject UseArw;
-    private GameObject DropArw;
-    private GameObject BackArw;
-    private Joystick joystick;
-    private MoveStuffMenuArrow moveSMA;
-    private TouchControls touches;
-    private Transform itemMenu;
+    public Button UseBtn;
+    public Button DropBtn;
+    public Button BackBtn;
+    public GameObject UseArw;
+    public GameObject DropArw;
+    public GameObject BackArw;
+    public Joystick joystick;
+    public MoveStuffMenuArrow moveSMA;
+    public TouchControls touches;
+    public Transform itemMenu;
 
     public bool bControllerLeft;
     public bool bControllerRight;
@@ -37,19 +37,6 @@ public class MoveItemMenuArrow : MonoBehaviour
     void Start()
     {
         // Initializers
-        UseBtn = GameObject.Find("UseBtn").GetComponent<UnityEngine.UI.Button>();
-        DropBtn = GameObject.Find("DropBtn").GetComponent<UnityEngine.UI.Button>();
-        BackBtn = GameObject.Find("BackBtn").GetComponent<UnityEngine.UI.Button>();
-
-        UseArw = GameObject.Find("UseArw");
-        DropArw = GameObject.Find("DropArw");
-        BackArw = GameObject.Find("BackArw");
-
-        itemMenu = GameObject.Find("ItemMenu").transform;
-        joystick = FindObjectOfType<Joystick>();
-        moveSMA = FindObjectOfType<MoveStuffMenuArrow>();
-        touches = FindObjectOfType<TouchControls>();
-        
         currentPosition = ItemArrowPos.Use;
     }
 

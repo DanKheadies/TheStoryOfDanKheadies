@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  05/10/2019
+// Last:  08/18/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,8 +10,8 @@ using UnityEngine.UI;
 // Controls the actions & display of the GUI input
 public class TouchControls : MonoBehaviour
 {
-    private PlayerMovement pMove;
-    private Scene scene;
+    public PlayerMovement playerMove;
+    public Scene scene;
     public Toggle vibeTog;
 
     public bool bAaction;
@@ -34,14 +34,11 @@ public class TouchControls : MonoBehaviour
     public int currentContVibe;
 
     public string lastDirection;
-
-
+    
     void Start()
     {
         // Initializers
-        pMove = FindObjectOfType<PlayerMovement>();
         scene = SceneManager.GetActiveScene();
-        vibeTog = GameObject.Find("VibrateToggle").GetComponent<Toggle>();
 
         // Sets initial vibrate based off saved data
         if (!PlayerPrefs.HasKey("ControlsVibrate"))
@@ -72,97 +69,97 @@ public class TouchControls : MonoBehaviour
     void Update()
     {
         // Moving the player based off arrow flags
-        if (pMove.bGWCUpdate &&
-            !pMove.bStopPlayerMovement &&
+        if (playerMove.bGWCUpdate &&
+            !playerMove.bStopPlayerMovement &&
             scene.name == "GuessWhoColluded")
         {
             if (bUp)
             {
-                pMove.GWCMove(0.0f, 1.0f);
+                playerMove.GWCMove(0.0f, 1.0f);
                 bUp = false;
             }
 
             if (bLeft)
             {
-                pMove.GWCMove(-1.0f, 0.0f);
+                playerMove.GWCMove(-1.0f, 0.0f);
                 bLeft = false;
             }
 
             if (bDown)
             {
-                pMove.GWCMove(0.0f, -1.0f);
+                playerMove.GWCMove(0.0f, -1.0f);
                 bDown = false;
             }
 
             if (bRight)
             {
-                pMove.GWCMove(1.0f, 0.0f);
+                playerMove.GWCMove(1.0f, 0.0f);
                 bRight = false;
             }
         }
 
-        if (!pMove.bStopPlayerMovement &&
+        if (!playerMove.bStopPlayerMovement &&
             bUIactive)
         {
             if (bUp)
             {
-                pMove.Move(0.0f, 1.0f);
+                playerMove.Move(0.0f, 1.0f);
             }
             else if (bRight)
             {
-                pMove.Move(1.0f, 0.0f);
+                playerMove.Move(1.0f, 0.0f);
             }
             else if (bLeft)
             {
-                pMove.Move(-1.0f, 0.0f);
+                playerMove.Move(-1.0f, 0.0f);
             }
             else if (bDown)
             {
-                pMove.Move(0.0f, -1.0f);
+                playerMove.Move(0.0f, -1.0f);
             }
 
             if (bUpRight &&
                 lastDirection == "up")
             {
-                pMove.Move(1.0f, 0.0f);
+                playerMove.Move(1.0f, 0.0f);
             }
             else if (bUpRight &&
                      lastDirection == "right")
             {
-                pMove.Move(0.0f, 1.0f);
+                playerMove.Move(0.0f, 1.0f);
             }
 
             if (bUpLeft &&
                 lastDirection == "up")
             {
-                pMove.Move(-1.0f, 0.0f);
+                playerMove.Move(-1.0f, 0.0f);
             }
             else if (bUpLeft &&
                      lastDirection == "left")
             {
-                pMove.Move(0.0f, 1.0f);
+                playerMove.Move(0.0f, 1.0f);
             }
 
             if (bDownLeft &&
                 lastDirection == "down")
             {
-                pMove.Move(-1.0f, 0.0f);
+                playerMove.Move(-1.0f, 0.0f);
             }
             else if (bDownLeft &&
                      lastDirection == "left")
             {
-                pMove.Move(0.0f, -1.0f);
+                playerMove.Move(0.0f, -1.0f);
             }
 
             if (bDownRight &&
                 lastDirection == "down")
             {
-                pMove.Move(1.0f, 0.0f);
+                playerMove.Move(1.0f, 0.0f);
             }
             else if (bDownRight &&
                      lastDirection == "right")
             {
-                pMove.Move(0.0f, -1.0f);
+                playerMove.Move(0.0f, -1.0f);
             }
         }
     }

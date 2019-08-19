@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/23/2018
-// Last:  06/20/2019
+// Last:  08/18/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,18 +9,18 @@ using UnityEngine.UI;
 // To "move" and execute the arrows on the Options Menu
 public class MoveOptionsMenuArrow : MonoBehaviour
 {
-    private Button Opt1Btn;
-    private Button Opt2Btn;
-    private Button Opt3Btn;
-    private Button Opt4Btn;
-    private GameObject Opt1Arw;
-    private GameObject Opt2Arw;
-    private GameObject Opt3Arw;
-    private GameObject Opt4Arw;
-    private GameObject pauseScreen;
-    private Joystick joystick;
-    private OptionsManager oMan;
-    private TouchControls touches;
+    public Button Opt1Btn;
+    public Button Opt2Btn;
+    public Button Opt3Btn;
+    public Button Opt4Btn;
+    public GameObject Opt1Arw;
+    public GameObject Opt2Arw;
+    public GameObject Opt3Arw;
+    public GameObject Opt4Arw;
+    public GameObject pauseScreen;
+    public Joystick joystick;
+    public OptionsManager oMan;
+    public TouchControls touches;
 
     public bool bControllerDown;
     public bool bControllerUp;
@@ -40,22 +40,6 @@ public class MoveOptionsMenuArrow : MonoBehaviour
 
     void Start()
     {
-        // Initializers
-        Opt1Btn = GameObject.Find("Opt1").GetComponent<Button>();
-        Opt2Btn = GameObject.Find("Opt2").GetComponent<Button>();
-        Opt3Btn = GameObject.Find("Opt3").GetComponent<Button>();
-        Opt4Btn = GameObject.Find("Opt4").GetComponent<Button>();
-
-        Opt1Arw = GameObject.Find("Opt1Arw");
-        Opt2Arw = GameObject.Find("Opt2Arw");
-        Opt3Arw = GameObject.Find("Opt3Arw");
-        Opt4Arw = GameObject.Find("Opt4Arw");
-        
-        joystick = FindObjectOfType<Joystick>();
-        oMan = FindObjectOfType<OptionsManager>();
-        pauseScreen = GameObject.Find("PauseScreen");
-        touches = FindObjectOfType<TouchControls>();
-        
         currentPosition = ArrowPos.Opt1;
     }
 

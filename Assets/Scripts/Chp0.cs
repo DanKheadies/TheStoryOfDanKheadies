@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  05/09/2019
+// Last:  08/17/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +27,7 @@ public class Chp0 : MonoBehaviour
     public PolygonCollider2D playerCollider;
     public SaveGame save;
     public SceneTransitioner sceneTrans;
-    private SFXManager SFXMan;
+    public SFXManager SFXMan;
     public Text dText;
     public TouchControls touches;
     public UIManager uMan;
@@ -44,28 +44,28 @@ public class Chp0 : MonoBehaviour
     void Start()
     {
         // Initializers
-        dArrow = GameObject.Find("Dialogue_Arrow");
-        dBox = GameObject.Find("Dialogue_Box");
-        dMan = FindObjectOfType<DialogueManager>();
-        dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
-        fixedJoy = FindObjectOfType<FixedJoystick>();
-        homeVRGoggles = GameObject.Find("HomeVRGoggles");
-        HUD = GameObject.Find("HUD");
-        inv = FindObjectOfType<Inventory>();
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        mMan = FindObjectOfType<MusicManager>();
-        npcMove = FindObjectsOfType<NPCMovement>();
-        pauseButton = GameObject.Find("PauseButton");
-        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<PolygonCollider2D>();
-        save = FindObjectOfType<SaveGame>();
-        sceneTrans = FindObjectOfType<SceneTransitioner>();
-        sFaderAnim = GameObject.Find("Screen_Fader");
-        sFaderAnimDia = GameObject.Find("Screen_Fader_Dialogue");
-        SFXMan = FindObjectOfType<SFXManager>();
-        thePlayer = GameObject.FindGameObjectWithTag("Player");
-        touches = FindObjectOfType<TouchControls>();
-        uMan = FindObjectOfType<UIManager>();
-        warpCollider = GameObject.Find("Chp0.to.Chp1").GetComponent<BoxCollider2D>();
+        //dArrow = GameObject.Find("Dialogue_Arrow");
+        //dBox = GameObject.Find("Dialogue_Box");
+        //dMan = FindObjectOfType<DialogueManager>();
+        //dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
+        //fixedJoy = FindObjectOfType<FixedJoystick>();
+        //homeVRGoggles = GameObject.Find("HomeVRGoggles");
+        //HUD = GameObject.Find("HUD");
+        //inv = FindObjectOfType<Inventory>();
+        //mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        //mMan = FindObjectOfType<MusicManager>();
+        //npcMove = FindObjectsOfType<NPCMovement>();
+        //pauseButton = GameObject.Find("PauseButton");
+        //playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<PolygonCollider2D>();
+        //save = FindObjectOfType<SaveGame>();
+        //sceneTrans = FindObjectOfType<SceneTransitioner>();
+        //sFaderAnim = GameObject.Find("Screen_Fader");
+        //sFaderAnimDia = GameObject.Find("Screen_Fader_Dialogue");
+        //SFXMan = FindObjectOfType<SFXManager>();
+        //thePlayer = GameObject.FindGameObjectWithTag("Player");
+        //touches = FindObjectOfType<TouchControls>();
+        //uMan = FindObjectOfType<UIManager>();
+        //warpCollider = GameObject.Find("Chp0.to.Chp1").GetComponent<BoxCollider2D>();
         
         strobeTimer = 3.0f;
 

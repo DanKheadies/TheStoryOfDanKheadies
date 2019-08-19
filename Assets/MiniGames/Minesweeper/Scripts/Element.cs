@@ -28,12 +28,6 @@ public class Element : MonoBehaviour
 
     void Start()
     {
-        // Initializers
-        dMan = FindObjectOfType<DialogueManager>();
-        ms = FindObjectOfType<Minesweeper>();
-        pause = FindObjectOfType<PauseGame>();
-        touches = GameObject.Find("GUIControls").GetComponent<TouchControls>();
-
         //mineProbability = 0.01f;
         mineProbability = 0.15f; // DC TODO set different skill levels
 

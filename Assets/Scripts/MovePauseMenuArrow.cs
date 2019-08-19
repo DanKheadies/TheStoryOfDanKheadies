@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/08/2017
-// Last:  06/27/2019
+// Last:  08/18/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,44 +10,46 @@ using UnityEngine.SceneManagement;
 // To "move" and execute the arrows on the Pause Menu
 public class MovePauseMenuArrow : MonoBehaviour
 {
-    private Button CollumBtn;
-    private Button ControlsBtn;
-    private Button GGBtn;
-    private Button GoOnBtn;
-    private Button IconsBtn;
-    private Button KogabiBtn;
-    private Button MapBtn;
-    private Button QuitBtn;
-    private Button ResetBtn;
-    private Button SaveBtn;
-    private Button SoundBtn;
-    private Button StuffBtn;
+    [Header("General Menu Options")]
+    public Button ControlsBtn;
+    public Button GoOnBtn;
+    public Button KogabiBtn;
+    public Button MapBtn;
+    public Button QuitBtn;
+    public Button SaveBtn;
+    public Button SoundBtn;
+    public Button StuffBtn;
+    public GameObject ControlsArw;
+    public GameObject GoOnArw;
+    public GameObject KogabiArw;
+    public GameObject MapArw;
+    public GameObject QuitArw;
+    public GameObject SaveArw;
+    public GameObject SoundArw;
+    public GameObject StuffArw;
 
-    private GameObject CollumArw;
-    private GameObject ControlsArw;
-    private GameObject GGArw;
-    private GameObject GoOnArw;
-    private GameObject IconsArw;
-    private GameObject KogabiArw;
-    private GameObject MapArw;
-    private GameObject QuitArw;
-    private GameObject ResetArw;
-    private GameObject SaveArw;
-    private GameObject SoundArw;
-    private GameObject StuffArw;
+    [Header("Guess Who Colluded Menu Options")]
+    public Button CollumBtn;
+    public Button GGBtn;
+    public Button IconsBtn;
+    public Button ResetBtn;
+    public GameObject CollumArw;
+    public GameObject GGArw;
+    public GameObject IconsArw;
+    public GameObject ResetArw;
 
-    private CanvasGroup itemMenuAlpha;
-    private Joystick joystick;
-    private Scene scene;
-    private TouchControls touches;
-    private Transform pauseMenu;
-    private Transform pauseScreen;
+    [Header("General")]
+    public CanvasGroup itemMenuAlpha;
+    public Joystick joystick;
+    public Scene scene;
+    public TouchControls touches;
+    public Transform pauseMenu;
+    public Transform pauseScreen;
 
     public bool bControllerDown;
     public bool bControllerUp;
     public bool bFreezeControllerInput;
-
-
+    
     public enum ArrowPos : int
     {
         // For Core
@@ -77,43 +79,7 @@ public class MovePauseMenuArrow : MonoBehaviour
     void Start()
     {
         // Initializers
-        itemMenuAlpha = GameObject.Find("ItemMenu").GetComponent<CanvasGroup>();
-        joystick = FindObjectOfType<Joystick>();
-        pauseMenu = GameObject.Find("PauseMenu").transform;
-        pauseScreen = GameObject.Find("PauseScreen").transform;
         scene = SceneManager.GetActiveScene();
-        touches = FindObjectOfType<TouchControls>();
-
-        ControlsBtn = GameObject.Find("Controls").GetComponent<Button>();
-        GoOnBtn = GameObject.Find("GoOn").GetComponent<Button>();
-        KogabiBtn = GameObject.Find("Kogabi").GetComponent<Button>();
-        MapBtn = GameObject.Find("Map").GetComponent<Button>();
-        QuitBtn = GameObject.Find("Quit").GetComponent<Button>();
-        SaveBtn = GameObject.Find("Save").GetComponent<Button>();
-        SoundBtn = GameObject.Find("Sound").GetComponent<Button>();
-        StuffBtn = GameObject.Find("Stuff").GetComponent<Button>();
-
-        ControlsArw = GameObject.Find("ControlsArw");
-        GoOnArw = GameObject.Find("GoOnArw");
-        KogabiArw = GameObject.Find("KogabiArw");
-        MapArw = GameObject.Find("MapArw");
-        QuitArw = GameObject.Find("QuitArw");
-        SaveArw = GameObject.Find("SaveArw");
-        SoundArw = GameObject.Find("SoundArw");
-        StuffArw = GameObject.Find("StuffArw");
-
-        if (scene.name == "GuessWhoColluded")
-        {
-            CollumBtn = GameObject.Find("Colluminac").GetComponent<Button>();
-            GGBtn = GameObject.Find("GG").GetComponent<Button>();
-            IconsBtn = GameObject.Find("Icons").GetComponent<Button>();
-            ResetBtn = GameObject.Find("Reset").GetComponent<Button>();
-
-            CollumArw = GameObject.Find("ColluminacArw");
-            GGArw = GameObject.Find("GGArw");
-            IconsArw = GameObject.Find("IconsArw");
-            ResetArw = GameObject.Find("ResetArw");
-        }
 
         currentPosition = ArrowPos.GoOn;
     }

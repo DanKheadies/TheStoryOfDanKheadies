@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  06/11/2019
+// Last:  08/17/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 // Assigned to Interactable Objects (i.e. on an item)
 public class ItemManager : MonoBehaviour
 {
-    public Animator pAnim;
+    public Animator playerAnim;
     public DialogueManager dMan;
     public GameObject player;
     public Inventory inv;
@@ -24,9 +24,8 @@ public class ItemManager : MonoBehaviour
     public GameObject orangeBud;
     public GameObject purpleBud;
     public GameObject whiteBud;
-    public GameObject vrGoggles;
-
     public GameObject homeVRGoggles;
+    public GameObject vrGoggles;
 
     public bool bAcquired; // Checks & Balances
     public bool bDoneAcquiring; // Checks & Balances
@@ -38,32 +37,7 @@ public class ItemManager : MonoBehaviour
     void Start()
     {
         // Initializers
-        dMan = FindObjectOfType<DialogueManager>();
-        inv = FindObjectOfType<Inventory>();
-        pAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
-        pause = FindObjectOfType<PauseGame>();
-        player = GameObject.FindGameObjectWithTag("Player");
         scene = SceneManager.GetActiveScene();
-        touches = FindObjectOfType<TouchControls>();
-        uMan = FindObjectOfType<UIManager>();
-
-        // 04/07/2018 DC TODO -- Extract to individual scene files
-        if (scene.name == "Chp0")
-        {
-            vrGoggles = GameObject.Find("VR.Goggles");
-
-            homeVRGoggles = GameObject.Find("HomeVRGoggles");
-        }
-        else if (scene.name == "Chp1")
-        {
-            greenBud = GameObject.Find("Cannabis.Bud.Green");
-            orangeBud = GameObject.Find("Cannabis.Bud.Orange");
-            purpleBud = GameObject.Find("Cannabis.Bud.Purple");
-            whiteBud = GameObject.Find("Cannabis.Bud.White");
-            vrGoggles = GameObject.Find("VR.Goggles");
-
-            homeVRGoggles = GameObject.Find("HomeVRGoggles");
-        }
 
         // Check for VR Goggles & hide if in inventory
         if (scene.name == "Chp1")
@@ -108,6 +82,7 @@ public class ItemManager : MonoBehaviour
             bDoneAcquiring)
         {
             HideItem();
+            Debug.Log("hide");
             bDoneAcquiring = false;
         }
     }
@@ -134,38 +109,38 @@ public class ItemManager : MonoBehaviour
     {
         if (inv.items.Count < inv.totalItems)
         {
-            pAnim.Play("Acquire");
+            playerAnim.Play("Acquire");
 
             // Display and add item to inventory
-            if (this.name == "Cannabis.Bud.Green")
+            if (name == "Cannabis.Bud.Green")
             {
                 greenBud.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
-            else if (this.name == "Cannabis.Bud.Orange")
+            else if (name == "Cannabis.Bud.Orange")
             {
                 orangeBud.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
-            else if (this.name == "Cannabis.Bud.Purple")
+            else if (name == "Cannabis.Bud.Purple")
             {
                 purpleBud.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
-            else if (this.name == "Cannabis.Bud.White")
+            else if (name == "Cannabis.Bud.White")
             {
                 whiteBud.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
-            else if (this.name == "HomeVRGoggles")
+            else if (name == "HomeVRGoggles")
             {
                 vrGoggles.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
                 
                 // Disables the item's interactivity and "removes"
                 // Note: cannabis is taken care of in CannabisPlant.cs
-                this.GetComponent<BoxCollider2D>().enabled = false;
-                this.transform.localScale = Vector2.zero;
+                GetComponent<BoxCollider2D>().enabled = false;
+                transform.localScale = Vector2.zero;
             }
 
             dMan.portPic = portPic;
@@ -187,17 +162,38 @@ public class ItemManager : MonoBehaviour
 
     public void HideItem()
     {
-        if (scene.name == "Chp0")
-        {
-            vrGoggles.transform.localScale = Vector3.zero;
-        }
-        else if (scene.name == "Chp1")
+        if (greenBud != null)
         {
             greenBud.transform.localScale = Vector3.zero;
+        }
+        else if (orangeBud != null)
+        {
             orangeBud.transform.localScale = Vector3.zero;
+        }
+        else if (purpleBud != null)
+        {
             purpleBud.transform.localScale = Vector3.zero;
+        }
+        else if (whiteBud != null)
+        {
             whiteBud.transform.localScale = Vector3.zero;
+        }
+        else if (vrGoggles != null)
+        {
             vrGoggles.transform.localScale = Vector3.zero;
         }
+
+        //if (scene.name == "Chp0")
+        //{
+        //    vrGoggles.transform.localScale = Vector3.zero;
+        //}
+        //else if (scene.name == "Chp1")
+        //{
+        //    greenBud.transform.localScale = Vector3.zero;
+        //    orangeBud.transform.localScale = Vector3.zero;
+        //    purpleBud.transform.localScale = Vector3.zero;
+        //    whiteBud.transform.localScale = Vector3.zero;
+        //    vrGoggles.transform.localScale = Vector3.zero;
+        //}
     }
 }

@@ -1,8 +1,8 @@
-﻿// CC 4.0 International License: Attribution--Holistic3d.com & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Brackeys & HolisticGaming.com--NonCommercial--ShareALike
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/08/2016
-// Last:  08/10/2019
+// Last:  08/13/2019
 
 using UnityEngine;
 
@@ -10,5 +10,12 @@ using UnityEngine;
 public class TurretBlueprint
 {
     public GameObject prefab;
+    public GameObject upgradedPrefab;
     public int cost;
+    public int upgradedCost;
+
+    public int GetSellAmount()
+    {
+        return cost / 2;
+    }
 }

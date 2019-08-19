@@ -1,21 +1,21 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/18/2017
-// Last:  06/11/2019
+// Last:  08/17/2019
 
 using UnityEngine;
 
 // Assigns plants Cannabis Objects
 public class CannabisPlant : MonoBehaviour
 {
-    private Animator anim;
-    private DialogueManager dMan;
-    private GameObject greenBud;
-    private GameObject orangeBud;
+    public Animator playerAnim;
+    public DialogueManager dMan;
+    public GameObject greenBud;
+    public GameObject orangeBud;
     public PauseGame pause;
     public GameObject player;
-    private GameObject purpleBud;
-    private GameObject whiteBud;
+    public GameObject purpleBud;
+    public GameObject whiteBud;
     public Inventory inv;
     public Item item;
     public Sprite portPic;
@@ -41,17 +41,17 @@ public class CannabisPlant : MonoBehaviour
     void Start()
     {
         // Initializers
-        anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
-        dMan = FindObjectOfType<DialogueManager>();
-        greenBud = GameObject.Find("Cannabis.Bud.Green");
-        inv = FindObjectOfType<Inventory>();
-        orangeBud = GameObject.Find("Cannabis.Bud.Orange");
-        pause = FindObjectOfType<PauseGame>();
-        player = GameObject.FindGameObjectWithTag("Player");
-        purpleBud = GameObject.Find("Cannabis.Bud.Purple");
-        touches = FindObjectOfType<TouchControls>();
-        uMan = FindObjectOfType<UIManager>();
-        whiteBud = GameObject.Find("Cannabis.Bud.White");
+        //anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        //dMan = FindObjectOfType<DialogueManager>();
+        //greenBud = GameObject.Find("Cannabis.Bud.Green");
+        //inv = FindObjectOfType<Inventory>();
+        //orangeBud = GameObject.Find("Cannabis.Bud.Orange");
+        //pause = FindObjectOfType<PauseGame>();
+        //player = GameObject.FindGameObjectWithTag("Player");
+        //purpleBud = GameObject.Find("Cannabis.Bud.Purple");
+        //touches = FindObjectOfType<TouchControls>();
+        //uMan = FindObjectOfType<UIManager>();
+        //whiteBud = GameObject.Find("Cannabis.Bud.White");
 
         bAcquired = false;
         bFreeze = false;
@@ -123,10 +123,22 @@ public class CannabisPlant : MonoBehaviour
 
     public void HideBud()
     {
-        greenBud.GetComponent<Transform>().localScale = Vector3.zero;
-        orangeBud.GetComponent<Transform>().localScale = Vector3.zero;
-        purpleBud.GetComponent<Transform>().localScale = Vector3.zero;
-        whiteBud.GetComponent<Transform>().localScale = Vector3.zero;
+        if (greenBud != null)
+        {
+            greenBud.transform.localScale = Vector3.zero;
+        }
+        else if (orangeBud != null)
+        {
+            orangeBud.transform.localScale = Vector3.zero;
+        }
+        else if (purpleBud != null)
+        {
+            purpleBud.transform.localScale = Vector3.zero;
+        }
+        else if (whiteBud != null)
+        {
+            whiteBud.transform.localScale = Vector3.zero;
+        }
     }
 
     public void InteractWithPlant()
@@ -139,28 +151,28 @@ public class CannabisPlant : MonoBehaviour
         {
             bFreeze = true;
 
-            anim.Play("Acquire");
+            playerAnim.Play("Acquire");
 
             // Display and add bud to inventory
             if (bGreen)
             {
-                greenBud.GetComponent<Transform>().localScale = Vector3.one;
+                greenBud.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
             else if (bOrange)
             {
-                orangeBud.GetComponent<Transform>().localScale = Vector3.one;
+                orangeBud.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
 
             }
             else if (bPurple)
             {
-                purpleBud.GetComponent<Transform>().localScale = Vector3.one;
+                purpleBud.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
             else if (bWhite)
             {
-                whiteBud.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                whiteBud.transform.localScale = Vector3.one;
                 Inventory.instance.Add(item);
             }
 

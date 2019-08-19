@@ -1,12 +1,14 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  06/29/2019
+// Last:  08/18/2019
 
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
+// TODO: board wont' show up on load
 
 // Contains 'key' GWC code
 public class GWC_Controller : MonoBehaviour
@@ -23,11 +25,11 @@ public class GWC_Controller : MonoBehaviour
     public GameObject oBox;
     public GameObject pauseBtn;
     public GameObject pauseScreen;
+    public GameObject player;
     public GameObject playerCard;
     public GameObject sceneTransAnim;
     public GameObject sFaderAnim;
     public GameObject sFaderAnimDia;
-    public GameObject thePlayer;
     public GameObject trumpCards;
     public GameObject warpGWC;
     public Image dPic;
@@ -83,39 +85,7 @@ public class GWC_Controller : MonoBehaviour
     void Start()
     {
         // Initializers
-        aUtil = FindObjectOfType<AspectUtility>();
-        brio = FindObjectOfType<PlayerBrioManager>();
-        camFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
         chars = GetComponent<Characters>();
-        dArrow = GameObject.Find("Dialogue_Arrow").GetComponent<ImageStrobe>();
-        dBox = GameObject.Find("Dialogue_Box");
-        dMan = FindObjectOfType<DialogueManager>();
-        dPic = GameObject.Find("Dialogue_Picture").GetComponent<Image>();
-        dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
-        HUD = GameObject.Find("HUD");
-        inv = FindObjectOfType<Inventory>();
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        mMan = FindObjectOfType<MusicManager>();
-        moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
-        muellerCards = GameObject.Find("Mueller_Cards");
-        oBox = GameObject.Find("Options_Box");
-        oMan = FindObjectOfType<OptionsManager>();
-        pause = FindObjectOfType<PauseGame>();
-        pauseBtn = GameObject.Find("PauseButton");
-        pauseScreen = GameObject.FindGameObjectWithTag("Pause");
-        playerCard = GameObject.Find("Player_Character_Card");
-        save = FindObjectOfType<SaveGame>();
-        scene = SceneManager.GetActiveScene();
-        sceneTransAnim = GameObject.Find("SceneTransitioner");
-        sFaderAnim = GameObject.Find("Screen_Fader");
-        sFaderAnimDia = GameObject.Find("Screen_Fader_Dialogue");
-        SFXMan = FindObjectOfType<SFXManager>();
-        spLogic = FindObjectOfType<SinglePlayerLogic>();
-        thePlayer = GameObject.FindGameObjectWithTag("Player");
-        touches = FindObjectOfType<TouchControls>();
-        trumpCards = GameObject.Find("Trump_Cards");
-        warpGWC = GameObject.Find("GuessWhoColluded.to.Chp1");
-        uMan = FindObjectOfType<UIManager>();
 
         charTiles = new CharacterTile[24];
 
@@ -167,7 +137,7 @@ public class GWC_Controller : MonoBehaviour
         dBox.transform.localScale = Vector3.one;
         sFaderAnimDia.GetComponent<Animator>().enabled = true;
 
-        thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+        player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
     }
 
     void Update()
@@ -232,7 +202,7 @@ public class GWC_Controller : MonoBehaviour
             !bAvoidUpdate &&
             bStartGame)
         {
-            thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = false;
+            player.GetComponent<PlayerMovement>().bStopPlayerMovement = false;
             mMan.bMusicCanPlay = true;
             sFaderAnim.GetComponent<Animator>().enabled = true;
 
@@ -721,7 +691,7 @@ public class GWC_Controller : MonoBehaviour
         PlayerPrefs.SetString("TransferScene", warpGWC.GetComponent<SceneTransitioner>().BetaLoad);
 
         // Stop Dan from moving
-        thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+        player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
 
         // Remove and prevent dialog 
         dMan.gameObject.transform.localScale = Vector3.zero;
@@ -795,7 +765,7 @@ public class GWC_Controller : MonoBehaviour
 
     public void GWC_PromptRestrictions()
     {
-        thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+        player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
     }
 
     public void GWC_DialogueResetter()

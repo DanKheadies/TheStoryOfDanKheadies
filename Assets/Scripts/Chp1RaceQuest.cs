@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/27/2018
-// Last:  10/04/2018
+// Last:  08/18/2019
 
 using UnityEngine;
 
@@ -20,14 +20,6 @@ public class Chp1RaceQuest : MonoBehaviour
     void Start()
     {
         // Initializers
-        chp1 = FindObjectOfType<Chp1>();
-        thePlayer = GameObject.FindGameObjectWithTag("Player");
-
-        raceCP1 = GameObject.Find("Checkpoint_1");
-        raceCP2 = GameObject.Find("Checkpoint_2");
-        raceCP3 = GameObject.Find("Checkpoint_3");
-        raceCP4 = GameObject.Find("Checkpoint_4");
-
         ogPoints = thePlayer.GetComponent<PolygonCollider2D>().points;
         racePoints = new Vector2[]
         {
@@ -44,29 +36,34 @@ public class Chp1RaceQuest : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (this.gameObject.name == "Race_Start" && collision.gameObject.CompareTag("Player"))
+        if (gameObject.name == "Race_Start" && 
+            collision.gameObject.CompareTag("Player"))
         {
             raceCP1.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
         }
-        else if (this.gameObject.name == "Checkpoint_1" && collision.gameObject.CompareTag("Player"))
+        else if (gameObject.name == "Checkpoint_1" && 
+                 collision.gameObject.CompareTag("Player"))
         {
             raceCP2.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
         }
-        else if (this.gameObject.name == "Checkpoint_2" && collision.gameObject.CompareTag("Player"))
+        else if (gameObject.name == "Checkpoint_2" && 
+                 collision.gameObject.CompareTag("Player"))
         {
             raceCP3.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
         }
-        else if (this.gameObject.name == "Checkpoint_3" && collision.gameObject.CompareTag("Player"))
+        else if (gameObject.name == "Checkpoint_3" && 
+                 collision.gameObject.CompareTag("Player"))
         {
             raceCP4.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
         }
-        else if (this.gameObject.name == "Checkpoint_4" && collision.gameObject.CompareTag("Player"))
+        else if (gameObject.name == "Checkpoint_4" && 
+                 collision.gameObject.CompareTag("Player"))
         {
             GameObject.Find("Race_End").GetComponent<QuestTrigger>().endQuest = true;
         }
 
         // Shrink player's hitbox while within the race area
-        if (this.gameObject.name == "Race_Perimeter" && collision.gameObject.CompareTag("Player"))
+        if (gameObject.name == "Race_Perimeter" && collision.gameObject.CompareTag("Player"))
         {
             thePlayer.GetComponent<PolygonCollider2D>().points = racePoints;
         }
@@ -75,7 +72,7 @@ public class Chp1RaceQuest : MonoBehaviour
     public void OnTriggerExit2D(Collider2D collision)
     {
         // Reset the player's hitbox to normal when outside the race area
-        if (this.gameObject.name == "Race_Perimeter" && collision.gameObject.CompareTag("Player"))
+        if (gameObject.name == "Race_Perimeter" && collision.gameObject.CompareTag("Player"))
         {
             thePlayer.GetComponent<PolygonCollider2D>().points = ogPoints;
 

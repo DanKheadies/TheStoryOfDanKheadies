@@ -9,19 +9,13 @@ using UnityEngine;
 // Slows players when interacting w/ that TarTar
 public class TarTar : MonoBehaviour
 {
-    public GameObject thePlayer;
-
-    void Start()
-    {
-        // Initializers
-        thePlayer = GameObject.FindGameObjectWithTag("Player");
-    }
+    public GameObject player;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            thePlayer.GetComponent<PlayerMovement>().moveSpeed = 0.1f;
+            player.GetComponent<PlayerMovement>().moveSpeed = 0.1f;
         }
     }
 
@@ -30,7 +24,7 @@ public class TarTar : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // UX: return reduced speed and after X time, go full speed
-            thePlayer.GetComponent<PlayerMovement>().moveSpeed = 0.333f;
+            player.GetComponent<PlayerMovement>().moveSpeed = 0.333f;
             StartCoroutine(FullSpeed());
         }
     }
@@ -38,6 +32,6 @@ public class TarTar : MonoBehaviour
     IEnumerator FullSpeed()
     {
         yield return new WaitForSeconds(0.333f);
-        thePlayer.GetComponent<PlayerMovement>().moveSpeed = 1.0f;
+        player.GetComponent<PlayerMovement>().moveSpeed = 1.0f;
     }
 }

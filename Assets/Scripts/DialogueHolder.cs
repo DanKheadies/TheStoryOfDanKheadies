@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/16/2019
+// Last:  08/19/2019
 
 using UnityEngine;
 
@@ -25,12 +25,6 @@ public class DialogueHolder : MonoBehaviour
 	void Start ()
     {
         // Initializers
-        anim = GetComponentInParent<Animator>();
-        dMan = FindObjectOfType<DialogueManager>();
-        pause = FindObjectOfType<PauseGame>();
-        touches = FindObjectOfType<TouchControls>();
-        uMan = FindObjectOfType<UIManager>();
-
         bHasEntered = false;
         bHasExited = true;
     }
@@ -80,6 +74,8 @@ public class DialogueHolder : MonoBehaviour
             // Restores NPC movement if it has animation/animator
             if (!dMan.bDialogueActive && 
                 transform.parent.GetComponent<Animator>() != null)
+                // TODO: Simplify?
+                // anim != null)
             {
                 anim.Play("NPC Movement");
             }
@@ -110,6 +106,8 @@ public class DialogueHolder : MonoBehaviour
 
         // NPC looks at player if there's an animation/animator
         if (transform.parent.GetComponent<Animator>() != null)
+        // TODO: Simplify?
+        //  anim != null)
         {
             OrientNPC(collision);
         }

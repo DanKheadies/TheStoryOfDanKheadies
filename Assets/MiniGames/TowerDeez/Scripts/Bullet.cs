@@ -1,4 +1,4 @@
-﻿// CC 4.0 International License: Attribution--Holistic3d.com & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Brackeys & HolisticGaming.com--NonCommercial--ShareALike
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 07/21/2016

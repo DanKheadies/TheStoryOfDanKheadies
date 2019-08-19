@@ -1,29 +1,26 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/28/2019
+// Last:  08/18/2019
 
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 // Controls where dialogues are displayed
 public class DialogueManager : MonoBehaviour
 {
     public AspectUtility aspectUtil;
-    private Animator pAnim;
+    public Animator playerAnim;
     public CameraFollow mainCamera;
     public FixedJoystick fixedJoy;
     public GameObject dArrow;
     public GameObject dBox;
     public Image dFrame;
     public Image dPic;
-    public ImageStrobe imgStrobe;
     public OptionsManager oMan;
     public PauseGame pause;
-    public PlayerMovement pMove;
-    public Scene scene;
+    public PlayerMovement playerMove;
     public SFXManager SFXMan;
     public Sprite portPic;
     public Text dText;
@@ -56,30 +53,7 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-        // Initializers
-        aspectUtil = FindObjectOfType<Camera>().GetComponent<AspectUtility>();
-        dArrow = GameObject.Find("Dialogue_Arrow");
-        dBox = GameObject.Find("Dialogue_Box");
-        dFrame = GameObject.Find("Dialogue_Frame").GetComponent<Image>();
-        dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
-        dPic = GameObject.Find("Dialogue_Picture").GetComponent<Image>();
-        fixedJoy = FindObjectOfType<FixedJoystick>();
-        imgStrobe = GameObject.Find("Dialogue_Arrow").GetComponent<ImageStrobe>();
-        mainCamera = FindObjectOfType<CameraFollow>();
-        oMan = FindObjectOfType<OptionsManager>();
-        pause = FindObjectOfType<PauseGame>();
-        pMove = FindObjectOfType<PlayerMovement>();
-        scene = SceneManager.GetActiveScene();
-        SFXMan = FindObjectOfType<SFXManager>();
-        touches = FindObjectOfType<TouchControls>();
-        uMan = FindObjectOfType<UIManager>();
-
-        // Avoid loading animator if none present in scene
-        if (scene.name != "GuessWhoColluded")
-        {
-            pAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
-        }
-
+        // TODO: Still needed?
         bDialogueActive = false;
         bPauseDialogue = false; // UX -- Prevents immediately reopening a dialogue while moving / talking
         pauseTime = 0.333f;
@@ -182,10 +156,10 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(dArrow.gameObject.GetComponent<ImageStrobe>().StopStrobe());
 
         // Reactivate the player
-        pMove.bStopPlayerMovement = false;
-        if (scene.name != "GuessWhoColluded")
+        playerMove.bStopPlayerMovement = false;
+        if (playerAnim != null)
         {
-            pAnim.Play("Idle");
+            playerAnim.Play("Idle");
         }
 
         // Restore Brio & Button if no more dialogue
@@ -209,13 +183,13 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(ResetStrobes());
 
         // Stops the player's movement
-        pMove.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        if (scene.name != "GuessWhoColluded")
+        playerMove.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        if (playerAnim != null)
         {
-            pAnim.SetBool("bIsWalking", false);
+            playerAnim.SetBool("bIsWalking", false);
         }
         touches.UnpressedAllArrows();
-        pMove.bStopPlayerMovement = true;
+        playerMove.bStopPlayerMovement = true;
 
         // Hide BrioBar & Pause Button (Opac)
         uMan.HideBrioAndButton();

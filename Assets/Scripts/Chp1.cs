@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  06/27/2019
+// Last:  08/19/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,21 +16,21 @@ public class Chp1 : MonoBehaviour
     public GameObject dArrow;
     public GameObject dBox;
     public GameObject greatTree;
-    public GameObject homeVRGoggles;
-    public GameObject kid2;
-    public GameObject kid4;
-    public GameObject kid5;
-    public GameObject kid6;
-    public GameObject kid7;
-    public GameObject kid8;
-    public GameObject kid9;
-    public GameObject man1;
-    public GameObject oldMan1;
-    public GameObject parent1;
-    public GameObject parent2;
-    public GameObject person1;
-    public GameObject pookieB1;
-    public GameObject pookieB2;
+    public GameObject item_homeVRGoggles;
+    public GameObject npc_al_khidr;
+    public GameObject npc_ashera;
+    public GameObject npc_atandwa;
+    public GameObject npc_canaan;
+    public GameObject npc_chun;
+    public GameObject npc_dagon;
+    public GameObject npc_dilum;
+    public GameObject npc_eliz;
+    public GameObject npc_enki;
+    public GameObject npc_marija;
+    public GameObject npc_pookieB1;
+    public GameObject npc_pookieB2;
+    public GameObject npc_thabo;
+    public GameObject npc_zola;
     public GameObject quest0;
     public GameObject quest1;
     public GameObject quest2;
@@ -83,12 +83,12 @@ public class Chp1 : MonoBehaviour
     public bool bContainsQ8ItemWhite;
 
     public bool bQ4Seeking;
+    public bool bFoundQ4Kid1;
+    public bool bFoundQ4Kid2;
+    public bool bFoundQ4Kid3;
     public bool bFoundQ4Kid4;
     public bool bFoundQ4Kid5;
     public bool bFoundQ4Kid6;
-    public bool bFoundQ4Kid7;
-    public bool bFoundQ4Kid8;
-    public bool bFoundQ4Kid9;
     public bool bFoundQ4All;
 
     public bool bQ3InitialCheck;
@@ -119,55 +119,17 @@ public class Chp1 : MonoBehaviour
 
     void Start()
     {
-        // Initializers
-        camFollow = FindObjectOfType<CameraFollow>();
-        dArrow = GameObject.Find("Dialogue_Arrow");
-        dBox = GameObject.Find("Dialogue_Box");
-        dMan = FindObjectOfType<DialogueManager>();
-        dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
-        greatTree = GameObject.Find("GreatTree");
-        homeVRGoggles = GameObject.Find("HomeVRGoggles");
-        inv = FindObjectOfType<Inventory>();
-        kid2 = GameObject.Find("Kid.2");
-        kid4 = GameObject.Find("Kid.4");
-        kid5 = GameObject.Find("Kid.5");
-        kid6 = GameObject.Find("Kid.6");
-        kid7 = GameObject.Find("Kid.7");
-        kid8 = GameObject.Find("Kid.8");
-        kid9 = GameObject.Find("Kid.9");
-        mainCamera = FindObjectOfType<Camera>();
-        man1 = GameObject.Find("Man.1");
-        mMan = FindObjectOfType<MusicManager>();
-        moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
-        oldMan1 = GameObject.Find("OldMan.1");
-        oMan = FindObjectOfType<OptionsManager>();
-        parent1 = GameObject.Find("Parent.1");
-        parent2 = GameObject.Find("Parent.2");
-        pause = FindObjectOfType<PauseGame>();
-        person1 = GameObject.Find("Person.1");
-        pookieB1 = GameObject.Find("PookieBear.1");
-        pookieB2 = GameObject.Find("PookieBear.2");
-        qMan = FindObjectOfType<QuestManager>();
-        questTrigger2 = GameObject.Find("QT_2");
-        save = FindObjectOfType<SaveGame>();
-        screenFader = GameObject.Find("Screen_Fader");
-        thePlayer = GameObject.FindGameObjectWithTag("Player");
-        touches = FindObjectOfType<TouchControls>();
-        warpGWC = GameObject.Find("Chp1.to.GuessWhoColluded");
-        warpMinesweeper = GameObject.Find("Chp1.to.Minesweeper");
-        uMan = FindObjectOfType<UIManager>();
-
         inv.RerunStart();
 
-        quest0 = GameObject.Find("Quest_0"); // Truth or Elaborate Lie w/ Parent2
-        quest1 = GameObject.Find("Quest_1"); // Race w/ Kid2
-        quest2 = GameObject.Find("Quest_2"); // Treehouse Search
-        quest3 = GameObject.Find("Quest_3"); // Item Check w/ OldMan1
-        quest4 = GameObject.Find("Quest_4"); // Hide & Seek w/ Kid4
-        quest5 = GameObject.Find("Quest_5"); // Talking to GreatTree
-        quest6 = GameObject.Find("Quest_6"); // Minesweeper
-        quest7 = GameObject.Find("Quest_7"); // PookieBear1
-        quest8 = GameObject.Find("Quest_8"); // PookieBear2
+        //quest0 = Truth or Elaborate Lie w/ Dagon
+        //quest1 = Race w/ canaan
+        //quest2 = Treehouse Search
+        //quest3 = Item Check w/ Enki
+        //quest4 = Hide & Seek w/ Al-khidr
+        //quest5 = Talking to GreatTree
+        //quest6 = Minesweeper
+        //quest7 = PookieBear1
+        //quest8 = PookieBear2
 
         invTimer = 0.333f;
         questCount = 9;
@@ -254,7 +216,7 @@ public class Chp1 : MonoBehaviour
 
         // 06/20/19 DC TODO -- Drop goggles in Chp0 and they can't be gotten again (can see, but can't get)
         // Occurs even after getting another item
-        // Item Check -- VR Goggles Prompts Parent1's response
+        // Item Check -- VR Goggles Prompts Ashera's response
         if (inv.bUpdateItemCount)
         {
             for (int i = 0; i < inv.items.Count; i++)
@@ -270,26 +232,26 @@ public class Chp1 : MonoBehaviour
 
             if (bHasGoggles)
             {
-                parent1.transform.GetChild(0).gameObject.SetActive(true);
-                parent1.transform.GetChild(1).gameObject.SetActive(false);
+                npc_ashera.transform.GetChild(0).gameObject.SetActive(true);
+                npc_ashera.transform.GetChild(1).gameObject.SetActive(false);
 
-                homeVRGoggles.transform.localScale = Vector3.zero;
+                item_homeVRGoggles.transform.localScale = Vector3.zero;
             }
             else
             {
-                parent1.transform.GetChild(0).gameObject.SetActive(false);
-                parent1.transform.GetChild(1).gameObject.SetActive(true);
+                npc_ashera.transform.GetChild(0).gameObject.SetActive(false);
+                npc_ashera.transform.GetChild(1).gameObject.SetActive(true);
 
-                homeVRGoggles.transform.localScale = Vector3.one;
+                item_homeVRGoggles.transform.localScale = Vector3.one;
             }
 
             bHasGoggles = false;
         }
 
-        // Quest 0 -- Truth or Elaborate Lie w/ Parent2
+        // Quest 0 -- Truth or Elaborate Lie w/ Dagon
         // see below
 
-        // Quest 1 -- Race w/ Kid2 -> Start Timer
+        // Quest 1 -- Race w/ Canaan -> Start Timer
         if (quest1.GetComponent<QuestObject>().bHasStarted &&
             !quest1.GetComponent<QuestObject>().bHasEnded &&
             !pause.bPauseActive)
@@ -297,27 +259,27 @@ public class Chp1 : MonoBehaviour
             raceTimer += Time.deltaTime;
         }
 
-        // Quest 1 -- Race w/ Kid2 -> End, Check Race Time, & Assign Dialogue
+        // Quest 1 -- Race w/ canaan -> End, Check Race Time, & Assign Dialogue
         if (quest1.GetComponent<QuestObject>().bHasEnded &&
             !dMan.bDialogueActive &&
             !bAvoidUpdateQ1)
         {
             bAvoidUpdateQ1 = true;
 
-            kid2.transform.GetChild(0).gameObject.SetActive(false);
-            kid2.transform.GetChild(1).gameObject.SetActive(true);
+            npc_canaan.transform.GetChild(0).gameObject.SetActive(false);
+            npc_canaan.transform.GetChild(1).gameObject.SetActive(true);
 
             raceTimer = Mathf.Round(raceTimer);
 
             if (raceTimer == 0) // Saved data condition
             {
-                kid2.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
+                npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
                     "Feel free to keep practicing. It's always good to practice."
                 };
             }
             else if (raceTimer <= 10)
             {
-                kid2.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
+                npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
                     "Holy goat nipples Batman.. How the.. Did you cheat?",
                     "You set one of the best records at " + raceTimer + " seconds?!?",
                     "Well.. Well ran. Let's see how you do tomorrow."
@@ -325,26 +287,26 @@ public class Chp1 : MonoBehaviour
             }
             else if (raceTimer <= 30 && raceTimer > 10)
             {
-                kid2.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
+                npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
                     "Good race Dan! You ran that in " + raceTimer + " seconds.",
                     "Keep practicing and improving. Maybe you'll beat my time!"
                 };
             }
             else
             {
-                kid2.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
+                npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
                     "Well.. You made it... You finished after " + raceTimer + " seconds.",
                     "Keep training Dan. It's good for you!"
                 };
             }
         }
 
-        // Quest 1 -- Race w/ Kid2 -> Reward
+        // Quest 1 -- Race w/ Canaan -> Reward
         if (!quest1.GetComponent<QuestObject>().bHasCollected &&
             quest1.GetComponent<QuestObject>().bHasEnded &&
             (int)camFollow.currentCoords == 32)
         {
-            if (kid2.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+            if (npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
                 dMan.bDialogueActive)
             {
                 Quest1Reward();
@@ -377,7 +339,7 @@ public class Chp1 : MonoBehaviour
             Quest2Reward();
         }
 
-        // Quest 3 -- Item Check w/ OldMan1 -> Initial check
+        // Quest 3 -- Item Check w/ Enki -> Initial check
         if (quest3.GetComponent<QuestObject>().bHasStarted &&
             !bQ3InitialCheck)
         {
@@ -385,7 +347,7 @@ public class Chp1 : MonoBehaviour
             inv.bUpdateItemCount = true;
         }
 
-        // Quest 3 -- Item Check w/ OldMan1 -> Check on inventory change
+        // Quest 3 -- Item Check w/ Enki -> Check on inventory change
         if (quest3.GetComponent<QuestObject>().bHasStarted &&
             !bAvoidUpdateQ3 &&
             (inv.bUpdateItemCount || 
@@ -404,21 +366,21 @@ public class Chp1 : MonoBehaviour
             if (bContainsQ3Item &&
                 !dMan.bDialogueActive)
             {
-                oldMan1.transform.GetChild(0).gameObject.SetActive(false);
-                oldMan1.transform.GetChild(1).gameObject.SetActive(true);
+                npc_enki.transform.GetChild(0).gameObject.SetActive(false);
+                npc_enki.transform.GetChild(1).gameObject.SetActive(true);
 
-                oldMan1.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = true;
+                npc_enki.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = true;
             }
             else
             {
-                oldMan1.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = false;
+                npc_enki.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = false;
 
-                oldMan1.transform.GetChild(0).gameObject.SetActive(true);
-                oldMan1.transform.GetChild(1).gameObject.SetActive(false);
+                npc_enki.transform.GetChild(0).gameObject.SetActive(true);
+                npc_enki.transform.GetChild(1).gameObject.SetActive(false);
             }
         }
 
-        // Quest 3 -- Item Check w/ OldMan1 -> Reward & Removal
+        // Quest 3 -- Item Check w/ Enki -> Reward & Removal
         if (!quest3.GetComponent<QuestObject>().bHasCollected && 
             quest3.GetComponent<QuestObject>().bHasEnded &&
             !bAvoidUpdateQ3)
@@ -441,16 +403,16 @@ public class Chp1 : MonoBehaviour
             }
         }
 
-        // Quest 4 -- Hide & Seek w/ Kid4 (counting)
+        // Quest 4 -- Hide & Seek w/ Al-khidr (counting)
         if (quest4.GetComponent<QuestObject>().bHasStarted &&
             !dMan.bDialogueActive &&
             !bAvoidUpdateQ4counting)
         {
             StartCoroutine(HideAndSeek());
 
-            // Avoid talking to Kid4
-            kid4.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
-            kid4.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = true;
+            // Avoid talking to Al-khidr
+            npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+            npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = true;
 
             // Stops the player's movement
             thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
@@ -462,7 +424,7 @@ public class Chp1 : MonoBehaviour
             touches.transform.localScale = Vector3.zero;
         }
 
-        // Quest 4 -- Hide & Seek w/ Kid4 (start seeking)
+        // Quest 4 -- Hide & Seek w/ Al-khidr (start seeking)
         if (quest4.GetComponent<QuestObject>().bHasStarted &&
             !dMan.bDialogueActive &&
             bQ4Seeking &&
@@ -477,65 +439,65 @@ public class Chp1 : MonoBehaviour
             bAvoidUpdateQ4seeking = true;
         }
 
-        // Quest 4 -- Hide & Seek w/ Kid4 (seeking)
+        // Quest 4 -- Hide & Seek w/ Al-khidr (seeking)
         if (bQ4Seeking)
         {
-            if (kid4.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+            if (npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+                !dMan.bDialogueActive &&
+                !bFoundQ4Kid1)
+            {
+                bFoundQ4Kid1 = true;
+                Q4LastKidFound = "Al-khidr";
+                Q4KidCounter += 1;
+
+                HideAndSeekFoundKid();
+            }
+            else if (npc_atandwa.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+                !dMan.bDialogueActive &&
+                !bFoundQ4Kid2)
+            {
+                bFoundQ4Kid2 = true;
+                Q4LastKidFound = "Atandwa";
+                Q4KidCounter += 1;
+
+                HideAndSeekFoundKid();
+            }
+            else if (npc_eliz.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+                !dMan.bDialogueActive &&
+                !bFoundQ4Kid3)
+            {
+                bFoundQ4Kid3 = true;
+                Q4LastKidFound = "Eliz";
+                Q4KidCounter += 1;
+
+                HideAndSeekFoundKid();
+            }
+            else if (npc_thabo.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
                 !dMan.bDialogueActive &&
                 !bFoundQ4Kid4)
             {
                 bFoundQ4Kid4 = true;
-                Q4LastKidFound = "Kid4";
+                Q4LastKidFound = "Thabo";
                 Q4KidCounter += 1;
 
                 HideAndSeekFoundKid();
             }
-            else if (kid5.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+            else if (npc_zola.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
                 !dMan.bDialogueActive &&
                 !bFoundQ4Kid5)
             {
                 bFoundQ4Kid5 = true;
-                Q4LastKidFound = "Kid5";
+                Q4LastKidFound = "Zola";
                 Q4KidCounter += 1;
 
                 HideAndSeekFoundKid();
             }
-            else if (kid6.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+            else if (npc_marija.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
                 !dMan.bDialogueActive &&
                 !bFoundQ4Kid6)
             {
                 bFoundQ4Kid6 = true;
-                Q4LastKidFound = "Kid6";
-                Q4KidCounter += 1;
-
-                HideAndSeekFoundKid();
-            }
-            else if (kid7.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
-                !dMan.bDialogueActive &&
-                !bFoundQ4Kid7)
-            {
-                bFoundQ4Kid7 = true;
-                Q4LastKidFound = "Kid7";
-                Q4KidCounter += 1;
-
-                HideAndSeekFoundKid();
-            }
-            else if (kid8.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
-                !dMan.bDialogueActive &&
-                !bFoundQ4Kid8)
-            {
-                bFoundQ4Kid8 = true;
-                Q4LastKidFound = "Kid8";
-                Q4KidCounter += 1;
-
-                HideAndSeekFoundKid();
-            }
-            else if (kid9.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
-                !dMan.bDialogueActive &&
-                !bFoundQ4Kid9)
-            {
-                bFoundQ4Kid9 = true;
-                Q4LastKidFound = "Kid9";
+                Q4LastKidFound = "Marija";
                 Q4KidCounter += 1;
 
                 HideAndSeekFoundKid();
@@ -547,7 +509,7 @@ public class Chp1 : MonoBehaviour
             }
         }
 
-        // Quest 4 -- Hide & Seek w/ Kid4 (finished)
+        // Quest 4 -- Hide & Seek w/ Al-khidr (finished)
         if (quest4.GetComponent<QuestObject>().bHasStarted &&
             !dMan.bDialogueActive &&
             Q4KidCounter == 6 &&
@@ -670,19 +632,19 @@ public class Chp1 : MonoBehaviour
                 bContainsQ7ItemWhite)
             {
                 // Activate DH w/ OH
-                pookieB1.transform.GetChild(0).gameObject.SetActive(false);
-                pookieB1.transform.GetChild(1).gameObject.SetActive(true);
+                npc_pookieB1.transform.GetChild(0).gameObject.SetActive(false);
+                npc_pookieB1.transform.GetChild(1).gameObject.SetActive(true);
 
                 if (bContainsQ7ItemGreen &&
                     bContainsQ7ItemOrange &&
                     bContainsQ7ItemPurple &&
                     bContainsQ7ItemWhite)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[4];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[3] = "Give em a white nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[4];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[3] = "Give em a white nug";
 
                     Q7Options = "gopw";
                 }
@@ -690,10 +652,10 @@ public class Chp1 : MonoBehaviour
                          bContainsQ7ItemPurple &&
                          bContainsQ7ItemWhite)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
 
                     Q7Options = "gpw";
                 }
@@ -701,10 +663,10 @@ public class Chp1 : MonoBehaviour
                          bContainsQ7ItemOrange &&
                          bContainsQ7ItemWhite)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
 
                     Q7Options = "gow";
                 }
@@ -712,10 +674,10 @@ public class Chp1 : MonoBehaviour
                          bContainsQ7ItemOrange &&
                          bContainsQ7ItemPurple)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
 
                     Q7Options = "gop";
                 }
@@ -723,92 +685,92 @@ public class Chp1 : MonoBehaviour
                          bContainsQ7ItemPurple &&
                          bContainsQ7ItemWhite)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
 
                     Q7Options = "opw";
                 }
                 else if (bContainsQ7ItemGreen &&
                          bContainsQ7ItemOrange)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
 
                     Q7Options = "go";
                 }
                 else if (bContainsQ7ItemGreen &&
                          bContainsQ7ItemPurple)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
 
                     Q7Options = "gp";
                 }
                 else if (bContainsQ7ItemGreen &&
                          bContainsQ7ItemWhite)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
 
                     Q7Options = "gw";
                 }
                 else if (bContainsQ7ItemOrange &&
                          bContainsQ7ItemPurple)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
 
                     Q7Options = "op";
                 }
                 else if (bContainsQ7ItemOrange &&
                          bContainsQ7ItemWhite)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
 
                     Q7Options = "ow";
                 }
                 else if (bContainsQ7ItemPurple &&
                          bContainsQ7ItemWhite)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
 
                     Q7Options = "pw";
                 }
                 else if (bContainsQ7ItemGreen)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
 
                     Q7Options = "g";
                 }
                 else if (bContainsQ7ItemOrange)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
 
                     Q7Options = "o";
                 }
                 else if (bContainsQ7ItemPurple)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
 
                     Q7Options = "p";
                 }
                 else if (bContainsQ7ItemWhite)
                 {
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a white nug";
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a white nug";
 
                     Q7Options = "w";
                 }
@@ -816,8 +778,8 @@ public class Chp1 : MonoBehaviour
             else
             {
                 // Activate DH (no OH)
-                pookieB1.transform.GetChild(0).gameObject.SetActive(true);
-                pookieB1.transform.GetChild(1).gameObject.SetActive(false);
+                npc_pookieB1.transform.GetChild(0).gameObject.SetActive(true);
+                npc_pookieB1.transform.GetChild(1).gameObject.SetActive(false);
             }
         }
         
@@ -913,19 +875,19 @@ public class Chp1 : MonoBehaviour
                 bContainsQ8ItemWhite)
             {
                 // Activate DH w/ OH
-                pookieB2.transform.GetChild(0).gameObject.SetActive(false);
-                pookieB2.transform.GetChild(1).gameObject.SetActive(true);
+                npc_pookieB2.transform.GetChild(0).gameObject.SetActive(false);
+                npc_pookieB2.transform.GetChild(1).gameObject.SetActive(true);
 
                 if (bContainsQ8ItemGreen &&
                     bContainsQ8ItemOrange &&
                     bContainsQ8ItemPurple &&
                     bContainsQ8ItemWhite)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[4];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[3] = "Give em a white nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[4];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[3] = "Give em a white nug";
 
                     Q8Options = "gopw";
                 }
@@ -933,10 +895,10 @@ public class Chp1 : MonoBehaviour
                          bContainsQ8ItemPurple &&
                          bContainsQ8ItemWhite)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
 
                     Q8Options = "gpw";
                 }
@@ -944,10 +906,10 @@ public class Chp1 : MonoBehaviour
                          bContainsQ8ItemOrange &&
                          bContainsQ8ItemWhite)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
 
                     Q8Options = "gow";
                 }
@@ -955,10 +917,10 @@ public class Chp1 : MonoBehaviour
                          bContainsQ8ItemOrange &&
                          bContainsQ8ItemPurple)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
 
                     Q8Options = "gop";
                 }
@@ -966,92 +928,92 @@ public class Chp1 : MonoBehaviour
                          bContainsQ8ItemPurple &&
                          bContainsQ8ItemWhite)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
 
                     Q8Options = "opw";
                 }
                 else if (bContainsQ8ItemGreen &&
                          bContainsQ8ItemOrange)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
 
                     Q8Options = "go";
                 }
                 else if (bContainsQ8ItemGreen &&
                          bContainsQ8ItemPurple)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
 
                     Q8Options = "gp";
                 }
                 else if (bContainsQ8ItemGreen &&
                          bContainsQ8ItemWhite)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
 
                     Q8Options = "gw";
                 }
                 else if (bContainsQ8ItemOrange &&
                          bContainsQ8ItemPurple)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
 
                     Q8Options = "op";
                 }
                 else if (bContainsQ8ItemOrange &&
                          bContainsQ8ItemWhite)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
 
                     Q8Options = "ow";
                 }
                 else if (bContainsQ8ItemPurple &&
                          bContainsQ8ItemWhite)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
 
                     Q8Options = "pw";
                 }
                 else if (bContainsQ8ItemGreen)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
 
                     Q8Options = "g";
                 }
                 else if (bContainsQ8ItemOrange)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
 
                     Q8Options = "o";
                 }
                 else if (bContainsQ8ItemPurple)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
 
                     Q8Options = "p";
                 }
                 else if (bContainsQ8ItemWhite)
                 {
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a white nug";
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a white nug";
 
                     Q8Options = "w";
                 }
@@ -1059,8 +1021,8 @@ public class Chp1 : MonoBehaviour
             else
             {
                 // Activate DH (no OH)
-                pookieB2.transform.GetChild(0).gameObject.SetActive(true);
-                pookieB2.transform.GetChild(1).gameObject.SetActive(false);
+                npc_pookieB2.transform.GetChild(0).gameObject.SetActive(true);
+                npc_pookieB2.transform.GetChild(1).gameObject.SetActive(false);
             }
         }
 
@@ -1071,13 +1033,13 @@ public class Chp1 : MonoBehaviour
         {
             if (!bAvoidUpdateQ7Q8DH)
             {
-                man1.transform.GetChild(0).gameObject.SetActive(false);
-                man1.transform.GetChild(1).gameObject.SetActive(true);
+                npc_dilum.transform.GetChild(0).gameObject.SetActive(false);
+                npc_dilum.transform.GetChild(1).gameObject.SetActive(true);
 
                 bAvoidUpdateQ7Q8DH = true;
             }
 
-            if (man1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+            if (npc_dilum.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
                 dMan.bDialogueActive)
             {
                 Quest7And8Reward();
@@ -1109,7 +1071,7 @@ public class Chp1 : MonoBehaviour
             thePlayer.GetComponent<Animator>().enabled = false;
 
             // Stop NPCs from moving
-            person1.GetComponent<Animator>().enabled = false;
+            npc_chun.GetComponent<Animator>().enabled = false;
         }
         
         // Final Item Count Check (allows multiple conditions to be check)
@@ -1211,24 +1173,24 @@ public class Chp1 : MonoBehaviour
     public void QuestDialogueCheck()
     {
         // Quest 0 - Dialogue 1 - Option 1
-        if (parent2.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
-            parent2.transform.GetChild(0).gameObject.activeSelf &&
+        if (npc_dagon.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+            npc_dagon.transform.GetChild(0).gameObject.activeSelf &&
             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
         {
             oMan.ResetOptions();
             Quest0Dialogue1Opt1();
         }
         // Quest 0 - Dialogue 1 - Option 2
-        else if (parent2.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
-                 parent2.transform.GetChild(0).gameObject.activeSelf &&
+        else if (npc_dagon.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+                 npc_dagon.transform.GetChild(0).gameObject.activeSelf &&
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
         {
             oMan.ResetOptions();
             Quest0Dialogue1Opt2();
         }
         // Quest 0 - Dialogue 2 - Option *
-        else if (parent2.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
-                 parent2.transform.GetChild(1).gameObject.activeSelf &&
+        else if (npc_dagon.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+                 npc_dagon.transform.GetChild(1).gameObject.activeSelf &&
                 (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
         {
@@ -1238,16 +1200,16 @@ public class Chp1 : MonoBehaviour
 
 
         // Quest 4 - Dialogue 1 - Option 1
-        if (kid4.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
-            kid4.transform.GetChild(0).gameObject.activeSelf &&
+        if (npc_al_khidr.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+            npc_al_khidr.transform.GetChild(0).gameObject.activeSelf &&
             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
         {
             oMan.ResetOptions();
             Quest4Dialogue1Opt1();
         }
         // Quest 4 - Dialogue 1 - Option 2
-        else if (kid4.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
-                 kid4.transform.GetChild(0).gameObject.activeSelf &&
+        else if (npc_al_khidr.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+                 npc_al_khidr.transform.GetChild(0).gameObject.activeSelf &&
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
         {
             oMan.ResetOptions();
@@ -1296,16 +1258,16 @@ public class Chp1 : MonoBehaviour
 
 
         // Quest 6 - Dialogue 1 - Option 1
-        if (person1.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
-            person1.transform.GetChild(0).gameObject.activeSelf &&
+        if (npc_chun.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+            npc_chun.transform.GetChild(0).gameObject.activeSelf &&
             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
         {
             oMan.ResetOptions();
             Quest6Dialogue1Opt1();
         }
         // Quest 6 - Dialogue 1 - Option 2
-        else if (person1.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
-                 person1.transform.GetChild(0).gameObject.activeSelf &&
+        else if (npc_chun.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+                 npc_chun.transform.GetChild(0).gameObject.activeSelf &&
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
         {
             oMan.ResetOptions();
@@ -1314,8 +1276,8 @@ public class Chp1 : MonoBehaviour
 
 
         // Quest 7 - Dialogue 1 - Option *
-        if (pookieB1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
-            pookieB1.transform.GetChild(1).gameObject.activeSelf &&
+        if (npc_pookieB1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+            npc_pookieB1.transform.GetChild(1).gameObject.activeSelf &&
             (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
              moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
              moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3 ||
@@ -1329,8 +1291,8 @@ public class Chp1 : MonoBehaviour
         }
 
         // Quest 8 - Dialogue 1 - Option *
-        if (pookieB2.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
-            pookieB2.transform.GetChild(1).gameObject.activeSelf &&
+        if (npc_pookieB2.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+            npc_pookieB2.transform.GetChild(1).gameObject.activeSelf &&
             (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
              moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
              moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3 ||
@@ -1350,10 +1312,10 @@ public class Chp1 : MonoBehaviour
         // Quest Trigger -> Quest Object text will render first; then we activate the next round of dialogue / options
         // 05/11/2018 DC TODO -- Improve so that options can follow options (when coupled with a quest)
 
-        parent2.transform.GetChild(0).gameObject.SetActive(false);
-        parent2.transform.GetChild(1).gameObject.SetActive(true);
+        npc_dagon.transform.GetChild(0).gameObject.SetActive(false);
+        npc_dagon.transform.GetChild(1).gameObject.SetActive(true);
 
-        parent2.transform.GetChild(1).GetComponent<DialogueHolder>().bContinueDialogue = true;
+        npc_dagon.transform.GetChild(1).GetComponent<DialogueHolder>().bContinueDialogue = true;
     }
 
     public void Quest0Dialogue1Opt2()
@@ -1371,8 +1333,8 @@ public class Chp1 : MonoBehaviour
     {
         // 05/11/2018 DC TODO -- Add divergent options, i.e. different text per option selected
 
-        parent2.transform.GetChild(1).gameObject.SetActive(false);
-        parent2.transform.GetChild(2).gameObject.SetActive(true);
+        npc_dagon.transform.GetChild(1).gameObject.SetActive(false);
+        npc_dagon.transform.GetChild(2).gameObject.SetActive(true);
 
         quest0.GetComponent<QuestObject>().EndQuest();
 
@@ -1386,11 +1348,11 @@ public class Chp1 : MonoBehaviour
     public void Quest4Dialogue1Opt1()
     {
         // Yes -- Play
-        kid4.transform.GetChild(0).gameObject.SetActive(false);
-        kid4.transform.GetChild(1).gameObject.SetActive(true);
+        npc_al_khidr.transform.GetChild(0).gameObject.SetActive(false);
+        npc_al_khidr.transform.GetChild(1).gameObject.SetActive(true);
 
-        // Avoid talking to Kid4
-        kid4.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        // Avoid talking to Al-khidr
+        npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
 
         thePlayer.transform.position = new Vector3(
             thePlayer.transform.position.x + 0.001f,
@@ -1416,27 +1378,27 @@ public class Chp1 : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-        // Move Kid4
-        kid4.transform.localPosition = new Vector2(7.429f, -7.797f);
+        // Move Al-khidr
+        npc_al_khidr.transform.localPosition = new Vector2(7.429f, -7.797f);
 
         // "Turn on" Kids 5-9
-        kid5.transform.localScale = Vector3.one;
-        kid6.transform.localScale = Vector3.one;
-        kid7.transform.localScale = Vector3.one;
-        kid8.transform.localScale = Vector3.one;
-        kid9.transform.localScale = Vector3.one;
+        npc_atandwa.transform.localScale = Vector3.one;
+        npc_eliz.transform.localScale = Vector3.one;
+        npc_thabo.transform.localScale = Vector3.one;
+        npc_zola.transform.localScale = Vector3.one;
+        npc_marija.transform.localScale = Vector3.one;
 
         // Need to reset each kid's box collider after first round (but why?)
-        kid5.GetComponent<BoxCollider2D>().isTrigger = true;
-        kid5.GetComponent<BoxCollider2D>().isTrigger = false;
-        kid6.GetComponent<BoxCollider2D>().isTrigger = true;
-        kid6.GetComponent<BoxCollider2D>().isTrigger = false;
-        kid7.GetComponent<BoxCollider2D>().isTrigger = true;
-        kid7.GetComponent<BoxCollider2D>().isTrigger = false;
-        kid8.GetComponent<BoxCollider2D>().isTrigger = true;
-        kid8.GetComponent<BoxCollider2D>().isTrigger = false;
-        kid9.GetComponent<BoxCollider2D>().isTrigger = true;
-        kid9.GetComponent<BoxCollider2D>().isTrigger = false;
+        npc_atandwa.GetComponent<BoxCollider2D>().isTrigger = true;
+        npc_atandwa.GetComponent<BoxCollider2D>().isTrigger = false;
+        npc_eliz.GetComponent<BoxCollider2D>().isTrigger = true;
+        npc_eliz.GetComponent<BoxCollider2D>().isTrigger = false;
+        npc_thabo.GetComponent<BoxCollider2D>().isTrigger = true;
+        npc_thabo.GetComponent<BoxCollider2D>().isTrigger = false;
+        npc_zola.GetComponent<BoxCollider2D>().isTrigger = true;
+        npc_zola.GetComponent<BoxCollider2D>().isTrigger = false;
+        npc_marija.GetComponent<BoxCollider2D>().isTrigger = true;
+        npc_marija.GetComponent<BoxCollider2D>().isTrigger = false;
 
         // Set dialogue & dialogue elements
         dMan.dialogueLines = new string[] {
@@ -1508,30 +1470,33 @@ public class Chp1 : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        // Deactivate Kid4 DH (order matters?)
-        kid4.transform.GetChild(1).gameObject.SetActive(false);
+        // Deactivate Al-khidr DH (order matters?)
+        npc_al_khidr.transform.GetChild(1).gameObject.SetActive(false);
 
-        // Move Kid4, Kid4's DH2, Dan & Camera
-        kid4.transform.localPosition = new Vector2(4.07f, -9.43f);
-        kid4.transform.GetChild(2).gameObject.transform.localPosition = new Vector2(0f, 0f);
+        // Move Al-khidr, Al-khidr's DH2, Dan & Camera
+        npc_al_khidr.transform.localPosition = new Vector2(4.07f, -9.43f);
+        npc_al_khidr.transform.GetChild(2).gameObject.transform.localPosition = new Vector2(0f, 0f);
         thePlayer.transform.localPosition = new Vector2(-19.157f, -1.674f);
         mainCamera.transform.localPosition = new Vector2(-19.157f, -1.674f);
 
-        // Activate Kid4 DH2 (order matters?)
-        kid4.transform.GetChild(2).gameObject.SetActive(true);
+        // Activate Al-khidr DH2 (order matters?)
+        npc_al_khidr.transform.GetChild(2).gameObject.SetActive(true);
 
         // "Turn off" Kids 5-9
-        kid5.transform.localScale = Vector3.zero;
-        kid6.transform.localScale = Vector3.zero;
-        kid7.transform.localScale = Vector3.zero;
-        kid8.transform.localScale = Vector3.zero;
-        kid9.transform.localScale = Vector3.zero;
+        npc_atandwa.transform.localScale = Vector3.zero;
+        npc_eliz.transform.localScale = Vector3.zero;
+        npc_thabo.transform.localScale = Vector3.zero;
+        npc_zola.transform.localScale = Vector3.zero;
+        npc_marija.transform.localScale = Vector3.zero;
 
         // Fade in
         screenFader.GetComponent<Animator>().SetBool("FadeIn", true);
 
-        // Turn on GUI
-        touches.transform.localScale = Vector3.one;
+        // Turn on GUI if present
+        if (uMan.bControlsActive)
+        {
+            touches.transform.localScale = Vector3.one;
+        }
 
         bAvoidUpdateQ4counting = true;
         bAvoidUpdateQ4seeking = true;
@@ -1543,56 +1508,56 @@ public class Chp1 : MonoBehaviour
 
     public void CheckAndDisableLastKidFound()
     {
-        if (Q4LastKidFound == "Kid4")
+        if (Q4LastKidFound == "Al-khidr")
         {
-            kid4.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+            npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
         }
-        else if (Q4LastKidFound == "Kid5")
+        else if (Q4LastKidFound == "Atandwa")
         {
-            kid5.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+            npc_atandwa.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
         }
-        else if (Q4LastKidFound == "Kid6")
+        else if (Q4LastKidFound == "Eliz")
         {
-            kid6.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+            npc_eliz.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
         }
-        else if (Q4LastKidFound == "Kid7")
+        else if (Q4LastKidFound == "Thabo")
         {
-            kid7.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+            npc_thabo.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
         }
-        else if (Q4LastKidFound == "Kid8")
+        else if (Q4LastKidFound == "Zola")
         {
-            kid8.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+            npc_zola.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
         }
-        else if (Q4LastKidFound == "Kid9")
+        else if (Q4LastKidFound == "Marija")
         {
-            kid9.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+            npc_marija.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
         }
     }
     
     public void Quest4Reset()
     {
-        // Move Kid4 back to his spot
-        kid4.transform.localPosition = new Vector2(4.07f, -9.43f);
+        // Move Al-khidr back to his spot
+        npc_al_khidr.transform.localPosition = new Vector2(4.07f, -9.43f);
 
         // Reset quest checks
+        bFoundQ4Kid1 = false;
+        bFoundQ4Kid2 = false;
+        bFoundQ4Kid3 = false;
         bFoundQ4Kid4 = false;
         bFoundQ4Kid5 = false;
         bFoundQ4Kid6 = false;
-        bFoundQ4Kid7 = false;
-        bFoundQ4Kid8 = false;
-        bFoundQ4Kid9 = false;
 
-        // Reset Kid4 dialogues
-        kid4.transform.GetChild(1).gameObject.SetActive(false);
-        kid4.transform.GetChild(0).gameObject.SetActive(true);
+        // Reset Al-khidr dialogues
+        npc_al_khidr.transform.GetChild(1).gameObject.SetActive(false);
+        npc_al_khidr.transform.GetChild(0).gameObject.SetActive(true);
 
         // Reset Dialogue Holders
-        kid4.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
-        kid5.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
-        kid6.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
-        kid7.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
-        kid8.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
-        kid9.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+        npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+        npc_atandwa.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+        npc_eliz.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+        npc_thabo.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+        npc_zola.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+        npc_marija.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
 
         // Reset everything else
         quest4.GetComponent<QuestObject>().bHasStarted = false;
@@ -1603,11 +1568,11 @@ public class Chp1 : MonoBehaviour
         oMan.ResetOptions();
 
         // "Turn off" Kids 5-9
-        kid5.transform.localScale = Vector3.zero;
-        kid6.transform.localScale = Vector3.zero;
-        kid7.transform.localScale = Vector3.zero;
-        kid8.transform.localScale = Vector3.zero;
-        kid9.transform.localScale = Vector3.zero;
+        npc_atandwa.transform.localScale = Vector3.zero;
+        npc_eliz.transform.localScale = Vector3.zero;
+        npc_thabo.transform.localScale = Vector3.zero;
+        npc_zola.transform.localScale = Vector3.zero;
+        npc_marija.transform.localScale = Vector3.zero;
     }
 
     public void Quest5Dialogue2()
@@ -1673,8 +1638,8 @@ public class Chp1 : MonoBehaviour
             dMan.gameObject.SetActive(false);
 
             // Stop NPCs from moving
-            person1.GetComponent<NPCMovement>().moveSpeed = 0;
-            person1.GetComponent<Animator>().enabled = false;
+            npc_chun.GetComponent<NPCMovement>().moveSpeed = 0;
+            npc_chun.GetComponent<Animator>().enabled = false;
         }
         else
         {
@@ -1791,18 +1756,18 @@ public class Chp1 : MonoBehaviour
         }
 
         // Animate Pookie & stop moving
-        if (thePlayer.transform.position.x >= pookieB1.transform.position.x)
+        if (thePlayer.transform.position.x >= npc_pookieB1.transform.position.x)
         {
-            pookieB1.GetComponent<Animator>().Play("Eat Right");
+            npc_pookieB1.GetComponent<Animator>().Play("Eat Right");
         }
         else
         {
-            pookieB1.GetComponent<Animator>().Play("Eat Left");
+            npc_pookieB1.GetComponent<Animator>().Play("Eat Left");
         }
 
         // Disable Pookie movement & dialogue
-        pookieB1.GetComponent<NPCMovement>().enabled = false;
-        pookieB1.transform.GetChild(1).gameObject.SetActive(false);
+        npc_pookieB1.GetComponent<NPCMovement>().enabled = false;
+        npc_pookieB1.transform.GetChild(1).gameObject.SetActive(false);
 
         StartCoroutine(PookieBear1Animations());
 
@@ -1816,15 +1781,15 @@ public class Chp1 : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        pookieB1.GetComponent<Animator>().Play("Sit Normal");
+        npc_pookieB1.GetComponent<Animator>().Play("Sit Normal");
 
         yield return new WaitForSeconds(3);
 
-        pookieB1.GetComponent<Animator>().Play("Sit Eyes");
+        npc_pookieB1.GetComponent<Animator>().Play("Sit Eyes");
 
         yield return new WaitForSeconds(2);
 
-        pookieB1.GetComponent<Animator>().Play("Sit Happy");
+        npc_pookieB1.GetComponent<Animator>().Play("Sit Happy");
     }
 
     public void Quest8Dialogue1Opt()
@@ -1918,18 +1883,18 @@ public class Chp1 : MonoBehaviour
         }
 
         // Animate Pookie & stop moving
-        if (thePlayer.transform.position.x >= pookieB2.transform.position.x)
+        if (thePlayer.transform.position.x >= npc_pookieB2.transform.position.x)
         {
-            pookieB2.GetComponent<Animator>().Play("Eat Right");
+            npc_pookieB2.GetComponent<Animator>().Play("Eat Right");
         }
         else
         {
-            pookieB2.GetComponent<Animator>().Play("Eat Left");
+            npc_pookieB2.GetComponent<Animator>().Play("Eat Left");
         }
 
         // Disable Pookie movement & dialogue
-        pookieB2.GetComponent<NPCMovement>().enabled = false;
-        pookieB2.transform.GetChild(1).gameObject.SetActive(false);
+        npc_pookieB2.GetComponent<NPCMovement>().enabled = false;
+        npc_pookieB2.transform.GetChild(1).gameObject.SetActive(false);
 
         StartCoroutine(PookieBear2Animations());
 
@@ -1943,15 +1908,15 @@ public class Chp1 : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        pookieB2.GetComponent<Animator>().Play("Sit Normal");
+        npc_pookieB2.GetComponent<Animator>().Play("Sit Normal");
 
         yield return new WaitForSeconds(3);
 
-        pookieB2.GetComponent<Animator>().Play("Sit Eyes");
+        npc_pookieB2.GetComponent<Animator>().Play("Sit Eyes");
 
         yield return new WaitForSeconds(2);
 
-        pookieB2.GetComponent<Animator>().Play("Sit Happy");
+        npc_pookieB2.GetComponent<Animator>().Play("Sit Happy");
     }
 
     public void Chp1QuestDialogueChecker()
@@ -1959,36 +1924,36 @@ public class Chp1 : MonoBehaviour
         // Q0
         if (qMan.questsCollected[0])
         {
-            parent2.transform.GetChild(0).gameObject.SetActive(false);
-            parent2.transform.GetChild(2).gameObject.SetActive(true);
+            npc_dagon.transform.GetChild(0).gameObject.SetActive(false);
+            npc_dagon.transform.GetChild(2).gameObject.SetActive(true);
         }
         else if (qMan.questsStarted[0])
         {
-            parent2.transform.GetChild(0).gameObject.SetActive(false);
-            parent2.transform.GetChild(1).gameObject.SetActive(true);
+            npc_dagon.transform.GetChild(0).gameObject.SetActive(false);
+            npc_dagon.transform.GetChild(1).gameObject.SetActive(true);
         }
 
         // Q1
         if (qMan.questsCollected[1])
         {
             bAvoidUpdateQ1 = true;
-            kid2.transform.GetChild(0).gameObject.SetActive(false);
-            kid2.transform.GetChild(1).gameObject.SetActive(true);
+            npc_canaan.transform.GetChild(0).gameObject.SetActive(false);
+            npc_canaan.transform.GetChild(1).gameObject.SetActive(true);
         }
 
         // Q3
         if (qMan.questsCollected[3])
         {
             bAvoidUpdateQ3 = true;
-            oldMan1.transform.GetChild(0).gameObject.SetActive(false);
-            oldMan1.transform.GetChild(1).gameObject.SetActive(true);
+            npc_enki.transform.GetChild(0).gameObject.SetActive(false);
+            npc_enki.transform.GetChild(1).gameObject.SetActive(true);
         }
 
         // Q4
         if (qMan.questsCollected[4])
         {
-            kid4.transform.GetChild(0).gameObject.SetActive(false);
-            kid4.transform.GetChild(2).gameObject.SetActive(true);
+            npc_al_khidr.transform.GetChild(0).gameObject.SetActive(false);
+            npc_al_khidr.transform.GetChild(2).gameObject.SetActive(true);
         }
 
         // Q5
@@ -2002,8 +1967,8 @@ public class Chp1 : MonoBehaviour
         if (qMan.questsCollected[7] ||
             qMan.questsCollected[8])
         {
-            man1.transform.GetChild(0).gameObject.SetActive(false);
-            man1.transform.GetChild(1).gameObject.SetActive(true);
+            npc_dilum.transform.GetChild(0).gameObject.SetActive(false);
+            npc_dilum.transform.GetChild(1).gameObject.SetActive(true);
 
             // DC 02/13/19 -- "Bug" that allows pookie bears to get back up & look "normal" after quest complete, saved & quit, and then talked to again
         }
@@ -2072,13 +2037,13 @@ public class Chp1 : MonoBehaviour
             bAvoidUpdateQ7Q8 = true;
 
             // PookieBear 1 Satisfied
-            pookieB1.GetComponent<NPCMovement>().enabled = false;
-            pookieB1.transform.GetChild(1).gameObject.SetActive(false);
+            npc_pookieB1.GetComponent<NPCMovement>().enabled = false;
+            npc_pookieB1.transform.GetChild(1).gameObject.SetActive(false);
             StartCoroutine(PookieBear1Animations());
 
             // PookieBear 2 Satisfied
-            pookieB2.GetComponent<NPCMovement>().enabled = false;
-            pookieB2.transform.GetChild(1).gameObject.SetActive(false);
+            npc_pookieB2.GetComponent<NPCMovement>().enabled = false;
+            npc_pookieB2.transform.GetChild(1).gameObject.SetActive(false);
             StartCoroutine(PookieBear2Animations());
         }
 
@@ -2087,8 +2052,8 @@ public class Chp1 : MonoBehaviour
             bAvoidUpdateQ7 = true;
 
             // PookieBear 1 Satisfied
-            pookieB1.GetComponent<NPCMovement>().enabled = false;
-            pookieB1.transform.GetChild(1).gameObject.SetActive(false);
+            npc_pookieB1.GetComponent<NPCMovement>().enabled = false;
+            npc_pookieB1.transform.GetChild(1).gameObject.SetActive(false);
             StartCoroutine(PookieBear1Animations());
         }
 
@@ -2097,8 +2062,8 @@ public class Chp1 : MonoBehaviour
             bAvoidUpdateQ8 = true;
 
             // PookieBear 2 Satisfied
-            pookieB2.GetComponent<NPCMovement>().enabled = false;
-            pookieB2.transform.GetChild(1).gameObject.SetActive(false);
+            npc_pookieB2.GetComponent<NPCMovement>().enabled = false;
+            npc_pookieB2.transform.GetChild(1).gameObject.SetActive(false);
             StartCoroutine(PookieBear2Animations());
         }
     }

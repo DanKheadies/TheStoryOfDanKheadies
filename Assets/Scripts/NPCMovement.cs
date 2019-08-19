@@ -1,40 +1,35 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/13/2018
+// Last:  08/18/2019
 
 using UnityEngine;
 
 // Controls NPC movements, constraints, and dialogue
 public class NPCMovement : MonoBehaviour
 {
-    private Animator npcAnim;
+    public Animator npcAnim;
     public Collider2D walkZone;
-    private DialogueManager dMan;
-    private Rigidbody2D npcRigidBody;
-    private Vector2 lastMove;
+    public DialogueManager dMan;
+    public Rigidbody2D npcRigidBody;
+    public Vector2 lastMove;
     public Vector2 minWalkPoint;
     public Vector2 maxWalkPoint;
 
     public bool bCanMove;
-    private bool bHasWalkZone;
-    private bool bIsWalking;
+    public bool bHasWalkZone;
+    public bool bIsWalking;
 
     public float moveSpeed;
-    private float waitCounter;
+    public float waitCounter;
     public float waitTime;
-    private float walkCounter;
+    public float walkCounter;
     public float walkTime;
 
-    private int walkDirection;
+    public int walkDirection;
 
     void Start ()
     {
-        // Initializers
-        dMan = FindObjectOfType<DialogueManager>();
-        npcAnim = GetComponent<Animator>();
-        npcRigidBody = GetComponent<Rigidbody2D>();
-
         waitCounter = waitTime;
         walkCounter = walkTime;
         

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/02/2018
-// Last:  02/11/2019
+// Last:  08/18/2019
 
 using UnityEngine;
 
@@ -21,12 +21,7 @@ public class ScreenOrientation : MonoBehaviour
 	void Start ()
     {
         // Initializers
-        aspectUtil = GetComponent<AspectUtility>();
         devOr = Input.deviceOrientation;
-        fixedJoy = FindObjectOfType<FixedJoystick>();
-        dMan = FindObjectOfType<DialogueManager>();
-        oMan = FindObjectOfType<OptionsManager>();
-        uMan = FindObjectOfType<UIManager>();
 
         bIsFull = Screen.fullScreen;
         bSizingChange = false;

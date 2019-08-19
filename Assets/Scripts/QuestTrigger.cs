@@ -1,32 +1,22 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  02/14/2019
+// Last:  08/18/2019
 
 using UnityEngine;
 
 // Handles NPC and zone quest interactions
 public class QuestTrigger : MonoBehaviour
 {
-    private Animator npcAnim;
-    private DialogueManager dMan;
-    private QuestManager qMan;
-    private SpriteRenderer spRend;
+    public Animator npcAnim;
+    public DialogueManager dMan;
+    public QuestManager qMan;
+    public SpriteRenderer spRend;
 
     public bool beginQuest;
     public bool endQuest;
 
     public int questNumber;
-
-
-	void Start ()
-    {
-        // Initializers
-        dMan = FindObjectOfType<DialogueManager>();
-        npcAnim = GetComponentInParent<Animator>();
-        spRend = gameObject.GetComponentInParent<SpriteRenderer>();
-        qMan = FindObjectOfType<QuestManager>();
-	}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -40,7 +30,8 @@ public class QuestTrigger : MonoBehaviour
                 // Bool set on GameObject directs NPC interaction
                 if (beginQuest)
                 {
-                    if (spRend)
+                    if (spRend != null &&
+                        npcAnim != null)
                     {
                         OrientNPC(collision);
                     }
@@ -51,9 +42,12 @@ public class QuestTrigger : MonoBehaviour
 
                 if (endQuest)
                 {
-                    if (spRend)
+                    if (spRend != null)
                     {
-                        OrientNPC(collision);
+                        if (npcAnim != null)
+                        {
+                            OrientNPC(collision);
+                        }
 
                         // Stop NPC movement
                         if (transform.parent.GetComponent<NPCMovement>() != null)
@@ -69,7 +63,9 @@ public class QuestTrigger : MonoBehaviour
         }
 
         // Reset NPC
-        if (spRend && !dMan.bDialogueActive)
+        if (!dMan.bDialogueActive && 
+            spRend != null && 
+            npcAnim != null)
         {
             npcAnim.Play("NPC Movement");
         }

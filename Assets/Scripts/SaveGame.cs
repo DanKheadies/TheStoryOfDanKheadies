@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/11/2019
+// Last:  08/18/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,36 +18,18 @@ public class SaveGame : MonoBehaviour
     public TouchControls touches;
     public UIManager uMan;
     public VolumeManager savedVol;
-    
-    private string savedItem;
+
+    public int invTotal;
+    public string savedItem;
 
     void Start()
     {
         // Initializers
         scene = SceneManager.GetActiveScene();
 
-        if (scene.name == "MainMenu")
+        if (tempItem != null)
         {
-            savedVol = FindObjectOfType<VolumeManager>();
-        }
-        else if (scene.name == "Showdown")
-        {
-            savedPlayer = GameObject.FindGameObjectWithTag("Player");
-            inv = FindObjectOfType<Inventory>().GetComponent<Inventory>();
-            savedVol = FindObjectOfType<VolumeManager>();
             tempItem = ScriptableObject.CreateInstance<Item>();
-            uMan = FindObjectOfType<UIManager>();
-        }
-        else
-        {
-            camFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
-            savedCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-            savedPlayer = GameObject.FindGameObjectWithTag("Player");
-            inv = FindObjectOfType<Inventory>().GetComponent<Inventory>();
-            savedVol = FindObjectOfType<VolumeManager>();
-            tempItem = ScriptableObject.CreateInstance<Item>();
-            touches = FindObjectOfType<TouchControls>();
-            uMan = FindObjectOfType<UIManager>();
         }
     }
 
@@ -57,8 +39,7 @@ public class SaveGame : MonoBehaviour
         {
             DeleteAllPrefs();
         }
-
-
+        
         if (Input.GetKeyUp(KeyCode.C))
         {
             CheckSavedData();
@@ -67,6 +48,7 @@ public class SaveGame : MonoBehaviour
 
     public void RerunStart()
     {
+        // TODO: still needed?
         Start();
     }
 
@@ -272,9 +254,11 @@ public class SaveGame : MonoBehaviour
         PlayerPrefs.DeleteKey("TransferAnandaCoord");
         PlayerPrefs.DeleteKey("TransferBrioMax");
         PlayerPrefs.DeleteKey("TransferBrio");
-        
+
+        invTotal = PlayerPrefs.GetInt("TransferItemTotal");
         PlayerPrefs.DeleteKey("TransferItemTotal");
-        for (int i = 0; i < inv.totalItems; i++)
+
+        for (int i = 0; i < invTotal; i++)
         {
             PlayerPrefs.DeleteKey("TransferItem" + i);
         }

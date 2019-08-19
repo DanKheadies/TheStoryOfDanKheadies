@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/13/2018
-// Last:  06/27/2019
+// Last:  08/18/2019
 
 using UnityEngine;
 
@@ -33,19 +33,6 @@ public class CharacterTile : MonoBehaviour
 
     void Start()
     {
-        // Initializers
-        dMan = FindObjectOfType<DialogueManager>();
-        gwc = FindObjectOfType<GWC_Controller>();
-        gwcTouches = FindObjectOfType<GWCTouchControls>();
-        pause = GameObject.Find("Game_Controller").GetComponent<PauseGame>();
-        spLogic = FindObjectOfType<SinglePlayerLogic>();
-        tileChar = gameObject.transform.GetChild(2);
-        tileFlag = gameObject.transform.GetChild(3);
-        tileIcon = gameObject.transform.GetChild(0);
-        tileName = gameObject.transform.GetChild(1);
-        touches = FindObjectOfType<TouchControls>();
-        uMan = FindObjectOfType<UIManager>();
-
         bShowChar = true;
         bShowFlag = true;
         bShowIcon = true;

@@ -1,8 +1,8 @@
-﻿// CC 4.0 International License: Attribution--Holistic3d.com & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Brackeys & HolisticGaming.com--NonCommercial--ShareALike
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 08/12/2016
-// Last:  08/12/2019
+// Last:  08/15/2019
 
 using UnityEngine;
 
@@ -17,34 +17,58 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        if (GameManagement.GameIsOver)
+        if (GameManagement.IsGameOver ||
+            GameManagement.IsLevelWon)
         {
             enabled = false;
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.F))
             doMovement = !doMovement;
         if (!doMovement)
             return;
 
-        if (Input.GetKey("w") || 
-            Input.mousePosition.y >= Screen.height - panBorderThickness)
+        // Up
+        if (Input.GetKey(KeyCode.W) ||
+            Input.GetKey(KeyCode.UpArrow)
+#if !UNITY_EDITOR
+            || Input.mousePosition.y >= Screen.height - panBorderThickness
+#endif
+        )
         {
             transform.Translate(Vector3.forward * panSpeed * Time.deltaTime, Space.World);
         }
-        if (Input.GetKey("s") ||
-            Input.mousePosition.y <= panBorderThickness)
+
+        // Down
+        if (Input.GetKey(KeyCode.S) ||
+            Input.GetKey(KeyCode.DownArrow)
+#if !UNITY_EDITOR
+            || Input.mousePosition.y <= panBorderThickness
+#endif
+        )
         {
             transform.Translate(Vector3.back * panSpeed * Time.deltaTime, Space.World);
         }
-        if (Input.GetKey("d") ||
-           Input.mousePosition.x >= Screen.width - panBorderThickness)
-        {
+        
+        // Right
+        if (Input.GetKey(KeyCode.D) ||
+            Input.GetKey(KeyCode.RightArrow)
+#if !UNITY_EDITOR
+            || Input.mousePosition.x >= Screen.width - panBorderThickness
+#endif
+        )
+        { 
             transform.Translate(Vector3.right * panSpeed * Time.deltaTime, Space.World);
         }
-        if (Input.GetKey("a") ||
-           Input.mousePosition.x <= panBorderThickness)
+
+        // Left
+        if (Input.GetKey(KeyCode.A) ||
+            Input.GetKey(KeyCode.LeftArrow)
+#if !UNITY_EDITOR
+            || Input.mousePosition.x <= panBorderThickness
+#endif
+        )
         {
             transform.Translate(Vector3.left * panSpeed * Time.deltaTime, Space.World);
         }

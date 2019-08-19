@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  01/10/2019
+// Last:  08/18/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,8 +9,8 @@ using UnityEngine.SceneManagement;
 // Manage the Player's Brio
 public class PlayerBrioManager : MonoBehaviour
 {
-    private Animator pAnim;
-    private DialogueManager dMan;
+    public Animator playerAnim;
+    public DialogueManager dMan;
     public GameObject pause;
     public Scene scene;
     public Sprite portPic;
@@ -25,15 +25,7 @@ public class PlayerBrioManager : MonoBehaviour
     void Start ()
     {
         // Initializers
-        dMan = FindObjectOfType<DialogueManager>();
-        pause = GameObject.FindGameObjectWithTag("Pause");
         scene = SceneManager.GetActiveScene();
-        uMan = FindObjectOfType<UIManager>();
-
-        if (scene.name != "GuessWhoColluded")
-        {
-            pAnim = GetComponent<Animator>();
-        }
 
         // Setting the brio
         if (PlayerPrefs.GetInt("Transferring") == 1)
@@ -67,10 +59,9 @@ public class PlayerBrioManager : MonoBehaviour
             dMan.dialogueLines = warningLines;
             dMan.portPic = portPic;
             dMan.ShowDialogue();
-            if (scene.name != "GuessWhoColluded")
-            {
-                pAnim.SetBool("bIsWalking", false);
-            }
+
+            if (playerAnim != null)
+                playerAnim.SetBool("bIsWalking", false);
             playerCurrentBrio = 1;
         }
         

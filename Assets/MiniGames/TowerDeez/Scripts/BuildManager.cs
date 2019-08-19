@@ -1,17 +1,20 @@
-﻿// CC 4.0 International License: Attribution--Holistic3d.com & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Brackeys & HolisticGaming.com--NonCommercial--ShareALike
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 08/06/2016
-// Last:  08/11/2019
+// Last:  08/13/2019
 
 using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
+    private Node selectedNode;
     private TurretBlueprint turretToBuild;
 
     public static BuildManager instance;
     public GameObject buildEffect;
+    public GameObject sellEffect;
+    public NodeUI nodeUI;
 
     void Awake()
     {
@@ -22,32 +25,37 @@ public class BuildManager : MonoBehaviour
         }
 
         instance = this;
-    } 
+    }
 
     public bool CanBuild { get { return turretToBuild != null; } }
     public bool HasMoney { get { return PlayerStatistics.Money >= turretToBuild.cost; } }
+    public TurretBlueprint GetTurretToBuild() { return turretToBuild; }
 
     public void SelectTurretToBuild(TurretBlueprint turret)
     {
         turretToBuild = turret;
+        selectedNode = null;
+
+        nodeUI.Hide();
     }
 
-    public void BuildTurretOn(Node node)
+    public void SelectNode(Node node)
     {
-        if (PlayerStatistics.Money < turretToBuild.cost)
+        if (selectedNode == node)
         {
-            Debug.Log("Need more vespian gas.");
+            DeselectNode();
             return;
         }
 
-        PlayerStatistics.Money -= turretToBuild.cost;
+        selectedNode = node;
+        turretToBuild = null;
 
-        GameObject turret = Instantiate(turretToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
-        node.turret = turret;
+        nodeUI.SetTarget(node);
+    }
 
-        GameObject effect = Instantiate(buildEffect, node.GetBuildPosition(), Quaternion.identity);
-        Destroy(effect, 5f);
-
-        Debug.Log("Turret built. Money left: " + PlayerStatistics.Money);
+    public void DeselectNode()
+    {
+        selectedNode = null;
+        nodeUI.Hide();
     }
 }

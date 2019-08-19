@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso, Asbjorn Thirslund (Brackeys), Austin (AwfulMedia / GameGrind)
 // Start: 01/18/2018
-// Last:  02/22/2019
+// Last:  08/18/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,12 +9,12 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour
 {
     public Button removeButton;
-    private Button stuffBack;
+    public Button stuffBack;
     public Image icon;
-    private Inventory inv;
+    public Inventory inv;
     public Item item;
     public FixedJoystick fixedJoy;
-    private Transform itemMenu;
+    public Transform itemMenu;
     public TouchControls touches;
 
     public int itemId;
@@ -22,17 +22,6 @@ public class InventorySlot : MonoBehaviour
     private string title;
     private string description;
     private string supplemental;
-
-
-    void Start()
-    {
-        // Initializers
-        fixedJoy = FindObjectOfType<FixedJoystick>();
-        inv = GameObject.Find("Inventory").GetComponent<Inventory>();
-        itemMenu = GameObject.Find("ItemMenu").transform;
-        stuffBack = GameObject.Find("StuffBack").GetComponent<Button>();
-        touches = FindObjectOfType<TouchControls>();
-    }
 
     public void AddItem (Item newItem)
     {

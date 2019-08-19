@@ -57,6 +57,14 @@ public class SceneTransitioner : MonoBehaviour
                         sceneTitle.text = "Guess Who\n";
                         sceneSubtitle.text = "\nColluded...";
                         break;
+                    case "PookieVision":
+                        sceneTitle.text = "Pookie Vision\n";
+                        sceneSubtitle.text = "\nFor the kids..";
+                        break;
+                    case "TowerDeez":
+                        sceneTitle.text = "TowerDeez\n";
+                        sceneSubtitle.text = "\nAnd it's nuts..";
+                        break;
                     default:
                         sceneTitle.text = "n_n\n";
                         sceneSubtitle.text = "\nLoading some scene...";
@@ -106,6 +114,7 @@ public class SceneTransitioner : MonoBehaviour
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             collision.gameObject.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
 
+            // TODO: prob change this
             if (scene.name != "GuessWhoColluded")
             {
                 collision.gameObject.GetComponent<Animator>().SetBool("bIsWalking", false);

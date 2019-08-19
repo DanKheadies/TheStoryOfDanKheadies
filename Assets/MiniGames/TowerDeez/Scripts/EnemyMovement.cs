@@ -1,8 +1,8 @@
-﻿// CC 4.0 International License: Attribution--Holistic3d.com & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Brackeys & HolisticGaming.com--NonCommercial--ShareALike
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 10/17/2016
-// Last:  08/12/2019
+// Last:  08/16/2019
 
 using UnityEngine;
 
@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
 {
     private Enemy enemy;
     private Transform target;
+    public int bossMultiplier = 10;
     private int waypointIndex = 0;
 
     void Start()
@@ -46,7 +47,15 @@ public class EnemyMovement : MonoBehaviour
 
     void EndPath()
     {
-        PlayerStatistics.Lives--;
+        if (enemy.isBoss)
+        {
+            PlayerStatistics.Lives -= 1 * bossMultiplier;
+        }
+        else
+        {
+            PlayerStatistics.Lives--;
+        }
+        WaveSpawner.enemiesAlive--;
         Destroy(gameObject);
     }
 }

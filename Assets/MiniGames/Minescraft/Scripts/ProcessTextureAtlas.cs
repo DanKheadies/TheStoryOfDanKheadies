@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 
-public class ProcessTextureAtlas : AssetPostprocessor {
+public class ProcessTextureAtlas { 
+//public class ProcessTextureAtlas : AssetPostprocessor {
 
     //static List<string> uvs = new List<string>();
 

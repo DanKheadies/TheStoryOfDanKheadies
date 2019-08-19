@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  05/10/2019
+// Last:  08/18/2019
 
 // DC TODO -- Bring in QuestMananger & complete quest when won (but still able to keep playing for restored brio & not more brio)
 
@@ -14,9 +14,9 @@ public class Minesweeper : MonoBehaviour
 {
     public DialogueManager dMan;
     public GameObject dBox;
+    public GameObject npc_chun;
     public GameObject pause;
-    public GameObject person1;
-    public GameObject thePlayer;
+    public GameObject player;
     public GameObject warpMinesweeper;
     public Image dPic;
     public ImageStrobe dArrow;
@@ -48,24 +48,24 @@ public class Minesweeper : MonoBehaviour
     void Start ()
     {
         // Initializers
-        brio = FindObjectOfType<PlayerBrioManager>();
-        dArrow = GameObject.Find("Dialogue_Arrow").GetComponent<ImageStrobe>();
-        dBox = GameObject.Find("Dialogue_Box");
-        dMan = FindObjectOfType<DialogueManager>();
-        dPic = GameObject.Find("Dialogue_Picture").GetComponent<Image>();
-        dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
-        inv = FindObjectOfType<Inventory>();
-        mMan = FindObjectOfType<MusicManager>();
-        moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
-        oMan = FindObjectOfType<OptionsManager>();
-        pause = GameObject.FindGameObjectWithTag("Pause");
-        person1 = GameObject.Find("Person.1");
-        save = FindObjectOfType<SaveGame>();
-        SFXMan = FindObjectOfType<SFXManager>();
-        thePlayer = GameObject.FindGameObjectWithTag("Player");
-        touches = FindObjectOfType<TouchControls>();
-        warpMinesweeper = GameObject.Find("Minesweeper.to.Chp1");
-        uMan = FindObjectOfType<UIManager>();
+        //brio = FindObjectOfType<PlayerBrioManager>();
+        //dArrow = GameObject.Find("Dialogue_Arrow").GetComponent<ImageStrobe>();
+        //dBox = GameObject.Find("Dialogue_Box");
+        //dMan = FindObjectOfType<DialogueManager>();
+        //dPic = GameObject.Find("Dialogue_Picture").GetComponent<Image>();
+        //dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
+        //inv = FindObjectOfType<Inventory>();
+        //mMan = FindObjectOfType<MusicManager>();
+        //moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
+        //oMan = FindObjectOfType<OptionsManager>();
+        //pause = GameObject.FindGameObjectWithTag("Pause");
+        //npc_chun = GameObject.Find("Person.1");
+        //save = FindObjectOfType<SaveGame>();
+        //SFXMan = FindObjectOfType<SFXManager>();
+        //player = GameObject.FindGameObjectWithTag("Player");
+        //touches = FindObjectOfType<TouchControls>();
+        //warpMinesweeper = GameObject.Find("Minesweeper.to.Chp1");
+        //uMan = FindObjectOfType<UIManager>();
         
         strobeTimer = 1.0f;
         timer = 0.333f;
@@ -75,7 +75,7 @@ public class Minesweeper : MonoBehaviour
         mMan.bMusicCanPlay = false;
 
         // Restrict player movement
-        thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+        player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
 
         // First time in minigame, give instructions
         if (PlayerPrefs.GetInt("GivenDirectionsForMinesweeper") == 0)
@@ -205,22 +205,22 @@ public class Minesweeper : MonoBehaviour
     public void Win()
     {
         // Ask the player if they want to play again
-        person1.transform.GetChild(0).gameObject.SetActive(true);
-        person1.transform.GetChild(0).GetComponent<DialogueHolder>().bContinueDialogue = true;
+        npc_chun.transform.GetChild(0).gameObject.SetActive(true);
+        npc_chun.transform.GetChild(0).GetComponent<DialogueHolder>().bContinueDialogue = true;
 
         // Ask about difficulty
 
         // Reward with brio (max cap & current)
-        thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
-        thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(15);
+        player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
+        player.GetComponent<PlayerBrioManager>().RestorePlayer(15);
         uMan.bUpdateBrio = true;
     }
 
     public void Lose()
     {
         // Have Person1 ask if players wants again or done?
-        person1.transform.GetChild(1).gameObject.SetActive(true);
-        person1.transform.GetChild(1).GetComponent<DialogueHolder>().bContinueDialogue = true;
+        npc_chun.transform.GetChild(1).gameObject.SetActive(true);
+        npc_chun.transform.GetChild(1).GetComponent<DialogueHolder>().bContinueDialogue = true;
 
         // Ask about difficulty
     }
@@ -228,8 +228,8 @@ public class Minesweeper : MonoBehaviour
     public void MinesweeperDialogueCheck()
     {
         // Win or Lose - Option 1 - Play again
-        if ((person1.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered ||
-             person1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered) &&
+        if ((npc_chun.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered ||
+             npc_chun.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered) &&
              moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
         {
             // Reset
@@ -240,8 +240,8 @@ public class Minesweeper : MonoBehaviour
             bReset = true;
         }
         // Win or Lose - Option 2 - Stop playing
-        else if ((person1.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered ||
-                  person1.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered) &&
+        else if ((npc_chun.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered ||
+                  npc_chun.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered) &&
                   moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
         {
             oMan.ResetOptions();
@@ -255,7 +255,7 @@ public class Minesweeper : MonoBehaviour
             PlayerPrefs.SetString("TransferScene", warpMinesweeper.GetComponent<SceneTransitioner>().BetaLoad);
 
             // Stop Dan from moving
-            thePlayer.GetComponent<Animator>().enabled = false;
+            player.GetComponent<Animator>().enabled = false;
 
             // Stop the player from bringing up the dialog again
             dMan.gameObject.transform.localScale = Vector3.zero;
@@ -264,8 +264,8 @@ public class Minesweeper : MonoBehaviour
 
     public void ResetGame()
     {
-        person1.transform.GetChild(0).gameObject.SetActive(false);
-        person1.transform.GetChild(1).gameObject.SetActive(false);
+        npc_chun.transform.GetChild(0).gameObject.SetActive(false);
+        npc_chun.transform.GetChild(1).gameObject.SetActive(false);
 
         bAvoidUpdate = false;
     }

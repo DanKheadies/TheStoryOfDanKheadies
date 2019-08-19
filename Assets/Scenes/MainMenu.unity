@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c440ffc505c98f4bb569c65c64dbac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saved: {fileID: 0}
+  saved: {fileID: 1420302594}
   scene:
     m_Handle: 0
   slider: {fileID: 0}
@@ -325,6 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingImage: {fileID: 617343133}
+  bFadeCycle: 0
   bFadeIn: 1
   bFadeOut: 1
   preFadeInDelay: 8
@@ -421,6 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingImage: {fileID: 723064534}
+  bFadeCycle: 0
   bFadeIn: 1
   bFadeOut: 0
   preFadeInDelay: 10
@@ -747,6 +749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingImage: {fileID: 923145376}
+  bFadeCycle: 0
   bFadeIn: 1
   bFadeOut: 0
   preFadeInDelay: 15
@@ -906,6 +909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingImage: {fileID: 1138903405}
+  bFadeCycle: 0
   bFadeIn: 1
   bFadeOut: 1
   preFadeInDelay: 0
@@ -1234,6 +1238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingImage: {fileID: 1244532942}
+  bFadeCycle: 0
   bFadeIn: 1
   bFadeOut: 0
   preFadeInDelay: 15
@@ -1394,6 +1399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingImage: {fileID: 1418487121}
+  bFadeCycle: 0
   bFadeIn: 1
   bFadeOut: 0
   preFadeInDelay: 15
@@ -1523,13 +1529,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657659725cd7f214a8452bf91e2cb6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endB: {fileID: 0}
-  goOnB: {fileID: 0}
-  newB: {fileID: 0}
-  newT: {fileID: 0}
-  noB: {fileID: 0}
-  startB: {fileID: 0}
-  yesB: {fileID: 0}
+  endB: {fileID: 1244532939}
+  goOnB: {fileID: 1418487117}
+  newB: {fileID: 1971151042}
+  newT: {fileID: 1572233885}
+  noB: {fileID: 1944737601}
+  startB: {fileID: 923145373}
+  yesB: {fileID: 825285413}
   savedScene: 
 --- !u!114 &1420302594
 MonoBehaviour:
@@ -1543,7 +1549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b0e78cdd6e47c4cbadc6e10f5394b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savedCamera: {fileID: 0}
+  savedCamera: {fileID: 1351398430}
   camFollow: {fileID: 0}
   savedPlayer: {fileID: 0}
   inv: {fileID: 0}
@@ -1551,8 +1557,8 @@ MonoBehaviour:
   scene:
     m_Handle: 0
   touches: {fileID: 0}
-  uiMan: {fileID: 0}
-  savedVol: {fileID: 0}
+  uMan: {fileID: 0}
+  savedVol: {fileID: 402009869}
 --- !u!114 &1420302595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1565,7 +1571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e614c1215c7e2794087538161af611bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  save: {fileID: 0}
+  save: {fileID: 1420302594}
 --- !u!224 &1420302598
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1766,6 +1772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingImage: {fileID: 1654705634}
+  bFadeCycle: 0
   bFadeIn: 1
   bFadeOut: 0
   preFadeInDelay: 10
@@ -2133,6 +2140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingImage: {fileID: 1971151046}
+  bFadeCycle: 0
   bFadeIn: 1
   bFadeOut: 0
   preFadeInDelay: 15
@@ -2339,6 +2347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingImage: {fileID: 2072471815}
+  bFadeCycle: 0
   bFadeIn: 1
   bFadeOut: 0
   preFadeInDelay: 14

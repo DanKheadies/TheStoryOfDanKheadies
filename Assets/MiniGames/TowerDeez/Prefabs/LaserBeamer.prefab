@@ -29,7 +29,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8442611025593721131}
+  m_Father: {fileID: 7901406515396914483}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4731,7 +4731,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8442611025593721131}
+  m_Father: {fileID: 7901406515396914483}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4806,7 +4806,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8442611025593721131}
+  - {fileID: 7901406515396914483}
   - {fileID: 5289866808406762979}
   - {fileID: 7010633500168856967}
   m_Father: {fileID: 0}
@@ -4827,6 +4827,8 @@ MonoBehaviour:
   range: 20
   fireRate: 1
   useLaser: 1
+  slowAmount: 0.5
+  damageOverTime: 3
   lineRenderer: {fileID: 6376694498920129059}
   impactEffect: {fileID: 7115196859278294182}
   impactLight: {fileID: 407080788706434217}
@@ -5157,7 +5159,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8442611025593721131}
+  - component: {fileID: 7901406515396914483}
   - component: {fileID: 7115196859278294183}
   - component: {fileID: 7115196859278294182}
   m_Layer: 0
@@ -5167,15 +5169,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &8442611025593721131
-RectTransform:
+--- !u!4 &7901406515396914483
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7115196859278294184}
   m_LocalRotation: {x: -0, y: -0.9585933, z: -0, w: 0.2847789}
-  m_LocalPosition: {x: 0, y: 0, z: 4.38}
+  m_LocalPosition: {x: 3.95, y: 1.06, z: 4.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6280961221916199667}
@@ -5183,11 +5185,6 @@ RectTransform:
   m_Father: {fileID: 5289866808406762977}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -146.90901, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.95, y: 1.06}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!199 &7115196859278294183
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5323,7 +5320,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0

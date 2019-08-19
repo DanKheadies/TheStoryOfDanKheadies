@@ -2,7 +2,7 @@
 // Authors: Unity (https://unity3d.com/learn/tutorials/topics/mobile-touch/pinch-zoom) (https://docs.unity3d.com/ScriptReference/Input.GetTouch.html)
 // Contributors: David W. Corso, JoaquinRD, alberto-lara
 // Start: 02/18/2019
-// Last:  06/10/2019
+// Last:  08/18/2019
 
 using UnityEngine;
 
@@ -13,7 +13,7 @@ public class GWCTouchControls : MonoBehaviour
     public GameObject pause;
     public GameObject sceneTransAnim;
     public GWC_Controller gwc;
-    public PlayerMovement pMove;
+    public PlayerMovement playerMove;
     public TouchControls touches;
 
     public bool bPinchZooming;
@@ -31,15 +31,6 @@ public class GWCTouchControls : MonoBehaviour
 
     void Start()
     {
-        // Initializers
-        aUtil = FindObjectOfType<AspectUtility>();
-        gwc = FindObjectOfType<GWC_Controller>();
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        pause = GameObject.Find("PauseScreen");
-        pMove = FindObjectOfType<PlayerMovement>();
-        sceneTransAnim = GameObject.Find("SceneTransitioner");
-        touches = FindObjectOfType<TouchControls>();
-
         maxDoubleTapTime = 0.333f;
         perspectiveZoomSpeed = 0.1f;       // The rate of change of the field of view in perspective mode.
         orthoZoomSpeed = 0.0125f;          // The rate of change of the orthographic size in orthographic mode.
@@ -77,7 +68,7 @@ public class GWCTouchControls : MonoBehaviour
                         xInput = 1;
                     }
 
-                    pMove.GWCMove(xInput, 0);
+                    playerMove.GWCMove(xInput, 0);
                 }
                 else if (Mathf.Abs(touchDeltaPosition.x) < Mathf.Abs(touchDeltaPosition.y))
                 {
@@ -90,7 +81,7 @@ public class GWCTouchControls : MonoBehaviour
                         yInput = 1;
                     }
 
-                    pMove.GWCMove(0, yInput);
+                    playerMove.GWCMove(0, yInput);
                 }
             }
 

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/27/2019
+// Last:  08/18/2019
 
 //using System.Collections;
 using UnityEngine;
@@ -12,14 +12,11 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Camera mainCamera;
-    public CameraSlider camSlide;
     public Canvas HUD;
-    public Canvas dHUD;
-    public CanvasGroup contOpacCan;
-    public CanvasGroup hudCanvas;
+    public CanvasGroup guiControlsCan;
     public DialogueManager dMan;
-    public FixedJoystick fixedJoy;
-    public GameObject pauseButtOpac;
+    public FixedJoystick fixedJoystick;
+    public GameObject pauseButtOpac; 
     public GameObject[] dPads;
     public GameObject[] joySticks;
     public OptionsManager oMan;
@@ -51,37 +48,7 @@ public class UIManager : MonoBehaviour
     void Start ()
     {
         // Initializers 
-        brioBar = GameObject.Find("BrioBar").GetComponent<Slider>();
-        brioText = GameObject.Find("BrioText").GetComponent<Text>();
-        camSlide = FindObjectOfType<CameraSlider>();
-        contOpacCan = GameObject.Find("GUIControls").GetComponent<CanvasGroup>();
-        contOpacSlider = GameObject.Find("ShowButtonsSlider").GetComponent<Slider>();
-        conTog = GameObject.Find("ShowButtonsToggle").GetComponent<Toggle>();
-        dHUD = GameObject.Find("Dialogue_HUD").GetComponent<Canvas>();
-        dMan = FindObjectOfType<DialogueManager>();
-        dPads = GameObject.FindGameObjectsWithTag("D-Pad");
-        dPadTog = GameObject.Find("DPadControlToggle").GetComponent<Toggle>();
-        fixedJoy = FindObjectOfType<FixedJoystick>();
-        HUD = GetComponent<Canvas>();
-        hudCanvas = GetComponent<CanvasGroup>();
-        joySticks = GameObject.FindGameObjectsWithTag("Joystick");
-        mainCamera = FindObjectOfType<Camera>();
-        oMan = FindObjectOfType<OptionsManager>();
-        pauseButtOpac = GameObject.Find("PauseButtonOpacity");
-        playerBrio = FindObjectOfType<PlayerBrioManager>();
         scene = SceneManager.GetActiveScene();
-        touches = FindObjectOfType<TouchControls>();
-
-        controlsMenu = GameObject.Find("ControlsMenu").GetComponent<RectTransform>();
-        pauseMenu = GameObject.Find("PauseMenu").GetComponent<RectTransform>();
-        soundMenu = GameObject.Find("SoundMenu").GetComponent<RectTransform>();
-        stuffMenu = GameObject.Find("StuffMenu").GetComponent<RectTransform>();
-
-        if (scene.name == "GuessWhoColluded")
-        {
-            gwcMenu = GameObject.Find("GWCMenu").GetComponent<RectTransform>();
-            iconsMenu = GameObject.Find("IconsMenu").GetComponent<RectTransform>();
-        }
 
         // Sets initial activation off saved data (or transfer, which always saves UI)
         // In other words, this first IF only occurs on Chp0 - New Game
@@ -107,13 +74,13 @@ public class UIManager : MonoBehaviour
         {
             currentContOpac = 1.0f;
             contOpacSlider.value = 1.0f;
-            contOpacCan.alpha = 1.0f;
+            guiControlsCan.alpha = 1.0f;
         }
         else
         {
             currentContOpac = PlayerPrefs.GetFloat("ControlsOpac");
             contOpacSlider.value = currentContOpac;
-            contOpacCan.alpha = currentContOpac;
+            guiControlsCan.alpha = currentContOpac;
         }
 
         // Sets initial control type based off saved data (or transfer, which always saves UI)
@@ -154,14 +121,6 @@ public class UIManager : MonoBehaviour
 
             bUpdateBrio = false;
         }
-
-        //if (camSlide.bSlideDown ||
-        //    camSlide.bSlideLeft ||
-        //    camSlide.bSlideRight ||
-        //    camSlide.bSlideUp)
-        //{
-        //    StartCoroutine(DelayJoystickReturn());
-        //}
     }
 
     public void DisplayControls()
@@ -170,7 +129,7 @@ public class UIManager : MonoBehaviour
         conTog.isOn = true;
         touches.transform.localScale = Vector3.one;
 
-        fixedJoy.JoystickPosition();
+        fixedJoystick.GetComponent<FixedJoystick>().JoystickPosition();
     }
 
     public void HideControls()
@@ -259,8 +218,8 @@ public class UIManager : MonoBehaviour
         {
             joyStick.transform.localScale = Vector3.one;
         }
-        
-        fixedJoy.JoystickPosition();
+
+        fixedJoystick.GetComponent<FixedJoystick>().JoystickPosition();
     }
 
     // Toggles the movement type control
@@ -304,7 +263,7 @@ public class UIManager : MonoBehaviour
     public void ContOpacSliderChange()
     {
         currentContOpac = contOpacSlider.value;
-        contOpacCan.alpha = currentContOpac;
+        guiControlsCan.alpha = currentContOpac;
     }
 
     public void CheckAndSetMenus()

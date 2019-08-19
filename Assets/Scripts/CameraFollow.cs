@@ -74,9 +74,9 @@ public class CameraFollow : MonoBehaviour
     void Start ()
     {
         // Initializers
-        aspectUtil = GetComponent<AspectUtility>();
-        myCam = GetComponent<Camera>();
-        player = GameObject.FindGameObjectWithTag("Player");
+        //aspectUtil = GetComponent<AspectUtility>();
+        //myCam = GetComponent<Camera>();
+        //player = GameObject.FindGameObjectWithTag("Player");
         scene = SceneManager.GetActiveScene();
 
         // Camera 'bounding-box'

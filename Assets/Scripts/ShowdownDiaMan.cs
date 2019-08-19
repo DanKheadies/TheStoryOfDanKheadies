@@ -1,13 +1,10 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  07/01/2017
+// Last:  08/18/2019
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 // Controls where dialogues are displayed
 public class ShowdownDiaMan : MonoBehaviour
@@ -16,7 +13,7 @@ public class ShowdownDiaMan : MonoBehaviour
     public Camera showdownCamera;
     public GameObject dbox;
     public Text dText;
-    private TouchControls touches;
+    public TouchControls touches;
 
     public bool bDialogueActive;
 
@@ -35,11 +32,6 @@ public class ShowdownDiaMan : MonoBehaviour
 
     void Start()
     {
-        // Initializers
-        aspectUtil = GetComponent<AspectUtility>();
-        showdownCamera = Camera.main;
-        touches = FindObjectOfType<TouchControls>();
-
         // Size w/ respect to AspectUtility.cs
         showdownCamera.orthographicSize = aspectUtil._wantedAspectRatio;
 

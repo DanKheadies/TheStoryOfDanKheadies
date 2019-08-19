@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/26/2019
+// Last:  08/18/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,20 +9,19 @@ using UnityEngine.SceneManagement;
 // Control Player movement and overworld transition areas
 public class PlayerMovement : MonoBehaviour
 {
-    private Animator pAnim;
-    private AspectUtility aspectUtil;
-    private CameraFollow cameraFollow;
-    private CameraSlider cameraSlider;
-    private FixedJoystick fixJoystick;
-    private Joystick joystick;
-    private PlayerBrioManager playerBrioMan;
+    public Animator playerAnim;
+    public AspectUtility aspectUtil;
+    public CameraFollow cameraFollow;
+    public CameraSlider cameraSlider;
+    public FixedJoystick fixJoystick;
+    public PlayerBrioManager playerBrioMan;
     public PolygonCollider2D playerCollider;
     public Rigidbody2D rBody;
     public Scene scene;
-    private SFXManager SFXMan;
-    private TouchControls touches;
-    private Transform trans;
-    private UIManager uMan;
+    public SFXManager SFXMan;
+    public TouchControls touches;
+    public Transform trans;
+    public UIManager uMan;
     public Vector2 movementVector;
 
     public bool bControllerConnected;
@@ -41,28 +40,10 @@ public class PlayerMovement : MonoBehaviour
 	void Start ()
     {
         // Initializers
-        aspectUtil = FindObjectOfType<AspectUtility>();
-        cameraFollow = FindObjectOfType<CameraFollow>();
-        fixJoystick = FindObjectOfType<FixedJoystick>();
-        joystick = FindObjectOfType<Joystick>();
-        playerBrioMan = FindObjectOfType<PlayerBrioManager>();
-        playerCollider = GetComponent<PolygonCollider2D>();
-        rBody = GetComponent<Rigidbody2D>();
         scene = SceneManager.GetActiveScene();
-        SFXMan = FindObjectOfType<SFXManager>();
-        touches = FindObjectOfType<TouchControls>();
-        trans = GetComponent<Transform>();
-        uMan = FindObjectOfType<UIManager>();
 
-        if (scene.name != "GuessWhoColluded")
+        if (scene.name == "GuessWhoColluded")
         {
-            cameraSlider = FindObjectOfType<CameraSlider>();
-            pAnim = GetComponent<Animator>();
-        }
-        else
-        {
-            trans = GetComponent<Transform>();
-
             bGWCUpdate = true;
         }
 
@@ -82,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Controller Support
         controllers = Input.GetJoystickNames();
+
         if (controllers.Length > 0)
         {
             //Iterate over every element
@@ -136,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         {
             // DC TODO -- See if sliding; then restrict movement in that previous direction for 
             //            0.X seconds AFTER re-contact w/ Joystick
-            Move(joystick.Horizontal, joystick.Vertical);
+            Move(fixJoystick.Horizontal, fixJoystick.Vertical);
         }
         else if (bIsControlling)
         {
@@ -171,15 +153,18 @@ public class PlayerMovement : MonoBehaviour
         movementVector = moveSpeed * new Vector2(xInput, yInput);
 
         // Animate movement
-        if (movementVector != Vector2.zero)
+        if (playerAnim != null)
         {
-            pAnim.SetBool("bIsWalking", true);
-            pAnim.SetFloat("Input_X", movementVector.x);
-            pAnim.SetFloat("Input_Y", movementVector.y);
-        }
-        else
-        {
-            pAnim.SetBool("bIsWalking", false);
+            if (movementVector != Vector2.zero)
+            {
+                playerAnim.SetBool("bIsWalking", true);
+                playerAnim.SetFloat("Input_X", movementVector.x);
+                playerAnim.SetFloat("Input_Y", movementVector.y);
+            }
+            else
+            {
+                playerAnim.SetBool("bIsWalking", false);
+            }
         }
 
         // 2x Move Speed
@@ -188,7 +173,9 @@ public class PlayerMovement : MonoBehaviour
              !uMan.bMobileDevice))
         {
             rBody.velocity = movementVector * 2;
-            pAnim.speed = 2.0f;
+
+            if (playerAnim != null)
+                playerAnim.speed = 2.0f;
             
             // Use Brio
             if (movementVector != Vector2.zero)
@@ -201,7 +188,9 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rBody.velocity = movementVector;
-            pAnim.speed = 1.0f;
+
+            if (playerAnim != null)
+                playerAnim.speed = 1.0f;
         }
     }
 
@@ -228,7 +217,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (bGWCUpdate)
             {
-                GWCMoveViaJoystick(joystick.Horizontal, joystick.Vertical);
+                GWCMoveViaJoystick(fixJoystick.Horizontal, fixJoystick.Vertical);
             }
 
             if (fixJoystick.bJoying)
@@ -337,9 +326,9 @@ public class PlayerMovement : MonoBehaviour
         aspectUtil.Awake();
 
         // "Stop" player animation
-        if (scene.name != "GuessWhoColluded")
+        if (playerAnim != null)
         {
-            pAnim.speed = 0.0001f;
+            playerAnim.speed = 0.0001f;
         }
 
         // Unsync and stop camera tracking
@@ -347,7 +336,10 @@ public class PlayerMovement : MonoBehaviour
         cameraFollow.bUpdateOn = false;
 
         // Hide UI (if present) and prevent input
-        cameraSlider.bTempControlActive = uMan.bControlsActive;
+        if (cameraSlider != null)
+        {
+            cameraSlider.bTempControlActive = uMan.bControlsActive;
+        }
         touches.transform.localScale = Vector3.zero; // 05/10/2019 DC TODO -- Change this to uMan.HideControls()?
         touches.UnpressedAllArrows();
 
@@ -355,7 +347,8 @@ public class PlayerMovement : MonoBehaviour
         bStopPlayerMovement = true;
 
         // Prevent player interactions (e.g. other tripwires)
-        playerCollider.enabled = false;
+        if (playerCollider != null)
+            playerCollider.enabled = false;
     }
 
     // Location triggers, camera sliding, player stop/start, player sliding, faders, & sound effects
@@ -364,7 +357,8 @@ public class PlayerMovement : MonoBehaviour
         // Overworld Shifts
         // Collisions listed alphabetically by ShiftZone parent
         // DC 09/25/2017 -- TODO: Possible performance upgrade based on most visited at the top
-        if (collision.CompareTag("ShiftZone"))
+        if (collision.CompareTag("ShiftZone") &&
+            cameraSlider != null)
         {
             if (collision.name == "BatteryNE2BatteryNW")
             {

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/12/2018
+// Last:  08/17/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,15 +21,6 @@ public class MenuControl : MonoBehaviour
 
     void Start()
     {
-        // Initializers
-        endB = GameObject.Find("End_Button");
-        goOnB = GameObject.Find("Go_On_Button");
-        newB = GameObject.Find("New_Button");
-        newT = GameObject.Find("New_Text");
-        noB = GameObject.Find("No_Button");
-        startB = GameObject.Find("Start_Button");
-        yesB = GameObject.Find("Yes_Button");
-
         if (PlayerPrefs.GetInt("Saved") > 0)
         {
             startB.transform.localScale = Vector3.zero;

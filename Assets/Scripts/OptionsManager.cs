@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/08/2018
-// Last:  05/01/2019
+// Last:  08/18/2019
 
 using System.Collections;
 using UnityEngine;
@@ -31,24 +31,24 @@ public class OptionsManager : MonoBehaviour
     public bool bPauseOptions;
     public bool bTempControlActive;
 
-    private float cameraHeight;
-    private float cameraWidth;
-    private float pauseTime;
+    public float cameraHeight;
+    public float cameraWidth;
+    public float pauseTime;
 
     // Arrays follow CSS rules for orientation
     // [0] = x
     // [1] = y
     // [2] = width
     // [3] = height
-    private float[] o1ArwPoints;
-    private float[] o2ArwPoints;
-    private float[] o3ArwPoints;
-    private float[] o4ArwPoints;
-    private float[] o1TextPoints;
-    private float[] o2TextPoints;
-    private float[] o3TextPoints;
-    private float[] o4TextPoints;
-    private float[] oFramePoints;
+    public float[] o1ArwPoints;
+    public float[] o2ArwPoints;
+    public float[] o3ArwPoints;
+    public float[] o4ArwPoints;
+    public float[] o1TextPoints;
+    public float[] o2TextPoints;
+    public float[] o3TextPoints;
+    public float[] o4TextPoints;
+    public float[] oFramePoints;
 
     public int tempOptsCount;
 
@@ -57,23 +57,6 @@ public class OptionsManager : MonoBehaviour
 
     void Start()
     {
-        // Initializers
-        dMan = FindObjectOfType<DialogueManager>();
-        fixedJoy = FindObjectOfType<FixedJoystick>();
-        mainCamera = FindObjectOfType<CameraFollow>();
-        moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
-        o1Arw = GameObject.Find("Opt1Arw").GetComponent<Image>();
-        o2Arw = GameObject.Find("Opt2Arw").GetComponent<Image>();
-        o3Arw = GameObject.Find("Opt3Arw").GetComponent<Image>();
-        o4Arw = GameObject.Find("Opt4Arw").GetComponent<Image>();
-        o1Text = GameObject.Find("Opt1").GetComponent<Image>();
-        o2Text = GameObject.Find("Opt2").GetComponent<Image>();
-        o3Text = GameObject.Find("Opt3").GetComponent<Image>();
-        o4Text = GameObject.Find("Opt4").GetComponent<Image>();
-        oFrame = GameObject.Find("Options_Frame").GetComponent<Image>();
-        oBox = GameObject.Find("Options_Box");
-        uMan = FindObjectOfType<UIManager>();
-
         // DC TODO -- Default is false?
         bDiaToOpts = false;
         bOptionsActive = false;
