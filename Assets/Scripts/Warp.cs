@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/18/2019
+// Last:  08/19/2019
 
 using System.Collections;
 using UnityEngine;
@@ -11,7 +11,7 @@ public class Warp : MonoBehaviour
 {
     public Animator playerAnim;
     public CameraFollow cFollow;
-    public PlayerMovement thePlayer;
+    public PlayerMovement player;
     public ScreenFader sFader;
     public TouchControls touches;
     public Transform warpTarget;
@@ -25,8 +25,8 @@ public class Warp : MonoBehaviour
         {
             // Stops the player's movement
             playerAnim.SetBool("bIsWalking", false);
-            thePlayer.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            thePlayer.bStopPlayerMovement = true;
+            player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            player.bStopPlayerMovement = true;
             touches.UnpressedAllArrows();
 
             // Fade out
@@ -42,7 +42,8 @@ public class Warp : MonoBehaviour
             StartCoroutine(sFader.FadeToClear());
             
             yield return new WaitForSeconds(1.0f);
-            thePlayer.bStopPlayerMovement = false;
+
+            player.bStopPlayerMovement = false;
         }
     }
 }

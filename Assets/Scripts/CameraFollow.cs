@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  01/10/2019
+// Last:  08/19/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -63,6 +63,7 @@ public class CameraFollow : MonoBehaviour
 
     public AnandaCoords currentCoords;
 
+    public float depth;
     public float minCamX;
     public float minCamY;
     public float maxCamX;
@@ -74,9 +75,6 @@ public class CameraFollow : MonoBehaviour
     void Start ()
     {
         // Initializers
-        //aspectUtil = GetComponent<AspectUtility>();
-        //myCam = GetComponent<Camera>();
-        //player = GameObject.FindGameObjectWithTag("Player");
         scene = SceneManager.GetActiveScene();
 
         // Camera 'bounding-box'
@@ -87,6 +85,8 @@ public class CameraFollow : MonoBehaviour
         myCam.orthographicSize = aspectUtil._wantedAspectRatio;
         
         bUpdateOn = true;
+
+        depth = -10f;
 
         smoothTime = 0.2f;
         smoothVelocity = new Vector2(0.2f, 0.2f);
@@ -116,14 +116,14 @@ public class CameraFollow : MonoBehaviour
                 transform.position = new Vector3(
                     Mathf.Clamp(posX, minCamX, maxCamX),
                     Mathf.Clamp(posY, minCamY, maxCamY),
-                    -10f);
+                    depth);
             }
             else
             {
                 // Camera follows the player with a slight delay 
                 posX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x, ref smoothVelocity.x, smoothTime);
                 posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y, ref smoothVelocity.y, smoothTime);
-                transform.position = new Vector3(posX, posY, -10f);
+                transform.position = new Vector3(posX, posY, depth);
 
                 // Camera bounds per area
                 // Areas listed alphabetically
@@ -140,7 +140,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * 0.0f),
                         (maxCamPos.y + 5.12f * 0.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.BatteryNW)
                 {
@@ -153,7 +153,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * 0.0f),
                         (maxCamPos.y + 5.12f * 0.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.BatterySE)
                 {
@@ -166,7 +166,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -1.0f),
                         (maxCamPos.y + 5.12f * -1.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.BatterySW)
                 {
@@ -179,7 +179,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -1.0f),
                         (maxCamPos.y + 5.12f * -1.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.BuildersNE)
                 {
@@ -192,7 +192,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * 1.0f),
                         (maxCamPos.y + 5.12f * 1.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.BuildersNW)
                 {
@@ -205,7 +205,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * 1.0f),
                         (maxCamPos.y + 5.12f * 1.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.BuildersSE)
                 {
@@ -218,7 +218,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * 0.0f),
                         (maxCamPos.y + 5.12f * 0.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.BuildersSW)
                 {
@@ -231,7 +231,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * 0.0f),
                         (maxCamPos.y + 5.12f * 0.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.Campus)
                 {
@@ -244,7 +244,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -2.0f),
                         (maxCamPos.y + 5.12f * -1.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.CannaFieldNW)
                 {
@@ -257,7 +257,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -2.0f),
                         (maxCamPos.y + 5.12f * -2.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.CannaFieldSE)
                 {
@@ -270,7 +270,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -3.0f),
                         (maxCamPos.y + 5.12f * -3.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.CannaFieldSW)
                 {
@@ -283,7 +283,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -3.0f),
                         (maxCamPos.y + 5.12f * -3.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.CannaHouse)
                 {
@@ -296,7 +296,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -2.0f),
                         (maxCamPos.y + 5.12f * -2.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.FarmNW)
                 {
@@ -309,7 +309,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -3.0f),
                         (maxCamPos.y + 5.12f * -3.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.FarmNC)
                 {
@@ -322,7 +322,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -3.0f),
                         (maxCamPos.y + 5.12f * -3.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.FarmNE)
                 {
@@ -335,7 +335,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -3.0f),
                         (maxCamPos.y + 5.12f * -3.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.FarmWC)
                 {
@@ -348,7 +348,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -4.0f),
                         (maxCamPos.y + 5.12f * -4.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.FarmCC)
                 {
@@ -361,7 +361,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -4.0f),
                         (maxCamPos.y + 5.12f * -4.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.FarmEC)
                 {
@@ -374,7 +374,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -4.0f),
                         (maxCamPos.y + 5.12f * -4.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.FarmSW)
                 {
@@ -387,7 +387,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -5.0f),
                         (maxCamPos.y + 5.12f * -5.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.FarmSC)
                 {
@@ -400,7 +400,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -5.0f),
                         (maxCamPos.y + 5.12f * -5.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.FarmSE)
                 {
@@ -413,7 +413,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -5.0f),
                         (maxCamPos.y + 5.12f * -5.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.Home)
                 {
@@ -426,7 +426,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -2.0f),
                         (maxCamPos.y + 5.12f * -2.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.HousesE)
                 {
@@ -439,7 +439,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -1.0f),
                         (maxCamPos.y + 5.12f * -1.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.HousesN)
                 {
@@ -452,7 +452,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * 2.0f),
                         (maxCamPos.y + 5.12f * 2.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.HousesS)
                 {
@@ -465,7 +465,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -6.0f),
                         (maxCamPos.y + 5.12f * -6.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.HousesW)
                 {
@@ -478,7 +478,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -2.0f),
                         (maxCamPos.y + 5.12f * -2.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.Lake)
                 {
@@ -491,7 +491,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * 3.0f),
                         (maxCamPos.y + 5.12f * 3.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.PlaygroundE)
                 {
@@ -504,7 +504,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -1.0f),
                         (maxCamPos.y + 5.12f * -1.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.PlaygroundN)
                 {
@@ -517,7 +517,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * 2.0f),
                         (maxCamPos.y + 5.12f * 2.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.PlaygroundS)
                 {
@@ -530,7 +530,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -6.0f),
                         (maxCamPos.y + 5.12f * -6.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.PlaygroundW)
                 {
@@ -543,7 +543,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -1.0f),
                         (maxCamPos.y + 5.12f * -1.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.RaceTrackE)
                 {
@@ -556,7 +556,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -2.0f),
                         (maxCamPos.y + 5.12f * -2.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.River)
                 {
@@ -569,7 +569,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * 3.0f),
                         (maxCamPos.y + 5.12f * 3.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.WoodsW)
                 {
@@ -582,7 +582,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * -1.0f),
                         (maxCamPos.y + 5.12f * 0.0f)),
-                    -10);
+                    depth);
                 }
                 else if (currentCoords == AnandaCoords.WoodsWSecret)
                 {
@@ -595,7 +595,7 @@ public class CameraFollow : MonoBehaviour
                         transform.position.y,
                         (minCamPos.y + 5.12f * 1.0f),
                         (maxCamPos.y + 5.12f * 1.0f)),
-                    -10);
+                    depth);
                 }
                 else
                 {

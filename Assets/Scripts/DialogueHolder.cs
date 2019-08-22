@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/19/2019
+// Last:  08/21/2019
 
 using UnityEngine;
 
@@ -12,14 +12,17 @@ public class DialogueHolder : MonoBehaviour
     public Collider2D colliEnter;
     public DialogueManager dMan;
     public PauseGame pause;
+    public ScriptManager scriptMan;
     public Sprite portPic;
     public TouchControls touches;
     public UIManager uMan;
 
+    public bool bActionOnClose;
     public bool bContinueDialogue;
     public bool bHasEntered;
     public bool bHasExited;
-    
+
+    public string action;
     public string[] dialogueLines;
 
 	void Start ()
@@ -114,6 +117,11 @@ public class DialogueHolder : MonoBehaviour
 
         // Stop UI controls / actions 
         touches.bAaction = false;
+
+        // Run any actions
+        scriptMan.DialogueAction(action);
+        if (bActionOnClose)
+            scriptMan.ActionOnClose(action);
     }
 
     void OrientNPC(Collider2D collision)

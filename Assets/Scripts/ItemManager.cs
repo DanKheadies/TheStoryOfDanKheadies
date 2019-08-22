@@ -82,7 +82,6 @@ public class ItemManager : MonoBehaviour
             bDoneAcquiring)
         {
             HideItem();
-            Debug.Log("hide");
             bDoneAcquiring = false;
         }
     }

@@ -64,8 +64,7 @@ public class CameraSlider : MonoBehaviour
             touches.transform.localScale = Vector3.one;
         }
     }
-
-
+    
     public void SlideRight()
     {
         bSlideRight = true;

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  08/19/2019
+// Last:  08/22/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,24 +13,25 @@ public class Chp1 : MonoBehaviour
     public Camera mainCamera;
     public CameraFollow camFollow;
     public DialogueManager dMan;
-    public GameObject dArrow;
-    public GameObject dBox;
     public GameObject greatTree;
     public GameObject item_homeVRGoggles;
     public GameObject npc_al_khidr;
     public GameObject npc_ashera;
     public GameObject npc_atandwa;
+    public GameObject npc_brackey;
     public GameObject npc_canaan;
     public GameObject npc_chun;
     public GameObject npc_dagon;
     public GameObject npc_dilum;
     public GameObject npc_eliz;
     public GameObject npc_enki;
+    public GameObject npc_heartha;
     public GameObject npc_marija;
     public GameObject npc_pookieB1;
     public GameObject npc_pookieB2;
     public GameObject npc_thabo;
     public GameObject npc_zola;
+    public GameObject player;
     public GameObject quest0;
     public GameObject quest1;
     public GameObject quest2;
@@ -40,11 +41,15 @@ public class Chp1 : MonoBehaviour
     public GameObject quest6;
     public GameObject quest7;
     public GameObject quest8;
+    public GameObject quest9;
+    public GameObject quest10;
     public GameObject questTrigger2;
     public GameObject screenFader;
-    public GameObject thePlayer;
+    public GameObject treeHouseDoor;
     public GameObject warpGWC;
     public GameObject warpMinesweeper;
+    public GameObject warpPookieVision;
+    public GameObject warpTowerDeez;
     public Inventory inv;
     public MoveOptionsMenuArrow moveOptsArw;
     public MusicManager mMan;
@@ -52,6 +57,7 @@ public class Chp1 : MonoBehaviour
     public PauseGame pause;
     public QuestManager qMan;
     public SaveGame save;
+    public ScriptManager scriptMan;
     public Text dText;
     public TouchControls touches;
     public UIManager uMan;
@@ -70,17 +76,21 @@ public class Chp1 : MonoBehaviour
     public bool bAvoidUpdateQ7Q8Ini;
     public bool bAvoidUpdateQ7Q8DH;
     public bool bAvoidUpdateQ7Q8;
+    //public bool bAvoidUpdateQ9;
+    //public bool bAvoidUpdateQ10;
 
-    public bool bContainsQ3Item;
-    public bool bContainsQ6Item;
-    public bool bContainsQ7ItemGreen;
-    public bool bContainsQ7ItemOrange;
-    public bool bContainsQ7ItemPurple;
-    public bool bContainsQ7ItemWhite;
-    public bool bContainsQ8ItemGreen;
-    public bool bContainsQ8ItemOrange;
-    public bool bContainsQ8ItemPurple;
-    public bool bContainsQ8ItemWhite;
+    public bool bHasGoggles;
+    public bool bHasQ3SmoochWoochy;
+    public bool bHasQ7Green;
+    public bool bHasQ7Orange;
+    public bool bHasQ7Purple;
+    public bool bHasQ7White;
+    public bool bHasQ8Green;
+    public bool bHasQ8Orange;
+    public bool bHasQ8Purple;
+    public bool bHasQ8White;
+    public bool bContainsQ9Item; // TODO
+    public bool bContainsQ10Item; // TODO
 
     public bool bQ4Seeking;
     public bool bFoundQ4Kid1;
@@ -92,12 +102,8 @@ public class Chp1 : MonoBehaviour
     public bool bFoundQ4All;
 
     public bool bQ3InitialCheck;
-    public bool bGetInventory;
-    public bool bHasGoggles;
-
-    public float invTimer;
+    
     public float raceTimer;
-    public float transferAddedPosition;
 
     public int Q4KidCounter;
     public int Q7GreenCounter;
@@ -108,7 +114,6 @@ public class Chp1 : MonoBehaviour
     public int Q8OrangeCounter;
     public int Q8PurpleCounter;
     public int Q8WhiteCounter;
-    public int questCount;
 
     public string Q4LastKidFound;
     public string Q7Options;
@@ -117,31 +122,27 @@ public class Chp1 : MonoBehaviour
     public string Q8SelectedOption;
     public string savedQuestsValue;
 
+    //quest0  = Truth or Elaborate Lie w/ Dagon
+    //quest1  = Race w/ canaan
+    //quest2  = Treehouse Search
+    //quest3  = Item Check w/ Enki
+    //quest4  = Hide & Seek w/ Al-khidr
+    //quest5  = Talking to GreatTree
+    //quest6  = Minesweeper
+    //quest7  = PookieBear1
+    //quest8  = PookieBear2
+    //quest9  = PookieVision
+    //quest10 = TowerDeez
+
     void Start()
     {
         inv.RerunStart();
-
-        //quest0 = Truth or Elaborate Lie w/ Dagon
-        //quest1 = Race w/ canaan
-        //quest2 = Treehouse Search
-        //quest3 = Item Check w/ Enki
-        //quest4 = Hide & Seek w/ Al-khidr
-        //quest5 = Talking to GreatTree
-        //quest6 = Minesweeper
-        //quest7 = PookieBear1
-        //quest8 = PookieBear2
-
-        invTimer = 0.333f;
-        questCount = 9;
-        raceTimer = 0f;
-
-        savedQuestsValue = "";
 
         // Chapter 1 -- First Time
         if (PlayerPrefs.GetString("Chapter") != "Chp1" &&
             PlayerPrefs.GetInt("TransferAnandaCoord") == 0)
         {
-            thePlayer.transform.position = new Vector2(-13.68f, -7.625f);
+            player.transform.position = new Vector2(-13.68f, -7.625f);
             mainCamera.transform.position = new Vector2(-13.68f, -7.625f);
             camFollow.currentCoords = CameraFollow.AnandaCoords.Home;
             // see Update timer for inventory load
@@ -152,14 +153,14 @@ public class Chp1 : MonoBehaviour
             save.RerunStart();
             save.GetTransferData();
             LoadQuests();
-            inv.bUpdateItemCount = true;
-            // see Update timer for inventory load
+            GoggleCheck();
+            StartCoroutine(LoadInventory());
 
             // Show UI if mobile (assumes coming from GWC where they might be off)
             // see Update timer for mobile check (needs time for uMan to load fully)
 
             // Set player & camera position
-            thePlayer.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferP_x"), (PlayerPrefs.GetFloat("TransferP_y") - 0.1f));
+            player.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferP_x"), (PlayerPrefs.GetFloat("TransferP_y") - 0.1f));
             mainCamera.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferCam_x"), PlayerPrefs.GetFloat("TransferCam_y"));
             camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("TransferAnandaCoord");
         }
@@ -169,8 +170,8 @@ public class Chp1 : MonoBehaviour
             save.RerunStart();
             save.GetSavedGame();
             LoadQuests();
-            inv.bUpdateItemCount = true;
-            // see Update timer for inventory load
+            GoggleCheck(); 
+            StartCoroutine(LoadInventory());
 
             Chp1QuestDialogueChecker();
 
@@ -182,247 +183,125 @@ public class Chp1 : MonoBehaviour
         }
     }
 
+    //public void ResetHideAndSeek()
+    //{
+    //    if (mainCamera.GetComponent<CameraFollow>().currentCoords != CameraFollow.AnandaCoords.WoodsW)
+    //    {
+    //        Quest4Reset();
+    //    }
+    //}
+
     void Update()
     {
-        // Load Inventory -- Saved vs. Transfer
-        // Reset Transition Data
-        if (invTimer > 0)
-        {
-            invTimer -= Time.deltaTime;
-
-            if (invTimer <= 0)
-            {
-                // From Chp0
-                if (PlayerPrefs.GetString("Chapter") != "Chp1" ||
-                    PlayerPrefs.GetInt("Transferring") == 1)
-                {
-                    inv.LoadInventory("transfer");
-
-                    uMan.CheckIfMobile();
-                }
-                // From saved 
-                else
-                {
-                    inv.LoadInventory("saved");
-                }
-
-                // Reset Transfer
-                PlayerPrefs.SetInt("Transferring", 0);
-
-                // Clear Transition data
-                save.DeleteTransPrefs();
-            }
-        }
-
         // 06/20/19 DC TODO -- Drop goggles in Chp0 and they can't be gotten again (can see, but can't get)
         // Occurs even after getting another item
         // Item Check -- VR Goggles Prompts Ashera's response
-        if (inv.bUpdateItemCount)
-        {
-            for (int i = 0; i < inv.items.Count; i++)
-            {
-                string item = inv.items[i].ToString();
-                item = item.Substring(0, item.Length - 7);
-
-                if (item == "VR.Goggles")
-                {
-                    bHasGoggles = true;
-                }
-            }
-
-            if (bHasGoggles)
-            {
-                npc_ashera.transform.GetChild(0).gameObject.SetActive(true);
-                npc_ashera.transform.GetChild(1).gameObject.SetActive(false);
-
-                item_homeVRGoggles.transform.localScale = Vector3.zero;
-            }
-            else
-            {
-                npc_ashera.transform.GetChild(0).gameObject.SetActive(false);
-                npc_ashera.transform.GetChild(1).gameObject.SetActive(true);
-
-                item_homeVRGoggles.transform.localScale = Vector3.one;
-            }
-
-            bHasGoggles = false;
-        }
+        //if (inv.bUpdateItemCount)
+        //{
+        //    GoggleCheck();
+        //}
 
         // Quest 0 -- Truth or Elaborate Lie w/ Dagon
         // see below
 
         // Quest 1 -- Race w/ Canaan -> Start Timer
-        if (quest1.GetComponent<QuestObject>().bHasStarted &&
-            !quest1.GetComponent<QuestObject>().bHasEnded &&
-            !pause.bPauseActive)
+        if (!pause.bPauseActive &&
+            quest1.GetComponent<QuestObject>().bHasStarted &&
+            !quest1.GetComponent<QuestObject>().bHasEnded)
         {
             raceTimer += Time.deltaTime;
         }
 
         // Quest 1 -- Race w/ canaan -> End, Check Race Time, & Assign Dialogue
-        if (quest1.GetComponent<QuestObject>().bHasEnded &&
-            !dMan.bDialogueActive &&
-            !bAvoidUpdateQ1)
-        {
-            bAvoidUpdateQ1 = true;
+        //if (!dMan.bDialogueActive &&
+        //    !bAvoidUpdateQ1 &&
+        //    quest1.GetComponent<QuestObject>().bHasEnded)
+        //{
+        //    //bAvoidUpdateQ1 = true;
 
-            npc_canaan.transform.GetChild(0).gameObject.SetActive(false);
-            npc_canaan.transform.GetChild(1).gameObject.SetActive(true);
-
-            raceTimer = Mathf.Round(raceTimer);
-
-            if (raceTimer == 0) // Saved data condition
-            {
-                npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
-                    "Feel free to keep practicing. It's always good to practice."
-                };
-            }
-            else if (raceTimer <= 10)
-            {
-                npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
-                    "Holy goat nipples Batman.. How the.. Did you cheat?",
-                    "You set one of the best records at " + raceTimer + " seconds?!?",
-                    "Well.. Well ran. Let's see how you do tomorrow."
-                };
-            }
-            else if (raceTimer <= 30 && raceTimer > 10)
-            {
-                npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
-                    "Good race Dan! You ran that in " + raceTimer + " seconds.",
-                    "Keep practicing and improving. Maybe you'll beat my time!"
-                };
-            }
-            else
-            {
-                npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
-                    "Well.. You made it... You finished after " + raceTimer + " seconds.",
-                    "Keep training Dan. It's good for you!"
-                };
-            }
-        }
+        //    //EndRace();
+        //}
 
         // Quest 1 -- Race w/ Canaan -> Reward
-        if (!quest1.GetComponent<QuestObject>().bHasCollected &&
-            quest1.GetComponent<QuestObject>().bHasEnded &&
-            (int)camFollow.currentCoords == 32)
-        {
-            if (npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
-                dMan.bDialogueActive)
-            {
-                Quest1Reward();
-            }
-        }
+        //if ((int)camFollow.currentCoords == 32 &&
+        //    !quest1.GetComponent<QuestObject>().bHasCollected &&
+        //    quest1.GetComponent<QuestObject>().bHasEnded)
+        //{
+        //    if (npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+        //        dMan.bDialogueActive)
+        //    {
+        //        Quest1Reward();
+        //    }
+        //}
 
-        // Quest 2 -- Treehouse Search -> Start
-        if (quest2.GetComponent<QuestObject>().bHasStarted &&
-            !dMan.bDialogueActive &&
-            !bAvoidUpdateQ2)
-        {
-            bAvoidUpdateQ2 = true;
+        //// Quest 2 -- Treehouse Search -> Start
+        //if (!dMan.bDialogueActive &&
+        //    !bAvoidUpdateQ2 &&
+        //    quest2.GetComponent<QuestObject>().bHasStarted)
+        //{
+        //    //bAvoidUpdateQ2 = true;
 
-            questTrigger2.transform.GetChild(1).GetComponent<Transform>().localScale = new Vector3(0.2625f, 0.24937f, 1f);
+        //    //TreeHouse();
+        //}
 
-            // Disable door again & move Dan back (need isTrigger double-tap change?)
-            // DC 02/12/19 -- Don't move back Dan here?
-            GameObject.Find("HomeSWTreeDoor").transform.tag = "LockedDoor";
-            GameObject.Find("HomeSWTreeDoor").transform.localScale = Vector3.one;
-            GameObject.Find("HomeSWTreeDoor").GetComponent<BoxCollider2D>().isTrigger = false;
-            GameObject.Find("HomeSWTreeDoor").transform.GetChild(0).GetComponent<BoxCollider2D>().isTrigger = false;
-            GameObject.Find("HomeSWTreeDoor").transform.GetChild(0).GetComponent<BoxCollider2D>().isTrigger = true;
-        }
-
-        // Quest 2 -- Treehouse Search -> Reward
-        if (!quest2.GetComponent<QuestObject>().bHasCollected &&
-            quest2.GetComponent<QuestObject>().bHasEnded &&
-            (int)camFollow.currentCoords == 23)
-        {
-            Quest2Reward();
-        }
+        //// Quest 2 -- Treehouse Search -> Reward
+        //if ((int)camFollow.currentCoords == 23 &&
+        //    !quest2.GetComponent<QuestObject>().bHasCollected &&
+        //    quest2.GetComponent<QuestObject>().bHasEnded)
+        //{
+        //    //Quest2Reward();
+        //}
 
         // Quest 3 -- Item Check w/ Enki -> Initial check
-        if (quest3.GetComponent<QuestObject>().bHasStarted &&
-            !bQ3InitialCheck)
-        {
-            bQ3InitialCheck = true;
-            inv.bUpdateItemCount = true;
-        }
+        //if (quest3.GetComponent<QuestObject>().bHasStarted &&
+        //    !bQ3InitialCheck)
+        //{
+        //    bQ3InitialCheck = true;
+        //    //inv.bUpdateItemCount = true;
+        //    SmoochyWoochyCheck();
+        //}
 
         // Quest 3 -- Item Check w/ Enki -> Check on inventory change
-        if (quest3.GetComponent<QuestObject>().bHasStarted &&
-            !bAvoidUpdateQ3 &&
-            (inv.bUpdateItemCount || 
-             bContainsQ3Item))
-        {
-            for (int i = 0; i < inv.items.Count; i++)
-            {
-                string item = inv.items[i].ToString();
-                
-                if (item == "Cannabis.Bud.SmoochyWoochyPoochy (Item)")
-                {
-                    bContainsQ3Item = true;
-                }
-            }
-
-            if (bContainsQ3Item &&
-                !dMan.bDialogueActive)
-            {
-                npc_enki.transform.GetChild(0).gameObject.SetActive(false);
-                npc_enki.transform.GetChild(1).gameObject.SetActive(true);
-
-                npc_enki.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = true;
-            }
-            else
-            {
-                npc_enki.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().endQuest = false;
-
-                npc_enki.transform.GetChild(0).gameObject.SetActive(true);
-                npc_enki.transform.GetChild(1).gameObject.SetActive(false);
-            }
-        }
+        //if (quest3.GetComponent<QuestObject>().bHasStarted &&
+        //    !bAvoidUpdateQ3 &&
+        //    (inv.bUpdateItemCount ||
+        //     bHasQ3SmoochWoochy))
+        //{
+            
+        //}
 
         // Quest 3 -- Item Check w/ Enki -> Reward & Removal
-        if (!quest3.GetComponent<QuestObject>().bHasCollected && 
-            quest3.GetComponent<QuestObject>().bHasEnded &&
-            !bAvoidUpdateQ3)
-        {
-            bAvoidUpdateQ3 = true;
+        //if (!quest3.GetComponent<QuestObject>().bHasCollected && 
+        //    quest3.GetComponent<QuestObject>().bHasEnded &&
+        //    !bAvoidUpdateQ3)
+        //{
+        //    //bAvoidUpdateQ3 = true;
 
-            Quest3Reward();
+        //    //Quest3Reward();
 
-            // Remove the bud
-            bool bTempCheck = true;
-            for (int i = 0; i < inv.items.Count; i++)
-            {
-                string item = inv.items[i].ToString();
-
-                if (item == "Cannabis.Bud.SmoochyWoochyPoochy (Item)" && bTempCheck)
-                {
-                    inv.Remove(inv.items[i]);
-                    bTempCheck = false;
-                }
-            }
-        }
+            
+        //}
 
         // Quest 4 -- Hide & Seek w/ Al-khidr (counting)
-        if (quest4.GetComponent<QuestObject>().bHasStarted &&
-            !dMan.bDialogueActive &&
-            !bAvoidUpdateQ4counting)
-        {
-            StartCoroutine(HideAndSeek());
+        //if (quest4.GetComponent<QuestObject>().bHasStarted &&
+        //    !dMan.bDialogueActive &&
+        //    !bAvoidUpdateQ4counting)
+        //{
+        //    //StartCoroutine(HideAndSeek());
 
-            // Avoid talking to Al-khidr
-            npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
-            npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = true;
+        //    //// Avoid talking to Al-khidr
+        //    //npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        //    //npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = true;
 
-            // Stops the player's movement
-            thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+        //    //// Stops the player's movement
+        //    //player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
 
-            // Fade out
-            screenFader.GetComponent<Animator>().Play("FadeOut");
+        //    //// Fade out
+        //    //screenFader.GetComponent<Animator>().Play("FadeOut");
 
-            // Turn off GUI
-            touches.transform.localScale = Vector3.zero;
-        }
+        //    //// Turn off GUI
+        //    //touches.transform.localScale = Vector3.zero;
+        //}
 
         // Quest 4 -- Hide & Seek w/ Al-khidr (start seeking)
         if (quest4.GetComponent<QuestObject>().bHasStarted &&
@@ -430,601 +309,371 @@ public class Chp1 : MonoBehaviour
             bQ4Seeking &&
             !bAvoidUpdateQ4seeking)
         {
-            // Fade in
-            screenFader.GetComponent<Animator>().SetBool("FadeIn", true);
+            //// Fade in
+            //screenFader.GetComponent<Animator>().SetBool("FadeIn", true);
 
-            // Resume the player's movement
-            thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = false;
+            //// Resume the player's movement
+            //player.GetComponent<PlayerMovement>().bStopPlayerMovement = false;
 
-            bAvoidUpdateQ4seeking = true;
+            //bAvoidUpdateQ4seeking = true;
         }
 
         // Quest 4 -- Hide & Seek w/ Al-khidr (seeking)
         if (bQ4Seeking)
         {
-            if (npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
-                !dMan.bDialogueActive &&
-                !bFoundQ4Kid1)
-            {
-                bFoundQ4Kid1 = true;
-                Q4LastKidFound = "Al-khidr";
-                Q4KidCounter += 1;
+            //if (npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+            //    !dMan.bDialogueActive &&
+            //    !bFoundQ4Kid1)
+            //{
+            //    bFoundQ4Kid1 = true;
+            //    Q4LastKidFound = "Al-khidr";
+            //    Q4KidCounter += 1;
 
-                HideAndSeekFoundKid();
-            }
-            else if (npc_atandwa.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
-                !dMan.bDialogueActive &&
-                !bFoundQ4Kid2)
-            {
-                bFoundQ4Kid2 = true;
-                Q4LastKidFound = "Atandwa";
-                Q4KidCounter += 1;
+            //    HideAndSeekFoundKid();
+            //}
+            //else if (npc_atandwa.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+            //    !dMan.bDialogueActive &&
+            //    !bFoundQ4Kid2)
+            //{
+            //    bFoundQ4Kid2 = true;
+            //    Q4LastKidFound = "Atandwa";
+            //    Q4KidCounter += 1;
 
-                HideAndSeekFoundKid();
-            }
-            else if (npc_eliz.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
-                !dMan.bDialogueActive &&
-                !bFoundQ4Kid3)
-            {
-                bFoundQ4Kid3 = true;
-                Q4LastKidFound = "Eliz";
-                Q4KidCounter += 1;
+            //    HideAndSeekFoundKid();
+            //}
+            //else if (npc_eliz.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+            //    !dMan.bDialogueActive &&
+            //    !bFoundQ4Kid3)
+            //{
+            //    bFoundQ4Kid3 = true;
+            //    Q4LastKidFound = "Eliz";
+            //    Q4KidCounter += 1;
 
-                HideAndSeekFoundKid();
-            }
-            else if (npc_thabo.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
-                !dMan.bDialogueActive &&
-                !bFoundQ4Kid4)
-            {
-                bFoundQ4Kid4 = true;
-                Q4LastKidFound = "Thabo";
-                Q4KidCounter += 1;
+            //    HideAndSeekFoundKid();
+            //}
+            //else if (npc_thabo.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+            //    !dMan.bDialogueActive &&
+            //    !bFoundQ4Kid4)
+            //{
+            //    bFoundQ4Kid4 = true;
+            //    Q4LastKidFound = "Thabo";
+            //    Q4KidCounter += 1;
 
-                HideAndSeekFoundKid();
-            }
-            else if (npc_zola.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
-                !dMan.bDialogueActive &&
-                !bFoundQ4Kid5)
-            {
-                bFoundQ4Kid5 = true;
-                Q4LastKidFound = "Zola";
-                Q4KidCounter += 1;
+            //    HideAndSeekFoundKid();
+            //}
+            //else if (npc_zola.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+            //    !dMan.bDialogueActive &&
+            //    !bFoundQ4Kid5)
+            //{
+            //    bFoundQ4Kid5 = true;
+            //    Q4LastKidFound = "Zola";
+            //    Q4KidCounter += 1;
 
-                HideAndSeekFoundKid();
-            }
-            else if (npc_marija.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
-                !dMan.bDialogueActive &&
-                !bFoundQ4Kid6)
-            {
-                bFoundQ4Kid6 = true;
-                Q4LastKidFound = "Marija";
-                Q4KidCounter += 1;
+            //    HideAndSeekFoundKid();
+            //}
+            //else if (npc_marija.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered &&
+            //    !dMan.bDialogueActive &&
+            //    !bFoundQ4Kid6)
+            //{
+            //    bFoundQ4Kid6 = true;
+            //    Q4LastKidFound = "Marija";
+            //    Q4KidCounter += 1;
 
-                HideAndSeekFoundKid();
-            }
+            //    HideAndSeekFoundKid();
+            //}
 
-            if (mainCamera.GetComponent<CameraFollow>().currentCoords != CameraFollow.AnandaCoords.WoodsW)
-            {
-                Quest4Reset();
-            }
+            //if (mainCamera.GetComponent<CameraFollow>().currentCoords != CameraFollow.AnandaCoords.WoodsW)
+            //{
+            //    Quest4Reset();
+            //}
         }
 
-        // Quest 4 -- Hide & Seek w/ Al-khidr (finished)
-        if (quest4.GetComponent<QuestObject>().bHasStarted &&
-            !dMan.bDialogueActive &&
-            Q4KidCounter == 6 &&
-            !bQ4Seeking &&
-            !bAvoidUpdateQ4)
-        {
-            bAvoidUpdateQ4 = true;
+        //// Quest 4 -- Hide & Seek w/ Al-khidr (finished)
+        //if (quest4.GetComponent<QuestObject>().bHasStarted &&
+        //    !dMan.bDialogueActive &&
+        //    Q4KidCounter == 6 &&
+        //    !bQ4Seeking &&
+        //    !bAvoidUpdateQ4)
+        //{
+        //    bAvoidUpdateQ4 = true;
 
-            StartCoroutine(HideAndSeekFinished());
+        //    StartCoroutine(HideAndSeekFinished());
 
-            // Stops the player's movement
-            thePlayer.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+        //    // Stops the player's movement
+        //    player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
 
-            // Fade out
-            screenFader.GetComponent<Animator>().Play("FadeOut");
+        //    // Fade out
+        //    screenFader.GetComponent<Animator>().Play("FadeOut");
 
-            // Turn off GUI
-            touches.transform.localScale = Vector3.zero;
-        }
+        //    // Turn off GUI
+        //    touches.transform.localScale = Vector3.zero;
+        //}
 
-        // Quest 7 & 8 -- Check current inventory
-        if (quest7.GetComponent<QuestObject>().bHasStarted &&
-            quest7.GetComponent<QuestObject>().bHasStarted &&
-            !bAvoidUpdateQ7Q8Ini)
-        {
-            bAvoidUpdateQ7Q8Ini = true;
+        //// Quest 7 & 8 -- Check current inventory
+        //if (quest7.GetComponent<QuestObject>().bHasStarted &&
+        //    quest7.GetComponent<QuestObject>().bHasStarted &&
+        //    !bAvoidUpdateQ7Q8Ini)
+        //{
+        //    bAvoidUpdateQ7Q8Ini = true;
 
-            inv.bUpdateItemCount = true;
-        }
+        //    //inv.bUpdateItemCount = true;
+        //    GoggleCheck();
+        //}
 
-        // Quest 7 -- Item Check & Options for PookieBear1
-        if (quest7.GetComponent<QuestObject>().bHasStarted &&
-            inv.bUpdateItemCount &&
-            !bAvoidUpdateQ7)
-        {
-            // Reset the counters
-            Q7GreenCounter = 0;
-            Q7OrangeCounter = 0;
-            Q7PurpleCounter = 0;
-            Q7WhiteCounter = 0;
+        //// Quest 7 -- Item Check & Options for PookieBear1
+        //if (quest7.GetComponent<QuestObject>().bHasStarted &&
+        //    //inv.bUpdateItemCount &&
+        //    !bAvoidUpdateQ7)
+        //{
+            
+            
+        //    //// Reset the counters
+        //    //Q7GreenCounter = 0;
+        //    //Q7OrangeCounter = 0;
+        //    //Q7PurpleCounter = 0;
+        //    //Q7WhiteCounter = 0;
 
-            // Check each item
-            for (int i = 0; i < inv.items.Count; i++)
-            {
-                string item = inv.items[i].ToString();
+        //    //// Check each item
+        //    //for (int i = 0; i < inv.items.Count; i++)
+        //    //{
+        //    //    string item = inv.items[i].ToString();
 
-                // Green nug check
-                if (item == "Cannabis.Bud.SmoochyWoochyPoochy (Item)" ||
-                    item == "Cannabis.Bud.NaturesCandy (Item)" ||
-                    item == "Cannabis.Bud.TheDevilsLettuce (Item)")
-                {
-                    Q7GreenCounter += 1;
-                }
+        //    //    // Green nug check
+        //    //    if (item == "Cannabis.Bud.SmoochyWoochyPoochy (Item)" ||
+        //    //        item == "Cannabis.Bud.NaturesCandy (Item)" ||
+        //    //        item == "Cannabis.Bud.TheDevilsLettuce (Item)")
+        //    //    {
+        //    //        Q7GreenCounter += 1;
+        //    //    }
 
-                // Orange nug
-                if (item == "Cannabis.Bud.BootyJuice (Item)" ||
-                    item == "Cannabis.Bud.Catnip (Item)" ||
-                    item == "Cannabis.Bud.SnoopLeone (Item)")
-                {
-                    Q7OrangeCounter += 1;
-                }
+        //    //    // Orange nug
+        //    //    if (item == "Cannabis.Bud.BootyJuice (Item)" ||
+        //    //        item == "Cannabis.Bud.Catnip (Item)" ||
+        //    //        item == "Cannabis.Bud.SnoopLeone (Item)")
+        //    //    {
+        //    //        Q7OrangeCounter += 1;
+        //    //    }
 
-                // Purple nug
-                if (item == "Cannabis.Bud.GranPapasMedicine (Item)" ||
-                    item == "Cannabis.Bud.PurpleNurple (Item)" ||
-                    item == "Cannabis.Bud.RighteousBud (Item)")
-                {
-                    Q7PurpleCounter += 1;
-                }
+        //    //    // Purple nug
+        //    //    if (item == "Cannabis.Bud.GranPapasMedicine (Item)" ||
+        //    //        item == "Cannabis.Bud.PurpleNurple (Item)" ||
+        //    //        item == "Cannabis.Bud.RighteousBud (Item)")
+        //    //    {
+        //    //        Q7PurpleCounter += 1;
+        //    //    }
 
-                // White nug
-                if (item == "Cannabis.Bud.CreeperBud (Item)" ||
-                    item == "Cannabis.Bud.MastaRoshi (Item)" ||
-                    item == "Cannabis.Bud.WhiteWalker (Item)")
-                {
-                    Q7WhiteCounter += 1;
-                }
-            }
+        //    //    // White nug
+        //    //    if (item == "Cannabis.Bud.CreeperBud (Item)" ||
+        //    //        item == "Cannabis.Bud.MastaRoshi (Item)" ||
+        //    //        item == "Cannabis.Bud.WhiteWalker (Item)")
+        //    //    {
+        //    //        Q7WhiteCounter += 1;
+        //    //    }
+        //    //}
 
-            if (Q7GreenCounter > 0)
-            {
-                bContainsQ7ItemGreen = true;
-            }
-            else
-            {
-                bContainsQ7ItemGreen = false;
-            }
+        //    //if (Q7GreenCounter > 0)
+        //    //{
+        //    //    bContainsQ7ItemGreen = true;
+        //    //}
+        //    //else
+        //    //{
+        //    //    bContainsQ7ItemGreen = false;
+        //    //}
 
-            if (Q7OrangeCounter > 0)
-            {
-                bContainsQ7ItemOrange = true;
-            }
-            else
-            {
-                bContainsQ7ItemOrange = false;
-            }
+        //    //if (Q7OrangeCounter > 0)
+        //    //{
+        //    //    bContainsQ7ItemOrange = true;
+        //    //}
+        //    //else
+        //    //{
+        //    //    bContainsQ7ItemOrange = false;
+        //    //}
 
-            if (Q7PurpleCounter > 0)
-            {
-                bContainsQ7ItemPurple = true;
-            }
-            else
-            {
-                bContainsQ7ItemPurple = false;
-            }
+        //    //if (Q7PurpleCounter > 0)
+        //    //{
+        //    //    bContainsQ7ItemPurple = true;
+        //    //}
+        //    //else
+        //    //{
+        //    //    bContainsQ7ItemPurple = false;
+        //    //}
 
-            if (Q7WhiteCounter > 0)
-            {
-                bContainsQ7ItemWhite = true;
-            }
-            else
-            {
-                bContainsQ7ItemWhite = false;
-            }
+        //    //if (Q7WhiteCounter > 0)
+        //    //{
+        //    //    bContainsQ7ItemWhite = true;
+        //    //}
+        //    //else
+        //    //{
+        //    //    bContainsQ7ItemWhite = false;
+        //    //}
 
-            // if one of them present, activate options handler on Pookie
-            if (bContainsQ7ItemGreen ||
-                bContainsQ7ItemOrange ||
-                bContainsQ7ItemPurple || 
-                bContainsQ7ItemWhite)
-            {
-                // Activate DH w/ OH
-                npc_pookieB1.transform.GetChild(0).gameObject.SetActive(false);
-                npc_pookieB1.transform.GetChild(1).gameObject.SetActive(true);
+        //    //// if one of them present, activate options handler on Pookie
+        //    //if (bContainsQ7ItemGreen ||
+        //    //    bContainsQ7ItemOrange ||
+        //    //    bContainsQ7ItemPurple || 
+        //    //    bContainsQ7ItemWhite)
+        //    //{
+        //    //    // Activate DH w/ OH
+        //    //    npc_pookieB1.transform.GetChild(0).gameObject.SetActive(false);
+        //    //    npc_pookieB1.transform.GetChild(1).gameObject.SetActive(true);
 
-                if (bContainsQ7ItemGreen &&
-                    bContainsQ7ItemOrange &&
-                    bContainsQ7ItemPurple &&
-                    bContainsQ7ItemWhite)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[4];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[3] = "Give em a white nug";
+        //    //    if (bContainsQ7ItemGreen &&
+        //    //        bContainsQ7ItemOrange &&
+        //    //        bContainsQ7ItemPurple &&
+        //    //        bContainsQ7ItemWhite)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[4];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[3] = "Give em a white nug";
 
-                    Q7Options = "gopw";
-                }
-                else if (bContainsQ7ItemGreen &&
-                         bContainsQ7ItemPurple &&
-                         bContainsQ7ItemWhite)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+        //    //        Q7Options = "gopw";
+        //    //    }
+        //    //    else if (bContainsQ7ItemGreen &&
+        //    //             bContainsQ7ItemPurple &&
+        //    //             bContainsQ7ItemWhite)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
 
-                    Q7Options = "gpw";
-                }
-                else if (bContainsQ7ItemGreen &&
-                         bContainsQ7ItemOrange &&
-                         bContainsQ7ItemWhite)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+        //    //        Q7Options = "gpw";
+        //    //    }
+        //    //    else if (bContainsQ7ItemGreen &&
+        //    //             bContainsQ7ItemOrange &&
+        //    //             bContainsQ7ItemWhite)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
 
-                    Q7Options = "gow";
-                }
-                else if (bContainsQ7ItemGreen &&
-                         bContainsQ7ItemOrange &&
-                         bContainsQ7ItemPurple)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
+        //    //        Q7Options = "gow";
+        //    //    }
+        //    //    else if (bContainsQ7ItemGreen &&
+        //    //             bContainsQ7ItemOrange &&
+        //    //             bContainsQ7ItemPurple)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
 
-                    Q7Options = "gop";
-                }
-                else if (bContainsQ7ItemOrange &&
-                         bContainsQ7ItemPurple &&
-                         bContainsQ7ItemWhite)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+        //    //        Q7Options = "gop";
+        //    //    }
+        //    //    else if (bContainsQ7ItemOrange &&
+        //    //             bContainsQ7ItemPurple &&
+        //    //             bContainsQ7ItemWhite)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
 
-                    Q7Options = "opw";
-                }
-                else if (bContainsQ7ItemGreen &&
-                         bContainsQ7ItemOrange)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+        //    //        Q7Options = "opw";
+        //    //    }
+        //    //    else if (bContainsQ7ItemGreen &&
+        //    //             bContainsQ7ItemOrange)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
 
-                    Q7Options = "go";
-                }
-                else if (bContainsQ7ItemGreen &&
-                         bContainsQ7ItemPurple)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+        //    //        Q7Options = "go";
+        //    //    }
+        //    //    else if (bContainsQ7ItemGreen &&
+        //    //             bContainsQ7ItemPurple)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
 
-                    Q7Options = "gp";
-                }
-                else if (bContainsQ7ItemGreen &&
-                         bContainsQ7ItemWhite)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+        //    //        Q7Options = "gp";
+        //    //    }
+        //    //    else if (bContainsQ7ItemGreen &&
+        //    //             bContainsQ7ItemWhite)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
 
-                    Q7Options = "gw";
-                }
-                else if (bContainsQ7ItemOrange &&
-                         bContainsQ7ItemPurple)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+        //    //        Q7Options = "gw";
+        //    //    }
+        //    //    else if (bContainsQ7ItemOrange &&
+        //    //             bContainsQ7ItemPurple)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
 
-                    Q7Options = "op";
-                }
-                else if (bContainsQ7ItemOrange &&
-                         bContainsQ7ItemWhite)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+        //    //        Q7Options = "op";
+        //    //    }
+        //    //    else if (bContainsQ7ItemOrange &&
+        //    //             bContainsQ7ItemWhite)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
 
-                    Q7Options = "ow";
-                }
-                else if (bContainsQ7ItemPurple &&
-                         bContainsQ7ItemWhite)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+        //    //        Q7Options = "ow";
+        //    //    }
+        //    //    else if (bContainsQ7ItemPurple &&
+        //    //             bContainsQ7ItemWhite)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
 
-                    Q7Options = "pw";
-                }
-                else if (bContainsQ7ItemGreen)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+        //    //        Q7Options = "pw";
+        //    //    }
+        //    //    else if (bContainsQ7ItemGreen)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
 
-                    Q7Options = "g";
-                }
-                else if (bContainsQ7ItemOrange)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+        //    //        Q7Options = "g";
+        //    //    }
+        //    //    else if (bContainsQ7ItemOrange)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
 
-                    Q7Options = "o";
-                }
-                else if (bContainsQ7ItemPurple)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
+        //    //        Q7Options = "o";
+        //    //    }
+        //    //    else if (bContainsQ7ItemPurple)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
 
-                    Q7Options = "p";
-                }
-                else if (bContainsQ7ItemWhite)
-                {
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a white nug";
+        //    //        Q7Options = "p";
+        //    //    }
+        //    //    else if (bContainsQ7ItemWhite)
+        //    //    {
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+        //    //        npc_pookieB1.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a white nug";
 
-                    Q7Options = "w";
-                }
-            }
-            else
-            {
-                // Activate DH (no OH)
-                npc_pookieB1.transform.GetChild(0).gameObject.SetActive(true);
-                npc_pookieB1.transform.GetChild(1).gameObject.SetActive(false);
-            }
-        }
-        
+        //    //        Q7Options = "w";
+        //    //    }
+        //    //}
+        //    //else
+        //    //{
+        //    //    // Activate DH (no OH)
+        //    //    npc_pookieB1.transform.GetChild(0).gameObject.SetActive(true);
+        //    //    npc_pookieB1.transform.GetChild(1).gameObject.SetActive(false);
+        //    //}
+        //}
+
         // Quest 8 -- Item Check & Options for PookieBear2
-        if (quest8.GetComponent<QuestObject>().bHasStarted &&
-            inv.bUpdateItemCount &&
-            !bAvoidUpdateQ8)
-        {
-            // Reset the counters
-            Q8GreenCounter = 0;
-            Q8OrangeCounter = 0;
-            Q8PurpleCounter = 0;
-            Q8WhiteCounter = 0;
-
-            // Check each item
-            for (int i = 0; i < inv.items.Count; i++)
-            {
-                string item = inv.items[i].ToString();
-
-                // Green nug check
-                if (item == "Cannabis.Bud.SmoochyWoochyPoochy (Item)" ||
-                    item == "Cannabis.Bud.NaturesCandy (Item)" ||
-                    item == "Cannabis.Bud.TheDevilsLettuce (Item)")
-                {
-                    Q8GreenCounter += 1;
-                }
-
-                // Orange nug
-                if (item == "Cannabis.Bud.BootyJuice (Item)" ||
-                    item == "Cannabis.Bud.Catnip (Item)" ||
-                    item == "Cannabis.Bud.SnoopLeone (Item)")
-                {
-                    Q8OrangeCounter += 1;
-                }
-
-                // Purple nug
-                if (item == "Cannabis.Bud.GranPapasMedicine (Item)" ||
-                    item == "Cannabis.Bud.PurpleNurple (Item)" ||
-                    item == "Cannabis.Bud.RighteousBud (Item)")
-                {
-                    Q8PurpleCounter += 1;
-                }
-
-                // White nug
-                if (item == "Cannabis.Bud.CreeperBud (Item)" ||
-                    item == "Cannabis.Bud.MastaRoshi (Item)" ||
-                    item == "Cannabis.Bud.WhiteWalker (Item)")
-                {
-                    Q8WhiteCounter += 1;
-                }
-            }
-
-            if (Q8GreenCounter > 0)
-            {
-                bContainsQ8ItemGreen = true;
-            }
-            else
-            {
-                bContainsQ8ItemGreen = false;
-            }
-
-            if (Q8OrangeCounter > 0)
-            {
-                bContainsQ8ItemOrange = true;
-            }
-            else
-            {
-                bContainsQ8ItemOrange = false;
-            }
-
-            if (Q8PurpleCounter > 0)
-            {
-                bContainsQ8ItemPurple = true;
-            }
-            else
-            {
-                bContainsQ8ItemPurple = false;
-            }
-
-            if (Q8WhiteCounter > 0)
-            {
-                bContainsQ8ItemWhite = true;
-            }
-            else
-            {
-                bContainsQ8ItemWhite = false;
-            }
-
-            // if one of them present, activate options handler on Pookie
-            if (bContainsQ8ItemGreen ||
-                bContainsQ8ItemOrange ||
-                bContainsQ8ItemPurple ||
-                bContainsQ8ItemWhite)
-            {
-                // Activate DH w/ OH
-                npc_pookieB2.transform.GetChild(0).gameObject.SetActive(false);
-                npc_pookieB2.transform.GetChild(1).gameObject.SetActive(true);
-
-                if (bContainsQ8ItemGreen &&
-                    bContainsQ8ItemOrange &&
-                    bContainsQ8ItemPurple &&
-                    bContainsQ8ItemWhite)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[4];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[3] = "Give em a white nug";
-
-                    Q8Options = "gopw";
-                }
-                else if (bContainsQ8ItemGreen &&
-                         bContainsQ8ItemPurple &&
-                         bContainsQ8ItemWhite)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
-
-                    Q8Options = "gpw";
-                }
-                else if (bContainsQ8ItemGreen &&
-                         bContainsQ8ItemOrange &&
-                         bContainsQ8ItemWhite)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
-
-                    Q8Options = "gow";
-                }
-                else if (bContainsQ8ItemGreen &&
-                         bContainsQ8ItemOrange &&
-                         bContainsQ8ItemPurple)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
-
-                    Q8Options = "gop";
-                }
-                else if (bContainsQ8ItemOrange &&
-                         bContainsQ8ItemPurple &&
-                         bContainsQ8ItemWhite)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
-
-                    Q8Options = "opw";
-                }
-                else if (bContainsQ8ItemGreen &&
-                         bContainsQ8ItemOrange)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
-
-                    Q8Options = "go";
-                }
-                else if (bContainsQ8ItemGreen &&
-                         bContainsQ8ItemPurple)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
-
-                    Q8Options = "gp";
-                }
-                else if (bContainsQ8ItemGreen &&
-                         bContainsQ8ItemWhite)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
-
-                    Q8Options = "gw";
-                }
-                else if (bContainsQ8ItemOrange &&
-                         bContainsQ8ItemPurple)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
-
-                    Q8Options = "op";
-                }
-                else if (bContainsQ8ItemOrange &&
-                         bContainsQ8ItemWhite)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
-
-                    Q8Options = "ow";
-                }
-                else if (bContainsQ8ItemPurple &&
-                         bContainsQ8ItemWhite)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
-
-                    Q8Options = "pw";
-                }
-                else if (bContainsQ8ItemGreen)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
-
-                    Q8Options = "g";
-                }
-                else if (bContainsQ8ItemOrange)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
-
-                    Q8Options = "o";
-                }
-                else if (bContainsQ8ItemPurple)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
-
-                    Q8Options = "p";
-                }
-                else if (bContainsQ8ItemWhite)
-                {
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
-                    npc_pookieB2.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a white nug";
-
-                    Q8Options = "w";
-                }
-            }
-            else
-            {
-                // Activate DH (no OH)
-                npc_pookieB2.transform.GetChild(0).gameObject.SetActive(true);
-                npc_pookieB2.transform.GetChild(1).gameObject.SetActive(false);
-            }
-        }
+        //if (quest8.GetComponent<QuestObject>().bHasStarted &&
+        //    inv.bUpdateItemCount &&
+        //    !bAvoidUpdateQ8)
+        //{
+        //    //PookieCheck(npc_pookieB2, Q8Options,
+        //    //    Q8GreenCounter, Q8OrangeCounter, Q8PurpleCounter, Q8WhiteCounter,
+        //    //    bHasQ8Green, bHasQ8Orange, bHasQ8Purple, bHasQ8White);
+        //}
 
         // Quest 7 & 8 -- Both Fed
         if (bAvoidUpdateQ7 &&
@@ -1049,7 +698,7 @@ public class Chp1 : MonoBehaviour
         }
 
         // Minigame -- Guess Who Colluded
-        if (thePlayer.GetComponent<PolygonCollider2D>().IsTouching(warpGWC.GetComponent<BoxCollider2D>()))
+        if (player.GetComponent<PolygonCollider2D>().IsTouching(warpGWC.GetComponent<BoxCollider2D>()))
         {
             // Transition animation
             warpGWC.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
@@ -1068,16 +717,67 @@ public class Chp1 : MonoBehaviour
             dMan.gameObject.SetActive(false);
 
             // Stop Dan from moving
-            thePlayer.GetComponent<Animator>().enabled = false;
+            player.GetComponent<Animator>().enabled = false;
 
             // Stop NPCs from moving
             npc_chun.GetComponent<Animator>().enabled = false;
         }
-        
-        // Final Item Count Check (allows multiple conditions to be check)
-        if (inv.bUpdateItemCount)
+    }
+
+    public void TreeHouse()
+    {
+        StartCoroutine(DelayTreeHouse());
+    }
+
+    IEnumerator DelayTreeHouse()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        questTrigger2.transform.GetChild(1).GetComponent<Transform>().localScale = new Vector3(0.2625f, 0.24937f, 1f);
+
+        // Disable door again & move Dan back (need isTrigger double-tap change?)
+        // DC 02/12/19 -- Don't move back Dan here?
+        treeHouseDoor.transform.tag = "LockedDoor";
+        treeHouseDoor.transform.localScale = Vector3.one;
+        treeHouseDoor.GetComponent<BoxCollider2D>().isTrigger = false;
+        treeHouseDoor.transform.GetChild(0).GetComponent<BoxCollider2D>().isTrigger = false;
+        treeHouseDoor.transform.GetChild(0).GetComponent<BoxCollider2D>().isTrigger = true;
+    }
+
+    public void EndRace()
+    {
+        npc_canaan.transform.GetChild(0).gameObject.SetActive(false);
+        npc_canaan.transform.GetChild(1).gameObject.SetActive(true);
+
+        raceTimer = Mathf.Round(raceTimer);
+
+        if (raceTimer == 0)
         {
-            inv.bUpdateItemCount = false;
+            npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
+                    "Feel free to keep practicing. It's always good to practice."
+                };
+        }
+        else if (raceTimer <= 10)
+        {
+            npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
+                    "Holy goat nipples Batman.. How the.. Did you cheat?",
+                    "You set one of the best records at " + raceTimer + " seconds?!?",
+                    "Well.. Well ran. Let's see how you do tomorrow."
+                };
+        }
+        else if (raceTimer <= 30 && raceTimer > 10)
+        {
+            npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
+                    "Good race Dan! You ran that in " + raceTimer + " seconds.",
+                    "Keep practicing and improving. Maybe you'll beat my time!"
+                };
+        }
+        else
+        {
+            npc_canaan.transform.GetChild(1).GetComponent<DialogueHolder>().dialogueLines = new string[] {
+                    "Well.. You made it... You finished after " + raceTimer + " seconds.",
+                    "Keep training Dan. It's good for you!"
+                };
         }
     }
 
@@ -1085,8 +785,8 @@ public class Chp1 : MonoBehaviour
     {
         if (!quest0.GetComponent<QuestObject>().bHasCollected)
         {
-            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
-            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
+            player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
+            player.GetComponent<PlayerBrioManager>().RestorePlayer(10);
             uMan.bUpdateBrio = true;
 
             quest0.GetComponent<QuestObject>().CollectedQuest();
@@ -1097,8 +797,8 @@ public class Chp1 : MonoBehaviour
     {
         if (!quest1.GetComponent<QuestObject>().bHasCollected)
         {
-            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
-            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
+            player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
+            player.GetComponent<PlayerBrioManager>().RestorePlayer(10);
             uMan.bUpdateBrio = true;
 
             quest1.GetComponent<QuestObject>().CollectedQuest();
@@ -1109,8 +809,8 @@ public class Chp1 : MonoBehaviour
     {
         if (!quest2.GetComponent<QuestObject>().bHasCollected)
         {
-            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
-            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(5);
+            player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
+            player.GetComponent<PlayerBrioManager>().RestorePlayer(5);
             uMan.bUpdateBrio = true;
 
             quest2.GetComponent<QuestObject>().CollectedQuest();
@@ -1119,13 +819,29 @@ public class Chp1 : MonoBehaviour
 
     public void Quest3Reward()
     {
-        if (!quest3.GetComponent<QuestObject>().bHasCollected)
+        if (quest3.GetComponent<QuestObject>().bHasEnded &&
+            !quest3.GetComponent<QuestObject>().bHasCollected)
         {
-            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
-            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(5);
+            player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
+            player.GetComponent<PlayerBrioManager>().RestorePlayer(5);
             uMan.bUpdateBrio = true;
 
             quest3.GetComponent<QuestObject>().CollectedQuest();
+
+            // Remove the first bud in inv
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+                item = item.Substring(0, item.Length - 7);
+
+                if (item == "Cannabis.Bud.SmoochyWoochyPoochy")
+                {
+                    inv.Remove(inv.items[i]);
+                    return;
+                }
+            }
+
+            // TODO: disable SmoochyWoochyCheck() here, QT, DH, SM, etc.
         }
     }
 
@@ -1133,8 +849,8 @@ public class Chp1 : MonoBehaviour
     {
         if (!quest4.GetComponent<QuestObject>().bHasCollected)
         {
-            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(15);
-            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(20);
+            player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(15);
+            player.GetComponent<PlayerBrioManager>().RestorePlayer(20);
             uMan.bUpdateBrio = true;
             
             quest4.GetComponent<QuestObject>().CollectedQuest();
@@ -1145,8 +861,8 @@ public class Chp1 : MonoBehaviour
     {
         if (!quest5.GetComponent<QuestObject>().bHasCollected)
         {
-            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
-            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(10);
+            player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
+            player.GetComponent<PlayerBrioManager>().RestorePlayer(10);
             uMan.bUpdateBrio = true;
             
             quest5.GetComponent<QuestObject>().CollectedQuest();
@@ -1158,8 +874,8 @@ public class Chp1 : MonoBehaviour
         if (!quest7.GetComponent<QuestObject>().bHasCollected &&
             !quest8.GetComponent<QuestObject>().bHasCollected)
         {
-            thePlayer.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
-            thePlayer.GetComponent<PlayerBrioManager>().RestorePlayer(25);
+            player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
+            player.GetComponent<PlayerBrioManager>().RestorePlayer(25);
             uMan.bUpdateBrio = true;
             
             dMan.portPic = quest7.GetComponent<QuestObject>().portPic;
@@ -1304,6 +1020,42 @@ public class Chp1 : MonoBehaviour
             dMan.ResetDialogue();
             Quest8Dialogue1Opt();
         }
+
+
+        // Quest 9 - Dialogue 1 - Option 1
+        if (npc_heartha.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+            npc_heartha.transform.GetChild(0).gameObject.activeSelf &&
+            moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
+        {
+            oMan.ResetOptions();
+            Quest9Dialogue1Opt1();
+        }
+        // Quest 9 - Dialogue 1 - Option 2
+        else if (npc_heartha.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+                 npc_heartha.transform.GetChild(0).gameObject.activeSelf &&
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
+        {
+            oMan.ResetOptions();
+            Quest9Dialogue1Opt2();
+        }
+
+
+        // Quest 10 - Dialogue 1 - Option 1
+        if (npc_brackey.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+            npc_brackey.transform.GetChild(0).gameObject.activeSelf &&
+            moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
+        {
+            oMan.ResetOptions();
+            Quest10Dialogue1Opt1();
+        }
+        // Quest 10 - Dialogue 1 - Option 2
+        else if (npc_brackey.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+                 npc_brackey.transform.GetChild(0).gameObject.activeSelf &&
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
+        {
+            oMan.ResetOptions();
+            Quest10Dialogue1Opt2();
+        }
     }
 
     public void Quest0Dialogue1Opt1()
@@ -1354,10 +1106,10 @@ public class Chp1 : MonoBehaviour
         // Avoid talking to Al-khidr
         npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
 
-        thePlayer.transform.position = new Vector3(
-            thePlayer.transform.position.x + 0.001f,
-            thePlayer.transform.position.y + 0.001f,
-            thePlayer.transform.position.z
+        player.transform.position = new Vector3(
+            player.transform.position.x + 0.001f,
+            player.transform.position.y + 0.001f,
+            player.transform.position.z
         );
     }
 
@@ -1372,14 +1124,34 @@ public class Chp1 : MonoBehaviour
         dMan.ShowDialogue();
     }
 
+    public void PreHideAndSeek()
+    {
+        // Avoid talking to Al-khidr
+        npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = true;
+
+        // Stops the player's movement
+        player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+
+        // Fade out
+        screenFader.GetComponent<Animator>().Play("FadeOut");
+
+        // Turn off GUI
+        touches.transform.localScale = Vector3.zero;
+
+        StartCoroutine(HideAndSeek());
+    }
+
     IEnumerator HideAndSeek()
     {
-        bAvoidUpdateQ4counting = true;
+        // Turn off Quest Trigger ActionOnClose
+        npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().bActionOnClose = false;
 
         yield return new WaitForSeconds(2);
 
-        // Move Al-khidr
+        // Move Al-khidr & turn on the HideAndSeekKid script
         npc_al_khidr.transform.localPosition = new Vector2(7.429f, -7.797f);
+        npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<Chp1HideAndSeekKid>().enabled = true;
 
         // "Turn on" Kids 5-9
         npc_atandwa.transform.localScale = Vector3.one;
@@ -1406,18 +1178,76 @@ public class Chp1 : MonoBehaviour
                 "41..",
                 "42... Game on!"
             };
-        dMan.portPic = thePlayer.GetComponent<PlayerBrioManager>().portPic;
+        dMan.portPic = player.GetComponent<PlayerBrioManager>().portPic;
         dMan.currentLine = 0;
         dText.text = dMan.dialogueLines[dMan.currentLine];
         dMan.ShowDialogue();
-
+        scriptMan.ActionOnClose("HidNowSeeking");
+        
         // Turn on GUI if present
         if (uMan.bControlsActive)
-        {
             touches.transform.localScale = Vector3.one;
-        }
+    }
 
-        bQ4Seeking = true;
+    public void HidNowSeeking()
+    {
+        // Fade in
+        screenFader.GetComponent<Animator>().SetBool("FadeIn", true);
+
+        // Resume the player's movement
+        player.GetComponent<PlayerMovement>().bStopPlayerMovement = false;
+    }
+
+    public void HideAndSeekFindingKid(string _name)
+    {
+        if (_name == "Al-khidr")
+        {
+            bFoundQ4Kid1 = true;
+            Q4LastKidFound = "Al-khidr";
+            Q4KidCounter += 1;
+
+            HideAndSeekFoundKid();
+        }
+        else if (_name == "Atandwa")
+        {
+            bFoundQ4Kid2 = true;
+            Q4LastKidFound = "Atandwa";
+            Q4KidCounter += 1;
+
+            HideAndSeekFoundKid();
+        }
+        else if (_name == "Eliz")
+        {
+            bFoundQ4Kid3 = true;
+            Q4LastKidFound = "Eliz";
+            Q4KidCounter += 1;
+
+            HideAndSeekFoundKid();
+        }
+        else if (_name == "Thabo")
+        {
+            bFoundQ4Kid4 = true;
+            Q4LastKidFound = "Thabo";
+            Q4KidCounter += 1;
+
+            HideAndSeekFoundKid();
+        }
+        else if (_name == "Zola")
+        {
+            bFoundQ4Kid5 = true;
+            Q4LastKidFound = "Zola";
+            Q4KidCounter += 1;
+
+            HideAndSeekFoundKid();
+        }
+        else if (_name == "Marija")
+        {
+            bFoundQ4Kid6 = true;
+            Q4LastKidFound = "Marija";
+            Q4KidCounter += 1;
+
+            HideAndSeekFoundKid();
+        }
     }
 
     public void HideAndSeekFoundKid()
@@ -1442,7 +1272,7 @@ public class Chp1 : MonoBehaviour
             dMan.dialogueLines = new string[] {
                 tempCool + ".. That's " + Q4KidCounter + " of 6."
             };
-            dMan.portPic = thePlayer.GetComponent<PlayerBrioManager>().portPic;
+            dMan.portPic = player.GetComponent<PlayerBrioManager>().portPic;
             dMan.currentLine = 0;
             dText.text = dMan.dialogueLines[dMan.currentLine];
             dMan.ShowDialogue();
@@ -1453,17 +1283,34 @@ public class Chp1 : MonoBehaviour
             dMan.dialogueLines = new string[] {
                 "Shibby.. Found all of you."
             };
-            dMan.portPic = thePlayer.GetComponent<PlayerBrioManager>().portPic;
+            dMan.portPic = player.GetComponent<PlayerBrioManager>().portPic;
             dMan.currentLine = 0;
             dText.text = dMan.dialogueLines[dMan.currentLine];
             dMan.ShowDialogue();
+            scriptMan.ActionOnClose("PreHideAndSeekFinished");
 
             // Last kid talked to, dh.hasEntered = false
             CheckAndDisableLastKidFound();
 
-            bQ4Seeking = false;
-            bFoundQ4All = true;
+            //bQ4Seeking = false;
+            //bFoundQ4All = true;
+
+            
         }
+    }
+
+    public void PreHideAndSeekFinished()
+    {
+        StartCoroutine(HideAndSeekFinished());
+
+        // Stops the player's movement
+        player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+
+        // Fade out
+        screenFader.GetComponent<Animator>().Play("FadeOut");
+
+        // Turn off GUI
+        touches.transform.localScale = Vector3.zero;
     }
 
     IEnumerator HideAndSeekFinished()
@@ -1476,7 +1323,7 @@ public class Chp1 : MonoBehaviour
         // Move Al-khidr, Al-khidr's DH2, Dan & Camera
         npc_al_khidr.transform.localPosition = new Vector2(4.07f, -9.43f);
         npc_al_khidr.transform.GetChild(2).gameObject.transform.localPosition = new Vector2(0f, 0f);
-        thePlayer.transform.localPosition = new Vector2(-19.157f, -1.674f);
+        player.transform.localPosition = new Vector2(-19.157f, -1.674f);
         mainCamera.transform.localPosition = new Vector2(-19.157f, -1.674f);
 
         // Activate Al-khidr DH2 (order matters?)
@@ -1498,8 +1345,8 @@ public class Chp1 : MonoBehaviour
             touches.transform.localScale = Vector3.one;
         }
 
-        bAvoidUpdateQ4counting = true;
-        bAvoidUpdateQ4seeking = true;
+        //bAvoidUpdateQ4counting = true;
+        //bAvoidUpdateQ4seeking = true;
 
         yield return new WaitForSeconds(1);
 
@@ -1536,43 +1383,58 @@ public class Chp1 : MonoBehaviour
     
     public void Quest4Reset()
     {
-        // Move Al-khidr back to his spot
-        npc_al_khidr.transform.localPosition = new Vector2(4.07f, -9.43f);
+        if (!quest4.GetComponent<QuestObject>().bHasCollected)
+        {
+            // Turn on Quest Trigger ActionOnClose
+            npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().bActionOnClose = true;
 
-        // Reset quest checks
-        bFoundQ4Kid1 = false;
-        bFoundQ4Kid2 = false;
-        bFoundQ4Kid3 = false;
-        bFoundQ4Kid4 = false;
-        bFoundQ4Kid5 = false;
-        bFoundQ4Kid6 = false;
+            // Move Al-khidr back to his spot & disable HideAndSeekKid script
+            npc_al_khidr.transform.localPosition = new Vector2(4.07f, -9.43f);
+            npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<Chp1HideAndSeekKid>().enabled = false;
 
-        // Reset Al-khidr dialogues
-        npc_al_khidr.transform.GetChild(1).gameObject.SetActive(false);
-        npc_al_khidr.transform.GetChild(0).gameObject.SetActive(true);
+            // Renable all of the other kids' HideAndSeekKid scripts
+            npc_atandwa.transform.GetChild(0).gameObject.GetComponent<Chp1HideAndSeekKid>().enabled = true;
+            npc_eliz.transform.GetChild(0).gameObject.GetComponent<Chp1HideAndSeekKid>().enabled = true;
+            npc_marija.transform.GetChild(0).gameObject.GetComponent<Chp1HideAndSeekKid>().enabled = true;
+            npc_thabo.transform.GetChild(0).gameObject.GetComponent<Chp1HideAndSeekKid>().enabled = true;
+            npc_zola.transform.GetChild(0).gameObject.GetComponent<Chp1HideAndSeekKid>().enabled = true;
 
-        // Reset Dialogue Holders
-        npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
-        npc_atandwa.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
-        npc_eliz.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
-        npc_thabo.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
-        npc_zola.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
-        npc_marija.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+            // Reset quest checks
+            bFoundQ4Kid1 = false;
+            bFoundQ4Kid2 = false;
+            bFoundQ4Kid3 = false;
+            bFoundQ4Kid4 = false;
+            bFoundQ4Kid5 = false;
+            bFoundQ4Kid6 = false;
 
-        // Reset everything else
-        quest4.GetComponent<QuestObject>().bHasStarted = false;
-        bAvoidUpdateQ4counting = false;
-        bQ4Seeking = false;
-        bAvoidUpdateQ4seeking = false;
-        Q4KidCounter = 0;
-        oMan.ResetOptions();
+            // Reset Al-khidr dialogues
+            npc_al_khidr.transform.GetChild(1).gameObject.SetActive(false);
+            npc_al_khidr.transform.GetChild(0).gameObject.SetActive(true);
+            npc_al_khidr.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
 
-        // "Turn off" Kids 5-9
-        npc_atandwa.transform.localScale = Vector3.zero;
-        npc_eliz.transform.localScale = Vector3.zero;
-        npc_thabo.transform.localScale = Vector3.zero;
-        npc_zola.transform.localScale = Vector3.zero;
-        npc_marija.transform.localScale = Vector3.zero;
+            // Reset Dialogue Holders
+            npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+            npc_atandwa.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+            npc_eliz.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+            npc_thabo.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+            npc_zola.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+            npc_marija.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasExited = false;
+
+            // Reset everything else
+            quest4.GetComponent<QuestObject>().bHasStarted = false;
+            bAvoidUpdateQ4counting = false;
+            bQ4Seeking = false;
+            bAvoidUpdateQ4seeking = false;
+            Q4KidCounter = 0;
+            oMan.ResetOptions();
+
+            // "Turn off" Kids 5-9
+            npc_atandwa.transform.localScale = Vector3.zero;
+            npc_eliz.transform.localScale = Vector3.zero;
+            npc_thabo.transform.localScale = Vector3.zero;
+            npc_zola.transform.localScale = Vector3.zero;
+            npc_marija.transform.localScale = Vector3.zero;
+        }
     }
 
     public void Quest5Dialogue2()
@@ -1609,14 +1471,15 @@ public class Chp1 : MonoBehaviour
         for (int i = 0; i < inv.items.Count; i++)
         {
             string item = inv.items[i].ToString();
+            item = item.Substring(0, item.Length - 7);
 
-            if (item == "VR.Goggles (Item)")
+            if (item == "VR.Goggles")
             {
-                bContainsQ6Item = true;
+                bHasGoggles = true;
             }
         }
         
-        if (bContainsQ6Item)
+        if (bHasGoggles)
         {
             warpMinesweeper.GetComponent<BoxCollider2D>().enabled = true;
             warpMinesweeper.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
@@ -1681,15 +1544,17 @@ public class Chp1 : MonoBehaviour
             for (int i = 0; i < inv.items.Count; i++)
             {
                 string item = inv.items[i].ToString();
+                item = item.Substring(0, item.Length - 7);
 
-                if ((item == "Cannabis.Bud.SmoochyWoochyPoochy (Item)" ||
-                     item == "Cannabis.Bud.NaturesCandy (Item)" ||
-                     item == "Cannabis.Bud.TheDevilsLettuce (Item)") && 
+                if ((item == "Cannabis.Bud.SmoochyWoochyPoochy" ||
+                     item == "Cannabis.Bud.NaturesCandy" ||
+                     item == "Cannabis.Bud.TheDevilsLettuce") && 
                     bTempCheck)
 
                 {
                     inv.Remove(inv.items[i]);
-                    inv.bUpdateItemCount = true;
+                    //inv.bUpdateItemCount = true;
+                    GoggleCheck();
                     bTempCheck = false;
                 }
             }
@@ -1701,15 +1566,17 @@ public class Chp1 : MonoBehaviour
             for (int i = 0; i < inv.items.Count; i++)
             {
                 string item = inv.items[i].ToString();
+                item = item.Substring(0, item.Length - 7);
 
-                if ((item == "Cannabis.Bud.BootyJuice (Item)" ||
-                     item == "Cannabis.Bud.Catnip (Item)" ||
-                     item == "Cannabis.Bud.SnoopLeone (Item)") &&
+                if ((item == "Cannabis.Bud.BootyJuice" ||
+                     item == "Cannabis.Bud.Catnip" ||
+                     item == "Cannabis.Bud.SnoopLeone") &&
                     bTempCheck)
 
                 {
                     inv.Remove(inv.items[i]);
-                    inv.bUpdateItemCount = true;
+                    //inv.bUpdateItemCount = true;
+                    GoggleCheck();
                     bTempCheck = false;
                 }
             }
@@ -1721,15 +1588,17 @@ public class Chp1 : MonoBehaviour
             for (int i = 0; i < inv.items.Count; i++)
             {
                 string item = inv.items[i].ToString();
+                item = item.Substring(0, item.Length - 7);
 
-                if ((item == "Cannabis.Bud.GranPapasMedicine (Item)" ||
-                     item == "Cannabis.Bud.PurpleNurple (Item)" ||
-                     item == "Cannabis.Bud.RighteousBud (Item)") &&
+                if ((item == "Cannabis.Bud.GranPapasMedicine" ||
+                     item == "Cannabis.Bud.PurpleNurple" ||
+                     item == "Cannabis.Bud.RighteousBud") &&
                     bTempCheck)
 
                 {
                     inv.Remove(inv.items[i]);
-                    inv.bUpdateItemCount = true;
+                    //inv.bUpdateItemCount = true;
+                    GoggleCheck();
                     bTempCheck = false;
                 }
             }
@@ -1741,22 +1610,24 @@ public class Chp1 : MonoBehaviour
             for (int i = 0; i < inv.items.Count; i++)
             {
                 string item = inv.items[i].ToString();
+                item = item.Substring(0, item.Length - 7);
 
-                if ((item == "Cannabis.Bud.CreeperBud (Item)" ||
-                     item == "Cannabis.Bud.MastaRoshi (Item)" ||
-                     item == "Cannabis.Bud.WhiteWalker (Item)") &&
+                if ((item == "Cannabis.Bud.CreeperBud" ||
+                     item == "Cannabis.Bud.MastaRoshi" ||
+                     item == "Cannabis.Bud.WhiteWalker") &&
                     bTempCheck)
 
                 {
                     inv.Remove(inv.items[i]);
-                    inv.bUpdateItemCount = true;
+                    //inv.bUpdateItemCount = true;
+                    GoggleCheck();
                     bTempCheck = false;
                 }
             }
         }
 
         // Animate Pookie & stop moving
-        if (thePlayer.transform.position.x >= npc_pookieB1.transform.position.x)
+        if (player.transform.position.x >= npc_pookieB1.transform.position.x)
         {
             npc_pookieB1.GetComponent<Animator>().Play("Eat Right");
         }
@@ -1816,7 +1687,8 @@ public class Chp1 : MonoBehaviour
 
                 {
                     inv.Remove(inv.items[i]);
-                    inv.bUpdateItemCount = true;
+                    //inv.bUpdateItemCount = true;
+                    GoggleCheck();
                     bTempCheck = false;
                 }
             }
@@ -1836,7 +1708,8 @@ public class Chp1 : MonoBehaviour
 
                 {
                     inv.Remove(inv.items[i]);
-                    inv.bUpdateItemCount = true;
+                    //inv.bUpdateItemCount = true;
+                    GoggleCheck();
                     bTempCheck = false;
                 }
             }
@@ -1856,7 +1729,8 @@ public class Chp1 : MonoBehaviour
 
                 {
                     inv.Remove(inv.items[i]);
-                    inv.bUpdateItemCount = true;
+                    //inv.bUpdateItemCount = true;
+                    GoggleCheck();
                     bTempCheck = false;
                 }
             }
@@ -1876,14 +1750,14 @@ public class Chp1 : MonoBehaviour
 
                 {
                     inv.Remove(inv.items[i]);
-                    inv.bUpdateItemCount = true;
+                    //inv.bUpdateItemCount = true;
                     bTempCheck = false;
                 }
             }
         }
 
         // Animate Pookie & stop moving
-        if (thePlayer.transform.position.x >= npc_pookieB2.transform.position.x)
+        if (player.transform.position.x >= npc_pookieB2.transform.position.x)
         {
             npc_pookieB2.GetComponent<Animator>().Play("Eat Right");
         }
@@ -1917,6 +1791,132 @@ public class Chp1 : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         npc_pookieB2.GetComponent<Animator>().Play("Sit Happy");
+    }
+
+    public void Quest9Dialogue1Opt1()
+    {
+        // yes play a game
+
+        for (int i = 0; i < inv.items.Count; i++)
+        {
+            string item = inv.items[i].ToString();
+
+            if (item == "VR.Goggles (Item)")
+            {
+                bContainsQ9Item = true;
+            }
+        }
+
+        if (bContainsQ9Item)
+        {
+            warpPookieVision.GetComponent<BoxCollider2D>().enabled = true;
+            warpPookieVision.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
+
+            // Save Transfer Values 
+            save.SaveBrioTransfer();
+            save.SaveInventoryTransfer();
+            save.SavePositionTransfer();
+            PlayerPrefs.SetInt("Transferring", 1);
+            PlayerPrefs.SetString("TransferScene", warpPookieVision.GetComponent<SceneTransitioner>().BetaLoad);
+
+            // Save Quests
+            SaveQuests();
+
+            // Stop the player from bringing up the dialog again 
+            dMan.gameObject.transform.localScale = Vector3.zero;
+
+            // Stop Dan from moving
+            dMan.gameObject.SetActive(false);
+
+            // Stop NPCs from moving
+            //npc_heartha.GetComponent<NPCMovement>().moveSpeed = 0;
+            //npc_heartha.GetComponent<Animator>().enabled = false;
+        }
+        else
+        {
+            // No play a game
+            dMan.dialogueLines = new string[] {
+                "Oh, well.. You'll need Particle Visors to play.",
+                "Come back when you have some."
+            };
+            dMan.currentLine = 0;
+            dText.text = dMan.dialogueLines[dMan.currentLine];
+            dMan.ShowDialogue();
+        }
+    }
+
+    public void Quest9Dialogue1Opt2()
+    {
+        // No play a game
+        dMan.dialogueLines = new string[] {
+                "Sure.. Perhaps later..."
+            };
+        dMan.currentLine = 0;
+        dText.text = dMan.dialogueLines[dMan.currentLine];
+        dMan.ShowDialogue();
+    }
+
+    public void Quest10Dialogue1Opt1()
+    {
+        // yes play a game
+
+        for (int i = 0; i < inv.items.Count; i++)
+        {
+            string item = inv.items[i].ToString();
+
+            if (item == "VR.Goggles (Item)")
+            {
+                bContainsQ10Item = true;
+            }
+        }
+
+        if (bContainsQ10Item)
+        {
+            warpTowerDeez.GetComponent<BoxCollider2D>().enabled = true;
+            warpTowerDeez.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
+
+            // Save Transfer Values 
+            save.SaveBrioTransfer();
+            save.SaveInventoryTransfer();
+            save.SavePositionTransfer();
+            PlayerPrefs.SetInt("Transferring", 1);
+            PlayerPrefs.SetString("TransferScene", warpTowerDeez.GetComponent<SceneTransitioner>().BetaLoad);
+
+            // Save Quests
+            SaveQuests();
+
+            // Stop the player from bringing up the dialog again 
+            dMan.gameObject.transform.localScale = Vector3.zero;
+
+            // Stop Dan from moving
+            dMan.gameObject.SetActive(false);
+
+            // Stop NPCs from moving
+            //npc_brackey.GetComponent<NPCMovement>().moveSpeed = 0;
+            //npc_brackey.GetComponent<Animator>().enabled = false;
+        }
+        else
+        {
+            // No play a game
+            dMan.dialogueLines = new string[] {
+                "Oh, well.. You'll need Particle Visors to play.",
+                "Come back when you have some."
+            };
+            dMan.currentLine = 0;
+            dText.text = dMan.dialogueLines[dMan.currentLine];
+            dMan.ShowDialogue();
+        }
+    }
+
+    public void Quest10Dialogue1Opt2()
+    {
+        // No play a game
+        dMan.dialogueLines = new string[] {
+                "Sure.. Perhaps later..."
+            };
+        dMan.currentLine = 0;
+        dText.text = dMan.dialogueLines[dMan.currentLine];
+        dMan.ShowDialogue();
     }
 
     public void Chp1QuestDialogueChecker()
@@ -1972,6 +1972,344 @@ public class Chp1 : MonoBehaviour
 
             // DC 02/13/19 -- "Bug" that allows pookie bears to get back up & look "normal" after quest complete, saved & quit, and then talked to again
         }
+    }
+
+    public void GoggleCheck()
+    {
+        for (int i = 0; i < inv.items.Count; i++)
+        {
+            string item = inv.items[i].ToString();
+            item = item.Substring(0, item.Length - 7);
+
+            if (item == "VR.Goggles")
+                bHasGoggles = true;
+        }
+
+        if (bHasGoggles)
+        {
+            npc_ashera.transform.GetChild(0).gameObject.SetActive(true);
+            npc_ashera.transform.GetChild(1).gameObject.SetActive(false);
+
+            item_homeVRGoggles.transform.localScale = Vector3.zero;
+        }
+        else
+        {
+            npc_ashera.transform.GetChild(0).gameObject.SetActive(false);
+            npc_ashera.transform.GetChild(1).gameObject.SetActive(true);
+
+            item_homeVRGoggles.transform.localScale = Vector3.one;
+        }
+
+        // Reset
+        bHasGoggles = false;
+    }
+
+    public void SmoochyWoochyCheck()
+    {
+        if (!quest3.GetComponent<QuestObject>().bHasCollected)
+        {
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+                item = item.Substring(0, item.Length - 7);
+
+                if (item == "Cannabis.Bud.SmoochyWoochyPoochy")
+                {
+                    bHasQ3SmoochWoochy = true;
+                }
+            }
+
+            if (bHasQ3SmoochWoochy &&
+                !dMan.bDialogueActive &&
+                quest3.GetComponent<QuestObject>().bHasStarted)
+            {
+                npc_enki.transform.GetChild(0).gameObject.SetActive(false);
+                npc_enki.transform.GetChild(1).gameObject.SetActive(true);
+
+                npc_enki.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().bEndQuest = true;
+            }
+            else
+            {
+                npc_enki.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().bEndQuest = false;
+
+                npc_enki.transform.GetChild(0).gameObject.SetActive(true);
+                npc_enki.transform.GetChild(1).gameObject.SetActive(false);
+            }
+
+            // Reset bool check
+            bHasQ3SmoochWoochy = false;
+        }
+    }
+
+    public void PookieCheck()
+    {
+        PookieCheck(npc_pookieB1, Q7Options, "Q7",
+                Q7GreenCounter, Q7OrangeCounter, Q7PurpleCounter, Q7WhiteCounter,
+                bHasQ7Green, bHasQ7Orange, bHasQ7Purple, bHasQ7White);
+
+        PookieCheck(npc_pookieB2, Q8Options, "Q8",
+                Q8GreenCounter, Q8OrangeCounter, Q8PurpleCounter, Q8WhiteCounter,
+                bHasQ8Green, bHasQ8Orange, bHasQ8Purple, bHasQ8White);
+    }
+
+    public void PookieCheck(GameObject _pookieBear, string _qOptions, string _questNum,
+        int _greenCount, int _orangeCount, int _purpleCount, int _whiteCount,
+        bool _bHasGreen, bool _bHasOrange, bool _bHasPurple, bool _bHasWhite)
+    {
+        // Reset the counters
+        _greenCount = 0;
+        _orangeCount = 0;
+        _purpleCount = 0;
+        _whiteCount = 0;
+
+        // Check each item
+        for (int i = 0; i < inv.items.Count; i++)
+        {
+            string item = inv.items[i].ToString();
+            item = item.Substring(0, item.Length - 7);
+
+            // Green nug check
+            if (item == "Cannabis.Bud.SmoochyWoochyPoochy" ||
+                item == "Cannabis.Bud.NaturesCandy" ||
+                item == "Cannabis.Bud.TheDevilsLettuce")
+            {
+                _greenCount += 1;
+            }
+
+            // Orange nug
+            if (item == "Cannabis.Bud.BootyJuice" ||
+                item == "Cannabis.Bud.Catnip" ||
+                item == "Cannabis.Bud.SnoopLeone")
+            {
+                _orangeCount += 1;
+            }
+
+            // Purple nug
+            if (item == "Cannabis.Bud.GranPapasMedicine" ||
+                item == "Cannabis.Bud.PurpleNurple" ||
+                item == "Cannabis.Bud.RighteousBud")
+            {
+                _purpleCount += 1;
+            }
+
+            // White nug
+            if (item == "Cannabis.Bud.CreeperBud" ||
+                item == "Cannabis.Bud.MastaRoshi" ||
+                item == "Cannabis.Bud.WhiteWalker")
+            {
+                _whiteCount += 1;
+            }
+        }
+
+        if (_greenCount > 0)
+            _bHasGreen = true;
+        else
+            _bHasGreen = false;
+
+        if (_orangeCount > 0)
+            _bHasOrange = true;
+        else
+            _bHasOrange = false;
+
+        if (_purpleCount > 0)
+            _bHasPurple = true;
+        else
+            _bHasPurple = false;
+
+        if (_whiteCount > 0)
+            _bHasWhite = true;
+        else
+            _bHasWhite = false;
+
+        // if one of them present, activate options handler on Pookie
+        if (_bHasGreen ||
+            _bHasOrange ||
+            _bHasPurple ||
+            _bHasWhite)
+        {
+            // Activate DH w/ OH
+            _pookieBear.transform.GetChild(0).gameObject.SetActive(false);
+            _pookieBear.transform.GetChild(1).gameObject.SetActive(true);
+
+            if (_bHasGreen &&
+                _bHasOrange &&
+                _bHasPurple &&
+                _bHasWhite)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[4];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[3] = "Give em a white nug";
+
+                _qOptions = "gopw";
+            }
+            else if (_bHasGreen &&
+                     _bHasPurple &&
+                     _bHasWhite)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+
+                _qOptions = "gpw";
+            }
+            else if (_bHasGreen &&
+                     _bHasOrange &&
+                     _bHasWhite)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+
+                _qOptions = "gow";
+            }
+            else if (_bHasGreen &&
+                     _bHasOrange &&
+                     _bHasPurple)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a purple nug";
+
+                _qOptions = "gop";
+            }
+            else if (_bHasOrange &&
+                     _bHasPurple &&
+                     _bHasWhite)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[3];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[2] = "Give em a white nug";
+
+                _qOptions = "opw";
+            }
+            else if (_bHasGreen &&
+                     _bHasOrange)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em an orange nug";
+
+                _qOptions = "go";
+            }
+            else if (_bHasGreen &&
+                     _bHasPurple)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+
+                _qOptions = "gp";
+            }
+            else if (_bHasGreen &&
+                     _bHasWhite)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+
+                _qOptions = "gw";
+            }
+            else if (_bHasOrange &&
+                     _bHasPurple)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a purple nug";
+
+                _qOptions = "op";
+            }
+            else if (_bHasOrange &&
+                     _bHasWhite)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+
+                _qOptions = "ow";
+            }
+            else if (_bHasPurple &&
+                     _bHasWhite)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[2];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[1] = "Give em a white nug";
+
+                _qOptions = "pw";
+            }
+            else if (_bHasGreen)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a green nug";
+
+                _qOptions = "g";
+            }
+            else if (_bHasOrange)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em an orange nug";
+
+                _qOptions = "o";
+            }
+            else if (_bHasPurple)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a purple nug";
+
+                _qOptions = "p";
+            }
+            else if (_bHasWhite)
+            {
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options = new string[1];
+                _pookieBear.transform.GetChild(1).gameObject.GetComponent<OptionsHolder>().options[0] = "Give em a white nug";
+
+                _qOptions = "w";
+            }
+        }
+        else
+        {
+            // Activate DH (no OH)
+            _pookieBear.transform.GetChild(0).gameObject.SetActive(true);
+            _pookieBear.transform.GetChild(1).gameObject.SetActive(false);
+        }
+
+        // Set QXOptions
+        if (_questNum == "Q7")
+            Q7Options = _qOptions;
+        if (_questNum == "Q8")
+            Q8Options = _qOptions;
+
+    }
+
+
+    IEnumerator LoadInventory()
+    {
+        yield return new WaitForSeconds(0.333f);
+
+        // From Chp0
+        if (PlayerPrefs.GetString("Chapter") != "Chp1" ||
+            PlayerPrefs.GetInt("Transferring") == 1)
+        {
+            inv.LoadInventory("transfer");
+
+            uMan.CheckIfMobile();
+        }
+        // From saved 
+        else
+        {
+            inv.LoadInventory("saved");
+        }
+
+        // Reset Transfer
+        PlayerPrefs.SetInt("Transferring", 0);
+
+        // Clear Transition data
+        save.DeleteTransPrefs();
     }
 
     public void LoadQuests()

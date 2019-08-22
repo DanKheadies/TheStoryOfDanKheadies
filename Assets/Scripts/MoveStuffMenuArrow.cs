@@ -91,53 +91,6 @@ public class MoveStuffMenuArrow : MonoBehaviour
     void Start()
     {
         // Initializers
-        //itemMenu = GameObject.Find("ItemMenu").transform;
-        //joystick = FindObjectOfType<Joystick>();
-        //stuffMenu = GameObject.Find("StuffMenu").transform;
-        //touches = FindObjectOfType<TouchControls>();
-
-        //item1 = GameObject.Find("InventorySlot").transform.GetChild(0).GetComponent<Button>();
-        //item2 = GameObject.Find("InventorySlot (1)").transform.GetChild(0).GetComponent<Button>();
-        //item3 = GameObject.Find("InventorySlot (2)").transform.GetChild(0).GetComponent<Button>();
-        //item4 = GameObject.Find("InventorySlot (3)").transform.GetChild(0).GetComponent<Button>();
-        //item5 = GameObject.Find("InventorySlot (4)").transform.GetChild(0).GetComponent<Button>();
-        //item6 = GameObject.Find("InventorySlot (5)").transform.GetChild(0).GetComponent<Button>();
-        //item7 = GameObject.Find("InventorySlot (6)").transform.GetChild(0).GetComponent<Button>();
-        //item8 = GameObject.Find("InventorySlot (7)").transform.GetChild(0).GetComponent<Button>();
-        //item9 = GameObject.Find("InventorySlot (8)").transform.GetChild(0).GetComponent<Button>();
-        //item10 = GameObject.Find("InventorySlot (9)").transform.GetChild(0).GetComponent<Button>();
-        //item11 = GameObject.Find("InventorySlot (10)").transform.GetChild(0).GetComponent<Button>();
-        //item12 = GameObject.Find("InventorySlot (11)").transform.GetChild(0).GetComponent<Button>();
-        //item13 = GameObject.Find("InventorySlot (12)").transform.GetChild(0).GetComponent<Button>();
-        //item14 = GameObject.Find("InventorySlot (13)").transform.GetChild(0).GetComponent<Button>();
-        //item15 = GameObject.Find("InventorySlot (14)").transform.GetChild(0).GetComponent<Button>();
-        //item16 = GameObject.Find("InventorySlot (15)").transform.GetChild(0).GetComponent<Button>();
-        //item17 = GameObject.Find("InventorySlot (16)").transform.GetChild(0).GetComponent<Button>();
-        //item18 = GameObject.Find("InventorySlot (17)").transform.GetChild(0).GetComponent<Button>();
-        //item19 = GameObject.Find("InventorySlot (18)").transform.GetChild(0).GetComponent<Button>();
-        //item20 = GameObject.Find("InventorySlot (19)").transform.GetChild(0).GetComponent<Button>();
-
-        //itemSelector1 = GameObject.Find("ItemSelector1");
-        //itemSelector2 = GameObject.Find("ItemSelector2");
-        //itemSelector3 = GameObject.Find("ItemSelector3");
-        //itemSelector4 = GameObject.Find("ItemSelector4");
-        //itemSelector5 = GameObject.Find("ItemSelector5");
-        //itemSelector6 = GameObject.Find("ItemSelector6");
-        //itemSelector7 = GameObject.Find("ItemSelector7");
-        //itemSelector8 = GameObject.Find("ItemSelector8");
-        //itemSelector9 = GameObject.Find("ItemSelector9");
-        //itemSelector10 = GameObject.Find("ItemSelector10");
-        //itemSelector11 = GameObject.Find("ItemSelector11");
-        //itemSelector12 = GameObject.Find("ItemSelector12");
-        //itemSelector13 = GameObject.Find("ItemSelector13");
-        //itemSelector14 = GameObject.Find("ItemSelector14");
-        //itemSelector15 = GameObject.Find("ItemSelector15");
-        //itemSelector16 = GameObject.Find("ItemSelector16");
-        //itemSelector17 = GameObject.Find("ItemSelector17");
-        //itemSelector18 = GameObject.Find("ItemSelector18");
-        //itemSelector19 = GameObject.Find("ItemSelector19");
-        //itemSelector20 = GameObject.Find("ItemSelector20");
-
         currentPosition = SelectorPosition.item1;
     }
     

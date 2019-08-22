@@ -2,7 +2,7 @@
 // Authors: Asbjorn Thirslund (Brackeys)
 // Contributors: David W. Corso
 // Start: 01/18/2018
-// Last:  06/11/2019
+// Last:  08/21/2019
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +28,7 @@ public class Inventory : MonoBehaviour
     
     public Item selectedItem;
     public List<Item> items;
+    public ScriptManager scriptMan;
 
     public delegate void onItemChanged();
     public onItemChanged onItemChangedCallback;
@@ -42,8 +43,6 @@ public class Inventory : MonoBehaviour
         // Initializers
         items = new List<Item>();
         totalItems = 20;
-
-        bUpdateItemCount = false;
     }
 
     public void RerunStart()
@@ -69,8 +68,8 @@ public class Inventory : MonoBehaviour
                 onItemChangedCallback.Invoke();
             }
         }
-
-        bUpdateItemCount = true;
+        
+        scriptMan.InventoryUpdate();
 
         return true;
     }
@@ -84,8 +83,8 @@ public class Inventory : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        bUpdateItemCount = true;
+        
+        scriptMan.InventoryUpdate();
     }
 
     public void Remove(Item item)
@@ -98,8 +97,8 @@ public class Inventory : MonoBehaviour
         {
             onItemChangedCallback.Invoke();
         }
-
-        bUpdateItemCount = true;
+        
+        scriptMan.InventoryUpdate();
     }
 
     public Item GetSelectedItemById (int itemId)

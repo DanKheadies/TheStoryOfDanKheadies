@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/18/2017
-// Last:  08/17/2019
+// Last:  08/19/2019
 
 using UnityEngine;
 
@@ -40,23 +40,6 @@ public class CannabisPlant : MonoBehaviour
 
     void Start()
     {
-        // Initializers
-        //anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
-        //dMan = FindObjectOfType<DialogueManager>();
-        //greenBud = GameObject.Find("Cannabis.Bud.Green");
-        //inv = FindObjectOfType<Inventory>();
-        //orangeBud = GameObject.Find("Cannabis.Bud.Orange");
-        //pause = FindObjectOfType<PauseGame>();
-        //player = GameObject.FindGameObjectWithTag("Player");
-        //purpleBud = GameObject.Find("Cannabis.Bud.Purple");
-        //touches = FindObjectOfType<TouchControls>();
-        //uMan = FindObjectOfType<UIManager>();
-        //whiteBud = GameObject.Find("Cannabis.Bud.White");
-
-        bAcquired = false;
-        bFreeze = false;
-        bDoneAcquiring = false;
-        bHasEntered = false;
         bHasExited = true;
 
         if (Random.Range(0.0f, 1.0f) > 0.66f)
@@ -93,9 +76,9 @@ public class CannabisPlant : MonoBehaviour
             bDoneAcquiring = true;
         }
 
-        if (!dMan.bDialogueActive && 
-            !bAcquired && 
-            bDoneAcquiring)
+        if (bDoneAcquiring &&
+            !dMan.bDialogueActive && 
+            !bAcquired)
         {
             HideBud();
             bDoneAcquiring = false;

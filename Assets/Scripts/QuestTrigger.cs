@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  08/18/2019
+// Last:  08/21/2019
 
 using UnityEngine;
 
@@ -11,12 +11,16 @@ public class QuestTrigger : MonoBehaviour
     public Animator npcAnim;
     public DialogueManager dMan;
     public QuestManager qMan;
+    public ScriptManager scriptMan;
     public SpriteRenderer spRend;
 
-    public bool beginQuest;
-    public bool endQuest;
+    public bool bActionOnClose;
+    public bool bBeginQuest;
+    public bool bEndQuest;
 
     public int questNumber;
+
+    public string action;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,7 +32,7 @@ public class QuestTrigger : MonoBehaviour
             if (!qMan.questsCollected[questNumber])
             {
                 // Bool set on GameObject directs NPC interaction
-                if (beginQuest)
+                if (bBeginQuest)
                 {
                     if (spRend != null &&
                         npcAnim != null)
@@ -38,9 +42,14 @@ public class QuestTrigger : MonoBehaviour
                     
                     // Quest Text
                     qMan.quests[questNumber].BeginQuest();
+
+                    // Run any actions
+                    scriptMan.QuestAction(action);
+                    if (bActionOnClose)
+                        scriptMan.ActionOnClose(action);
                 }
 
-                if (endQuest)
+                if (bEndQuest)
                 {
                     if (spRend != null)
                     {
@@ -58,6 +67,11 @@ public class QuestTrigger : MonoBehaviour
 
                     // Quest Text
                     qMan.quests[questNumber].EndQuest();
+
+                    // Run any actions
+                    scriptMan.QuestAction(action);
+                    if (bActionOnClose)
+                        scriptMan.ActionOnClose(action);
                 }
             }
         }

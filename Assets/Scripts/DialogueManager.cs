@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/18/2019
+// Last:  08/21/2019
 
 using System.Collections;
 using UnityEngine;
@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     public OptionsManager oMan;
     public PauseGame pause;
     public PlayerMovement playerMove;
+    public ScriptManager scriptMan;
     public SFXManager SFXMan;
     public Sprite portPic;
     public Text dText;
@@ -48,8 +49,8 @@ public class DialogueManager : MonoBehaviour
 
     public int currentLine;
 
+    public string closingAction;
     public string[] dialogueLines;
-
 
     void Start()
     {
@@ -65,8 +66,7 @@ public class DialogueManager : MonoBehaviour
 
         ConfigureParameters();
     }
-
-
+    
     void Update()
     {
         if (bPauseDialogue)
@@ -164,6 +164,11 @@ public class DialogueManager : MonoBehaviour
 
         // Restore Brio & Button if no more dialogue
         StartCoroutine(WaitForOptions());
+
+        // Action on close
+        if (closingAction != "")
+            scriptMan.ClosingAction(closingAction);
+        closingAction = "";
     }
 
     public void ShowDialogue()

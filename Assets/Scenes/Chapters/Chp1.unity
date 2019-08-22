@@ -1868,12 +1868,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &37225302
@@ -2940,12 +2943,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 33ce9f0eb802c0c4ea3b8ee674fba7db, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hey Dan, can you come back later?
   - I'm working on a class project atm..
@@ -3778,12 +3784,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &76694011
@@ -5259,6 +5268,7 @@ GameObject:
   - component: {fileID: 123848456}
   - component: {fileID: 123848457}
   - component: {fileID: 123848458}
+  - component: {fileID: 123848459}
   m_Layer: 0
   m_Name: Start
   m_TagString: Untagged
@@ -5321,10 +5331,27 @@ MonoBehaviour:
   npcAnim: {fileID: 0}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 0}
-  beginQuest: 1
-  endQuest: 0
+  bActionOnClose: 0
+  bBeginQuest: 1
+  bEndQuest: 0
   questNumber: 2
+  action: 
+--- !u!114 &123848459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123848455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb80819ec479a4a4cad4d89d381f4a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp1: {fileID: 841729771}
+  treeHouseColli: {fileID: 123848457}
 --- !u!1 &125400927
 GameObject:
   m_ObjectHideFlags: 0
@@ -5957,10 +5984,13 @@ MonoBehaviour:
   npcAnim: {fileID: 1780482142}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 1780482146}
-  beginQuest: 1
-  endQuest: 0
+  bActionOnClose: 0
+  bBeginQuest: 1
+  bEndQuest: 0
   questNumber: 0
+  action: 
 --- !u!60 &136251390
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -6006,12 +6036,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: bc128c9f05e4f814d98a26a221fc95fe, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Oi, think you're ready? Well again..
   - 'Truth or Elaborate Lie: There is only one true god, cognition.'
@@ -6333,12 +6366,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 1787a025189f5454f8f40cc9c529f709, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - So the rest of the world is coming together swimmingly, but..
   - There's legit nothing to "do".. Lots to see, but meh..
@@ -7496,13 +7532,14 @@ GameObject:
   m_Component:
   - component: {fileID: 190270237}
   - component: {fileID: 190270238}
+  - component: {fileID: 190270239}
   m_Layer: 0
   m_Name: BoundWoodsMain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &190270237
 Transform:
   m_ObjectHideFlags: 0
@@ -7511,8 +7548,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190270236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.08, y: -9.51, z: 0}
-  m_LocalScale: {x: 0.89646, y: 0.94286996, z: 1.6769799}
+  m_LocalPosition: {x: 3.829, y: -10.615, z: 0}
+  m_LocalScale: {x: 0.89646, y: 0.585, z: 1.6769799}
   m_Children: []
   m_Father: {fileID: 1948385974}
   m_RootOrder: 7
@@ -7543,6 +7580,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 11.546648, y: 16.769938}
   m_EdgeRadius: 0
+--- !u!114 &190270239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190270236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e69583cb859d22c46889fb9d4100e0f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp1: {fileID: 841729771}
+  perimeterColli: {fileID: 190270238}
 --- !u!1 &192378795
 GameObject:
   m_ObjectHideFlags: 0
@@ -8257,12 +8308,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: cfc662d4b4775e840969fafbac351209, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Derp derp herp derp..
 --- !u!60 &202028931
@@ -8306,6 +8360,7 @@ GameObject:
   - component: {fileID: 205334165}
   - component: {fileID: 205334166}
   - component: {fileID: 205334167}
+  - component: {fileID: 205334168}
   m_Layer: 0
   m_Name: DialogueZone1
   m_TagString: Untagged
@@ -8372,12 +8427,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 388689f62e4c3d74d84ec6c846a532d8, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Now what was that recipe again..
   - Three parts smoochy woochy poochy. One part booty juice.
@@ -8397,10 +8455,27 @@ MonoBehaviour:
   npcAnim: {fileID: 862829843}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 862829848}
-  beginQuest: 1
-  endQuest: 0
+  bActionOnClose: 1
+  bBeginQuest: 1
+  bEndQuest: 0
   questNumber: 3
+  action: SmoochyWoochy
+--- !u!114 &205334168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205334163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97fe9aba2192c68409311e2aa1737f11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp1: {fileID: 841729771}
+  enkiColli: {fileID: 205334165}
 --- !u!1001 &205866136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8994,12 +9069,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &222822514
@@ -9809,12 +9887,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &234353461
@@ -10260,12 +10341,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &243250875
@@ -11560,12 +11644,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 1061423b04c49694381b5aaaa8757c24, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: Chp1RaceReward
   dialogueLines:
   - Sorry, I got nothing more for you..
   - If only I could walk away.. WTB animations n movement..
@@ -11904,12 +11991,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &292960914
@@ -12074,12 +12164,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: cfc662d4b4775e840969fafbac351209, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - This ish will be dank.. I'm super cereal you guys..
 --- !u!60 &301883157
@@ -12265,7 +12358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 875949248}
   cFollow: {fileID: 769443535}
-  thePlayer: {fileID: 875949246}
+  player: {fileID: 875949246}
   sFader: {fileID: 5655120153616620516}
   touches: {fileID: 2087698428}
   warpTarget: {fileID: 1370055029}
@@ -12370,12 +12463,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &309197677
@@ -12657,12 +12753,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 33ce9f0eb802c0c4ea3b8ee674fba7db, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hey Dan, what's really hood?
   - If you go by the Field, please tell my mum that I've soiled myself.
@@ -13539,12 +13638,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &327393562
@@ -13966,10 +14068,13 @@ MonoBehaviour:
   npcAnim: {fileID: 1780482142}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 1780482146}
-  beginQuest: 0
-  endQuest: 1
+  bActionOnClose: 0
+  bBeginQuest: 0
+  bEndQuest: 1
   questNumber: 0
+  action: 
 --- !u!60 &343439909
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -14015,12 +14120,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: bc128c9f05e4f814d98a26a221fc95fe, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - 'Ohhh Danny boyy.. '
   - The pipes, the pipes are caAaAalling...
@@ -16227,10 +16335,13 @@ MonoBehaviour:
   npcAnim: {fileID: 1132203880}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 1132203884}
-  beginQuest: 0
-  endQuest: 1
+  bActionOnClose: 0
+  bBeginQuest: 0
+  bEndQuest: 0
   questNumber: 7
+  action: 
 --- !u!114 &392916917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16247,12 +16358,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: cfc662d4b4775e840969fafbac351209, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Love me some pookie bears.
   - Zug zug..
@@ -16300,10 +16414,13 @@ MonoBehaviour:
   npcAnim: {fileID: 1132203880}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 0}
   spRend: {fileID: 1132203884}
-  beginQuest: 0
-  endQuest: 1
+  bActionOnClose: 0
+  bBeginQuest: 0
+  bEndQuest: 0
   questNumber: 8
+  action: 
 --- !u!1 &394827618
 GameObject:
   m_ObjectHideFlags: 0
@@ -17149,7 +17266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 875949248}
   cFollow: {fileID: 769443535}
-  thePlayer: {fileID: 875949246}
+  player: {fileID: 875949246}
   sFader: {fileID: 5655120153616620516}
   touches: {fileID: 2087698428}
   warpTarget: {fileID: 1154143074}
@@ -18823,12 +18940,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &444202536
@@ -18944,6 +19064,7 @@ GameObject:
   - component: {fileID: 444637245}
   - component: {fileID: 444637246}
   - component: {fileID: 444637247}
+  - component: {fileID: 444637248}
   m_Layer: 0
   m_Name: DialogueZone
   m_TagString: Untagged
@@ -19010,14 +19131,31 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: ffc9e227e58f9f74182926f5658c5c95, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - 'Dang, you found me.. '
+--- !u!114 &444637248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444637244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ea3186ca634884382ba719bbdea6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp1: {fileID: 841729771}
+  kidColli: {fileID: 444637246}
 --- !u!114 &448233423 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1168717255706979506, guid: fc57066e3389e2c4cb1320576bd12808,
@@ -19711,12 +19849,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: c158d6f00db1dbe44a50c0294b6f27d4, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Rawr..
 --- !u!1 &472302247
@@ -20083,6 +20224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedItem: {fileID: 0}
   items: []
+  scriptMan: {fileID: 841729765}
   selectedItemId: 0
   totalItems: 0
   bUpdateItemCount: 0
@@ -21699,14 +21841,69 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
+--- !u!1 &502026026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 502026028}
+  - component: {fileID: 502026027}
+  m_Layer: 0
+  m_Name: Quest_10
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &502026027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502026026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efbf76c65fdcf6a4f87e30f35e1df6ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dMan: {fileID: 1880181858}
+  qMan: {fileID: 2041127070}
+  portPic: {fileID: 21300000, guid: cb0a295efb692dc4d967fcbe460a2fb7, type: 3}
+  bHasStarted: 0
+  bHasEnded: 0
+  bHasCollected: 0
+  questNumber: 6
+  beginText: []
+  endText: []
+--- !u!4 &502026028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502026026}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2041127069}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &505059246
 GameObject:
   m_ObjectHideFlags: 0
@@ -22289,12 +22486,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 1061423b04c49694381b5aaaa8757c24, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Dude, before you say anything, I know.. I know...
   - We all look the same. That's gonna be the norm for a bit.
@@ -22374,12 +22574,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &522121054
@@ -22393,6 +22596,7 @@ GameObject:
   - component: {fileID: 522121055}
   - component: {fileID: 522121056}
   - component: {fileID: 522121057}
+  - component: {fileID: 522121058}
   m_Layer: 0
   m_Name: DialogueZone
   m_TagString: Untagged
@@ -22459,14 +22663,31 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: ffc9e227e58f9f74182926f5658c5c95, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - You're pretty good at this Dan.
+--- !u!114 &522121058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522121054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ea3186ca634884382ba719bbdea6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp1: {fileID: 841729771}
+  kidColli: {fileID: 522121056}
 --- !u!1 &527502865
 GameObject:
   m_ObjectHideFlags: 0
@@ -22793,6 +23014,7 @@ GameObject:
   - component: {fileID: 532701113}
   - component: {fileID: 532701114}
   - component: {fileID: 532701115}
+  - component: {fileID: 532701116}
   m_Layer: 0
   m_Name: DialogueZone
   m_TagString: Untagged
@@ -22859,14 +23081,31 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: ffc9e227e58f9f74182926f5658c5c95, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Whelp.... The jigs up.
+--- !u!114 &532701116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532701112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ea3186ca634884382ba719bbdea6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp1: {fileID: 841729771}
+  kidColli: {fileID: 532701114}
 --- !u!1 &536226316
 GameObject:
   m_ObjectHideFlags: 0
@@ -24230,12 +24469,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &575480598
@@ -24847,6 +25089,7 @@ GameObject:
   - component: {fileID: 601847694}
   - component: {fileID: 601847695}
   - component: {fileID: 601847696}
+  - component: {fileID: 601847697}
   m_Layer: 0
   m_Name: End
   m_TagString: Untagged
@@ -24909,10 +25152,27 @@ MonoBehaviour:
   npcAnim: {fileID: 0}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 0}
-  beginQuest: 0
-  endQuest: 1
+  bActionOnClose: 0
+  bBeginQuest: 0
+  bEndQuest: 1
   questNumber: 2
+  action: 
+--- !u!114 &601847697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601847693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 572477673f8734e43a3a21e627b47782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp1: {fileID: 841729771}
+  dirtColli: {fileID: 601847695}
 --- !u!1 &603523510
 GameObject:
   m_ObjectHideFlags: 0
@@ -27398,12 +27658,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &669121972
@@ -27602,12 +27865,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: c158d6f00db1dbe44a50c0294b6f27d4, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Rawr..
 --- !u!1 &669943043
@@ -27651,17 +27917,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 669943043}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa79df172b2a24443b463fd6a7d365b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e26a981b3f6b2c4d96369d3e3a816fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   chp1: {fileID: 841729771}
+  chp1RP: {fileID: 1973596049}
   raceCP1: {fileID: 1066692597}
   raceCP2: {fileID: 818855629}
   raceCP3: {fileID: 669943043}
   raceCP4: {fileID: 1221598394}
-  thePlayer: {fileID: 875949244}
-  ogPoints: []
-  racePoints: []
+  raceEnd: {fileID: 730106419}
+  raceStart: {fileID: 2003407217}
+  player: {fileID: 875949244}
 --- !u!61 &669943046
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -27922,7 +28189,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1265214909}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &672920309
 MonoBehaviour:
@@ -28251,12 +28518,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &683549998
@@ -29441,12 +29711,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 33ce9f0eb802c0c4ea3b8ee674fba7db, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - 'Christ.. '
 --- !u!60 &718400727
@@ -30314,6 +30587,7 @@ GameObject:
   - component: {fileID: 730106420}
   - component: {fileID: 730106422}
   - component: {fileID: 730106421}
+  - component: {fileID: 730106423}
   m_Layer: 0
   m_Name: Race_End
   m_TagString: Untagged
@@ -30330,7 +30604,7 @@ Transform:
   m_GameObject: {fileID: 730106419}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -11.46, y: -4.64, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.24937, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 612160515}
   m_RootOrder: 5
@@ -30350,10 +30624,13 @@ MonoBehaviour:
   npcAnim: {fileID: 0}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 0}
-  beginQuest: 0
-  endQuest: 0
+  bActionOnClose: 0
+  bBeginQuest: 0
+  bEndQuest: 1
   questNumber: 1
+  action: 
 --- !u!61 &730106422
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30380,6 +30657,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &730106423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730106419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e26a981b3f6b2c4d96369d3e3a816fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp1: {fileID: 841729771}
+  chp1RP: {fileID: 1973596049}
+  raceCP1: {fileID: 1066692597}
+  raceCP2: {fileID: 818855629}
+  raceCP3: {fileID: 669943043}
+  raceCP4: {fileID: 1221598394}
+  raceEnd: {fileID: 730106419}
+  raceStart: {fileID: 2003407217}
+  player: {fileID: 875949244}
 --- !u!114 &731568433 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5655120153639176149, guid: fc57066e3389e2c4cb1320576bd12808,
@@ -30457,12 +30755,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 6b5f241ef247cfb48960790e6b8c3666, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - I was wondering when you would find your way to me.
 --- !u!60 &733258065
@@ -30542,7 +30843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 875949248}
   cFollow: {fileID: 769443535}
-  thePlayer: {fileID: 875949246}
+  player: {fileID: 875949246}
   sFader: {fileID: 5655120153616620516}
   touches: {fileID: 2087698428}
   warpTarget: {fileID: 2000753386}
@@ -30749,12 +31050,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &742382338
@@ -31325,7 +31629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 875949248}
   cFollow: {fileID: 769443535}
-  thePlayer: {fileID: 875949246}
+  player: {fileID: 875949246}
   sFader: {fileID: 5655120153616620516}
   touches: {fileID: 2087698428}
   warpTarget: {fileID: 1376857649}
@@ -32012,12 +32316,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &768364821
@@ -32188,6 +32495,11 @@ PrefabInstance:
       propertyPath: uMan
       value: 
       objectReference: {fileID: 5655120153616620508}
+    - target: {fileID: 5186248832947789558, guid: b55727ae08db23b4d9746e71b50819c7,
+        type: 3}
+      propertyPath: _wantedAspectRatio
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b55727ae08db23b4d9746e71b50819c7, type: 3}
 --- !u!114 &769443534 stripped
@@ -32549,12 +32861,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &776326087
@@ -33436,12 +33751,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0d6d44e9c86018c499daa00a9edc3f5e, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Pretend like we have goggles and gloves on.
   - And that we're making stuffs..
@@ -34272,12 +34590,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &815700327
@@ -34394,6 +34715,7 @@ GameObject:
   - component: {fileID: 816724292}
   - component: {fileID: 816724293}
   - component: {fileID: 816724291}
+  - component: {fileID: 816724294}
   m_Layer: 0
   m_Name: DialogueZone2
   m_TagString: Untagged
@@ -34430,10 +34752,13 @@ MonoBehaviour:
   npcAnim: {fileID: 862829843}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 862829848}
-  beginQuest: 0
-  endQuest: 1
+  bActionOnClose: 1
+  bBeginQuest: 0
+  bEndQuest: 0
   questNumber: 3
+  action: Chp1EnkiReward
 --- !u!60 &816724292
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -34479,15 +34804,32 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 388689f62e4c3d74d84ec6c846a532d8, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hot day! You came through Dan! Thank you child. Thank you!
   - I love me some smoochy woochy poochy...
+--- !u!114 &816724294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816724289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97fe9aba2192c68409311e2aa1737f11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp1: {fileID: 841729771}
+  enkiColli: {fileID: 816724292}
 --- !u!1 &818855629
 GameObject:
   m_ObjectHideFlags: 0
@@ -34529,17 +34871,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 818855629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa79df172b2a24443b463fd6a7d365b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e26a981b3f6b2c4d96369d3e3a816fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   chp1: {fileID: 841729771}
+  chp1RP: {fileID: 1973596049}
   raceCP1: {fileID: 1066692597}
   raceCP2: {fileID: 818855629}
   raceCP3: {fileID: 669943043}
   raceCP4: {fileID: 1221598394}
-  thePlayer: {fileID: 875949244}
-  ogPoints: []
-  racePoints: []
+  raceEnd: {fileID: 730106419}
+  raceStart: {fileID: 2003407217}
+  player: {fileID: 875949244}
 --- !u!61 &818855632
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -34745,12 +35088,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 1787a025189f5454f8f40cc9c529f709, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - One day we'll find out what iSkewl is like.
   - One day...
@@ -35121,7 +35467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 875949248}
   cFollow: {fileID: 769443535}
-  thePlayer: {fileID: 875949246}
+  player: {fileID: 875949246}
   sFader: {fileID: 5655120153616620516}
   touches: {fileID: 2087698428}
   warpTarget: {fileID: 527502866}
@@ -35361,12 +35707,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &837958888
@@ -35443,12 +35792,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &840417062
@@ -35567,6 +35919,7 @@ GameObject:
   - component: {fileID: 841729769}
   - component: {fileID: 841729770}
   - component: {fileID: 841729771}
+  - component: {fileID: 841729765}
   m_Layer: 0
   m_Name: Game_Controller
   m_TagString: Untagged
@@ -35574,6 +35927,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &841729765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841729764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f6bad1dc3e79c4480027a7e4c5e92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp1: {fileID: 841729771}
+  dMan: {fileID: 1880181858}
 --- !u!4 &841729766
 Transform:
   m_ObjectHideFlags: 0
@@ -35700,24 +36067,25 @@ MonoBehaviour:
   mainCamera: {fileID: 769443537}
   camFollow: {fileID: 769443535}
   dMan: {fileID: 1880181858}
-  dArrow: {fileID: 5655120153616620574}
-  dBox: {fileID: 5655120153616620573}
   greatTree: {fileID: 18194764}
   item_homeVRGoggles: {fileID: 2052798313}
   npc_al_khidr: {fileID: 215809806}
   npc_ashera: {fileID: 24329180}
   npc_atandwa: {fileID: 1279384804}
+  npc_brackey: {fileID: 1302678121}
   npc_canaan: {fileID: 1691541368}
   npc_chun: {fileID: 2095739429}
   npc_dagon: {fileID: 1780482140}
   npc_dilum: {fileID: 1132203878}
   npc_eliz: {fileID: 1173617574}
   npc_enki: {fileID: 862829841}
+  npc_heartha: {fileID: 1033403214}
   npc_marija: {fileID: 1675929005}
   npc_pookieB1: {fileID: 485260479}
   npc_pookieB2: {fileID: 1686517952}
   npc_thabo: {fileID: 1682213066}
   npc_zola: {fileID: 1360548447}
+  player: {fileID: 875949244}
   quest0: {fileID: 1553098094}
   quest1: {fileID: 2063539470}
   quest2: {fileID: 1609771950}
@@ -35727,11 +36095,15 @@ MonoBehaviour:
   quest6: {fileID: 853675776}
   quest7: {fileID: 425401631}
   quest8: {fileID: 1048636566}
+  quest9: {fileID: 1094339509}
+  quest10: {fileID: 502026026}
   questTrigger2: {fileID: 1599190429}
   screenFader: {fileID: 5655120153616620581}
-  thePlayer: {fileID: 875949244}
+  treeHouseDoor: {fileID: 316947528}
   warpGWC: {fileID: 1337416201}
   warpMinesweeper: {fileID: 672920307}
+  warpPookieVision: {fileID: 968759459}
+  warpTowerDeez: {fileID: 1448235531}
   inv: {fileID: 475676935}
   moveOptsArw: {fileID: 5655120153616620518}
   mMan: {fileID: 46970153}
@@ -35739,6 +36111,7 @@ MonoBehaviour:
   pause: {fileID: 841729768}
   qMan: {fileID: 2041127070}
   save: {fileID: 841729769}
+  scriptMan: {fileID: 841729765}
   dText: {fileID: 5655120153616620570}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
@@ -35753,16 +36126,18 @@ MonoBehaviour:
   bAvoidUpdateQ7Q8Ini: 0
   bAvoidUpdateQ7Q8DH: 0
   bAvoidUpdateQ7Q8: 0
-  bContainsQ3Item: 0
-  bContainsQ6Item: 0
-  bContainsQ7ItemGreen: 0
-  bContainsQ7ItemOrange: 0
-  bContainsQ7ItemPurple: 0
-  bContainsQ7ItemWhite: 0
-  bContainsQ8ItemGreen: 0
-  bContainsQ8ItemOrange: 0
-  bContainsQ8ItemPurple: 0
-  bContainsQ8ItemWhite: 0
+  bHasGoggles: 0
+  bHasQ3SmoochWoochy: 0
+  bHasQ7Green: 0
+  bHasQ7Orange: 0
+  bHasQ7Purple: 0
+  bHasQ7White: 0
+  bHasQ8Green: 0
+  bHasQ8Orange: 0
+  bHasQ8Purple: 0
+  bHasQ8White: 0
+  bContainsQ9Item: 0
+  bContainsQ10Item: 0
   bQ4Seeking: 0
   bFoundQ4Kid1: 0
   bFoundQ4Kid2: 0
@@ -35772,11 +36147,7 @@ MonoBehaviour:
   bFoundQ4Kid6: 0
   bFoundQ4All: 0
   bQ3InitialCheck: 0
-  bGetInventory: 0
-  bHasGoggles: 0
-  invTimer: 0
   raceTimer: 0
-  transferAddedPosition: 0
   Q4KidCounter: 0
   Q7GreenCounter: 0
   Q7OrangeCounter: 0
@@ -35786,7 +36157,6 @@ MonoBehaviour:
   Q8OrangeCounter: 0
   Q8PurpleCounter: 0
   Q8WhiteCounter: 0
-  questCount: 0
   Q4LastKidFound: 
   Q7Options: 
   Q7SelectedOption: 
@@ -37794,12 +38164,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &869179836
@@ -39116,12 +39489,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 33ce9f0eb802c0c4ea3b8ee674fba7db, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Orball comin at ya soon...
 --- !u!60 &898824648
@@ -39808,12 +40184,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &924691975
@@ -41482,7 +41861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 875949248}
   cFollow: {fileID: 769443535}
-  thePlayer: {fileID: 875949246}
+  player: {fileID: 875949246}
   sFader: {fileID: 5655120153616620516}
   touches: {fileID: 2087698428}
   warpTarget: {fileID: 857001025}
@@ -41569,6 +41948,87 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!1 &968759459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 968759460}
+  - component: {fileID: 968759462}
+  - component: {fileID: 968759461}
+  m_Layer: 0
+  m_Name: Chp1.to.PookieVision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &968759460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968759459}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.261, y: -12.983, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1265214909}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &968759461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968759459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b56044d191f45f449c828fa834b1b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  scene:
+    m_Handle: 0
+  sceneSubtitle: {fileID: 0}
+  sceneTitle: {fileID: 0}
+  bLoadScene: 0
+  bNeedsTimer: 0
+  bAnimationToTransitionScene: 0
+  timeToLoad: 0.001
+  AlphaLoad: SceneTransitioner
+  BetaLoad: Minesweeper
+--- !u!61 &968759462
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968759459}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.07536566, y: 0.00000023841858}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.54181933, y: 0.43142557}
   m_EdgeRadius: 0
 --- !u!1 &973711698
 GameObject:
@@ -41981,12 +42441,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &997682221
@@ -42886,12 +43349,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1001 &1018856034
@@ -43285,12 +43751,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1027579459
@@ -43673,12 +44142,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 0}
   pause: {fileID: 0}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 0}
   uMan: {fileID: 0}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!114 &1030202206 stripped
@@ -44863,12 +45335,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1048599148
@@ -45047,12 +45522,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 55597f3cf4c6d8d4caf3404fa5308689, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Oi, interested in some TowerDeez?
 --- !u!60 &1054886908
@@ -45662,17 +46140,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1066692597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa79df172b2a24443b463fd6a7d365b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e26a981b3f6b2c4d96369d3e3a816fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   chp1: {fileID: 841729771}
+  chp1RP: {fileID: 1973596049}
   raceCP1: {fileID: 1066692597}
   raceCP2: {fileID: 818855629}
   raceCP3: {fileID: 669943043}
   raceCP4: {fileID: 1221598394}
-  thePlayer: {fileID: 875949244}
-  ogPoints: []
-  racePoints: []
+  raceEnd: {fileID: 730106419}
+  raceStart: {fileID: 2003407217}
+  player: {fileID: 875949244}
 --- !u!61 &1066692600
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -46677,12 +47156,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1082534746
@@ -47177,14 +47659,69 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: c158d6f00db1dbe44a50c0294b6f27d4, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Rawr..
+--- !u!1 &1094339509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1094339511}
+  - component: {fileID: 1094339510}
+  m_Layer: 0
+  m_Name: Quest_9
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1094339510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094339509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efbf76c65fdcf6a4f87e30f35e1df6ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dMan: {fileID: 1880181858}
+  qMan: {fileID: 2041127070}
+  portPic: {fileID: 21300000, guid: cb0a295efb692dc4d967fcbe460a2fb7, type: 3}
+  bHasStarted: 0
+  bHasEnded: 0
+  bHasCollected: 0
+  questNumber: 6
+  beginText: []
+  endText: []
+--- !u!4 &1094339511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094339509}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2041127069}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1096615001
 GameObject:
   m_ObjectHideFlags: 0
@@ -48214,12 +48751,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1115489006
@@ -48741,12 +49281,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0d6d44e9c86018c499daa00a9edc3f5e, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Herp derp.. I'm here to help with pathing.
 --- !u!1 &1127678693
@@ -49568,12 +50111,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0d6d44e9c86018c499daa00a9edc3f5e, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Team work makes the dream work!
 --- !u!60 &1132338925
@@ -49700,12 +50246,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 1281d20e4fb58294ea33ee8e6face7c9, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - We're so excited that you're starting skewl this year.
   - It's going to be more fun than you dreamed! We love you Dan.
@@ -50884,12 +51433,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 1061423b04c49694381b5aaaa8757c24, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Aww man Dan, you missed it! That game was INTENSE!
   - Can't wait to make my Particle Gloves and play some Droball..
@@ -51721,12 +52273,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 1281d20e4fb58294ea33ee8e6face7c9, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Oh Dan, it seems you misplaced your goggles again.
   - Jabu returned em, and I put them up in your room.
@@ -52375,12 +52930,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0d6d44e9c86018c499daa00a9edc3f5e, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Team work makes the dream work!
 --- !u!60 &1209692114
@@ -52490,12 +53048,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: bc128c9f05e4f814d98a26a221fc95fe, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Oh Dan, sorry mah boy. I forgot, there's no skewl today!
   - Whelp... While you're here, lets play a game! What do you say?
@@ -52951,17 +53512,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1221598394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa79df172b2a24443b463fd6a7d365b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e26a981b3f6b2c4d96369d3e3a816fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   chp1: {fileID: 841729771}
+  chp1RP: {fileID: 1973596049}
   raceCP1: {fileID: 1066692597}
   raceCP2: {fileID: 818855629}
   raceCP3: {fileID: 669943043}
   raceCP4: {fileID: 1221598394}
-  thePlayer: {fileID: 875949244}
-  ogPoints: []
-  racePoints: []
+  raceEnd: {fileID: 730106419}
+  raceStart: {fileID: 2003407217}
+  player: {fileID: 875949244}
 --- !u!61 &1221598397
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -54604,8 +55166,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 672920308}
   - {fileID: 1337416202}
+  - {fileID: 672920308}
+  - {fileID: 968759460}
+  - {fileID: 1448235532}
   - {fileID: 1268622703}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -54684,12 +55248,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1267842584
@@ -54824,7 +55391,7 @@ Transform:
   - {fileID: 383398730}
   - {fileID: 780199923}
   m_Father: {fileID: 1265214909}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1271627629
 GameObject:
@@ -55285,12 +55852,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0d6d44e9c86018c499daa00a9edc3f5e, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hey Dan. Guess what, I've been choosen!
   - The developer is going to have me walk around the map.
@@ -56760,12 +57330,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1309365865
@@ -57665,7 +58238,7 @@ Transform:
   m_LocalScale: {x: 0.3375, y: 0.3625, z: 1}
   m_Children: []
   m_Father: {fileID: 1265214909}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1337416203
 MonoBehaviour:
@@ -57790,12 +58363,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1338340168
@@ -58463,12 +59039,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: ffc9e227e58f9f74182926f5658c5c95, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Ho Dan! Interested in playing some Hide and Seek?
 --- !u!114 &1351416037
@@ -58561,12 +59140,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1353218526
@@ -59621,12 +60203,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 6b5f241ef247cfb48960790e6b8c3666, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - '*Leaves rustle in the wind.*'
   - '*Cut scene about some shizz.*'
@@ -59676,10 +60261,13 @@ MonoBehaviour:
   npcAnim: {fileID: 0}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 0}
-  beginQuest: 0
-  endQuest: 1
+  bActionOnClose: 0
+  bBeginQuest: 0
+  bEndQuest: 1
   questNumber: 5
+  action: 
 --- !u!114 &1383137757 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5655120152534545471, guid: fc57066e3389e2c4cb1320576bd12808,
@@ -60383,12 +60971,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: cfc662d4b4775e840969fafbac351209, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - I'm here to help test pathing. Herp derp..
 --- !u!60 &1394304450
@@ -61407,12 +61998,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 388689f62e4c3d74d84ec6c846a532d8, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Oh hay Dan, I'm making me some new underwear.
 --- !u!60 &1420240071
@@ -61585,6 +62179,7 @@ GameObject:
   - component: {fileID: 1424969840}
   - component: {fileID: 1424969839}
   - component: {fileID: 1424969838}
+  - component: {fileID: 1424969837}
   m_Layer: 0
   m_Name: DialogueZone2
   m_TagString: Untagged
@@ -61606,6 +62201,20 @@ Transform:
   m_Father: {fileID: 215809807}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1424969837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424969835}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ea3186ca634884382ba719bbdea6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp1: {fileID: 841729771}
+  kidColli: {fileID: 1424969840}
 --- !u!114 &1424969838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61621,10 +62230,13 @@ MonoBehaviour:
   npcAnim: {fileID: 215809808}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 215809812}
-  beginQuest: 1
-  endQuest: 0
+  bActionOnClose: 1
+  bBeginQuest: 1
+  bEndQuest: 0
   questNumber: 4
+  action: HideAndSeek
 --- !u!114 &1424969839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61641,12 +62253,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: ffc9e227e58f9f74182926f5658c5c95, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: Testicle
   dialogueLines:
   - Aww man.. You found me.
   - But this spot was PRO...
@@ -62200,12 +62815,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1442230959
@@ -62486,12 +63104,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!114 &1443713174 stripped
@@ -62710,6 +63331,87 @@ PolygonCollider2D:
       - {x: 0.87067217, y: 0.22413372}
       - {x: 0.8700555, y: -0.4090869}
       - {x: -0.69546753, y: -0.40908054}
+--- !u!1 &1448235531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1448235532}
+  - component: {fileID: 1448235534}
+  - component: {fileID: 1448235533}
+  m_Layer: 0
+  m_Name: Chp1.to.TowerDeez
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1448235532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448235531}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.335, y: -6.212, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1265214909}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1448235533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448235531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b56044d191f45f449c828fa834b1b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  scene:
+    m_Handle: 0
+  sceneSubtitle: {fileID: 0}
+  sceneTitle: {fileID: 0}
+  bLoadScene: 0
+  bNeedsTimer: 0
+  bAnimationToTransitionScene: 0
+  timeToLoad: 0.001
+  AlphaLoad: SceneTransitioner
+  BetaLoad: Minesweeper
+--- !u!61 &1448235534
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448235531}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.07536566, y: 0.00000023841858}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.54181933, y: 0.43142557}
+  m_EdgeRadius: 0
 --- !u!1001 &1450072146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64033,12 +64735,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1462920831
@@ -64311,12 +65016,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 6b5f241ef247cfb48960790e6b8c3666, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hello child...
 --- !u!60 &1464740092
@@ -64365,10 +65073,13 @@ MonoBehaviour:
   npcAnim: {fileID: 0}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 0}
-  beginQuest: 1
-  endQuest: 0
+  bActionOnClose: 0
+  bBeginQuest: 1
+  bEndQuest: 0
   questNumber: 5
+  action: 
 --- !u!1 &1468166201
 GameObject:
   m_ObjectHideFlags: 0
@@ -65402,12 +66113,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 1061423b04c49694381b5aaaa8757c24, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Ho Dan! What's really hood?
   - You tryna play some games?
@@ -66921,12 +67635,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1518680554
@@ -67349,6 +68066,7 @@ GameObject:
   - component: {fileID: 1522643198}
   - component: {fileID: 1522643199}
   - component: {fileID: 1522643200}
+  - component: {fileID: 1522643201}
   m_Layer: 0
   m_Name: DialogueZone
   m_TagString: Untagged
@@ -67415,14 +68133,31 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: ffc9e227e58f9f74182926f5658c5c95, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Aww snap! You found me..
+--- !u!114 &1522643201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522643197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ea3186ca634884382ba719bbdea6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp1: {fileID: 841729771}
+  kidColli: {fileID: 1522643199}
 --- !u!1 &1522738961
 GameObject:
   m_ObjectHideFlags: 0
@@ -67626,12 +68361,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1525022428
@@ -67712,12 +68450,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: b9a7fea6747b7f544a4b817add47c0fb, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Ho Dan! I'm just finishing up my new game.
   - Care to test it out for me?
@@ -71989,12 +72730,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 1061423b04c49694381b5aaaa8757c24, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - (Pretend I have goggles on...)
   - Move Cannamander! Doge that dankle!
@@ -73527,12 +74271,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1660944838
@@ -75446,12 +76193,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1702545712 stripped
@@ -76215,12 +76965,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1715830357
@@ -76300,12 +77053,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: c158d6f00db1dbe44a50c0294b6f27d4, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Rawr..
 --- !u!1 &1717237721
@@ -76382,12 +77138,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1721763296
@@ -77078,10 +77837,13 @@ MonoBehaviour:
   npcAnim: {fileID: 215809808}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 215809812}
-  beginQuest: 0
-  endQuest: 1
+  bActionOnClose: 0
+  bBeginQuest: 0
+  bEndQuest: 1
   questNumber: 4
+  action: 
 --- !u!114 &1739991942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77098,12 +77860,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: ffc9e227e58f9f74182926f5658c5c95, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Twas fun Dan. I'll talk to the fellas and see if they're game for more.
   - Come back later. Maybe we'll play some Manhunt or Cops n Robbers.
@@ -78356,12 +79121,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 1061423b04c49694381b5aaaa8757c24, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - (Pretend I have goggles on...)
   - Comon' Marichu, dankle his arse!
@@ -79384,12 +80152,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1789902459
@@ -79542,12 +80313,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 388689f62e4c3d74d84ec6c846a532d8, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Yup yup, I'm finishing out the new Pod.
   - Almost done for the day. I'll save it and resume tomorrow.
@@ -79646,12 +80420,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 6b5f241ef247cfb48960790e6b8c3666, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Ahh yes. You must have many questions child.
   - Where to begin.. I have been watching you since the beginning.
@@ -80180,12 +80957,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1812292247
@@ -80403,6 +81183,7 @@ GameObject:
   - component: {fileID: 1816635520}
   - component: {fileID: 1816635521}
   - component: {fileID: 1816635522}
+  - component: {fileID: 1816635523}
   m_Layer: 0
   m_Name: DialogueZone
   m_TagString: Untagged
@@ -80469,14 +81250,31 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: ffc9e227e58f9f74182926f5658c5c95, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Ha I thought this was pretty sneaky..
+--- !u!114 &1816635523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816635519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ea3186ca634884382ba719bbdea6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp1: {fileID: 841729771}
+  kidColli: {fileID: 1816635521}
 --- !u!1 &1816659856
 GameObject:
   m_ObjectHideFlags: 0
@@ -82187,12 +82985,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: cfc662d4b4775e840969fafbac351209, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - How're them pookie bears doin?
   - Zug zug..
@@ -82211,10 +83012,13 @@ MonoBehaviour:
   npcAnim: {fileID: 1132203880}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 1132203884}
-  beginQuest: 1
-  endQuest: 0
+  bActionOnClose: 0
+  bBeginQuest: 0
+  bEndQuest: 0
   questNumber: 7
+  action: 
 --- !u!114 &1853634944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82230,10 +83034,13 @@ MonoBehaviour:
   npcAnim: {fileID: 1132203880}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 0}
   spRend: {fileID: 1132203884}
-  beginQuest: 1
-  endQuest: 0
+  bActionOnClose: 0
+  bBeginQuest: 0
+  bEndQuest: 0
   questNumber: 8
+  action: 
 --- !u!1 &1858429542
 GameObject:
   m_ObjectHideFlags: 0
@@ -83296,12 +84103,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: cfc662d4b4775e840969fafbac351209, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Almost time for harvest eh Dani boi?
   - I'm looking forward to some of that Purple Nurple fo sho.
@@ -83603,12 +84413,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: ad464303cab9c65429faccc69d817934, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - So I've been doing some research on pookie bears and canna.
   - Wanna see what they see when they consome the plants?
@@ -83803,12 +84616,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 33ce9f0eb802c0c4ea3b8ee674fba7db, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hey Dan, what's really hood?
   - Once Pops helps me with my gloves, I'll be able to build on my own.
@@ -84207,12 +85023,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: cfc662d4b4775e840969fafbac351209, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Ho Dan, I'm helpilng Mawkus build his own Particle Gloves.
 --- !u!60 &1909623823
@@ -86018,12 +86837,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &1966275809
@@ -86480,15 +87302,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1973596047}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa79df172b2a24443b463fd6a7d365b9, type: 3}
+  m_Script: {fileID: 11500000, guid: e5b2c5f01ac39894eb96c24bf74bc438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   chp1: {fileID: 841729771}
-  raceCP1: {fileID: 1066692597}
-  raceCP2: {fileID: 818855629}
-  raceCP3: {fileID: 669943043}
-  raceCP4: {fileID: 1221598394}
-  thePlayer: {fileID: 875949244}
+  chp1RC: {fileID: 2003407221}
+  raceEnd: {fileID: 730106419}
+  raceStart: {fileID: 2003407217}
+  player: {fileID: 875949244}
   ogPoints: []
   racePoints: []
 --- !u!60 &1973596050
@@ -86946,12 +87767,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: cfc662d4b4775e840969fafbac351209, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - I'm sure more people will be building things soon..
 --- !u!60 &1983632892
@@ -87655,10 +88479,13 @@ MonoBehaviour:
   npcAnim: {fileID: 0}
   dMan: {fileID: 1880181858}
   qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
   spRend: {fileID: 0}
-  beginQuest: 1
-  endQuest: 0
+  bActionOnClose: 0
+  bBeginQuest: 1
+  bEndQuest: 0
   questNumber: 1
+  action: 
 --- !u!61 &2003407220
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -87694,17 +88521,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2003407217}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa79df172b2a24443b463fd6a7d365b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e26a981b3f6b2c4d96369d3e3a816fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   chp1: {fileID: 841729771}
+  chp1RP: {fileID: 1973596049}
   raceCP1: {fileID: 1066692597}
   raceCP2: {fileID: 818855629}
   raceCP3: {fileID: 669943043}
   raceCP4: {fileID: 1221598394}
-  thePlayer: {fileID: 875949244}
-  ogPoints: []
-  racePoints: []
+  raceEnd: {fileID: 730106419}
+  raceStart: {fileID: 2003407217}
+  player: {fileID: 875949244}
 --- !u!1 &2005881623
 GameObject:
   m_ObjectHideFlags: 0
@@ -88201,12 +89029,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0d6d44e9c86018c499daa00a9edc3f5e, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Oh hello Dan! Say are you busy?
   - Can you go check on my lil Nesbit?
@@ -88852,12 +89683,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &2025769425
@@ -89801,12 +90635,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &2037510936
@@ -90107,6 +90944,8 @@ Transform:
   - {fileID: 853675777}
   - {fileID: 425401632}
   - {fileID: 1048636567}
+  - {fileID: 1094339511}
+  - {fileID: 502026028}
   m_Father: {fileID: 841729766}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -90133,6 +90972,8 @@ MonoBehaviour:
   - {fileID: 853675778}
   - {fileID: 425401633}
   - {fileID: 1048636568}
+  - {fileID: 1094339510}
+  - {fileID: 502026027}
   questsStarted: 
   questsEnded: 
   questsCollected: 
@@ -90347,12 +91188,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &2052798313
@@ -91914,12 +92758,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1880181858}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   touches: {fileID: 2087698428}
   uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hmmm.. It seems locked. Perhaps later.
 --- !u!1 &2095739429
@@ -93989,6 +94836,21 @@ PrefabInstance:
       propertyPath: itemMenu
       value: 
       objectReference: {fileID: 5655120153616620568}
+    - target: {fileID: 640059315020778769, guid: fc57066e3389e2c4cb1320576bd12808,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 841729768}
+    - target: {fileID: 640059315020778769, guid: fc57066e3389e2c4cb1320576bd12808,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Stuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 640059315020778769, guid: fc57066e3389e2c4cb1320576bd12808,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5655120153616620503}
     - target: {fileID: 5655120153102151605, guid: fc57066e3389e2c4cb1320576bd12808,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -94539,6 +95401,11 @@ PrefabInstance:
       propertyPath: uMan
       value: 
       objectReference: {fileID: 5655120153616620508}
+    - target: {fileID: 5655120153347217329, guid: fc57066e3389e2c4cb1320576bd12808,
+        type: 3}
+      propertyPath: scriptMan
+      value: 
+      objectReference: {fileID: 841729765}
     - target: {fileID: 2590773633372806509, guid: fc57066e3389e2c4cb1320576bd12808,
         type: 3}
       propertyPath: stuffBack
@@ -96841,21 +97708,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 640059315020778769, guid: fc57066e3389e2c4cb1320576bd12808,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 841729768}
-    - target: {fileID: 640059315020778769, guid: fc57066e3389e2c4cb1320576bd12808,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Stuff
-      objectReference: {fileID: 0}
-    - target: {fileID: 640059315020778769, guid: fc57066e3389e2c4cb1320576bd12808,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 5655120153616620503}
     - target: {fileID: 1384891952399797847, guid: fc57066e3389e2c4cb1320576bd12808,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
