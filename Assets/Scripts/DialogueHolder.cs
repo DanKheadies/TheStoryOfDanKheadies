@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/21/2019
+// Last:  08/23/2019
 
 using UnityEngine;
 
@@ -76,9 +76,7 @@ public class DialogueHolder : MonoBehaviour
             
             // Restores NPC movement if it has animation/animator
             if (!dMan.bDialogueActive && 
-                transform.parent.GetComponent<Animator>() != null)
-                // TODO: Simplify?
-                // anim != null)
+                anim)
             {
                 anim.Play("NPC Movement");
             }
@@ -102,18 +100,12 @@ public class DialogueHolder : MonoBehaviour
         }
 
         // Stop NPC movement
-        if (transform.parent.GetComponent<NPCMovement>() != null)
-        {
+        if (transform.parent.GetComponent<NPCMovement>())
             transform.parent.GetComponent<NPCMovement>().bCanMove = false;
-        }
 
         // NPC looks at player if there's an animation/animator
-        if (transform.parent.GetComponent<Animator>() != null)
-        // TODO: Simplify?
-        //  anim != null)
-        {
+        if (anim)
             OrientNPC(collision);
-        }
 
         // Stop UI controls / actions 
         touches.bAaction = false;
@@ -124,7 +116,7 @@ public class DialogueHolder : MonoBehaviour
             scriptMan.ActionOnClose(action);
     }
 
-    void OrientNPC(Collider2D collision)
+    public void OrientNPC(Collider2D collision)
     {
         // NPC above Player
         if ((transform.parent.position.y > collision.transform.position.y) &&

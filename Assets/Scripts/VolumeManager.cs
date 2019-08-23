@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/23/2017
-// Last:  08/18/2019
+// Last:  08/23/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -82,7 +82,7 @@ public class VolumeManager : MonoBehaviour
             currentVolumeLevel = PlayerPrefs.GetFloat("Volume");
 
             // Adjusts the slider to the saved volume and voids error
-            if (slider != null)
+            if (slider)
             {
                 slider.value = currentVolumeLevel;
             }

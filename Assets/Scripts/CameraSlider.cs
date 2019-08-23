@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/17/2019
+// Last:  08/23/2019
 
 using System.Collections;
 using UnityEngine;
@@ -52,7 +52,7 @@ public class CameraSlider : MonoBehaviour
         }
 
         // Return the player's movement / state
-        if (playerAnim != null)
+        if (playerAnim)
             playerAnim.speed = 1.0f;
 
         playerMove.bStopPlayerMovement = false;

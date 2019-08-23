@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 07/21/2016
-// Last:  08/16/2019
+// Last:  08/23/2019
 
 using UnityEngine;
 
@@ -54,7 +54,7 @@ public class Turret : MonoBehaviour
                 nearestEnemy = enemy;
             }
 
-            if (nearestEnemy != null &&
+            if (nearestEnemy &&
                 shortestDistance <= range)
             {
                 target = nearestEnemy.transform;
@@ -115,7 +115,7 @@ public class Turret : MonoBehaviour
         GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
-        if (bullet != null)
+        if (bullet)
             bullet.Seek(target);
     }
 

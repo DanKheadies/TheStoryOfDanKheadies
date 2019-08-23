@@ -47,26 +47,6 @@ public class Minesweeper : MonoBehaviour
 
     void Start ()
     {
-        // Initializers
-        //brio = FindObjectOfType<PlayerBrioManager>();
-        //dArrow = GameObject.Find("Dialogue_Arrow").GetComponent<ImageStrobe>();
-        //dBox = GameObject.Find("Dialogue_Box");
-        //dMan = FindObjectOfType<DialogueManager>();
-        //dPic = GameObject.Find("Dialogue_Picture").GetComponent<Image>();
-        //dText = GameObject.Find("Dialogue_Text").GetComponent<Text>();
-        //inv = FindObjectOfType<Inventory>();
-        //mMan = FindObjectOfType<MusicManager>();
-        //moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
-        //oMan = FindObjectOfType<OptionsManager>();
-        //pause = GameObject.FindGameObjectWithTag("Pause");
-        //npc_chun = GameObject.Find("Person.1");
-        //save = FindObjectOfType<SaveGame>();
-        //SFXMan = FindObjectOfType<SFXManager>();
-        //player = GameObject.FindGameObjectWithTag("Player");
-        //touches = FindObjectOfType<TouchControls>();
-        //warpMinesweeper = GameObject.Find("Minesweeper.to.Chp1");
-        //uMan = FindObjectOfType<UIManager>();
-        
         strobeTimer = 1.0f;
         timer = 0.333f;
         
@@ -107,24 +87,13 @@ public class Minesweeper : MonoBehaviour
 
         // Hide BrioBar & Pause Button (Opac)
         uMan.HideBrioAndButton();
+
+        // Get transfer items (if any)
+        inv.LoadInventory("transfer");
     }
 
     void Update ()
     {
-        // Transfer -- Load inventory
-        if (timer > 0)
-        {
-            timer -= Time.deltaTime;
-
-            if (timer <= 0)
-            {
-                inv.LoadInventory("transfer");
-
-                // Reset Transfer
-                PlayerPrefs.SetInt("Transferring", 0);
-            }
-        }
-
         if (strobeTimer > 0)
         {
             strobeTimer -= Time.deltaTime;

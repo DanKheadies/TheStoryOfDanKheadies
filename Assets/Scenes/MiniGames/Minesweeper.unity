@@ -17394,6 +17394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedItem: {fileID: 0}
   items: []
+  scriptMan: {fileID: 2074391692}
   selectedItemId: 0
   totalItems: 0
   bUpdateItemCount: 0
@@ -17653,12 +17654,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1137910804}
   pause: {fileID: 2074391689}
+  scriptMan: {fileID: 2074391692}
   portPic: {fileID: 21300000, guid: b9a7fea6747b7f544a4b817add47c0fb, type: 3}
   touches: {fileID: 945577415}
   uMan: {fileID: 517931596}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Ka BOOM! You is dedz.
   - Care to play again?
@@ -25909,6 +25913,7 @@ MonoBehaviour:
   oMan: {fileID: 1137910805}
   pause: {fileID: 2074391689}
   playerMove: {fileID: 1933751392}
+  scriptMan: {fileID: 0}
   SFXMan: {fileID: 2090163999}
   portPic: {fileID: 21300000, guid: cb0a295efb692dc4d967fcbe460a2fb7, type: 3}
   dText: {fileID: 578846267}
@@ -25919,6 +25924,7 @@ MonoBehaviour:
   bPauseDialogue: 0
   bTempControlActive: 0
   currentLine: 0
+  closingAction: 
   dialogueLines:
   - The Story of Dan Kheadies
 --- !u!114 &1137910805
@@ -36067,12 +36073,15 @@ MonoBehaviour:
   colliEnter: {fileID: 0}
   dMan: {fileID: 1137910804}
   pause: {fileID: 2074391689}
+  scriptMan: {fileID: 2074391692}
   portPic: {fileID: 21300000, guid: b9a7fea6747b7f544a4b817add47c0fb, type: 3}
   touches: {fileID: 945577415}
   uMan: {fileID: 517931596}
+  bActionOnClose: 0
   bContinueDialogue: 0
   bHasEntered: 0
   bHasExited: 0
+  action: 
   dialogueLines:
   - Hey you did it, GG!
   - Care to play again?
@@ -38124,6 +38133,7 @@ MonoBehaviour:
   smoothVelocity: {x: 0.2, y: 0.2}
   bUpdateOn: 1
   currentCoords: 0
+  depth: 0
   minCamX: 0
   minCamY: 0
   maxCamX: 0
@@ -43672,6 +43682,7 @@ GameObject:
   - component: {fileID: 2074391688}
   - component: {fileID: 2074391687}
   - component: {fileID: 2074391686}
+  - component: {fileID: 2074391692}
   m_Layer: 0
   m_Name: Game_Controller
   m_TagString: Untagged
@@ -43830,6 +43841,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2074391692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074391685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f6bad1dc3e79c4480027a7e4c5e92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp0: {fileID: 0}
+  chp1: {fileID: 0}
+  dMan: {fileID: 1137910804}
 --- !u!1 &2076129493
 GameObject:
   m_ObjectHideFlags: 0

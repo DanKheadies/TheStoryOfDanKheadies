@@ -141,17 +141,13 @@ public class PookieSplorer : MonoBehaviour
             Input.GetButton("Controller Top Button"))
         {
             if (color > 0)
-            {
                 color -= 0.01f;
-            }
         }
         else if (Input.GetKey(KeyCode.O) ||
                  Input.GetButton("Controller Left Button"))
         {
             if (color < 1)
-            {
                 color += 0.01f;
-            }
         }
 
         // Cycle 
@@ -159,17 +155,16 @@ public class PookieSplorer : MonoBehaviour
             Input.GetButton("Controller Right Button"))
         {
             if (symmetry > 0)
-            {
                 symmetry -= 0.1f;
-            }
+
+            else if (symmetry < 0)
+                symmetry = 0;
         }
         else if (Input.GetKey(KeyCode.Q) ||
                  Input.GetButton("Controller Bottom Button"))
         {
             if (symmetry < 1)
-            {
                 symmetry += 0.1f;
-            }
         }
 
         if (Input.GetKey(KeyCode.R) ||

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  08/19/2019
+// Last:  08/22/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,17 +73,10 @@ public class Chp0 : MonoBehaviour
         // Chapter 0 Saved Game
         else
         {
-            // Initialize
-            inv.RerunStart();
-            save.RerunStart();
-
-            // Get saved info
             save.GetSavedGame();
 
-            // Cue timer to get saved inventory info
-            StartCoroutine(LoadInventory());
-
-            // Fade in
+            VisorCheck();
+            
             sFaderAnimDia.GetComponent<Animator>().enabled = true;
         }
     }
@@ -130,12 +123,8 @@ public class Chp0 : MonoBehaviour
         }
     }
 
-    IEnumerator LoadInventory()
+    public void VisorCheck()
     {
-        yield return new WaitForSeconds(0.333f);
-
-        inv.LoadInventory("saved");
-
         // Item Check -- Check on VR Goggles to avoid farming
         for (int i = 0; i < inv.items.Count; i++)
         {

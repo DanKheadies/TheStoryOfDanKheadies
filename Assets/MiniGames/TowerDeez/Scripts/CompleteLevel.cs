@@ -17,9 +17,6 @@ public class CompleteLevel : MonoBehaviour
     {
         // TODO: Display summary before moving on (time, built, spend, killed, earned, etc.)
 
-        // Unlock next level
-        PlayerPrefs.SetInt("levelReached", (PlayerPrefs.GetInt("levelReached") + 1));
-
         // Get current level
         string nextLevel = SceneManager.GetActiveScene().name;
         nextLevel = nextLevel.Substring(nextLevel.Length - 1);

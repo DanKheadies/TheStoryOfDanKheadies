@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/18/2017
-// Last:  08/19/2019
+// Last:  08/23/2019
 
 using UnityEngine;
 
@@ -106,19 +106,19 @@ public class CannabisPlant : MonoBehaviour
 
     public void HideBud()
     {
-        if (greenBud != null)
+        if (greenBud)
         {
             greenBud.transform.localScale = Vector3.zero;
         }
-        else if (orangeBud != null)
+        else if (orangeBud)
         {
             orangeBud.transform.localScale = Vector3.zero;
         }
-        else if (purpleBud != null)
+        else if (purpleBud)
         {
             purpleBud.transform.localScale = Vector3.zero;
         }
-        else if (whiteBud != null)
+        else if (whiteBud)
         {
             whiteBud.transform.localScale = Vector3.zero;
         }

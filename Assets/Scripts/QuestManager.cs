@@ -25,24 +25,25 @@ public class QuestManager : MonoBehaviour
 	
 	void Update ()
     {
-        //if (Input.GetKeyDown(KeyCode.G))
-        //{
-        //    Debug.Log("QL: " + quests.Length);
-        //    for (int i = 0; i < quests.Length; i++) {
-        //        Debug.Log("Q#: " + quests[i].questNumber);
-        //        Debug.Log("St: " + quests[i].bHasStarted);
-        //        Debug.Log("En: " + quests[i].bHasEnded);
-        //    }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Debug.Log("QL: " + quests.Length);
+            for (int i = 0; i < quests.Length; i++)
+            {
+                Debug.Log("Q#: " + quests[i].questNumber);
+                Debug.Log("St: " + quests[i].bHasStarted);
+                Debug.Log("En: " + quests[i].bHasEnded);
+            }
 
-        //    Debug.Log("QC: " + questsCompleted.Length);
-        //    for (int i = 0; i < questsCompleted.Length; i++)
-        //    {
-        //        Debug.Log("Q#: " + questsCompleted[i]);
-        //        //Debug.Log("St: " + questsCompleted[i].bHasStarted);
-        //        //Debug.Log("En: " + questsCompleted[i].bHasEnded);
-        //    }
-        //}
-	}
+            //Debug.Log("QC: " + questsCompleted.Length);
+            //for (int i = 0; i < questsCompleted.Length; i++)
+            //{
+            //    Debug.Log("Q#: " + questsCompleted[i]);
+            //    //Debug.Log("St: " + questsCompleted[i].bHasStarted);
+            //    //Debug.Log("En: " + questsCompleted[i].bHasEnded);
+            //}
+        }
+    }
 
     public void ShowQuestText(string[] questText)
     {

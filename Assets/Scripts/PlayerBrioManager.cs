@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/18/2019
+// Last:  08/23/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -60,7 +60,7 @@ public class PlayerBrioManager : MonoBehaviour
             dMan.portPic = portPic;
             dMan.ShowDialogue();
 
-            if (playerAnim != null)
+            if (playerAnim)
                 playerAnim.SetBool("bIsWalking", false);
             playerCurrentBrio = 1;
         }

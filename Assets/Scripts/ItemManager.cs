@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  08/17/2019
+// Last:  08/23/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -161,38 +161,19 @@ public class ItemManager : MonoBehaviour
 
     public void HideItem()
     {
-        if (greenBud != null)
-        {
+        if (greenBud)
             greenBud.transform.localScale = Vector3.zero;
-        }
-        else if (orangeBud != null)
-        {
-            orangeBud.transform.localScale = Vector3.zero;
-        }
-        else if (purpleBud != null)
-        {
-            purpleBud.transform.localScale = Vector3.zero;
-        }
-        else if (whiteBud != null)
-        {
-            whiteBud.transform.localScale = Vector3.zero;
-        }
-        else if (vrGoggles != null)
-        {
-            vrGoggles.transform.localScale = Vector3.zero;
-        }
 
-        //if (scene.name == "Chp0")
-        //{
-        //    vrGoggles.transform.localScale = Vector3.zero;
-        //}
-        //else if (scene.name == "Chp1")
-        //{
-        //    greenBud.transform.localScale = Vector3.zero;
-        //    orangeBud.transform.localScale = Vector3.zero;
-        //    purpleBud.transform.localScale = Vector3.zero;
-        //    whiteBud.transform.localScale = Vector3.zero;
-        //    vrGoggles.transform.localScale = Vector3.zero;
-        //}
+        else if (orangeBud)
+            orangeBud.transform.localScale = Vector3.zero;
+
+        else if (purpleBud)
+            purpleBud.transform.localScale = Vector3.zero;
+
+        else if (whiteBud)
+            whiteBud.transform.localScale = Vector3.zero;
+
+        else if (vrGoggles)
+            vrGoggles.transform.localScale = Vector3.zero;
     }
 }

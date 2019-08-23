@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/18/2019
+// Last:  08/23/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -153,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
         movementVector = moveSpeed * new Vector2(xInput, yInput);
 
         // Animate movement
-        if (playerAnim != null)
+        if (playerAnim)
         {
             if (movementVector != Vector2.zero)
             {
@@ -174,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rBody.velocity = movementVector * 2;
 
-            if (playerAnim != null)
+            if (playerAnim)
                 playerAnim.speed = 2.0f;
             
             // Use Brio
@@ -189,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rBody.velocity = movementVector;
 
-            if (playerAnim != null)
+            if (playerAnim)
                 playerAnim.speed = 1.0f;
         }
     }
@@ -326,7 +326,7 @@ public class PlayerMovement : MonoBehaviour
         aspectUtil.Awake();
 
         // "Stop" player animation
-        if (playerAnim != null)
+        if (playerAnim)
         {
             playerAnim.speed = 0.0001f;
         }
@@ -336,7 +336,7 @@ public class PlayerMovement : MonoBehaviour
         cameraFollow.bUpdateOn = false;
 
         // Hide UI (if present) and prevent input
-        if (cameraSlider != null)
+        if (cameraSlider)
         {
             cameraSlider.bTempControlActive = uMan.bControlsActive;
         }
@@ -347,7 +347,7 @@ public class PlayerMovement : MonoBehaviour
         bStopPlayerMovement = true;
 
         // Prevent player interactions (e.g. other tripwires)
-        if (playerCollider != null)
+        if (playerCollider)
             playerCollider.enabled = false;
     }
 
@@ -358,7 +358,7 @@ public class PlayerMovement : MonoBehaviour
         // Collisions listed alphabetically by ShiftZone parent
         // DC 09/25/2017 -- TODO: Possible performance upgrade based on most visited at the top
         if (collision.CompareTag("ShiftZone") &&
-            cameraSlider != null)
+            cameraSlider)
         {
             if (collision.name == "BatteryNE2BatteryNW")
             {

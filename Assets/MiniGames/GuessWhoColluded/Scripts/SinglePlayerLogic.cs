@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/31/2019
-// Last:  04/22/2019
+// Last:  08/23/2019
 
 using System.Collections;
 using UnityEngine;
@@ -80,16 +80,6 @@ public class SinglePlayerLogic : MonoBehaviour
 
     void Start()
     {
-        // Initializers
-        chars = FindObjectOfType<Characters>();
-        dMan = FindObjectOfType<DialogueManager>();
-        end = FindObjectOfType<EndGame>();
-        gwc = FindObjectOfType<GWC_Controller>();
-        moveOptsArw = FindObjectOfType<MoveOptionsMenuArrow>();
-        oMan = FindObjectOfType<OptionsManager>();
-        pause = FindObjectOfType<PauseGame>();
-        touches = FindObjectOfType<TouchControls>();
-
         bTraitClothingColorO1 = bTraitCountryO1 = bTraitHairColorO1 = bTraitHairLengthO1 = bTraitIconsO1 = bTraitSkinColorO1 = true;
 
         logicTree = Random.Range(1, 3);

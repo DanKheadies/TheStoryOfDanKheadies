@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/21/2019
+// Last:  08/23/2019
 
 using System.Collections;
 using UnityEngine;
@@ -157,7 +157,7 @@ public class DialogueManager : MonoBehaviour
 
         // Reactivate the player
         playerMove.bStopPlayerMovement = false;
-        if (playerAnim != null)
+        if (playerAnim)
         {
             playerAnim.Play("Idle");
         }
@@ -189,7 +189,7 @@ public class DialogueManager : MonoBehaviour
 
         // Stops the player's movement
         playerMove.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        if (playerAnim != null)
+        if (playerAnim)
         {
             playerAnim.SetBool("bIsWalking", false);
         }

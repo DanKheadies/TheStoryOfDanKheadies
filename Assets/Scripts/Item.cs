@@ -2,7 +2,7 @@
 // Authors: Asbjorn Thirslund (Brackeys)
 // Contributors: David W. Corso
 // Start: 01/18/2018
-// Last:  08/12/2018
+// Last:  08/22/2019
 
 using UnityEngine;
 
@@ -12,7 +12,7 @@ public class Item : ScriptableObject
     public string itemName = "New Item";
     public string itemDescription = "Item Description";
     public Sprite icon = null;
-    public bool isDefault = false;
+    public bool bInteractable = true;
     public int dankness = 0;
 
     public virtual void Use()

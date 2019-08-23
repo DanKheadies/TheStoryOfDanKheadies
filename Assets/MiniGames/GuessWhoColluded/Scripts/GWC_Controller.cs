@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  08/18/2019
+// Last:  08/23/2019
 
 using System.Collections;
 using UnityEngine;
@@ -138,6 +138,9 @@ public class GWC_Controller : MonoBehaviour
         sFaderAnimDia.GetComponent<Animator>().enabled = true;
 
         player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+        
+        // Get transfer items (if any)
+        inv.LoadInventory("transfer");
     }
 
     void Update()

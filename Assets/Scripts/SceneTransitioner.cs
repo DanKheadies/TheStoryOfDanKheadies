@@ -61,7 +61,7 @@ public class SceneTransitioner : MonoBehaviour
                         sceneTitle.text = "Pookie Vision\n";
                         sceneSubtitle.text = "\nFor the kids..";
                         break;
-                    case "TowerDeez":
+                    case "TD_Menu":
                         sceneTitle.text = "TowerDeez\n";
                         sceneSubtitle.text = "\nAnd it's nuts..";
                         break;

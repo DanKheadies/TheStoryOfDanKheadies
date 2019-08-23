@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso, Asbjorn Thirslund (Brackeys), Austin (AwfulMedia / GameGrind)
 // Start: 01/18/2018
-// Last:  08/18/2019
+// Last:  08/23/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -63,7 +63,7 @@ public class InventorySlot : MonoBehaviour
 
     public void OpenItemMenu (bool bItemOpen)
     {
-        if (item != null)
+        if (item)
         {
             if (bItemOpen)
             {

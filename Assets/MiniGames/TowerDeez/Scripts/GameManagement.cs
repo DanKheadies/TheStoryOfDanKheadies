@@ -58,6 +58,12 @@ public class GameManagement : MonoBehaviour
     {
         IsLevelWon = true;
 
+        Debug.Log("level won");
+        Debug.Log("current level: " + PlayerPrefs.GetInt("levelReached"));
+        // Unlock next level
+        PlayerPrefs.SetInt("levelReached", (PlayerPrefs.GetInt("levelReached") + 1));
+        Debug.Log("current level: " + PlayerPrefs.GetInt("levelReached"));
+
         // TODO: Enable if device flips
 
         if (Screen.width >= Screen.height)

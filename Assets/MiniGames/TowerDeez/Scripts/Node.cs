@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 08/06/2016
-// Last:  08/13/2019
+// Last:  08/23/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -95,7 +95,7 @@ public class Node : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        if (turret != null)
+        if (turret)
         {
             buildMan.SelectNode(this);
             return;

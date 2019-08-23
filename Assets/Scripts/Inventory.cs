@@ -2,30 +2,15 @@
 // Authors: Asbjorn Thirslund (Brackeys)
 // Contributors: David W. Corso
 // Start: 01/18/2018
-// Last:  08/21/2019
+// Last:  08/23/2019
 
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    #region Singleton
 
     public static Inventory instance;
-
-    void Awake()
-    {
-        if (instance != null)
-        {
-            Debug.LogWarning("More than one instance of inventory found. Error.");
-            return;
-        }
-
-        instance = this;
-    }
-
-    #endregion
-    
     public Item selectedItem;
     public List<Item> items;
     public ScriptManager scriptMan;
@@ -38,54 +23,51 @@ public class Inventory : MonoBehaviour
 
     public bool bUpdateItemCount;
 
-    void Start()
+    void Awake()
     {
+        if (instance)
+        {
+            Debug.LogWarning("More than one instance of inventory found. Error.");
+            return;
+        }
+
+        instance = this;
+
         // Initializers
         items = new List<Item>();
         totalItems = 20;
     }
 
-    public void RerunStart()
+    public void Add(Item item)
     {
-        Start();
-    }
-
-    public bool Add(Item item)
-    {
-        if (!item.isDefault)
+        if (item.bInteractable)
         {
             if (items.Count >= totalItems)
             {
-                Debug.Log(items.Count);
                 Debug.Log("Not enough room.");
-                return false;
+                return;
             }
-            
-            items.Add(item);
+            else
+            {
+                items.Add(item);
+                scriptMan.InventoryUpdate();
+            }
 
             if (onItemChangedCallback != null)
-            {
                 onItemChangedCallback.Invoke();
-            }
         }
-        
-        scriptMan.InventoryUpdate();
-
-        return true;
     }
 
-    public void PickUpDestory(Item item)
-    {
-        bool wasPickedUp = Inventory.instance.Add(item);
+    //public void PickUpDestory(Item item)
+    //{
+    //    bool wasPickedUp = instance.Add(item);
 
-        // Remove item if needed
-        if (wasPickedUp)
-        {
-            Destroy(gameObject);
-        }
+    //    // Remove item if needed
+    //    if (wasPickedUp)
+    //        Destroy(gameObject);
         
-        scriptMan.InventoryUpdate();
-    }
+    //    scriptMan.InventoryUpdate();
+    //}
 
     public void Remove(Item item)
     {
@@ -94,9 +76,7 @@ public class Inventory : MonoBehaviour
         // TODO -- Drops an instance of item on the ground
 
         if (onItemChangedCallback != null)
-        {
             onItemChangedCallback.Invoke();
-        }
         
         scriptMan.InventoryUpdate();
     }
@@ -106,9 +86,7 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             if (itemId == i)
-            {
                 selectedItem = items[i];
-            }
         }
         
         return selectedItem;

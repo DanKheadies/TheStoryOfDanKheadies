@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/18/2019
+// Last:  08/22/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,41 +20,23 @@ public class SaveGame : MonoBehaviour
     public VolumeManager savedVol;
 
     public int invTotal;
+
     public string savedItem;
-
-    void Start()
-    {
-        // Initializers
-        scene = SceneManager.GetActiveScene();
-
-        if (tempItem != null)
-        {
-            tempItem = ScriptableObject.CreateInstance<Item>();
-        }
-    }
 
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Backspace))
-        {
             DeleteAllPrefs();
-        }
         
         if (Input.GetKeyUp(KeyCode.C))
-        {
             CheckSavedData();
-        }
-    } 
-
-    public void RerunStart()
-    {
-        // TODO: still needed?
-        Start();
     }
 
     // Saves *majority* of user data
     public void SavingGame()
     {
+        scene = SceneManager.GetActiveScene();
+
         PlayerPrefs.SetInt("Saved", 1);
         PlayerPrefs.SetString("Chapter", scene.name);
         PlayerPrefs.SetFloat("Cam_x", savedCamera.transform.position.x);
@@ -65,12 +47,13 @@ public class SaveGame : MonoBehaviour
         PlayerPrefs.SetFloat("BrioMax", savedPlayer.GetComponent<PlayerBrioManager>().playerMaxBrio);
         PlayerPrefs.SetFloat("Brio", savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio);
 
-        // Clear out the inventory prefs before saving again
+        // Clear out the inventory prefs...
         PlayerPrefs.SetInt("ItemTotal", 0);
         for (int i = 0; i < inv.totalItems; i++)
         {
             PlayerPrefs.SetString("Item" + i, "");
         }
+        // ...before saving again
         for (int i = 0; i < inv.items.Count; i++)
         {
             PlayerPrefs.SetString("Item" + i, inv.items[i].ToString());
@@ -113,7 +96,9 @@ public class SaveGame : MonoBehaviour
                 {
                     string savedItem = PlayerPrefs.GetString("TransferItem" + i);
                     savedItem = savedItem.Substring(0, savedItem.Length - 7);
-                    Item tempItem = (Item)Resources.Load("Items/" + savedItem);
+
+                    Item tempItem = tempItem = ScriptableObject.CreateInstance<Item>();
+                    tempItem = (Item)Resources.Load("Items/" + savedItem);
                     Debug.Log("TInv " + (i + 1) + ": " + PlayerPrefs.GetString("TransferItem" + i, inv.items[i].ToString()));
                 }
             }
@@ -125,7 +110,9 @@ public class SaveGame : MonoBehaviour
                 {
                     string savedItem = PlayerPrefs.GetString("Item" + i);
                     savedItem = savedItem.Substring(0, savedItem.Length - 7);
-                    Item tempItem = (Item)Resources.Load("Items/" + savedItem);
+
+                    Item tempItem = tempItem = ScriptableObject.CreateInstance<Item>();
+                    tempItem = (Item)Resources.Load("Items/" + savedItem);
                     Debug.Log("Inv " + (i + 1) + ": " + PlayerPrefs.GetString("Item" + i, inv.items[i].ToString()));
                 }
             }
@@ -149,18 +136,14 @@ public class SaveGame : MonoBehaviour
     // Saves UI controls' opacity and data
     public void SavingUIControls()
     {
-        PlayerPrefs.SetInt("ControlsDPad", uMan.currentContDPad); // Also called in UIManager
-        PlayerPrefs.SetFloat("ControlsOpac", uMan.currentContOpac); // Also called in UIManager
+        PlayerPrefs.SetInt("ControlsDPad", uMan.currentContDPad); 
+        PlayerPrefs.SetFloat("ControlsOpac", uMan.currentContOpac); 
         PlayerPrefs.SetInt("ControlsVibrate", touches.currentContVibe); // Also called in TouchControls
 
         if (uMan.bControlsActive)
-        {
             PlayerPrefs.SetInt("ControlsActive", 1);
-        }
         else
-        {
             PlayerPrefs.SetInt("ControlsActive", 0);
-        }
     }
 
     // Temp save inventory for switching scenes
@@ -208,38 +191,46 @@ public class SaveGame : MonoBehaviour
         savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio = PlayerPrefs.GetFloat("Brio");
 
         // Camera
-        savedCamera.transform.position = new Vector2(PlayerPrefs.GetFloat("Cam_x"), PlayerPrefs.GetFloat("Cam_y"));
-        float posX = Mathf.SmoothDamp(savedCamera.transform.position.x, savedPlayer.transform.position.x, ref camFollow.smoothVelocity.x, camFollow.smoothTime);
-        float posY = Mathf.SmoothDamp(savedCamera.transform.position.y, savedPlayer.transform.position.y, ref camFollow.smoothVelocity.y, camFollow.smoothTime);
-        savedCamera.transform.position = new Vector3(posX, posY, -10);
+        savedCamera.transform.position = new Vector3(
+            PlayerPrefs.GetFloat("Cam_x"), 
+            PlayerPrefs.GetFloat("Cam_y"), 
+            -10);
 
+        // Location
         camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("AnandaCoord");
 
-        // See UIManager for UI getters
+        // Inventory
+        inv.LoadInventory("saved");
 
-        // See TouchControls for touches getters
+        // UI
+        // see UIManager.Start()
 
-        // See Inventory for inventory getters
+        // Vibrate
+        // see TouchControls.Start()
     }
 
     // Loads *all* user data at the start
     public void GetTransferData()
     {
+        // Player
         savedPlayer.transform.position = new Vector2(
             PlayerPrefs.GetFloat("TransferP_x"),
-            PlayerPrefs.GetFloat("TransferP_y"));
+            PlayerPrefs.GetFloat("TransferP_y") - 0.05f);
 
         savedPlayer.GetComponent<PlayerBrioManager>().playerMaxBrio = PlayerPrefs.GetFloat("TransferBrioMax");
         savedPlayer.GetComponent<PlayerBrioManager>().playerCurrentBrio = PlayerPrefs.GetFloat("TransferBrio");
 
-        savedCamera.transform.position = new Vector2(PlayerPrefs.GetFloat("TransferCam_x"), PlayerPrefs.GetFloat("TransferCam_y"));
-        float posX = Mathf.SmoothDamp(savedCamera.transform.position.x, savedPlayer.transform.position.x, ref camFollow.smoothVelocity.x, camFollow.smoothTime);
-        float posY = Mathf.SmoothDamp(savedCamera.transform.position.y, savedPlayer.transform.position.y, ref camFollow.smoothVelocity.y, camFollow.smoothTime);
-        savedCamera.transform.position = new Vector3(posX, posY, -10);
+        // Camera
+        savedCamera.transform.position = new Vector3(
+            PlayerPrefs.GetFloat("TransferCam_x"), 
+            PlayerPrefs.GetFloat("TransferCam_y"), 
+            -10);
 
+        // Location
         camFollow.currentCoords = (CameraFollow.AnandaCoords)PlayerPrefs.GetInt("TransferAnandaCoord");
 
-        // See Chapter start for inventory getters
+        // Inventory
+        inv.LoadInventory("transfer");
     }
 
     // Testing -- Delete all transfer

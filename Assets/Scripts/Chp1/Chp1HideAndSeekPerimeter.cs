@@ -23,6 +23,6 @@ public class Chp1HideAndSeekPerimeter : MonoBehaviour
     {
         yield return new WaitForSeconds(1.333f);
 
-        chp1.Quest4Reset();
+        chp1.HideAndSeekReset();
     }
 }

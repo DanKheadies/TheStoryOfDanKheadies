@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 08/06/2016
-// Last:  08/13/2019
+// Last:  08/23/2019
 
 using UnityEngine;
 
@@ -18,7 +18,7 @@ public class BuildManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance != null)
+        if (instance)
         {
             Debug.LogError("More than one BuildManager in scene.");
             return;

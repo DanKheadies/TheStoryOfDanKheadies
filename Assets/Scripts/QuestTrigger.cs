@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  08/21/2019
+// Last:  08/23/2019
 
 using UnityEngine;
 
@@ -32,14 +32,17 @@ public class QuestTrigger : MonoBehaviour
             if (!qMan.questsCollected[questNumber])
             {
                 // Bool set on GameObject directs NPC interaction
-                if (bBeginQuest)
+                if (bBeginQuest &&
+                    !qMan.questsStarted[questNumber])
                 {
-                    if (spRend != null &&
-                        npcAnim != null)
-                    {
+                    // Stop NPC movement
+                    if (transform.parent.GetComponent<NPCMovement>())
+                        transform.parent.GetComponent<NPCMovement>().bCanMove = false;
+
+                    // NPC looks at player if there's an animation/animator
+                    if (npcAnim)
                         OrientNPC(collision);
-                    }
-                    
+
                     // Quest Text
                     qMan.quests[questNumber].BeginQuest();
 
@@ -49,21 +52,16 @@ public class QuestTrigger : MonoBehaviour
                         scriptMan.ActionOnClose(action);
                 }
 
-                if (bEndQuest)
+                if (bEndQuest &&
+                    !qMan.questsEnded[questNumber])
                 {
-                    if (spRend != null)
-                    {
-                        if (npcAnim != null)
-                        {
-                            OrientNPC(collision);
-                        }
+                    // Stop NPC movement
+                    if (transform.parent.GetComponent<NPCMovement>())
+                        transform.parent.GetComponent<NPCMovement>().bCanMove = false;
 
-                        // Stop NPC movement
-                        if (transform.parent.GetComponent<NPCMovement>() != null)
-                        {
-                            transform.parent.GetComponent<NPCMovement>().bCanMove = false;
-                        }
-                    }
+                    // NPC looks at player if there's an animation/animator
+                    if (npcAnim)
+                        OrientNPC(collision);
 
                     // Quest Text
                     qMan.quests[questNumber].EndQuest();
@@ -78,10 +76,11 @@ public class QuestTrigger : MonoBehaviour
 
         // Reset NPC
         if (!dMan.bDialogueActive && 
-            spRend != null && 
-            npcAnim != null)
+            spRend && 
+            npcAnim)
         {
             npcAnim.Play("NPC Movement");
+            transform.parent.GetComponent<NPCMovement>().bCanMove = false;
         }
     }
 

@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public SceneFader sceneFader;
-    public string levelToLoad = "TowerDeez";
+    public string levelToLoad = "TD_LevelSelector";
 
     public void Play()
     {
@@ -20,5 +20,13 @@ public class MainMenu : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void TransitionToChp1()
+    {
+        // Save Transfer Values
+        PlayerPrefs.SetInt("Transferring", 1);
+
+        sceneFader.FadeTo("Chp1");
     }
 }

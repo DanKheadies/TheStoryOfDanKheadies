@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 07/21/2016
-// Last:  08/09/2019
+// Last:  08/23/2019
 
 using UnityEngine;
 
@@ -75,7 +75,7 @@ public class Bullet : MonoBehaviour
     {
         Enemy e = enemy.GetComponent<Enemy>();
 
-        if (e != null)
+        if (e)
         {
             e.TakeDamage(damage);
         }

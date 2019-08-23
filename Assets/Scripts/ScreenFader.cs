@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/18/2019
+// Last:  08/23/2019
 
 using System.Collections;
 using UnityEngine;
@@ -23,7 +23,7 @@ public class ScreenFader : MonoBehaviour
         anim.SetTrigger("FadeIn");
         while (playerMove.bStopPlayerMovement)
         {
-            if (playerAnim != null)
+            if (playerAnim)
                 playerAnim.SetBool("bIsWalking", false);
             yield return null;
         }
@@ -35,7 +35,7 @@ public class ScreenFader : MonoBehaviour
         anim.SetTrigger("FadeOut");
         while (playerMove.bStopPlayerMovement)
         {
-            if (playerAnim != null)
+            if (playerAnim)
                 playerAnim.SetBool("bIsWalking", false);
             yield return null;
         }
