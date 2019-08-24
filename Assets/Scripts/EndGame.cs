@@ -20,6 +20,8 @@ public class EndGame : MonoBehaviour
         save.DeleteTransPrefs();
         
         Application.Quit();
+
+        Debug.Log("i ended");
     }
 
     public void GoToMainMenu()

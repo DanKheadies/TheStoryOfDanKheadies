@@ -124,93 +124,7 @@ public class MovePauseMenuArrow : MonoBehaviour
             {
                 bControllerDown = false;
 
-                // For core
-                if (currentPosition == ArrowPos.GoOn)
-                {
-                    currentPosition = ArrowPos.Save;
-                    ClearAllArrows();
-                    SaveArw.transform.localScale = Vector3.one;
-                }
-                else if (currentPosition == ArrowPos.Save)
-                {
-                    currentPosition = ArrowPos.Stuff;
-                    ClearAllArrows();
-                    StuffArw.transform.localScale = Vector3.one;
-                }
-                else if (currentPosition == ArrowPos.Stuff)
-                {
-                    currentPosition = ArrowPos.Sound;
-                    ClearAllArrows();
-                    SoundArw.transform.localScale = Vector3.one;
-                }
-                else if (currentPosition == ArrowPos.Sound)
-                {
-                    currentPosition = ArrowPos.Controls;
-                    ClearAllArrows();
-                    ControlsArw.transform.localScale = Vector3.one;
-                }
-                else if (currentPosition == ArrowPos.Controls)
-                {
-                    currentPosition = ArrowPos.Quit;
-                    ClearAllArrows();
-                    QuitArw.transform.localScale = Vector3.one;
-                }
-
-                // For Guess Who Colluded
-                if (scene.name == "GuessWhoColluded")
-                {
-                    // Skips & goes back "down" to correct option
-                    if (currentPosition == ArrowPos.Save)
-                    {
-                        currentPosition = ArrowPos.Stuff;
-                        ClearAllArrows();
-                        StuffArw.transform.localScale = Vector3.one;
-                    }
-                    // Tiggers arrow to move to secondary menu
-                    else if (currentPosition == ArrowPos.Quit &&
-                             !bSecondaryMenu)
-                    {
-                        bSecondaryMenu = true;
-                    }
-                    // GWC only options
-                    else if (currentPosition == ArrowPos.Quit &&
-                             bSecondaryMenu)
-                    {
-                        currentPosition = ArrowPos.Colluminac;
-                        ClearAllArrows();
-                        CollumArw.transform.localScale = new Vector3(1, 1, 1);
-                    }
-                    else if (currentPosition == ArrowPos.Colluminac)
-                    {
-                        currentPosition = ArrowPos.Icons;
-                        ClearAllArrows();
-                        IconsArw.transform.localScale = new Vector3(1, 1, 1);
-                    }
-                    else if (currentPosition == ArrowPos.Icons)
-                    {
-                        currentPosition = ArrowPos.Reset;
-                        ClearAllArrows();
-                        ResetArw.transform.localScale = new Vector3(1, 1, 1);
-                    }
-                    else if (currentPosition == ArrowPos.Reset)
-                    {
-                        currentPosition = ArrowPos.GG;
-                        ClearAllArrows();
-                        GGArw.transform.localScale = new Vector3(1, 1, 1);
-                    }
-                }
-
-                // For Minesweeper
-                else if (scene.name == "Minesweeper")
-                {
-                    // Skips & goes back "down" to correct option
-                    if (currentPosition == ArrowPos.Save)
-                    {
-                        currentPosition = ArrowPos.Stuff;
-                        ClearAllArrows();
-                        StuffArw.transform.localScale = Vector3.one;
-                    }
-                }
+                MoveDown();
             }
             else if (Input.GetKeyDown(KeyCode.W) ||
                      Input.GetKeyDown(KeyCode.UpArrow) ||
@@ -218,150 +132,13 @@ public class MovePauseMenuArrow : MonoBehaviour
             {
                 bControllerUp = false;
 
-                // For core
-                if (currentPosition == ArrowPos.Quit)
-                {
-                    currentPosition = ArrowPos.Controls;
-                    ClearAllArrows();
-                    ControlsArw.transform.localScale = Vector3.one;
-                }
-                else if (currentPosition == ArrowPos.Controls)
-                {
-                    currentPosition = ArrowPos.Sound;
-                    ClearAllArrows();
-                    SoundArw.transform.localScale = Vector3.one;
-                }
-                else if (currentPosition == ArrowPos.Sound)
-                {
-                    currentPosition = ArrowPos.Stuff;
-                    ClearAllArrows();
-                    StuffArw.transform.localScale = Vector3.one;
-                }
-                else if (currentPosition == ArrowPos.Stuff)
-                {
-                    currentPosition = ArrowPos.Save;
-                    ClearAllArrows();
-                    SaveArw.transform.localScale = Vector3.one;
-                }
-                else if (currentPosition == ArrowPos.Save)
-                {
-                    currentPosition = ArrowPos.GoOn;
-                    ClearAllArrows();
-                    GoOnArw.transform.localScale = Vector3.one;
-                }
-
-                // For Guess Who Colluded
-                if (scene.name == "GuessWhoColluded")
-                {
-                    // GWC only options
-                    if (currentPosition == ArrowPos.GG)
-                    {
-                        currentPosition = ArrowPos.Reset;
-                        ClearAllArrows();
-                        ResetArw.transform.localScale = Vector3.one;
-                    }
-                    else if (currentPosition == ArrowPos.Reset)
-                    {
-                        currentPosition = ArrowPos.Icons;
-                        ClearAllArrows();
-                        IconsArw.transform.localScale = Vector3.one;
-                    }
-                    else if (currentPosition == ArrowPos.Icons)
-                    {
-                        currentPosition = ArrowPos.Colluminac;
-                        ClearAllArrows();
-                        CollumArw.transform.localScale = Vector3.one;
-                    }
-                    else if (currentPosition == ArrowPos.Colluminac)
-                    {
-                        currentPosition = ArrowPos.Quit;
-                        ClearAllArrows();
-                        QuitArw.transform.localScale = new Vector3(1, 1, 1);
-
-                        // Resets secondary menu positioning
-                        bSecondaryMenu = false;
-                    }
-                    // Skips & goes back "up" to correct option
-                    else if (currentPosition == ArrowPos.Save)
-                    {
-                        currentPosition = ArrowPos.GoOn;
-                        ClearAllArrows();
-                        GoOnArw.transform.localScale = new Vector3(1, 1, 1);
-                    }
-                }
-
-                // For Minesweeper
-                if (scene.name == "Minesweeper")
-                {
-                    // Skips & goes back "down" to correct option
-                    if (currentPosition == ArrowPos.Save)
-                    {
-                        currentPosition = ArrowPos.GoOn;
-                        ClearAllArrows();
-                        GoOnArw.transform.localScale = Vector3.one;
-                    }
-                }
+                MoveUp();
             }
             else if (Input.GetButtonDown("Action") ||
                      Input.GetKeyDown(KeyCode.JoystickButton0) ||
                      touches.bAaction)
             {
-                // For core
-                if (currentPosition == ArrowPos.GoOn)
-                {
-                    GoOnBtn.onClick.Invoke();
-                }
-                else if (currentPosition == ArrowPos.Save)
-                {
-                    SaveBtn.onClick.Invoke();
-                }
-                else if (currentPosition == ArrowPos.Kogabi)
-                {
-                    KogabiBtn.onClick.Invoke();
-                }
-                else if (currentPosition == ArrowPos.Stuff)
-                {
-                    StuffBtn.onClick.Invoke();
-                }
-                else if (currentPosition == ArrowPos.Map)
-                {
-                    MapBtn.onClick.Invoke();
-                }
-                else if (currentPosition == ArrowPos.Sound)
-                {
-                    SoundBtn.onClick.Invoke();
-                }
-                else if (currentPosition == ArrowPos.Controls)
-                {
-                    ControlsBtn.onClick.Invoke();
-                }
-                else if (currentPosition == ArrowPos.Quit)
-                {
-                    QuitBtn.onClick.Invoke();
-                }
-
-                // For Guess Who Colluded
-                if (scene.name == "GuessWhoColluded")
-                {
-                    if (currentPosition == ArrowPos.Colluminac)
-                    {
-                        CollumBtn.onClick.Invoke();
-                    }
-                    else if (currentPosition == ArrowPos.Icons)
-                    {
-                        IconsBtn.onClick.Invoke();
-                    }
-                    else if (currentPosition == ArrowPos.Reset)
-                    {
-                        ResetBtn.onClick.Invoke();
-                    }
-                    else if (currentPosition == ArrowPos.GG)
-                    {
-                        GGBtn.onClick.Invoke();
-                    }
-                }
-
-                touches.bAaction = false;
+                SelectOption();
             }
             else if (Input.GetKeyDown(KeyCode.Escape) ||
                      Input.GetKeyDown(KeyCode.JoystickButton7) ||
@@ -373,6 +150,244 @@ public class MovePauseMenuArrow : MonoBehaviour
                 ResetArrows();
             }
         }
+    }
+
+    public void MoveDown()
+    {
+        // For core
+        if (currentPosition == ArrowPos.GoOn)
+        {
+            currentPosition = ArrowPos.Save;
+            ClearAllArrows();
+            SaveArw.transform.localScale = Vector3.one;
+        }
+        else if (currentPosition == ArrowPos.Save)
+        {
+            currentPosition = ArrowPos.Stuff;
+            ClearAllArrows();
+            StuffArw.transform.localScale = Vector3.one;
+        }
+        else if (currentPosition == ArrowPos.Stuff)
+        {
+            currentPosition = ArrowPos.Sound;
+            ClearAllArrows();
+            SoundArw.transform.localScale = Vector3.one;
+        }
+        else if (currentPosition == ArrowPos.Sound)
+        {
+            currentPosition = ArrowPos.Controls;
+            ClearAllArrows();
+            ControlsArw.transform.localScale = Vector3.one;
+        }
+        else if (currentPosition == ArrowPos.Controls)
+        {
+            currentPosition = ArrowPos.Quit;
+            ClearAllArrows();
+            QuitArw.transform.localScale = Vector3.one;
+        }
+
+        // For Guess Who Colluded
+        if (scene.name == "GuessWhoColluded")
+        {
+            // Skips & goes back "down" to correct option
+            if (currentPosition == ArrowPos.Save)
+            {
+                currentPosition = ArrowPos.Stuff;
+                ClearAllArrows();
+                StuffArw.transform.localScale = Vector3.one;
+            }
+            // Tiggers arrow to move to secondary menu
+            else if (currentPosition == ArrowPos.Quit &&
+                     !bSecondaryMenu)
+            {
+                bSecondaryMenu = true;
+            }
+            // GWC only options
+            else if (currentPosition == ArrowPos.Quit &&
+                     bSecondaryMenu)
+            {
+                currentPosition = ArrowPos.Colluminac;
+                ClearAllArrows();
+                CollumArw.transform.localScale = new Vector3(1, 1, 1);
+            }
+            else if (currentPosition == ArrowPos.Colluminac)
+            {
+                currentPosition = ArrowPos.Icons;
+                ClearAllArrows();
+                IconsArw.transform.localScale = new Vector3(1, 1, 1);
+            }
+            else if (currentPosition == ArrowPos.Icons)
+            {
+                currentPosition = ArrowPos.Reset;
+                ClearAllArrows();
+                ResetArw.transform.localScale = new Vector3(1, 1, 1);
+            }
+            else if (currentPosition == ArrowPos.Reset)
+            {
+                currentPosition = ArrowPos.GG;
+                ClearAllArrows();
+                GGArw.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+
+        // For Minesweeper
+        else if (scene.name == "Minesweeper")
+        {
+            // Skips & goes back "down" to correct option
+            if (currentPosition == ArrowPos.Save)
+            {
+                currentPosition = ArrowPos.Stuff;
+                ClearAllArrows();
+                StuffArw.transform.localScale = Vector3.one;
+            }
+        }
+    }
+
+    public void MoveUp()
+    {
+        // For core
+        if (currentPosition == ArrowPos.Quit)
+        {
+            currentPosition = ArrowPos.Controls;
+            ClearAllArrows();
+            ControlsArw.transform.localScale = Vector3.one;
+        }
+        else if (currentPosition == ArrowPos.Controls)
+        {
+            currentPosition = ArrowPos.Sound;
+            ClearAllArrows();
+            SoundArw.transform.localScale = Vector3.one;
+        }
+        else if (currentPosition == ArrowPos.Sound)
+        {
+            currentPosition = ArrowPos.Stuff;
+            ClearAllArrows();
+            StuffArw.transform.localScale = Vector3.one;
+        }
+        else if (currentPosition == ArrowPos.Stuff)
+        {
+            currentPosition = ArrowPos.Save;
+            ClearAllArrows();
+            SaveArw.transform.localScale = Vector3.one;
+        }
+        else if (currentPosition == ArrowPos.Save)
+        {
+            currentPosition = ArrowPos.GoOn;
+            ClearAllArrows();
+            GoOnArw.transform.localScale = Vector3.one;
+        }
+
+        // For Guess Who Colluded
+        if (scene.name == "GuessWhoColluded")
+        {
+            // GWC only options
+            if (currentPosition == ArrowPos.GG)
+            {
+                currentPosition = ArrowPos.Reset;
+                ClearAllArrows();
+                ResetArw.transform.localScale = Vector3.one;
+            }
+            else if (currentPosition == ArrowPos.Reset)
+            {
+                currentPosition = ArrowPos.Icons;
+                ClearAllArrows();
+                IconsArw.transform.localScale = Vector3.one;
+            }
+            else if (currentPosition == ArrowPos.Icons)
+            {
+                currentPosition = ArrowPos.Colluminac;
+                ClearAllArrows();
+                CollumArw.transform.localScale = Vector3.one;
+            }
+            else if (currentPosition == ArrowPos.Colluminac)
+            {
+                currentPosition = ArrowPos.Quit;
+                ClearAllArrows();
+                QuitArw.transform.localScale = new Vector3(1, 1, 1);
+
+                // Resets secondary menu positioning
+                bSecondaryMenu = false;
+            }
+            // Skips & goes back "up" to correct option
+            else if (currentPosition == ArrowPos.Save)
+            {
+                currentPosition = ArrowPos.GoOn;
+                ClearAllArrows();
+                GoOnArw.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+
+        // For Minesweeper
+        if (scene.name == "Minesweeper")
+        {
+            // Skips & goes back "down" to correct option
+            if (currentPosition == ArrowPos.Save)
+            {
+                currentPosition = ArrowPos.GoOn;
+                ClearAllArrows();
+                GoOnArw.transform.localScale = Vector3.one;
+            }
+        }
+    }
+
+    public void SelectOption()
+    {
+        // For core
+        if (currentPosition == ArrowPos.GoOn)
+        {
+            GoOnBtn.onClick.Invoke();
+        }
+        else if (currentPosition == ArrowPos.Save)
+        {
+            SaveBtn.onClick.Invoke();
+        }
+        else if (currentPosition == ArrowPos.Kogabi)
+        {
+            KogabiBtn.onClick.Invoke();
+        }
+        else if (currentPosition == ArrowPos.Stuff)
+        {
+            StuffBtn.onClick.Invoke();
+        }
+        else if (currentPosition == ArrowPos.Map)
+        {
+            MapBtn.onClick.Invoke();
+        }
+        else if (currentPosition == ArrowPos.Sound)
+        {
+            SoundBtn.onClick.Invoke();
+        }
+        else if (currentPosition == ArrowPos.Controls)
+        {
+            ControlsBtn.onClick.Invoke();
+        }
+        else if (currentPosition == ArrowPos.Quit)
+        {
+            QuitBtn.onClick.Invoke();
+        }
+
+        // For Guess Who Colluded
+        if (scene.name == "GuessWhoColluded")
+        {
+            if (currentPosition == ArrowPos.Colluminac)
+            {
+                CollumBtn.onClick.Invoke();
+            }
+            else if (currentPosition == ArrowPos.Icons)
+            {
+                IconsBtn.onClick.Invoke();
+            }
+            else if (currentPosition == ArrowPos.Reset)
+            {
+                ResetBtn.onClick.Invoke();
+            }
+            else if (currentPosition == ArrowPos.GG)
+            {
+                GGBtn.onClick.Invoke();
+            }
+        }
+
+        touches.bAaction = false;
     }
 
     public void ClearAllArrows()

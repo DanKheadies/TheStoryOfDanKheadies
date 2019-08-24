@@ -221,6 +221,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58bfe640f7c10c41a98602068487a2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMove: {fileID: 0}
+  scene:
+    m_Handle: 0
   vibeTog: {fileID: 0}
   bAaction: 0
   bBaction: 0
@@ -1014,7 +1017,6 @@ GameObject:
   - component: {fileID: 4745645437250967784}
   - component: {fileID: 4745645437250967787}
   - component: {fileID: 4745645437250967786}
-  - component: {fileID: 4745645437250967785}
   - component: {fileID: 4745645437250967830}
   m_Layer: 5
   m_Name: UpMvmtBtn
@@ -1123,22 +1125,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4745645437250967785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4745645437250967788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab98b66288df7b4fa182075f2f12bd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axisName: Vertical
-  axisValue: 1
-  responseSpeed: 3
-  returnToCentreSpeed: 3
 --- !u!114 &4745645437250967830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1664,7 +1650,6 @@ GameObject:
   - component: {fileID: 4745645437475076814}
   - component: {fileID: 4745645437475076801}
   - component: {fileID: 4745645437475076800}
-  - component: {fileID: 4745645437475076803}
   - component: {fileID: 4745645437475076802}
   m_Layer: 5
   m_Name: DownRightMvmtBtn
@@ -1773,22 +1758,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4745645437475076803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4745645437475076804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab98b66288df7b4fa182075f2f12bd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axisName: Vertical
-  axisValue: -1
-  responseSpeed: 3
-  returnToCentreSpeed: 3
 --- !u!114 &4745645437475076802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1894,7 +1863,6 @@ GameObject:
   - component: {fileID: 4745645437547199293}
   - component: {fileID: 4745645437547199292}
   - component: {fileID: 4745645437547199295}
-  - component: {fileID: 4745645437547199290}
   - component: {fileID: 4745645437547199291}
   m_Layer: 5
   m_Name: LeftMvmtBtn
@@ -2003,22 +1971,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4745645437547199290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4745645437547199281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab98b66288df7b4fa182075f2f12bd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axisName: Horizontal
-  axisValue: -1
-  responseSpeed: 3
-  returnToCentreSpeed: 3
 --- !u!114 &4745645437547199291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2578,7 +2530,6 @@ GameObject:
   - component: {fileID: 4745645437638092995}
   - component: {fileID: 4745645437638092994}
   - component: {fileID: 4745645437638092997}
-  - component: {fileID: 4745645437638092992}
   - component: {fileID: 4745645437638092993}
   m_Layer: 5
   m_Name: RightMvmtBtn
@@ -2687,22 +2638,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4745645437638092992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4745645437638092999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab98b66288df7b4fa182075f2f12bd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axisName: Horizontal
-  axisValue: 1
-  responseSpeed: 3
-  returnToCentreSpeed: 3
 --- !u!114 &4745645437638092993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2808,7 +2743,6 @@ GameObject:
   - component: {fileID: 4745645437694029450}
   - component: {fileID: 4745645437694029453}
   - component: {fileID: 4745645437694029452}
-  - component: {fileID: 4745645437694029455}
   - component: {fileID: 4745645437694029454}
   m_Layer: 5
   m_Name: DownLeftMvmtBtn
@@ -2917,22 +2851,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4745645437694029455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4745645437694029440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab98b66288df7b4fa182075f2f12bd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axisName: Vertical
-  axisValue: -1
-  responseSpeed: 3
-  returnToCentreSpeed: 3
 --- !u!114 &4745645437694029454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3919,7 +3837,6 @@ GameObject:
   - component: {fileID: 4745645438233770033}
   - component: {fileID: 4745645438233770032}
   - component: {fileID: 4745645438233770035}
-  - component: {fileID: 4745645438233770034}
   - component: {fileID: 4745645438233770037}
   m_Layer: 5
   m_Name: UpLefttMvmtBtn
@@ -4028,22 +3945,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4745645438233770034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4745645438233770039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab98b66288df7b4fa182075f2f12bd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axisName: Vertical
-  axisValue: 1
-  responseSpeed: 3
-  returnToCentreSpeed: 3
 --- !u!114 &4745645438233770037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4149,7 +4050,6 @@ GameObject:
   - component: {fileID: 4745645438301866648}
   - component: {fileID: 4745645438301866651}
   - component: {fileID: 4745645438301866650}
-  - component: {fileID: 4745645438301866653}
   - component: {fileID: 4745645438301866652}
   m_Layer: 5
   m_Name: UpRightMvmtBtn
@@ -4258,22 +4158,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4745645438301866653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4745645438301866654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab98b66288df7b4fa182075f2f12bd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axisName: Vertical
-  axisValue: 1
-  responseSpeed: 3
-  returnToCentreSpeed: 3
 --- !u!114 &4745645438301866652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4379,7 +4263,6 @@ GameObject:
   - component: {fileID: 4745645438310108140}
   - component: {fileID: 4745645438310108143}
   - component: {fileID: 4745645438310108142}
-  - component: {fileID: 4745645438310108141}
   - component: {fileID: 4745645438310108138}
   m_Layer: 5
   m_Name: DownMvmtBtn
@@ -4488,22 +4371,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4745645438310108141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4745645438310108128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab98b66288df7b4fa182075f2f12bd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axisName: Vertical
-  axisValue: -1
-  responseSpeed: 3
-  returnToCentreSpeed: 3
 --- !u!114 &4745645438310108138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4750,6 +4617,21 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Joystick
       objectReference: {fileID: 0}
+    - target: {fileID: 114859346367353968, guid: ce5089f3caa5bb042a4d4c23a427bc82,
+        type: 3}
+      propertyPath: handleLimit
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 224251571662654508, guid: ce5089f3caa5bb042a4d4c23a427bc82,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 224251571662654508, guid: ce5089f3caa5bb042a4d4c23a427bc82,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 110
+      objectReference: {fileID: 0}
     - target: {fileID: 224070147403872398, guid: ce5089f3caa5bb042a4d4c23a427bc82,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4870,27 +4752,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224251571662654508, guid: ce5089f3caa5bb042a4d4c23a427bc82,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 110
-      objectReference: {fileID: 0}
-    - target: {fileID: 224251571662654508, guid: ce5089f3caa5bb042a4d4c23a427bc82,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 110
-      objectReference: {fileID: 0}
     - target: {fileID: 114925146479644530, guid: ce5089f3caa5bb042a4d4c23a427bc82,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 39caa3bd50dd2e04790eecf7b56f3113,
         type: 3}
-    - target: {fileID: 114859346367353968, guid: ce5089f3caa5bb042a4d4c23a427bc82,
-        type: 3}
-      propertyPath: handleLimit
-      value: 0.45
-      objectReference: {fileID: 0}
     - target: {fileID: 1058966431294526, guid: ce5089f3caa5bb042a4d4c23a427bc82, type: 3}
       propertyPath: m_IsActive
       value: 1
