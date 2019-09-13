@@ -38,6 +38,7 @@ public class ScreenOrientation : MonoBehaviour
         {
             ResetParameters();
 
+
             bSizingChange = false;
         }
 
@@ -50,10 +51,15 @@ public class ScreenOrientation : MonoBehaviour
 
     public void ResetParameters()
     {
-        aspectUtil.Awake();
-        dMan.ConfigureParameters();
-        oMan.ConfigureParameters();
-        fixedJoy.JoystickPosition();
-        uMan.CheckAndSetMenus();
+        if (aspectUtil)
+            aspectUtil.Awake();
+        if (dMan)
+            dMan.ConfigureParameters();
+        if (oMan)
+            oMan.ConfigureParameters();
+        if (fixedJoy)
+            fixedJoy.JoystickPosition();
+        if (uMan)
+            uMan.CheckAndSetMenus();
     }
 }
