@@ -2,12 +2,14 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/10/2016
-// Last:  09/13/2019
+// Last:  09/16/2019
 
 using UnityEngine;
 
 public class TD_SBF_CameraController : MonoBehaviour
 {
+    public TD_SBF_ControlManagement cMan;
+
     private bool doMovement = true;
     public float panSpeed = 30f;
     public float panBorderThickness = 15f;
@@ -77,7 +79,8 @@ public class TD_SBF_CameraController : MonoBehaviour
         currentPos.z = -10f;
         transform.position = currentPos;
 
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        if (Input.GetAxis("Mouse ScrollWheel") != 0 &&
+            !cMan.bAvoidCamScroll)
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
 
@@ -85,13 +88,13 @@ public class TD_SBF_CameraController : MonoBehaviour
             if (scroll > 0 &&
                 GetComponent<Camera>().orthographicSize > 5)
                 GetComponent<Camera>().orthographicSize -=
-                    scroll * 500 * scrollSpeed * Time.deltaTime;
+                    scroll * 250 * scrollSpeed * Time.deltaTime;
 
             // Zoom Out
             if (scroll < 0 &&
                 GetComponent<Camera>().orthographicSize < 50)
                 GetComponent<Camera>().orthographicSize -=
-                    scroll * 500 * scrollSpeed * Time.deltaTime;
+                    scroll * 250 * scrollSpeed * Time.deltaTime;
 
             if (GetComponent<Camera>().orthographicSize < 0)
                 GetComponent<Camera>().orthographicSize = 5f;

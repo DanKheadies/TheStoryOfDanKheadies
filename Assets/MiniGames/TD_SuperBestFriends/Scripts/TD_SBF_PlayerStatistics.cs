@@ -2,21 +2,21 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  09/13/2019
+// Last:  09/15/2019
 
 using UnityEngine;
 
 public class TD_SBF_PlayerStatistics : MonoBehaviour
 {
     public static int Lives;
-    public static int Money;
+    public static int ThoughtsPrayers;
     public static int Rounds;
     public int startLives = 999;
-    public int startMoney = 400;
+    public int startThoughtsPrayers = 400;
 
     void Start()
     {
-        Money = startMoney;
+        ThoughtsPrayers = startThoughtsPrayers;
         Lives = startLives;
 
         Rounds = 0;

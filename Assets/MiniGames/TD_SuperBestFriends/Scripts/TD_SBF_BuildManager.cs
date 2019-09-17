@@ -2,14 +2,14 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/13/2019
+// Last:  09/15/2019
 
 using UnityEngine;
 
 public class TD_SBF_BuildManager : MonoBehaviour
 {
-    private TD_SBF_Node selectedNode;
-    private TD_SBF_TurretBlueprint turretToBuild;
+    public TD_SBF_Node selectedNode;
+    public TD_SBF_TurretBlueprint turretToBuild;
 
     public static TD_SBF_BuildManager td_sbf_instance;
     public GameObject buildEffect;
@@ -28,7 +28,7 @@ public class TD_SBF_BuildManager : MonoBehaviour
     }
 
     public bool TD_SBF_CanBuild { get { return turretToBuild != null; } }
-    public bool TD_SBF_HasMoney { get { return TD_SBF_PlayerStatistics.Money >= turretToBuild.cost; } }
+    public bool TD_SBF_HasThoughtsPrayers { get { return TD_SBF_PlayerStatistics.ThoughtsPrayers >= turretToBuild.cost; } }
     public TD_SBF_TurretBlueprint GetTurretToBuild() { return turretToBuild; }
 
     public void SelectTurretToBuild(TD_SBF_TurretBlueprint turret)

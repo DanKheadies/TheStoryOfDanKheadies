@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  09/13/2019
+// Last:  09/15/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,7 +51,7 @@ public class TD_SBF_Enemy : MonoBehaviour
     {
         isDead = true;
 
-        TD_SBF_PlayerStatistics.Money += worth;
+        TD_SBF_PlayerStatistics.ThoughtsPrayers += worth;
 
         //GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         //Destroy(effect, 5f);

@@ -2,41 +2,146 @@
 // Authors: Jason (Unity3d College)
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  09/13/2019
+// Last:  09/17/2019
 
 using UnityEngine;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class TD_SBF_TowerPlacer : MonoBehaviour
 {
-    //public TD_SBF_Grid grid;
+    TD_SBF_BuildManager td_sbf_buildMan;
 
-    //private void Awake()
-    //{
-    //    grid = FindObjectOfType<TD_SBF_Grid>();   
-    //}
+    public Color canBuild;
+    public Color noBuild;
+    public Color noSelection;
+    public Color selectTower;
+    public GameObject gridNodeSelector;
+    public GameObject gridNode;
+    public RaycastHit currentHit;
+    public TD_SBF_Grid grid;
+    public TD_SBF_NodeUI nodeUI;
+    public Vector3 prevNode;
 
-    //private void Update()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        RaycastHit hitInfo;
-    //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    //        Debug.Log(ray);
+    public List<Vector3> nodeArray;
 
-    //        if (Physics.Raycast(ray, out hitInfo))
-    //        {
-    //            Debug.Log("hit");
-    //            PlaceCubeNear(hitInfo.point);
-    //            Debug.Log(hitInfo.point);
-    //        }
-    //    }
-    //}
+    void Start()
+    {
+        nodeArray = new List<Vector3>();
+        td_sbf_buildMan = TD_SBF_BuildManager.td_sbf_instance;
+    }
 
-    //private void PlaceCubeNear(Vector3 clickPoint)
-    //{
-    //    var finalPosition = grid.GetNearestPointOnGrid(clickPoint);
-    //    GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = finalPosition;
+    public void OnMouseOver()
+    {
+        RaycastHit hitInfo;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-    //    //GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = nearPoint;
-    //}
+        if (Physics.Raycast(ray, out hitInfo))
+        {
+            CheckNode(hitInfo.point);
+
+            if (Input.GetMouseButtonDown(0) &&
+                td_sbf_buildMan.TD_SBF_CanBuild &&
+                td_sbf_buildMan.TD_SBF_HasThoughtsPrayers &&
+                td_sbf_buildMan.turretToBuild.cost != 0)
+            {
+                PlaceTowerNear(hitInfo.point);
+            }
+            else if (Input.GetMouseButtonDown(0) &&
+                     !EventSystem.current.IsPointerOverGameObject())
+            {
+                nodeUI.Hide();
+            }
+        }
+    }
+
+    public void CheckNode(Vector3 hoverPoint)
+    {
+        var currentNode = grid.GetNearestPointOnGrid(hoverPoint);
+        currentNode += new Vector3(0, 0, -1f);
+
+        // Destroy area TBC when clicking UI
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            GameObject prevAreaTBC = GameObject.FindGameObjectWithTag("PrevGridNode");
+            Destroy(prevAreaTBC);
+            return;
+        }
+
+        else if (currentNode != prevNode)
+        {
+            // Find and destroy previous node
+            GameObject prevNodeTBC = GameObject.FindGameObjectWithTag("PrevGridNode");
+            Destroy(prevNodeTBC);
+
+            // Create and save "highlighted" node
+            GameObject gridNodeTBC = Instantiate(gridNodeSelector, currentNode, Quaternion.identity);
+
+            // Check how to color node
+            ColorCheck(currentNode, gridNodeTBC);
+
+            // Last: set the previous node in case user moves the cursor
+            prevNode = currentNode;
+        }
+        else
+        {
+            //Debug.Log("not the prevoius");
+            //TD_SBF_Node hoverNode = null;
+            //td_sbf_buildMan.SelectNode(hoverNode);
+        }
+    }
+
+    public void ColorCheck(Vector3 _currentNode, GameObject _gridNodeTBC)
+    {
+        if (td_sbf_buildMan.TD_SBF_CanBuild &&
+                td_sbf_buildMan.turretToBuild.cost != 0)
+        {
+            if (td_sbf_buildMan.TD_SBF_HasThoughtsPrayers &&
+                !nodeArray.Contains(_currentNode))
+            {
+                _gridNodeTBC.GetComponent<SpriteRenderer>().color = canBuild;
+            }
+            else if (!td_sbf_buildMan.TD_SBF_HasThoughtsPrayers)
+            {
+                if (nodeArray.Contains(_currentNode))
+                    _gridNodeTBC.GetComponent<SpriteRenderer>().color = selectTower;
+                else
+                    _gridNodeTBC.GetComponent<SpriteRenderer>().color = noBuild;
+            }
+            else
+            {
+                _gridNodeTBC.GetComponent<SpriteRenderer>().color = selectTower;
+            }
+        }
+    }
+
+    private void PlaceTowerNear(Vector3 clickPoint)
+    {
+        var finalPosition = grid.GetNearestPointOnGrid(clickPoint);
+
+        // Increase z-index to make node clickable
+        finalPosition += new Vector3(0, 0, -1f);
+
+        // Avoid tower placement when clicking UI
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        else if (!nodeArray.Contains(finalPosition))
+        {
+            // Add to array & create
+            nodeArray.Add(finalPosition);
+            GameObject newNode = Instantiate(gridNode, finalPosition, Quaternion.identity);
+            newNode.GetComponent<TD_SBF_Node>().BuildTurret(td_sbf_buildMan.GetTurretToBuild());
+        }
+
+        // Reset / recheck node color
+        GameObject prevNodeTBC = GameObject.FindGameObjectWithTag("PrevGridNode");
+        ColorCheck(finalPosition, prevNodeTBC);
+    }
+
+    public void OnMouseExit()
+    {
+        GameObject prevAreaTBC = GameObject.FindGameObjectWithTag("PrevGridNode");
+        Destroy(prevAreaTBC);
+    }
 }

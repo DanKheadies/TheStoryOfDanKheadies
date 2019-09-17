@@ -9,59 +9,49 @@ using UnityEngine;
 public class TD_SBF_Grid : MonoBehaviour
 {
     [SerializeField]
-    private float size = 1f;
+    private float unitSize = 1f;
 
-    //public Vector3 GetNearestPointOnGrid(Vector3 position)
-    //{
-    //    position -= transform.position;
+    public float xOffset = 0;
+    public float yOffset = 0;
 
-    //    int xCount = Mathf.RoundToInt(position.x / size);
-    //    int yCount = Mathf.RoundToInt(position.y / size);
-    //    int zCount = Mathf.RoundToInt(position.z / size);
+    public float width = 1;
+    public float height = 1;
 
-    //    Vector3 result = new Vector3(
-    //        (float)xCount * size,
-    //        (float)yCount * size,
-    //        (float)zCount * size);
+    public Vector3 GetNearestPointOnGrid(Vector3 position)
+    {
+        position -= transform.position;
 
-    //    result += transform.position;
+        int xCount = Mathf.RoundToInt(position.x / unitSize);
+        int yCount = Mathf.RoundToInt(position.y / unitSize);
+        int zCount = Mathf.RoundToInt(position.z / unitSize);
 
-    //    return result;
-    //}
-    //public Vector3 GetNearestPointOnGrid(Vector3 position)
-    //{
-    //    position.x -= transform.position.x;
-    //    position.y -= transform.position.y;
-    //    position.z = 0;
+        Vector3 result = new Vector3(
+            xCount * unitSize,
+            yCount * unitSize,
+            zCount * unitSize);
 
-    //    int xCount = Mathf.RoundToInt(position.x / size);
-    //    int yCount = Mathf.RoundToInt(position.y / size);
-    //    int zCount = 0;
+        result += transform.position;
 
-    //    Vector3 result = new Vector3(
-    //        xCount * size, 
-    //        yCount * size,
-    //        zCount);
+        return result;
+    }
 
+    private void OnDrawGizmos()
+    {
+        // Avoid memory error / bug
+        if (unitSize == 0)
+            return;
 
-    //    result.x += transform.position.x;
-    //    result.y += transform.position.y;
-    //    result.z = 0;
+        Gizmos.color = Color.yellow;
 
-    //    return result;
-    //}
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.yellow;
-    //    for (float x = 0; x < 40; x += size)
-    //    {
-    //        for (float y = 0; y < 40; y += size)
-    //        {
-    //            //var point = GetNearestPointOnGrid(new Vector3(x, y, 0f));
-    //            //Gizmos.DrawSphere(point, 0.1f);
-    //            Debug.Log("x: " + x);
-    //        }
-    //    }
-    //}
+        for (float x = 0; x < width; x += unitSize)
+        {
+            for (float y = 0; y < height; y += unitSize)
+            {
+                var point = GetNearestPointOnGrid(
+                    new Vector3(x + xOffset, -y + yOffset, 0f));
+                Gizmos.DrawSphere(point, 0.1f);
+                Gizmos.DrawWireCube(point, new Vector3(unitSize, unitSize, 1));
+            }
+        }
+    }
 }

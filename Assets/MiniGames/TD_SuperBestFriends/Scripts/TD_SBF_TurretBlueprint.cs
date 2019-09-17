@@ -13,6 +13,7 @@ public class TD_SBF_TurretBlueprint
     public GameObject upgradedPrefab;
     public int cost;
     public int upgradedCost;
+    public int upgradeLevel;
 
     public int GetSellAmount()
     {

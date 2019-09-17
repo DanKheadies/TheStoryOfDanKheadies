@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  09/13/2019
+// Last:  09/17/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,7 +11,7 @@ public class TD_SBF_PauseMenu : MonoBehaviour
 {
     public GameObject ui;
     public TD_SBF_SceneFader sceneFader;
-    public string levelToLoad = "TD_Menu";
+    public string levelToLoad = "TD_SBF_Menu";
 
     void Update()
     {

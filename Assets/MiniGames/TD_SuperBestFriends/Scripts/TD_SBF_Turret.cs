@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/13/2019
+// Last:  09/17/2019
 
 using UnityEngine;
 
@@ -10,6 +10,7 @@ public class TD_SBF_Turret : MonoBehaviour
 {
     public Transform target;
     public TD_SBF_Enemy targetEnemy;
+    //public TD_SBF_TowerPlacer towerPlacer;
 
     [Header("General")]
     public float range = 15f;
@@ -113,7 +114,7 @@ public class TD_SBF_Turret : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         TD_SBF_Bullet bullet = bulletGO.GetComponent<TD_SBF_Bullet>();
 
         if (bullet)
@@ -143,6 +144,34 @@ public class TD_SBF_Turret : MonoBehaviour
         impactEffect.transform.position = target.position + dir.normalized;
 
         impactEffect.transform.rotation = Quaternion.LookRotation(dir);
+    }
+
+    void OnMouseDown()
+    {
+        //RaycastHit hitInfo;
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //if (Physics.Raycast(ray, out hitInfo))
+        //{
+        //    //towerPlacer.CheckNode(hitInfo.point);
+        //    Collider[] colliders;
+        //    colliders = Physics.OverlapBox(transform.position, transform.localScale);
+
+        //    Debug.Log(colliders);
+
+        //    if (colliders.Length > 1)
+        //    //if ((colliders = Physics.OverlapShere(transform.position, 1f /* Radius */)).Length > 1) //Presuming the object you are testing also has a collider 0 otherwise
+        //    {
+        //        Debug.Log(colliders);
+        //        //foreach (var collider in colliders)
+        //        //{
+        //        //    var go = collider.gameObject; //This is the game object you collided with
+        //        //    if (go == gameObject) continue; //Skip the object itself
+        //        //                                    //Do something
+        //        //}
+        //    }
+        //}
+        //td_sbf_buildMan.SelectNode(this);
     }
 
     void OnDrawGizmosSelected()

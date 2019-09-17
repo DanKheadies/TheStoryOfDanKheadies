@@ -2,13 +2,13 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/11/2019
+// Last:  09/16/2019
 
 using UnityEngine;
 
 public class TD_SBF_Bullet : MonoBehaviour
 {
-    //public GameObject impactEffect;
+    public GameObject impactEffect;
     private Transform target;
 
     //public float explosionRadius = 0f;
@@ -38,14 +38,20 @@ public class TD_SBF_Bullet : MonoBehaviour
             return;
         }
 
+        float angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) + 90;
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 1000);
+
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-        transform.LookAt(target);
     }
 
     void HitTarget()
     {
-        //GameObject effectIns = Instantiate(impactEffect, transform.position, transform.rotation);
-        //Destroy(effectIns, 5f);
+        if (impactEffect)
+        {
+            GameObject effectIns = Instantiate(impactEffect, transform.position, Quaternion.identity);
+            Destroy(effectIns, 1f);
+        }
 
         //if (explosionRadius > 0f)
         //{
