@@ -2,18 +2,21 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/17/2019
+// Last:  09/25/2019
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TD_SBF_Turret : MonoBehaviour
 {
     public Transform target;
     public TD_SBF_Enemy targetEnemy;
-    //public TD_SBF_TowerPlacer towerPlacer;
 
     [Header("General")]
+    public bool isDestroyed;
+    public float health;
     public float range = 15f;
+    public float startHealth = 15f;
 
     [Header("Use Bullets (default)")]
     public float fireRate = 1f; // Bullets per second
@@ -29,6 +32,7 @@ public class TD_SBF_Turret : MonoBehaviour
 
     [Header("Unity Setup Fields")]
     public GameObject bulletPrefab;
+    public Image healthBar;
     public Transform firePoint;
     public Transform partToRotate;
     public float rotateSpeed = 10f;
@@ -36,6 +40,7 @@ public class TD_SBF_Turret : MonoBehaviour
 
     void Start()
     {
+        health = startHealth;
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
@@ -146,32 +151,48 @@ public class TD_SBF_Turret : MonoBehaviour
         impactEffect.transform.rotation = Quaternion.LookRotation(dir);
     }
 
-    void OnMouseDown()
+    public void TakeDamage(float amount, GameObject attackingEnemy)
     {
-        //RaycastHit hitInfo;
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        healthBar.GetComponentInParent<CanvasGroup>().alpha = 1;
 
-        //if (Physics.Raycast(ray, out hitInfo))
-        //{
-        //    //towerPlacer.CheckNode(hitInfo.point);
-        //    Collider[] colliders;
-        //    colliders = Physics.OverlapBox(transform.position, transform.localScale);
+        health -= amount;
 
-        //    Debug.Log(colliders);
+        healthBar.fillAmount = health / startHealth;
 
-        //    if (colliders.Length > 1)
-        //    //if ((colliders = Physics.OverlapShere(transform.position, 1f /* Radius */)).Length > 1) //Presuming the object you are testing also has a collider 0 otherwise
-        //    {
-        //        Debug.Log(colliders);
-        //        //foreach (var collider in colliders)
-        //        //{
-        //        //    var go = collider.gameObject; //This is the game object you collided with
-        //        //    if (go == gameObject) continue; //Skip the object itself
-        //        //                                    //Do something
-        //        //}
-        //    }
-        //}
-        //td_sbf_buildMan.SelectNode(this);
+        if (health <= 0f &&
+            !isDestroyed)
+        {
+            DestroyTower();
+            attackingEnemy.GetComponentInChildren<TD_SBF_EnemyPathfinding>()
+                .firstTower = null;
+            attackingEnemy.GetComponentInChildren<TD_SBF_EnemyPathfinding>()
+                .DestroyNode();
+            attackingEnemy.GetComponentInChildren<TD_SBF_EnemyPathfinding>()
+                .RecheckPathing();
+        }
+    }
+
+    public void RepairTower(float amount)
+    {
+        if (health >= startHealth)
+            healthBar.GetComponentInParent<CanvasGroup>().alpha = 0;
+    }
+
+    void DestroyTower()
+    {
+        isDestroyed = true;
+
+        // TODO
+        // towerAni.Play("Tower_Destroyed");
+        // Temp
+        gameObject.transform.GetChild(0).transform.localScale = Vector3.zero;
+        gameObject.transform.GetChild(1).transform.localScale = Vector3.zero;
+        GameObject effect = Instantiate(TD_SBF_BuildManager.td_sbf_instance.buildEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 1f);
+
+        GetComponentInChildren<PolygonCollider2D>().isTrigger = true;
+
+        Destroy(gameObject, 0.5f);
     }
 
     void OnDrawGizmosSelected()

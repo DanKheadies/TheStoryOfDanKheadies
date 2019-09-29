@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/11/2019
+// Last:  09/25/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +23,7 @@ public class TD_SBF_NodeUI : MonoBehaviour
 
         if (!target.isUpgraded)
         {
-            upgradeCost.text = "-" + target.turretBlueprint.upgradedCost;
+            upgradeCost.text = "-" + (target.turretBlueprint.cost * target.turretBlueprint.upgradeCostMultiplier);
             upgradeButton.interactable = true;
         }
         else

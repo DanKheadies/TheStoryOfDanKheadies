@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/15/2019
+// Last:  09/23/2019
 
 using UnityEngine;
 
@@ -14,6 +14,7 @@ public class TD_SBF_BuildManager : MonoBehaviour
     public static TD_SBF_BuildManager td_sbf_instance;
     public GameObject buildEffect;
     public GameObject sellEffect;
+    public GameObject upgradeEffect;
     public TD_SBF_NodeUI nodeUI;
 
     void Awake()

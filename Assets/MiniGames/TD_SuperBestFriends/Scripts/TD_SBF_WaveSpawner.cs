@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/11/2019
+// Last:  09/23/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -91,7 +91,12 @@ public class TD_SBF_WaveSpawner : MonoBehaviour
 
     void SpawnEnemy(GameObject enemy)
     {
-        Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+        Instantiate(enemy, 
+            new Vector3(
+                spawnPoint.position.x + Random.Range(-5f, 5f),
+                spawnPoint.position.y + Random.Range(-3f, 3f),
+                spawnPoint.position.z),
+            spawnPoint.rotation);
     }
 
     IEnumerator DelayedWin()

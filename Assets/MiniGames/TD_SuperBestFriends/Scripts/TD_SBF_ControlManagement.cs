@@ -7,8 +7,9 @@ using UnityEngine;
 
 public class TD_SBF_ControlManagement : MonoBehaviour
 {
-    public GameObject controlsBar;
     public GameObject buildBar;
+    public GameObject controlsBar;
+    public GameObject heroBar;
     public TD_SBF_BuildManager bMan;
 
     public bool bAvoidCamScroll;
@@ -19,6 +20,32 @@ public class TD_SBF_ControlManagement : MonoBehaviour
         controlsBar.SetActive(!controlsBar.activeSelf);
 
         bMan.turretToBuild = null;
+    }
+
+    public void DisableBuildBar()
+    {
+        if (buildBar.activeSelf)
+        {
+            buildBar.SetActive(!buildBar.activeSelf);
+            controlsBar.SetActive(!controlsBar.activeSelf);
+
+            bMan.turretToBuild = null;
+        }
+    }
+
+    public void ToggleHeroBar()
+    {
+        heroBar.SetActive(!heroBar.activeSelf);
+        controlsBar.SetActive(!controlsBar.activeSelf);
+    }
+
+    public void DisableHeroBar()
+    {
+        if (heroBar.activeSelf)
+        {
+            heroBar.SetActive(!heroBar.activeSelf);
+            controlsBar.SetActive(!controlsBar.activeSelf);
+        }
     }
 
     public void AvoidCamScroll()

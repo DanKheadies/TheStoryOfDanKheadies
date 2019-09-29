@@ -2,15 +2,18 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  09/13/2019
+// Last:  09/23/2019
 
 using UnityEngine;
 
 [RequireComponent(typeof(TD_SBF_Enemy))]
 public class TD_SBF_EnemyMovement : MonoBehaviour
 {
-    private TD_SBF_Enemy enemy;
+    public TD_SBF_Enemy enemy;
     //private Transform target;
+    public Vector3 movement;
+    public Vector3 rBodyVelocity;
+
     public int bossMultiplier = 10;
     private int waypointIndex = 0;
 
@@ -18,6 +21,11 @@ public class TD_SBF_EnemyMovement : MonoBehaviour
     {
         enemy = GetComponent<TD_SBF_Enemy>();
         //target = Waypoints.waypoints[0];
+
+        //currentPos = transform.position;
+        //previousPos = transform.position;
+
+        InvokeRepeating("PositionCheck", 0.1f, 1f);
     }
 
     void Update()
@@ -30,7 +38,28 @@ public class TD_SBF_EnemyMovement : MonoBehaviour
         //    GetNextWaypoint();
         //}
 
-        enemy.speed = enemy.startSpeed;
+        //enemy.speed = enemy.startSpeed;
+    }
+
+    public void PositionCheck()
+    {
+        //currentPos = transform.position;
+
+        //if (currentPos != previousPos)
+        //{
+        //    enemy.enemyAni.
+        //}
+
+        //if (movementVector != Vector2.zero)
+        //{
+        //    playerAnim.SetBool("bIsWalking", true);
+        //    playerAnim.SetFloat("Input_X", movementVector.x);
+        //    playerAnim.SetFloat("Input_Y", movementVector.y);
+        //}
+        //else
+        //{
+        //    playerAnim.SetBool("bIsWalking", false);
+        //}
     }
 
     //void GetNextWaypoint()

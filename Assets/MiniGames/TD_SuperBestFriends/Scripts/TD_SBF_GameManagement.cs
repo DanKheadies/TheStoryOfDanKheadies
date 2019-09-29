@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/13/2019
+// Last:  09/17/2019
 
 using UnityEngine;
 
@@ -15,7 +15,10 @@ public class TD_SBF_GameManagement : MonoBehaviour
     public GameObject gameOverUI_Vertical;
     public GameObject HUD_Horizontal;
     public GameObject HUD_Vertical;
+    public TD_SBF_ControlManagement cMan;
 
+    public bool bIsHeroMode;
+    public bool bIsTowerMode;
     public static bool IsGameOver;
     public static bool IsLevelWon;
 
@@ -51,6 +54,24 @@ public class TD_SBF_GameManagement : MonoBehaviour
         if (TD_SBF_PlayerStatistics.Lives <= 0)
         {
             EndGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            cMan.ToggleHeroBar();
+            cMan.DisableHeroBar();
+            cMan.ToggleBuildBar();
+            DisableHeroMode();
+            ToggleTowerMode();
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            cMan.ToggleBuildBar();
+            cMan.DisableBuildBar();
+            cMan.ToggleHeroBar();
+            DisableTowerMode();
+            ToggleHeroMode();
         }
     }
 
@@ -94,5 +115,46 @@ public class TD_SBF_GameManagement : MonoBehaviour
             gameOverUI_Vertical.SetActive(true);
             gameOverUI_Horizontal.SetActive(false);
         }
+    }
+
+    public void ToggleHeroMode()
+    {
+        bIsHeroMode = !bIsHeroMode;
+
+        if (bIsHeroMode)
+            cameraCont.GetComponent<TD_SBF_CameraFollow>().enabled = true;
+        else
+            cameraCont.GetComponent<TD_SBF_CameraFollow>().enabled = false;
+        
+        GameObject prevAreaTBC = GameObject.FindGameObjectWithTag("PrevGridNode");
+        if (prevAreaTBC)
+            Destroy(prevAreaTBC);
+    }
+
+    public void DisableHeroMode()
+    {
+        if (bIsHeroMode)
+        {
+            bIsHeroMode = false;
+            cameraCont.GetComponent<TD_SBF_CameraFollow>().enabled = false;
+        }
+    }
+
+    public void ToggleTowerMode()
+    {
+        bIsTowerMode = !bIsTowerMode;
+
+        if (!bIsTowerMode)
+        {
+            GameObject prevAreaTBC = GameObject.FindGameObjectWithTag("PrevGridNode");
+            if (prevAreaTBC)
+                Destroy(prevAreaTBC);
+        }
+    }
+
+    public void DisableTowerMode()
+    {
+        if (bIsTowerMode)
+            bIsTowerMode = false;
     }
 }

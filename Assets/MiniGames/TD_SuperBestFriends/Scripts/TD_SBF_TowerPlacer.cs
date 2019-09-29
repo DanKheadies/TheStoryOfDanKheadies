@@ -2,7 +2,7 @@
 // Authors: Jason (Unity3d College)
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  09/17/2019
+// Last:  09/23/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,11 +19,24 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
     public GameObject gridNodeSelector;
     public GameObject gridNode;
     public RaycastHit currentHit;
+    public TD_SBF_GameManagement gMan;
     public TD_SBF_Grid grid;
     public TD_SBF_NodeUI nodeUI;
+    public static TD_SBF_TowerPlacer the_tp;
     public Vector3 prevNode;
 
     public List<Vector3> nodeArray;
+
+    void Awake()
+    {
+        if (the_tp)
+        {
+            Debug.LogError("More than one TowerPlacer in scene.");
+            return;
+        }
+
+        the_tp = this;
+    }
 
     void Start()
     {
@@ -33,26 +46,31 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
 
     public void OnMouseOver()
     {
-        RaycastHit hitInfo;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hitInfo))
+        if (gMan.bIsTowerMode)
         {
-            CheckNode(hitInfo.point);
+            RaycastHit hitInfo;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Input.GetMouseButtonDown(0) &&
-                td_sbf_buildMan.TD_SBF_CanBuild &&
-                td_sbf_buildMan.TD_SBF_HasThoughtsPrayers &&
-                td_sbf_buildMan.turretToBuild.cost != 0)
+            if (Physics.Raycast(ray, out hitInfo) &&
+                !gMan.bIsHeroMode)
             {
-                PlaceTowerNear(hitInfo.point);
-            }
-            else if (Input.GetMouseButtonDown(0) &&
-                     !EventSystem.current.IsPointerOverGameObject())
-            {
-                nodeUI.Hide();
+                CheckNode(hitInfo.point);
+
+                if (Input.GetMouseButtonDown(0) &&
+                    td_sbf_buildMan.TD_SBF_CanBuild &&
+                    td_sbf_buildMan.TD_SBF_HasThoughtsPrayers &&
+                    td_sbf_buildMan.turretToBuild.cost != 0)
+                {
+                    PlaceTowerNear(hitInfo.point);
+                }
+                else if (Input.GetMouseButtonDown(0) &&
+                         !EventSystem.current.IsPointerOverGameObject())
+                {
+                    nodeUI.Hide();
+                }
             }
         }
+            
     }
 
     public void CheckNode(Vector3 hoverPoint)
@@ -67,7 +85,6 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
             Destroy(prevAreaTBC);
             return;
         }
-
         else if (currentNode != prevNode)
         {
             // Find and destroy previous node
@@ -94,7 +111,7 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
     public void ColorCheck(Vector3 _currentNode, GameObject _gridNodeTBC)
     {
         if (td_sbf_buildMan.TD_SBF_CanBuild &&
-                td_sbf_buildMan.turretToBuild.cost != 0)
+            td_sbf_buildMan.turretToBuild.cost != 0)
         {
             if (td_sbf_buildMan.TD_SBF_HasThoughtsPrayers &&
                 !nodeArray.Contains(_currentNode))
@@ -110,7 +127,8 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
             }
             else
             {
-                _gridNodeTBC.GetComponent<SpriteRenderer>().color = selectTower;
+                if (_gridNodeTBC)
+                    _gridNodeTBC.GetComponent<SpriteRenderer>().color = selectTower;
             }
         }
     }

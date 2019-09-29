@@ -4,9 +4,12 @@
 // Last:  08/28/2019
 
 using UnityEngine;
+using System.Collections;
 
 public class TD_SBF_MenuController : MonoBehaviour
 {
+    public TD_SBF_SceneFader fader;
+
     // TODO: in another script, account for screen height, i.e. ipad vs iphone
     // and reposition group of characters (object/shell) higher or lower
 
@@ -24,6 +27,7 @@ public class TD_SBF_MenuController : MonoBehaviour
     void Start()
     {
         OrientationCheck();
+        StartCoroutine(LoadModeSelector());
     }
 
     void Update()
@@ -75,5 +79,16 @@ public class TD_SBF_MenuController : MonoBehaviour
             curtain_v.SetActive(true);
             sbf_v.SetActive(true);
         }
+    }
+
+    public void LoadLevel(string levelName)
+    {
+        fader.FadeTo(levelName);
+    }
+
+    public IEnumerator LoadModeSelector()
+    {
+        yield return new WaitForSeconds(10f);
+        LoadLevel("TD_SBF_ModeSelector");
     }
 }

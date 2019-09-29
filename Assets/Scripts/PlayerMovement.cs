@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/23/2019
+// Last:  09/17/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -36,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
 
     public string[] controllers;
     
-
 	void Start ()
     {
         // Initializers

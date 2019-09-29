@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/17/2019
+// Last:  09/25/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,6 +14,7 @@ public class TD_SBF_Node : MonoBehaviour
 
     public Color hoverColor;
     public Color notEnoughThoughtsPrayersColor;
+    public TD_SBF_HeroAnimator heroAni;
     public SpriteRenderer rend;
     public TD_SBF_TowerPlacer towerPlacer;
     public Vector3 positionOffset;
@@ -25,12 +26,14 @@ public class TD_SBF_Node : MonoBehaviour
     [HideInInspector]
     public bool isUpgraded = false;
 
-    void Start()
+    void Awake()
     {
-        towerPlacer = FindObjectOfType<TD_SBF_TowerPlacer>();
+        heroAni = GameObject.FindGameObjectWithTag("Hero")
+            .GetComponent<TD_SBF_HeroAnimator>();
         rend = GetComponent<SpriteRenderer>();
         startColor = rend.color;
         td_sbf_buildMan = TD_SBF_BuildManager.td_sbf_instance;
+        towerPlacer = FindObjectOfType<TD_SBF_TowerPlacer>();
     }
 
     public Vector3 GetBuildPosition()
@@ -56,22 +59,27 @@ public class TD_SBF_Node : MonoBehaviour
         // Set sorting order
         _turret.transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>()
             .sortingOrder = 100 + Mathf.Abs(Mathf.RoundToInt(_turret.transform.position.y));
+        
+        heroAni.GetComponent<Animator>().Play("Hero_Build");
+        Invoke("RestoreHeroMovementAnimation", 1f);
 
-        //GameObject effect = Instantiate(td_sbf_buildMan.buildEffect, GetBuildPosition(), Quaternion.identity);
-        //Destroy(effect, 5f);
+        GameObject effect = Instantiate(TD_SBF_BuildManager.td_sbf_instance.buildEffect, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect, 0.75f);
 
         AstarPath.active.Scan();
     }
 
     public void UpgradeTurret()
     {
-        if (TD_SBF_PlayerStatistics.ThoughtsPrayers < turretBlueprint.upgradedCost)
+        if (TD_SBF_PlayerStatistics.ThoughtsPrayers < 
+            turretBlueprint.cost * turretBlueprint.upgradeCostMultiplier)
         {
             Debug.Log("Need more vespian gas to upgrade.");
             return;
         }
 
-        TD_SBF_PlayerStatistics.ThoughtsPrayers -= turretBlueprint.upgradedCost;
+        TD_SBF_PlayerStatistics.ThoughtsPrayers -= 
+            turretBlueprint.cost * turretBlueprint.upgradeCostMultiplier;
 
         // Get rid of the old turret
         Destroy(turret);
@@ -80,22 +88,22 @@ public class TD_SBF_Node : MonoBehaviour
         GameObject _turret = Instantiate(turretBlueprint.upgradedPrefab, GetBuildPosition(), Quaternion.identity);
         turret = _turret;
 
-        GameObject effect = Instantiate(td_sbf_buildMan.buildEffect, GetBuildPosition(), Quaternion.identity);
-        Destroy(effect, 5f);
+        Debug.Log(td_sbf_buildMan.upgradeEffect);
+        GameObject effect = Instantiate(td_sbf_buildMan.upgradeEffect, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect, 0.75f);
 
         isUpgraded = true;
     }
 
     public void SellTurret()
     {
-        Debug.Log("selling");
-        Debug.Log(turret);
         // TODO: if upgraded, give 1/2 upgraded price
         // TODO: after X seconds, set sell price to half
         TD_SBF_PlayerStatistics.ThoughtsPrayers += turretBlueprint.GetSellAmount();
 
         // Spawn a cool effect
         GameObject effect = Instantiate(td_sbf_buildMan.sellEffect, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect, 1f);
         
         // Destroy turret
         Destroy(turret);
@@ -120,41 +128,10 @@ public class TD_SBF_Node : MonoBehaviour
             td_sbf_buildMan.SelectNode(this);
             return;
         }
-
-        //if (!td_sbf_buildMan.TD_SBF_CanBuild)
-        //    return;
-
-        //if (td_sbf_buildMan.turretToBuild != null)
-        {
-            //Debug.Log(td_sbf_buildMan.turretToBuild);
-            //BuildTurret(td_sbf_buildMan.GetTurretToBuild());
-        }
     }
 
-    void OnMouseEnter()
+    public void RestoreHeroMovementAnimation()
     {
-        //if (EventSystem.current.IsPointerOverGameObject())
-        //{
-        //    return;
-        //}
-
-        //if (!td_sbf_buildMan.TD_SBF_CanBuild)
-        //{
-        //    return;
-        //}
-
-        //if (td_sbf_buildMan.TD_SBF_HasThoughtsPrayers)
-        //{
-        //    rend.color = hoverColor;
-        //}
-        //else
-        //{
-        //    rend.color = notEnoughThoughtsPrayersColor;
-        //}
-    }
-
-    void OnMouseExit()
-    {
-        //rend.color = startColor;
+        heroAni.GetComponent<Animator>().Play("Hero_Movement");
     }
 }
