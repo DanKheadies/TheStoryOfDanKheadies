@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/16/2019
+// Last:  10/14/2019
 
 using UnityEngine;
 
@@ -11,7 +11,7 @@ public class TD_SBF_Bullet : MonoBehaviour
     public GameObject impactEffect;
     private Transform target;
 
-    //public float explosionRadius = 0f;
+    public float explosionRadius = 0f;
     public float speed = 70f;
     public int damage = 5;
 
@@ -53,27 +53,25 @@ public class TD_SBF_Bullet : MonoBehaviour
             Destroy(effectIns, 1f);
         }
 
-        //if (explosionRadius > 0f)
-        //{
-        //    Explode();
-        //}
-        //else
-        Damage(target);
+        if (explosionRadius > 0f)
+            Explode();
+        else
+            Damage(target);
 
         Destroy(gameObject);
     }
 
-    //void Explode()
-    //{
-    //    Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-    //    foreach (Collider collider in colliders)
-    //    {
-    //        if (collider.tag == "Enemy")
-    //        {
-    //            Damage(collider.transform);
-    //        }
-    //    }
-    //}
+    void Explode()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.tag == "Enemy")
+            {
+                Damage(collider.transform);
+            }
+        }
+    }
 
     void Damage(Transform enemy)
     {

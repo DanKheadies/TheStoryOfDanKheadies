@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/25/2019
+// Last:  10/14/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,13 +18,11 @@ public class TD_SBF_Node : MonoBehaviour
     public SpriteRenderer rend;
     public TD_SBF_TowerPlacer towerPlacer;
     public Vector3 positionOffset;
-
-    [HideInInspector]
+    
     public GameObject turret;
-    [HideInInspector]
     public TD_SBF_TurretBlueprint turretBlueprint;
-    [HideInInspector]
-    public bool isUpgraded = false;
+    //public bool isUpgraded = false;
+    public int towerLevel = 1;
 
     void Awake()
     {
@@ -51,7 +49,7 @@ public class TD_SBF_Node : MonoBehaviour
 
         TD_SBF_PlayerStatistics.ThoughtsPrayers -= blueprint.cost;
 
-        GameObject _turret = Instantiate(blueprint.prefab, GetBuildPosition(), Quaternion.identity);
+        GameObject _turret = Instantiate(blueprint.lvl1_prefab, GetBuildPosition(), Quaternion.identity);
         turret = _turret;
 
         turretBlueprint = blueprint;
@@ -71,35 +69,74 @@ public class TD_SBF_Node : MonoBehaviour
 
     public void UpgradeTurret()
     {
-        if (TD_SBF_PlayerStatistics.ThoughtsPrayers < 
-            turretBlueprint.cost * turretBlueprint.upgradeCostMultiplier)
+        // Build a new one
+        //isUpgraded = true;
+        if (towerLevel == 3)
         {
-            Debug.Log("Need more vespian gas to upgrade.");
-            return;
+            Debug.Log("max'd");
+        }
+        else if (towerLevel == 2)
+        {
+            if (TD_SBF_PlayerStatistics.ThoughtsPrayers <
+                turretBlueprint.cost * 
+                (turretBlueprint.upgradeCostMultiplier * turretBlueprint.upgradeCostMultiplier))
+            {
+                Debug.Log("Need more vespian gas to upgrade.");
+                td_sbf_buildMan.RequireMoreThoughtsAndPrayers();
+                return;
+            }
+
+            TD_SBF_PlayerStatistics.ThoughtsPrayers -=
+                turretBlueprint.cost * 
+                (turretBlueprint.upgradeCostMultiplier * turretBlueprint.upgradeCostMultiplier);
+
+            // Get rid of the old turret
+            Destroy(turret);
+
+            GameObject _turret = Instantiate(turretBlueprint.lvl3_prefab, GetBuildPosition(), Quaternion.identity);
+            turret = _turret;
+
+            // Set sorting order
+            _turret.transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>()
+                .sortingOrder = 100 + Mathf.Abs(Mathf.RoundToInt(_turret.transform.position.y));
+
+            towerLevel = 3;
+        }
+        if (towerLevel == 1)
+        {
+            if (TD_SBF_PlayerStatistics.ThoughtsPrayers <
+                   turretBlueprint.cost * turretBlueprint.upgradeCostMultiplier)
+            {
+                Debug.Log("Need more vespian gas to upgrade.");
+                td_sbf_buildMan.RequireMoreThoughtsAndPrayers();
+                return;
+            }
+
+            TD_SBF_PlayerStatistics.ThoughtsPrayers -=
+                turretBlueprint.cost * turretBlueprint.upgradeCostMultiplier;
+
+            // Get rid of the old turret
+            Destroy(turret);
+
+            GameObject _turret = Instantiate(turretBlueprint.lvl2_prefab, GetBuildPosition(), Quaternion.identity);
+            turret = _turret;
+
+            // Set sorting order
+            _turret.transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>()
+                .sortingOrder = 100 + Mathf.Abs(Mathf.RoundToInt(_turret.transform.position.y));
+
+            towerLevel = 2;
         }
 
-        TD_SBF_PlayerStatistics.ThoughtsPrayers -= 
-            turretBlueprint.cost * turretBlueprint.upgradeCostMultiplier;
-
-        // Get rid of the old turret
-        Destroy(turret);
-
-        // Build a new one
-        GameObject _turret = Instantiate(turretBlueprint.upgradedPrefab, GetBuildPosition(), Quaternion.identity);
-        turret = _turret;
-
-        Debug.Log(td_sbf_buildMan.upgradeEffect);
         GameObject effect = Instantiate(td_sbf_buildMan.upgradeEffect, GetBuildPosition(), Quaternion.identity);
         Destroy(effect, 0.75f);
-
-        isUpgraded = true;
     }
 
     public void SellTurret()
     {
         // TODO: if upgraded, give 1/2 upgraded price
         // TODO: after X seconds, set sell price to half
-        TD_SBF_PlayerStatistics.ThoughtsPrayers += turretBlueprint.GetSellAmount();
+        TD_SBF_PlayerStatistics.ThoughtsPrayers += turretBlueprint.GetSellAmount(towerLevel);
 
         // Spawn a cool effect
         GameObject effect = Instantiate(td_sbf_buildMan.sellEffect, GetBuildPosition(), Quaternion.identity);

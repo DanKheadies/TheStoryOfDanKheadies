@@ -1,8 +1,8 @@
-﻿// CC 4.0 International License: Attribution--Brackeys & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Blackthronprod & HolisticGaming.com--NonCommercial--ShareALike
 // Authors: Blackthornprod
 // Contributors: David W. Corso
 // Start: 07/05/2018
-// Last:  09/26/2019
+// Last:  10/14/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,6 +12,7 @@ public class TD_SBF_HeroActions : MonoBehaviour
     public Animator heroAni;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_HeroStats heroStats;
+    public TD_SBF_HeroMovement heroMove;
     public LayerMask whatIsEnemies;
     public Transform attackPos;
 
@@ -45,10 +46,6 @@ public class TD_SBF_HeroActions : MonoBehaviour
                      !EventSystem.current.IsPointerOverGameObject())
             {
                 StartSecondaryAttack();
-            }
-            else if (Input.GetMouseButtonUp(1))
-            {
-                EndSecondaryAttack();
             }
         }
         else
@@ -92,15 +89,43 @@ public class TD_SBF_HeroActions : MonoBehaviour
         // For UI button click
         if (secondaryAttackWaitCounter > 0)
             return;
-        
-        Debug.Log("start attack");
+
+        GetComponent<TD_SBF_HeroMovement>().bStopPlayerMovement = true;
+        BoostHero();
+        Invoke("NormalizeHero", 3f);
+        Invoke("EndSecondaryAttack", 0.5f);
     }
 
     public void EndSecondaryAttack()
     {
-        Debug.Log("BOOM BABY");
+        GetComponent<TD_SBF_HeroMovement>().bStopPlayerMovement = false;
+
+        heroAni.GetComponent<Animator>().Play("Hero_Idle");
+
+        GetComponent<SpriteRenderer>().color = new Color(
+            255f / 255f, 255f / 255f, 205f / 255f);
 
         secondaryAttackWaitCounter = secondaryAttackWaitTime;
+    }
+
+    public void BoostHero()
+    {
+        heroAni.GetComponent<Animator>().Play("Hero_Oil");
+
+        heroStats.HealHero(5f);
+        heroStats.stunDuration += 0.25f;
+        heroStats.damage += 2f;
+        heroMove.moveSpeed += 1f;
+    }
+
+    public void NormalizeHero()
+    {
+        GetComponent<SpriteRenderer>().color = new Color(
+            255f / 255f, 255f / 255f, 255f / 255f);
+
+        heroStats.stunDuration -= 0.25f;
+        heroStats.damage -= 2f;
+        heroMove.moveSpeed -= 1f;
     }
 
     public void SetAttackPosition()

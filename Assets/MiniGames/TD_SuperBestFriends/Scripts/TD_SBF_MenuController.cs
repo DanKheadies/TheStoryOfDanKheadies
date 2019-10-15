@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/27/2019
-// Last:  08/28/2019
+// Last:  10/07/2019
 
 using UnityEngine;
 using System.Collections;
@@ -23,6 +23,8 @@ public class TD_SBF_MenuController : MonoBehaviour
     public GameObject characters_v;
     public GameObject curtain_v;
     public GameObject sbf_v;
+
+    public float waitTime = 10f;
 
     void Start()
     {
@@ -88,7 +90,7 @@ public class TD_SBF_MenuController : MonoBehaviour
 
     public IEnumerator LoadModeSelector()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(waitTime);
         LoadLevel("TD_SBF_ModeSelector");
     }
 }

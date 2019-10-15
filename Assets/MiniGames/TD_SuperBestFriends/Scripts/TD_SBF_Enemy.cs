@@ -15,9 +15,9 @@ public class TD_SBF_Enemy : MonoBehaviour
     public bool isDead;
     public float damage;
     public float health;
-    //public float speed;
+    public float speed;
     public float startHealth;
-    //public float startSpeed;
+    public float startSpeed;
     public int worth;
 
     [Header("Unity Stuff")]
@@ -28,7 +28,9 @@ public class TD_SBF_Enemy : MonoBehaviour
         damage = 15f;
         isDead = false;
         health = startHealth;
-        //speed = startSpeed;
+
+        startSpeed = GetComponent<Pathfinding.AIPath>().maxSpeed;
+        speed = startSpeed;
 
         GetComponent<Pathfinding.AIDestinationSetter>().target = 
             GameObject.FindGameObjectWithTag("Throne").transform;
@@ -82,6 +84,7 @@ public class TD_SBF_Enemy : MonoBehaviour
     public void Slow(float amount)
     {
         //speed = startSpeed * (amount);
+        GetComponent<Pathfinding.AIPath>().maxSpeed = startSpeed * (amount);
     }
 
     void Die()

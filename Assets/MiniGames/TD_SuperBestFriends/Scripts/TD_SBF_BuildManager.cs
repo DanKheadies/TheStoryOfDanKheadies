@@ -59,4 +59,9 @@ public class TD_SBF_BuildManager : MonoBehaviour
         selectedNode = null;
         nodeUI.Hide();
     }
+
+    public void RequireMoreThoughtsAndPrayers()
+    {
+        Debug.Log("Get the UI elements and flash a quick 'gradual' color change from white to red to white again.");
+    }
 }

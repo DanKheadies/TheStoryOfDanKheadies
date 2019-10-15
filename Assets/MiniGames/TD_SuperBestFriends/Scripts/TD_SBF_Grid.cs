@@ -1,8 +1,8 @@
-﻿// CC 4.0 International License: Attribution--Brackeys & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Unity3d College & HolisticGaming.com--NonCommercial--ShareALike
 // Authors: Jason (Unity3d College)
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  09/13/2019
+// Last:  10/14/2019
 
 using UnityEngine;
 

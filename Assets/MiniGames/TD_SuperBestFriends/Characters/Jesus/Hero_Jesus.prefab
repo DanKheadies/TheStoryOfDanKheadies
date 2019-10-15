@@ -395,6 +395,7 @@ MonoBehaviour:
   heroAni: {fileID: 5023779645834583292}
   gMan: {fileID: 0}
   heroStats: {fileID: 7872172092223806368}
+  heroMove: {fileID: 5023779645834583293}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 1024
@@ -404,7 +405,7 @@ MonoBehaviour:
   basicAttackWaitCounter: 0
   basicAttackWaitTime: 2.5
   secondaryAttackWaitCounter: 0
-  secondaryAttackWaitTime: 5
+  secondaryAttackWaitTime: 15
 --- !u!114 &7872172092223806368
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
-﻿// CC 4.0 International License: Attribution--Brackeys & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/26/2019
-// Last:  09/26/2019
+// Last:  10/14/2019
 
 using UnityEngine;
 using UnityEngine.UI;

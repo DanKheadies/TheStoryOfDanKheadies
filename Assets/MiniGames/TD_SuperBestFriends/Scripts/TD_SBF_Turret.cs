@@ -2,18 +2,21 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/25/2019
+// Last:  10/14/2019
 
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class TD_SBF_Turret : MonoBehaviour
 {
+    public Animator turretAni;
     public Transform target;
     public TD_SBF_Enemy targetEnemy;
 
     [Header("General")]
     public bool isDestroyed;
+    public bool bAnimateShot;
     public float health;
     public float range = 15f;
     public float startHealth = 15f;
@@ -27,8 +30,7 @@ public class TD_SBF_Turret : MonoBehaviour
     public float slowAmount = 0.5f;
     public int damageOverTime = 3;
     public LineRenderer lineRenderer;
-    public ParticleSystem impactEffect;
-    public Light impactLight;
+    public GameObject impactEffect;
 
     [Header("Unity Setup Fields")]
     public GameObject bulletPrefab;
@@ -52,8 +54,8 @@ public class TD_SBF_Turret : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
         {
-            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            
             if (distanceToEnemy < shortestDistance)
             {
                 shortestDistance = distanceToEnemy;
@@ -82,8 +84,7 @@ public class TD_SBF_Turret : MonoBehaviour
                 if (lineRenderer.enabled)
                 {
                     lineRenderer.enabled = false;
-                    impactEffect.Stop();
-                    impactLight.enabled = false;
+                    impactEffect.SetActive(false);
                 }
             }
 
@@ -102,6 +103,9 @@ public class TD_SBF_Turret : MonoBehaviour
             {
                 Shoot();
                 fireCountdown = 1f / fireRate;
+
+                if (bAnimateShot)
+                    StartCoroutine(AnimateShot());
             }
 
             fireCountdown -= Time.deltaTime;
@@ -126,6 +130,17 @@ public class TD_SBF_Turret : MonoBehaviour
             bullet.Seek(target);
     }
 
+    public IEnumerator AnimateShot()
+    {
+        transform.GetChild(0).transform.GetChild(0)
+            .GetComponent<Animator>().SetBool("bIsShooting", true);
+
+        yield return new WaitForSeconds(0.25f);
+
+        transform.GetChild(0).transform.GetChild(0)
+            .GetComponent<Animator>().SetBool("bIsShooting", false);
+    }
+
     void Laser()
     {
         if (targetEnemy.health > 0)
@@ -137,8 +152,7 @@ public class TD_SBF_Turret : MonoBehaviour
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
-            impactEffect.Play();
-            impactLight.enabled = true;
+            impactEffect.SetActive(true);
         }
 
         lineRenderer.SetPosition(0, firePoint.position);
@@ -146,9 +160,7 @@ public class TD_SBF_Turret : MonoBehaviour
 
         Vector3 dir = firePoint.position - target.position;
 
-        impactEffect.transform.position = target.position + dir.normalized;
-
-        impactEffect.transform.rotation = Quaternion.LookRotation(dir);
+        impactEffect.transform.position = target.position + dir.normalized / 10;
     }
 
     public void TakeDamage(float amount, GameObject attackingEnemy)

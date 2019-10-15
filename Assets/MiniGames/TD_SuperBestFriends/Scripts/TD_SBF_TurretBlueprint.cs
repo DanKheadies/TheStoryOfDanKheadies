@@ -2,22 +2,30 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  09/25/2019
+// Last:  10/14/2019
 
 using UnityEngine;
 
 [System.Serializable]
 public class TD_SBF_TurretBlueprint
 {
-    public GameObject prefab;
-    public GameObject upgradedPrefab;
+    public GameObject lvl1_prefab;
+    public GameObject lvl2_prefab;
+    public GameObject lvl3_prefab;
     public float health;
     public int cost;
     public int upgradeCostMultiplier;
     public int upgradeLevel;
 
-    public int GetSellAmount()
+    public int GetSellAmount(int towerLevel)
     {
-        return cost / 2;
+        if (towerLevel == 1)
+            return cost / 2;
+        else if (towerLevel == 2)
+            return (cost * upgradeCostMultiplier) / 2;
+        else if (towerLevel == 3)
+            return (cost * upgradeCostMultiplier * upgradeCostMultiplier) / 2;
+        else
+            return cost;
     }
 }

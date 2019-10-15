@@ -21,9 +21,15 @@ public class TD_SBF_NodeUI : MonoBehaviour
 
         transform.position = target.GetBuildPosition();
 
-        if (!target.isUpgraded)
+        if (target.towerLevel == 1)
         {
             upgradeCost.text = "-" + (target.turretBlueprint.cost * target.turretBlueprint.upgradeCostMultiplier);
+            upgradeButton.interactable = true;
+        }
+        else if (target.towerLevel == 2)
+        {
+            upgradeCost.text = "-" + (target.turretBlueprint.cost * 
+                target.turretBlueprint.upgradeCostMultiplier * target.turretBlueprint.upgradeCostMultiplier);
             upgradeButton.interactable = true;
         }
         else
@@ -32,7 +38,7 @@ public class TD_SBF_NodeUI : MonoBehaviour
             upgradeButton.interactable = false;
         }
 
-        sellAmount.text = "+" + target.turretBlueprint.GetSellAmount();
+        sellAmount.text = "+" + target.turretBlueprint.GetSellAmount(_target.towerLevel);
 
         ui.SetActive(true);
     }
