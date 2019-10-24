@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  09/13/2019
+// Last:  10/21/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,11 +12,14 @@ public class TD_SBF_GameOver : MonoBehaviour
 {
     public TD_SBF_SceneFader sceneFader;
     public Text roundsText;
-    public string menuSceneName = "TD_Menu";
+
+    public int rounds;
+    public string menuSceneName = "TD_SBF_ModeSelector";
 
     void OnEnable()
     {
-        roundsText.text = TD_SBF_PlayerStatistics.Rounds.ToString();
+        rounds = TD_SBF_PlayerStatistics.Rounds - 1;
+        roundsText.text = rounds.ToString();
     }
 
     public void Retry()

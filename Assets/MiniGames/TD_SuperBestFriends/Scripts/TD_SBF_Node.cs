@@ -14,8 +14,8 @@ public class TD_SBF_Node : MonoBehaviour
 
     public Color hoverColor;
     public Color notEnoughThoughtsPrayersColor;
-    public TD_SBF_HeroAnimator heroAni;
     public SpriteRenderer rend;
+    public TD_SBF_HeroAnimator heroAni;
     public TD_SBF_TowerPlacer towerPlacer;
     public Vector3 positionOffset;
     
@@ -64,7 +64,11 @@ public class TD_SBF_Node : MonoBehaviour
         GameObject effect = Instantiate(TD_SBF_BuildManager.td_sbf_instance.buildEffect, GetBuildPosition(), Quaternion.identity);
         Destroy(effect, 0.75f);
 
-        AstarPath.active.Scan();
+        if (TD_SBF_WaveSpawner.enemiesAlive > 0)
+        {
+            Debug.Log("active astar via build");
+            AstarPath.active.Scan();
+        }
     }
 
     public void UpgradeTurret()
@@ -146,7 +150,11 @@ public class TD_SBF_Node : MonoBehaviour
         Destroy(turret);
         turretBlueprint = null;
 
-        AstarPath.active.Scan();
+        if (TD_SBF_WaveSpawner.enemiesAlive > 0)
+        {
+            Debug.Log("active astar via sell");
+            AstarPath.active.Scan();
+        }
 
         // Remove from grid array
         towerPlacer.nodeArray.Remove(transform.position);

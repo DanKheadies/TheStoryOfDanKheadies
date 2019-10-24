@@ -29,6 +29,6 @@ public class TD_SBF_CameraFollow : MonoBehaviour
         // Camera follows the player with a slight delay 
         posX = Mathf.SmoothDamp(transform.position.x, hero.transform.position.x, ref smoothVelocity.x, smoothTime);
         posY = Mathf.SmoothDamp(transform.position.y, hero.transform.position.y, ref smoothVelocity.y, smoothTime);
-        transform.position = new Vector3(posX, posY, depth);
+        transform.position = new Vector3(posX, posY + 0.225f, depth);
     }
 }

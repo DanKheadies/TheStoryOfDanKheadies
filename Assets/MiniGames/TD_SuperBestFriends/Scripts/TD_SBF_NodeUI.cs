@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/25/2019
+// Last:  10/21/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,16 +10,24 @@ using UnityEngine.UI;
 public class TD_SBF_NodeUI : MonoBehaviour
 {
     public Button upgradeButton;
+    public GameObject selectionEffect;
     public GameObject ui;
+    public TD_SBF_BuildManager bMan;
     public TD_SBF_Node target;
     public Text sellAmount;
     public Text upgradeCost;
 
     public void SetTarget(TD_SBF_Node _target)
     {
+        if (selectionEffect)
+            Destroy(selectionEffect);
+
         target = _target;
 
-        transform.position = target.GetBuildPosition();
+        selectionEffect = Instantiate(
+            TD_SBF_BuildManager.td_sbf_instance.selectionEffect, 
+            target.GetBuildPosition() + new Vector3(0, 0.420f, 0), 
+            Quaternion.identity);
 
         if (target.towerLevel == 1)
         {
@@ -46,6 +54,14 @@ public class TD_SBF_NodeUI : MonoBehaviour
     public void Hide()
     {
         ui.SetActive(false);
+
+        if (selectionEffect)
+            Destroy(selectionEffect);
+    }
+
+    public void DeselectNode()
+    {
+        TD_SBF_BuildManager.td_sbf_instance.DeselectNode();
     }
 
     public void Upgrade()

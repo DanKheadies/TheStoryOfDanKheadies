@@ -2,7 +2,7 @@
 // Authors: Jason (Unity3d College)
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  10/14/2019
+// Last:  10/21/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -55,7 +55,7 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
                 !gMan.bIsHeroMode)
             {
                 CheckNode(hitInfo.point);
-
+                
                 if (Input.GetMouseButtonDown(0) &&
                     td_sbf_buildMan.TD_SBF_CanBuild &&
                     td_sbf_buildMan.TD_SBF_HasThoughtsPrayers &&
@@ -67,6 +67,9 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
                          !EventSystem.current.IsPointerOverGameObject())
                 {
                     nodeUI.Hide();
+
+                    if (nodeUI.selectionEffect)
+                        Destroy(nodeUI.selectionEffect);
                 }
             }
         }

@@ -162,8 +162,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAni: {fileID: 8838559092865699870}
+  destination: {fileID: 0}
   firstNode: {fileID: 0}
   firstTower: {fileID: 0}
+  enemy: {fileID: 0}
   spawnPoint: {fileID: 0}
   currentPosition: {x: 0, y: 0, z: 0}
   previousPosition: {x: 0, y: 0, z: 0}
@@ -173,6 +175,7 @@ MonoBehaviour:
   bTimeToDestroy: 0
   bScatteredOnce: 0
   bScatteredTwice: 0
+  bossMultiplier: 10
   attackDuration: 2.5
 --- !u!1 &7683401761412944290
 GameObject:
@@ -490,7 +493,7 @@ MonoBehaviour:
   repathRate: 0.5
   canSearch: 1
   canMove: 1
-  maxSpeed: 0.3
+  maxSpeed: 1
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -537,12 +540,12 @@ MonoBehaviour:
   enemyAni: {fileID: 8838559092865699870}
   isBoss: 0
   isDead: 0
-  damage: 25
+  damage: 5
   health: 0
   speed: 0
-  startHealth: 50000
+  startHealth: 100
   startSpeed: 0
-  worth: 20
+  worth: 10
   healthBar: {fileID: 7683401762982390381}
 --- !u!114 &7306856580977844636
 MonoBehaviour:

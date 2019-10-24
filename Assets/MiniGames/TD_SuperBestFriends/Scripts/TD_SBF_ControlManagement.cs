@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/13/2019
-// Last:  10/14/2019
+// Last:  10/23/2019
 
 using UnityEngine;
 
@@ -18,7 +18,7 @@ public class TD_SBF_ControlManagement : MonoBehaviour
     {
         buildBar.SetActive(!buildBar.activeSelf);
         controlsBar.SetActive(!controlsBar.activeSelf);
-
+        bAvoidCamScroll = false;
         bMan.turretToBuild = null;
     }
 
@@ -28,7 +28,7 @@ public class TD_SBF_ControlManagement : MonoBehaviour
         {
             buildBar.SetActive(!buildBar.activeSelf);
             controlsBar.SetActive(!controlsBar.activeSelf);
-
+            
             bMan.turretToBuild = null;
         }
     }
@@ -50,11 +50,11 @@ public class TD_SBF_ControlManagement : MonoBehaviour
 
     public void AvoidCamScroll()
     {
-        bAvoidCamScroll = !bAvoidCamScroll;
+        bAvoidCamScroll = true;
     }
 
     public void ReenableCamScroll()
     {
-        bAvoidCamScroll = !bAvoidCamScroll;
+        bAvoidCamScroll = false;
     }
 }

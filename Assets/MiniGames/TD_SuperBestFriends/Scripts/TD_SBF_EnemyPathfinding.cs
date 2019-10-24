@@ -1,15 +1,17 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/17/2019
-// Last:  10/14/2019
+// Last:  10/23/2019
 
 using UnityEngine;
 
 public class TD_SBF_EnemyPathfinding : MonoBehaviour
 {
     public Animator enemyAni;
+    public GameObject destination;
     public GameObject firstNode;
     public GameObject firstTower;
+    public TD_SBF_Enemy enemy;
     public Transform spawnPoint;
     public Vector3 currentPosition;
     public Vector3 previousPosition;
@@ -20,11 +22,13 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
     public bool bTimeToDestroy;
     public bool bScatteredOnce;
     public bool bScatteredTwice;
+    public int bossMultiplier = 10;
     public float attackDuration = 1.5f;
 
     void Start()
     {
         currentPosition = transform.position;
+        enemy = transform.GetComponentInParent<TD_SBF_Enemy>();
         InvokeRepeating("CheckPosition", 1f, 1.0f);
         InvokeRepeating("SetSortingLayer", 1f, 1.0f);
         InvokeRepeating("SetBodyMass", 1f, 1.0f);
@@ -102,7 +106,7 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
             bTimeToDestroy &&
             !bAttacking)
         {
-            if (collision.name == "TD_SBF_TowerStandard(Clone)" &&
+            if (collision.tag == "GridTower" &&
                 !firstTower)
             {
                 firstTower = collision.gameObject;
@@ -124,7 +128,7 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
                     DamageTower(firstTower);
             }
 
-            if (collision.name == "TD_SBF_Node(Clone)" &&
+            if (collision.tag == "GridNode" &&
                 !firstNode)
             {
                 firstNode = collision.gameObject;
@@ -152,6 +156,21 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
                 bIsBlocked)
         {
             TryToScatter();
+        }
+
+        if (collision.tag == "Throne")
+        {
+            if (enemy.isBoss)
+            {
+                TD_SBF_PlayerStatistics.Lives -= 1 * bossMultiplier;
+            }
+            else
+            {
+                TD_SBF_PlayerStatistics.Lives--;
+            }
+
+            TD_SBF_WaveSpawner.enemiesAlive--;
+            Destroy(transform.parent.gameObject);
         }
     }
     
@@ -201,11 +220,15 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
 
     public void DestroyNode()
     {
-        TD_SBF_TowerPlacer.the_tp.nodeArray.Remove(firstNode.transform.position);
-        Destroy(firstNode);
+        // Need to check?
+        //if (firstNode)
+        {
+            TD_SBF_TowerPlacer.the_tp.nodeArray.Remove(firstNode.transform.position);
+            Destroy(firstNode);
 
-        bIsBlocked = false;
-        firstNode = null;
+            bIsBlocked = false;
+            firstNode = null;
+        }
     }
 
     // Need to double dip functions -- weird non-action if co-routine via Turret
@@ -216,6 +239,7 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
     }
     public void RerecheckPathing()
     {
+        Debug.Log("active astar via recheck");
         AstarPath.active.Scan();
     }
 }

@@ -57,6 +57,8 @@ public class TD_SBF_Enemy : MonoBehaviour
         healthBar.fillAmount = health / startHealth;
 
         GetComponent<Pathfinding.AIPath>().maxSpeed = 0;
+        GetComponent<Pathfinding.AIPath>().canMove = false;
+        enemyAni.SetBool("bIsWalking", false);
 
         // bonk animation
         enemyAni.Play("Enemy_Bonk_Down");
@@ -105,6 +107,8 @@ public class TD_SBF_Enemy : MonoBehaviour
 
     public void ResetEnemyMovement()
     {
-        GetComponent<Pathfinding.AIPath>().maxSpeed = 3;
+        GetComponent<Pathfinding.AIPath>().maxSpeed = startSpeed;
+        GetComponent<Pathfinding.AIPath>().canMove = true;
+        enemyAni.SetBool("bIsWalking", true);
     }
 }

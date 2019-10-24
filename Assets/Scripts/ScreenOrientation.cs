@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/02/2018
-// Last:  08/18/2019
+// Last:  10/21/2019
 
 using UnityEngine;
 
@@ -37,8 +37,7 @@ public class ScreenOrientation : MonoBehaviour
             bSizingChange)
         {
             ResetParameters();
-
-
+            
             bSizingChange = false;
         }
 

@@ -13,6 +13,7 @@ public class TD_SBF_BuildManager : MonoBehaviour
 
     public static TD_SBF_BuildManager td_sbf_instance;
     public GameObject buildEffect;
+    public GameObject selectionEffect;
     public GameObject sellEffect;
     public GameObject upgradeEffect;
     public TD_SBF_NodeUI nodeUI;

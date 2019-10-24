@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/27/2019
-// Last:  10/14/2019
+// Last:  10/21/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,8 +10,9 @@ public class TD_SBF_ModeSelector : MonoBehaviour
 {
     public Button[] characterButtons;
     public Button[] modeButtons;
-    public GameObject modeCanvas;
     public GameObject characterCanvas;
+    public GameObject modeCanvas;
+    public GameObject optionsCanvas;
     public TD_SBF_SceneFader fader;
 
     void Start()
@@ -47,6 +48,16 @@ public class TD_SBF_ModeSelector : MonoBehaviour
         //}
     }
 
+    void Update()
+    {
+        if ((Input.GetKeyDown(KeyCode.Escape) ||
+             Input.GetKeyDown(KeyCode.P)) &&
+             !characterCanvas.activeSelf)
+        {
+            ToggleOptions();
+        }
+    }
+
     public void ToggleMode()
     {
         if (modeCanvas.activeSelf)
@@ -58,6 +69,20 @@ public class TD_SBF_ModeSelector : MonoBehaviour
         {
             modeCanvas.SetActive(true);
             characterCanvas.SetActive(false);
+        }
+    }
+
+    public void ToggleOptions()
+    {
+        if (modeCanvas.activeSelf)
+        {
+            modeCanvas.SetActive(false);
+            optionsCanvas.SetActive(true);
+        }
+        else
+        {
+            modeCanvas.SetActive(true);
+            optionsCanvas.SetActive(false);
         }
     }
 
@@ -79,5 +104,11 @@ public class TD_SBF_ModeSelector : MonoBehaviour
     public void LoadLevel(string levelName)
     {
         fader.FadeTo(levelName);
+    }
+
+    public void EndGame()
+    {
+        Debug.Log("End Game");
+        Application.Quit();
     }
 }

@@ -87,6 +87,8 @@ public class TD_SBF_WaveSpawner : MonoBehaviour
         }
 
         waveIndex++;
+
+        AstarPath.active.Scan();
     }
 
     void SpawnEnemy(GameObject enemy)
