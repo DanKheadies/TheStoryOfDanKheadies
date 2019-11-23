@@ -2,7 +2,7 @@
 // Authors: Blackthornprod
 // Contributors: David W. Corso
 // Start: 07/05/2018
-// Last:  10/14/2019
+// Last:  11/20/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -27,7 +27,8 @@ public class TD_SBF_HeroActions : MonoBehaviour
     {
         if (basicAttackWaitCounter <= 0)
         {
-            if (Input.GetMouseButtonDown(0) &&
+            if ((Input.GetMouseButtonDown(0) ||
+                 Input.GetButtonDown("Controller Bottom Button")) &&
                 gMan.bIsHeroMode &&
                 !EventSystem.current.IsPointerOverGameObject())
             {
@@ -41,9 +42,10 @@ public class TD_SBF_HeroActions : MonoBehaviour
 
         if (secondaryAttackWaitCounter <= 0)
         {
-            if (Input.GetMouseButtonDown(1) &&
-                     gMan.bIsHeroMode &&
-                     !EventSystem.current.IsPointerOverGameObject())
+            if ((Input.GetMouseButtonDown(0) ||
+                 Input.GetButtonDown("Controller Right Button")) &&
+                gMan.bIsHeroMode &&
+                !EventSystem.current.IsPointerOverGameObject())
             {
                 StartSecondaryAttack();
             }

@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/17/2019
+// Last:  11/21/2019
 
 using UnityEngine;
 
@@ -16,6 +16,8 @@ public class TD_SBF_GameManagement : MonoBehaviour
     public GameObject HUD_Horizontal;
     public GameObject HUD_Vertical;
     public TD_SBF_ControlManagement cMan;
+    public TD_SBF_NodeUISelector nodeUISel;
+    public TD_SBF_ShopSelector shopSel;
 
     public bool bIsHeroMode;
     public bool bIsTowerMode;
@@ -56,7 +58,8 @@ public class TD_SBF_GameManagement : MonoBehaviour
             EndGame();
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B) ||
+            Input.GetButtonDown("Controller Left Bumper"))
         {
             cMan.ToggleHeroBar();
             cMan.DisableHeroBar();
@@ -65,7 +68,8 @@ public class TD_SBF_GameManagement : MonoBehaviour
             ToggleTowerMode();
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H) ||
+            Input.GetButtonDown("Controller Right Bumper"))
         {
             cMan.ToggleBuildBar();
             cMan.DisableBuildBar();
@@ -149,6 +153,9 @@ public class TD_SBF_GameManagement : MonoBehaviour
             GameObject prevAreaTBC = GameObject.FindGameObjectWithTag("PrevGridNode");
             if (prevAreaTBC)
                 Destroy(prevAreaTBC);
+
+            shopSel.ResetTowerMode();
+            nodeUISel.ResetNodeUI();
         }
     }
 
@@ -156,5 +163,7 @@ public class TD_SBF_GameManagement : MonoBehaviour
     {
         if (bIsTowerMode)
             bIsTowerMode = false;
+
+        shopSel.ResetTowerMode();
     }
 }

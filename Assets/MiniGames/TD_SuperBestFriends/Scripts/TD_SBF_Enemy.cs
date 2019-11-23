@@ -25,7 +25,6 @@ public class TD_SBF_Enemy : MonoBehaviour
 
     void Start()
     {
-        damage = 15f;
         isDead = false;
         health = startHealth;
 
@@ -99,6 +98,7 @@ public class TD_SBF_Enemy : MonoBehaviour
         GetComponent<Pathfinding.AIPath>().canMove = false;
         GetComponent<Pathfinding.AIPath>().maxSpeed = 0;
         GetComponent<PolygonCollider2D>().isTrigger = true;
+        transform.GetChild(0).GetComponent<TD_SBF_EnemyPathfinding>().DisableEnemy();
 
         TD_SBF_WaveSpawner.enemiesAlive--;
 

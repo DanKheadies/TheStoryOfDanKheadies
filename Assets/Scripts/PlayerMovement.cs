@@ -56,13 +56,18 @@ public class PlayerMovement : MonoBehaviour
         }
 
         controllers = Input.GetJoystickNames();
+
+        InvokeRepeating("FindController", 1.5f, 1.5f);
+    }
+
+    public void FindController()
+    {
+        controllers = Input.GetJoystickNames();
     }
 
     void Update()
     {
         // Controller Support
-        controllers = Input.GetJoystickNames();
-
         if (controllers.Length > 0)
         {
             //Iterate over every element

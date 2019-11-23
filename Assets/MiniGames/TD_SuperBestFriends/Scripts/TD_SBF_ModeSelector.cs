@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/27/2019
-// Last:  10/21/2019
+// Last:  11/20/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,7 +51,8 @@ public class TD_SBF_ModeSelector : MonoBehaviour
     void Update()
     {
         if ((Input.GetKeyDown(KeyCode.Escape) ||
-             Input.GetKeyDown(KeyCode.P)) &&
+             Input.GetKeyDown(KeyCode.P) ||
+             Input.GetButtonDown("Controller Start Button")) &&
              !characterCanvas.activeSelf)
         {
             ToggleOptions();

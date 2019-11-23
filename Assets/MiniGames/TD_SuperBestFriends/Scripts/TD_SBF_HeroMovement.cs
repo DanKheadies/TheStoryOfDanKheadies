@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/17/2019
-// Last:  09/24/2019
+// Last:  11/20/2019
 
 using UnityEngine;
 
@@ -10,23 +10,21 @@ public class TD_SBF_HeroMovement : MonoBehaviour
     public Animator heroAni;
     public GameObject attackPos;
     public Rigidbody2D rBody;
+    public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_GameManagement gMan;
     public Vector2 movementVector;
-
-    public bool bControllerConnected;
-    public bool bIsControlling;
+    
     public bool bStopPlayerMovement;
 
     public float moveSpeed;
 
-    public string[] controllers;
-
     void Start()
     {
         // Initializers
-        controllers = Input.GetJoystickNames();
+        contSupp = GameObject.Find("GameSupport").GetComponent<TD_SBF_ControllerSupport>();
         gMan = GameObject.FindGameObjectWithTag("GameController")
             .GetComponent<TD_SBF_GameManagement>();
+
         InvokeRepeating("SetBodyMass", 1f, 1.0f);
     }
 
@@ -59,7 +57,7 @@ public class TD_SBF_HeroMovement : MonoBehaviour
         //    //            0.X seconds AFTER re-contact w/ Joystick
         //    Move(fixJoystick.Horizontal, fixJoystick.Vertical);
         //}
-        else if (bIsControlling)
+        else if (contSupp.bIsControlling)
         {
             MovePlayerWithController();
         }
@@ -67,37 +65,6 @@ public class TD_SBF_HeroMovement : MonoBehaviour
         {
             Move(Input.GetAxisRaw("Horizontal"), 
                  Input.GetAxisRaw("Vertical"));
-        }
-    }
-
-    public void ControllerSupport()
-    {
-        // Controller Support
-        controllers = Input.GetJoystickNames();
-
-        if (controllers.Length > 0)
-        {
-            //Iterate over every element
-            for (int i = 0; i < controllers.Length; ++i)
-            {
-                //Check if the string is empty or not
-                if (!string.IsNullOrEmpty(controllers[i]))
-                {
-                    bControllerConnected = true;
-
-                    if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
-                        Input.GetAxis("Controller Joystick Vertical") != 0 ||
-                        Input.GetAxis("Controller DPad Horizontal") != 0 ||
-                        Input.GetAxis("Controller DPad Vertical") != 0)
-                    {
-                        bIsControlling = true;
-                    }
-                    else
-                        bIsControlling = false;
-                }
-                else
-                    bControllerConnected = false;
-            }
         }
     }
 

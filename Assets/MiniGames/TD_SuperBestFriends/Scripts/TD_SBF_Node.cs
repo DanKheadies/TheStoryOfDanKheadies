@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  10/14/2019
+// Last:  11/21/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,28 +10,51 @@ using UnityEngine.EventSystems;
 public class TD_SBF_Node : MonoBehaviour
 {
     TD_SBF_BuildManager td_sbf_buildMan;
-    public Color startColor;
 
+    public Color startColor;
     public Color hoverColor;
     public Color notEnoughThoughtsPrayersColor;
+    public GameObject turret;
     public SpriteRenderer rend;
+    public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_HeroAnimator heroAni;
     public TD_SBF_TowerPlacer towerPlacer;
-    public Vector3 positionOffset;
-    
-    public GameObject turret;
     public TD_SBF_TurretBlueprint turretBlueprint;
-    //public bool isUpgraded = false;
+    public Vector3 positionOffset;
+
     public int towerLevel = 1;
 
     void Awake()
     {
+        contSupp = GameObject.FindGameObjectWithTag("GameSupport")
+            .GetComponent<TD_SBF_ControllerSupport>();
         heroAni = GameObject.FindGameObjectWithTag("Hero")
             .GetComponent<TD_SBF_HeroAnimator>();
         rend = GetComponent<SpriteRenderer>();
         startColor = rend.color;
         td_sbf_buildMan = TD_SBF_BuildManager.td_sbf_instance;
         towerPlacer = FindObjectOfType<TD_SBF_TowerPlacer>();
+    }
+
+    void Update()
+    {
+        if (Input.GetButtonDown("Controller Bottom Button") &&
+            contSupp.bControllerConnected &&
+            !contSupp.bBelayAction &&
+            towerPlacer.gMan.bIsTowerMode)
+        {
+            RaycastHit hitInfo;
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                if (Vector3.Distance(hitInfo.point, turret.transform.position) < 0.8f)
+                {
+                    td_sbf_buildMan.SelectNode(this);
+                    return;
+                }
+            }
+        }
     }
 
     public Vector3 GetBuildPosition()
@@ -65,14 +88,12 @@ public class TD_SBF_Node : MonoBehaviour
         Destroy(effect, 0.75f);
 
         if (TD_SBF_WaveSpawner.enemiesAlive > 0)
-        {
-            Debug.Log("active astar via build");
             AstarPath.active.Scan();
-        }
     }
 
     public void UpgradeTurret()
     {
+        Debug.Log("[Node] Upgrade");
         // Build a new one
         //isUpgraded = true;
         if (towerLevel == 3)
@@ -108,6 +129,7 @@ public class TD_SBF_Node : MonoBehaviour
         }
         if (towerLevel == 1)
         {
+            Debug.Log("[Node] Upgrade to 2");
             if (TD_SBF_PlayerStatistics.ThoughtsPrayers <
                    turretBlueprint.cost * turretBlueprint.upgradeCostMultiplier)
             {
@@ -151,10 +173,7 @@ public class TD_SBF_Node : MonoBehaviour
         turretBlueprint = null;
 
         if (TD_SBF_WaveSpawner.enemiesAlive > 0)
-        {
-            Debug.Log("active astar via sell");
             AstarPath.active.Scan();
-        }
 
         // Remove from grid array
         towerPlacer.nodeArray.Remove(transform.position);

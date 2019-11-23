@@ -2,7 +2,7 @@
 // Authors: Jason (Unity3d College)
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  10/21/2019
+// Last:  11/21/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,18 +11,21 @@ using System.Collections.Generic;
 public class TD_SBF_TowerPlacer : MonoBehaviour
 {
     TD_SBF_BuildManager td_sbf_buildMan;
-
+    
     public Color canBuild;
     public Color noBuild;
     public Color noSelection;
     public Color selectTower;
-    public GameObject gridNodeSelector;
     public GameObject gridNode;
+    public GameObject gridNodeSelector;
+    public GameObject gridNodeTBC;
     public RaycastHit currentHit;
+    public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_Grid grid;
     public TD_SBF_NodeUI nodeUI;
     public static TD_SBF_TowerPlacer the_tp;
+    public Vector3 currentNode;
     public Vector3 prevNode;
 
     public List<Vector3> nodeArray;
@@ -44,9 +47,35 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
         td_sbf_buildMan = TD_SBF_BuildManager.td_sbf_instance;
     }
 
+    void Update()
+    {
+        if (gMan.bIsTowerMode &&
+            contSupp.bControllerConnected)
+        {
+            RaycastHit hitInfo;
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                CheckNode(hitInfo.point);
+
+                // TODO: avoid running this when a tower is present, i.e. need another condition
+                // Note: doesn't seem to harm anything, but shouldn't do it
+                if (Input.GetButtonDown("Controller Bottom Button") &&
+                    td_sbf_buildMan.TD_SBF_CanBuild &&
+                    td_sbf_buildMan.TD_SBF_HasThoughtsPrayers &&
+                    td_sbf_buildMan.turretToBuild.cost != 0)
+                {
+                    PlaceTowerNear(hitInfo.point);
+                }
+            }
+        }
+    }
+    
     public void OnMouseOver()
     {
-        if (gMan.bIsTowerMode)
+        if (gMan.bIsTowerMode &&
+            !contSupp.bControllerConnected)
         {
             RaycastHit hitInfo;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -72,13 +101,12 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
                         Destroy(nodeUI.selectionEffect);
                 }
             }
-        }
-            
+        }  
     }
 
     public void CheckNode(Vector3 hoverPoint)
     {
-        var currentNode = grid.GetNearestPointOnGrid(hoverPoint);
+        currentNode = grid.GetNearestPointOnGrid(hoverPoint);
         currentNode += new Vector3(0, 0, -1f);
 
         // Destroy area TBC when clicking UI
@@ -95,7 +123,7 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
             Destroy(prevNodeTBC);
 
             // Create and save "highlighted" node
-            GameObject gridNodeTBC = Instantiate(gridNodeSelector, currentNode, Quaternion.identity);
+            gridNodeTBC = Instantiate(gridNodeSelector, currentNode, Quaternion.identity);
 
             // Check how to color node
             ColorCheck(currentNode, gridNodeTBC);

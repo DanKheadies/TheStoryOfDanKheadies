@@ -162,11 +162,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAni: {fileID: 8838559092865699870}
-  destination: {fileID: 0}
   firstNode: {fileID: 0}
   firstTower: {fileID: 0}
   enemy: {fileID: 0}
   spawnPoint: {fileID: 0}
+  throne: {fileID: 0}
   currentPosition: {x: 0, y: 0, z: 0}
   previousPosition: {x: 0, y: 0, z: 0}
   bAttacking: 0
@@ -540,7 +540,7 @@ MonoBehaviour:
   enemyAni: {fileID: 8838559092865699870}
   isBoss: 0
   isDead: 0
-  damage: 5
+  damage: 3
   health: 0
   speed: 0
   startHealth: 100

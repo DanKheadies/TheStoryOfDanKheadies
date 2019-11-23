@@ -8,15 +8,15 @@ using UnityEngine;
 
 public class TD_SBF_BuildManager : MonoBehaviour
 {
-    public TD_SBF_Node selectedNode;
-    public TD_SBF_TurretBlueprint turretToBuild;
-
     public static TD_SBF_BuildManager td_sbf_instance;
     public GameObject buildEffect;
     public GameObject selectionEffect;
     public GameObject sellEffect;
     public GameObject upgradeEffect;
+    public TD_SBF_Node selectedNode;
     public TD_SBF_NodeUI nodeUI;
+    public TD_SBF_NodeUISelector nodeUISel;
+    public TD_SBF_TurretBlueprint turretToBuild;
 
     void Awake()
     {
@@ -59,6 +59,8 @@ public class TD_SBF_BuildManager : MonoBehaviour
     {
         selectedNode = null;
         nodeUI.Hide();
+
+        //nodeUISel.ResetNodeUI();
     }
 
     public void RequireMoreThoughtsAndPrayers()

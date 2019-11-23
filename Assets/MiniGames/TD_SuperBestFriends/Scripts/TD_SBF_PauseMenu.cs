@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  10/21/2019
+// Last:  11/20/2019
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,7 +24,8 @@ public class TD_SBF_PauseMenu : MonoBehaviour
     void Update()
     {
         if ((Input.GetKeyDown(KeyCode.Escape) ||
-             Input.GetKeyDown(KeyCode.P)) &&
+             Input.GetKeyDown(KeyCode.P) ||
+             Input.GetButtonDown("Controller Start Button")) &&
              !modeSelector)
         {
             Toggle();

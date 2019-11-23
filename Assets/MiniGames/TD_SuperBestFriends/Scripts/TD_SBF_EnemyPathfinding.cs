@@ -1,18 +1,19 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/17/2019
-// Last:  10/23/2019
+// Last:  11/19/2019
 
 using UnityEngine;
+using Pathfinding;
 
 public class TD_SBF_EnemyPathfinding : MonoBehaviour
 {
     public Animator enemyAni;
-    public GameObject destination;
     public GameObject firstNode;
     public GameObject firstTower;
     public TD_SBF_Enemy enemy;
     public Transform spawnPoint;
+    public Transform throne;
     public Vector3 currentPosition;
     public Vector3 previousPosition;
 
@@ -28,7 +29,9 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
     void Start()
     {
         currentPosition = transform.position;
-        enemy = transform.GetComponentInParent<TD_SBF_Enemy>();
+        enemy = GetComponentInParent<TD_SBF_Enemy>();
+        throne = GameObject.FindGameObjectWithTag("Throne").GetComponent<Transform>();
+
         InvokeRepeating("CheckPosition", 1f, 1.0f);
         InvokeRepeating("SetSortingLayer", 1f, 1.0f);
         InvokeRepeating("SetBodyMass", 1f, 1.0f);
@@ -78,20 +81,24 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
         bScatteredOnce = true;
         bScatteredTwice = true;
 
-        GetComponentInParent<Pathfinding.AIDestinationSetter>().target =
+        GetComponentInParent<AIDestinationSetter>().target =
             spawnPoint;
-
-        Invoke("ResetTarget", 2.5f);
+        
+        GetComponentInParent<TD_SBF_Enemy>().speed *= 1.5f;
+        Invoke("ResetTarget", 2.5f + GetComponentInParent<TD_SBF_Enemy>().startSpeed * 0.5f);
     }
 
     public void ResetTarget()
     {
-        GetComponentInParent<Pathfinding.AIDestinationSetter>().target =
-            GameObject.FindGameObjectWithTag("Throne").transform;
+        GetComponentInParent<AIDestinationSetter>().target = throne;
+        GetComponentInParent<TD_SBF_Enemy>().speed = GetComponentInParent<TD_SBF_Enemy>().startSpeed;
 
         ToggleCollider();
 
         bIsBlocked = false;
+
+        firstNode = null;
+        firstTower = null;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -221,14 +228,14 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
     public void DestroyNode()
     {
         // Need to check?
-        //if (firstNode)
+        if (firstNode)
         {
             TD_SBF_TowerPlacer.the_tp.nodeArray.Remove(firstNode.transform.position);
             Destroy(firstNode);
-
-            bIsBlocked = false;
-            firstNode = null;
         }
+
+        bIsBlocked = false;
+        firstNode = null;
     }
 
     // Need to double dip functions -- weird non-action if co-routine via Turret
@@ -239,7 +246,17 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
     }
     public void RerecheckPathing()
     {
-        Debug.Log("active astar via recheck");
         AstarPath.active.Scan();
+    }
+
+    public void DisableEnemy()
+    {
+        bAttacking = false;
+        bGetSpawnTransform = false;
+        bIsBlocked = false;
+        bTimeToDestroy = false;
+        firstNode = null;
+        firstTower = null;
+        CancelInvoke("CheckPosition");
     }
 }
