@@ -162,16 +162,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAni: {fileID: 8838559092865699870}
-  destination: {fileID: 0}
   firstNode: {fileID: 0}
   firstTower: {fileID: 0}
   enemy: {fileID: 0}
   spawnPoint: {fileID: 0}
+  throne: {fileID: 0}
   currentPosition: {x: 0, y: 0, z: 0}
   previousPosition: {x: 0, y: 0, z: 0}
   bAttacking: 0
   bGetSpawnTransform: 0
+  bHoldPosition: 0
   bIsBlocked: 0
+  bIsPunching: 0
   bTimeToDestroy: 0
   bScatteredOnce: 0
   bScatteredTwice: 0
@@ -537,7 +539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1a2eb2505e89b4d9795f13062ac674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAni: {fileID: 8838559092865699870}
+  enemyAni: {fileID: 7306856580977844636}
   isBoss: 0
   isDead: 0
   damage: 15

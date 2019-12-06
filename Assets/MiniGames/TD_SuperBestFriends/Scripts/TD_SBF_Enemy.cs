@@ -2,14 +2,15 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  09/25/2019
+// Last:  12/05/2019
 
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class TD_SBF_Enemy : MonoBehaviour
 {
-    public Animator enemyAni;
+    public TD_SBF_EnemyAnimator enemyAni;
 
     public bool isBoss;
     public bool isDead;
@@ -50,17 +51,14 @@ public class TD_SBF_Enemy : MonoBehaviour
 
     public void TakeHeroMeleeDamage(float _amount, float _stunDur)
     {
-        Debug.Log("damaging enemy");
         health -= _amount;
 
         healthBar.fillAmount = health / startHealth;
 
-        GetComponent<Pathfinding.AIPath>().maxSpeed = 0;
-        GetComponent<Pathfinding.AIPath>().canMove = false;
-        enemyAni.SetBool("bIsWalking", false);
+        StopEnemyMovement();
 
         // bonk animation
-        enemyAni.Play("Enemy_Bonk_Down");
+        enemyAni.enemyAni.Play("Enemy_Bonk_Down");
 
         Invoke("ResetEnemyMovement", _stunDur);
 
@@ -73,13 +71,20 @@ public class TD_SBF_Enemy : MonoBehaviour
 
     public void DamageHero(GameObject hero)
     {
-        //hero.GetComponent<TD_SBF_HeroStats>().TakeDamage(damage);
-        Debug.Log("damaging hero");
+        StopEnemyMovement();
+
+        hero.GetComponentInParent<TD_SBF_HeroStats>().TakeDamage(damage);
+
+        StartCoroutine(RecoverMovement());
     }
 
     public void DamageTower(GameObject tower)
     {
+        StopEnemyMovement();
+
         tower.GetComponent<TD_SBF_Turret>().TakeDamage(damage, gameObject);
+
+        StartCoroutine(RecoverMovement());
     }
 
     public void Slow(float amount)
@@ -92,11 +97,11 @@ public class TD_SBF_Enemy : MonoBehaviour
     {
         isDead = true;
 
-        TD_SBF_PlayerStatistics.ThoughtsPrayers += worth;
-        
-        enemyAni.Play("Enemy_Death");
-        GetComponent<Pathfinding.AIPath>().canMove = false;
-        GetComponent<Pathfinding.AIPath>().maxSpeed = 0;
+        TD_SBF_PlayerStatistics.ThoughtsPrayers += 
+            worth * TD_SBF_PlayerStatistics.ThoughtsPrayersModifier;
+
+        StopEnemyMovement();
+        enemyAni.enemyAni.Play("Enemy_Death");
         GetComponent<PolygonCollider2D>().isTrigger = true;
         transform.GetChild(0).GetComponent<TD_SBF_EnemyPathfinding>().DisableEnemy();
 
@@ -105,10 +110,28 @@ public class TD_SBF_Enemy : MonoBehaviour
         Destroy(gameObject, 2.25f);
     }
 
+    public void StopEnemyMovement()
+    {
+        GetComponent<Pathfinding.AIPath>().maxSpeed = 0;
+        GetComponent<Pathfinding.AIPath>().canMove = false;
+        enemyAni.enemyAni.SetBool("bIsWalking", false);
+    }
+
     public void ResetEnemyMovement()
     {
         GetComponent<Pathfinding.AIPath>().maxSpeed = startSpeed;
         GetComponent<Pathfinding.AIPath>().canMove = true;
-        enemyAni.SetBool("bIsWalking", true);
+        enemyAni.enemyAni.SetBool("bIsWalking", true);
+
+        transform.GetChild(0).GetComponent<TD_SBF_EnemyPathfinding>().ToggleCollider();
+    }
+
+    public IEnumerator RecoverMovement()
+    {
+        float duration = transform.GetChild(0).GetComponent<TD_SBF_EnemyPathfinding>()
+            .attackDuration;
+        yield return new WaitForSeconds(duration);
+
+        ResetEnemyMovement();
     }
 }

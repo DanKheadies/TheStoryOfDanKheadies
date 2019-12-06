@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  11/21/2019
+// Last:  12/04/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -28,12 +28,14 @@ public class TD_SBF_Node : MonoBehaviour
     {
         contSupp = GameObject.FindGameObjectWithTag("GameSupport")
             .GetComponent<TD_SBF_ControllerSupport>();
-        heroAni = GameObject.FindGameObjectWithTag("Hero")
-            .GetComponent<TD_SBF_HeroAnimator>();
         rend = GetComponent<SpriteRenderer>();
         startColor = rend.color;
         td_sbf_buildMan = TD_SBF_BuildManager.td_sbf_instance;
         towerPlacer = FindObjectOfType<TD_SBF_TowerPlacer>();
+
+        if (heroAni)
+            heroAni = GameObject.FindGameObjectWithTag("Hero")
+                .GetComponent<TD_SBF_HeroAnimator>();
     }
 
     void Update()
@@ -81,8 +83,11 @@ public class TD_SBF_Node : MonoBehaviour
         _turret.transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>()
             .sortingOrder = 100 + Mathf.Abs(Mathf.RoundToInt(_turret.transform.position.y));
         
-        heroAni.GetComponent<Animator>().Play("Hero_Build");
-        Invoke("RestoreHeroMovementAnimation", 1f);
+        if (heroAni)
+        {
+            heroAni.GetComponent<Animator>().Play("Hero_Build");
+            Invoke("RestoreHeroMovementAnimation", 1f);
+        }
 
         GameObject effect = Instantiate(TD_SBF_BuildManager.td_sbf_instance.buildEffect, GetBuildPosition(), Quaternion.identity);
         Destroy(effect, 0.75f);
@@ -93,7 +98,6 @@ public class TD_SBF_Node : MonoBehaviour
 
     public void UpgradeTurret()
     {
-        Debug.Log("[Node] Upgrade");
         // Build a new one
         //isUpgraded = true;
         if (towerLevel == 3)
@@ -129,7 +133,6 @@ public class TD_SBF_Node : MonoBehaviour
         }
         if (towerLevel == 1)
         {
-            Debug.Log("[Node] Upgrade to 2");
             if (TD_SBF_PlayerStatistics.ThoughtsPrayers <
                    turretBlueprint.cost * turretBlueprint.upgradeCostMultiplier)
             {

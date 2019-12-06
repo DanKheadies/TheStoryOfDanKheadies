@@ -373,13 +373,12 @@ MonoBehaviour:
   heroAni: {fileID: 5023779645834583292}
   attackPos: {fileID: 9090625280347224789}
   rBody: {fileID: 5023779645834583234}
+  contSupp: {fileID: 0}
   gMan: {fileID: 0}
+  heroStats: {fileID: 7872172092223806368}
   movementVector: {x: 0, y: 0}
-  bControllerConnected: 0
-  bIsControlling: 0
   bStopPlayerMovement: 0
   moveSpeed: 10
-  controllers: []
 --- !u!114 &5953014966743871225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,12 +418,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroAni: {fileID: 5023779645834583292}
+  heroBMan: {fileID: 0}
   heroMove: {fileID: 5023779645834583293}
-  isInvincible: 0
-  isDead: 0
+  heroUpgrade: {fileID: 0}
+  bIsInvincible: 0
+  bIsDead: 0
+  boostModifier: 1
   damage: 15
   health: 0
-  startHealth: 50
+  startHealth: 5
   stunDuration: 0.5
   healthBar: {fileID: 9047597101731650940}
 --- !u!1 &5023779645861120701

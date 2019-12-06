@@ -2,14 +2,14 @@
 // Authors: Blackthornprod
 // Contributors: David W. Corso
 // Start: 07/05/2018
-// Last:  11/20/2019
+// Last:  12/05/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TD_SBF_HeroActions : MonoBehaviour
 {
-    public Animator heroAni;
+    public TD_SBF_HeroAnimator heroAni;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_HeroStats heroStats;
     public TD_SBF_HeroMovement heroMove;
@@ -25,6 +25,9 @@ public class TD_SBF_HeroActions : MonoBehaviour
     
     void Update()
     {
+        if (heroStats.bIsDead)
+            return;
+
         if (basicAttackWaitCounter <= 0)
         {
             if ((Input.GetMouseButtonDown(0) ||
@@ -42,7 +45,7 @@ public class TD_SBF_HeroActions : MonoBehaviour
 
         if (secondaryAttackWaitCounter <= 0)
         {
-            if ((Input.GetMouseButtonDown(0) ||
+            if ((Input.GetMouseButtonDown(1) ||
                  Input.GetButtonDown("Controller Right Button")) &&
                 gMan.bIsHeroMode &&
                 !EventSystem.current.IsPointerOverGameObject())
@@ -53,6 +56,12 @@ public class TD_SBF_HeroActions : MonoBehaviour
         else
         {
             secondaryAttackWaitCounter -= Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) &&
+            Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            TD_SBF_PlayerStatistics.ThoughtsPrayers += 1000;
         }
     }
 
@@ -66,8 +75,7 @@ public class TD_SBF_HeroActions : MonoBehaviour
         GetComponent<TD_SBF_HeroMovement>().bStopPlayerMovement = true;
 
         // Animation
-        heroAni.SetBool("bIsAttacking", true);
-        heroAni.SetBool("bIsWalking", false);
+        heroAni.Attack();
         Invoke("ResetAttack", 0.75f);
 
         SetAttackPosition();
@@ -102,7 +110,7 @@ public class TD_SBF_HeroActions : MonoBehaviour
     {
         GetComponent<TD_SBF_HeroMovement>().bStopPlayerMovement = false;
 
-        heroAni.GetComponent<Animator>().Play("Hero_Idle");
+        heroAni.Idle();
 
         GetComponent<SpriteRenderer>().color = new Color(
             255f / 255f, 255f / 255f, 205f / 255f);
@@ -112,12 +120,12 @@ public class TD_SBF_HeroActions : MonoBehaviour
 
     public void BoostHero()
     {
-        heroAni.GetComponent<Animator>().Play("Hero_Oil");
+        heroAni.Oil();
 
-        heroStats.HealHero(5f);
-        heroStats.stunDuration += 0.25f;
-        heroStats.damage += 2f;
-        heroMove.moveSpeed += 1f;
+        heroStats.HealHero(5f * heroStats.boostModifier);
+        heroStats.stunDuration += (0.25f * heroStats.boostModifier);
+        heroStats.damage += (2f * heroStats.boostModifier);
+        heroMove.moveSpeed += (1f * heroStats.boostModifier);
     }
 
     public void NormalizeHero()
@@ -125,15 +133,15 @@ public class TD_SBF_HeroActions : MonoBehaviour
         GetComponent<SpriteRenderer>().color = new Color(
             255f / 255f, 255f / 255f, 255f / 255f);
 
-        heroStats.stunDuration -= 0.25f;
-        heroStats.damage -= 2f;
-        heroMove.moveSpeed -= 1f;
+        heroStats.stunDuration -= (0.25f * heroStats.boostModifier);
+        heroStats.damage -= (2f * heroStats.boostModifier);
+        heroMove.moveSpeed -= (1f * heroStats.boostModifier);
     }
 
     public void SetAttackPosition()
     {
-        float posX = heroAni.GetFloat("MoveX");
-        float posY = heroAni.GetFloat("MoveY");
+        float posX = heroAni.heroAni.GetFloat("MoveX");
+        float posY = heroAni.heroAni.GetFloat("MoveY");
 
         if (Mathf.Abs(posX) > Mathf.Abs(posY))
         {
@@ -156,7 +164,7 @@ public class TD_SBF_HeroActions : MonoBehaviour
         // Resume player
         GetComponent<TD_SBF_HeroMovement>().bStopPlayerMovement = false;
 
-        heroAni.SetBool("bIsAttacking", false);
+        heroAni.Idle();
     }
 
     private void OnDrawGizmosSelected()

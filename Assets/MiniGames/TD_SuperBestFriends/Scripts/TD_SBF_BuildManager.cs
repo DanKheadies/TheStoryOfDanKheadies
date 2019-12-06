@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  09/23/2019
+// Last:  12/05/2019
 
 using UnityEngine;
 
@@ -16,6 +16,7 @@ public class TD_SBF_BuildManager : MonoBehaviour
     public TD_SBF_Node selectedNode;
     public TD_SBF_NodeUI nodeUI;
     public TD_SBF_NodeUISelector nodeUISel;
+    public TD_SBF_ThoughtsPrayersUI tpUI;
     public TD_SBF_TurretBlueprint turretToBuild;
 
     void Awake()
@@ -65,6 +66,6 @@ public class TD_SBF_BuildManager : MonoBehaviour
 
     public void RequireMoreThoughtsAndPrayers()
     {
-        Debug.Log("Get the UI elements and flash a quick 'gradual' color change from white to red to white again.");
+        tpUI.FlashWarning();
     }
 }

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/13/2019
-// Last:  10/23/2019
+// Last:  11/24/2019
 
 using UnityEngine;
 
@@ -35,6 +35,11 @@ public class TD_SBF_ControlManagement : MonoBehaviour
 
     public void ToggleHeroBar()
     {
+        if (!heroBar.GetComponent<TD_SBF_HeroBarManager>().heroShell.activeSelf)
+        {
+            heroBar.GetComponent<TD_SBF_HeroBarManager>().ToggleHeroUpgradeShells();
+        }
+
         heroBar.SetActive(!heroBar.activeSelf);
         controlsBar.SetActive(!controlsBar.activeSelf);
     }

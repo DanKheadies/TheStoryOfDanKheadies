@@ -1,18 +1,22 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/13/2019
-// Last:  10/14/2019
+// Last:  12/05/2019
 
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class TD_SBF_HeroStats : MonoBehaviour
 {
-    public Animator heroAni;
+    public TD_SBF_HeroAnimator heroAni;
+    public TD_SBF_HeroBarManager heroBMan;
     public TD_SBF_HeroMovement heroMove;
-
-    public bool isInvincible;
-    public bool isDead;
+    public TD_SBF_HeroUpgrade heroUpgrade;
+    
+    public bool bIsInvincible;
+    public bool bIsDead;
+    public float boostModifier;
     public float damage;
     public float health;
     public float startHealth;
@@ -24,21 +28,24 @@ public class TD_SBF_HeroStats : MonoBehaviour
     void Start()
     {
         damage = 5f;
-        startHealth = 50f;
         health = startHealth;
         stunDuration = 0.5f;
     }
 
     public void TakeDamage(float amount)
     {
-        healthBar.GetComponentInParent<CanvasGroup>().alpha = 1;
-
         health -= amount;
+
+        if (health < startHealth)
+            healthBar.GetComponentInParent<CanvasGroup>().alpha = 1;
 
         healthBar.fillAmount = health / startHealth;
 
+        heroAni.GetHit();
+        StartCoroutine(RestoreIdleAni());
+
         if (health <= 0f &&
-            !isDead)
+            !bIsDead)
         {
             Die();
         }
@@ -48,21 +55,54 @@ public class TD_SBF_HeroStats : MonoBehaviour
     {
         if (health >= startHealth)
             healthBar.GetComponentInParent<CanvasGroup>().alpha = 0;
-    }
 
-    // Or just handle in HeroMovement
-    public void Slow(float amount)
-    {
-        // get speed from HeroMovement.moveSpeed
-        // heroMove.moveSpeed = heroMove.moveSpeed * (amount);
+        health += amount;
     }
 
     void Die()
     {
-        isDead = true;
+        bIsDead = true;
+        gameObject.tag = "Untagged";
+        transform.GetChild(0).tag = "Untagged";
 
-        heroAni.Play("Hero_Death");
+        heroAni.Die();
         heroMove.moveSpeed = 0;
         GetComponent<PolygonCollider2D>().isTrigger = true;
+
+        heroMove.bStopPlayerMovement = true;
+        heroBMan.DisableHeroAttacks();
+
+        healthBar.GetComponentInParent<CanvasGroup>().alpha = 0;
+
+        heroUpgrade.EnableRevive();
+    }
+
+    public void Revive(float _health)
+    {
+        bIsDead = false;
+        gameObject.tag = "Hero";
+        transform.GetChild(0).tag = "Hero";
+
+        heroAni.Build();
+        StartCoroutine(RestoreIdleAni());
+
+        health = _health;
+        healthBar.fillAmount = health / startHealth;
+
+        heroMove.bStopPlayerMovement = false;
+        heroMove.moveSpeed = 10f;
+
+        GetComponent<PolygonCollider2D>().isTrigger = false;
+
+        heroBMan.EnableHeroAttacks();
+        heroUpgrade.DisableRevive();
+    }
+
+    public IEnumerator RestoreIdleAni()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if (!bIsDead)
+            heroAni.Idle();
     }
 }

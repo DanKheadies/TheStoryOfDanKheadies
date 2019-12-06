@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/17/2019
-// Last:  11/19/2019
+// Last:  11/24/2019
 
 using UnityEngine;
 using Pathfinding;
@@ -19,12 +19,15 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
 
     public bool bAttacking;
     public bool bGetSpawnTransform;
+    public bool bHoldPosition;
     public bool bIsBlocked;
+    public bool bIsPunching;
     public bool bTimeToDestroy;
     public bool bScatteredOnce;
     public bool bScatteredTwice;
     public int bossMultiplier = 10;
-    public float attackDuration = 1.5f;
+    //public float attackDuration = 1.5f;
+    public float attackDuration = 0.75f;
 
     void Start()
     {
@@ -37,10 +40,18 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
         InvokeRepeating("SetBodyMass", 1f, 1.0f);
     }
 
+    void Update()
+    {
+        if (bHoldPosition)
+        {
+            GetComponentInParent<AIPath>().canMove = false;
+        }
+    }
+
     public void SetBodyMass()
     {
         transform.GetComponentInParent<Rigidbody2D>()
-            .mass = 100 * Mathf.Abs(Mathf.RoundToInt(transform.position.y));
+            .mass = 1000000 * Mathf.Abs(Mathf.RoundToInt(transform.position.y));
     }
 
     public void SetSortingLayer()
@@ -53,7 +64,8 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
     {
         currentPosition = transform.position;
 
-        if (currentPosition.Round(2) == previousPosition.Round(2))
+        if (currentPosition.Round(2) == previousPosition.Round(2) &&
+            !bIsPunching)
         {
             bIsBlocked = true;
 
@@ -142,7 +154,8 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
             }
         }
 
-        if (collision.tag == "Hero")
+        if (collision.tag == "Hero" &&
+            !bIsPunching)
         {
             // Attack animation
             AttackAnimation(collision.gameObject);
@@ -150,6 +163,8 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
 
             GetComponentInParent<TD_SBF_Enemy>().
                 DamageHero(collision.gameObject);
+
+            HoldPosition();
 
             // TODO
             // Remove hero health
@@ -204,17 +219,22 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
         }
     }
 
+    public void HoldPosition()
+    {
+        bHoldPosition = true;
+        bIsPunching = true;
+    }
+
     public void ResetAttack()
     {
         bAttacking = false;
-        Invoke("ResetDestruction", 0.5f);
+        bHoldPosition = false;
+        bIsBlocked = false;
+        bIsPunching = false;
+        bTimeToDestroy = false;
         enemyAni.Play("Enemy_Idle");
-    }
-
-    public void ResetDestruction()
-    {
-        if (!bIsBlocked)
-            bTimeToDestroy = false;
+        
+        GetComponentInParent<AIPath>().canMove = true;
 
         ToggleCollider();
     }

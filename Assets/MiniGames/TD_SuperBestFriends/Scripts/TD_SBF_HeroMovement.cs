@@ -12,6 +12,7 @@ public class TD_SBF_HeroMovement : MonoBehaviour
     public Rigidbody2D rBody;
     public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_GameManagement gMan;
+    public TD_SBF_HeroStats heroStats;
     public Vector2 movementVector;
     
     public bool bStopPlayerMovement;
@@ -33,7 +34,8 @@ public class TD_SBF_HeroMovement : MonoBehaviour
         if (!gMan.bIsHeroMode)
             return;
 
-        if (bStopPlayerMovement)
+        if (bStopPlayerMovement ||
+            heroStats.bIsDead)
         {
             movementVector = Vector2.zero;
             rBody.velocity = Vector2.zero;
