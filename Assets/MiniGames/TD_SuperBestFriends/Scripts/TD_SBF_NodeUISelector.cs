@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/20/2019
-// Last:  11/22/2019
+// Last:  12/09/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -79,14 +79,19 @@ public class TD_SBF_NodeUISelector : MonoBehaviour
             }
             else if (Input.GetButtonDown("Controller Bottom Button"))
             {
-                Debug.Log("[NodeUISel] Select Option with Cont");
                 SelectOption();
+            }
+            else if (Input.GetButtonDown("Controller Right Button"))
+            {
+                StartCoroutine(contSupp.BelayAction());
+
+                ResetNodeUI();
+                shopSel.ResetTowerMode();
             }
             else if (Input.GetButtonDown("Controller Right Button") ||
                      Input.GetButtonDown("Controller Right Bumper") ||
                      Input.GetButtonDown("Controller Left Bumper"))
             {
-                Debug.Log("[NodeUISel] Close NodeUI");
                 shopSel.ResetScroll();
             }
         }

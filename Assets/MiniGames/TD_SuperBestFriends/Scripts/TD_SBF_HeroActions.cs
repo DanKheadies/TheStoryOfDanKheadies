@@ -2,18 +2,19 @@
 // Authors: Blackthornprod
 // Contributors: David W. Corso
 // Start: 07/05/2018
-// Last:  12/05/2019
+// Last:  12/09/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TD_SBF_HeroActions : MonoBehaviour
 {
-    public TD_SBF_HeroAnimator heroAni;
-    public TD_SBF_GameManagement gMan;
-    public TD_SBF_HeroStats heroStats;
-    public TD_SBF_HeroMovement heroMove;
     public LayerMask whatIsEnemies;
+    public TD_SBF_GameManagement gMan;
+    public TD_SBF_HeroAnimator heroAni;
+    public TD_SBF_HeroBarManager heroBarMan;
+    public TD_SBF_HeroMovement heroMove;
+    public TD_SBF_HeroStats heroStats;
     public Transform attackPos;
 
     public float attackRangeX;
@@ -25,6 +26,20 @@ public class TD_SBF_HeroActions : MonoBehaviour
     
     void Update()
     {
+        if ((Input.GetButtonDown("Controller Top Button") ||
+             Input.GetButtonDown("Controller Left Button")) &&
+            gMan.bIsHeroMode &&
+            !EventSystem.current.IsPointerOverGameObject())
+        {
+            heroBarMan.ToggleHeroUpgradeShells();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) &&
+            Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            TD_SBF_PlayerStatistics.ThoughtsPrayers += 1000;
+        }
+
         if (heroStats.bIsDead)
             return;
 
@@ -33,7 +48,8 @@ public class TD_SBF_HeroActions : MonoBehaviour
             if ((Input.GetMouseButtonDown(0) ||
                  Input.GetButtonDown("Controller Bottom Button")) &&
                 gMan.bIsHeroMode &&
-                !EventSystem.current.IsPointerOverGameObject())
+                !EventSystem.current.IsPointerOverGameObject() &&
+                !heroBarMan.bUpgrading)
             {
                 BasicAttack();
             }
@@ -48,7 +64,8 @@ public class TD_SBF_HeroActions : MonoBehaviour
             if ((Input.GetMouseButtonDown(1) ||
                  Input.GetButtonDown("Controller Right Button")) &&
                 gMan.bIsHeroMode &&
-                !EventSystem.current.IsPointerOverGameObject())
+                !EventSystem.current.IsPointerOverGameObject() &&
+                !heroBarMan.bUpgrading)
             {
                 StartSecondaryAttack();
             }
@@ -56,12 +73,6 @@ public class TD_SBF_HeroActions : MonoBehaviour
         else
         {
             secondaryAttackWaitCounter -= Time.deltaTime;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1) &&
-            Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            TD_SBF_PlayerStatistics.ThoughtsPrayers += 1000;
         }
     }
 

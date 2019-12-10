@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  12/04/2019
+// Last:  12/09/2019
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -50,7 +50,7 @@ public class TD_SBF_Node : MonoBehaviour
 
             if (Physics.Raycast(ray, out hitInfo))
             {
-                if (Vector3.Distance(hitInfo.point, turret.transform.position) < 0.8f)
+                if (Vector3.Distance(hitInfo.point, turret.transform.position) < 0.85f)
                 {
                     td_sbf_buildMan.SelectNode(this);
                     return;

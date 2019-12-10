@@ -60,8 +60,6 @@ public class TD_SBF_BuildManager : MonoBehaviour
     {
         selectedNode = null;
         nodeUI.Hide();
-
-        //nodeUISel.ResetNodeUI();
     }
 
     public void RequireMoreThoughtsAndPrayers()
