@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  09/17/2019
+// Last:  01/12/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public AspectUtility aspectUtil;
     public CameraFollow cameraFollow;
     public CameraSlider cameraSlider;
+    public DeviceDetector devDetect;
     public FixedJoystick fixJoystick;
     public PlayerBrioManager playerBrioMan;
     public PolygonCollider2D playerCollider;
@@ -27,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
     public bool bControllerConnected;
     public bool bGWCUpdate;
     public bool bIsControlling;
-    public bool bIsMobile;
     public bool bStopPlayerMovement;
 
     public float moveSpeed;
@@ -174,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
         // 2x Move Speed
         if (touches.bBaction ||
             (Input.GetButton("BAction") &&
-             !uMan.bMobileDevice))
+             !devDetect.bIsMobile))
         {
             rBody.velocity = movementVector * 2;
 

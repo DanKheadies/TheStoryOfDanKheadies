@@ -17,6 +17,7 @@ public class TD_SBF_PauseMenu : MonoBehaviour
     public GameObject pauseButtons;
     public GameObject ui;
     public TD_SBF_SceneFader sceneFader;
+    public TD_SBF_TouchControls touchConts;
 
     public bool modeSelector;
     public string levelToLoad = "TD_SBF_ModeSelector";
@@ -42,10 +43,16 @@ public class TD_SBF_PauseMenu : MonoBehaviour
             !modeSelector)
         {
             Time.timeScale = 0f;
+
+            if (touchConts)
+                touchConts.HideControls();
         }
         else
         {
             Time.timeScale = 1f;
+
+            if (touchConts)
+                touchConts.DisplayControls();
         }
     }
 

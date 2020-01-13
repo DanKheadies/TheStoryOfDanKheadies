@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/17/2019
-// Last:  11/20/2019
+// Last:  12/12/2019
 
 using UnityEngine;
 
@@ -13,6 +13,7 @@ public class TD_SBF_HeroMovement : MonoBehaviour
     public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_HeroStats heroStats;
+    public TD_SBF_TouchControls touchConts;
     public Vector2 movementVector;
     
     public bool bStopPlayerMovement;
@@ -62,6 +63,12 @@ public class TD_SBF_HeroMovement : MonoBehaviour
         else if (contSupp.bIsControlling)
         {
             MovePlayerWithController();
+        }
+        else if (touchConts.leftFixedJoystick.Vertical != 0 ||
+                 touchConts.leftFixedJoystick.Horizontal != 0)
+        {
+            Move(touchConts.leftFixedJoystick.Horizontal,
+                 touchConts.leftFixedJoystick.Vertical);
         }
         else
         {

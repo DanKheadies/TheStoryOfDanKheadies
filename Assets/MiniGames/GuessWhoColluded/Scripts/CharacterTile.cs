@@ -1,13 +1,14 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/13/2018
-// Last:  08/18/2019
+// Last:  01/12/2020
 
 using UnityEngine;
 
 // Logic for each character tile on the GWC board
 public class CharacterTile : MonoBehaviour
 {
+    public DeviceDetector devDetect;
     public DialogueManager dMan;
     public GWC_Controller gwc;
     public GWCTouchControls gwcTouches;
@@ -78,7 +79,8 @@ public class CharacterTile : MonoBehaviour
              Input.GetKeyUp(KeyCode.RightShift) ||
              Input.GetKeyUp(KeyCode.JoystickButton1) ||
              (Input.GetMouseButtonUp(1) &&
-              !uMan.bMobileDevice)))
+              //!uMan.bMobileDevice)))
+              devDetect.bIsMobile)))
         {
             bAvoidUpdate = false;
         }

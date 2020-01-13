@@ -2,10 +2,9 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 11/16/2016
-// Last:  08/14/2019
+// Last:  12/13/2019
 
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -27,6 +26,7 @@ public class MainMenu : MonoBehaviour
         // Save Transfer Values
         PlayerPrefs.SetInt("Transferring", 1);
 
-        sceneFader.FadeTo("Chp1");
+        sceneFader.FadeTo("SceneTransitioner");
+        PlayerPrefs.SetString("TransferScene", "Chp1");
     }
 }

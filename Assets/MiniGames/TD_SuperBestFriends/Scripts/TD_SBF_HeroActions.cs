@@ -15,6 +15,7 @@ public class TD_SBF_HeroActions : MonoBehaviour
     public TD_SBF_HeroBarManager heroBarMan;
     public TD_SBF_HeroMovement heroMove;
     public TD_SBF_HeroStats heroStats;
+    public TD_SBF_TouchControls tConts;
     public Transform attackPos;
 
     public float attackRangeX;
@@ -49,7 +50,8 @@ public class TD_SBF_HeroActions : MonoBehaviour
                  Input.GetButtonDown("Controller Bottom Button")) &&
                 gMan.bIsHeroMode &&
                 !EventSystem.current.IsPointerOverGameObject() &&
-                !heroBarMan.bUpgrading)
+                !heroBarMan.bUpgrading &
+                !tConts.bAvoidSubUIElements)
             {
                 BasicAttack();
             }

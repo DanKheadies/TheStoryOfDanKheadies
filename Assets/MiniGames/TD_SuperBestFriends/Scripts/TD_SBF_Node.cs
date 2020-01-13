@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  12/09/2019
+// Last:  01/12/2020
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,6 +18,7 @@ public class TD_SBF_Node : MonoBehaviour
     public SpriteRenderer rend;
     public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_HeroAnimator heroAni;
+    public TD_SBF_TouchControls tConts;
     public TD_SBF_TowerPlacer towerPlacer;
     public TD_SBF_TurretBlueprint turretBlueprint;
     public Vector3 positionOffset;
@@ -30,6 +31,7 @@ public class TD_SBF_Node : MonoBehaviour
             .GetComponent<TD_SBF_ControllerSupport>();
         rend = GetComponent<SpriteRenderer>();
         startColor = rend.color;
+        tConts = FindObjectOfType<TD_SBF_TouchControls>();
         td_sbf_buildMan = TD_SBF_BuildManager.td_sbf_instance;
         towerPlacer = FindObjectOfType<TD_SBF_TowerPlacer>();
 
@@ -190,7 +192,8 @@ public class TD_SBF_Node : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        if (turret)
+        if (turret &&
+            !tConts.bAvoidSubUIElements)
         {
             td_sbf_buildMan.SelectNode(this);
             return;

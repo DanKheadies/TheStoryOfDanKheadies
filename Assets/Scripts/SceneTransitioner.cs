@@ -2,7 +2,7 @@
 // Authors: David W. Corso
 // Contributors: Nick Pettit
 // Start: 04/20/2017
-// Last:  05/10/2019
+// Last:  12/13/2019
 
 using System.Collections;
 using UnityEngine;
@@ -16,6 +16,7 @@ public class SceneTransitioner : MonoBehaviour
     public Scene scene;
     public Text sceneSubtitle;
     public Text sceneTitle;
+    public Transform smokeRings;
 
     public bool bLoadScene;
     public bool bNeedsTimer;
@@ -46,28 +47,32 @@ public class SceneTransitioner : MonoBehaviour
                 switch (BetaLoad)
                 {
                     case "Chp1":
-                        sceneTitle.text = "Chapter 1\n";
-                        sceneSubtitle.text = "\nIn the beginning...";
+                        sceneTitle.text = "Chapter 1";
+                        sceneSubtitle.text = "In the beginning...";
                         break;
                     case "Minesweeper":
-                        sceneTitle.text = "Minesweeper\n";
-                        sceneSubtitle.text = "\nBoom baby...";
+                        sceneTitle.text = "Minesweeper";
+                        sceneSubtitle.text = "Boom baby...";
                         break;
                     case "GuessWhoColluded":
-                        sceneTitle.text = "Guess Who\n";
-                        sceneSubtitle.text = "\nColluded...";
+                        sceneTitle.text = "Guess Who";
+                        sceneSubtitle.text = "Colluded...";
                         break;
                     case "PookieVision":
-                        sceneTitle.text = "Pookie Vision\n";
-                        sceneSubtitle.text = "\nFor the kids..";
+                        sceneTitle.text = "Pookie Vision";
+                        sceneSubtitle.text = "For the kids..";
                         break;
                     case "TD_Menu":
-                        sceneTitle.text = "TowerDeez\n";
-                        sceneSubtitle.text = "\nAnd it's nuts..";
+                        sceneTitle.text = "TowerDeez";
+                        sceneSubtitle.text = "And it's nuts..";
+                        break;
+                    case "TD_SBF_Menu":
+                        sceneTitle.text = "Super Best Friends TD";
+                        sceneSubtitle.text = "Hoooooooooooo..";
                         break;
                     default:
-                        sceneTitle.text = "n_n\n";
-                        sceneSubtitle.text = "\nLoading some scene...";
+                        sceneTitle.text = "n_n";
+                        sceneSubtitle.text = "Loading some scene...";
                         break;
                 }
 
@@ -120,13 +125,18 @@ public class SceneTransitioner : MonoBehaviour
                 collision.gameObject.GetComponent<Animator>().SetBool("bIsWalking", false);
             }
 
-            StartCoroutine(DelayedTransition());
+            StartCoroutine(DelayedTransition(2));
         }
     }
 
-    IEnumerator DelayedTransition()
+    public void PubTransition(float _time)
     {
-        yield return new WaitForSeconds(2);
+        StartCoroutine(DelayedTransition(_time));
+    }
+
+    IEnumerator DelayedTransition(float _time)
+    {
+        yield return new WaitForSeconds(_time);
 
         SceneManager.LoadScene(AlphaLoad);
     }
@@ -141,10 +151,11 @@ public class SceneTransitioner : MonoBehaviour
         sceneTitle = GameObject.Find("Scene_Title").GetComponent<Text>();
 
         // UI Image & Text Positioning and Sizing based off device size
-        sceneSubtitle.fontSize = (int)(((4f / 85f) * Screen.width + (2872f / 85f)) * 0.666f);
-        sceneSubtitle.lineSpacing = (-9f / 13600f) * Screen.width + (33063f / 13600f);
-        sceneTitle.fontSize = (int)((4f / 85f) * Screen.width + (2872f / 85f));
-        sceneTitle.lineSpacing = (-7f / 20400f) * Screen.width + (11103f / 6800f);
+        sceneSubtitle.fontSize = (int)(0.034090909090909f * Screen.width + 20.363636363636f);
+        sceneTitle.fontSize = (int)(0.0625f * Screen.width + 20f);
+
+        float scale = 0.0013849431818182f * Screen.width + 0.47727272727273f;
+        smokeRings.localScale = new Vector3(scale, scale, 1);
 
         yield return new WaitForSeconds(3);
 
@@ -159,17 +170,11 @@ public class SceneTransitioner : MonoBehaviour
     public void CheckScenesToLoad()
     {
         if (AlphaLoad == "" || AlphaLoad == null)
-        {
             AlphaLoad = "SceneTransitioner";
-        }
 
         if (scene.name == "LogoSplash")
-        {
-
-        }
+            return;
         else if (BetaLoad == "" || BetaLoad == null)
-        {
             BetaLoad = PlayerPrefs.GetString("TransferScene");
-        }
     }
 }

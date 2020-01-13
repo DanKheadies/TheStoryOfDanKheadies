@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/24/2019
-// Last:  12/09/2019
+// Last:  12/12/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,7 +56,10 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
 
     void Start()
     {
-        sec8.GetComponentInChildren<Button>().interactable = false;
+        if (heroStats.bIsDead)
+            sec8.GetComponentInChildren<Button>().interactable = true;
+        else
+            sec8.GetComponentInChildren<Button>().interactable = false;
 
         sec1.transform.GetChild(2).GetComponent<Text>().text = costSec1.ToString();
         sec2.transform.GetChild(2).GetComponent<Text>().text = costSec2.ToString();
@@ -597,6 +600,9 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
         }
 
         if (heroStats.bIsDead)
+        {
             heroStats.Revive(heroStats.startHealth);
+            TD_SBF_PlayerStatistics.ThoughtsPrayers -= costSec8;
+        }
     }
 }

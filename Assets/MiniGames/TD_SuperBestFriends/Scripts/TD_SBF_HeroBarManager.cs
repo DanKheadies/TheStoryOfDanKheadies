@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/26/2019
-// Last:  12/09/2019
+// Last:  12/12/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +20,7 @@ public class TD_SBF_HeroBarManager : MonoBehaviour
     public TD_SBF_HeroActions heroActions;
     public TD_SBF_HeroStats heroStats;
     public TD_SBF_HeroUpgrade heroUpgrade;
+    public TD_SBF_TouchControls touchConts;
 
     public bool bUpgrading;
     public float basicAttackCounter;
@@ -53,7 +54,6 @@ public class TD_SBF_HeroBarManager : MonoBehaviour
     public void ToggleHeroUpgradeShells()
     {
         bUpgrading = !bUpgrading;
-        Debug.Log("upgrading: " + bUpgrading);
 
         heroShell.SetActive(!heroShell.activeSelf);
         heroBackButton.SetActive(!heroBackButton.activeSelf);
@@ -66,6 +66,11 @@ public class TD_SBF_HeroBarManager : MonoBehaviour
             heroUpgrade.currentSelection = (TD_SBF_HeroUpgrade.UpgradeSection)1;
             heroUpgrade.sec1.GetComponentInChildren<Button>().Select();
         }
+
+        if (bUpgrading)
+            touchConts.HideControls();
+        else
+            touchConts.DisplayControls();
     }
 
     public void DisableHeroAttacks()

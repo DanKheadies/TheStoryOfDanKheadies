@@ -2,7 +2,7 @@
 // Authors: Jason (Unity3d College)
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  11/21/2019
+// Last:  01/12/2020
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,6 +24,7 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
     public TD_SBF_GameManagement gMan;
     public TD_SBF_Grid grid;
     public TD_SBF_NodeUI nodeUI;
+    public TD_SBF_TouchControls tConts;
     public static TD_SBF_TowerPlacer the_tp;
     public Vector3 currentNode;
     public Vector3 prevNode;
@@ -88,7 +89,8 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
                 if (Input.GetMouseButtonDown(0) &&
                     td_sbf_buildMan.TD_SBF_CanBuild &&
                     td_sbf_buildMan.TD_SBF_HasThoughtsPrayers &&
-                    td_sbf_buildMan.turretToBuild.cost != 0)
+                    td_sbf_buildMan.turretToBuild.cost != 0 &&
+                    !tConts.bAvoidSubUIElements)
                 {
                     PlaceTowerNear(hitInfo.point);
                 }

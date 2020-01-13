@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/27/2019
-// Last:  11/20/2019
+// Last:  12/13/2019
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -109,7 +109,11 @@ public class TD_SBF_ModeSelector : MonoBehaviour
 
     public void EndGame()
     {
-        Debug.Log("End Game");
-        Application.Quit();
+        // TODO: for tSoDK
+        PlayerPrefs.SetInt("Transferring", 1);
+        PlayerPrefs.SetString("TransferScene", "Chp1");
+
+        // TODO: for standalone
+        //Application.Quit();
     }
 }

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  08/22/2019
+// Last:  01/12/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +12,7 @@ public class Chp1 : MonoBehaviour
 {
     public Camera mainCamera;
     public CameraFollow camFollow;
+    public DeviceDetector devDetect;
     public DialogueManager dMan;
     public GameObject greatTree;
     public GameObject item_homeVRGoggles;
@@ -51,6 +52,7 @@ public class Chp1 : MonoBehaviour
     public GameObject warpMinesweeper;
     public GameObject warpPookieVision;
     public GameObject warpTowerDeez;
+    public GameObject warpTD_SBF;
     public Inventory inv;
     public MoveOptionsMenuArrow moveOptsArw;
     public MusicManager mMan;
@@ -100,7 +102,7 @@ public class Chp1 : MonoBehaviour
         {
             // Get transfer data
             save.GetTransferData();
-            
+
             // Cleanse transfer data
             save.DeleteTransPrefs();
 
@@ -135,10 +137,8 @@ public class Chp1 : MonoBehaviour
         }
     }
 
-    public void GoggleCheck()
+    public void CheckingForGoggles()
     {
-        // Optimization: PlayerPref that tracks if ever picked up goggles
-
         for (int i = 0; i < inv.items.Count; i++)
         {
             string item = inv.items[i].ToString();
@@ -147,6 +147,13 @@ public class Chp1 : MonoBehaviour
             if (item == "VR.Goggles")
                 bHasGoggles = true;
         }
+    }
+
+    public void GoggleCheck()
+    {
+        // Optimization: PlayerPref that tracks if ever picked up goggles
+
+        CheckingForGoggles();
 
         if (bHasGoggles)
         {
@@ -1032,9 +1039,9 @@ public class Chp1 : MonoBehaviour
 
         // Quest 5 - Dialogue 1 - Option *
         if (greatTree.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
-                 greatTree.transform.GetChild(0).gameObject.activeSelf &&
-                 (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
-                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
+            greatTree.transform.GetChild(0).gameObject.activeSelf &&
+            (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
+             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
         {
             oMan.ResetOptions();
             Quest5Dialogue2();
@@ -1153,6 +1160,22 @@ public class Chp1 : MonoBehaviour
             oMan.ResetOptions();
             Quest10Dialogue1Opt2();
         }
+        // Quest 10 - Dialogue 2 - Option 1
+        else if(npc_brackey.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+                npc_brackey.transform.GetChild(1).gameObject.activeSelf &&
+                moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
+        {
+            oMan.ResetOptions();
+            Quest10Dialogue2Opt1();
+        }
+        // Quest 10 - Dialogue 2 - Option 2
+        else if (npc_brackey.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
+                 npc_brackey.transform.GetChild(1).gameObject.activeSelf &&
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
+        {
+            oMan.ResetOptions();
+            Quest10Dialogue2Opt2();
+        }
     }
 
     public void Quest0Dialogue1Opt1()
@@ -1252,16 +1275,7 @@ public class Chp1 : MonoBehaviour
         // yes play a game
         // DC TODO -- offer difficulty choices
 
-        for (int i = 0; i < inv.items.Count; i++)
-        {
-            string item = inv.items[i].ToString();
-            item = item.Substring(0, item.Length - 7);
-
-            if (item == "VR.Goggles")
-            {
-                bHasGoggles = true;
-            }
-        }
+        CheckingForGoggles();
 
         if (bHasGoggles)
         {
@@ -1526,18 +1540,30 @@ public class Chp1 : MonoBehaviour
     public void Quest9Dialogue1Opt1()
     {
         // yes play a game
-
-        for (int i = 0; i < inv.items.Count; i++)
-        {
-            string item = inv.items[i].ToString();
-            item = item.Substring(0, item.Length - 7);
-
-            if (item == "VR.Goggles")
-                bHasGoggles = true;
-        }
+        CheckingForGoggles();
 
         if (bHasGoggles)
         {
+            if ((UnityEngine.iOS.Device.generation.ToString()).IndexOf("iPad") > -1)
+                Debug.Log("local test if Ipad");
+
+            Debug.Log("has goggles");
+            if (devDetect.bIsMobile &&
+                !devDetect.bIsIpad)
+            {
+                Debug.Log("mobile and not ipad");
+                // Any mobile device but iPad can't play 
+                dMan.dialogueLines = new string[] {
+                    "Ahh you seem to be lacking the necessary equipment.",
+                    "Come back when you have different hardware..."
+                };
+                dMan.currentLine = 0;
+                dText.text = dMan.dialogueLines[dMan.currentLine];
+                dMan.ShowDialogue();
+
+                return;
+            }
+
             warpPookieVision.GetComponent<BoxCollider2D>().enabled = true;
             warpPookieVision.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
 
@@ -1588,42 +1614,9 @@ public class Chp1 : MonoBehaviour
     public void Quest10Dialogue1Opt1()
     {
         // yes play a game
+        CheckingForGoggles();
 
-        for (int i = 0; i < inv.items.Count; i++)
-        {
-            string item = inv.items[i].ToString();
-            item = item.Substring(0, item.Length - 7);
-
-            if (item == "VR.Goggles")
-                bHasGoggles = true;
-        }
-
-        if (bHasGoggles)
-        {
-            warpTowerDeez.GetComponent<BoxCollider2D>().enabled = true;
-            warpTowerDeez.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
-
-            // Save Transfer Values 
-            save.SaveBrioTransfer();
-            save.SaveInventoryTransfer();
-            save.SavePositionTransfer();
-            PlayerPrefs.SetInt("Transferring", 1);
-            PlayerPrefs.SetString("TransferScene", warpTowerDeez.GetComponent<SceneTransitioner>().BetaLoad);
-
-            // Save Quests
-            SaveQuests();
-
-            // Stop the player from bringing up the dialog again 
-            dMan.gameObject.transform.localScale = Vector3.zero;
-
-            // Stop Dan from moving
-            dMan.gameObject.SetActive(false);
-
-            // Stop NPCs from moving
-            //npc_brackey.GetComponent<NPCMovement>().moveSpeed = 0;
-            //npc_brackey.GetComponent<Animator>().enabled = false;
-        }
-        else
+        if (!bHasGoggles)
         {
             // No visors
             dMan.dialogueLines = new string[] {
@@ -1633,7 +1626,36 @@ public class Chp1 : MonoBehaviour
             dMan.currentLine = 0;
             dText.text = dMan.dialogueLines[dMan.currentLine];
             dMan.ShowDialogue();
+
+            return;
         }
+
+        npc_brackey.transform.GetChild(0).gameObject.SetActive(false);
+        npc_brackey.transform.GetChild(1).gameObject.SetActive(true);
+        
+        if (devDetect.bIsMobile)
+        {
+            npc_brackey.transform.GetChild(1).GetComponent<OptionsHolder>().options = new string[]
+            {
+                "TD's Super Best Friends TD"
+            };
+        }
+        else
+        {
+            npc_brackey.transform.GetChild(1).GetComponent<OptionsHolder>().options = new string[]
+            {
+                "TD's Super Best Friends TD",
+                "TD's Tower Defense"
+            };
+        }
+
+        // TODO: needed to re-run TriggerCollider in DiaHolder
+        player.transform.position = new Vector3(
+            player.transform.position.x,
+            player.transform.position.y - 0.001f,
+            player.transform.position.z);
+
+        npc_brackey.transform.GetChild(1).GetComponent<DialogueHolder>().bContinueDialogue = true;
     }
 
     public void Quest10Dialogue1Opt2()
@@ -1645,6 +1667,58 @@ public class Chp1 : MonoBehaviour
         dMan.currentLine = 0;
         dText.text = dMan.dialogueLines[dMan.currentLine];
         dMan.ShowDialogue();
+    }
+
+    public void Quest10Dialogue2Opt1()
+    {
+        warpTD_SBF.GetComponent<BoxCollider2D>().enabled = true;
+        warpTD_SBF.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
+
+        // Save Transfer Values 
+        save.SaveBrioTransfer();
+        save.SaveInventoryTransfer();
+        save.SavePositionTransfer();
+        PlayerPrefs.SetInt("Transferring", 1);
+        PlayerPrefs.SetString("TransferScene", warpTD_SBF.GetComponent<SceneTransitioner>().BetaLoad);
+
+        // Save Quests
+        SaveQuests();
+
+        // Stop the player from bringing up the dialog again 
+        dMan.gameObject.transform.localScale = Vector3.zero;
+
+        // Stop Dan from moving
+        dMan.gameObject.SetActive(false);
+
+        // Stop NPCs from moving
+        //npc_brackey.GetComponent<NPCMovement>().moveSpeed = 0;
+        //npc_brackey.GetComponent<Animator>().enabled = false;  
+    }
+
+    public void Quest10Dialogue2Opt2()
+    {
+        warpTowerDeez.GetComponent<BoxCollider2D>().enabled = true;
+        warpTowerDeez.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
+
+        // Save Transfer Values 
+        save.SaveBrioTransfer();
+        save.SaveInventoryTransfer();
+        save.SavePositionTransfer();
+        PlayerPrefs.SetInt("Transferring", 1);
+        PlayerPrefs.SetString("TransferScene", warpTowerDeez.GetComponent<SceneTransitioner>().BetaLoad);
+
+        // Save Quests
+        SaveQuests();
+
+        // Stop the player from bringing up the dialog again 
+        dMan.gameObject.transform.localScale = Vector3.zero;
+
+        // Stop Dan from moving
+        dMan.gameObject.SetActive(false);
+
+        // Stop NPCs from moving
+        //npc_brackey.GetComponent<NPCMovement>().moveSpeed = 0;
+        //npc_brackey.GetComponent<Animator>().enabled = false;  
     }
 
     public void Chp1QuestChecker()

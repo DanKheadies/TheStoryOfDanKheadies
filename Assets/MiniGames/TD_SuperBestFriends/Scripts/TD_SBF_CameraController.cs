@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/10/2016
-// Last:  09/17/2019
+// Last:  12/12/2019
 
 using UnityEngine;
 
@@ -11,6 +11,7 @@ public class TD_SBF_CameraController : MonoBehaviour
     public TD_SBF_ControlManagement cMan;
     public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_GameManagement gMan;
+    public TD_SBF_TouchControls touchConts;
     
     public float panSpeed = 30f;
     public float scrollSpeed = 5f;
@@ -66,18 +67,24 @@ public class TD_SBF_CameraController : MonoBehaviour
                 transform.Translate(Vector2.left * panSpeed * Time.deltaTime, Space.World);
             }
 
-            Vector3 currentPos = transform.position;
-            currentPos.x = Mathf.Clamp(transform.position.x, 5f, 65f);
-            currentPos.y = Mathf.Clamp(transform.position.y, -100f, -5f);
-            currentPos.z = -10f;
-            transform.position = currentPos;
+            // Need to handle virtual joystick movement seperately, i.e. too jarring otherwise
+            if (touchConts.leftFixedJoystick.bJoying)
+                VirtualJoystickMove();
+
+            CalcPosition();
         }
 
         // Mouse
         if (!cMan.bAvoidCamScroll &&
-            Input.GetAxis("Mouse ScrollWheel") != 0)
+            (Input.GetAxis("Mouse ScrollWheel") != 0 ||
+             touchConts.rightFixedJoystick.Vertical != 0))
         {
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            float scroll = 0;
+
+            if (Input.GetAxis("Mouse ScrollWheel") != 0)
+                scroll = Input.GetAxis("Mouse ScrollWheel");
+            else
+                scroll = touchConts.rightFixedJoystick.Vertical * 0.05f;
 
             // Zoom In
             if (scroll > 0 &&
@@ -128,5 +135,35 @@ public class TD_SBF_CameraController : MonoBehaviour
             if (GetComponent<Camera>().orthographicSize > 50)
                 GetComponent<Camera>().orthographicSize = 50f;
         }
+    }
+
+    public void VirtualJoystickMove()
+    {
+        // Up
+        if (touchConts.leftFixedJoystick.Vertical > 0)
+            transform.Translate(Vector2.up * (panSpeed * 0.5f) * Time.deltaTime, Space.World);
+
+        // Down
+        if (touchConts.leftFixedJoystick.Vertical < 0)
+            transform.Translate(Vector2.down * (panSpeed * 0.5f) * Time.deltaTime, Space.World);
+
+        // Right
+        if (touchConts.leftFixedJoystick.Horizontal > 0)
+            transform.Translate(Vector2.right * (panSpeed * 0.5f) * Time.deltaTime, Space.World);
+
+        // Left
+        if (touchConts.leftFixedJoystick.Horizontal < 0)
+            transform.Translate(Vector2.left * (panSpeed * 0.5f) * Time.deltaTime, Space.World);
+
+        CalcPosition();
+    }
+
+    public void CalcPosition()
+    {
+        Vector3 currentPos = transform.position;
+        currentPos.x = Mathf.Clamp(transform.position.x, 5f, 65f);
+        currentPos.y = Mathf.Clamp(transform.position.y, -100f, -5f);
+        currentPos.z = -10f;
+        transform.position = currentPos;
     }
 }

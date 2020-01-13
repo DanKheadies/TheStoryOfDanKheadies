@@ -40,7 +40,11 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - WebGL
+    - Standalone
+    - iPhone
+    - Android
   - serializedVersion: 2
     name: Fast
     pixelLightCount: 0
@@ -75,7 +79,11 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - WebGL
+    - Android
+    - iPhone
+    - Standalone
   - serializedVersion: 2
     name: Simple
     pixelLightCount: 1
@@ -110,7 +118,11 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - WebGL
+    - Standalone
+    - iPhone
+    - Android
   - serializedVersion: 2
     name: Good
     pixelLightCount: 2
@@ -145,7 +157,11 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - WebGL
+    - Android
+    - iPhone
+    - Standalone
   - serializedVersion: 2
     name: Beautiful
     pixelLightCount: 3
@@ -215,9 +231,12 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - WebGL
+    - Android
+    - iPhone
   m_PerPlatformDefaultQuality:
-    Android: 0
-    Standalone: 0
-    WebGL: 0
-    iPhone: 0
+    Android: 4
+    Standalone: 4
+    WebGL: 4
+    iPhone: 4

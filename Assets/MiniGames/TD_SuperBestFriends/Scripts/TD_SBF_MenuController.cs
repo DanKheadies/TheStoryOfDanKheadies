@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/27/2019
-// Last:  10/07/2019
+// Last:  01/12/2020
 
 using UnityEngine;
 using System.Collections;
@@ -28,7 +28,7 @@ public class TD_SBF_MenuController : MonoBehaviour
 
     void Start()
     {
-        OrientationCheck();
+        //OrientationCheck();
         StartCoroutine(LoadModeSelector());
     }
 
@@ -36,7 +36,7 @@ public class TD_SBF_MenuController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            OrientationCheck();
+            //OrientationCheck();
         }
 
         //if (Input.deviceOrientation != devOr ||
@@ -60,6 +60,7 @@ public class TD_SBF_MenuController : MonoBehaviour
 
     public void OrientationCheck()
     {
+        Debug.Log("derp");
         // Width > height = center in the screen
         if (Screen.width >= Screen.height)
         {

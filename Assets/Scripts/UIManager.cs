@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/18/2019
+// Last:  01/12/2020
 
 //using System.Collections;
 using UnityEngine;
@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public Camera mainCamera;
     public Canvas HUD;
     public CanvasGroup guiControlsCan;
+    public DeviceDetector devDetect;
     public DialogueManager dMan;
     public FixedJoystick fixedJoystick;
     public GameObject pauseButtOpac; 
@@ -37,7 +38,8 @@ public class UIManager : MonoBehaviour
 
     public bool bControlsActive;
     public bool bControlsDPad;
-    public bool bMobileDevice;
+    //public bool bIsIpad;
+    //public bool bMobileDevice;
     public bool bUpdateBrio;
 
     public float currentContOpac;
@@ -142,18 +144,20 @@ public class UIManager : MonoBehaviour
     public void CheckIfMobile()
     {
         // Set based off device
-        #if !UNITY_EDITOR
-            #if UNITY_IOS
-                bMobileDevice = true;
-            #endif
+        //#if !UNITY_EDITOR
+        //    #if UNITY_IOS
+        //        bMobileDevice = true;
+        //    #endif
 
-            #if UNITY_ANDROID
-                bMobileDevice = true;
-            #endif
-        #endif
+        //    #if UNITY_ANDROID
+        //        bMobileDevice = true;
+        //    #endif
+        //#endif
+
+        devDetect.CheckIfMobile();
 
         // Show GUI Controls for Mobile Devices
-        if (bMobileDevice)
+        if (devDetect.bIsMobile)
         {
             DisplayControls();
         }
