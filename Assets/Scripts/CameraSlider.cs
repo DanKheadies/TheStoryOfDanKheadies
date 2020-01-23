@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/23/2019
+// Last:  01/22/2020
 
 using System.Collections;
 using UnityEngine;
@@ -10,7 +10,8 @@ using UnityEngine;
 public class CameraSlider : MonoBehaviour
 {
     public Animator playerAnim;
-    public CameraFollow mainCamera;
+    public AreaAnimator areaAni;
+    public CameraFollow camFollow;
     public GameObject player;
     public PlayerMovement playerMove;
     public TouchControls touches;
@@ -33,7 +34,7 @@ public class CameraSlider : MonoBehaviour
             yield return null;
         }
 
-        mainCamera.bUpdateOn = true;
+        areaAni.CheckAreaToAnimate();
     }
 
     // Slide the player when transitioning areas
@@ -60,9 +61,7 @@ public class CameraSlider : MonoBehaviour
 
         // Checks (& resumes) UI controls
         if (bTempControlActive)
-        {
             touches.transform.localScale = Vector3.one;
-        }
     }
     
     public void SlideRight()
@@ -70,8 +69,8 @@ public class CameraSlider : MonoBehaviour
         bSlideRight = true;
 
         StartCoroutine(Slide(
-            mainCamera.transform,
-            (mainCamera.transform.position + new Vector3(2.555f, 0f)),
+            camFollow.transform,
+            (camFollow.transform.position + new Vector3(2.555f, 0f)),
             1.0f));
 
         StartCoroutine(DelayedSlide(
@@ -85,8 +84,8 @@ public class CameraSlider : MonoBehaviour
         bSlideLeft = true;
 
         StartCoroutine(Slide(
-            mainCamera.transform,
-            (mainCamera.transform.position + new Vector3(-2.555f, 0f)),
+            camFollow.transform,
+            (camFollow.transform.position + new Vector3(-2.555f, 0f)),
             1.0f));
 
         StartCoroutine(DelayedSlide(
@@ -100,8 +99,8 @@ public class CameraSlider : MonoBehaviour
         bSlideUp = true;
 
         StartCoroutine(Slide(
-            mainCamera.transform,
-            (mainCamera.transform.position + new Vector3(0f, 2.23f)),
+            camFollow.transform,
+            (camFollow.transform.position + new Vector3(0f, 2.23f)),
             1.0f));
 
         StartCoroutine(DelayedSlide(
@@ -115,8 +114,8 @@ public class CameraSlider : MonoBehaviour
         bSlideDown = true;
 
         StartCoroutine(Slide(
-            mainCamera.transform,
-            (mainCamera.transform.position + new Vector3(0f, -2.23f)),
+            camFollow.transform,
+            (camFollow.transform.position + new Vector3(0f, -2.23f)),
             1.0f));
 
         StartCoroutine(DelayedSlide(

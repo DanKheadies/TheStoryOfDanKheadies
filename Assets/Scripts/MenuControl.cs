@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/24/2019
+// Last:  01/14/2020
 
 using System.Collections;
 using UnityEngine;
@@ -121,7 +121,6 @@ public class MenuControl : MonoBehaviour
              bIsSelectable &&
              !bAvoidSelection)
         {
-            Debug.Log("selecting");
             SelectOption();
         }
 
@@ -308,46 +307,27 @@ public class MenuControl : MonoBehaviour
     public void SelectOption()
     {
         if (currentPosition == SelectionPosition.Start)
-        {
             startB.GetComponent<Button>().onClick.Invoke();
-        }
         else if (currentPosition == SelectionPosition.GoOn)
-        {
             goOnB.GetComponent<Button>().onClick.Invoke();
-        }
         else if (currentPosition == SelectionPosition.New)
-        {
             newB.GetComponent<Button>().onClick.Invoke();
-        }
         else if (currentPosition == SelectionPosition.End)
-        {
             endB.GetComponent<Button>().onClick.Invoke();
-        }
         else if (currentPosition == SelectionPosition.YesNew)
-        {
-            Debug.Log("yes new");
             yesB.GetComponent<Button>().onClick.Invoke();
-        }
         else if (currentPosition == SelectionPosition.NoNew)
-        {
-            Debug.Log("no new");
             noB.GetComponent<Button>().onClick.Invoke();
-        }
     }
 
     public void GoToScene()
     {
-        Debug.Log("start");
         Time.timeScale = 1;
 
         if (PlayerPrefs.GetString("Chapter") != "")
-        {
             SceneManager.LoadScene(PlayerPrefs.GetString("Chapter"));
-        }
         else
-        {
             SceneManager.LoadScene("Chp0");
-        }
     }
 
     public void NewGame()
@@ -393,7 +373,6 @@ public class MenuControl : MonoBehaviour
 
     public void AvoidSelection()
     {
-        Debug.Log("avoid");
         bAvoidSelection = true;
         EventSystem.current.SetSelectedGameObject(null);
     }

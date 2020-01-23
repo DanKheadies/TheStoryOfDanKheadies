@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  01/12/2020
+// Last:  01/22/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -337,7 +337,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Unsync and stop camera tracking
         cameraFollow.currentCoords = 0;
-        cameraFollow.bUpdateOn = false;
+        //cameraFollow.bUpdateOn = false;
 
         // Hide UI (if present) and prevent input
         if (cameraSlider)
