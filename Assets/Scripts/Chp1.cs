@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  01/12/2020
+// Last:  02/09/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,6 +48,7 @@ public class Chp1 : MonoBehaviour
     public GameObject questTrigger2;
     public GameObject screenFader;
     public GameObject treeHouseDoor;
+    public GameObject warpCSTreeTunnel;
     public GameObject warpGWC;
     public GameObject warpMinesweeper;
     public GameObject warpPookieVision;
@@ -97,11 +98,14 @@ public class Chp1 : MonoBehaviour
             // Cleanse transfer data
             save.DeleteTransPrefs();
         }
-        // Chapter 1 -- Transferring from a mini-game
+        // Chapter 1 -- Transferring from a mini-game or cutscene
         else if (PlayerPrefs.GetInt("Transferring") == 1)
         {
             // Get transfer data
             save.GetTransferData();
+
+            // Execute transfer actions
+            TransferActions(PlayerPrefs.GetString("TransferActions"));
 
             // Cleanse transfer data
             save.DeleteTransPrefs();
@@ -120,10 +124,10 @@ public class Chp1 : MonoBehaviour
 
             // When loading from PlaygroundW, play Jurassic Dank
             if (camFollow.currentCoords == (CameraFollow.AnandaCoords)32)
-            {
                 mMan.SwitchTrack(1);
-            }
         }
+        
+        StartCoroutine(TogglePlayerHitBoxDelay());
     }
 
     void Update()
@@ -135,6 +139,18 @@ public class Chp1 : MonoBehaviour
         {
             raceTimer += Time.deltaTime;
         }
+        
+        if (Input.GetKeyUp(KeyCode.N))
+            TogglePlayerHitbox();
+    }
+
+    public void TransferActions(string functionName)
+    {
+        if (functionName == "Quest5Reward")
+            Quest5Reward();
+
+        if (functionName == "Quest6Reward")
+            Quest6Reward();
     }
 
     public void CheckingForGoggles()
@@ -863,6 +879,17 @@ public class Chp1 : MonoBehaviour
         Quest7And8Reward();
     }
 
+    public void ResetGreatTreeDialogueToMiddle()
+    {
+        if (greatTree.transform.GetChild(3).gameObject.activeSelf)
+            greatTree.transform.GetChild(3).gameObject.SetActive(false);
+
+        if (greatTree.transform.GetChild(4).gameObject.activeSelf)
+            greatTree.transform.GetChild(4).gameObject.SetActive(false);
+
+        greatTree.transform.GetChild(2).gameObject.SetActive(true); 
+    }
+
     public void WarpToGuessWhoColluded()
     {
         // Transition animation
@@ -894,7 +921,7 @@ public class Chp1 : MonoBehaviour
         {
             player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
             player.GetComponent<PlayerBrioManager>().RestorePlayer(10);
-            uMan.bUpdateBrio = true;
+            uMan.UpdateBrio();
 
             quest0.GetComponent<QuestObject>().CollectedQuest();
         }
@@ -906,7 +933,7 @@ public class Chp1 : MonoBehaviour
         {
             player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
             player.GetComponent<PlayerBrioManager>().RestorePlayer(10);
-            uMan.bUpdateBrio = true;
+            uMan.UpdateBrio();
 
             quest1.GetComponent<QuestObject>().CollectedQuest();
         }
@@ -918,7 +945,7 @@ public class Chp1 : MonoBehaviour
         {
             player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
             player.GetComponent<PlayerBrioManager>().RestorePlayer(5);
-            uMan.bUpdateBrio = true;
+            uMan.UpdateBrio();
 
             quest2.GetComponent<QuestObject>().CollectedQuest();
         }
@@ -931,7 +958,7 @@ public class Chp1 : MonoBehaviour
         {
             player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
             player.GetComponent<PlayerBrioManager>().RestorePlayer(5);
-            uMan.bUpdateBrio = true;
+            uMan.UpdateBrio();
 
             quest3.GetComponent<QuestObject>().CollectedQuest();
 
@@ -958,7 +985,7 @@ public class Chp1 : MonoBehaviour
         {
             player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(15);
             player.GetComponent<PlayerBrioManager>().RestorePlayer(20);
-            uMan.bUpdateBrio = true;
+            uMan.UpdateBrio();
 
             quest4.GetComponent<QuestObject>().CollectedQuest();
         }
@@ -968,11 +995,26 @@ public class Chp1 : MonoBehaviour
     {
         if (!quest5.GetComponent<QuestObject>().bHasCollected)
         {
-            player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
-            player.GetComponent<PlayerBrioManager>().RestorePlayer(10);
-            uMan.bUpdateBrio = true;
+            player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(420);
+            player.GetComponent<PlayerBrioManager>().RestorePlayer(420);
+            uMan.UpdateBrio();
+
+            greatTree.transform.GetChild(0).gameObject.SetActive(false);
+            greatTree.transform.GetChild(5).gameObject.SetActive(true);
 
             quest5.GetComponent<QuestObject>().CollectedQuest();
+        }
+    }
+
+    public void Quest6Reward()
+    {
+        if (!quest6.GetComponent<QuestObject>().bHasCollected)
+        {
+            player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
+            player.GetComponent<PlayerBrioManager>().RestorePlayer(15);
+            uMan.UpdateBrio();
+
+            quest6.GetComponent<QuestObject>().CollectedQuest();
         }
     }
 
@@ -983,7 +1025,7 @@ public class Chp1 : MonoBehaviour
         {
             player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(10);
             player.GetComponent<PlayerBrioManager>().RestorePlayer(25);
-            uMan.bUpdateBrio = true;
+            uMan.UpdateBrio();
 
             quest7.GetComponent<QuestObject>().CollectedQuest();
             quest8.GetComponent<QuestObject>().CollectedQuest();
@@ -1044,7 +1086,7 @@ public class Chp1 : MonoBehaviour
              moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
         {
             oMan.ResetOptions();
-            Quest5Dialogue2();
+            Quest5Dialogue1();
         }
         // Quest 5 - Dialogue 2 - Option *
         else if (greatTree.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered &&
@@ -1053,27 +1095,41 @@ public class Chp1 : MonoBehaviour
                   moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2))
         {
             oMan.ResetOptions();
-            Quest5Dialogue3();
+            Quest5Dialogue2();
         }
-        // Quest 5 - Dialogue 3 - Option *
+        // Quest 5 - Dialogue 3 - Option 1
         else if (greatTree.transform.GetChild(2).GetComponent<DialogueHolder>().bHasEntered &&
                  greatTree.transform.GetChild(2).gameObject.activeSelf &&
-                 (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
-                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
-                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3))
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
         {
             oMan.ResetOptions();
-            Quest5Dialogue4();
+            Quest5Dialogue3Opt1();
         }
-        // Quest 5 - Dialogue 4 - Option *
-        else if (greatTree.transform.GetChild(3).GetComponent<DialogueHolder>().bHasEntered &&
-                 greatTree.transform.GetChild(3).gameObject.activeSelf &&
+        // Quest 5 - Dialogue 3 - Option 2
+        else if (greatTree.transform.GetChild(2).GetComponent<DialogueHolder>().bHasEntered &&
+                 greatTree.transform.GetChild(2).gameObject.activeSelf &&
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
+        {
+            oMan.ResetOptions();
+            Quest5Dialogue3Opt2();
+        }
+        // Quest 5 - Dialogue 3 - Option 3
+        else if (greatTree.transform.GetChild(2).GetComponent<DialogueHolder>().bHasEntered &&
+                 greatTree.transform.GetChild(2).gameObject.activeSelf &&
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3)
+        {
+            oMan.ResetOptions();
+            Quest5Dialogue3Opt3();
+        }
+        // Quest 5 - Dialogue 6 - Option *
+        else if (greatTree.transform.GetChild(5).GetComponent<DialogueHolder>().bHasEntered &&
+                 greatTree.transform.GetChild(5).gameObject.activeSelf &&
                  (moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1 ||
                   moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2 ||
                   moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt3))
         {
             oMan.ResetOptions();
-            Quest5Reward();
+            Quest5Dialogue6();
         }
 
 
@@ -1244,7 +1300,7 @@ public class Chp1 : MonoBehaviour
         dMan.ShowDialogue();
     }
 
-    public void Quest5Dialogue2()
+    public void Quest5Dialogue1()
     {
         greatTree.transform.GetChild(0).gameObject.SetActive(false);
         greatTree.transform.GetChild(1).gameObject.SetActive(true);
@@ -1252,7 +1308,7 @@ public class Chp1 : MonoBehaviour
         greatTree.transform.GetChild(1).GetComponent<DialogueHolder>().bContinueDialogue = true;
     }
 
-    public void Quest5Dialogue3()
+    public void Quest5Dialogue2()
     {
         greatTree.transform.GetChild(1).gameObject.SetActive(false);
         greatTree.transform.GetChild(2).gameObject.SetActive(true);
@@ -1260,14 +1316,57 @@ public class Chp1 : MonoBehaviour
         greatTree.transform.GetChild(2).GetComponent<DialogueHolder>().bContinueDialogue = true;
     }
 
-    public void Quest5Dialogue4()
+    public void Quest5Dialogue3Opt1()
+    {
+        greatTree.transform.GetChild(2).gameObject.SetActive(false);
+        greatTree.transform.GetChild(3).gameObject.SetActive(true);
+
+        warpCSTreeTunnel.GetComponent<BoxCollider2D>().enabled = true;
+        warpCSTreeTunnel.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
+
+        // Save Transfer Values 
+        save.SaveBrioTransfer();
+        save.SaveInventoryTransfer();
+        save.SavePositionTransfer();
+        PlayerPrefs.SetInt("Transferring", 1);
+        PlayerPrefs.SetString("TransferScene", warpCSTreeTunnel.GetComponent<SceneTransitioner>().BetaLoad);
+
+        // Save Quests
+        SaveQuests();
+
+        // Stop the player from bringing up the dialog again 
+        dMan.gameObject.transform.localScale = Vector3.zero;
+
+        // Stop Dan from moving
+        dMan.gameObject.SetActive(false);
+    }
+
+    public void Quest5Dialogue3Opt2()
     {
         greatTree.transform.GetChild(2).gameObject.SetActive(false);
         greatTree.transform.GetChild(3).gameObject.SetActive(true);
 
         greatTree.transform.GetChild(3).GetComponent<DialogueHolder>().bContinueDialogue = true;
 
-        // TODO
+        dMan.closingAction = "ResetGreatTreeDialogueToMiddle";
+    }
+
+    public void Quest5Dialogue3Opt3()
+    {
+        greatTree.transform.GetChild(2).gameObject.SetActive(false);
+        greatTree.transform.GetChild(4).gameObject.SetActive(true);
+
+        greatTree.transform.GetChild(4).GetComponent<DialogueHolder>().bContinueDialogue = true;
+
+        dMan.closingAction = "ResetGreatTreeDialogueToMiddle";
+    }
+
+    public void Quest5Dialogue6()
+    {
+        greatTree.transform.GetChild(5).gameObject.SetActive(false);
+        greatTree.transform.GetChild(6).gameObject.SetActive(true);
+
+        greatTree.transform.GetChild(6).GetComponent<DialogueHolder>().bContinueDialogue = true;
     }
 
     public void Quest6Dialogue1Opt1()
@@ -1724,7 +1823,7 @@ public class Chp1 : MonoBehaviour
     public void Chp1QuestChecker()
     {
         // Q0 
-        if (qMan.questsCollected[0]) // || questsEnded[0]
+        if (qMan.questsCollected[0])
         {
             npc_dagon.transform.GetChild(0).gameObject.SetActive(false);
             npc_dagon.transform.GetChild(2).gameObject.SetActive(true);
@@ -1795,10 +1894,22 @@ public class Chp1 : MonoBehaviour
         }
 
         // Q5
-        if (qMan.questsCollected[5])
+        if (qMan.questsCollected[5] &&
+            !qMan.questsEnded[5])
         {
             greatTree.transform.GetChild(0).gameObject.SetActive(false);
-            greatTree.transform.GetChild(3).gameObject.SetActive(true);
+            greatTree.transform.GetChild(5).gameObject.SetActive(true);
+        }
+        else if (qMan.questsCollected[5] &&
+                 qMan.questsEnded[5])
+        {
+            greatTree.transform.GetChild(0).gameObject.SetActive(false);
+            greatTree.transform.GetChild(6).gameObject.SetActive(true);
+        }
+        else if (qMan.questsStarted[5])
+        {
+            greatTree.transform.GetChild(0).gameObject.SetActive(false);
+            greatTree.transform.GetChild(2).gameObject.SetActive(true);
         }
 
         // Q7 & Q8
@@ -1843,6 +1954,23 @@ public class Chp1 : MonoBehaviour
 
             PookieQuestStatus();
         }
+
+        // Q7 & Q8 but not complete
+        PookieCheck(npc_pookieB1, Q7Options, "Q7");
+        PookieCheck(npc_pookieB2, Q8Options, "Q8");
+    }
+    
+    IEnumerator TogglePlayerHitBoxDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        TogglePlayerHitbox();
+    }
+
+    public void TogglePlayerHitbox()
+    {
+        player.GetComponent<PolygonCollider2D>().enabled = false;
+        player.GetComponent<PolygonCollider2D>().enabled = true;
     }
 
     public void LoadQuests()

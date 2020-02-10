@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  08/18/2019
+// Last:  02/09/2020
 
 using UnityEngine;
 
@@ -45,6 +45,6 @@ public class PlayerStats : MonoBehaviour
         // Update Brio Bar & add extra
         playerBrio.playerMaxBrio = currentBrio;
         playerBrio.playerCurrentBrio += currentBrio - brioLevels[currentLevel - 1];
-        uMan.bUpdateBrio = true;
+        uMan.UpdateBrio();
     }
 }

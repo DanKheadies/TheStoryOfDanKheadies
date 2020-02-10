@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/12/2018
+// Last:  02/09/2020
 
 using UnityEngine;
 
@@ -17,7 +17,7 @@ public class FatiguePlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerBrioManager>().FatiguePlayer(negativeBrio);
-            uMan.bUpdateBrio = true;
+            uMan.UpdateBrio();
         }
     }
 }

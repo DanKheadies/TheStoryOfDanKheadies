@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  01/22/2020
+// Last:  02/08/2020
 
 using System.Collections;
 using UnityEngine;
@@ -16,6 +16,7 @@ public class CameraSlider : MonoBehaviour
     public PlayerMovement playerMove;
     public TouchControls touches;
 
+    public bool bIsSliding;
     public bool bSlideDown;
     public bool bSlideLeft;
     public bool bSlideRight;
@@ -35,6 +36,8 @@ public class CameraSlider : MonoBehaviour
         }
 
         areaAni.CheckAreaToAnimate();
+
+        bIsSliding = false;
     }
 
     // Slide the player when transitioning areas
@@ -66,6 +69,7 @@ public class CameraSlider : MonoBehaviour
     
     public void SlideRight()
     {
+        bIsSliding = true;
         bSlideRight = true;
 
         StartCoroutine(Slide(
@@ -81,6 +85,7 @@ public class CameraSlider : MonoBehaviour
 
     public void SlideLeft()
     {
+        bIsSliding = true;
         bSlideLeft = true;
 
         StartCoroutine(Slide(
@@ -96,6 +101,7 @@ public class CameraSlider : MonoBehaviour
 
     public void SlideUp()
     {
+        bIsSliding = true;
         bSlideUp = true;
 
         StartCoroutine(Slide(
@@ -111,6 +117,7 @@ public class CameraSlider : MonoBehaviour
 
     public void SlideDown()
     {
+        bIsSliding = true;
         bSlideDown = true;
 
         StartCoroutine(Slide(

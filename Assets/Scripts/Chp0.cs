@@ -15,6 +15,8 @@ public class Chp0 : MonoBehaviour
     public GameObject dArrow;
     public GameObject dBox;
     public GameObject homeVRGoggles;
+    public GameObject npc_ashera;
+    public GameObject npc_dagon;
     public GameObject pauseButton;
     public GameObject player;
     public GameObject sFaderAnim;
@@ -79,6 +81,9 @@ public class Chp0 : MonoBehaviour
             
             sFaderAnimDia.GetComponent<Animator>().enabled = true;
         }
+
+        npc_ashera.GetComponent<Animator>().SetBool("bIsSitting", true);
+        npc_dagon.GetComponent<Animator>().SetBool("bIsSitting", true);
     }
 
     void Update ()

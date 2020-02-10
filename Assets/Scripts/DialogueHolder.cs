@@ -105,7 +105,12 @@ public class DialogueHolder : MonoBehaviour
 
         // NPC looks at player if there's an animation/animator
         if (anim)
-            OrientNPC(collision);
+        {
+            if (anim.GetBool("bIsSitting"))
+                OrientSittingNPC(collision);
+            else
+                OrientNPC(collision);
+        }
 
         // Stop UI controls / actions 
         touches.bAaction = false;
@@ -145,6 +150,39 @@ public class DialogueHolder : MonoBehaviour
                 Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
         {
             anim.Play("Right");
+        }
+    }
+
+    // TODO: deal with cases when there is no Play(orientation) rather than warning message
+    public void OrientSittingNPC(Collider2D collision)
+    {
+        // NPC above Player
+        if ((transform.parent.position.y > collision.transform.position.y) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
+                Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Sitting Down");
+        }
+        // NPC below Player
+        else if ((transform.parent.position.y < collision.transform.position.y) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
+                Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Sitting Up");
+        }
+        // NPC to the right of Player
+        else if ((transform.parent.position.x > collision.transform.position.x) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+                Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Sitting Left");
+        }
+        // NPC to the left of Player
+        else if ((transform.parent.position.x < collision.transform.position.x) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+                Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Sitting Right");
         }
     }
 }

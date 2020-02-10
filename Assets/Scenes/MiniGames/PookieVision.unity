@@ -5970,6 +5970,7 @@ MonoBehaviour:
   mainCamera: {fileID: 1820261570}
   HUD: {fileID: 517931601}
   guiControlsCan: {fileID: 709941600}
+  devDetect: {fileID: 2074391693}
   dMan: {fileID: 1137910804}
   fixedJoystick: {fileID: 201469705}
   pauseButtOpac: {fileID: 1899659619}
@@ -6004,8 +6005,6 @@ MonoBehaviour:
   touches: {fileID: 945577415}
   bControlsActive: 0
   bControlsDPad: 0
-  bMobileDevice: 0
-  bUpdateBrio: 0
   currentContOpac: 0
   currentContDPad: 0
 --- !u!114 &517931597
@@ -19227,12 +19226,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 1933751394}
+  sceneTrans: {fileID: 1444730141}
   dMan: {fileID: 1137910804}
-  pause: {fileID: 2012861183}
+  pause: {fileID: 2074391689}
   scene:
     m_Handle: 0
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   uMan: {fileID: 517931596}
+  bRestoreOverTime: 0
   diffMaxAndCurrent: 0
   playerMaxBrio: 50
   playerCurrentBrio: 0
@@ -19284,6 +19285,7 @@ MonoBehaviour:
   aspectUtil: {fileID: 1820261572}
   cameraFollow: {fileID: 1820261573}
   cameraSlider: {fileID: 0}
+  devDetect: {fileID: 0}
   fixJoystick: {fileID: 201469705}
   playerBrioMan: {fileID: 1933751390}
   playerCollider: {fileID: 1933751391}
@@ -19298,7 +19300,6 @@ MonoBehaviour:
   bControllerConnected: 0
   bGWCUpdate: 0
   bIsControlling: 0
-  bIsMobile: 0
   bStopPlayerMovement: 0
   moveSpeed: 0
   xInput: 0
@@ -20648,6 +20649,7 @@ GameObject:
   - component: {fileID: 2074391687}
   - component: {fileID: 2074391686}
   - component: {fileID: 2074391692}
+  - component: {fileID: 2074391693}
   m_Layer: 0
   m_Name: Game_Controller
   m_TagString: Untagged
@@ -20794,7 +20796,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chp0: {fileID: 0}
   chp1: {fileID: 0}
+  treeTunnel: {fileID: 0}
   dMan: {fileID: 1137910804}
+--- !u!114 &2074391693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074391685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e804f19a8f4d42d43bbfe4094c994210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bIsIpad: 0
+  bIsMobile: 0
 --- !u!1 &2076129493
 GameObject:
   m_ObjectHideFlags: 0

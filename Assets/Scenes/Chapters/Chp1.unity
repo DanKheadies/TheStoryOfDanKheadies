@@ -1212,6 +1212,9 @@ Transform:
   - {fileID: 733258062}
   - {fileID: 1794300842}
   - {fileID: 1381386460}
+  - {fileID: 1588674240}
+  - {fileID: 1903295069}
+  - {fileID: 1799718614}
   m_Father: {fileID: 1948385974}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23976,6 +23979,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &548949499 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5186248832254095791, guid: b55727ae08db23b4d9746e71b50819c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 769443533}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &552845710 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 602033278533526912, guid: fc57066e3389e2c4cb1320576bd12808,
@@ -24351,6 +24360,88 @@ PolygonCollider2D:
       - {x: 0.87067217, y: 0.22413372}
       - {x: 0.8700555, y: -0.4090869}
       - {x: -0.69546753, y: -0.40908054}
+--- !u!1 &565295443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 565295444}
+  - component: {fileID: 565295446}
+  - component: {fileID: 565295445}
+  m_Layer: 0
+  m_Name: Chp1.to.CS_TreeTunnel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &565295444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565295443}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -17.806, y: 8.032, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1265214909}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &565295445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565295443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b56044d191f45f449c828fa834b1b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  scene:
+    m_Handle: 0
+  sceneSubtitle: {fileID: 0}
+  sceneTitle: {fileID: 0}
+  smokeRings: {fileID: 0}
+  bLoadScene: 0
+  bNeedsTimer: 0
+  bAnimationToTransitionScene: 0
+  timeToLoad: 0.001
+  AlphaLoad: SceneTransitioner
+  BetaLoad: CS_TreeTunnel
+--- !u!61 &565295446
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565295443}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.5}
+  m_EdgeRadius: 0
 --- !u!1 &566790306
 GameObject:
   m_ObjectHideFlags: 0
@@ -25690,7 +25781,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1265214909}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &607882873
 MonoBehaviour:
@@ -28556,7 +28647,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1265214909}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &672920309
 MonoBehaviour:
@@ -31105,8 +31196,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oMan: {fileID: 5655120153616620500}
   options:
-  - '"I... what..."'
-  - Stare silently at the tree.
+  - To you?
+  - '*stare silently at the tree'
 --- !u!114 &733258064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35816,6 +35907,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7888949895219731169, guid: fb4ddad4bfe3b234fb50bb69acba9aa5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4225122948620830, guid: fb4ddad4bfe3b234fb50bb69acba9aa5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.48
@@ -35849,11 +35945,6 @@ PrefabInstance:
       value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 1586667818249964, guid: fb4ddad4bfe3b234fb50bb69acba9aa5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7888949895219731169, guid: fb4ddad4bfe3b234fb50bb69acba9aa5,
-        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -36545,6 +36636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chp0: {fileID: 0}
   chp1: {fileID: 841729771}
+  treeTunnel: {fileID: 0}
   dMan: {fileID: 1880181858}
 --- !u!4 &841729766
 Transform:
@@ -36707,6 +36799,7 @@ MonoBehaviour:
   questTrigger2: {fileID: 1599190429}
   screenFader: {fileID: 5655120153616620581}
   treeHouseDoor: {fileID: 316947528}
+  warpCSTreeTunnel: {fileID: 565295443}
   warpGWC: {fileID: 1337416201}
   warpMinesweeper: {fileID: 672920307}
   warpPookieVision: {fileID: 968759459}
@@ -38698,12 +38791,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 875949248}
+  sceneTrans: {fileID: 548949499}
   dMan: {fileID: 1880181858}
-  pause: {fileID: 841729764}
+  pause: {fileID: 841729768}
   scene:
     m_Handle: 0
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   uMan: {fileID: 5655120153616620508}
+  bRestoreOverTime: 0
   diffMaxAndCurrent: 0
   playerMaxBrio: 50
   playerCurrentBrio: 0
@@ -42353,7 +42448,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1265214909}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &968759461
 MonoBehaviour:
@@ -55713,6 +55808,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 565295444}
   - {fileID: 1337416202}
   - {fileID: 672920308}
   - {fileID: 968759460}
@@ -55939,7 +56035,7 @@ Transform:
   - {fileID: 383398730}
   - {fileID: 780199923}
   m_Father: {fileID: 1265214909}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1271627629
 GameObject:
@@ -58788,7 +58884,7 @@ Transform:
   m_LocalScale: {x: 0.3375, y: 0.3625, z: 1}
   m_Children: []
   m_Father: {fileID: 1265214909}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1337416203
 MonoBehaviour:
@@ -60718,8 +60814,6 @@ GameObject:
   - component: {fileID: 1381386460}
   - component: {fileID: 1381386463}
   - component: {fileID: 1381386462}
-  - component: {fileID: 1381386461}
-  - component: {fileID: 1381386464}
   m_Layer: 0
   m_Name: DialogueZone4
   m_TagString: Untagged
@@ -60741,23 +60835,6 @@ Transform:
   m_Father: {fileID: 18194765}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1381386461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1381386459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e170fc8c9217ef40a0a7f1de9e47582, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  oMan: {fileID: 5655120153616620500}
-  options:
-  - Gay. You tease.
-  - So dumb Mr. Game Developer.
-  - I undestand you're busy Mr. Game Developer. Keep working! You got this!!
 --- !u!114 &1381386462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60784,8 +60861,9 @@ MonoBehaviour:
   bHasExited: 0
   action: 
   dialogueLines:
-  - '*Leaves rustle in the wind.*'
-  - '*Cut scene about some shizz.*'
+  - Very well young Daniel, but remember this..
+  - A society grows great when old men plant trees whose shade they know
+  - they will never sit in.
 --- !u!60 &1381386463
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -60817,28 +60895,6 @@ PolygonCollider2D:
       - {x: 0.0020777385, y: -0.50071526}
       - {x: -0.53749084, y: -0.27245522}
       - {x: -0.542127, y: -0.069641754}
---- !u!114 &1381386464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1381386459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 181ddc14ac81eed4daec3af3e0b231e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npcAnim: {fileID: 0}
-  dMan: {fileID: 1880181858}
-  qMan: {fileID: 2041127070}
-  scriptMan: {fileID: 841729765}
-  spRend: {fileID: 0}
-  bActionOnClose: 0
-  bBeginQuest: 0
-  bEndQuest: 1
-  questNumber: 5
-  action: 
 --- !u!114 &1383137757 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5655120152534545471, guid: fc57066e3389e2c4cb1320576bd12808,
@@ -63932,7 +63988,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1265214909}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1448235533
 MonoBehaviour:
@@ -65564,7 +65620,6 @@ GameObject:
   - component: {fileID: 1464740092}
   - component: {fileID: 1464740091}
   - component: {fileID: 1464740090}
-  - component: {fileID: 1464740093}
   m_Layer: 0
   m_Name: DialogueZone1
   m_TagString: Untagged
@@ -65600,8 +65655,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oMan: {fileID: 5655120153616620500}
   options:
-  - '"Hello."'
-  - Stare silently at the tree.
+  - Hello.
+  - '*stare silently at the tree'
 --- !u!114 &1464740091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65660,28 +65715,6 @@ PolygonCollider2D:
       - {x: 0.0020777385, y: -0.50071526}
       - {x: -0.53749084, y: -0.27245522}
       - {x: -0.542127, y: -0.069641754}
---- !u!114 &1464740093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1464740088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 181ddc14ac81eed4daec3af3e0b231e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npcAnim: {fileID: 0}
-  dMan: {fileID: 1880181858}
-  qMan: {fileID: 2041127070}
-  scriptMan: {fileID: 841729765}
-  spRend: {fileID: 0}
-  bActionOnClose: 0
-  bBeginQuest: 1
-  bEndQuest: 0
-  questNumber: 5
-  action: 
 --- !u!1 &1468166201
 GameObject:
   m_ObjectHideFlags: 0
@@ -71991,6 +72024,96 @@ PolygonCollider2D:
       - {x: 0.87067217, y: 0.22413372}
       - {x: 0.8700555, y: -0.4090869}
       - {x: -0.69546753, y: -0.40908054}
+--- !u!1 &1588674239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1588674240}
+  - component: {fileID: 1588674244}
+  - component: {fileID: 1588674243}
+  m_Layer: 0
+  m_Name: DialogueZone5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1588674240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588674239}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0000009536743, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_Children: []
+  m_Father: {fileID: 18194765}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1588674243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588674239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d54c8da22bff46419731d3bba7bae75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  colliEnter: {fileID: 0}
+  dMan: {fileID: 1880181858}
+  pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
+  portPic: {fileID: 21300000, guid: 6b5f241ef247cfb48960790e6b8c3666, type: 3}
+  touches: {fileID: 2087698428}
+  uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
+  bContinueDialogue: 0
+  bHasEntered: 0
+  bHasExited: 0
+  action: 
+  dialogueLines:
+  - '*the tree stares quietly at you'
+--- !u!60 &1588674244
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588674239}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.0015513103, y: -0.21479225}
+      - {x: 0.55054986, y: -0.08559482}
+      - {x: 0.54679364, y: -0.3005085}
+      - {x: 0.0020777385, y: -0.50071526}
+      - {x: -0.53749084, y: -0.27245522}
+      - {x: -0.542127, y: -0.069641754}
 --- !u!1 &1591172996
 GameObject:
   m_ObjectHideFlags: 0
@@ -81213,6 +81336,7 @@ GameObject:
   - component: {fileID: 1794300845}
   - component: {fileID: 1794300844}
   - component: {fileID: 1794300843}
+  - component: {fileID: 1794300846}
   m_Layer: 0
   m_Name: DialogueZone3
   m_TagString: Untagged
@@ -81248,9 +81372,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oMan: {fileID: 5655120153616620500}
   options:
-  - '"Watching?"'
-  - '"Since the.. beginning?"'
-  - Slowly begin to walk backwards, keeping your eyes intensely on the tree.
+  - Yes.
+  - No.
+  - '*stare silently at the tree'
 --- !u!114 &1794300844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81277,8 +81401,10 @@ MonoBehaviour:
   bHasExited: 0
   action: 
   dialogueLines:
-  - Ahh yes. You must have many questions child.
-  - Where to begin.. I have been watching you since the beginning.
+  - I am the spirit of this world. The man behind the curtain.
+  - I've been here since the beginning. And I'll be there at the end.
+  - I am your guide, and I will help you as needed.
+  - Would you like my advice, my insight?
 --- !u!60 &1794300845
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -81310,6 +81436,28 @@ PolygonCollider2D:
       - {x: 0.0020777385, y: -0.50071526}
       - {x: -0.53749084, y: -0.27245522}
       - {x: -0.542127, y: -0.069641754}
+--- !u!114 &1794300846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794300841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181ddc14ac81eed4daec3af3e0b231e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcAnim: {fileID: 0}
+  dMan: {fileID: 1880181858}
+  qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
+  spRend: {fileID: 0}
+  bActionOnClose: 0
+  bBeginQuest: 1
+  bEndQuest: 0
+  questNumber: 5
+  action: 
 --- !u!1 &1796650039
 GameObject:
   m_ObjectHideFlags: 0
@@ -81514,6 +81662,120 @@ PolygonCollider2D:
       - {x: 0.87067217, y: 0.22413372}
       - {x: 0.8700555, y: -0.4090869}
       - {x: -0.69546753, y: -0.40908054}
+--- !u!1 &1799718613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1799718614}
+  - component: {fileID: 1799718617}
+  - component: {fileID: 1799718616}
+  - component: {fileID: 1799718615}
+  m_Layer: 0
+  m_Name: DialogueZone7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1799718614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799718613}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0000009536743, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_Children: []
+  m_Father: {fileID: 18194765}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1799718615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799718613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181ddc14ac81eed4daec3af3e0b231e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcAnim: {fileID: 0}
+  dMan: {fileID: 1880181858}
+  qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
+  spRend: {fileID: 0}
+  bActionOnClose: 0
+  bBeginQuest: 0
+  bEndQuest: 1
+  questNumber: 5
+  action: 
+--- !u!114 &1799718616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799718613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d54c8da22bff46419731d3bba7bae75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  colliEnter: {fileID: 0}
+  dMan: {fileID: 1880181858}
+  pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
+  portPic: {fileID: 21300000, guid: 6b5f241ef247cfb48960790e6b8c3666, type: 3}
+  touches: {fileID: 2087698428}
+  uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
+  bContinueDialogue: 0
+  bHasEntered: 0
+  bHasExited: 0
+  action: 
+  dialogueLines:
+  - Continue on the journey before you my child.
+  - Go in peace, Dan, to love and serve we..
+--- !u!60 &1799718617
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799718613}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.0015513103, y: -0.21479225}
+      - {x: 0.55054986, y: -0.08559482}
+      - {x: 0.54679364, y: -0.3005085}
+      - {x: 0.0020777385, y: -0.50071526}
+      - {x: -0.53749084, y: -0.27245522}
+      - {x: -0.542127, y: -0.069641754}
 --- !u!1 &1799801306
 GameObject:
   m_ObjectHideFlags: 0
@@ -85617,6 +85879,116 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1903295068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1903295069}
+  - component: {fileID: 1903295072}
+  - component: {fileID: 1903295071}
+  - component: {fileID: 1903295070}
+  m_Layer: 0
+  m_Name: DialogueZone6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1903295069
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903295068}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0000009536743, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_Children: []
+  m_Father: {fileID: 18194765}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1903295070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903295068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e170fc8c9217ef40a0a7f1de9e47582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oMan: {fileID: 5655120153616620500}
+  options:
+  - Yes.
+  - No.
+  - '*stare silently at the tree'
+--- !u!114 &1903295071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903295068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d54c8da22bff46419731d3bba7bae75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  colliEnter: {fileID: 0}
+  dMan: {fileID: 1880181858}
+  pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
+  portPic: {fileID: 21300000, guid: 6b5f241ef247cfb48960790e6b8c3666, type: 3}
+  touches: {fileID: 2087698428}
+  uMan: {fileID: 5655120153616620508}
+  bActionOnClose: 0
+  bContinueDialogue: 0
+  bHasEntered: 0
+  bHasExited: 0
+  action: 
+  dialogueLines:
+  - 'Your experiences and the experiences of others make up the '
+  - fabric of our reality. The more you do and see, the more you'll be.
+  - Are you beginning to understand Dan?
+--- !u!60 &1903295072
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903295068}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.0015513103, y: -0.21479225}
+      - {x: 0.55054986, y: -0.08559482}
+      - {x: 0.54679364, y: -0.3005085}
+      - {x: 0.0020777385, y: -0.50071526}
+      - {x: -0.53749084, y: -0.27245522}
+      - {x: -0.542127, y: -0.069641754}
 --- !u!1 &1903586327
 GameObject:
   m_ObjectHideFlags: 0

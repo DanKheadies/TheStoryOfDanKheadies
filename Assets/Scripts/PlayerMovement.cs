@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  01/22/2020
+// Last:  02/09/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -185,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
             if (movementVector != Vector2.zero)
             {
                 playerBrioMan.FatiguePlayer(0.1f);
-                uMan.bUpdateBrio = true;
+                uMan.UpdateBrio();
             }
         }
         // 1x Move Speed

@@ -20520,6 +20520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chp0: {fileID: 0}
   chp1: {fileID: 0}
+  treeTunnel: {fileID: 0}
   dMan: {fileID: 1616946429}
 --- !u!114 &768314387
 MonoBehaviour:
@@ -20633,10 +20634,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 0}
-  mainCamera: {fileID: 769352917}
+  areaAni: {fileID: 0}
+  camFollow: {fileID: 0}
   player: {fileID: 1999479184}
   playerMove: {fileID: 1999479187}
   touches: {fileID: 1931411147}
+  bIsSliding: 0
   bSlideDown: 0
   bSlideLeft: 0
   bSlideRight: 0
@@ -47847,7 +47850,6 @@ MonoBehaviour:
   touches: {fileID: 1931411147}
   bControlsActive: 0
   bControlsDPad: 0
-  bUpdateBrio: 0
   currentContOpac: 0
   currentContDPad: 0
 --- !u!114 &1814653777
@@ -52791,12 +52793,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 0}
+  sceneTrans: {fileID: 778553634}
   dMan: {fileID: 1616946429}
-  pause: {fileID: 908197422}
+  pause: {fileID: 768314381}
   scene:
     m_Handle: 0
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   uMan: {fileID: 1814653776}
+  bRestoreOverTime: 0
   diffMaxAndCurrent: 0
   playerMaxBrio: 50
   playerCurrentBrio: 0

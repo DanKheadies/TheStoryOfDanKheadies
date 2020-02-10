@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  08/18/2019
+// Last:  02/09/2020
 
 // DC TODO -- Bring in QuestMananger & complete quest when won (but still able to keep playing for restored brio & not more brio)
 
@@ -157,14 +157,11 @@ public class Minesweeper : MonoBehaviour
             !dMan.bDialogueActive &&
             (!bHasLost || !bHasWon))
         {
-            if (warpMinesweeper.GetComponent<SceneTransitioner>().bAnimationToTransitionScene)
-            {
-                // Avoid losing brio if scene transition animation is going
-            }
-            else
+            if (!warpMinesweeper.GetComponent<SceneTransitioner>().bAnimationToTransitionScene)
             {
                 brio.FatiguePlayer(0.0025f);
-                uMan.bUpdateBrio = true;
+                brio.bRestoreOverTime = false;
+                uMan.UpdateBrio();
             }
         }
 
@@ -179,10 +176,8 @@ public class Minesweeper : MonoBehaviour
 
         // Ask about difficulty
 
-        // Reward with brio (max cap & current)
-        player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(5);
-        player.GetComponent<PlayerBrioManager>().RestorePlayer(15);
-        uMan.bUpdateBrio = true;
+        // Reward 
+        PlayerPrefs.SetString("TransferActions", "Quest6Reward");
     }
 
     public void Lose()

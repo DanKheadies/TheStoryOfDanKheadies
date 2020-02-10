@@ -167,7 +167,9 @@ public class DialogueManager : MonoBehaviour
 
         // Action on close
         if (closingAction != "")
+        {
             scriptMan.ClosingAction(closingAction);
+        }
         closingAction = "";
     }
 

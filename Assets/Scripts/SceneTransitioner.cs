@@ -2,7 +2,7 @@
 // Authors: David W. Corso
 // Contributors: Nick Pettit
 // Start: 04/20/2017
-// Last:  12/13/2019
+// Last:  02/09/2020
 
 using System.Collections;
 using UnityEngine;
@@ -49,6 +49,10 @@ public class SceneTransitioner : MonoBehaviour
                     case "Chp1":
                         sceneTitle.text = "Chapter 1";
                         sceneSubtitle.text = "In the beginning...";
+                        break;
+                    case "CS_TreeTunnel":
+                        sceneTitle.text = "A Great Tree";
+                        sceneSubtitle.text = "Offering you a branch..";
                         break;
                     case "Minesweeper":
                         sceneTitle.text = "Minesweeper";
@@ -144,11 +148,8 @@ public class SceneTransitioner : MonoBehaviour
     IEnumerator LoadNewScene()
     {
         // Initializers for text sizing
-        mainCamera = FindObjectOfType<Camera>();
         cameraHeight = mainCamera.rect.height;
         cameraWidth = mainCamera.rect.width;
-        sceneSubtitle = GameObject.Find("Scene_Subtitle").GetComponent<Text>();
-        sceneTitle = GameObject.Find("Scene_Title").GetComponent<Text>();
 
         // UI Image & Text Positioning and Sizing based off device size
         sceneSubtitle.fontSize = (int)(0.034090909090909f * Screen.width + 20.363636363636f);

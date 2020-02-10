@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  01/12/2020
+// Last:  02/09/2020
 
 //using System.Collections;
 using UnityEngine;
@@ -38,9 +38,6 @@ public class UIManager : MonoBehaviour
 
     public bool bControlsActive;
     public bool bControlsDPad;
-    //public bool bIsIpad;
-    //public bool bMobileDevice;
-    public bool bUpdateBrio;
 
     public float currentContOpac;
 
@@ -110,19 +107,14 @@ public class UIManager : MonoBehaviour
         CheckAndSetMenus();
 
         // Sets brio bar
-        bUpdateBrio = true;
+        UpdateBrio();
     }
-    
-    void Update ()
-    {
-        if (bUpdateBrio)
-        {
-            brioBar.maxValue = playerBrio.playerMaxBrio;
-            brioBar.value = playerBrio.playerCurrentBrio;
-            brioText.text = "BR:  " + (int)(playerBrio.playerCurrentBrio) + " / " + (int)(playerBrio.playerMaxBrio);
 
-            bUpdateBrio = false;
-        }
+    public void UpdateBrio()
+    {
+        brioBar.maxValue = playerBrio.playerMaxBrio;
+        brioBar.value = playerBrio.playerCurrentBrio;
+        brioText.text = "BR:  " + (int)(playerBrio.playerCurrentBrio) + " / " + (int)(playerBrio.playerMaxBrio);
     }
 
     public void DisplayControls()

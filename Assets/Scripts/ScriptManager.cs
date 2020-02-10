@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/21/2019
-// Last:  08/21/2019
+// Last:  02/09/2020
 
 using UnityEngine;
 
@@ -9,6 +9,7 @@ public class ScriptManager : MonoBehaviour
 {
     public Chp0 chp0;
     public Chp1 chp1;
+    public CS_TreeTunnel treeTunnel;
     public DialogueManager dMan;
 
     public void InventoryUpdate()
@@ -62,6 +63,14 @@ public class ScriptManager : MonoBehaviour
 
             else if (action == "PookieCheck")
                 chp1.PookieCheck();
+
+            else if (action == "ResetGreatTreeDialogueToMiddle")
+                chp1.ResetGreatTreeDialogueToMiddle();
+        }
+        else if (treeTunnel)
+        {
+            if (action == "WarpOut")
+                treeTunnel.WarpOut();
         }
     }
 }

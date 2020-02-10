@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/22/2019
+// Last:  02/09/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -245,6 +245,7 @@ public class SaveGame : MonoBehaviour
         PlayerPrefs.DeleteKey("TransferAnandaCoord");
         PlayerPrefs.DeleteKey("TransferBrioMax");
         PlayerPrefs.DeleteKey("TransferBrio");
+        PlayerPrefs.DeleteKey("TransferActions");
 
         invTotal = PlayerPrefs.GetInt("TransferItemTotal");
         PlayerPrefs.DeleteKey("TransferItemTotal");
