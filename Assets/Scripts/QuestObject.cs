@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  08/18/2019
+// Last:  02/13/2020
 
 using UnityEngine;
 
@@ -10,14 +10,17 @@ public class QuestObject : MonoBehaviour
 {
     public DialogueManager dMan;
     public QuestManager qMan;
+    public ScriptManager sMan;
     public Sprite portPic;
 
+    public bool bActionOnClose;
     public bool bHasStarted;
     public bool bHasEnded;
     public bool bHasCollected;
 
     public int questNumber;
 
+    public string action;
     public string[] beginText;
     public string[] endText;
 
@@ -40,6 +43,10 @@ public class QuestObject : MonoBehaviour
             qMan.ShowQuestText(endText);
             qMan.questsEnded[questNumber] = true;
             bHasEnded = true;
+
+            // Run any actions
+            if (bActionOnClose)
+                sMan.ActionOnClose(action);
         }
     }
 

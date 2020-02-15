@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  02/09/2020
+// Last:  02/14/2020
 
 // DC TODO -- Bring in QuestMananger & complete quest when won (but still able to keep playing for restored brio & not more brio)
 
@@ -173,6 +173,7 @@ public class Minesweeper : MonoBehaviour
         // Ask the player if they want to play again
         npc_chun.transform.GetChild(0).gameObject.SetActive(true);
         npc_chun.transform.GetChild(0).GetComponent<DialogueHolder>().bContinueDialogue = true;
+        dMan.PauseDialogue();
 
         // Ask about difficulty
 
@@ -185,6 +186,7 @@ public class Minesweeper : MonoBehaviour
         // Have Person1 ask if players wants again or done?
         npc_chun.transform.GetChild(1).gameObject.SetActive(true);
         npc_chun.transform.GetChild(1).GetComponent<DialogueHolder>().bContinueDialogue = true;
+        dMan.PauseDialogue();
 
         // Ask about difficulty
     }

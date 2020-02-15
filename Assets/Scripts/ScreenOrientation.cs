@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/02/2018
-// Last:  10/21/2019
+// Last:  02/11/2020
 
 using UnityEngine;
 
@@ -13,6 +13,7 @@ public class ScreenOrientation : MonoBehaviour
     public DeviceOrientation devOr;
     public FixedJoystick fixedJoy;
     public OptionsManager oMan;
+    public ScriptManager sMan;
     public UIManager uMan;
 
     public bool bIsFull;
@@ -46,6 +47,11 @@ public class ScreenOrientation : MonoBehaviour
             bIsFull = Screen.fullScreen;
             bSizingChange = true;
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetParameters();
+        }
     }
 
     public void ResetParameters()
@@ -60,5 +66,8 @@ public class ScreenOrientation : MonoBehaviour
             fixedJoy.JoystickPosition();
         if (uMan)
             uMan.CheckAndSetMenus();
+        
+        if (sMan)
+            sMan.ResetParameters("CS_TreeTunnel");
     }
 }

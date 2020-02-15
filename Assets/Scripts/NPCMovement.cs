@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/23/2019
+// Last:  02/10/2020
 
 using UnityEngine;
 
@@ -126,20 +126,14 @@ public class NPCMovement : MonoBehaviour
 
             // Trigger to walk
             if (waitCounter < 0)
-            {
                 ChooseDirection();
-            }
         }
 
         // Move if there is no dialogue prompt
         if (!dMan.bDialogueActive)
-        {
             bCanMove = true;
-        }
         else
-        {
             walkCounter = 0;
-        }
 
         // Stop movement
         if (!bCanMove)

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/23/2019
+// Last:  02/14/2020
 
 using System.Collections;
 using UnityEngine;
@@ -158,18 +158,15 @@ public class DialogueManager : MonoBehaviour
         // Reactivate the player
         playerMove.bStopPlayerMovement = false;
         if (playerAnim)
-        {
             playerAnim.Play("Idle");
-        }
 
         // Restore Brio & Button if no more dialogue
         StartCoroutine(WaitForOptions());
 
         // Action on close
         if (closingAction != "")
-        {
             scriptMan.ClosingAction(closingAction);
-        }
+
         closingAction = "";
     }
 
@@ -303,6 +300,11 @@ public class DialogueManager : MonoBehaviour
     public void UnpauseDialogue()
     {
         bPauseDialogue = false;
+        pauseTime = 0.333f;
+    }
+
+    public void RefreshPause()
+    {
         pauseTime = 0.333f;
     }
 }

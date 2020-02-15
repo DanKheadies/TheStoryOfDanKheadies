@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/23/2019
+// Last:  02/14/2020
 
 using UnityEngine;
 
@@ -78,7 +78,14 @@ public class DialogueHolder : MonoBehaviour
             if (!dMan.bDialogueActive && 
                 anim)
             {
-                anim.Play("NPC Movement");
+                if (anim.GetBool("bIsWalking"))
+                    anim.Play("NPC Movement");
+                else if (anim.GetBool("bIsSitting"))
+                    anim.Play("NPC Sitting");
+                else if (anim.GetBool("bIsVogging"))
+                    anim.Play("NPC Vog Idle");
+                else
+                    anim.Play("NPC Idle");
             }
         }
     }
@@ -94,9 +101,7 @@ public class DialogueHolder : MonoBehaviour
 
             // Activates Options Holder if any options
             if (GetComponent<OptionsHolder>())
-            {
                 GetComponent<OptionsHolder>().PrepareOptions();
-            }
         }
 
         // Stop NPC movement
@@ -104,10 +109,13 @@ public class DialogueHolder : MonoBehaviour
             transform.parent.GetComponent<NPCMovement>().bCanMove = false;
 
         // NPC looks at player if there's an animation/animator
-        if (anim)
+        if (anim &&
+            collision)
         {
             if (anim.GetBool("bIsSitting"))
                 OrientSittingNPC(collision);
+            else if (anim.GetBool("bIsVogging"))
+                OrientVoggingNPC(collision);
             else
                 OrientNPC(collision);
         }
@@ -161,28 +169,60 @@ public class DialogueHolder : MonoBehaviour
             (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
                 Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
         {
-            anim.Play("Sitting Down");
+            anim.Play("Sit Down");
         }
         // NPC below Player
         else if ((transform.parent.position.y < collision.transform.position.y) &&
             (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
                 Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
         {
-            anim.Play("Sitting Up");
+            anim.Play("Sit Up");
         }
         // NPC to the right of Player
         else if ((transform.parent.position.x > collision.transform.position.x) &&
             (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
                 Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
         {
-            anim.Play("Sitting Left");
+            anim.Play("Sit Left");
         }
         // NPC to the left of Player
         else if ((transform.parent.position.x < collision.transform.position.x) &&
             (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
                 Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
         {
-            anim.Play("Sitting Right");
+            anim.Play("Sit Right");
+        }
+    }
+
+    public void OrientVoggingNPC(Collider2D collision)
+    {
+        // NPC above Player
+        if ((transform.parent.position.y > collision.transform.position.y) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
+                Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Vog Down");
+        }
+        // NPC below Player
+        else if ((transform.parent.position.y < collision.transform.position.y) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
+                Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Vog Up");
+        }
+        // NPC to the right of Player
+        else if ((transform.parent.position.x > collision.transform.position.x) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+                Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Vog Left");
+        }
+        // NPC to the left of Player
+        else if ((transform.parent.position.x < collision.transform.position.x) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+                Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            anim.Play("Vog Right");
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/16/2017
-// Last:  08/23/2019
+// Last:  02/13/2020
 
 using UnityEngine;
 
@@ -41,7 +41,14 @@ public class QuestTrigger : MonoBehaviour
 
                     // NPC looks at player if there's an animation/animator
                     if (npcAnim)
-                        OrientNPC(collision);
+                    {
+                        if (npcAnim.GetBool("bIsSitting"))
+                            OrientSittingNPC(collision);
+                        else if (npcAnim.GetBool("bIsVogging"))
+                            OrientVoggingNPC(collision);
+                        else
+                            OrientNPC(collision);
+                    }
 
                     // Quest Text
                     qMan.quests[questNumber].BeginQuest();
@@ -61,7 +68,14 @@ public class QuestTrigger : MonoBehaviour
 
                     // NPC looks at player if there's an animation/animator
                     if (npcAnim)
-                        OrientNPC(collision);
+                    {
+                        if (npcAnim.GetBool("bIsSitting"))
+                            OrientSittingNPC(collision);
+                        else if (npcAnim.GetBool("bIsVogging"))
+                            OrientVoggingNPC(collision);
+                        else
+                            OrientNPC(collision);
+                    }
 
                     // Quest Text
                     qMan.quests[questNumber].EndQuest();
@@ -73,14 +87,20 @@ public class QuestTrigger : MonoBehaviour
                 }
             }
         }
+    }
 
-        // Reset NPC
-        if (!dMan.bDialogueActive && 
-            spRend && 
-            npcAnim)
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // Drives NPC interaction
+        if (collision.gameObject.CompareTag("Player"))
         {
-            npcAnim.Play("NPC Movement");
-            transform.parent.GetComponent<NPCMovement>().bCanMove = false;
+            // Reset NPC
+            if (!dMan.bDialogueActive &&
+                spRend &&
+                npcAnim)
+            {
+                transform.parent.GetComponent<NPCMovement>().bCanMove = true;
+            }
         }
     }
 
@@ -113,6 +133,71 @@ public class QuestTrigger : MonoBehaviour
              Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
         {
             npcAnim.Play("Right");
+        }
+    }
+
+    // TODO: deal with cases when there is no Play(orientation) rather than warning message
+    public void OrientSittingNPC(Collider2D collision)
+    {
+        // NPC above Player
+        if ((transform.parent.position.y > collision.transform.position.y) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
+             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            npcAnim.Play("Sit Down");
+        }
+        // NPC below Player
+        else if ((transform.parent.position.y < collision.transform.position.y) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
+             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            npcAnim.Play("Sit Up");
+        }
+        // NPC to the right of Player
+        else if ((transform.parent.position.x > collision.transform.position.x) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            npcAnim.Play("Sit Left");
+        }
+        // NPC to the left of Player
+        else if ((transform.parent.position.x < collision.transform.position.x) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            npcAnim.Play("Sit Right");
+        }
+    }
+
+    public void OrientVoggingNPC(Collider2D collision)
+    {
+        // NPC above Player
+        if ((transform.parent.position.y > collision.transform.position.y) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
+             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            npcAnim.Play("Vog Down");
+        }
+        // NPC below Player
+        else if ((transform.parent.position.y < collision.transform.position.y) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) >
+             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            npcAnim.Play("Vog Up");
+        }
+        // NPC to the right of Player
+        else if ((transform.parent.position.x > collision.transform.position.x) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            npcAnim.Play("Vog Left");
+        }
+        // NPC to the left of Player
+        else if ((transform.parent.position.x < collision.transform.position.x) &&
+            (Mathf.Abs((transform.parent.position.y - collision.transform.position.y)) <
+             Mathf.Abs((transform.parent.position.x - collision.transform.position.x))))
+        {
+            npcAnim.Play("Vog Right");
         }
     }
 }

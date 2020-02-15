@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  02/09/2020
+// Last:  02/14/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +15,8 @@ public class Chp1 : MonoBehaviour
     public DeviceDetector devDetect;
     public DialogueManager dMan;
     public GameObject greatTree;
+    public GameObject homeCushion;
+    public GameObject homeCushionCollider;
     public GameObject item_homeVRGoggles;
     public GameObject npc_al_khidr;
     public GameObject npc_ashera;
@@ -109,24 +111,20 @@ public class Chp1 : MonoBehaviour
 
             // Cleanse transfer data
             save.DeleteTransPrefs();
-
-            // Load quest data
-            LoadQuests();
-            Chp1QuestChecker();
         }
         // Chapter 1 -- Saved Game
         else
         {
             save.GetSavedGame();
 
-            LoadQuests();
-            Chp1QuestChecker();
-
             // When loading from PlaygroundW, play Jurassic Dank
             if (camFollow.currentCoords == (CameraFollow.AnandaCoords)32)
                 mMan.SwitchTrack(1);
         }
         
+        LoadQuests();
+        Chp1QuestChecker();
+
         StartCoroutine(TogglePlayerHitBoxDelay());
     }
 
@@ -139,9 +137,6 @@ public class Chp1 : MonoBehaviour
         {
             raceTimer += Time.deltaTime;
         }
-        
-        if (Input.GetKeyUp(KeyCode.N))
-            TogglePlayerHitbox();
     }
 
     public void TransferActions(string functionName)
@@ -151,6 +146,35 @@ public class Chp1 : MonoBehaviour
 
         if (functionName == "Quest6Reward")
             Quest6Reward();
+    }
+
+
+    public void CheckAndDisableLastKidFound()
+    {
+        if (Q4LastKidFound == "Al-khidr")
+        {
+            npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        }
+        else if (Q4LastKidFound == "Atandwa")
+        {
+            npc_atandwa.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        }
+        else if (Q4LastKidFound == "Eliz")
+        {
+            npc_eliz.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        }
+        else if (Q4LastKidFound == "Thabo")
+        {
+            npc_thabo.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        }
+        else if (Q4LastKidFound == "Zola")
+        {
+            npc_zola.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        }
+        else if (Q4LastKidFound == "Marija")
+        {
+            npc_marija.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        }
     }
 
     public void CheckingForGoggles()
@@ -165,74 +189,138 @@ public class Chp1 : MonoBehaviour
         }
     }
 
-    public void GoggleCheck()
+    public void DagonInLab()
     {
-        // Optimization: PlayerPref that tracks if ever picked up goggles
+        // Move Dagon's position
+        npc_dagon.transform.localPosition = new Vector3(-6.63f, -7.075f, 0);
 
-        CheckingForGoggles();
+        // Remove cushion
+        homeCushionCollider.SetActive(false);
+        homeCushion.SetActive(false);
 
-        if (bHasGoggles)
+        // Activate new Dagon prompt(s)
+        npc_dagon.transform.GetChild(0).gameObject.SetActive(false);
+        npc_dagon.transform.GetChild(1).gameObject.SetActive(false);
+        npc_dagon.transform.GetChild(2).gameObject.SetActive(false);
+        npc_dagon.transform.GetChild(3).gameObject.SetActive(true);
+    }
+
+    public void DagonWalkingToLab()
+    {
+        // Activate "pipes" prompt
+        npc_dagon.transform.GetChild(1).gameObject.SetActive(false);
+        npc_dagon.transform.GetChild(2).gameObject.SetActive(true);
+        npc_dagon.transform.GetChild(2).GetComponent<DialogueHolder>().bContinueDialogue = true;
+        dMan.PauseDialogue();
+
+        npc_dagon.transform.GetChild(2).GetComponent<PolygonCollider2D>().enabled = false;
+
+        // Walk Dagon
+        StartCoroutine(DagonWalkingToLabDelay());
+    }
+
+    IEnumerator DagonWalkingToLabDelay()
+    {
+        // Visually prevent player from dismissing
+        dMan.bStartStrobing = false;
+        StartCoroutine(dMan.dArrow.gameObject.GetComponent<ImageStrobe>().StopStrobe());
+        dMan.dArrow.transform.localScale = Vector3.zero;
+
+        yield return new WaitForSeconds(0.001f);
+
+        // Physically prevent player from dimissing
+        dMan.bDialogueActive = false;
+        dMan.RefreshPause();
+
+        yield return new WaitForSeconds(0.333f);
+
+        npc_dagon.GetComponent<Animator>().SetBool("bIsVogging", false);
+        npc_dagon.GetComponent<Animator>().SetBool("bIsWalking", true);
+        npc_dagon.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        npc_dagon.GetComponent<NPCIdle>().enabled = false;
+
+        npc_dagon.GetComponent<Animator>().Play("NPC Movement", 0, 0.25f);
+
+        if (npc_dagon.transform.position.y > player.transform.position.y)
         {
-            npc_ashera.transform.GetChild(0).gameObject.SetActive(true);
-            npc_ashera.transform.GetChild(1).gameObject.SetActive(false);
+            npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0.5f);
+            npc_dagon.GetComponent<Animator>().SetFloat("MoveX", 0);
+            npc_dagon.GetComponent<Animator>().SetFloat("MoveY", 1f);
 
-            item_homeVRGoggles.transform.localScale = Vector3.zero;
+            yield return new WaitForSeconds(1f);
+
+            npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(-0.55f, 0);
+            npc_dagon.GetComponent<Animator>().SetFloat("MoveX", -1f);
+            npc_dagon.GetComponent<Animator>().SetFloat("MoveY", 0);
+
+            yield return new WaitForSeconds(2f);
+
+            npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -0.4f);
+            npc_dagon.GetComponent<Animator>().SetFloat("MoveX", 0);
+            npc_dagon.GetComponent<Animator>().SetFloat("MoveY", -1f);
         }
         else
         {
-            npc_ashera.transform.GetChild(0).gameObject.SetActive(false);
-            npc_ashera.transform.GetChild(1).gameObject.SetActive(true);
+            npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -0.4f);
+            npc_dagon.GetComponent<Animator>().SetFloat("MoveX", 0);
+            npc_dagon.GetComponent<Animator>().SetFloat("MoveY", -1f);
 
-            item_homeVRGoggles.transform.localScale = Vector3.one;
+            yield return new WaitForSeconds(1f);
+
+            npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(-0.55f, 0);
+            npc_dagon.GetComponent<Animator>().SetFloat("MoveX", -1f);
+            npc_dagon.GetComponent<Animator>().SetFloat("MoveY", 0);
+
+            yield return new WaitForSeconds(2f);
+
+            npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0.5f);
+            npc_dagon.GetComponent<Animator>().SetFloat("MoveX", 0);
+            npc_dagon.GetComponent<Animator>().SetFloat("MoveY", 1f);
         }
 
-        // Reset
-        bHasGoggles = false;
-    }
+        yield return new WaitForSeconds(1f);
 
-    public void SmoochyWoochyCheck()
-    {
-        if (!quest3.GetComponent<QuestObject>().bHasCollected)
-        {
-            for (int i = 0; i < inv.items.Count; i++)
-            {
-                string item = inv.items[i].ToString();
-                item = item.Substring(0, item.Length - 7);
+        npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(-0.5f, 0);
+        npc_dagon.GetComponent<Animator>().SetFloat("MoveX", -1f);
+        npc_dagon.GetComponent<Animator>().SetFloat("MoveY", 0);
 
-                if (item == "Cannabis.Bud.SmoochyWoochyPoochy")
-                {
-                    bHasQ3SmoochWoochy = true;
-                }
-            }
+        yield return new WaitForSeconds(0.666f);
 
-            if (bHasQ3SmoochWoochy &&
-                !dMan.bDialogueActive &&
-                quest3.GetComponent<QuestObject>().bHasStarted)
-            {
-                npc_enki.transform.GetChild(0).gameObject.SetActive(false);
-                npc_enki.transform.GetChild(1).gameObject.SetActive(true);
+        npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        npc_dagon.GetComponent<Animator>().SetBool("bIsWalking", false);
 
-                npc_enki.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().bEndQuest = true;
+        // Remove cushion
+        homeCushionCollider.SetActive(false);
+        homeCushion.SetActive(false);
 
-                npc_enki.transform.GetChild(1).gameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
-                npc_enki.transform.GetChild(1).gameObject.GetComponent<PolygonCollider2D>().isTrigger = true;
-            }
-            else
-            {
-                npc_enki.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().bEndQuest = false;
+        yield return new WaitForSeconds(0.5f);
 
-                npc_enki.transform.GetChild(0).gameObject.SetActive(true);
-                npc_enki.transform.GetChild(1).gameObject.SetActive(false);
-            }
+        npc_dagon.GetComponent<Collider2D>().enabled = false;
+        npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(-0.5f, 0);
+        npc_dagon.GetComponent<Animator>().SetFloat("MoveX", -1f);
+        npc_dagon.GetComponent<Animator>().SetFloat("MoveY", 0);
+        npc_dagon.GetComponent<Animator>().SetBool("bIsWalking", true);
 
-            // Reset bool check
-            bHasQ3SmoochWoochy = false;
-        }
-    }
+        yield return new WaitForSeconds(1f);
 
-    public void TreeHouse()
-    {
-        StartCoroutine(DelayTreeHouse());
+        // Reactivate Dagon
+        npc_dagon.transform.localPosition = new Vector3(-6.63f, -7.075f, 0);
+        npc_dagon.GetComponent<Animator>().SetBool("bIsWalking", false);
+        npc_dagon.GetComponent<Collider2D>().enabled = true;
+        npc_dagon.GetComponent<NPCIdle>().enabled = true;
+        npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        npc_dagon.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+
+        // Activate new Dagon prompt
+        npc_dagon.transform.GetChild(2).gameObject.SetActive(false);
+        npc_dagon.transform.GetChild(3).gameObject.SetActive(true);
+
+        // Visually allow player to dismiss
+        dMan.bStartStrobing = true;
+        dMan.dArrow.transform.localScale = Vector3.one;
+
+        // Physically allow player to dismiss
+        dMan.bDialogueActive = true;
     }
 
     IEnumerator DelayTreeHouse()
@@ -286,22 +374,29 @@ public class Chp1 : MonoBehaviour
         }
     }
 
-    public void PreHideAndSeek()
+    public void GoggleCheck()
     {
-        // Avoid talking to Al-khidr
-        npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
-        npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = true;
+        // Optimization: PlayerPref that tracks if ever picked up goggles
 
-        // Stops the player's movement
-        player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+        CheckingForGoggles();
 
-        // Fade out
-        screenFader.GetComponent<Animator>().Play("FadeOut");
+        if (bHasGoggles)
+        {
+            npc_ashera.transform.GetChild(0).gameObject.SetActive(true);
+            npc_ashera.transform.GetChild(1).gameObject.SetActive(false);
 
-        // Turn off GUI
-        touches.transform.localScale = Vector3.zero;
+            item_homeVRGoggles.transform.localScale = Vector3.zero;
+        }
+        else
+        {
+            npc_ashera.transform.GetChild(0).gameObject.SetActive(false);
+            npc_ashera.transform.GetChild(1).gameObject.SetActive(true);
 
-        StartCoroutine(HideAndSeek());
+            item_homeVRGoggles.transform.localScale = Vector3.one;
+        }
+
+        // Reset
+        bHasGoggles = false;
     }
 
     IEnumerator HideAndSeek()
@@ -450,20 +545,6 @@ public class Chp1 : MonoBehaviour
         }
     }
 
-    public void PreHideAndSeekFinished()
-    {
-        StartCoroutine(HideAndSeekFinished());
-
-        // Stops the player's movement
-        player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
-
-        // Fade out
-        screenFader.GetComponent<Animator>().Play("FadeOut");
-
-        // Turn off GUI
-        touches.transform.localScale = Vector3.zero;
-    }
-
     IEnumerator HideAndSeekFinished()
     {
         yield return new WaitForSeconds(2);
@@ -499,34 +580,6 @@ public class Chp1 : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         Quest4Reward();
-    }
-
-    public void CheckAndDisableLastKidFound()
-    {
-        if (Q4LastKidFound == "Al-khidr")
-        {
-            npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
-        }
-        else if (Q4LastKidFound == "Atandwa")
-        {
-            npc_atandwa.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
-        }
-        else if (Q4LastKidFound == "Eliz")
-        {
-            npc_eliz.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
-        }
-        else if (Q4LastKidFound == "Thabo")
-        {
-            npc_thabo.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
-        }
-        else if (Q4LastKidFound == "Zola")
-        {
-            npc_zola.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
-        }
-        else if (Q4LastKidFound == "Marija")
-        {
-            npc_marija.transform.GetChild(0).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
-        }
     }
 
     public void HideAndSeekReset()
@@ -879,6 +932,38 @@ public class Chp1 : MonoBehaviour
         Quest7And8Reward();
     }
 
+    public void PreHideAndSeek()
+    {
+        // Avoid talking to Al-khidr
+        npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasEntered = false;
+        npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = true;
+
+        // Stops the player's movement
+        player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+
+        // Fade out
+        screenFader.GetComponent<Animator>().Play("FadeOut");
+
+        // Turn off GUI
+        touches.transform.localScale = Vector3.zero;
+
+        StartCoroutine(HideAndSeek());
+    }
+
+    public void PreHideAndSeekFinished()
+    {
+        StartCoroutine(HideAndSeekFinished());
+
+        // Stops the player's movement
+        player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+
+        // Fade out
+        screenFader.GetComponent<Animator>().Play("FadeOut");
+
+        // Turn off GUI
+        touches.transform.localScale = Vector3.zero;
+    }
+
     public void ResetGreatTreeDialogueToMiddle()
     {
         if (greatTree.transform.GetChild(3).gameObject.activeSelf)
@@ -888,6 +973,75 @@ public class Chp1 : MonoBehaviour
             greatTree.transform.GetChild(4).gameObject.SetActive(false);
 
         greatTree.transform.GetChild(2).gameObject.SetActive(true); 
+    }
+
+    public void SetAsheraVogging()
+    {
+        npc_ashera.GetComponent<Animator>().SetBool("bIsVogging", true);
+    }
+
+    public void SetNPCsVogging()
+    {
+        npc_ashera.GetComponent<Animator>().SetBool("bIsVogging", true);
+        npc_dagon.GetComponent<Animator>().SetBool("bIsVogging", true);
+    }
+
+    public void SmoochyWoochyCheck()
+    {
+        if (!quest3.GetComponent<QuestObject>().bHasCollected)
+        {
+            for (int i = 0; i < inv.items.Count; i++)
+            {
+                string item = inv.items[i].ToString();
+                item = item.Substring(0, item.Length - 7);
+
+                if (item == "Cannabis.Bud.SmoochyWoochyPoochy")
+                {
+                    bHasQ3SmoochWoochy = true;
+                }
+            }
+
+            if (bHasQ3SmoochWoochy &&
+                !dMan.bDialogueActive &&
+                quest3.GetComponent<QuestObject>().bHasStarted)
+            {
+                npc_enki.transform.GetChild(0).gameObject.SetActive(false);
+                npc_enki.transform.GetChild(1).gameObject.SetActive(true);
+
+                npc_enki.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().bEndQuest = true;
+
+                npc_enki.transform.GetChild(1).gameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
+                npc_enki.transform.GetChild(1).gameObject.GetComponent<PolygonCollider2D>().isTrigger = true;
+            }
+            else
+            {
+                npc_enki.transform.GetChild(1).gameObject.GetComponent<QuestTrigger>().bEndQuest = false;
+
+                npc_enki.transform.GetChild(0).gameObject.SetActive(true);
+                npc_enki.transform.GetChild(1).gameObject.SetActive(false);
+            }
+
+            // Reset bool check
+            bHasQ3SmoochWoochy = false;
+        }
+    }
+
+    IEnumerator TogglePlayerHitBoxDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        TogglePlayerHitbox();
+    }
+
+    public void TogglePlayerHitbox()
+    {
+        player.GetComponent<PolygonCollider2D>().enabled = false;
+        player.GetComponent<PolygonCollider2D>().enabled = true;
+    }
+
+    public void TreeHouse()
+    {
+        StartCoroutine(DelayTreeHouse());
     }
 
     public void WarpToGuessWhoColluded()
@@ -914,6 +1068,7 @@ public class Chp1 : MonoBehaviour
         // Stop NPCs from moving
         npc_chun.GetComponent<Animator>().enabled = false;
     }
+    
 
     public void Quest0Reward()
     {
@@ -1236,14 +1391,11 @@ public class Chp1 : MonoBehaviour
 
     public void Quest0Dialogue1Opt1()
     {
-        // Yes -- Play
-        // Quest Trigger -> Quest Object text will render first; then we activate the next round of dialogue / options
-        // 05/11/2018 DC TODO -- Improve so that options can follow options (when coupled with a quest)
-
         npc_dagon.transform.GetChild(0).gameObject.SetActive(false);
         npc_dagon.transform.GetChild(1).gameObject.SetActive(true);
 
         npc_dagon.transform.GetChild(1).GetComponent<DialogueHolder>().bContinueDialogue = true;
+        dMan.PauseDialogue();
     }
 
     public void Quest0Dialogue1Opt2()
@@ -1306,6 +1458,7 @@ public class Chp1 : MonoBehaviour
         greatTree.transform.GetChild(1).gameObject.SetActive(true);
 
         greatTree.transform.GetChild(1).GetComponent<DialogueHolder>().bContinueDialogue = true;
+        dMan.PauseDialogue();
     }
 
     public void Quest5Dialogue2()
@@ -1314,6 +1467,7 @@ public class Chp1 : MonoBehaviour
         greatTree.transform.GetChild(2).gameObject.SetActive(true);
 
         greatTree.transform.GetChild(2).GetComponent<DialogueHolder>().bContinueDialogue = true;
+        dMan.PauseDialogue();
     }
 
     public void Quest5Dialogue3Opt1()
@@ -1347,6 +1501,7 @@ public class Chp1 : MonoBehaviour
         greatTree.transform.GetChild(3).gameObject.SetActive(true);
 
         greatTree.transform.GetChild(3).GetComponent<DialogueHolder>().bContinueDialogue = true;
+        dMan.PauseDialogue();
 
         dMan.closingAction = "ResetGreatTreeDialogueToMiddle";
     }
@@ -1357,6 +1512,7 @@ public class Chp1 : MonoBehaviour
         greatTree.transform.GetChild(4).gameObject.SetActive(true);
 
         greatTree.transform.GetChild(4).GetComponent<DialogueHolder>().bContinueDialogue = true;
+        dMan.PauseDialogue();
 
         dMan.closingAction = "ResetGreatTreeDialogueToMiddle";
     }
@@ -1367,6 +1523,7 @@ public class Chp1 : MonoBehaviour
         greatTree.transform.GetChild(6).gameObject.SetActive(true);
 
         greatTree.transform.GetChild(6).GetComponent<DialogueHolder>().bContinueDialogue = true;
+        dMan.PauseDialogue();
     }
 
     public void Quest6Dialogue1Opt1()
@@ -1755,6 +1912,7 @@ public class Chp1 : MonoBehaviour
             player.transform.position.z);
 
         npc_brackey.transform.GetChild(1).GetComponent<DialogueHolder>().bContinueDialogue = true;
+        dMan.PauseDialogue();
     }
 
     public void Quest10Dialogue1Opt2()
@@ -1820,19 +1978,24 @@ public class Chp1 : MonoBehaviour
         //npc_brackey.GetComponent<Animator>().enabled = false;  
     }
 
+    
     public void Chp1QuestChecker()
     {
         // Q0 
         if (qMan.questsCollected[0])
         {
-            npc_dagon.transform.GetChild(0).gameObject.SetActive(false);
-            npc_dagon.transform.GetChild(2).gameObject.SetActive(true);
+            DagonInLab();
+            SetAsheraVogging();
         }
         else if (qMan.questsStarted[0])
         {
             npc_dagon.transform.GetChild(0).gameObject.SetActive(false);
             npc_dagon.transform.GetChild(1).gameObject.SetActive(true);
+
+            SetNPCsVogging();
         }
+        else
+            SetNPCsVogging();
 
         // Q1
         if (qMan.questsCollected[1])
@@ -1959,19 +2122,7 @@ public class Chp1 : MonoBehaviour
         PookieCheck(npc_pookieB1, Q7Options, "Q7");
         PookieCheck(npc_pookieB2, Q8Options, "Q8");
     }
-    
-    IEnumerator TogglePlayerHitBoxDelay()
-    {
-        yield return new WaitForSeconds(0.1f);
 
-        TogglePlayerHitbox();
-    }
-
-    public void TogglePlayerHitbox()
-    {
-        player.GetComponent<PolygonCollider2D>().enabled = false;
-        player.GetComponent<PolygonCollider2D>().enabled = true;
-    }
 
     public void LoadQuests()
     {

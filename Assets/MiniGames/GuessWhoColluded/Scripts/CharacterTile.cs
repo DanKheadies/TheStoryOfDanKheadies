@@ -79,7 +79,6 @@ public class CharacterTile : MonoBehaviour
              Input.GetKeyUp(KeyCode.RightShift) ||
              Input.GetKeyUp(KeyCode.JoystickButton1) ||
              (Input.GetMouseButtonUp(1) &&
-              //!uMan.bMobileDevice)))
               devDetect.bIsMobile)))
         {
             bAvoidUpdate = false;

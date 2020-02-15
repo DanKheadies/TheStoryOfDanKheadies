@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/21/2019
-// Last:  02/09/2020
+// Last:  02/10/2020
 
 using UnityEngine;
 
@@ -49,8 +49,8 @@ public class ScriptManager : MonoBehaviour
     {
         if (chp1)
         {
-            if (action == "SmoochyWoochy")
-                chp1.SmoochyWoochyCheck();
+            if (action == "DagonWalkingToLab")
+                chp1.DagonWalkingToLab();
 
             else if (action == "HideAndSeek")
                 chp1.PreHideAndSeek();
@@ -66,11 +66,21 @@ public class ScriptManager : MonoBehaviour
 
             else if (action == "ResetGreatTreeDialogueToMiddle")
                 chp1.ResetGreatTreeDialogueToMiddle();
+
+            else if (action == "SmoochyWoochy")
+                chp1.SmoochyWoochyCheck();
         }
         else if (treeTunnel)
         {
             if (action == "WarpOut")
                 treeTunnel.WarpOut();
         }
+    }
+
+    public void ResetParameters(string sceneName)
+    {
+        if (treeTunnel &&
+            sceneName == "CS_TreeTunnel")
+            treeTunnel.ScaleAnimation();
     }
 }
