@@ -1,5 +1,96 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3305823382898847909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1008258802897435236}
+  - component: {fileID: 2644186109253045738}
+  - component: {fileID: 4575382342798481390}
+  m_Layer: 0
+  m_Name: HitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1008258802897435236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305823382898847909}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 981048228553399489}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &2644186109253045738
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305823382898847909}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.79010403, y: 1.2064617}
+      - {x: 0.6015962, y: 1.206388}
+      - {x: 0.80028903, y: 1.405659}
+      - {x: 0.80183613, y: 1.6076713}
+      - {x: 0.593079, y: 1.801228}
+      - {x: -0.6071819, y: 1.7994053}
+      - {x: -0.8023012, y: 1.5948911}
+      - {x: -0.8019561, y: 1.4011004}
+      - {x: -0.60213554, y: 1.2010579}
+      - {x: -0.79919326, y: 1.198291}
+      - {x: -0.9026372, y: 0.9920887}
+      - {x: -0.902307, y: 0.5994252}
+      - {x: -0.7010854, y: 0.40203816}
+      - {x: -0.407401, y: 0.398674}
+      - {x: -0.5877852, y: -0.80901706}
+      - {x: 0.58778536, y: -0.80901694}
+      - {x: 0.39716262, y: 0.39791}
+      - {x: 0.70198286, y: 0.40065897}
+      - {x: 0.8988267, y: 0.6003405}
+      - {x: 0.8976328, y: 0.99900603}
+--- !u!114 &4575382342798481390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305823382898847909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8059e5f297ed4804f88d5253686dafe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliders: []
+  nodePos: {x: 0, y: 0, z: 0}
 --- !u!1 &3878103069846250645
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +203,7 @@ GameObject:
   - component: {fileID: 2521481785998782271}
   - component: {fileID: 1686421817479519441}
   - component: {fileID: 2535207902033839531}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: UI_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,8 +299,8 @@ CanvasGroup:
   m_GameObject: {fileID: 5506566618198027908}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &5738464277602470320
 GameObject:
@@ -356,6 +447,7 @@ Transform:
   - {fileID: 8568311137055884876}
   - {fileID: 6459392148772595871}
   - {fileID: 5053312288671020287}
+  - {fileID: 1008258802897435236}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -585,7 +677,7 @@ GameObject:
   - component: {fileID: 7556389646012013254}
   - component: {fileID: 5714618460359279621}
   - component: {fileID: 6431387377778998074}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -759,7 +851,7 @@ GameObject:
   - component: {fileID: 2995476446076322967}
   - component: {fileID: 5223707609405555010}
   - component: {fileID: 5493040951584694216}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

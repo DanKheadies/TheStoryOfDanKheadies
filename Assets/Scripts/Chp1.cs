@@ -1800,8 +1800,10 @@ public class Chp1 : MonoBehaviour
 
         if (bHasGoggles)
         {
+#if UNITY_IOS
             if ((UnityEngine.iOS.Device.generation.ToString()).IndexOf("iPad") > -1)
                 Debug.Log("local test if Ipad");
+#endif
 
             Debug.Log("has goggles");
             if (devDetect.bIsMobile &&

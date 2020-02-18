@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/27/2019
-// Last:  01/12/2020
+// Last:  02/16/2020
 
 using UnityEngine;
 using System.Collections;
@@ -60,7 +60,6 @@ public class TD_SBF_MenuController : MonoBehaviour
 
     public void OrientationCheck()
     {
-        Debug.Log("derp");
         // Width > height = center in the screen
         if (Screen.width >= Screen.height)
         {

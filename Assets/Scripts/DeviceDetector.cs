@@ -39,7 +39,9 @@ public class DeviceDetector : MonoBehaviour
 
     public void CheckIfIpad()
     {
+#if UNITY_IOS
         if ((UnityEngine.iOS.Device.generation.ToString()).IndexOf("iPad") > -1)
             bIsIpad = true;
+#endif
     }
 }

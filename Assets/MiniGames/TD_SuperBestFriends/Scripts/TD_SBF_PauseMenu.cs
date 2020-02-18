@@ -2,13 +2,14 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  11/20/2019
+// Last:  02/17/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TD_SBF_PauseMenu : MonoBehaviour
 {
+    public DeviceDetector devDetect;
     public GameObject audioButtons;
     public GameObject controlsButtons;
     public GameObject creditsButtons;
@@ -44,14 +45,16 @@ public class TD_SBF_PauseMenu : MonoBehaviour
         {
             Time.timeScale = 0f;
 
-            if (touchConts)
+            if (touchConts &&
+                devDetect.bIsMobile)
                 touchConts.HideControls();
         }
         else
         {
             Time.timeScale = 1f;
 
-            if (touchConts)
+            if (touchConts &&
+                devDetect.bIsMobile)
                 touchConts.DisplayControls();
         }
     }

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/24/2019
-// Last:  12/12/2019
+// Last:  02/18/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -141,143 +141,7 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
                         sec8.GetComponentInChildren<Button>().Select();
                     }
                 }
-
-                //if (!bAvoidInput)
-                //{
-                //    if (currentSelection == UpgradeSection.Section1)
-                //    {
-                //        if (Input.GetAxis("Controller Rightstick Vertical") > 0 ||
-                //            Input.GetAxis("Controller Rightstick Horizontal") > 0)
-                //        {
-                //            currentSelection = UpgradeSection.Section2;
-                //            sec2.GetComponentInChildren<Button>().Select();
-                //        }
-                //        else
-                //        {
-                //            if (heroStats.bIsDead)
-                //            {
-                //                currentSelection = UpgradeSection.Section8;
-                //                sec8.GetComponentInChildren<Button>().Select();
-                //            }
-                //            else
-                //            {
-                //                currentSelection = UpgradeSection.Section7;
-                //                sec7.GetComponentInChildren<Button>().Select();
-                //            }
-                //        }
-                //    }
-                //    else if (currentSelection == UpgradeSection.Section2)
-                //    {
-                //        if (Input.GetAxis("Controller Rightstick Vertical") > 0 ||
-                //            Input.GetAxis("Controller Rightstick Horizontal") > 0)
-                //        {
-                //            currentSelection = UpgradeSection.Section3;
-                //            sec3.GetComponentInChildren<Button>().Select();
-                //        }
-                //        else
-                //        {
-                //            currentSelection = UpgradeSection.Section1;
-                //            sec1.GetComponentInChildren<Button>().Select();
-                //        }
-                //    }
-                //    else if (currentSelection == UpgradeSection.Section3)
-                //    {
-                //        if (Input.GetAxis("Controller Rightstick Vertical") > 0)
-                //        {
-                //            currentSelection = UpgradeSection.Section4;
-                //            sec4.GetComponentInChildren<Button>().Select();
-                //        }
-                //        else
-                //        {
-                //            currentSelection = UpgradeSection.Section2;
-                //            sec2.GetComponentInChildren<Button>().Select();
-                //        }
-                //    }
-                //    else if (currentSelection == UpgradeSection.Section4)
-                //    {
-                //        if (Input.GetAxis("Controller Rightstick Vertical") > 0 ||
-                //            Input.GetAxis("Controller Rightstick Horizontal") < 0)
-                //        {
-                //            currentSelection = UpgradeSection.Section5;
-                //            sec5.GetComponentInChildren<Button>().Select();
-                //        }
-                //        else
-                //        {
-                //            currentSelection = UpgradeSection.Section3;
-                //            sec3.GetComponentInChildren<Button>().Select();
-                //        }
-                //    }
-                //    else if (currentSelection == UpgradeSection.Section5)
-                //    {
-                //        if (Input.GetAxis("Controller Rightstick Horizontal") < 0)
-                //        {
-                //            currentSelection = UpgradeSection.Section6;
-                //            sec6.GetComponentInChildren<Button>().Select();
-                //        }
-                //        else
-                //        {
-                //            currentSelection = UpgradeSection.Section4;
-                //            sec4.GetComponentInChildren<Button>().Select();
-                //        }
-                //    }
-                //    else if (currentSelection == UpgradeSection.Section6)
-                //    {
-                //        if (Input.GetAxis("Controller Rightstick Vertical") < 0 ||
-                //            Input.GetAxis("Controller Rightstick Horizontal") < 0)
-                //        {
-                //            currentSelection = UpgradeSection.Section7;
-                //            sec7.GetComponentInChildren<Button>().Select();
-                //        }
-                //        else
-                //        {
-                //            currentSelection = UpgradeSection.Section5;
-                //            sec5.GetComponentInChildren<Button>().Select();
-                //        }
-                //    }
-                //    else if (currentSelection == UpgradeSection.Section7)
-                //    {
-                //        if (Input.GetAxis("Controller Rightstick Vertical") < 0 ||
-                //            Input.GetAxis("Controller Rightstick Horizontal") < 0)
-                //        {
-                //            if (heroStats.bIsDead)
-                //            {
-                //                currentSelection = UpgradeSection.Section8;
-                //                sec8.GetComponentInChildren<Button>().Select();
-                //            }
-                //            else
-                //            {
-                //                currentSelection = UpgradeSection.Section1;
-                //                sec1.GetComponentInChildren<Button>().Select();
-                //            }
-                //        }
-                //        else
-                //        {
-                //            currentSelection = UpgradeSection.Section6;
-                //            sec6.GetComponentInChildren<Button>().Select();
-                //        }
-                //    }
-                //    else if (currentSelection == UpgradeSection.Section8)
-                //    {
-                //        if (Input.GetAxis("Controller Rightstick Vertical") < 0 ||
-                //            Input.GetAxis("Controller Rightstick Horizontal") < 0)
-                //        {
-                //            currentSelection = UpgradeSection.Section1;
-                //            sec1.GetComponentInChildren<Button>().Select();
-                //        }
-                //        else
-                //        {
-                //            currentSelection = UpgradeSection.Section7;
-                //            sec7.GetComponentInChildren<Button>().Select();
-                //        }
-                //    }
-                //}
-
-                //bAvoidInput = true;
             }
-            //else
-            //{
-            //    bAvoidInput = false;
-            //}
 
             if (Input.GetButtonDown("Controller Bottom Button"))
             {

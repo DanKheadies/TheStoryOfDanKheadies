@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/26/2019
-// Last:  12/12/2019
+// Last:  02/18/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +10,7 @@ public class TD_SBF_HeroBarManager : MonoBehaviour
 {
     public Color basicAttackColor;
     public Color secondaryAttackColor;
+    public DeviceDetector devDetect;
     public GameObject heroShell;
     public GameObject heroBackButton;
     public GameObject upgradeShell;
@@ -66,11 +67,14 @@ public class TD_SBF_HeroBarManager : MonoBehaviour
             heroUpgrade.currentSelection = (TD_SBF_HeroUpgrade.UpgradeSection)1;
             heroUpgrade.sec1.GetComponentInChildren<Button>().Select();
         }
-
-        if (bUpgrading)
-            touchConts.HideControls();
-        else
-            touchConts.DisplayControls();
+        
+        if (devDetect.bIsMobile)
+        {
+            if (bUpgrading)
+                touchConts.HideControls();
+            else
+                touchConts.DisplayControls();
+        }
     }
 
     public void DisableHeroAttacks()

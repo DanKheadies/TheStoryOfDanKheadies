@@ -13,6 +13,7 @@ public class TD_SBF_ModeSelector : MonoBehaviour
     public GameObject characterCanvas;
     public GameObject modeCanvas;
     public GameObject optionsCanvas;
+    public Scrollbar charScrollBar;
     public TD_SBF_SceneFader fader;
 
     void Start()
@@ -65,6 +66,9 @@ public class TD_SBF_ModeSelector : MonoBehaviour
         {
             modeCanvas.SetActive(false);
             characterCanvas.SetActive(true);
+
+            // Force scrollbar to top on open
+            charScrollBar.value = 1;
         }
         else
         {

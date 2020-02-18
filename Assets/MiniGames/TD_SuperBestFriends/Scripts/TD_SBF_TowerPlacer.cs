@@ -2,7 +2,7 @@
 // Authors: Jason (Unity3d College)
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  01/12/2020
+// Last:  02/18/2020
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,8 +10,6 @@ using System.Collections.Generic;
 
 public class TD_SBF_TowerPlacer : MonoBehaviour
 {
-    TD_SBF_BuildManager td_sbf_buildMan;
-    
     public Color canBuild;
     public Color noBuild;
     public Color noSelection;
@@ -29,7 +27,9 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
     public Vector3 currentNode;
     public Vector3 prevNode;
 
-    public List<Vector3> nodeArray;
+    public static List<Vector3> nodeArray;
+
+    public int currThoughtsPrayers;
 
     void Awake()
     {
@@ -45,11 +45,20 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
     void Start()
     {
         nodeArray = new List<Vector3>();
-        td_sbf_buildMan = TD_SBF_BuildManager.td_sbf_instance;
+
+        currThoughtsPrayers = TD_SBF_PlayerStatistics.ThoughtsPrayers;
     }
 
     void Update()
     {
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    foreach (Vector3 node in nodeArray)
+        //    {
+        //        Debug.Log(node);
+        //    }
+        //}
+
         if (gMan.bIsTowerMode &&
             contSupp.bControllerConnected)
         {
@@ -63,9 +72,9 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
                 // TODO: avoid running this when a tower is present, i.e. need another condition
                 // Note: doesn't seem to harm anything, but shouldn't do it
                 if (Input.GetButtonDown("Controller Bottom Button") &&
-                    td_sbf_buildMan.TD_SBF_CanBuild &&
-                    td_sbf_buildMan.TD_SBF_HasThoughtsPrayers &&
-                    td_sbf_buildMan.turretToBuild.cost != 0)
+                    TD_SBF_BuildManager.td_sbf_instance.TD_SBF_CanBuild &&
+                    TD_SBF_BuildManager.td_sbf_instance.TD_SBF_HasThoughtsPrayers &&
+                    TD_SBF_BuildManager.td_sbf_instance.turretToBuild.cost != 0)
                 {
                     PlaceTowerNear(hitInfo.point);
                 }
@@ -87,9 +96,10 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
                 CheckNode(hitInfo.point);
                 
                 if (Input.GetMouseButtonDown(0) &&
-                    td_sbf_buildMan.TD_SBF_CanBuild &&
-                    td_sbf_buildMan.TD_SBF_HasThoughtsPrayers &&
-                    td_sbf_buildMan.turretToBuild.cost != 0 &&
+                    TD_SBF_BuildManager.td_sbf_instance.TD_SBF_CanBuild &&
+                    TD_SBF_BuildManager.td_sbf_instance.TD_SBF_HasThoughtsPrayers &&
+                    TD_SBF_BuildManager.td_sbf_instance.turretToBuild.cost != 0 &&
+                    !TD_SBF_BuildManager.td_sbf_instance.bOverTower &&
                     !tConts.bAvoidSubUIElements)
                 {
                     PlaceTowerNear(hitInfo.point);
@@ -108,7 +118,15 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
 
     public void CheckNode(Vector3 hoverPoint)
     {
-        currentNode = grid.GetNearestPointOnGrid(hoverPoint);
+        if (TD_SBF_BuildManager.td_sbf_instance.bOverTower)
+        {
+            hoverPoint = TD_SBF_BuildManager.td_sbf_instance.turretHitboxHoverPos;
+            hoverPoint = new Vector3(hoverPoint.x, hoverPoint.y, 0);
+            currentNode = grid.GetNearestPointOnGrid(hoverPoint);
+        }
+        else
+            currentNode = grid.GetNearestPointOnGrid(hoverPoint);
+
         currentNode += new Vector3(0, 0, -1f);
 
         // Destroy area TBC when clicking UI
@@ -135,23 +153,26 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
         }
         else
         {
-            //Debug.Log("not the prevoius");
-            //TD_SBF_Node hoverNode = null;
-            //td_sbf_buildMan.SelectNode(hoverNode);
+            if (gridNodeTBC &&
+                currThoughtsPrayers != TD_SBF_PlayerStatistics.ThoughtsPrayers)
+            {
+                ColorCheck(currentNode, gridNodeTBC);
+                currThoughtsPrayers = TD_SBF_PlayerStatistics.ThoughtsPrayers;
+            }
         }
     }
 
     public void ColorCheck(Vector3 _currentNode, GameObject _gridNodeTBC)
     {
-        if (td_sbf_buildMan.TD_SBF_CanBuild &&
-            td_sbf_buildMan.turretToBuild.cost != 0)
+        if (TD_SBF_BuildManager.td_sbf_instance.TD_SBF_CanBuild &&
+            TD_SBF_BuildManager.td_sbf_instance.turretToBuild.cost != 0)
         {
-            if (td_sbf_buildMan.TD_SBF_HasThoughtsPrayers &&
+            if (TD_SBF_BuildManager.td_sbf_instance.TD_SBF_HasThoughtsPrayers &&
                 !nodeArray.Contains(_currentNode))
             {
                 _gridNodeTBC.GetComponent<SpriteRenderer>().color = canBuild;
             }
-            else if (!td_sbf_buildMan.TD_SBF_HasThoughtsPrayers)
+            else if (!TD_SBF_BuildManager.td_sbf_instance.TD_SBF_HasThoughtsPrayers)
             {
                 if (nodeArray.Contains(_currentNode))
                     _gridNodeTBC.GetComponent<SpriteRenderer>().color = selectTower;
@@ -182,7 +203,7 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
             // Add to array & create
             nodeArray.Add(finalPosition);
             GameObject newNode = Instantiate(gridNode, finalPosition, Quaternion.identity);
-            newNode.GetComponent<TD_SBF_Node>().BuildTurret(td_sbf_buildMan.GetTurretToBuild());
+            newNode.GetComponent<TD_SBF_Node>().BuildTurret(TD_SBF_BuildManager.td_sbf_instance.GetTurretToBuild());
         }
 
         // Reset / recheck node color

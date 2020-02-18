@@ -2,47 +2,40 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  10/14/2019
+// Last:  02/16/2020
 
 using UnityEngine;
 
 public class TD_SBF_Shop : MonoBehaviour
 {
-    TD_SBF_BuildManager td_sbf_buildMan;
-
     public TD_SBF_TurretBlueprint basicTower;
     public TD_SBF_TurretBlueprint skullTower; 
     public TD_SBF_TurretBlueprint fireTower;
     public TD_SBF_TurretBlueprint orbTower;
     public TD_SBF_TurretBlueprint boomTower;
 
-    void Start()
-    {
-        td_sbf_buildMan = TD_SBF_BuildManager.td_sbf_instance;
-    }
-
     public void SelectBasicTower()
     {
-        td_sbf_buildMan.SelectTurretToBuild(basicTower);
+        TD_SBF_BuildManager.td_sbf_instance.SelectTurretToBuild(basicTower);
     }
 
     public void SelectSkullTower()
     {
-        td_sbf_buildMan.SelectTurretToBuild(skullTower);
+        TD_SBF_BuildManager.td_sbf_instance.SelectTurretToBuild(skullTower);
     }
 
     public void SelectFireTower()
     {
-        td_sbf_buildMan.SelectTurretToBuild(fireTower);
+        TD_SBF_BuildManager.td_sbf_instance.SelectTurretToBuild(fireTower);
     }
 
     public void SelectOrbTower()
     {
-        td_sbf_buildMan.SelectTurretToBuild(orbTower);
+        TD_SBF_BuildManager.td_sbf_instance.SelectTurretToBuild(orbTower);
     }
 
     public void SelectBoomTower()
     {
-        td_sbf_buildMan.SelectTurretToBuild(boomTower);
+        TD_SBF_BuildManager.td_sbf_instance.SelectTurretToBuild(boomTower);
     }
 }

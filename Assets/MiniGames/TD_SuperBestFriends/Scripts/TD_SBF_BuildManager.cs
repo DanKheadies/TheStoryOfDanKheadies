@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  12/05/2019
+// Last:  02/18/2020
 
 using UnityEngine;
 
@@ -18,6 +18,9 @@ public class TD_SBF_BuildManager : MonoBehaviour
     public TD_SBF_NodeUISelector nodeUISel;
     public TD_SBF_ThoughtsPrayersUI tpUI;
     public TD_SBF_TurretBlueprint turretToBuild;
+    public Vector3 turretHitboxHoverPos;
+
+    public bool bOverTower;
 
     void Awake()
     {

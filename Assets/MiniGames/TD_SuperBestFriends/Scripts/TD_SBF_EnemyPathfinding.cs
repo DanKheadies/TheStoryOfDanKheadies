@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/17/2019
-// Last:  11/24/2019
+// Last:  02/16/2020
 
 using UnityEngine;
 using Pathfinding;
@@ -250,7 +250,7 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
         // Need to check?
         if (firstNode)
         {
-            TD_SBF_TowerPlacer.the_tp.nodeArray.Remove(firstNode.transform.position);
+            TD_SBF_TowerPlacer.nodeArray.Remove(firstNode.transform.position);
             Destroy(firstNode);
         }
 

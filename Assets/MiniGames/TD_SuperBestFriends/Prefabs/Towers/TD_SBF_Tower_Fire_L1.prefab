@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2521481785998782271}
   - component: {fileID: 1686421817479519441}
   - component: {fileID: 2535207902033839531}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: UI_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,8 +109,8 @@ CanvasGroup:
   m_GameObject: {fileID: 5506566618198027908}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &5738464277602470320
 GameObject:
@@ -255,6 +255,7 @@ Transform:
   - {fileID: 3175945469648571500}
   - {fileID: 8568311137055884876}
   - {fileID: 5053312288671020287}
+  - {fileID: 5937831844106067701}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -390,7 +391,7 @@ GameObject:
   - component: {fileID: 7556389646012013254}
   - component: {fileID: 5714618460359279621}
   - component: {fileID: 6431387377778998074}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,6 +455,95 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!1 &8930087681526120749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5937831844106067701}
+  - component: {fileID: 2328103301802018067}
+  - component: {fileID: 2992716964195672459}
+  m_Layer: 0
+  m_Name: HitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5937831844106067701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930087681526120749}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.028516, y: 0.1677146, z: -5}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 981048228553399489}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &2328103301802018067
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930087681526120749}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.009836182, y: -0.07691398}
+      - {x: -0.5114886, y: -0.38886413}
+      - {x: -0.5159021, y: -0.7810626}
+      - {x: -0.4181619, y: -0.9765663}
+      - {x: -0.2135122, y: -1.1765987}
+      - {x: -0.021896604, y: -1.1791455}
+      - {x: -0.21759918, y: -1.7796252}
+      - {x: -0.42275214, y: -2.1781585}
+      - {x: -0.31597996, y: -2.4776752}
+      - {x: 0.8735455, y: -2.477207}
+      - {x: 0.9791815, y: -2.1762486}
+      - {x: 0.78247404, y: -1.7811952}
+      - {x: 0.59193146, y: -1.1802175}
+      - {x: 0.7736044, y: -1.1769264}
+      - {x: 0.9864008, y: -0.9739485}
+      - {x: 1.0837827, y: -0.7835084}
+      - {x: 1.084634, y: -0.37695602}
+      - {x: 0.5843236, y: -0.07791057}
+--- !u!114 &2992716964195672459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930087681526120749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8059e5f297ed4804f88d5253686dafe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliders: []
+  nodePos: {x: 0, y: 0, z: 0}
 --- !u!1 &8933590613852372665
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,7 +654,7 @@ GameObject:
   - component: {fileID: 2995476446076322967}
   - component: {fileID: 5223707609405555010}
   - component: {fileID: 5493040951584694216}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -2,20 +2,17 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  01/12/2020
+// Last:  02/18/2020
 
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TD_SBF_Node : MonoBehaviour
 {
-    TD_SBF_BuildManager td_sbf_buildMan;
-
     public Color startColor;
     public Color hoverColor;
     public Color notEnoughThoughtsPrayersColor;
     public GameObject turret;
-    public SpriteRenderer rend;
     public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_HeroAnimator heroAni;
     public TD_SBF_TouchControls tConts;
@@ -29,10 +26,8 @@ public class TD_SBF_Node : MonoBehaviour
     {
         contSupp = GameObject.FindGameObjectWithTag("GameSupport")
             .GetComponent<TD_SBF_ControllerSupport>();
-        rend = GetComponent<SpriteRenderer>();
-        startColor = rend.color;
+        startColor = GetComponent<SpriteRenderer>().color;
         tConts = FindObjectOfType<TD_SBF_TouchControls>();
-        td_sbf_buildMan = TD_SBF_BuildManager.td_sbf_instance;
         towerPlacer = FindObjectOfType<TD_SBF_TowerPlacer>();
 
         if (heroAni)
@@ -54,7 +49,7 @@ public class TD_SBF_Node : MonoBehaviour
             {
                 if (Vector3.Distance(hitInfo.point, turret.transform.position) < 0.85f)
                 {
-                    td_sbf_buildMan.SelectNode(this);
+                    TD_SBF_BuildManager.td_sbf_instance.SelectNode(this);
                     return;
                 }
             }
@@ -84,7 +79,11 @@ public class TD_SBF_Node : MonoBehaviour
         // Set sorting order
         _turret.transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>()
             .sortingOrder = 100 + Mathf.Abs(Mathf.RoundToInt(_turret.transform.position.y));
-        
+        // Set hitbox z position
+        Vector3 hitboxPos = _turret.transform.GetChild(3).GetComponent<Transform>().position;
+        hitboxPos = new Vector3(hitboxPos.x, hitboxPos.y, hitboxPos.z + (hitboxPos.y / 10000));
+        _turret.transform.GetChild(3).GetComponent<Transform>().position = hitboxPos;
+
         if (heroAni)
         {
             heroAni.GetComponent<Animator>().Play("Hero_Build");
@@ -100,91 +99,103 @@ public class TD_SBF_Node : MonoBehaviour
 
     public void UpgradeTurret()
     {
-        // Build a new one
-        //isUpgraded = true;
-        if (towerLevel == 3)
+        if (turret)
         {
-            Debug.Log("max'd");
-        }
-        else if (towerLevel == 2)
-        {
-            if (TD_SBF_PlayerStatistics.ThoughtsPrayers <
-                turretBlueprint.cost * 
-                (turretBlueprint.upgradeCostMultiplier * turretBlueprint.upgradeCostMultiplier))
+            // Build a new one
+            //isUpgraded = true;
+            if (towerLevel == 3)
             {
-                Debug.Log("Need more vespian gas to upgrade.");
-                td_sbf_buildMan.RequireMoreThoughtsAndPrayers();
-                return;
+                Debug.Log("max'd");
+            }
+            else if (towerLevel == 2)
+            {
+                if (TD_SBF_PlayerStatistics.ThoughtsPrayers <
+                    turretBlueprint.cost *
+                    (turretBlueprint.upgradeCostMultiplier * turretBlueprint.upgradeCostMultiplier))
+                {
+                    Debug.Log("Need more vespian gas to upgrade.");
+                    TD_SBF_BuildManager.td_sbf_instance.RequireMoreThoughtsAndPrayers();
+                    return;
+                }
+
+                TD_SBF_PlayerStatistics.ThoughtsPrayers -=
+                    turretBlueprint.cost *
+                    (turretBlueprint.upgradeCostMultiplier * turretBlueprint.upgradeCostMultiplier);
+
+                // Get rid of the old turret
+                Destroy(turret);
+
+                GameObject _turret = Instantiate(turretBlueprint.lvl3_prefab, GetBuildPosition(), Quaternion.identity);
+                turret = _turret;
+
+                // Set sorting order
+                _turret.transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>()
+                    .sortingOrder = 100 + Mathf.Abs(Mathf.RoundToInt(_turret.transform.position.y));
+
+                towerLevel = 3;
+            }
+            if (towerLevel == 1)
+            {
+                if (TD_SBF_PlayerStatistics.ThoughtsPrayers <
+                       turretBlueprint.cost * turretBlueprint.upgradeCostMultiplier)
+                {
+                    Debug.Log("Need more vespian gas to upgrade.");
+                    TD_SBF_BuildManager.td_sbf_instance.RequireMoreThoughtsAndPrayers();
+                    return;
+                }
+
+                TD_SBF_PlayerStatistics.ThoughtsPrayers -=
+                    turretBlueprint.cost * turretBlueprint.upgradeCostMultiplier;
+
+                // Get rid of the old turret
+                Destroy(turret);
+
+                GameObject _turret = Instantiate(turretBlueprint.lvl2_prefab, GetBuildPosition(), Quaternion.identity);
+                turret = _turret;
+
+                // Set sorting order
+                _turret.transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>()
+                    .sortingOrder = 100 + Mathf.Abs(Mathf.RoundToInt(_turret.transform.position.y));
+
+                towerLevel = 2;
             }
 
-            TD_SBF_PlayerStatistics.ThoughtsPrayers -=
-                turretBlueprint.cost * 
-                (turretBlueprint.upgradeCostMultiplier * turretBlueprint.upgradeCostMultiplier);
-
-            // Get rid of the old turret
-            Destroy(turret);
-
-            GameObject _turret = Instantiate(turretBlueprint.lvl3_prefab, GetBuildPosition(), Quaternion.identity);
-            turret = _turret;
-
-            // Set sorting order
-            _turret.transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>()
-                .sortingOrder = 100 + Mathf.Abs(Mathf.RoundToInt(_turret.transform.position.y));
-
-            towerLevel = 3;
+            GameObject effect = Instantiate(
+                TD_SBF_BuildManager.td_sbf_instance.upgradeEffect, 
+                GetBuildPosition(), 
+                Quaternion.identity);
+            Destroy(effect, 0.75f);
         }
-        if (towerLevel == 1)
-        {
-            if (TD_SBF_PlayerStatistics.ThoughtsPrayers <
-                   turretBlueprint.cost * turretBlueprint.upgradeCostMultiplier)
-            {
-                Debug.Log("Need more vespian gas to upgrade.");
-                td_sbf_buildMan.RequireMoreThoughtsAndPrayers();
-                return;
-            }
-
-            TD_SBF_PlayerStatistics.ThoughtsPrayers -=
-                turretBlueprint.cost * turretBlueprint.upgradeCostMultiplier;
-
-            // Get rid of the old turret
-            Destroy(turret);
-
-            GameObject _turret = Instantiate(turretBlueprint.lvl2_prefab, GetBuildPosition(), Quaternion.identity);
-            turret = _turret;
-
-            // Set sorting order
-            _turret.transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>()
-                .sortingOrder = 100 + Mathf.Abs(Mathf.RoundToInt(_turret.transform.position.y));
-
-            towerLevel = 2;
-        }
-
-        GameObject effect = Instantiate(td_sbf_buildMan.upgradeEffect, GetBuildPosition(), Quaternion.identity);
-        Destroy(effect, 0.75f);
     }
 
     public void SellTurret()
     {
-        // TODO: if upgraded, give 1/2 upgraded price
-        // TODO: after X seconds, set sell price to half
-        TD_SBF_PlayerStatistics.ThoughtsPrayers += turretBlueprint.GetSellAmount(towerLevel);
+        if (turret)
+        {
+            // TODO: if upgraded, give 1/2 upgraded price
+            // TODO: after X seconds, set sell price to half
+            TD_SBF_PlayerStatistics.ThoughtsPrayers += turretBlueprint.GetSellAmount(towerLevel);
 
-        // Spawn a cool effect
-        GameObject effect = Instantiate(td_sbf_buildMan.sellEffect, GetBuildPosition(), Quaternion.identity);
-        Destroy(effect, 1f);
-        
-        // Destroy turret
-        Destroy(turret);
-        turretBlueprint = null;
+            // Spawn a cool effect
+            GameObject effect = Instantiate(
+                TD_SBF_BuildManager.td_sbf_instance.sellEffect, 
+                GetBuildPosition(), 
+                Quaternion.identity);
+            Destroy(effect, 1f);
 
-        if (TD_SBF_WaveSpawner.enemiesAlive > 0)
-            AstarPath.active.Scan();
+            // Destroy turret
+            Destroy(turret);
+            turretBlueprint = null;
 
-        // Remove from grid array
-        towerPlacer.nodeArray.Remove(transform.position);
+            if (TD_SBF_WaveSpawner.enemiesAlive > 0)
+                AstarPath.active.Scan();
 
-        // Destroy self
-        Destroy(this);
+            // Remove from grid array
+            TD_SBF_TowerPlacer.nodeArray.Remove(transform.position);
+
+            // Destroy self
+            Destroy(gameObject);
+        }
     }
 
     void OnMouseDown()
@@ -195,9 +206,15 @@ public class TD_SBF_Node : MonoBehaviour
         if (turret &&
             !tConts.bAvoidSubUIElements)
         {
-            td_sbf_buildMan.SelectNode(this);
+            TD_SBF_BuildManager.td_sbf_instance.SelectNode(this);
             return;
         }
+    }
+
+    public void SelectThisNode()
+    {
+        if (!tConts.bAvoidSubUIElements)
+            TD_SBF_BuildManager.td_sbf_instance.SelectNode(this);
     }
 
     public void RestoreHeroMovementAnimation()

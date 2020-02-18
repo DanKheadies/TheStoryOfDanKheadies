@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  10/14/2019
+// Last:  02/16/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -203,6 +203,28 @@ public class TD_SBF_Turret : MonoBehaviour
         Destroy(effect, 1f);
 
         GetComponentInChildren<PolygonCollider2D>().isTrigger = true;
+
+        // Dismiss description bar (if present)
+        if (TD_SBF_BuildManager.td_sbf_instance.gameObject.GetComponent<TD_SBF_GameManagement>()
+                .nodeUISel.GetComponent<TD_SBF_NodeUI>().selectionEffect)
+            TD_SBF_BuildManager.td_sbf_instance.gameObject.GetComponent<TD_SBF_GameManagement>()
+                .nodeUISel.GetComponent<TD_SBF_NodeUI>().DescriptionBarCheck();
+
+        // Destroy associated node & clear from array
+        var nodePos = new Vector3(transform.position.x, transform.position.y, -1);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(nodePos, 0.001f);
+
+        if (colliders.Length > 0)
+        {
+            foreach (var collider in colliders)
+            {
+                if (collider.gameObject.tag == "GridNode")
+                {
+                    TD_SBF_TowerPlacer.nodeArray.Remove(collider.transform.position);
+                    Destroy(collider.gameObject, 0.125f);
+                }
+            }
+        }
 
         Destroy(gameObject, 0.5f);
     }
