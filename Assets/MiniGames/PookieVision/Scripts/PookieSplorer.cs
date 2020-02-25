@@ -2,12 +2,14 @@
 // Authors: Martijn / The Art of Code
 // Contributors: David W. Corso
 // Start: 08/03/2019
-// Last:  08/04/2019
+// Last:  02/25/2020
 
 using UnityEngine;
 
 public class PookieSplorer : MonoBehaviour
 {
+    public ControllerSupport contSupp;
+
     public Material mat;
     public Vector2 pos;
     public float scale, angle, color, symmetry, repeat, speed;
@@ -55,7 +57,8 @@ public class PookieSplorer : MonoBehaviour
     {
         // Zoom Out
         if (Input.GetKey(KeyCode.I) ||
-            (Input.GetAxis("Controller Right Trigger") > 0))
+            //(Input.GetAxis("Controller Right Trigger") > 0))
+            contSupp.ControllerTriggerRight() > 0)
         {
             if (scale > 0.00000001f)
             {
@@ -69,7 +72,8 @@ public class PookieSplorer : MonoBehaviour
         }
         // Zoom In
         else if (Input.GetKey(KeyCode.K) ||
-                 (Input.GetAxis("Controller Left Trigger") > 0))
+                 //(Input.GetAxis("Controller Left Trigger") > 0))
+                 contSupp.ControllerTriggerLeft() > 0)
         {
             if (scale < 75000f)
             {
@@ -88,13 +92,15 @@ public class PookieSplorer : MonoBehaviour
 
         // Rotate Left
         if (Input.GetKey(KeyCode.J) ||
-            Input.GetButton("Controller Left Bumper"))
+            //Input.GetButton("Controller Left Bumper"))
+            contSupp.ControllerBumperLeft("hold"))
         {
             angle -= 0.01f;
         }
         // Rotate Right
         else if (Input.GetKey(KeyCode.L) ||
-                 Input.GetButton("Controller Right Bumper"))
+                 //Input.GetButton("Controller Right Bumper"))
+                 contSupp.ControllerBumperRight("hold"))
         {
             angle += 0.01f;
         }
@@ -106,15 +112,19 @@ public class PookieSplorer : MonoBehaviour
 
         // Move Left
         if (Input.GetKey(KeyCode.A) ||
-            Input.GetAxis("Controller Joystick Horizontal") < 0 ||
-            Input.GetAxis("Controller DPad Horizontal") < 0)
+            //Input.GetAxis("Controller Joystick Horizontal") < 0 ||
+            //Input.GetAxis("Controller DPad Horizontal") < 0)
+            contSupp.ControllerLeftJoystickHorizontal() < 0 ||
+            contSupp.ControllerDirectionalPadHorizontal() < 0)
         {
             pos -= dir;
         }
         // Move Right
         else if (Input.GetKey(KeyCode.D) ||
-                 Input.GetAxis("Controller Joystick Horizontal") > 0 ||
-                 Input.GetAxis("Controller DPad Horizontal") > 0)
+                 //Input.GetAxis("Controller Joystick Horizontal") > 0 ||
+                 //Input.GetAxis("Controller DPad Horizontal") > 0)
+                 contSupp.ControllerLeftJoystickHorizontal() > 0 ||
+                 contSupp.ControllerDirectionalPadHorizontal() > 0)
         {
             pos += dir;
         }
@@ -123,28 +133,34 @@ public class PookieSplorer : MonoBehaviour
 
         // Move Down
         if (Input.GetKey(KeyCode.S) ||
-            Input.GetAxis("Controller Joystick Vertical") < 0 ||
-            Input.GetAxis("Controller DPad Vertical") > 0)
+            //Input.GetAxis("Controller Joystick Vertical") < 0 ||
+            //Input.GetAxis("Controller DPad Vertical") > 0)
+            contSupp.ControllerLeftJoystickVertical() < 0 ||
+            contSupp.ControllerDirectionalPadVertical() < 0)
         {
             pos -= dir;
         }
         // Move Up
         else if (Input.GetKey(KeyCode.W) ||
-                 Input.GetAxis("Controller Joystick Vertical") > 0 ||
-                 Input.GetAxis("Controller DPad Vertical") < 0)
+                 //Input.GetAxis("Controller Joystick Vertical") > 0 ||
+                 //Input.GetAxis("Controller DPad Vertical") < 0)
+                 contSupp.ControllerLeftJoystickVertical() > 0 ||
+                 contSupp.ControllerDirectionalPadVertical() > 0)
         {
             pos += dir;
         }
 
         // Cycle Colors
         if (Input.GetKey(KeyCode.U) ||
-            Input.GetButton("Controller Top Button"))
+            //Input.GetButton("Controller Top Button"))
+            contSupp.ControllerButtonPadTop("hold"))
         {
             if (color > 0)
                 color -= 0.01f;
         }
         else if (Input.GetKey(KeyCode.O) ||
-                 Input.GetButton("Controller Left Button"))
+                 //Input.GetButton("Controller Left Button"))
+                 contSupp.ControllerButtonPadLeft("hold"))
         {
             if (color < 1)
                 color += 0.01f;
@@ -152,7 +168,8 @@ public class PookieSplorer : MonoBehaviour
 
         // Cycle 
         if (Input.GetKey(KeyCode.E) ||
-            Input.GetButton("Controller Right Button"))
+            //Input.GetButton("Controller Right Button"))
+            contSupp.ControllerButtonPadRight("hold"))
         {
             if (symmetry > 0)
                 symmetry -= 0.1f;
@@ -161,14 +178,16 @@ public class PookieSplorer : MonoBehaviour
                 symmetry = 0;
         }
         else if (Input.GetKey(KeyCode.Q) ||
-                 Input.GetButton("Controller Bottom Button"))
+                 //Input.GetButton("Controller Bottom Button"))
+                 contSupp.ControllerButtonPadBottom("hold"))
         {
             if (symmetry < 1)
                 symmetry += 0.1f;
         }
 
         if (Input.GetKey(KeyCode.R) ||
-            Input.GetButton("Controller Select Button"))
+            //Input.GetButton("Controller Select Button"))
+            contSupp.ControllerMenuLeft("hold"))
         {
             ResetShader();
         }

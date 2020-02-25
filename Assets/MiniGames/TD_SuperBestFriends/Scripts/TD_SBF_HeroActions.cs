@@ -2,13 +2,14 @@
 // Authors: Blackthornprod
 // Contributors: David W. Corso
 // Start: 07/05/2018
-// Last:  12/09/2019
+// Last:  02/25/2020
 
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TD_SBF_HeroActions : MonoBehaviour
 {
+    public ControllerSupport contSupp;
     public LayerMask whatIsEnemies;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_HeroAnimator heroAni;
@@ -27,8 +28,10 @@ public class TD_SBF_HeroActions : MonoBehaviour
     
     void Update()
     {
-        if ((Input.GetButtonDown("Controller Top Button") ||
-             Input.GetButtonDown("Controller Left Button")) &&
+        //if ((Input.GetButtonDown("Controller Top Button") ||
+        //     Input.GetButtonDown("Controller Left Button")) &&
+        if ((contSupp.ControllerButtonPadTop("down") ||
+             contSupp.ControllerButtonPadLeft("down")) && 
             gMan.bIsHeroMode &&
             !EventSystem.current.IsPointerOverGameObject())
         {
@@ -47,7 +50,8 @@ public class TD_SBF_HeroActions : MonoBehaviour
         if (basicAttackWaitCounter <= 0)
         {
             if ((Input.GetMouseButtonDown(0) ||
-                 Input.GetButtonDown("Controller Bottom Button")) &&
+                 //Input.GetButtonDown("Controller Bottom Button")) &&
+                 contSupp.ControllerButtonPadBottom("down")) &&
                 gMan.bIsHeroMode &&
                 !EventSystem.current.IsPointerOverGameObject() &&
                 !heroBarMan.bUpgrading &
@@ -64,7 +68,8 @@ public class TD_SBF_HeroActions : MonoBehaviour
         if (secondaryAttackWaitCounter <= 0)
         {
             if ((Input.GetMouseButtonDown(1) ||
-                 Input.GetButtonDown("Controller Right Button")) &&
+                 //Input.GetButtonDown("Controller Right Button")) &&
+                 contSupp.ControllerButtonPadRight("down")) &&
                 gMan.bIsHeroMode &&
                 !EventSystem.current.IsPointerOverGameObject() &&
                 !heroBarMan.bUpgrading)

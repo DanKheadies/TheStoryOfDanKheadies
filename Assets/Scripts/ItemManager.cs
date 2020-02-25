@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  08/23/2019
+// Last:  02/24/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class ItemManager : MonoBehaviour
 {
     public Animator playerAnim;
+    public ControllerSupport contSupp;
     public DialogueManager dMan;
     public GameObject player;
     public Inventory inv;
@@ -65,6 +66,7 @@ public class ItemManager : MonoBehaviour
             !pause.bPauseActive &&
             (touches.bAaction ||
              Input.GetButtonDown("Action") ||
+             contSupp.ControllerButtonPadBottom("down") ||
              (Input.GetButtonDown("DialogueAction") &&
               !uMan.bControlsActive)))
         {

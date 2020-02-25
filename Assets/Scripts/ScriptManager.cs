@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/21/2019
-// Last:  02/10/2020
+// Last:  02/20/2020
 
 using UnityEngine;
 
@@ -11,6 +11,9 @@ public class ScriptManager : MonoBehaviour
     public Chp1 chp1;
     public CS_TreeTunnel treeTunnel;
     public DialogueManager dMan;
+    public ScreenOrientation screenOri;
+    public TD_SBF_MenuController tdsbfMenuCont;
+    public TD_SBF_ScreenOrientator_PauseMenu tdsbfScreenOriPause;
 
     public void InventoryUpdate()
     {
@@ -82,5 +85,11 @@ public class ScriptManager : MonoBehaviour
         if (treeTunnel &&
             sceneName == "CS_TreeTunnel")
             treeTunnel.ScaleAnimation();
+        else if (tdsbfMenuCont &&
+                 sceneName == "TD_SBF_MenuController")
+            tdsbfMenuCont.OrientationCheck();
+        else if (tdsbfScreenOriPause &&
+                 sceneName == "TD_SBF_LX")
+            tdsbfScreenOriPause.SetTransform();
     }
 }

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/20/2019
-// Last:  12/09/2019
+// Last:  02/25/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,10 +10,13 @@ public class TD_SBF_NodeUISelector : MonoBehaviour
 {
     public Button upgradeB;
     public Button sellB;
+    public Button detailsB;
     public Button closeB;
+    public ControllerSupport contSupp;
     public GameObject upgradeShell;
-    public TD_SBF_ControllerSupport contSupp;
-    public TD_SBF_GameManagement gMan;
+    public TD_SBF_BuildDescriptionBarSelector buildDescBarSel;
+    //public TD_SBF_ControllerSupport contSupp;
+    public TD_SBF_ControlManagement cMan;
     public TD_SBF_NodeUI nodeUI;
     public TD_SBF_Shop shop;
     public TD_SBF_ShopSelector shopSel;
@@ -22,7 +25,8 @@ public class TD_SBF_NodeUISelector : MonoBehaviour
     {
         Upgrade = 1,
         Sell = 2,
-        Close = 3
+        Details = 3,
+        Close = 4
     };
 
     public NodeUISelection currentSelection;
@@ -35,33 +39,40 @@ public class TD_SBF_NodeUISelector : MonoBehaviour
     void Update()
     {
         if (contSupp.bControllerConnected &&
-           upgradeShell.activeSelf &&
-           !bIsNowNodeUIMode)
+            upgradeShell.activeSelf &&
+            !bIsNowNodeUIMode &&
+            !buildDescBarSel.bIsNowBuildDescMode)
         {
             upgradeB.Select();
             bIsNowNodeUIMode = true;
             currentSelection = NodeUISelection.Upgrade;
 
+            cMan.OnTUB();
+            cMan.RestoreTUBInteractability();
+
             contSupp.bBelayAction = true;
         }
 
         if (contSupp.bControllerConnected &&
-           upgradeShell.activeSelf &&
-           bIsNowNodeUIMode)
+            upgradeShell.activeSelf &&
+            bIsNowNodeUIMode)
         {
             // Controller Support 
-            if (Input.GetAxis("Controller Rightstick Vertical") == 0)
+            //if (Input.GetAxis("Controller Rightstick Vertical") == 0)
+            if (contSupp.ControllerRightJoystickVertical() == 0)
             {
                 bFreezeControllerInput = false;
             }
             else if (!bFreezeControllerInput &&
-                     (Input.GetAxis("Controller Rightstick Vertical") > 0))
+                     //(Input.GetAxis("Controller Rightstick Vertical") > 0))
+                     contSupp.ControllerRightJoystickVertical() > 0)
             {
                 bControllerDown = true;
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
-                     (Input.GetAxis("Controller Rightstick Vertical") < 0))
+                     //(Input.GetAxis("Controller Rightstick Vertical") < 0))
+                     contSupp.ControllerRightJoystickVertical() < 0)
             {
                 bControllerUp = true;
                 bFreezeControllerInput = true;
@@ -77,20 +88,23 @@ public class TD_SBF_NodeUISelector : MonoBehaviour
                 bControllerUp = false;
                 MoveUp();
             }
-            else if (Input.GetButtonDown("Controller Bottom Button"))
+            //else if (Input.GetButtonDown("Controller Bottom Button"))
+            else if (contSupp.ControllerButtonPadBottom("down"))
             {
                 SelectOption();
             }
-            else if (Input.GetButtonDown("Controller Right Button"))
+            //else if (Input.GetButtonDown("Controller Right Button"))
+            else if (contSupp.ControllerButtonPadRight("down"))
             {
                 StartCoroutine(contSupp.BelayAction());
 
                 ResetNodeUI();
                 shopSel.ResetTowerMode();
             }
-            else if (Input.GetButtonDown("Controller Right Button") ||
-                     Input.GetButtonDown("Controller Right Bumper") ||
-                     Input.GetButtonDown("Controller Left Bumper"))
+            //else if (Input.GetButtonDown("Controller Right Bumper") ||
+            //         Input.GetButtonDown("Controller Left Bumper"))
+            else if (contSupp.ControllerBumperRight("down") ||
+                     contSupp.ControllerBumperLeft("down"))
             {
                 shopSel.ResetScroll();
             }
@@ -106,6 +120,11 @@ public class TD_SBF_NodeUISelector : MonoBehaviour
         }
         else if (currentSelection == NodeUISelection.Sell)
         {
+            currentSelection = NodeUISelection.Details;
+            detailsB.Select();
+        }
+        else if (currentSelection == NodeUISelection.Details)
+        {
             currentSelection = NodeUISelection.Close;
             closeB.Select();
         }
@@ -114,6 +133,11 @@ public class TD_SBF_NodeUISelector : MonoBehaviour
     public void MoveUp()
     {
         if (currentSelection == NodeUISelection.Close)
+        {
+            currentSelection = NodeUISelection.Details;
+            detailsB.Select();
+        }
+        else if (currentSelection == NodeUISelection.Details)
         {
             currentSelection = NodeUISelection.Sell;
             sellB.Select();
@@ -132,6 +156,12 @@ public class TD_SBF_NodeUISelector : MonoBehaviour
             upgradeB.onClick.Invoke();
         else if (currentSelection == NodeUISelection.Sell)
             sellB.onClick.Invoke();
+        else if (currentSelection == NodeUISelection.Details)
+        {
+            cMan.OffTUB();
+            buildDescBarSel.bIsNowBuildDescMode = true;
+            detailsB.onClick.Invoke();
+        }
         else if (currentSelection == NodeUISelection.Close)
             closeB.onClick.Invoke();
         

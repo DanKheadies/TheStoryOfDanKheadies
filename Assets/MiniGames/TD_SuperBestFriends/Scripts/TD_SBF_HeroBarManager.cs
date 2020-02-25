@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/26/2019
-// Last:  02/18/2020
+// Last:  02/25/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +10,7 @@ public class TD_SBF_HeroBarManager : MonoBehaviour
 {
     public Color basicAttackColor;
     public Color secondaryAttackColor;
+    public ControllerSupport contSupp;
     public DeviceDetector devDetect;
     public GameObject heroShell;
     public GameObject heroBackButton;
@@ -17,8 +18,9 @@ public class TD_SBF_HeroBarManager : MonoBehaviour
     public GameObject upgradeBackButton;
     public Image basicAttackBar;
     public Image secondaryAttackBar;
-    public TD_SBF_ControllerSupport contSupp;
+    //public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_HeroActions heroActions;
+    public TD_SBF_HeroMovement heroMove;
     public TD_SBF_HeroStats heroStats;
     public TD_SBF_HeroUpgrade heroUpgrade;
     public TD_SBF_TouchControls touchConts;

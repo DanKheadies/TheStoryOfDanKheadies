@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/27/2019
-// Last:  02/16/2020
+// Last:  02/20/2020
 
 using UnityEngine;
 using System.Collections;
@@ -10,10 +10,6 @@ public class TD_SBF_MenuController : MonoBehaviour
 {
     public TD_SBF_SceneFader fader;
 
-    // TODO: in another script, account for screen height, i.e. ipad vs iphone
-    // and reposition group of characters (object/shell) higher or lower
-
-    //TODO: get ScreenOrientation.cs & turn on/off gameobjects depending on orientation
     [Header("Horizontal")]
     public GameObject characters_h;
     public GameObject curtain_h;
@@ -24,38 +20,15 @@ public class TD_SBF_MenuController : MonoBehaviour
     public GameObject curtain_v;
     public GameObject sbf_v;
 
+    public bool bIsFull;
+    public bool bSizingChange;
+
     public float waitTime = 10f;
 
     void Start()
     {
-        //OrientationCheck();
+        OrientationCheck();
         StartCoroutine(LoadModeSelector());
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            //OrientationCheck();
-        }
-
-        //if (Input.deviceOrientation != devOr ||
-        //    Screen.autorotateToLandscapeLeft ||
-        //    Screen.autorotateToLandscapeRight ||
-        //    Screen.autorotateToPortrait ||
-        //    Screen.autorotateToPortraitUpsideDown ||
-        //    bSizingChange)
-        //{
-        //    OrientationCheck();
-
-        //    bSizingChange = false;
-        //}
-
-        //if (bIsFull != Screen.fullScreen)
-        //{
-        //    bIsFull = Screen.fullScreen;
-        //    bSizingChange = true;
-        //}
     }
 
     public void OrientationCheck()

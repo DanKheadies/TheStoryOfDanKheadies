@@ -13,6 +13,7 @@ using UnityEngine.UI;
 public class SceneTransitioner : MonoBehaviour
 {
     public Camera mainCamera;
+    public ControllerSupport contSupp;
     public Scene scene;
     public Text sceneSubtitle;
     public Text sceneTitle;
@@ -33,7 +34,10 @@ public class SceneTransitioner : MonoBehaviour
     {
         // Quick skip on loading screens / scenes
         if (scene.name == "LogoSplash" &&
-            Input.anyKeyDown)
+            (Input.anyKeyDown ||
+             contSupp.ControllerButtonPadBottom("down") ||
+             contSupp.ControllerButtonPadRight("down") ||
+             contSupp.ControllerMenuRight("down")))
         {
             SceneManager.LoadScene(AlphaLoad);
         }

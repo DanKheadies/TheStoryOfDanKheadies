@@ -112,6 +112,96 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &161523339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 161523341}
+  - component: {fileID: 161523340}
+  - component: {fileID: 161523343}
+  - component: {fileID: 161523342}
+  m_Layer: 0
+  m_Name: GameSupport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &161523340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161523339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51782a2ecd3fa494fbe2bab483a7ded4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bControllerConnected: 0
+  bIsMoving: 0
+  bIsWindows: 0
+  bIsOSX: 0
+  bIsLinux: 0
+  bIsiOS: 0
+  bIsAndriod: 0
+  bContIsXbox360: 0
+  bContIsXboxOne: 0
+  bContIsPS2: 0
+  bContIsPS4: 0
+  controllers: []
+--- !u!4 &161523341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161523339}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &161523342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161523339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e804f19a8f4d42d43bbfe4094c994210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bIsIpad: 0
+  bIsMobile: 0
+--- !u!114 &161523343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161523339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f6bad1dc3e79c4480027a7e4c5e92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp0: {fileID: 0}
+  chp1: {fileID: 0}
+  treeTunnel: {fileID: 0}
+  dMan: {fileID: 0}
+  screenOri: {fileID: 245969726}
+  tdsbfMenuCont: {fileID: 0}
+  tdsbfScreenOriPause: {fileID: 0}
 --- !u!1 &245969722
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +213,7 @@ GameObject:
   - component: {fileID: 245969725}
   - component: {fileID: 245969724}
   - component: {fileID: 245969723}
+  - component: {fileID: 245969726}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -194,6 +285,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &245969726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245969722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f156135b0d08b04e80d0e60b7a7370b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aspectUtil: {fileID: 0}
+  dMan: {fileID: 0}
+  devOr: 0
+  fixedJoy: {fileID: 0}
+  oMan: {fileID: 0}
+  sMan: {fileID: 161523343}
+  uMan: {fileID: 0}
+  bIsFull: 0
+  bSizingChange: 0
 --- !u!1 &529175729
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca1773bd03952f45a2d2da88bc3dc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 161523340}
   mat: {fileID: 2100000, guid: 107415bc2b334984e903eea1658a20b1, type: 2}
   pos: {x: 0, y: 0}
   scale: 2
@@ -446,5 +559,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

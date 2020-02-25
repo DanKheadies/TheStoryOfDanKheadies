@@ -2,12 +2,13 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  11/21/2019
+// Last:  02/25/2020
 
 using UnityEngine;
 
 public class TD_SBF_GameManagement : MonoBehaviour
 {
+    public ControllerSupport contSupp;
     public GameObject cameraCont;
     public GameObject completeLevelUI_Horizontal;
     public GameObject completeLevelUI_Vertical;
@@ -59,7 +60,8 @@ public class TD_SBF_GameManagement : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.B) ||
-            Input.GetButtonDown("Controller Left Bumper"))
+            //Input.GetButtonDown("Controller Left Bumper"))
+            contSupp.ControllerBumperLeft("down"))
         {
             cMan.ToggleHeroBar();
             cMan.DisableHeroBar();
@@ -69,7 +71,8 @@ public class TD_SBF_GameManagement : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.H) ||
-            Input.GetButtonDown("Controller Right Bumper"))
+            //Input.GetButtonDown("Controller Right Bumper"))
+            contSupp.ControllerBumperRight("down"))
         {
             cMan.ToggleBuildBar();
             cMan.DisableBuildBar();

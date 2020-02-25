@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/09/2020
+// Last:  02/25/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public AspectUtility aspectUtil;
     public CameraFollow cameraFollow;
     public CameraSlider cameraSlider;
+    public ControllerSupport contSupp;
     public DeviceDetector devDetect;
     public FixedJoystick fixJoystick;
     public PlayerBrioManager playerBrioMan;
@@ -25,16 +26,17 @@ public class PlayerMovement : MonoBehaviour
     public UIManager uMan;
     public Vector2 movementVector;
 
-    public bool bControllerConnected;
+    //public bool bControllerConnected;
     public bool bGWCUpdate;
-    public bool bIsControlling;
+    public bool bIsGWC;
+    //public bool bIsControlling;
     public bool bStopPlayerMovement;
 
     public float moveSpeed;
     public float xInput;
     public float yInput;
 
-    public string[] controllers;
+    //public string[] controllers;
     
 	void Start ()
     {
@@ -44,58 +46,55 @@ public class PlayerMovement : MonoBehaviour
         if (scene.name == "GuessWhoColluded")
         {
             bGWCUpdate = true;
+            bIsGWC = true;
         }
 
         if (scene.name == "Minesweeper")
-        {
             moveSpeed = 3.0f;
-        }
         else
-        {
             moveSpeed = 1.0f;
-        }
 
-        controllers = Input.GetJoystickNames();
+        //controllers = Input.GetJoystickNames();
 
-        InvokeRepeating("FindController", 1.5f, 1.5f);
+        //InvokeRepeating("FindController", 1.5f, 1.5f);
     }
 
-    public void FindController()
-    {
-        controllers = Input.GetJoystickNames();
-    }
+    //public void FindController()
+    //{
+    //    controllers = Input.GetJoystickNames();
+    //}
 
     void Update()
     {
-        // Controller Support
-        if (controllers.Length > 0)
-        {
-            //Iterate over every element
-            for (int i = 0; i < controllers.Length; ++i)
-            {
-                //Check if the string is empty or not
-                if (!string.IsNullOrEmpty(controllers[i]))
-                {
-                    bControllerConnected = true;
+        //// Controller Support
+        //if (controllers.Length > 0)
+        //{
+        //    //Iterate over every element
+        //    for (int i = 0; i < controllers.Length; ++i)
+        //    {
+        //        //Check if the string is empty or not
+        //        if (!string.IsNullOrEmpty(controllers[i]))
+        //        {
+        //            bControllerConnected = true;
 
-                    if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
-                        Input.GetAxis("Controller Joystick Vertical") != 0 ||
-                        Input.GetAxis("Controller DPad Horizontal") != 0 ||
-                        Input.GetAxis("Controller DPad Vertical") != 0)
-                    {
-                        bIsControlling = true;
-                    }
-                    else
-                    {
-                        bIsControlling = false;
-                    }
-                }
-                else
-                {
-                    bControllerConnected = false;
-                }
-            }
-        }
+        //            if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
+        //                Input.GetAxis("Controller Joystick Vertical") != 0 ||
+        //                Input.GetAxis("Controller DPad Horizontal") != 0 ||
+        //                Input.GetAxis("Controller DPad Vertical") != 0)
+        //            {
+        //                bIsControlling = true;
+        //            }
+        //            else
+        //            {
+        //                bIsControlling = false;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            bControllerConnected = false;
+        //        }
+        //    }
+        //}
 
         if (bStopPlayerMovement)
         {
@@ -114,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
             // No action; just need to avoid MovePlayer() here b/c it's cancelling out
             // the Touches script by passing in Move(0,0) while touches passes Move(X,Y)
         }
-        else if (scene.name == "GuessWhoColluded")
+        else if (bIsGWC)
         {
             GWCMovePlayer();
         }
@@ -124,7 +123,8 @@ public class PlayerMovement : MonoBehaviour
             //            0.X seconds AFTER re-contact w/ Joystick
             Move(fixJoystick.Horizontal, fixJoystick.Vertical);
         }
-        else if (bIsControlling)
+        else if (contSupp.bControllerConnected &&
+                 contSupp.bIsMoving)
         {
             MovePlayerWithController();
         }
@@ -136,20 +136,37 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovePlayerWithController()
     {
-        if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
-            Input.GetAxis("Controller Joystick Vertical") != 0)
+        if (contSupp.ControllerLeftJoystickHorizontal() != 0 ||
+            contSupp.ControllerLeftJoystickVertical() != 0)
         {
-            Move(Input.GetAxis("Controller Joystick Horizontal"), Input.GetAxis("Controller Joystick Vertical"));
+            Move(contSupp.ControllerLeftJoystickHorizontal(), 
+                 contSupp.ControllerLeftJoystickVertical());
         }
-        else if (Input.GetAxis("Controller DPad Horizontal") != 0 ||
-                 Input.GetAxis("Controller DPad Vertical") != 0)
+        else if (contSupp.ControllerDirectionalPadHorizontal() != 0 ||
+                 contSupp.ControllerDirectionalPadVertical() != 0)
         {
-            Move(Input.GetAxis("Controller DPad Horizontal"), (-1 * Input.GetAxis("Controller DPad Vertical")));
+            Move(contSupp.ControllerDirectionalPadHorizontal(), 
+                 contSupp.ControllerDirectionalPadVertical());
         }
         else
         {
             Move(0, 0);
         }
+
+        //if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
+        //    Input.GetAxis("Controller Joystick Vertical") != 0)
+        //{
+        //    Move(Input.GetAxis("Controller Joystick Horizontal"), Input.GetAxis("Controller Joystick Vertical"));
+        //}
+        //else if (Input.GetAxis("Controller DPad Horizontal") != 0 ||
+        //         Input.GetAxis("Controller DPad Vertical") != 0)
+        //{
+        //    Move(Input.GetAxis("Controller DPad Horizontal"), (-1 * Input.GetAxis("Controller DPad Vertical")));
+        //}
+        //else
+        //{
+        //    Move(0, 0);
+        //}
     }
 
     public void Move(float xInput, float yInput) 
@@ -173,6 +190,8 @@ public class PlayerMovement : MonoBehaviour
 
         // 2x Move Speed
         if (touches.bBaction ||
+            contSupp.ControllerButtonPadRight("hold") || 
+            contSupp.ControllerTriggerRight() > 0 ||
             (Input.GetButton("BAction") &&
              !devDetect.bIsMobile))
         {
@@ -200,45 +219,38 @@ public class PlayerMovement : MonoBehaviour
 
     public void GWCMovePlayer()
     {
-        if (bControllerConnected && 
-            bIsControlling)
+        //if (bControllerConnected && 
+        //    bIsControlling)
+        //contSupp.CheckForMovement();
+
+        if (contSupp.bControllerConnected &&
+            contSupp.bIsMoving)
         {
             if (bGWCUpdate)
-            {
                 GWCMovePlayerWithController();
-            }
 
-            if (bIsControlling)
-            {
+            //if (bIsControlling)
+            if (contSupp.bIsMoving)
                 bGWCUpdate = false;
-            }
             else
-            {
                 bGWCUpdate = true;
-            }
         }
         else if (fixJoystick.bJoying)
         {
             if (bGWCUpdate)
-            {
-                GWCMoveViaJoystick(fixJoystick.Horizontal, fixJoystick.Vertical);
-            }
+                GWCMoveViaJoystick(fixJoystick.Horizontal, 
+                                   fixJoystick.Vertical);
 
             if (fixJoystick.bJoying)
-            {
                 bGWCUpdate = false;
-            }
             else
-            {
                 bGWCUpdate = true;
-            }
         }
         else
         {
             if (bGWCUpdate)
-            {
-                GWCMove(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            }
+                GWCMove(Input.GetAxisRaw("Horizontal"), 
+                        Input.GetAxisRaw("Vertical"));
 
             if (Input.GetAxisRaw("Horizontal") != 0 ||
                 Input.GetAxisRaw("Vertical") != 0)
@@ -246,28 +258,37 @@ public class PlayerMovement : MonoBehaviour
                 bGWCUpdate = false;
             }
             else
-            {
                 bGWCUpdate = true;
-            }
         }
     }
 
     public void GWCMovePlayerWithController()
     {
-        if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
-            Input.GetAxis("Controller Joystick Vertical") != 0)
+        if (contSupp.ControllerLeftJoystickHorizontal() != 0 ||
+            contSupp.ControllerLeftJoystickVertical() != 0)
         {
-            GWCMoveViaJoystick(Input.GetAxis("Controller Joystick Horizontal"), Input.GetAxis("Controller Joystick Vertical"));
+            GWCMoveViaJoystick(contSupp.ControllerLeftJoystickHorizontal(),
+                               contSupp.ControllerLeftJoystickVertical());
         }
-        else if (Input.GetAxis("Controller DPad Horizontal") != 0 ||
-                 Input.GetAxis("Controller DPad Vertical") != 0)
+        else if (contSupp.ControllerDirectionalPadHorizontal() != 0 ||
+                 contSupp.ControllerDirectionalPadVertical() != 0)
         {
-            GWCMove(Input.GetAxis("Controller DPad Horizontal"), (-1 * Input.GetAxis("Controller DPad Vertical")));
+            GWCMove(contSupp.ControllerDirectionalPadHorizontal(),
+                    contSupp.ControllerDirectionalPadVertical());
         }
+        //if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
+        //    Input.GetAxis("Controller Joystick Vertical") != 0)
+        //{
+        //    GWCMoveViaJoystick(Input.GetAxis("Controller Joystick Horizontal"), 
+        //                       Input.GetAxis("Controller Joystick Vertical"));
+        //}
+        //else if (Input.GetAxis("Controller DPad Horizontal") != 0 ||
+        //         Input.GetAxis("Controller DPad Vertical") != 0)
+        //{
+        //    GWCMove(Input.GetAxis("Controller DPad Horizontal"), (-1 * Input.GetAxis("Controller DPad Vertical")));
+        //}
         else
-        {
             GWCMove(0, 0);
-        }
     }
 
     public void GWCMoveViaJoystick(float horiInput, float vertInput)
@@ -275,26 +296,18 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(horiInput) > Mathf.Abs(vertInput))
         {
             if (horiInput > 0)
-            {
                 xInput = 1;
-            }
             else if (horiInput < 0)
-            {
                 xInput = -1;
-            }
 
             GWCMove(xInput, 0);
         }
         else if (Mathf.Abs(horiInput) < Mathf.Abs(vertInput))
         {
             if (vertInput > 0)
-            {
                 yInput = 1;
-            }
             else if (vertInput < 0)
-            {
                 yInput = -1;
-            }
 
             GWCMove(0, yInput);
         }
@@ -303,25 +316,15 @@ public class PlayerMovement : MonoBehaviour
     public void GWCMove(float xInput, float yInput)
     {
         if (trans.position.x == 0 && xInput < 0)
-        {
             rBody.position = new Vector2(0, rBody.position.y + (2 * yInput));
-        }
         else if (trans.position.x == 10 && xInput > 0)
-        {
             rBody.position = new Vector2(10, rBody.position.y + (2 * yInput));
-        }
         else if (trans.position.y == 0 && yInput > 0)
-        {
             rBody.position = new Vector2(rBody.position.x + (2 * xInput), 0);
-        }
         else if (trans.position.y == -6 && yInput < 0)
-        {
             rBody.position = new Vector2(rBody.position.x + (2 * xInput), -6);
-        }
         else
-        {
             rBody.position = new Vector2(rBody.position.x + (2 * xInput), rBody.position.y + (2 * yInput));
-        }
     }
 
     public void CollisionBundle() // Note: order is important
@@ -331,9 +334,7 @@ public class PlayerMovement : MonoBehaviour
 
         // "Stop" player animation
         if (playerAnim)
-        {
             playerAnim.speed = 0.0001f;
-        }
 
         // Unsync and stop camera tracking
         cameraFollow.currentCoords = 0;
@@ -341,9 +342,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Hide UI (if present) and prevent input
         if (cameraSlider)
-        {
             cameraSlider.bTempControlActive = uMan.bControlsActive;
-        }
+
         touches.transform.localScale = Vector3.zero; // 05/10/2019 DC TODO -- Change this to uMan.HideControls()?
         touches.UnpressedAllArrows();
 

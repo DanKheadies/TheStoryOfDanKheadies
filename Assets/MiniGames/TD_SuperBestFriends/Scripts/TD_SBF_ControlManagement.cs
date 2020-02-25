@@ -1,9 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/13/2019
-// Last:  02/18/2020
+// Last:  02/25/2020
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,14 +10,19 @@ using UnityEngine.UI;
 
 public class TD_SBF_ControlManagement : MonoBehaviour
 {
+    public ControllerSupport contSupp;
     public EventSystem m_EventSystem;
     public GameObject buildDescriptionBar;
     public GameObject buildBar;
+    public GameObject controllerTowerPoint;
     public GameObject controlsBar;
     public GameObject heroBar;
     public GameObject towerUpgradeBar;
     public GraphicRaycaster m_Raycaster;
     public PointerEventData m_PointerEventData;
+    public TD_SBF_BuildDescriptionBarSelector buildDescBarSel;
+    //public TD_SBF_ControllerSupport contSupp;
+    public TD_SBF_GameManagement gMan;
     public TD_SBF_NodeUI nodeUI;
     public TD_SBF_TouchControls tConts;
 
@@ -51,26 +55,6 @@ public class TD_SBF_ControlManagement : MonoBehaviour
         }
     }
 
-    public void OnTUB()
-    {
-        bOnTUB = true;
-    }
-
-    public void OffTUB()
-    {
-        bOnTUB = false;
-    }
-
-    public void CheckTUB()
-    {
-        if (!bBelayTUB &&
-            !bOnTUB)
-        {
-            OnTUB();
-            RestoreTUBInteractability();
-        }
-    }
-
     public void ToggleBuildBar()
     {
         buildBar.SetActive(!buildBar.activeSelf);
@@ -80,6 +64,14 @@ public class TD_SBF_ControlManagement : MonoBehaviour
 
         tConts.StopAvoidSubUIElements(); // Not perfect
         CheckBuildDescriptionBar();
+        
+        if (contSupp.bControllerConnected)
+        {
+            if (buildBar.activeSelf)
+                controllerTowerPoint.SetActive(true);
+            else
+                controllerTowerPoint.SetActive(false);
+        }
     }
 
     public void DisableBuildBar()
@@ -91,12 +83,27 @@ public class TD_SBF_ControlManagement : MonoBehaviour
 
             TD_SBF_BuildManager.td_sbf_instance.turretToBuild = null;
         }
+        
+        if (contSupp.bControllerConnected)
+        {
+            buildDescBarSel.BumperOut();
+            controllerTowerPoint.SetActive(false);
+        }
     }
 
     public void ToggleHeroBar()
     {
         if (!heroBar.GetComponent<TD_SBF_HeroBarManager>().heroShell.activeSelf)
             heroBar.GetComponent<TD_SBF_HeroBarManager>().ToggleHeroUpgradeShells();
+
+        // Stop hero movement
+        if (gMan.bIsHeroMode)
+        {
+            heroBar.GetComponent<TD_SBF_HeroBarManager>().heroMove
+                    .GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            heroBar.GetComponent<TD_SBF_HeroBarManager>().heroMove
+                    .GetComponent<Animator>().SetBool("bIsWalking", false);
+        }
 
         heroBar.SetActive(!heroBar.activeSelf);
         controlsBar.SetActive(!controlsBar.activeSelf);
@@ -112,6 +119,9 @@ public class TD_SBF_ControlManagement : MonoBehaviour
             heroBar.SetActive(!heroBar.activeSelf);
             controlsBar.SetActive(!controlsBar.activeSelf);
         }
+
+        if (contSupp.bControllerConnected)
+            buildDescBarSel.BumperOut();
     }
 
     public void ToggleBuildDescriptionBar()
@@ -125,13 +135,46 @@ public class TD_SBF_ControlManagement : MonoBehaviour
     public void ShowBuildDescriptionBar()
     {
         if (!buildDescriptionBar.activeSelf)
+        {
             buildDescriptionBar.SetActive(true);
+        }
     }
 
     public void DisableBuildDescriptionBar()
     {
         if (buildDescriptionBar.activeSelf)
+        {
             buildDescriptionBar.SetActive(false);
+        }
+    }
+
+    public void CheckBuildDescriptionBar()
+    {
+        if (buildDescriptionBar.activeSelf)
+        {
+            DisableBuildDescriptionBar();
+            MaximizeTowerUpgradeBar();
+        }
+    }
+
+    public void CheckTUB()
+    {
+        if (!bBelayTUB &&
+            !bOnTUB)
+        {
+            OnTUB();
+            RestoreTUBInteractability();
+        }
+    }
+
+    public void OffTUB()
+    {
+        bOnTUB = false;
+    }
+
+    public void OnTUB()
+    {
+        bOnTUB = true;
     }
 
     public void MinimizeTowerUpgradeBar()
@@ -146,13 +189,18 @@ public class TD_SBF_ControlManagement : MonoBehaviour
         buildDescriptionBar.GetComponent<TD_SBF_BuildDescriptionBar>().CheckReturnButton();
     }
 
-    public void CheckBuildDescriptionBar()
+    public void BelayTUBInteractability()
     {
-        if (buildDescriptionBar.activeSelf)
-        {
-            DisableBuildDescriptionBar();
-            MaximizeTowerUpgradeBar();
-        }
+        bBelayTUB = true;
+
+        towerUpgradeBar.transform.GetChild(0).transform.GetChild(0).transform
+            .GetChild(0).GetComponent<Button>().interactable = false;
+        towerUpgradeBar.transform.GetChild(0).transform.GetChild(0).transform
+            .GetChild(1).GetComponent<Button>().interactable = false;
+        towerUpgradeBar.transform.GetChild(0).transform.GetChild(0).transform
+            .GetChild(2).GetComponent<Button>().interactable = false;
+        towerUpgradeBar.transform.GetChild(0).transform.GetChild(0).transform
+            .GetChild(3).GetComponent<Button>().interactable = false;
     }
 
     public void RestoreTUBInteractability()
@@ -171,84 +219,6 @@ public class TD_SBF_ControlManagement : MonoBehaviour
             bBelayTUB = false;
         }
     }
-
-    public void BelayTUBInteractability()
-    {
-        bBelayTUB = true;
-
-        towerUpgradeBar.transform.GetChild(0).transform.GetChild(0).transform
-            .GetChild(0).GetComponent<Button>().interactable = false;
-        towerUpgradeBar.transform.GetChild(0).transform.GetChild(0).transform
-            .GetChild(1).GetComponent<Button>().interactable = false;
-        towerUpgradeBar.transform.GetChild(0).transform.GetChild(0).transform
-            .GetChild(2).GetComponent<Button>().interactable = false;
-        towerUpgradeBar.transform.GetChild(0).transform.GetChild(0).transform
-            .GetChild(3).GetComponent<Button>().interactable = false;
-    }
-
-    //IEnumerator DelayActions()
-    //{
-        //if (buildDescriptionBar.activeSelf)
-
-        //buildBar.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //buildBar.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).transform
-        //    .GetChild(1).GetComponent<Button>().interactable = false;
-        //buildBar.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).transform
-        //    .GetChild(2).GetComponent<Button>().interactable = false;
-        //buildBar.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).transform
-        //    .GetChild(3).GetComponent<Button>().interactable = false;
-        //buildBar.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).transform
-        //    .GetChild(4).GetComponent<Button>().interactable = false;
-        //buildBar.transform
-        //    .GetChild(1).GetComponent<Button>().interactable = false;
-
-        //controlsBar.transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //controlsBar.transform
-        //    .GetChild(1).GetComponent<Button>().interactable = false;
-        //controlsBar.transform
-        //    .GetChild(2).GetComponent<Button>().interactable = false;
-
-        //heroBar.transform.GetChild(0).transform.GetChild(0).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //heroBar.transform.GetChild(0).transform.GetChild(0).transform
-        //    .GetChild(1).GetComponent<Button>().interactable = false;
-        //heroBar.transform.GetChild(0).transform.GetChild(0).transform
-        //    .GetChild(2).GetComponent<Button>().interactable = false;
-        //heroBar.transform
-        //    .GetChild(1).GetComponent<Button>().interactable = false;
-
-        //towerUpgradeBar.transform.GetChild(0).transform.GetChild(0).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //towerUpgradeBar.transform.GetChild(0).transform.GetChild(1).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //towerUpgradeBar.transform.GetChild(0).transform.GetChild(2).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //towerUpgradeBar.transform.GetChild(0).transform.GetChild(3).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-
-        //heroUpgradeBar.transform.GetChild(0).transform.GetChild(0).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //heroUpgradeBar.transform.GetChild(0).transform.GetChild(1).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //heroUpgradeBar.transform.GetChild(0).transform.GetChild(2).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //heroUpgradeBar.transform.GetChild(0).transform.GetChild(3).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //heroUpgradeBar.transform.GetChild(0).transform.GetChild(4).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //heroUpgradeBar.transform.GetChild(0).transform.GetChild(5).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //heroUpgradeBar.transform.GetChild(0).transform.GetChild(6).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //heroUpgradeBar.transform.GetChild(0).transform.GetChild(7).transform
-        //    .GetChild(0).GetComponent<Button>().interactable = false;
-        //heroBar.transform
-        //    .GetChild(2).GetComponent<Button>().interactable = false;
-
-        //yield return new WaitForEndOfFrame();
-    //}
 
     public void AvoidCamScroll()
     {

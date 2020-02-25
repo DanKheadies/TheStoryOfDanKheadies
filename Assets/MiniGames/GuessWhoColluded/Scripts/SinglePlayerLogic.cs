@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/31/2019
-// Last:  08/23/2019
+// Last:  02/24/2020
 
 using System.Collections;
 using UnityEngine;
@@ -10,6 +10,7 @@ using UnityEngine;
 public class SinglePlayerLogic : MonoBehaviour
 {
     public Characters chars;
+    public ControllerSupport contSupp;
     public DialogueManager dMan;
     public EndGame end;
     public GWC_Controller gwc;
@@ -460,6 +461,7 @@ public class SinglePlayerLogic : MonoBehaviour
                  !pause.bPausing &&
                  !bAvoidingQuickFTWGuessOnKeyboardOrUI &&
                  (Input.GetButtonUp("Action") ||
+                  contSupp.ControllerButtonPadBottom("up") ||
                   touches.bAaction))
         {
             bAvoidingQuickFTWGuessOnKeyboardOrUI = true;
@@ -470,6 +472,7 @@ public class SinglePlayerLogic : MonoBehaviour
                  !pause.bPausing &&
                  bAvoidingQuickFTWGuessOnKeyboardOrUI &&
                  (Input.GetButtonUp("Action") ||
+                  contSupp.ControllerButtonPadBottom("up") ||
                   touches.bAaction))
         {
             if (goldRimNameFTW == gwc.chars.characters[gwc.opponentCharacter].charGameName)

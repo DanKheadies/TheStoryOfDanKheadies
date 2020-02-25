@@ -2,7 +2,7 @@
 // Authors: Jason (Unity3d College)
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  02/18/2020
+// Last:  02/25/2020
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,11 +14,12 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
     public Color noBuild;
     public Color noSelection;
     public Color selectTower;
+    public ControllerSupport contSupp;
     public GameObject gridNode;
     public GameObject gridNodeSelector;
     public GameObject gridNodeTBC;
     public RaycastHit currentHit;
-    public TD_SBF_ControllerSupport contSupp;
+    //public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_Grid grid;
     public TD_SBF_NodeUI nodeUI;
@@ -71,7 +72,8 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
 
                 // TODO: avoid running this when a tower is present, i.e. need another condition
                 // Note: doesn't seem to harm anything, but shouldn't do it
-                if (Input.GetButtonDown("Controller Bottom Button") &&
+                //if (Input.GetButtonDown("Controller Bottom Button") &&
+                if (contSupp.ControllerButtonPadBottom("down") &&
                     TD_SBF_BuildManager.td_sbf_instance.TD_SBF_CanBuild &&
                     TD_SBF_BuildManager.td_sbf_instance.TD_SBF_HasThoughtsPrayers &&
                     TD_SBF_BuildManager.td_sbf_instance.turretToBuild.cost != 0)

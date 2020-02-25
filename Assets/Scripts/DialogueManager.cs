@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/14/2020
+// Last:  02/24/2020
 
 using System.Collections;
 using UnityEngine;
@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     public AspectUtility aspectUtil;
     public Animator playerAnim;
     public CameraFollow mainCamera;
+    public ControllerSupport contSupp;
     public FixedJoystick fixedJoy;
     public GameObject dArrow;
     public GameObject dBox;
@@ -85,6 +86,7 @@ public class DialogueManager : MonoBehaviour
             !pause.bPauseActive &&
             (touches.bAaction || 
              Input.GetButtonDown("Action") ||
+             contSupp.ControllerButtonPadBottom("down") ||
              (Input.GetButtonDown("DialogueAction") && 
               !uMan.bControlsActive)))
         {
@@ -126,7 +128,8 @@ public class DialogueManager : MonoBehaviour
 
         // Temp: Update Camera display / aspect ratio & virtual joystick
         if (Input.GetKeyUp(KeyCode.R) ||
-            Input.GetKeyUp(KeyCode.JoystickButton6))
+            //Input.GetKeyUp(KeyCode.JoystickButton6))
+            contSupp.ControllerMenuLeft("up"))
         {
             ConfigureParameters();
             fixedJoy.JoystickPosition();

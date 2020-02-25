@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  08/23/2019
+// Last:  02/24/2020
 
 using System.Collections;
 using UnityEngine;
@@ -18,6 +18,7 @@ public class GWC_Controller : MonoBehaviour
     public Camera mainCamera;
     public CameraFollow camFollow;
     public Characters chars;
+    public ControllerSupport contSupp;
     public DialogueManager dMan;
     public GameObject dBox;
     public GameObject HUD;
@@ -138,9 +139,6 @@ public class GWC_Controller : MonoBehaviour
         sFaderAnimDia.GetComponent<Animator>().enabled = true;
 
         player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
-        
-        // Get transfer items (if any)
-        inv.LoadInventory("transfer");
     }
 
     void Update()
@@ -266,7 +264,8 @@ public class GWC_Controller : MonoBehaviour
             !pause.bPausing &&
             (Input.GetAxis("Mouse ScrollWheel") > 0 ||
              Input.GetKeyDown(KeyCode.Comma) ||
-             Input.GetKeyDown(KeyCode.JoystickButton3) ||
+             //Input.GetKeyDown(KeyCode.JoystickButton3) ||
+             contSupp.ControllerButtonPadTop("down") ||
              touches.bYaction))
         {
             mainCamera.orthographicSize = mainCamera.orthographicSize - 0.25f;
@@ -284,7 +283,8 @@ public class GWC_Controller : MonoBehaviour
             !pause.bPausing &&
             (Input.GetAxis("Mouse ScrollWheel") < 0 ||
              Input.GetKeyDown(KeyCode.Period) ||
-             Input.GetKeyDown(KeyCode.JoystickButton2) ||
+             //Input.GetKeyDown(KeyCode.JoystickButton2) ||
+             contSupp.ControllerButtonPadLeft("down") ||
              touches.bXaction))
         {
             mainCamera.orthographicSize = mainCamera.orthographicSize + 0.25f;
@@ -315,8 +315,10 @@ public class GWC_Controller : MonoBehaviour
             !dMan.bDialogueActive &&
             (Input.GetKey(KeyCode.Space) ||
              Input.GetKey(KeyCode.G) ||
-             Mathf.Abs(Input.GetAxis("Controller Left Trigger")) > 0 ||
-             Mathf.Abs(Input.GetAxis("Controller Right Trigger")) > 0 ||
+             //Mathf.Abs(Input.GetAxis("Controller Left Trigger")) > 0 ||
+             //Mathf.Abs(Input.GetAxis("Controller Right Trigger")) > 0 ||
+             Mathf.Abs(contSupp.ControllerTriggerLeft()) > 0 ||
+             Mathf.Abs(contSupp.ControllerTriggerRight()) > 0 ||
              (Input.GetMouseButton(0) &&
               Input.touchCount < 2)))
         {

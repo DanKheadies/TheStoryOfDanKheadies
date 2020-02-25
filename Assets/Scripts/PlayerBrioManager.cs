@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/09/2020
+// Last:  02/24/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +11,7 @@ public class PlayerBrioManager : MonoBehaviour
 {
     public Animator playerAnim;
     public Animator sceneTrans;
+    public ControllerSupport contSupp;
     public DialogueManager dMan;
     public PauseGame pause;
     public Scene scene;
@@ -68,9 +69,11 @@ public class PlayerBrioManager : MonoBehaviour
              !sceneTrans.isActiveAndEnabled))
             BasicRestorePlayer();
 
+        // TODO: may not work if controller uses left joystick button
         // Temp solution to give Brio
         if (Input.GetKeyUp(KeyCode.X) ||
-            Input.GetKeyUp(KeyCode.JoystickButton2))
+            //Input.GetKeyUp(KeyCode.JoystickButton2))
+            contSupp.ControllerRightJoystickButton("up"))
         {
             RestorePlayer(50);
             uMan.UpdateBrio();

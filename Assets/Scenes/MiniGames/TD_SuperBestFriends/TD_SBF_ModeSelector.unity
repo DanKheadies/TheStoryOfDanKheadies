@@ -803,9 +803,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a932c2148634f343a562a74f32a8ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devOr: 0
-  bIsFull: 0
-  bSizingChange: 0
 --- !u!114 &122139400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2851,9 +2848,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a932c2148634f343a562a74f32a8ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devOr: 0
-  bIsFull: 0
-  bSizingChange: 0
 --- !u!114 &333573103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6292,6 +6286,8 @@ GameObject:
   - component: {fileID: 812840389}
   - component: {fileID: 812840390}
   - component: {fileID: 812840388}
+  - component: {fileID: 812840391}
+  - component: {fileID: 812840392}
   m_Layer: 0
   m_Name: ModeController
   m_TagString: Untagged
@@ -6311,6 +6307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b861e0097d40cb4cb6bfefb3c7e951c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  devDetect: {fileID: 812840391}
   audioButtons: {fileID: 1030130676}
   controlsButtons: {fileID: 1039036857}
   creditsButtons: {fileID: 1955190320}
@@ -6369,6 +6366,39 @@ MonoBehaviour:
   optionsCanvas: {fileID: 1827131872}
   charScrollBar: {fileID: 114947223}
   fader: {fileID: 2121324742}
+--- !u!114 &812840391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812840387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e804f19a8f4d42d43bbfe4094c994210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bIsIpad: 0
+  bIsMobile: 0
+--- !u!114 &812840392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812840387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f6bad1dc3e79c4480027a7e4c5e92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp0: {fileID: 0}
+  chp1: {fileID: 0}
+  treeTunnel: {fileID: 0}
+  dMan: {fileID: 0}
+  screenOri: {fileID: 832694028}
+  tdsbfMenuCont: {fileID: 0}
+  tdsbfScreenOriPause: {fileID: 0}
 --- !u!1 &816189069
 GameObject:
   m_ObjectHideFlags: 0
@@ -6772,6 +6802,7 @@ GameObject:
   - component: {fileID: 832694027}
   - component: {fileID: 832694026}
   - component: {fileID: 832694025}
+  - component: {fileID: 832694028}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6843,6 +6874,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+--- !u!114 &832694028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832694024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f156135b0d08b04e80d0e60b7a7370b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aspectUtil: {fileID: 0}
+  dMan: {fileID: 0}
+  devOr: 0
+  fixedJoy: {fileID: 0}
+  oMan: {fileID: 0}
+  sMan: {fileID: 812840392}
+  uMan: {fileID: 0}
+  bIsFull: 0
+  bSizingChange: 0
 --- !u!1 &845529436
 GameObject:
   m_ObjectHideFlags: 0
@@ -8180,9 +8232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a932c2148634f343a562a74f32a8ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devOr: 0
-  bIsFull: 0
-  bSizingChange: 0
 --- !u!114 &1030130679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8259,9 +8308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a932c2148634f343a562a74f32a8ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devOr: 0
-  bIsFull: 0
-  bSizingChange: 0
 --- !u!114 &1039036860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13634,9 +13680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a932c2148634f343a562a74f32a8ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devOr: 0
-  bIsFull: 0
-  bSizingChange: 0
 --- !u!114 &1955190323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14842,9 +14885,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a932c2148634f343a562a74f32a8ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devOr: 0
-  bIsFull: 0
-  bSizingChange: 0
 --- !u!114 &2128436656
 MonoBehaviour:
   m_ObjectHideFlags: 0

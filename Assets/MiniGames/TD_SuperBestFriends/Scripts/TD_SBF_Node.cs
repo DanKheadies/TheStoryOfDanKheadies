@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  02/18/2020
+// Last:  02/25/2020
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,8 +12,9 @@ public class TD_SBF_Node : MonoBehaviour
     public Color startColor;
     public Color hoverColor;
     public Color notEnoughThoughtsPrayersColor;
+    public ControllerSupport contSupp;
     public GameObject turret;
-    public TD_SBF_ControllerSupport contSupp;
+    //public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_HeroAnimator heroAni;
     public TD_SBF_TouchControls tConts;
     public TD_SBF_TowerPlacer towerPlacer;
@@ -24,8 +25,7 @@ public class TD_SBF_Node : MonoBehaviour
 
     void Awake()
     {
-        contSupp = GameObject.FindGameObjectWithTag("GameSupport")
-            .GetComponent<TD_SBF_ControllerSupport>();
+        contSupp = FindObjectOfType<ControllerSupport>();
         startColor = GetComponent<SpriteRenderer>().color;
         tConts = FindObjectOfType<TD_SBF_TouchControls>();
         towerPlacer = FindObjectOfType<TD_SBF_TowerPlacer>();
@@ -37,7 +37,8 @@ public class TD_SBF_Node : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Controller Bottom Button") &&
+        //if (Input.GetButtonDown("Controller Bottom Button") &&
+        if (contSupp.ControllerButtonPadBottom("down") &&
             contSupp.bControllerConnected &&
             !contSupp.bBelayAction &&
             towerPlacer.gMan.bIsTowerMode)

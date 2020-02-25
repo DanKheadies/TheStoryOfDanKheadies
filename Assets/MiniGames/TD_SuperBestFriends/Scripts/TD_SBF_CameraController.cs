@@ -2,14 +2,15 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/10/2016
-// Last:  01/14/2020
+// Last:  02/25/2020
 
 using UnityEngine;
 
 public class TD_SBF_CameraController : MonoBehaviour
 {
+    public ControllerSupport contSupp;
     public TD_SBF_ControlManagement cMan;
-    public TD_SBF_ControllerSupport contSupp;
+    //public TD_SBF_ControllerSupport td_contSupp;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_TouchControls touchConts;
     
@@ -30,9 +31,12 @@ public class TD_SBF_CameraController : MonoBehaviour
             // Up
             if (Input.GetKey(KeyCode.W) ||
                 Input.GetKey(KeyCode.UpArrow) ||
-                (contSupp.bIsControlling &&
-                 (Input.GetAxis("Controller Joystick Vertical") > 0 ||
-                  Input.GetAxis("Controller DPad Vertical") < 0)))
+                //(contSupp.bIsControlling &&
+                 //(Input.GetAxis("Controller Joystick Vertical") > 0 ||
+                 // Input.GetAxis("Controller DPad Vertical") < 0)))
+                (contSupp.bIsMoving &&
+                 (contSupp.ControllerLeftJoystickVertical() > 0 ||
+                  contSupp.ControllerDirectionalPadVertical() > 0)))
             {
                 transform.Translate(Vector2.up * panSpeed * Time.deltaTime, Space.World);
             }
@@ -40,9 +44,12 @@ public class TD_SBF_CameraController : MonoBehaviour
             // Down
             if (Input.GetKey(KeyCode.S) ||
                 Input.GetKey(KeyCode.DownArrow) ||
-                (contSupp.bIsControlling &&
-                 (Input.GetAxis("Controller Joystick Vertical") < 0 ||
-                  Input.GetAxis("Controller DPad Vertical") > 0)))
+                //(contSupp.bIsControlling &&
+                // (Input.GetAxis("Controller Joystick Vertical") < 0 ||
+                //  Input.GetAxis("Controller DPad Vertical") > 0)))
+                (contSupp.bIsMoving &&
+                 (contSupp.ControllerLeftJoystickVertical() < 0 ||
+                  contSupp.ControllerDirectionalPadVertical() < 0)))
             {
                 transform.Translate(Vector2.down * panSpeed * Time.deltaTime, Space.World);
             }
@@ -50,9 +57,12 @@ public class TD_SBF_CameraController : MonoBehaviour
             // Right
             if (Input.GetKey(KeyCode.D) ||
                 Input.GetKey(KeyCode.RightArrow) ||
-                (contSupp.bIsControlling &&
-                 (Input.GetAxis("Controller Joystick Horizontal") > 0 ||
-                  Input.GetAxis("Controller DPad Horizontal") > 0)))
+                //(contSupp.bIsControlling &&
+                // (Input.GetAxis("Controller Joystick Horizontal") > 0 ||
+                //  Input.GetAxis("Controller DPad Horizontal") > 0)))
+                (contSupp.bIsMoving &&
+                 (contSupp.ControllerLeftJoystickHorizontal() > 0 ||
+                  contSupp.ControllerDirectionalPadHorizontal() > 0)))
             {
                 transform.Translate(Vector2.right * panSpeed * Time.deltaTime, Space.World);
             }
@@ -60,9 +70,12 @@ public class TD_SBF_CameraController : MonoBehaviour
             // Left
             if (Input.GetKey(KeyCode.A) ||
                 Input.GetKey(KeyCode.LeftArrow) ||
-                (contSupp.bIsControlling &&
-                 (Input.GetAxis("Controller Joystick Horizontal") < 0 ||
-                  Input.GetAxis("Controller DPad Horizontal") < 0)))
+                //(contSupp.bIsControlling &&
+                // (Input.GetAxis("Controller Joystick Horizontal") < 0 ||
+                //  Input.GetAxis("Controller DPad Horizontal") < 0)))
+                (contSupp.bIsMoving &&
+                    (contSupp.ControllerLeftJoystickHorizontal() < 0 ||
+                     contSupp.ControllerDirectionalPadHorizontal() < 0)))
             {
                 transform.Translate(Vector2.left * panSpeed * Time.deltaTime, Space.World);
             }
@@ -106,9 +119,11 @@ public class TD_SBF_CameraController : MonoBehaviour
 
         // Controller
         if (!cMan.bAvoidCamScroll &&
-            Input.GetAxis("Controller Right Trigger") > 0)
+            //Input.GetAxis("Controller Right Trigger") > 0)
+            contSupp.ControllerTriggerRight() > 0)
         {
-            float scroll = Input.GetAxis("Controller Right Trigger");
+            //float scroll = Input.GetAxis("Controller Right Trigger");
+            float scroll = contSupp.ControllerTriggerRight();
 
             // Zoom In
             if (scroll > 0 &&
@@ -122,9 +137,11 @@ public class TD_SBF_CameraController : MonoBehaviour
 
         // Controller
         if (!cMan.bAvoidCamScroll &&
-            Input.GetAxis("Controller Left Trigger") > 0)
+            //Input.GetAxis("Controller Left Trigger") > 0)
+            contSupp.ControllerTriggerLeft() > 0)
         {
-            float scroll = Input.GetAxis("Controller Left Trigger");
+            //float scroll = Input.GetAxis("Controller Left Trigger");
+            float scroll = contSupp.ControllerTriggerLeft();
 
             // Zoom Out
             if (scroll > 0 &&

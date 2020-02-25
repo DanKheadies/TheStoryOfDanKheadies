@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 02/17/2020
-// Last:  02/18/2020
+// Last:  02/21/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +16,7 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
     public Text levelValue;
     public Text nameValue;
     public Text rangeValue;
+    public Text rateValue;
     public Text speedValue;
     public Text speedLabel;
 
@@ -53,7 +54,8 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
             rangeValue.text = shop.basicTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
-            speedValue.text = shop.basicTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            rateValue.text = shop.basicTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            speedValue.text = shop.basicTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().speed.ToString();
             speedLabel.text = "Speed";
         }
         else if (name == "Standard_L2")
@@ -63,7 +65,8 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
             rangeValue.text = shop.basicTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
-            speedValue.text = shop.basicTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            rateValue.text = shop.basicTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            speedValue.text = shop.basicTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().speed.ToString();
             speedLabel.text = "Speed";
         }
         else if (name == "Standard_L3")
@@ -72,8 +75,8 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             healthValue.text = shop.basicTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().startHealth.ToString();
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
-            rangeValue.text = shop.basicTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
-            speedValue.text = shop.basicTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            rateValue.text = shop.basicTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            speedValue.text = shop.basicTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().speed.ToString();
             speedLabel.text = "Speed";
         }
         else if (name == "Skull_L1")
@@ -83,7 +86,8 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
             rangeValue.text = shop.skullTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
-            speedValue.text = shop.skullTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            rateValue.text = shop.skullTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            speedValue.text = shop.skullTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().speed.ToString();
             speedLabel.text = "Speed";
         }
         else if (name == "Skull_L2")
@@ -93,7 +97,8 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
             rangeValue.text = shop.skullTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
-            speedValue.text = shop.skullTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            rateValue.text = shop.skullTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            speedValue.text = shop.skullTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().speed.ToString();
             speedLabel.text = "Speed";
         }
         else if (name == "Skull_L3")
@@ -103,7 +108,8 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
             rangeValue.text = shop.skullTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
-            speedValue.text = shop.skullTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            rateValue.text = shop.skullTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            speedValue.text = shop.skullTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().speed.ToString();
             speedLabel.text = "Speed";
         }
         else if (name == "Fire_L1")
@@ -113,7 +119,8 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
             rangeValue.text = shop.fireTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
-            speedValue.text = shop.fireTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            rateValue.text = shop.fireTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            speedValue.text = shop.fireTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().speed.ToString();
             speedLabel.text = "Speed";
         }
         else if (name == "Fire_L2")
@@ -123,7 +130,8 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
             rangeValue.text = shop.fireTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
-            speedValue.text = shop.fireTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            rateValue.text = shop.fireTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            speedValue.text = shop.fireTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().speed.ToString();
             speedLabel.text = "Speed";
         }
         else if (name == "Fire_L3")
@@ -133,7 +141,8 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
             rangeValue.text = shop.fireTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
-            speedValue.text = shop.fireTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            rateValue.text = shop.fireTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            speedValue.text = shop.fireTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().speed.ToString();
             speedLabel.text = "Speed";
         }
         else if (name == "Orb_L1")
@@ -143,6 +152,7 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
             rangeValue.text = shop.orbTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
+            rateValue.text = "100%";
             speedValue.text = ((1 - shop.orbTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().slowAmount) * 100).ToString() + "%";
             speedLabel.text = "Slow";
         }
@@ -153,6 +163,7 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
             rangeValue.text = shop.orbTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
+            rateValue.text = "100%";
             speedValue.text = ((1 - shop.orbTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().slowAmount) * 100).ToString() + "%";
             speedLabel.text = "Slow";
         }
@@ -163,6 +174,7 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
             rangeValue.text = shop.orbTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
+            rateValue.text = "100%";
             speedValue.text = ((1 - shop.orbTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().slowAmount) * 100).ToString() + "%";
             speedLabel.text = "Slow";
         }
@@ -172,8 +184,12 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             healthValue.text = shop.boomTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().startHealth.ToString();
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
-            rangeValue.text = shop.boomTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
-            speedValue.text = shop.boomTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            rangeValue.text = shop.boomTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().range.ToString() + 
+                " [" + 
+                shop.boomTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().explosionRadius.ToString() +
+                "]";
+            rateValue.text = shop.boomTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            speedValue.text = shop.boomTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().speed.ToString();
             speedLabel.text = "Speed";
         }
         else if (name == "Boom_L2")
@@ -182,8 +198,12 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             healthValue.text = shop.boomTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().startHealth.ToString();
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
-            rangeValue.text = shop.boomTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
-            speedValue.text = shop.boomTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            rangeValue.text = shop.boomTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().range.ToString() +
+                " [" +
+                shop.boomTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().explosionRadius.ToString() +
+                "]";
+            rateValue.text = shop.boomTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            speedValue.text = shop.boomTower.lvl2_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().speed.ToString();
             speedLabel.text = "Speed";
         }
         else if (name == "Boom_L3")
@@ -192,8 +212,12 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             healthValue.text = shop.boomTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().startHealth.ToString();
             levelValue.text = name.Substring(name.Length - 1).ToString();
             nameValue.text = name.Remove(name.Length - 3);
-            rangeValue.text = shop.boomTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().range.ToString();
-            speedValue.text = shop.boomTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            rangeValue.text = shop.boomTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().range.ToString() +
+                " [" +
+                shop.boomTower.lvl3_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().explosionRadius.ToString() +
+                "]";
+            rateValue.text = shop.boomTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().fireRate.ToString();
+            speedValue.text = shop.boomTower.lvl1_prefab.GetComponent<TD_SBF_Turret>().bulletPrefab.GetComponent<TD_SBF_Bullet>().speed.ToString();
             speedLabel.text = "Speed";
         }
         else
@@ -203,6 +227,7 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
             levelValue.text = "n/a";
             nameValue.text = "n/a";
             rangeValue.text = "n/a";
+            rateValue.text = "n/a";
             speedValue.text = "n/a";
             speedLabel.text = "Speed";
         }

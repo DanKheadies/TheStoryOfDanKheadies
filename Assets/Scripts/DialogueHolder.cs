@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/14/2020
+// Last:  02/24/2020
 
 using UnityEngine;
 
@@ -10,6 +10,7 @@ public class DialogueHolder : MonoBehaviour
 {
     public Animator anim;
     public Collider2D colliEnter;
+    public ControllerSupport contSupp;
     public DialogueManager dMan;
     public PauseGame pause;
     public ScriptManager scriptMan;
@@ -42,6 +43,7 @@ public class DialogueHolder : MonoBehaviour
             !pause.bPauseActive &&
             (touches.bAaction ||
              Input.GetButtonDown("Action") ||
+             contSupp.ControllerButtonPadBottom("down") ||
              (Input.GetButtonDown("DialogueAction") &&
               !uMan.bControlsActive)))
         {

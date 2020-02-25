@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/27/2019
-// Last:  12/13/2019
+// Last:  02/25/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +10,7 @@ public class TD_SBF_ModeSelector : MonoBehaviour
 {
     public Button[] characterButtons;
     public Button[] modeButtons;
+    public ControllerSupport contSupp;
     public GameObject characterCanvas;
     public GameObject modeCanvas;
     public GameObject optionsCanvas;
@@ -53,7 +54,8 @@ public class TD_SBF_ModeSelector : MonoBehaviour
     {
         if ((Input.GetKeyDown(KeyCode.Escape) ||
              Input.GetKeyDown(KeyCode.P) ||
-             Input.GetButtonDown("Controller Start Button")) &&
+             //Input.GetButtonDown("Controller Start Button")) &&
+             contSupp.ControllerMenuRight("down")) &&
              !characterCanvas.activeSelf)
         {
             ToggleOptions();

@@ -2136,37 +2136,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187127524}
   m_CullTransparentMesh: 0
---- !u!1 &206886287
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 206886288}
-  m_Layer: 0
-  m_Name: NPCs
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &206886288
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206886287}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1494280798}
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &232819650
 GameObject:
   m_ObjectHideFlags: 0
@@ -4229,6 +4198,7 @@ MonoBehaviour:
   Opt2Btn: {fileID: 136035246}
   Opt3Btn: {fileID: 620668992}
   Opt4Btn: {fileID: 162900219}
+  contSupp: {fileID: 801930202}
   Opt1Arw: {fileID: 1509250517}
   Opt2Arw: {fileID: 2631218}
   Opt3Arw: {fileID: 473511259}
@@ -5693,6 +5663,7 @@ MonoBehaviour:
   item18: {fileID: 1892056642}
   item19: {fileID: 352521624}
   item20: {fileID: 150164499}
+  contSupp: {fileID: 801930202}
   itemSelector1: {fileID: 475179840}
   itemSelector2: {fileID: 134097205}
   itemSelector3: {fileID: 180391449}
@@ -7031,6 +7002,7 @@ MonoBehaviour:
   IconsArw: {fileID: 0}
   ResetArw: {fileID: 0}
   itemMenuAlpha: {fileID: 817270847}
+  contSupp: {fileID: 801930202}
   joystick: {fileID: 945577419}
   scene:
     m_Handle: 0
@@ -7040,6 +7012,8 @@ MonoBehaviour:
   bControllerDown: 0
   bControllerUp: 0
   bFreezeControllerInput: 0
+  bIsGWC: 0
+  bIsMinesweeper: 0
   currentPosition: 165
   bSecondaryMenu: 0
 --- !u!114 &584032642
@@ -8231,7 +8205,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &766972395
 GameObject:
@@ -8410,109 +8384,6 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!1 &769264860
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 769264861}
-  - component: {fileID: 769264864}
-  - component: {fileID: 769264863}
-  - component: {fileID: 769264862}
-  m_Layer: 0
-  m_Name: DialogueZone2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &769264861
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 769264860}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1411698415}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &769264862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 769264860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e170fc8c9217ef40a0a7f1de9e47582, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  oMan: {fileID: 1137910805}
-  options:
-  - Sure, I'll play again.
-  - Nah, I'm good for now.
---- !u!114 &769264863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 769264860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d54c8da22bff46419731d3bba7bae75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  colliEnter: {fileID: 0}
-  dMan: {fileID: 1137910804}
-  pause: {fileID: 2074391689}
-  scriptMan: {fileID: 2074391692}
-  portPic: {fileID: 21300000, guid: b9a7fea6747b7f544a4b817add47c0fb, type: 3}
-  touches: {fileID: 945577415}
-  uMan: {fileID: 517931596}
-  bActionOnClose: 0
-  bContinueDialogue: 0
-  bHasEntered: 0
-  bHasExited: 0
-  action: 
-  dialogueLines:
-  - Ka BOOM! You is dedz.
-  - Care to play again?
---- !u!61 &769264864
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 769264860}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.64855576, y: 0.5764942}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 17.382034, y: 17.334}
-  m_EdgeRadius: 0
 --- !u!1 &769457241
 GameObject:
   m_ObjectHideFlags: 0
@@ -8929,6 +8800,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796838535}
   m_CullTransparentMesh: 0
+--- !u!1 &801930201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 801930203}
+  - component: {fileID: 801930202}
+  m_Layer: 0
+  m_Name: GameSupport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &801930202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801930201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51782a2ecd3fa494fbe2bab483a7ded4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bBelayAction: 0
+  bControllerConnected: 0
+  bIsMoving: 0
+  bIsWindows: 0
+  bIsOSX: 0
+  bIsLinux: 0
+  bIsiOS: 0
+  bIsAndriod: 0
+  bContIsXbox360: 0
+  bContIsXboxOne: 0
+  bContIsPS2: 0
+  bContIsPS4: 0
+  controllers: []
+--- !u!4 &801930203
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801930201}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &815108062
 GameObject:
   m_ObjectHideFlags: 0
@@ -9143,6 +9070,7 @@ MonoBehaviour:
   UseBtn: {fileID: 245387594}
   DropBtn: {fileID: 1064465277}
   BackBtn: {fileID: 766972398}
+  contSupp: {fileID: 0}
   UseArw: {fileID: 816210415}
   DropArw: {fileID: 1105518277}
   BackArw: {fileID: 1333877732}
@@ -12047,6 +11975,7 @@ MonoBehaviour:
   aspectUtil: {fileID: 1820261572}
   playerAnim: {fileID: 1933751394}
   mainCamera: {fileID: 1820261573}
+  contSupp: {fileID: 801930202}
   fixedJoy: {fileID: 945577419}
   dArrow: {fileID: 1435763998}
   dBox: {fileID: 1489847618}
@@ -12082,6 +12011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1820261573}
+  contSupp: {fileID: 801930202}
   dMan: {fileID: 1137910804}
   fixedJoy: {fileID: 945577419}
   oBox: {fileID: 429588857}
@@ -14111,7 +14041,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1394624251
 GameObject:
@@ -14217,39 +14147,7 @@ Transform:
   m_Children:
   - {fileID: 2039617090}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1411698414
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1411698415}
-  m_Layer: 0
-  m_Name: GreatTree
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1411698415
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411698414}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1727094824}
-  - {fileID: 769264861}
-  m_Father: {fileID: 1494280798}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1412831429
 GameObject:
@@ -15341,37 +15239,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489847618}
   m_CullTransparentMesh: 0
---- !u!1 &1494280797
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1494280798}
-  m_Layer: 0
-  m_Name: Chars
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1494280798
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494280797}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1411698415}
-  m_Father: {fileID: 206886288}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1509250517
 GameObject:
   m_ObjectHideFlags: 0
@@ -16881,109 +16748,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727003317}
   m_CullTransparentMesh: 0
---- !u!1 &1727094823
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1727094824}
-  - component: {fileID: 1727094825}
-  - component: {fileID: 1727094826}
-  - component: {fileID: 1727094827}
-  m_Layer: 0
-  m_Name: DialogueZone1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1727094824
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1727094823}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1411698415}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1727094825
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1727094823}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.64855576, y: 0.5764942}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 17.382034, y: 17.334}
-  m_EdgeRadius: 0
---- !u!114 &1727094826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1727094823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d54c8da22bff46419731d3bba7bae75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  colliEnter: {fileID: 0}
-  dMan: {fileID: 1137910804}
-  pause: {fileID: 2074391689}
-  scriptMan: {fileID: 2074391692}
-  portPic: {fileID: 21300000, guid: b9a7fea6747b7f544a4b817add47c0fb, type: 3}
-  touches: {fileID: 945577415}
-  uMan: {fileID: 517931596}
-  bActionOnClose: 0
-  bContinueDialogue: 0
-  bHasEntered: 0
-  bHasExited: 0
-  action: 
-  dialogueLines:
-  - Hey you did it, GG!
-  - Care to play again?
---- !u!114 &1727094827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1727094823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e170fc8c9217ef40a0a7f1de9e47582, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  oMan: {fileID: 1137910805}
-  options:
-  - Sure, I'll play again.
-  - Nah, I'm good for now.
 --- !u!1 &1727259829
 GameObject:
   m_ObjectHideFlags: 0
@@ -18130,7 +17894,7 @@ MonoBehaviour:
   devOr: 0
   fixedJoy: {fileID: 945577419}
   oMan: {fileID: 1137910805}
-  sMan: {fileID: 0}
+  sMan: {fileID: 2074391692}
   uMan: {fileID: 517931596}
   bIsFull: 0
   bSizingChange: 0
@@ -18163,6 +17927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectUtil: {fileID: 1820261572}
   myCam: {fileID: 1820261570}
+  contSupp: {fileID: 801930202}
   player: {fileID: 1933751389}
   scene:
     m_Handle: 0
@@ -19176,6 +18941,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 1933751394}
   sceneTrans: {fileID: 1444730141}
+  contSupp: {fileID: 801930202}
   dMan: {fileID: 1137910804}
   pause: {fileID: 2074391689}
   scene:
@@ -19235,6 +19001,7 @@ MonoBehaviour:
   aspectUtil: {fileID: 1820261572}
   cameraFollow: {fileID: 1820261573}
   cameraSlider: {fileID: 0}
+  contSupp: {fileID: 801930202}
   devDetect: {fileID: 2074391693}
   fixJoystick: {fileID: 945577419}
   playerBrioMan: {fileID: 1933751390}
@@ -19247,14 +19014,12 @@ MonoBehaviour:
   trans: {fileID: 1933751396}
   uMan: {fileID: 517931596}
   movementVector: {x: 0, y: 0}
-  bControllerConnected: 0
   bGWCUpdate: 0
-  bIsControlling: 0
+  bIsGWC: 0
   bStopPlayerMovement: 0
   moveSpeed: 0
   xInput: 0
   yInput: 0
-  controllers: []
 --- !u!50 &1933751393
 Rigidbody2D:
   serializedVersion: 4
@@ -20417,6 +20182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
+  contSupp: {fileID: 801930202}
   scene:
     m_Handle: 0
   sceneSubtitle: {fileID: 0}
@@ -20632,6 +20398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemMenuCanvas: {fileID: 817270847}
+  contSupp: {fileID: 801930202}
   dMan: {fileID: 1137910804}
   fixedJoy: {fileID: 945577419}
   movePArw: {fileID: 584032641}
@@ -20649,6 +20416,7 @@ MonoBehaviour:
   soundMenu: {fileID: 1973615587}
   stuffBack: {fileID: 543911348}
   stuffMenu: {fileID: 480357467}
+  bIsGWC: 0
   bPauseActive: 0
   bPausing: 0
 --- !u!114 &2074391690
@@ -20689,7 +20457,7 @@ Transform:
   - {fileID: 2090163998}
   - {fileID: 1758505870}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2074391692
 MonoBehaviour:
@@ -20707,6 +20475,9 @@ MonoBehaviour:
   chp1: {fileID: 0}
   treeTunnel: {fileID: 2074391686}
   dMan: {fileID: 1137910804}
+  screenOri: {fileID: 1820261571}
+  tdsbfMenuCont: {fileID: 0}
+  tdsbfScreenOriPause: {fileID: 0}
 --- !u!114 &2074391693
 MonoBehaviour:
   m_ObjectHideFlags: 0

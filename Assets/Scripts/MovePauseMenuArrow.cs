@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/08/2017
-// Last:  08/18/2019
+// Last:  02/25/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,6 +40,7 @@ public class MovePauseMenuArrow : MonoBehaviour
 
     [Header("General")]
     public CanvasGroup itemMenuAlpha;
+    public ControllerSupport contSupp;
     public Joystick joystick;
     public Scene scene;
     public TouchControls touches;
@@ -49,6 +50,8 @@ public class MovePauseMenuArrow : MonoBehaviour
     public bool bControllerDown;
     public bool bControllerUp;
     public bool bFreezeControllerInput;
+    public bool bIsGWC;
+    public bool bIsMinesweeper;
     
     public enum ArrowPos : int
     {
@@ -81,6 +84,11 @@ public class MovePauseMenuArrow : MonoBehaviour
         // Initializers
         scene = SceneManager.GetActiveScene();
 
+        if (scene.name == "GuessWhoColluded")
+            bIsGWC = true;
+        else if (scene.name == "Minesweeper")
+            bIsMinesweeper = true;
+
         currentPosition = ArrowPos.GoOn;
     }
 	
@@ -91,8 +99,10 @@ public class MovePauseMenuArrow : MonoBehaviour
             itemMenuAlpha.alpha == 0)
         {
             // Controller Support 
-            if (Input.GetAxis("Controller DPad Vertical") == 0 &&
-                Input.GetAxis("Controller Joystick Vertical") == 0 &&
+            //if (Input.GetAxis("Controller DPad Vertical") == 0 &&
+            //    Input.GetAxis("Controller Joystick Vertical") == 0 &&
+            if (contSupp.ControllerDirectionalPadVertical() == 0 &&
+                contSupp.ControllerLeftJoystickVertical() == 0 &&
                 joystick.Vertical == 0 &&
                 (!touches.bDown &&
                  !touches.bUp))
@@ -100,8 +110,10 @@ public class MovePauseMenuArrow : MonoBehaviour
                 bFreezeControllerInput = false;
             }
             else if (!bFreezeControllerInput &&
-                     (Input.GetAxis("Controller DPad Vertical") > 0 ||
-                      Input.GetAxis("Controller Joystick Vertical") < 0 ||
+                     //(Input.GetAxis("Controller DPad Vertical") > 0 ||
+                     // Input.GetAxis("Controller Joystick Vertical") < 0 ||
+                     (contSupp.ControllerDirectionalPadVertical() < 0 ||
+                      contSupp.ControllerLeftJoystickVertical() < 0 ||
                       joystick.Vertical < 0 ||
                       touches.bDown))
             {
@@ -109,8 +121,10 @@ public class MovePauseMenuArrow : MonoBehaviour
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
-                     (Input.GetAxis("Controller DPad Vertical") < 0 ||
-                      Input.GetAxis("Controller Joystick Vertical") > 0 ||
+                     //(Input.GetAxis("Controller DPad Vertical") < 0 ||
+                     // Input.GetAxis("Controller Joystick Vertical") > 0 ||
+                     (contSupp.ControllerDirectionalPadVertical() > 0 ||
+                      contSupp.ControllerLeftJoystickVertical() > 0 ||
                       joystick.Vertical > 0 ||
                       touches.bUp))
             {
@@ -135,14 +149,17 @@ public class MovePauseMenuArrow : MonoBehaviour
                 MoveUp();
             }
             else if (Input.GetButtonDown("Action") ||
-                     Input.GetKeyDown(KeyCode.JoystickButton0) ||
+                     //Input.GetKeyDown(KeyCode.JoystickButton0) ||
+                     contSupp.ControllerButtonPadBottom("down") ||
                      touches.bAaction)
             {
                 SelectOption();
             }
             else if (Input.GetKeyDown(KeyCode.Escape) ||
-                     Input.GetKeyDown(KeyCode.JoystickButton7) ||
-                     Input.GetKeyDown(KeyCode.JoystickButton1) ||
+                     //Input.GetKeyDown(KeyCode.JoystickButton7) ||
+                     //Input.GetKeyDown(KeyCode.JoystickButton1) ||
+                     contSupp.ControllerMenuRight("down") ||
+                     contSupp.ControllerButtonPadRight("down") ||
                      Input.GetButton("BAction") ||
                      touches.bBaction)
             {
@@ -187,7 +204,7 @@ public class MovePauseMenuArrow : MonoBehaviour
         }
 
         // For Guess Who Colluded
-        if (scene.name == "GuessWhoColluded")
+        if (bIsGWC)
         {
             // Skips & goes back "down" to correct option
             if (currentPosition == ArrowPos.Save)
@@ -231,7 +248,7 @@ public class MovePauseMenuArrow : MonoBehaviour
         }
 
         // For Minesweeper
-        else if (scene.name == "Minesweeper")
+        else if (bIsMinesweeper)
         {
             // Skips & goes back "down" to correct option
             if (currentPosition == ArrowPos.Save)
@@ -278,7 +295,7 @@ public class MovePauseMenuArrow : MonoBehaviour
         }
 
         // For Guess Who Colluded
-        if (scene.name == "GuessWhoColluded")
+        if (bIsGWC)
         {
             // GWC only options
             if (currentPosition == ArrowPos.GG)
@@ -318,7 +335,7 @@ public class MovePauseMenuArrow : MonoBehaviour
         }
 
         // For Minesweeper
-        if (scene.name == "Minesweeper")
+        if (bIsMinesweeper)
         {
             // Skips & goes back "down" to correct option
             if (currentPosition == ArrowPos.Save)
@@ -367,24 +384,16 @@ public class MovePauseMenuArrow : MonoBehaviour
         }
 
         // For Guess Who Colluded
-        if (scene.name == "GuessWhoColluded")
+        if (bIsGWC)
         {
             if (currentPosition == ArrowPos.Colluminac)
-            {
                 CollumBtn.onClick.Invoke();
-            }
             else if (currentPosition == ArrowPos.Icons)
-            {
                 IconsBtn.onClick.Invoke();
-            }
             else if (currentPosition == ArrowPos.Reset)
-            {
                 ResetBtn.onClick.Invoke();
-            }
             else if (currentPosition == ArrowPos.GG)
-            {
                 GGBtn.onClick.Invoke();
-            }
         }
 
         touches.bAaction = false;
@@ -403,7 +412,7 @@ public class MovePauseMenuArrow : MonoBehaviour
             SoundArw.transform.localScale = Vector3.zero;
             StuffArw.transform.localScale = Vector3.zero; 
 
-            if (scene.name == "GuessWhoColluded")
+            if (bIsGWC)
             {
                 CollumArw.transform.localScale = Vector3.zero;
                 GGArw.transform.localScale = Vector3.zero;
@@ -424,7 +433,7 @@ public class MovePauseMenuArrow : MonoBehaviour
         SoundArw.transform.localScale = Vector3.zero;
         StuffArw.transform.localScale = Vector3.zero;
 
-        if (scene.name == "GuessWhoColluded")
+        if (bIsGWC)
         {
             CollumArw.transform.localScale = Vector3.zero;
             GGArw.transform.localScale = Vector3.zero;

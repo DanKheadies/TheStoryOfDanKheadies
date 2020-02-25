@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/18/2017
-// Last:  08/23/2019
+// Last:  02/24/2020
 
 using UnityEngine;
 
@@ -9,6 +9,7 @@ using UnityEngine;
 public class CannabisPlant : MonoBehaviour
 {
     public Animator playerAnim;
+    public ControllerSupport contSupp;
     public DialogueManager dMan;
     public GameObject greenBud;
     public GameObject orangeBud;
@@ -43,13 +44,9 @@ public class CannabisPlant : MonoBehaviour
         bHasExited = true;
 
         if (Random.Range(0.0f, 1.0f) > 0.66f)
-        {
             bHasBud = true;
-        }
         else
-        {
             bHasBud = false;
-        }
     }
 
     void Update()
@@ -63,6 +60,7 @@ public class CannabisPlant : MonoBehaviour
             !pause.bPauseActive &&
             (touches.bAaction ||
              Input.GetButtonDown("Action") ||
+             contSupp.ControllerButtonPadBottom("down") ||
              (Input.GetButtonDown("DialogueAction") &&
               !uMan.bControlsActive)))
         {

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/08/2018
-// Last:  08/18/2019
+// Last:  02/24/2020
 
 using System.Collections;
 using UnityEngine;
@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class OptionsManager : MonoBehaviour
 {
     public CameraFollow mainCamera;
+    public ControllerSupport contSupp;
     public DialogueManager dMan;
     public FixedJoystick fixedJoy;
     public GameObject oBox;
@@ -90,7 +91,8 @@ public class OptionsManager : MonoBehaviour
 
         // Temp: Update Camera display / aspect ratio & virtual joystick
         if (Input.GetKeyUp(KeyCode.R) ||
-            Input.GetKeyUp(KeyCode.JoystickButton6))
+            //Input.GetKeyUp(KeyCode.JoystickButton6))
+            contSupp.ControllerMenuLeft("up"))
         {
             ConfigureParameters();
             fixedJoy.JoystickPosition();

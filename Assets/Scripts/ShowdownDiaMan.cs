@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/18/2019
+// Last:  02/24/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +11,7 @@ public class ShowdownDiaMan : MonoBehaviour
 {
     public AspectUtility aspectUtil;
     public Camera showdownCamera;
+    public ControllerSupport contSupp;
     public GameObject dbox;
     public Text dText;
     public TouchControls touches;
@@ -44,7 +45,8 @@ public class ShowdownDiaMan : MonoBehaviour
 
         // Temp: Update Camera display / aspect ratio
         if (Input.GetKeyUp(KeyCode.R) ||
-            Input.GetKeyUp(KeyCode.JoystickButton6))
+            //Input.GetKeyUp(KeyCode.JoystickButton6))
+            contSupp.ControllerMenuLeft("up"))
         {
             aspectUtil.Awake();
             ConfigureParameters();

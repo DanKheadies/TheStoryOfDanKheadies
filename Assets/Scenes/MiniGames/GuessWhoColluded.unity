@@ -336,6 +336,7 @@ MonoBehaviour:
   Opt2Btn: {fileID: 686079661}
   Opt3Btn: {fileID: 517641621}
   Opt4Btn: {fileID: 101552407}
+  contSupp: {fileID: 2046809082}
   Opt1Arw: {fileID: 1649989665}
   Opt2Arw: {fileID: 1949639276}
   Opt3Arw: {fileID: 1189422025}
@@ -1575,6 +1576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -3960,6 +3962,7 @@ MonoBehaviour:
   IconsArw: {fileID: 1311987153}
   ResetArw: {fileID: 127265664}
   itemMenuAlpha: {fileID: 176896024}
+  contSupp: {fileID: 2046809082}
   joystick: {fileID: 1931411150}
   scene:
     m_Handle: 0
@@ -3969,6 +3972,8 @@ MonoBehaviour:
   bControllerDown: 0
   bControllerUp: 0
   bFreezeControllerInput: 0
+  bIsGWC: 0
+  bIsMinesweeper: 0
   currentPosition: 165
   bSecondaryMenu: 0
 --- !u!114 &123391549
@@ -4614,6 +4619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -4795,6 +4801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -5695,6 +5702,7 @@ MonoBehaviour:
   UseBtn: {fileID: 344145205}
   DropBtn: {fileID: 82177844}
   BackBtn: {fileID: 1589499685}
+  contSupp: {fileID: 2046809082}
   UseArw: {fileID: 877739080}
   DropArw: {fileID: 1967121752}
   BackArw: {fileID: 1397415289}
@@ -7915,6 +7923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -8099,6 +8108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -8980,6 +8990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -9157,6 +9168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -9686,6 +9698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -11184,6 +11197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -11903,6 +11917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -12179,7 +12194,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &457769037
 GameObject:
@@ -12232,6 +12247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -13148,6 +13164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -14649,6 +14666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -15003,6 +15021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -15105,6 +15124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -15286,6 +15306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -15388,6 +15409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -16765,6 +16787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -17314,6 +17337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -17936,6 +17960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -18671,6 +18696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -20109,6 +20135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -20202,6 +20229,7 @@ MonoBehaviour:
   mainCamera: {fileID: 769352913}
   camFollow: {fileID: 769352917}
   chars: {fileID: 768314384}
+  contSupp: {fileID: 2046809082}
   dMan: {fileID: 1616946429}
   dBox: {fileID: 2000921476}
   HUD: {fileID: 1814653774}
@@ -20360,6 +20388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemMenuCanvas: {fileID: 176896024}
+  contSupp: {fileID: 2046809082}
   dMan: {fileID: 1616946429}
   fixedJoy: {fileID: 1931411150}
   movePArw: {fileID: 123391548}
@@ -20377,6 +20406,7 @@ MonoBehaviour:
   soundMenu: {fileID: 1280831630}
   stuffBack: {fileID: 1290598590}
   stuffMenu: {fileID: 2009561762}
+  bIsGWC: 0
   bPauseActive: 0
   bPausing: 0
 --- !u!114 &768314382
@@ -20444,6 +20474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chars: {fileID: 768314384}
+  contSupp: {fileID: 2046809082}
   dMan: {fileID: 1616946429}
   end: {fileID: 768314379}
   gwc: {fileID: 768314378}
@@ -20522,6 +20553,9 @@ MonoBehaviour:
   chp1: {fileID: 0}
   treeTunnel: {fileID: 0}
   dMan: {fileID: 1616946429}
+  screenOri: {fileID: 769352914}
+  tdsbfMenuCont: {fileID: 0}
+  tdsbfScreenOriPause: {fileID: 0}
 --- !u!114 &768314387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20618,6 +20652,7 @@ MonoBehaviour:
   devOr: 0
   fixedJoy: {fileID: 1931411150}
   oMan: {fileID: 1616946430}
+  sMan: {fileID: 768314386}
   uMan: {fileID: 1814653776}
   bIsFull: 0
   bSizingChange: 0
@@ -20635,7 +20670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 0}
   areaAni: {fileID: 0}
-  camFollow: {fileID: 0}
+  camFollow: {fileID: 769352917}
   player: {fileID: 1999479184}
   playerMove: {fileID: 1999479187}
   touches: {fileID: 1931411147}
@@ -20674,6 +20709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectUtil: {fileID: 769352916}
   myCam: {fileID: 769352913}
+  contSupp: {fileID: 2046809082}
   player: {fileID: 1999479184}
   scene:
     m_Handle: 0
@@ -21018,6 +21054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -22713,6 +22750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -23022,6 +23060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -23277,6 +23316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -24567,6 +24607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -24978,6 +25019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -25737,6 +25779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -25839,6 +25882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -26211,6 +26255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -32655,6 +32700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -33156,6 +33202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -34127,6 +34174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -37638,6 +37686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -38583,6 +38632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -39714,6 +39764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -40202,6 +40253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -41536,6 +41588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -41779,6 +41832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
+  contSupp: {fileID: 2046809082}
   scene:
     m_Handle: 0
   sceneSubtitle: {fileID: 0}
@@ -42585,6 +42639,7 @@ MonoBehaviour:
   aspectUtil: {fileID: 769352916}
   playerAnim: {fileID: 0}
   mainCamera: {fileID: 769352917}
+  contSupp: {fileID: 2046809082}
   fixedJoy: {fileID: 1931411150}
   dArrow: {fileID: 1065292858}
   dBox: {fileID: 2000921476}
@@ -42620,6 +42675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 769352917}
+  contSupp: {fileID: 2046809082}
   dMan: {fileID: 1616946429}
   fixedJoy: {fileID: 1931411150}
   oBox: {fileID: 5717762}
@@ -42962,6 +43018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -44427,6 +44484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -45599,6 +45657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -46554,6 +46613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -47460,6 +47520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -49020,6 +49081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -49860,6 +49922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -52010,6 +52073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -52535,6 +52599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43be49263d0c724a9711a56f55e1546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   dMan: {fileID: 1616946429}
   gwc: {fileID: 768314378}
@@ -52794,6 +52859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 0}
   sceneTrans: {fileID: 778553634}
+  contSupp: {fileID: 2046809082}
   dMan: {fileID: 1616946429}
   pause: {fileID: 768314381}
   scene:
@@ -52849,6 +52915,7 @@ MonoBehaviour:
   aspectUtil: {fileID: 769352916}
   cameraFollow: {fileID: 769352917}
   cameraSlider: {fileID: 769352915}
+  contSupp: {fileID: 2046809082}
   devDetect: {fileID: 768314387}
   fixJoystick: {fileID: 1931411150}
   playerBrioMan: {fileID: 1999479185}
@@ -52861,14 +52928,12 @@ MonoBehaviour:
   trans: {fileID: 1999479191}
   uMan: {fileID: 1814653776}
   movementVector: {x: 0, y: 0}
-  bControllerConnected: 0
   bGWCUpdate: 0
-  bIsControlling: 0
+  bIsGWC: 0
   bStopPlayerMovement: 0
   moveSpeed: 0
   xInput: 0
   yInput: 0
-  controllers: []
 --- !u!50 &1999479188
 Rigidbody2D:
   serializedVersion: 4
@@ -53262,6 +53327,7 @@ MonoBehaviour:
   item18: {fileID: 101833236}
   item19: {fileID: 1794813210}
   item20: {fileID: 954757752}
+  contSupp: {fileID: 2046809082}
   itemSelector1: {fileID: 335763802}
   itemSelector2: {fileID: 339492966}
   itemSelector3: {fileID: 1546231258}
@@ -54202,6 +54268,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2042833812}
   m_CullTransparentMesh: 0
+--- !u!1 &2046809081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2046809083}
+  - component: {fileID: 2046809082}
+  m_Layer: 0
+  m_Name: GameSupport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2046809082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046809081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51782a2ecd3fa494fbe2bab483a7ded4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bBelayAction: 0
+  bControllerConnected: 0
+  bIsMoving: 0
+  bIsWindows: 0
+  bIsOSX: 0
+  bIsLinux: 0
+  bIsiOS: 0
+  bIsAndriod: 0
+  bContIsXbox360: 0
+  bContIsXboxOne: 0
+  bContIsPS2: 0
+  bContIsPS4: 0
+  controllers: []
+--- !u!4 &2046809083
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046809081}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2048404522
 GameObject:
   m_ObjectHideFlags: 0

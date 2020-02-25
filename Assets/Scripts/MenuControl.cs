@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  01/14/2020
+// Last:  02/25/2020
 
 using System.Collections;
 using UnityEngine;
@@ -12,6 +12,7 @@ using UnityEngine.UI;
 // For Buttons only: transition scene or quiting game
 public class MenuControl : MonoBehaviour
 {
+    public ControllerSupport contSupp;
     public GameObject danFace;
     public GameObject dummyB;
     public GameObject endB;
@@ -75,8 +76,10 @@ public class MenuControl : MonoBehaviour
         // Skip animations
         if ((Input.GetKeyDown(KeyCode.Space) ||
              Input.GetMouseButtonDown(0) ||
-             Input.GetButtonDown("Controller Bottom Button") ||
-             Input.GetButtonDown("Controller Right Button")) &&
+             //Input.GetButtonDown("Controller Bottom Button") ||
+             //Input.GetButtonDown("Controller Right Button")) &&
+             contSupp.ControllerButtonPadBottom("down") ||
+             contSupp.ControllerButtonPadRight("down")) &&
              danFace.GetComponent<CanvasRenderer>().GetAlpha() != 1f)
         {
             starExploding.GetComponent<Animator>().enabled = false;
@@ -117,7 +120,8 @@ public class MenuControl : MonoBehaviour
 
         if ((Input.GetKeyDown(KeyCode.Space) ||
              Input.GetMouseButtonDown(0) ||
-             Input.GetButtonDown("Controller Bottom Button")) &&
+             //Input.GetButtonDown("Controller Bottom Button")) &&
+             contSupp.ControllerButtonPadBottom("down")) &&
              bIsSelectable &&
              !bAvoidSelection)
         {
@@ -125,37 +129,50 @@ public class MenuControl : MonoBehaviour
         }
 
         // Controller Support 
-        if (Input.GetAxis("Controller DPad Vertical") == 0 &&
-                Input.GetAxis("Controller Joystick Vertical") == 0 &&
-                Input.GetAxis("Controller DPad Horizontal") == 0 &&
-                Input.GetAxis("Controller Joystick Horizontal") == 0)
+        //if (Input.GetAxis("Controller DPad Vertical") == 0 &&
+        //        Input.GetAxis("Controller Joystick Vertical") == 0 &&
+        //        Input.GetAxis("Controller DPad Horizontal") == 0 &&
+        //        Input.GetAxis("Controller Joystick Horizontal") == 0)
+        if (!contSupp.bIsMoving)
+        //if (contSupp.ControllerDirectionalPadVertical() == 0 &&
+        //    contSupp.ControllerLeftJoystickVertical() == 0 &&
+        //    contSupp.ControllerDirectionalPadHorizontal() == 0 &&
+        //    contSupp.ControllerLeftJoystickHorizontal() == 0)
         {
             bFreezeControllerInput = false;
         }
         else if (!bFreezeControllerInput &&
-                 (Input.GetAxis("Controller DPad Vertical") > 0 ||
-                  Input.GetAxis("Controller Joystick Vertical") < 0))
+                 //(Input.GetAxis("Controller DPad Vertical") > 0 ||
+                 // Input.GetAxis("Controller Joystick Vertical") < 0))
+                 (contSupp.ControllerDirectionalPadVertical() < 0 ||
+                  contSupp.ControllerLeftJoystickVertical() < 0))
         {
             bControllerDown = true;
             bFreezeControllerInput = true;
         }
         else if (!bFreezeControllerInput &&
-                 (Input.GetAxis("Controller DPad Vertical") < 0 ||
-                  Input.GetAxis("Controller Joystick Vertical") > 0))
+                 //(Input.GetAxis("Controller DPad Vertical") < 0 ||
+                 // Input.GetAxis("Controller Joystick Vertical") > 0))
+                 (contSupp.ControllerDirectionalPadVertical() > 0 ||
+                  contSupp.ControllerLeftJoystickVertical() > 0))
         {
             bControllerUp = true;
             bFreezeControllerInput = true;
         }
         else if (!bFreezeControllerInput &&
-                   (Input.GetAxis("Controller DPad Horizontal") > 0 ||
-                    Input.GetAxis("Controller Joystick Horizontal") > 0))
+                 //(Input.GetAxis("Controller DPad Horizontal") > 0 ||
+                 // Input.GetAxis("Controller Joystick Horizontal") > 0))
+                 (contSupp.ControllerDirectionalPadHorizontal() > 0 ||
+                  contSupp.ControllerLeftJoystickHorizontal() > 0))
         {
             bControllerRight = true;
             bFreezeControllerInput = true;
         }
         else if (!bFreezeControllerInput &&
-                (Input.GetAxis("Controller DPad Horizontal") < 0 ||
-                 Input.GetAxis("Controller Joystick Horizontal") < 0))
+                 //(Input.GetAxis("Controller DPad Horizontal") < 0 ||
+                 // Input.GetAxis("Controller Joystick Horizontal") < 0))
+                 (contSupp.ControllerDirectionalPadHorizontal() < 0 ||
+                  contSupp.ControllerLeftJoystickHorizontal() < 0))
         {
             bControllerLeft = true;
             bFreezeControllerInput = true;

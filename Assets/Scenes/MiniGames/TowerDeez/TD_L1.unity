@@ -14098,6 +14098,7 @@ GameObject:
   - component: {fileID: 832694026}
   - component: {fileID: 832694025}
   - component: {fileID: 832694028}
+  - component: {fileID: 832694029}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -14186,6 +14187,27 @@ MonoBehaviour:
   scrollSpeed: 5
   minY: 10
   maxY: 80
+--- !u!114 &832694029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832694024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f156135b0d08b04e80d0e60b7a7370b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aspectUtil: {fileID: 0}
+  dMan: {fileID: 0}
+  devOr: 0
+  fixedJoy: {fileID: 0}
+  oMan: {fileID: 0}
+  sMan: {fileID: 1038036484}
+  uMan: {fileID: 0}
+  bIsFull: 0
+  bSizingChange: 0
 --- !u!1 &846470993
 GameObject:
   m_ObjectHideFlags: 0
@@ -17368,6 +17390,8 @@ GameObject:
   - component: {fileID: 1038036481}
   - component: {fileID: 1038036482}
   - component: {fileID: 1038036483}
+  - component: {fileID: 1038036484}
+  - component: {fileID: 1038036485}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -17499,6 +17523,39 @@ MonoBehaviour:
   ui: {fileID: 1109196951}
   sceneFader: {fileID: 574310091268227352}
   levelToLoad: TD_Menu
+--- !u!114 &1038036484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038036477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f6bad1dc3e79c4480027a7e4c5e92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chp0: {fileID: 0}
+  chp1: {fileID: 0}
+  treeTunnel: {fileID: 0}
+  dMan: {fileID: 0}
+  screenOri: {fileID: 832694029}
+  tdsbfMenuCont: {fileID: 0}
+  tdsbfScreenOriPause: {fileID: 0}
+--- !u!114 &1038036485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038036477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e804f19a8f4d42d43bbfe4094c994210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bIsIpad: 0
+  bIsMobile: 0
 --- !u!1001 &1038059043
 PrefabInstance:
   m_ObjectHideFlags: 0

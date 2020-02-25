@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  02/14/2020
+// Last:  02/25/2020
 
 // DC TODO -- Bring in QuestMananger & complete quest when won (but still able to keep playing for restored brio & not more brio)
 
@@ -12,6 +12,7 @@ using UnityEngine.UI;
 // Main Minesweeper logic
 public class Minesweeper : MonoBehaviour
 {
+    public ControllerSupport contSupp;
     public DialogueManager dMan;
     public GameObject dBox;
     public GameObject npc_chun;
@@ -121,10 +122,13 @@ public class Minesweeper : MonoBehaviour
             !dMan.bDialogueActive) &&
             bAvoidInvestionUpdate)
         {
-            // DC TODO 01/10/2019 -- Add touches and controller support
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetButton("Action") ||
+                Input.GetMouseButton(0) ||
+                contSupp.ControllerButtonPadBottom("hold") ||
+                touches.bAaction
+                )
             {
-                // Avoid reseting the booleans until spacebar is let up
+                // Avoid reseting the booleans until actionable is let up
             }
             else
             {

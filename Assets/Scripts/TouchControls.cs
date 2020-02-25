@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  08/18/2019
+// Last:  02/22/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,6 +29,7 @@ public class TouchControls : MonoBehaviour
 
     public bool bAvoidSubUIElements;
     public bool bControlsVibrate;
+    public bool bIsGWC;
     public bool bUIactive;
 
     public int currentContVibe;
@@ -39,6 +40,9 @@ public class TouchControls : MonoBehaviour
     {
         // Initializers
         scene = SceneManager.GetActiveScene();
+
+        if (scene.name == "GuessWhoColluded")
+            bIsGWC = true;
 
         // Sets initial vibrate based off saved data
         if (!PlayerPrefs.HasKey("ControlsVibrate"))
@@ -71,7 +75,7 @@ public class TouchControls : MonoBehaviour
         // Moving the player based off arrow flags
         if (playerMove.bGWCUpdate &&
             !playerMove.bStopPlayerMovement &&
-            scene.name == "GuessWhoColluded")
+            bIsGWC)
         {
             if (bUp)
             {

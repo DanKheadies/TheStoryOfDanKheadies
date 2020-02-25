@@ -1,10 +1,10 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/20/2019
-// Last:  11/21/2019
+// Last:  02/25/2020
 
+using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class TD_SBF_ShopSelector : MonoBehaviour
@@ -14,8 +14,12 @@ public class TD_SBF_ShopSelector : MonoBehaviour
     public Button fireTB;
     public Button orbTB;
     public Button boomTB;
+    public ControllerSupport contSupp;
     public GameObject shopScrollOptions;
-    public TD_SBF_ControllerSupport contSupp;
+    public TD_SBF_BuildDescriptionBar buildDescriptionbar;
+    public TD_SBF_BuildDescriptionBarSelector buildDescriptionBarSel;
+    //public TD_SBF_ControllerSupport contSupp;
+    public TD_SBF_ControlManagement cMan;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_NodeUISelector nodeUISel;
     public TD_SBF_Shop shop;
@@ -40,7 +44,9 @@ public class TD_SBF_ShopSelector : MonoBehaviour
     {
         if(contSupp.bControllerConnected &&
            gMan.bIsTowerMode &&
-           !bIsNowTowerMode)
+           !bIsNowTowerMode &&
+           !nodeUISel.bIsNowNodeUIMode &&
+           !buildDescriptionBarSel.bIsNowBuildDescMode)
         {
             OpeningTowerMode();
         }
@@ -51,18 +57,21 @@ public class TD_SBF_ShopSelector : MonoBehaviour
            bIsNowTowerMode)
         {
             // Controller Support 
-            if (Input.GetAxis("Controller Rightstick Vertical") == 0)
+            //if (Input.GetAxis("Controller Rightstick Vertical") == 0)
+            if (contSupp.ControllerRightJoystickVertical() == 0)
             {
                 bFreezeControllerInput = false;
             }
             else if (!bFreezeControllerInput &&
-                     (Input.GetAxis("Controller Rightstick Vertical") > 0))
+                     //(Input.GetAxis("Controller Rightstick Vertical") > 0))
+                     contSupp.ControllerRightJoystickVertical() > 0)
             {
                 bControllerDown = true;
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
-                     (Input.GetAxis("Controller Rightstick Vertical") < 0))
+                     //(Input.GetAxis("Controller Rightstick Vertical") < 0))
+                     contSupp.ControllerRightJoystickVertical() < 0)
             {
                 bControllerUp = true;
                 bFreezeControllerInput = true;
@@ -78,18 +87,6 @@ public class TD_SBF_ShopSelector : MonoBehaviour
                 bControllerUp = false;
                 MoveUp();
             }
-            //else if (Input.GetButtonDown("Controller Bottom Button"))
-            //{
-            //    Debug.Log("[ShopSel] Select Option with Cont");
-            //    SelectOption();
-            //}
-            //else if (Input.GetButtonDown("Controller Right Button") ||
-            //         Input.GetButtonDown("Controller Right Bumper") ||
-            //         Input.GetButtonDown("Controller Left Bumper"))
-            //{
-            //    Debug.Log("[ShopSel] Close Shop");
-            //    ResetTowerMode();
-            //}
         }
     }
     
@@ -98,16 +95,11 @@ public class TD_SBF_ShopSelector : MonoBehaviour
         bIsNowTowerMode = true;
         currentSelection = ShopSelection.BasicTower;
         SelectOption();
+
+        cMan.ToggleBuildDescriptionBar();
+        buildDescriptionbar.CheckReturnButton();
         
-        // TODO: see about simplifying
-        // Note: weird "bug" where Basic one 'select' if it's the selected object upon closing the build bar
-        if (EventSystem.current.currentSelectedGameObject != basicTB.gameObject)
-            basicTB.Select();
-        else
-        {
-            skullTB.Select();
-            basicTB.Select();
-        }
+        StartCoroutine(DelayInitialSelection());
 
         if (TD_SBF_TowerPlacer.the_tp.gridNodeTBC)
             TD_SBF_TowerPlacer.the_tp.ColorCheck(
@@ -230,5 +222,11 @@ public class TD_SBF_ShopSelector : MonoBehaviour
     {
         bIsNowTowerMode = false;
         ResetScroll();
+    }
+
+    IEnumerator DelayInitialSelection()
+    {
+        yield return new WaitForSeconds(0.001f);
+        basicTB.Select();
     }
 }

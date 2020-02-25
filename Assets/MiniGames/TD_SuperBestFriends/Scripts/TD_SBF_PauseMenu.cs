@@ -2,13 +2,14 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  02/17/2020
+// Last:  02/25/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TD_SBF_PauseMenu : MonoBehaviour
 {
+    public ControllerSupport contSupp;
     public DeviceDetector devDetect;
     public GameObject audioButtons;
     public GameObject controlsButtons;
@@ -17,6 +18,8 @@ public class TD_SBF_PauseMenu : MonoBehaviour
     public GameObject optionsButtons;
     public GameObject pauseButtons;
     public GameObject ui;
+    public TD_SBF_CameraFollow camFollow;
+    public TD_SBF_GameManagement gMan;
     public TD_SBF_SceneFader sceneFader;
     public TD_SBF_TouchControls touchConts;
 
@@ -27,7 +30,8 @@ public class TD_SBF_PauseMenu : MonoBehaviour
     {
         if ((Input.GetKeyDown(KeyCode.Escape) ||
              Input.GetKeyDown(KeyCode.P) ||
-             Input.GetButtonDown("Controller Start Button")) &&
+             //Input.GetButtonDown("Controller Start Button")) &&
+             contSupp.ControllerMenuRight("down")) &&
              !modeSelector)
         {
             Toggle();
@@ -57,6 +61,13 @@ public class TD_SBF_PauseMenu : MonoBehaviour
                 devDetect.bIsMobile)
                 touchConts.DisplayControls();
         }
+
+        if (gMan.bIsHeroMode &&
+            ui.activeSelf)
+            camFollow.enabled = false;
+        else if (gMan.bIsHeroMode &&
+            !ui.activeSelf)
+            camFollow.enabled = true;
     }
 
     public void Retry()

@@ -4289,6 +4289,7 @@ MonoBehaviour:
   Opt2Btn: {fileID: 136035246}
   Opt3Btn: {fileID: 620668992}
   Opt4Btn: {fileID: 162900219}
+  contSupp: {fileID: 0}
   Opt1Arw: {fileID: 1509250517}
   Opt2Arw: {fileID: 2631218}
   Opt3Arw: {fileID: 473511259}
@@ -5759,6 +5760,7 @@ MonoBehaviour:
   item18: {fileID: 1892056642}
   item19: {fileID: 352521624}
   item20: {fileID: 150164499}
+  contSupp: {fileID: 866205100}
   itemSelector1: {fileID: 475179840}
   itemSelector2: {fileID: 134097205}
   itemSelector3: {fileID: 180391449}
@@ -7098,6 +7100,7 @@ MonoBehaviour:
   IconsArw: {fileID: 0}
   ResetArw: {fileID: 0}
   itemMenuAlpha: {fileID: 817270847}
+  contSupp: {fileID: 866205100}
   joystick: {fileID: 201469705}
   scene:
     m_Handle: 0
@@ -7107,6 +7110,8 @@ MonoBehaviour:
   bControllerDown: 0
   bControllerUp: 0
   bFreezeControllerInput: 0
+  bIsGWC: 0
+  bIsMinesweeper: 0
   currentPosition: 165
   bSecondaryMenu: 0
 --- !u!114 &584032642
@@ -8172,7 +8177,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &756991005
 GameObject:
@@ -8542,9 +8547,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   colliEnter: {fileID: 0}
+  contSupp: {fileID: 866205100}
   dMan: {fileID: 1137910804}
   pause: {fileID: 2074391689}
-  scriptMan: {fileID: 0}
+  scriptMan: {fileID: 2074391692}
   portPic: {fileID: 21300000, guid: 55597f3cf4c6d8d4caf3404fa5308689, type: 3}
   touches: {fileID: 945577415}
   uMan: {fileID: 517931596}
@@ -9291,6 +9297,7 @@ MonoBehaviour:
   UseBtn: {fileID: 245387594}
   DropBtn: {fileID: 1064465277}
   BackBtn: {fileID: 766972398}
+  contSupp: {fileID: 866205100}
   UseArw: {fileID: 816210415}
   DropArw: {fileID: 1105518277}
   BackArw: {fileID: 1333877732}
@@ -9591,6 +9598,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a309bb5c9c4f9242b7c0775c3ea86c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &866205099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 866205101}
+  - component: {fileID: 866205100}
+  m_Layer: 0
+  m_Name: GameSupport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &866205100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866205099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51782a2ecd3fa494fbe2bab483a7ded4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bBelayAction: 0
+  bControllerConnected: 0
+  bIsMoving: 0
+  bIsWindows: 0
+  bIsOSX: 0
+  bIsLinux: 0
+  bIsiOS: 0
+  bIsAndriod: 0
+  bContIsXbox360: 0
+  bContIsXboxOne: 0
+  bContIsPS2: 0
+  bContIsPS4: 0
+  controllers: []
+--- !u!4 &866205101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866205099}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &870541829
 GameObject:
   m_ObjectHideFlags: 0
@@ -12087,6 +12150,7 @@ MonoBehaviour:
   aspectUtil: {fileID: 1820261572}
   playerAnim: {fileID: 1933751394}
   mainCamera: {fileID: 1820261573}
+  contSupp: {fileID: 866205100}
   fixedJoy: {fileID: 201469705}
   dArrow: {fileID: 1435763998}
   dBox: {fileID: 1489847618}
@@ -12095,7 +12159,7 @@ MonoBehaviour:
   oMan: {fileID: 1137910805}
   pause: {fileID: 2074391689}
   playerMove: {fileID: 1933751392}
-  scriptMan: {fileID: 0}
+  scriptMan: {fileID: 2074391692}
   SFXMan: {fileID: 2090163999}
   portPic: {fileID: 21300000, guid: cb0a295efb692dc4d967fcbe460a2fb7, type: 3}
   dText: {fileID: 578846267}
@@ -12122,6 +12186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1820261573}
+  contSupp: {fileID: 866205100}
   dMan: {fileID: 1137910804}
   fixedJoy: {fileID: 201469705}
   oBox: {fileID: 429588857}
@@ -16988,9 +17053,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   colliEnter: {fileID: 0}
+  contSupp: {fileID: 866205100}
   dMan: {fileID: 1137910804}
   pause: {fileID: 2074391689}
-  scriptMan: {fileID: 0}
+  scriptMan: {fileID: 2074391692}
   portPic: {fileID: 21300000, guid: ad464303cab9c65429faccc69d817934, type: 3}
   touches: {fileID: 945577415}
   uMan: {fileID: 517931596}
@@ -18170,6 +18236,7 @@ MonoBehaviour:
   devOr: 0
   fixedJoy: {fileID: 201469705}
   oMan: {fileID: 1137910805}
+  sMan: {fileID: 2074391692}
   uMan: {fileID: 517931596}
   bIsFull: 0
   bSizingChange: 0
@@ -18202,6 +18269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectUtil: {fileID: 1820261572}
   myCam: {fileID: 1820261570}
+  contSupp: {fileID: 866205100}
   player: {fileID: 1933751389}
   scene:
     m_Handle: 0
@@ -19227,6 +19295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 1933751394}
   sceneTrans: {fileID: 1444730141}
+  contSupp: {fileID: 866205100}
   dMan: {fileID: 1137910804}
   pause: {fileID: 2074391689}
   scene:
@@ -19285,7 +19354,8 @@ MonoBehaviour:
   aspectUtil: {fileID: 1820261572}
   cameraFollow: {fileID: 1820261573}
   cameraSlider: {fileID: 0}
-  devDetect: {fileID: 0}
+  contSupp: {fileID: 866205100}
+  devDetect: {fileID: 2074391693}
   fixJoystick: {fileID: 201469705}
   playerBrioMan: {fileID: 1933751390}
   playerCollider: {fileID: 1933751391}
@@ -19297,14 +19367,12 @@ MonoBehaviour:
   trans: {fileID: 1933751396}
   uMan: {fileID: 517931596}
   movementVector: {x: 0, y: 0}
-  bControllerConnected: 0
   bGWCUpdate: 0
-  bIsControlling: 0
+  bIsGWC: 0
   bStopPlayerMovement: 0
   moveSpeed: 0
   xInput: 0
   yInput: 0
-  controllers: []
 --- !u!50 &1933751393
 Rigidbody2D:
   serializedVersion: 4
@@ -20474,6 +20542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
+  contSupp: {fileID: 866205100}
   scene:
     m_Handle: 0
   sceneSubtitle: {fileID: 0}
@@ -20723,6 +20792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemMenuCanvas: {fileID: 817270847}
+  contSupp: {fileID: 866205100}
   dMan: {fileID: 1137910804}
   fixedJoy: {fileID: 201469705}
   movePArw: {fileID: 584032641}
@@ -20740,6 +20810,7 @@ MonoBehaviour:
   soundMenu: {fileID: 1973615587}
   stuffBack: {fileID: 543911348}
   stuffMenu: {fileID: 480357467}
+  bIsGWC: 0
   bPauseActive: 0
   bPausing: 0
 --- !u!114 &2074391690
@@ -20798,6 +20869,9 @@ MonoBehaviour:
   chp1: {fileID: 0}
   treeTunnel: {fileID: 0}
   dMan: {fileID: 1137910804}
+  screenOri: {fileID: 1820261571}
+  tdsbfMenuCont: {fileID: 0}
+  tdsbfScreenOriPause: {fileID: 0}
 --- !u!114 &2074391693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21267,6 +21341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca1773bd03952f45a2d2da88bc3dc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 0}
   mat: {fileID: 2100000, guid: 107415bc2b334984e903eea1658a20b1, type: 2}
   pos: {x: 0, y: 0}
   scale: 2
@@ -21318,6 +21393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80a8a5a6647c074d8ebd0ebc3a85639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contSupp: {fileID: 866205100}
   mat: {fileID: 2100000, guid: 0712664fa47534f4fae268c379c7c82c, type: 2}
   pos: {x: -0.82, y: 0.011675}
   scale: 4.083985

@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  10/14/2019
+// Last:  02/21/2020
 
 using UnityEngine;
 
@@ -63,13 +63,11 @@ public class TD_SBF_Bullet : MonoBehaviour
 
     void Explode()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-        foreach (Collider collider in colliders)
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        foreach (Collider2D collider in colliders)
         {
             if (collider.tag == "Enemy")
-            {
                 Damage(collider.transform);
-            }
         }
     }
 
@@ -78,9 +76,7 @@ public class TD_SBF_Bullet : MonoBehaviour
         TD_SBF_Enemy e = enemy.GetComponent<TD_SBF_Enemy>();
 
         if (e)
-        {
             e.TakeDamage(damage);
-        }
 
     }
 

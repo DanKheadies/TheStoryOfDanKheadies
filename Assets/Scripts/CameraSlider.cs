@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/08/2020
+// Last:  02/24/2020
 
 using System.Collections;
 using UnityEngine;
@@ -35,7 +35,8 @@ public class CameraSlider : MonoBehaviour
             yield return null;
         }
 
-        areaAni.CheckAreaToAnimate();
+        if (areaAni)
+            areaAni.CheckAreaToAnimate();
 
         bIsSliding = false;
     }

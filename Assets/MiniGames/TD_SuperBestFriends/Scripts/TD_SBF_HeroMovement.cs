@@ -1,16 +1,17 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/17/2019
-// Last:  12/12/2019
+// Last:  02/25/2020
 
 using UnityEngine;
 
 public class TD_SBF_HeroMovement : MonoBehaviour
 {
     public Animator heroAni;
+    public ControllerSupport contSupp;
     public GameObject attackPos;
     public Rigidbody2D rBody;
-    public TD_SBF_ControllerSupport contSupp;
+    //public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_HeroStats heroStats;
     public TD_SBF_TouchControls touchConts;
@@ -23,9 +24,9 @@ public class TD_SBF_HeroMovement : MonoBehaviour
     void Start()
     {
         // Initializers
-        contSupp = GameObject.Find("GameSupport").GetComponent<TD_SBF_ControllerSupport>();
-        gMan = GameObject.FindGameObjectWithTag("GameController")
-            .GetComponent<TD_SBF_GameManagement>();
+        //contSupp = GameObject.Find("GameSupport").GetComponent<TD_SBF_ControllerSupport>();
+        //gMan = GameObject.FindGameObjectWithTag("GameController")
+        //    .GetComponent<TD_SBF_GameManagement>();
 
         InvokeRepeating("SetBodyMass", 1f, 1.0f);
     }
@@ -60,7 +61,7 @@ public class TD_SBF_HeroMovement : MonoBehaviour
         //    //            0.X seconds AFTER re-contact w/ Joystick
         //    Move(fixJoystick.Horizontal, fixJoystick.Vertical);
         //}
-        else if (contSupp.bIsControlling)
+        else if (contSupp.bIsMoving)
         {
             MovePlayerWithController();
         }
@@ -79,17 +80,23 @@ public class TD_SBF_HeroMovement : MonoBehaviour
 
     public void MovePlayerWithController()
     {
-        if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
-            Input.GetAxis("Controller Joystick Vertical") != 0)
+        //if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
+        //    Input.GetAxis("Controller Joystick Vertical") != 0)
+        if (contSupp.ControllerLeftJoystickHorizontal() != 0 ||
+            contSupp.ControllerLeftJoystickVertical() != 0)
         {
-            Move(Input.GetAxis("Controller Joystick Horizontal"), 
-                 Input.GetAxis("Controller Joystick Vertical"));
+            //Move(Input.GetAxis("Controller Joystick Horizontal"), 
+            //     Input.GetAxis("Controller Joystick Vertical"));
+            Move(contSupp.ControllerLeftJoystickHorizontal(),
+                 contSupp.ControllerLeftJoystickVertical());
         }
-        else if (Input.GetAxis("Controller DPad Horizontal") != 0 ||
-                 Input.GetAxis("Controller DPad Vertical") != 0)
+        //else if (Input.GetAxis("Controller DPad Horizontal") != 0 ||
+        //         Input.GetAxis("Controller DPad Vertical") != 0)
+        else if (contSupp.ControllerDirectionalPadHorizontal() != 0 ||
+                 contSupp.ControllerDirectionalPadVertical() != 0)
         {
-            Move(Input.GetAxis("Controller DPad Horizontal"), 
-                 (Input.GetAxis("Controller DPad Vertical") * -1));
+            Move(contSupp.ControllerDirectionalPadHorizontal(),
+                 contSupp.ControllerDirectionalPadVertical() * -1);
         }
         else
             Move(0, 0);

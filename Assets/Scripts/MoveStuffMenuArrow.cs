@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 06/18/2019
-// Last:  08/17/2019
+// Last:  02/25/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +29,7 @@ public class MoveStuffMenuArrow : MonoBehaviour
     public Button item18;
     public Button item19;
     public Button item20;
+    public ControllerSupport contSupp;
     public GameObject itemSelector1;
     public GameObject itemSelector2;
     public GameObject itemSelector3;
@@ -100,10 +101,15 @@ public class MoveStuffMenuArrow : MonoBehaviour
             itemMenu.GetComponent<CanvasGroup>().alpha == 0)
         {
             // Controller Support 
-            if (Input.GetAxis("Controller DPad Vertical") == 0 &&
-                Input.GetAxis("Controller Joystick Vertical") == 0 &&
-                Input.GetAxis("Controller DPad Horizontal") == 0 &&
-                Input.GetAxis("Controller Joystick Horizontal") == 0 &&
+            //if (Input.GetAxis("Controller DPad Vertical") == 0 &&
+            //    Input.GetAxis("Controller Joystick Vertical") == 0 &&
+            //    Input.GetAxis("Controller DPad Horizontal") == 0 &&
+            //    Input.GetAxis("Controller Joystick Horizontal") == 0 &&
+            //if (contSupp.ControllerLeftJoystickHorizontal() == 0 &&
+            //    contSupp.ControllerLeftJoystickVertical() == 0 &&
+            //    contSupp.ControllerDirectionalPadHorizontal() == 0 &&
+            //    contSupp.ControllerDirectionalPadVertical() == 0 &&
+            if (!contSupp.bIsMoving &&
                 fixedJoystick.Vertical == 0 &&
                 fixedJoystick.Horizontal == 0 &&
                 (!touches.bDown &&
@@ -114,8 +120,10 @@ public class MoveStuffMenuArrow : MonoBehaviour
                 bFreezeControllerInput = false;
             }
             else if (!bFreezeControllerInput &&
-                     (Input.GetAxis("Controller DPad Vertical") > 0 ||
-                      Input.GetAxis("Controller Joystick Vertical") < 0 ||
+                     //(Input.GetAxis("Controller DPad Vertical") > 0 ||
+                     // Input.GetAxis("Controller Joystick Vertical") < 0 ||
+                     (contSupp.ControllerDirectionalPadVertical() < 0 ||
+                      contSupp.ControllerLeftJoystickVertical() < 0 ||
                       touches.bDown ||
                       (Mathf.Abs(fixedJoystick.Vertical) > Mathf.Abs(fixedJoystick.Horizontal) &&
                        fixedJoystick.Vertical < 0)))
@@ -124,8 +132,10 @@ public class MoveStuffMenuArrow : MonoBehaviour
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
-                     (Input.GetAxis("Controller DPad Vertical") < 0 ||
-                      Input.GetAxis("Controller Joystick Vertical") > 0 ||
+                     //(Input.GetAxis("Controller DPad Vertical") < 0 ||
+                     // Input.GetAxis("Controller Joystick Vertical") > 0 ||
+                     (contSupp.ControllerDirectionalPadVertical() > 0 ||
+                      contSupp.ControllerLeftJoystickVertical() > 0 ||
                       touches.bUp ||
                       (Mathf.Abs(fixedJoystick.Vertical) > Mathf.Abs(fixedJoystick.Horizontal) &&
                        fixedJoystick.Vertical > 0)))
@@ -134,19 +144,23 @@ public class MoveStuffMenuArrow : MonoBehaviour
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
-                    (Input.GetAxis("Controller DPad Horizontal") > 0 ||
-                     Input.GetAxis("Controller Joystick Horizontal") > 0 ||
-                     fixedJoystick.Horizontal > 0 ||
-                     touches.bRight))
+                     //(Input.GetAxis("Controller DPad Horizontal") > 0 ||
+                     // Input.GetAxis("Controller Joystick Horizontal") > 0 ||
+                     (contSupp.ControllerDirectionalPadHorizontal() > 0 ||
+                      contSupp.ControllerLeftJoystickHorizontal() > 0 ||
+                      fixedJoystick.Horizontal > 0 ||
+                      touches.bRight))
             {
                 bControllerRight = true;
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
-                    (Input.GetAxis("Controller DPad Horizontal") < 0 ||
-                     Input.GetAxis("Controller Joystick Horizontal") < 0 ||
-                     fixedJoystick.Horizontal < 0 ||
-                     touches.bLeft))
+                     //(Input.GetAxis("Controller DPad Horizontal") < 0 ||
+                     // Input.GetAxis("Controller Joystick Horizontal") < 0 ||
+                     (contSupp.ControllerDirectionalPadHorizontal() < 0 ||
+                      contSupp.ControllerLeftJoystickHorizontal() < 0 ||
+                      fixedJoystick.Horizontal < 0 ||
+                      touches.bLeft))
             {
                 bControllerLeft = true;
                 bFreezeControllerInput = true;
@@ -668,7 +682,8 @@ public class MoveStuffMenuArrow : MonoBehaviour
             }
             else if (bAllowSelection &&
                      (Input.GetButtonDown("Action") ||
-                      Input.GetKeyDown(KeyCode.JoystickButton0) ||
+                      //Input.GetKeyDown(KeyCode.JoystickButton0) ||
+                      contSupp.ControllerButtonPadBottom("down") ||
                       touches.bAaction))
             {
                 if (currentPosition == SelectorPosition.item1)
@@ -756,8 +771,10 @@ public class MoveStuffMenuArrow : MonoBehaviour
                 touches.bAaction = false;
             }
             else if (Input.GetKeyDown(KeyCode.Escape) ||
-                     Input.GetKeyDown(KeyCode.JoystickButton7) ||
-                     Input.GetKeyDown(KeyCode.JoystickButton1) ||
+                     //Input.GetKeyDown(KeyCode.JoystickButton7) ||
+                     //Input.GetKeyDown(KeyCode.JoystickButton1) ||
+                     contSupp.ControllerMenuRight("down") ||
+                     contSupp.ControllerButtonPadRight("down") ||
                      Input.GetButton("BAction") ||
                      touches.bBaction)
             {

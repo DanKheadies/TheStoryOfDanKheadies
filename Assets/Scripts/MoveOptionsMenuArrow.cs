@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/23/2018
-// Last:  08/18/2019
+// Last:  02/25/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +13,7 @@ public class MoveOptionsMenuArrow : MonoBehaviour
     public Button Opt2Btn;
     public Button Opt3Btn;
     public Button Opt4Btn;
+    public ControllerSupport contSupp;
     public GameObject Opt1Arw;
     public GameObject Opt2Arw;
     public GameObject Opt3Arw;
@@ -49,9 +50,11 @@ public class MoveOptionsMenuArrow : MonoBehaviour
             !oMan.bPauseOptions &&
             pauseScreen.transform.localScale == Vector3.zero)
         {
-            // Controller Support 
-            if (Input.GetAxis("Controller DPad Vertical") == 0 &&
-                Input.GetAxis("Controller Joystick Vertical") == 0 &&
+            //// Controller Support 
+            //if (Input.GetAxis("Controller DPad Vertical") == 0 &&
+            //    Input.GetAxis("Controller Joystick Vertical") == 0 &&
+            if (contSupp.ControllerDirectionalPadVertical() == 0 &&
+                contSupp.ControllerLeftJoystickVertical() == 0 &&
                 joystick.Vertical == 0 &&
                 (!touches.bDown &&
                  !touches.bUp))
@@ -59,8 +62,10 @@ public class MoveOptionsMenuArrow : MonoBehaviour
                 bFreezeControllerInput = false;
             }
             else if (!bFreezeControllerInput &&
-                     (Input.GetAxis("Controller DPad Vertical") > 0 ||
-                      Input.GetAxis("Controller Joystick Vertical") < 0 ||
+                     //(Input.GetAxis("Controller DPad Vertical") > 0 ||
+                     // Input.GetAxis("Controller Joystick Vertical") < 0 ||
+                     (contSupp.ControllerDirectionalPadVertical() < 0 ||
+                      contSupp.ControllerLeftJoystickVertical() < 0 ||
                       touches.bDown ||
                       (Mathf.Abs(joystick.Vertical) > Mathf.Abs(joystick.Horizontal) &&
                        joystick.Vertical < 0)))
@@ -69,8 +74,10 @@ public class MoveOptionsMenuArrow : MonoBehaviour
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
-                     (Input.GetAxis("Controller DPad Vertical") < 0 ||
-                      Input.GetAxis("Controller Joystick Vertical") > 0 ||
+                     //(Input.GetAxis("Controller DPad Vertical") < 0 ||
+                     // Input.GetAxis("Controller Joystick Vertical") > 0 ||
+                     (contSupp.ControllerDirectionalPadVertical() > 0 ||
+                      contSupp.ControllerLeftJoystickVertical() > 0 ||
                       touches.bUp ||
                       (Mathf.Abs(joystick.Vertical) > Mathf.Abs(joystick.Horizontal) &&
                        joystick.Vertical > 0)))
@@ -133,7 +140,8 @@ public class MoveOptionsMenuArrow : MonoBehaviour
                 }
             }
             else if (Input.GetButtonDown("Action") ||
-                     Input.GetKeyDown(KeyCode.JoystickButton0) ||
+                     //Input.GetKeyDown(KeyCode.JoystickButton0) ||
+                     contSupp.ControllerButtonPadBottom("down") ||
                      touches.bAaction)
             {
                 if (currentPosition == ArrowPos.Opt1)

@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  12/05/2019
+// Last:  02/18/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -96,6 +96,8 @@ public class TD_SBF_Enemy : MonoBehaviour
     void Die()
     {
         isDead = true;
+
+        gameObject.tag = "Deademy";
 
         TD_SBF_PlayerStatistics.ThoughtsPrayers += 
             worth * TD_SBF_PlayerStatistics.ThoughtsPrayersModifier;

@@ -2,17 +2,21 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  02/18/2020
+// Last:  02/20/2020
 
 using UnityEngine;
 
 public class TD_SBF_BuildManager : MonoBehaviour
 {
     public static TD_SBF_BuildManager td_sbf_instance;
+
     public GameObject buildEffect;
     public GameObject selectionEffect;
     public GameObject sellEffect;
     public GameObject upgradeEffect;
+    public TD_SBF_BuildDescriptionBar buildDescriptionBar;
+    public TD_SBF_BuildDescriptionBarSelector buildDescBarSel;
+    public TD_SBF_ControlManagement cMan;
     public TD_SBF_Node selectedNode;
     public TD_SBF_NodeUI nodeUI;
     public TD_SBF_NodeUISelector nodeUISel;
@@ -47,11 +51,18 @@ public class TD_SBF_BuildManager : MonoBehaviour
 
     public void SelectNode(TD_SBF_Node node)
     {
+        // Controller Support
+        if (buildDescBarSel.bIsNowBuildDescMode)
+            return;
+
         if (selectedNode == node)
         {
             DeselectNode();
             return;
         }
+
+        if (buildDescriptionBar.gameObject.activeSelf)
+            cMan.DisableBuildDescriptionBar();
 
         selectedNode = node;
         turretToBuild = null;

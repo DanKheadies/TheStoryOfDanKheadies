@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/02/2018
-// Last:  02/11/2020
+// Last:  02/20/2020
 
 using UnityEngine;
 
@@ -68,6 +68,10 @@ public class ScreenOrientation : MonoBehaviour
             uMan.CheckAndSetMenus();
         
         if (sMan)
+        {
             sMan.ResetParameters("CS_TreeTunnel");
+            sMan.ResetParameters("TD_SBF_LX");
+            sMan.ResetParameters("TD_SBF_MenuController");
+        }
     }
 }
