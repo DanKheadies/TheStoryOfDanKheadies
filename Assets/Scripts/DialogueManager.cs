@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/24/2020
+// Last:  02/27/2020
 
 using System.Collections;
 using UnityEngine;
@@ -73,10 +73,9 @@ public class DialogueManager : MonoBehaviour
         if (bPauseDialogue)
         {
             pauseTime -= Time.deltaTime;
+
             if (pauseTime < 0)
-            {
                 UnpauseDialogue();
-            }
         }
 
         // Advance active dialogues
@@ -128,7 +127,6 @@ public class DialogueManager : MonoBehaviour
 
         // Temp: Update Camera display / aspect ratio & virtual joystick
         if (Input.GetKeyUp(KeyCode.R) ||
-            //Input.GetKeyUp(KeyCode.JoystickButton6))
             contSupp.ControllerMenuLeft("up"))
         {
             ConfigureParameters();
@@ -192,9 +190,8 @@ public class DialogueManager : MonoBehaviour
         // Stops the player's movement
         playerMove.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         if (playerAnim)
-        {
             playerAnim.SetBool("bIsWalking", false);
-        }
+        
         touches.UnpressedAllArrows();
         playerMove.bStopPlayerMovement = true;
 

@@ -60,7 +60,6 @@ public class TD_SBF_GameManagement : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.B) ||
-            //Input.GetButtonDown("Controller Left Bumper"))
             contSupp.ControllerBumperLeft("down"))
         {
             cMan.ToggleHeroBar();
@@ -71,7 +70,6 @@ public class TD_SBF_GameManagement : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.H) ||
-            //Input.GetButtonDown("Controller Right Bumper"))
             contSupp.ControllerBumperRight("down"))
         {
             cMan.ToggleBuildBar();

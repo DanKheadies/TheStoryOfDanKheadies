@@ -18,7 +18,6 @@ public class TD_SBF_HeroBarManager : MonoBehaviour
     public GameObject upgradeBackButton;
     public Image basicAttackBar;
     public Image secondaryAttackBar;
-    //public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_HeroActions heroActions;
     public TD_SBF_HeroMovement heroMove;
     public TD_SBF_HeroStats heroStats;

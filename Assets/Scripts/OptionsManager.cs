@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/08/2018
-// Last:  02/24/2020
+// Last:  02/25/2020
 
 using System.Collections;
 using UnityEngine;
@@ -91,7 +91,6 @@ public class OptionsManager : MonoBehaviour
 
         // Temp: Update Camera display / aspect ratio & virtual joystick
         if (Input.GetKeyUp(KeyCode.R) ||
-            //Input.GetKeyUp(KeyCode.JoystickButton6))
             contSupp.ControllerMenuLeft("up"))
         {
             ConfigureParameters();

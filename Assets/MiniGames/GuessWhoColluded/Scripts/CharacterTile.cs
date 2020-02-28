@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/13/2018
-// Last:  02/24/2020
+// Last:  02/25/2020
 
 using UnityEngine;
 
@@ -65,7 +65,6 @@ public class CharacterTile : MonoBehaviour
             !bAvoidUpdate &&
             (Input.GetKeyDown(KeyCode.LeftShift) ||
              Input.GetKeyDown(KeyCode.RightShift) ||
-             //Input.GetKeyDown(KeyCode.JoystickButton1) ||
              contSupp.ControllerButtonPadRight("down") ||
              touches.bBaction ||
              (Input.GetMouseButtonDown(1) &&
@@ -80,7 +79,6 @@ public class CharacterTile : MonoBehaviour
         if (!pause.bPauseActive &&
             (Input.GetKeyUp(KeyCode.LeftShift) ||
              Input.GetKeyUp(KeyCode.RightShift) ||
-             //Input.GetKeyUp(KeyCode.JoystickButton1) ||
              contSupp.ControllerButtonPadRight("up") ||
              (Input.GetMouseButtonUp(1) &&
               devDetect.bIsMobile)))

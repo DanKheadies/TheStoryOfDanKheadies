@@ -11,7 +11,6 @@ public class TD_SBF_HeroMovement : MonoBehaviour
     public ControllerSupport contSupp;
     public GameObject attackPos;
     public Rigidbody2D rBody;
-    //public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_HeroStats heroStats;
     public TD_SBF_TouchControls touchConts;
@@ -23,11 +22,6 @@ public class TD_SBF_HeroMovement : MonoBehaviour
 
     void Start()
     {
-        // Initializers
-        //contSupp = GameObject.Find("GameSupport").GetComponent<TD_SBF_ControllerSupport>();
-        //gMan = GameObject.FindGameObjectWithTag("GameController")
-        //    .GetComponent<TD_SBF_GameManagement>();
-
         InvokeRepeating("SetBodyMass", 1f, 1.0f);
     }
 
@@ -72,26 +66,18 @@ public class TD_SBF_HeroMovement : MonoBehaviour
                  touchConts.leftFixedJoystick.Vertical);
         }
         else
-        {
             Move(Input.GetAxisRaw("Horizontal"), 
                  Input.GetAxisRaw("Vertical"));
-        }
     }
 
     public void MovePlayerWithController()
     {
-        //if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
-        //    Input.GetAxis("Controller Joystick Vertical") != 0)
         if (contSupp.ControllerLeftJoystickHorizontal() != 0 ||
             contSupp.ControllerLeftJoystickVertical() != 0)
         {
-            //Move(Input.GetAxis("Controller Joystick Horizontal"), 
-            //     Input.GetAxis("Controller Joystick Vertical"));
             Move(contSupp.ControllerLeftJoystickHorizontal(),
                  contSupp.ControllerLeftJoystickVertical());
         }
-        //else if (Input.GetAxis("Controller DPad Horizontal") != 0 ||
-        //         Input.GetAxis("Controller DPad Vertical") != 0)
         else if (contSupp.ControllerDirectionalPadHorizontal() != 0 ||
                  contSupp.ControllerDirectionalPadVertical() != 0)
         {
@@ -123,16 +109,9 @@ public class TD_SBF_HeroMovement : MonoBehaviour
 
         rBody.velocity = movementVector;
 
-        //if (playerAnim)
-        //    playerAnim.speed = 1.0f;
-
         // Set sorting order
         transform.GetComponent<SpriteRenderer>()
             .sortingOrder = 100 + Mathf.Abs(Mathf.RoundToInt(transform.position.y));
-
-        // Set animation direction
-        //heroAni.GetComponent<TD_SBF_HeroAnimator>()
-        //    .MovementDirection(xInput, yInput);
     }
 
     public void SetBodyMass()

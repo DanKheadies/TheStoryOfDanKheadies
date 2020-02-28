@@ -2,9 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  02/25/2020
-
-// DC TODO -- Bring in QuestMananger & complete quest when won (but still able to keep playing for restored brio & not more brio)
+// Last:  02/27/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -215,21 +213,27 @@ public class Minesweeper : MonoBehaviour
                   moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
         {
             oMan.ResetOptions();
-            warpMinesweeper.GetComponent<BoxCollider2D>().enabled = true;
-            warpMinesweeper.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
 
-            // Save Transfer Values
-            save.SaveBrioTransfer();
-            save.SaveInventoryTransfer();
-            PlayerPrefs.SetInt("Transferring", 1);
-            PlayerPrefs.SetString("TransferScene", warpMinesweeper.GetComponent<SceneTransitioner>().BetaLoad);
-
-            // Stop Dan from moving
-            player.GetComponent<Animator>().enabled = false;
-
-            // Stop the player from bringing up the dialog again
-            dMan.gameObject.transform.localScale = Vector3.zero;
+            GG();
         }
+    }
+
+    public void GG()
+    {
+        warpMinesweeper.GetComponent<BoxCollider2D>().enabled = true;
+        warpMinesweeper.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
+
+        // Save Transfer Values
+        save.SaveBrioTransfer();
+        save.SaveInventoryTransfer();
+        PlayerPrefs.SetInt("Transferring", 1);
+        PlayerPrefs.SetString("TransferScene", warpMinesweeper.GetComponent<SceneTransitioner>().BetaLoad);
+
+        // Stop Dan from moving
+        player.GetComponent<Animator>().enabled = false;
+
+        // Stop the player from bringing up the dialog again
+        dMan.gameObject.transform.localScale = Vector3.zero;
     }
 
     public void ResetGame()

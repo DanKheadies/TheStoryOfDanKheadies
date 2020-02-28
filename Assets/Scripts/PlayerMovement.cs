@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/25/2020
+// Last:  02/27/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,18 +25,14 @@ public class PlayerMovement : MonoBehaviour
     public Transform trans;
     public UIManager uMan;
     public Vector2 movementVector;
-
-    //public bool bControllerConnected;
+    
     public bool bGWCUpdate;
     public bool bIsGWC;
-    //public bool bIsControlling;
     public bool bStopPlayerMovement;
 
     public float moveSpeed;
     public float xInput;
     public float yInput;
-
-    //public string[] controllers;
     
 	void Start ()
     {
@@ -53,49 +49,10 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = 3.0f;
         else
             moveSpeed = 1.0f;
-
-        //controllers = Input.GetJoystickNames();
-
-        //InvokeRepeating("FindController", 1.5f, 1.5f);
     }
-
-    //public void FindController()
-    //{
-    //    controllers = Input.GetJoystickNames();
-    //}
 
     void Update()
     {
-        //// Controller Support
-        //if (controllers.Length > 0)
-        //{
-        //    //Iterate over every element
-        //    for (int i = 0; i < controllers.Length; ++i)
-        //    {
-        //        //Check if the string is empty or not
-        //        if (!string.IsNullOrEmpty(controllers[i]))
-        //        {
-        //            bControllerConnected = true;
-
-        //            if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
-        //                Input.GetAxis("Controller Joystick Vertical") != 0 ||
-        //                Input.GetAxis("Controller DPad Horizontal") != 0 ||
-        //                Input.GetAxis("Controller DPad Vertical") != 0)
-        //            {
-        //                bIsControlling = true;
-        //            }
-        //            else
-        //            {
-        //                bIsControlling = false;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            bControllerConnected = false;
-        //        }
-        //    }
-        //}
-
         if (bStopPlayerMovement)
         {
             movementVector = Vector2.zero;
@@ -149,24 +106,7 @@ public class PlayerMovement : MonoBehaviour
                  contSupp.ControllerDirectionalPadVertical());
         }
         else
-        {
             Move(0, 0);
-        }
-
-        //if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
-        //    Input.GetAxis("Controller Joystick Vertical") != 0)
-        //{
-        //    Move(Input.GetAxis("Controller Joystick Horizontal"), Input.GetAxis("Controller Joystick Vertical"));
-        //}
-        //else if (Input.GetAxis("Controller DPad Horizontal") != 0 ||
-        //         Input.GetAxis("Controller DPad Vertical") != 0)
-        //{
-        //    Move(Input.GetAxis("Controller DPad Horizontal"), (-1 * Input.GetAxis("Controller DPad Vertical")));
-        //}
-        //else
-        //{
-        //    Move(0, 0);
-        //}
     }
 
     public void Move(float xInput, float yInput) 
@@ -183,15 +123,13 @@ public class PlayerMovement : MonoBehaviour
                 playerAnim.SetFloat("Input_Y", movementVector.y);
             }
             else
-            {
                 playerAnim.SetBool("bIsWalking", false);
-            }
         }
 
         // 2x Move Speed
         if (touches.bBaction ||
             contSupp.ControllerButtonPadRight("hold") || 
-            contSupp.ControllerTriggerRight() > 0 ||
+            contSupp.ControllerTriggerRight() != 0 ||
             (Input.GetButton("BAction") &&
              !devDetect.bIsMobile))
         {
@@ -219,17 +157,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void GWCMovePlayer()
     {
-        //if (bControllerConnected && 
-        //    bIsControlling)
-        //contSupp.CheckForMovement();
-
         if (contSupp.bControllerConnected &&
             contSupp.bIsMoving)
         {
             if (bGWCUpdate)
                 GWCMovePlayerWithController();
-
-            //if (bIsControlling)
+            
             if (contSupp.bIsMoving)
                 bGWCUpdate = false;
             else
@@ -276,17 +209,6 @@ public class PlayerMovement : MonoBehaviour
             GWCMove(contSupp.ControllerDirectionalPadHorizontal(),
                     contSupp.ControllerDirectionalPadVertical());
         }
-        //if (Input.GetAxis("Controller Joystick Horizontal") != 0 ||
-        //    Input.GetAxis("Controller Joystick Vertical") != 0)
-        //{
-        //    GWCMoveViaJoystick(Input.GetAxis("Controller Joystick Horizontal"), 
-        //                       Input.GetAxis("Controller Joystick Vertical"));
-        //}
-        //else if (Input.GetAxis("Controller DPad Horizontal") != 0 ||
-        //         Input.GetAxis("Controller DPad Vertical") != 0)
-        //{
-        //    GWCMove(Input.GetAxis("Controller DPad Horizontal"), (-1 * Input.GetAxis("Controller DPad Vertical")));
-        //}
         else
             GWCMove(0, 0);
     }
@@ -327,6 +249,12 @@ public class PlayerMovement : MonoBehaviour
             rBody.position = new Vector2(rBody.position.x + (2 * xInput), rBody.position.y + (2 * yInput));
     }
 
+    public void StopPlayerMovement()
+    {
+        bStopPlayerMovement = true;
+        playerAnim.SetBool("bIsWalking", false);
+    }
+
     public void CollisionBundle() // Note: order is important
     {
         // Reset Camera dimension / ratio incase screen size changed at all (e.g. WebGL Fullscreen)
@@ -338,7 +266,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Unsync and stop camera tracking
         cameraFollow.currentCoords = 0;
-        //cameraFollow.bUpdateOn = false;
 
         // Hide UI (if present) and prevent input
         if (cameraSlider)

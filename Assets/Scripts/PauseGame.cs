@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/26/2017
-// Last:  02/24/2020
+// Last:  02/25/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -56,11 +56,9 @@ public class PauseGame : MonoBehaviour
 	void Update ()
     {
         if (Input.GetKeyUp(KeyCode.Escape) ||
-            //Input.GetKeyUp(KeyCode.JoystickButton7) ||
             contSupp.ControllerMenuRight("up") ||
             (bPauseActive &&
              (touches.bBaction ||
-              //Input.GetKeyUp(KeyCode.JoystickButton1))))
               contSupp.ControllerButtonPadRight("up"))))
         {
             if (controlsMenu.transform.localScale == Vector3.one)

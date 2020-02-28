@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 05/20/2018
-// Last:  02/24/2020
+// Last:  02/26/2020
 
 using System.Collections;
 using UnityEngine;
@@ -37,7 +37,6 @@ public class Element : MonoBehaviour
 
     void Update()
     {
-
         //if (Input.GetKeyUp(KeyCode.R))
         //{
         //    Debug.Log("hard reset");
@@ -48,7 +47,6 @@ public class Element : MonoBehaviour
             !dMan.bDialogueActive &&
             !ms.bAvoidInvestigating &&
             (Input.GetKeyUp(KeyCode.Space) ||
-             //Input.GetKeyUp(KeyCode.JoystickButton0) ||
              contSupp.ControllerButtonPadBottom("up") ||
              touches.bAaction))
         {
@@ -58,7 +56,6 @@ public class Element : MonoBehaviour
         if (bHasEntered &&
             !dMan.bDialogueActive &&
             (Input.GetKeyUp(KeyCode.F) ||
-             //Input.GetKeyUp(KeyCode.JoystickButton1) ||
              contSupp.ControllerButtonPadRight("up") ||
              touches.bBaction))
         {

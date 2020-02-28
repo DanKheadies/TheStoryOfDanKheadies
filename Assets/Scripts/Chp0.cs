@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  02/07/2020
+// Last:  02/27/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +12,7 @@ public class Chp0 : MonoBehaviour
 {
     public Camera mainCamera;
     public DialogueManager dMan;
+    public GameObject brioBar;
     public GameObject dArrow;
     public GameObject dBox;
     public GameObject homeVRGoggles;
@@ -43,6 +44,7 @@ public class Chp0 : MonoBehaviour
             touches.transform.localScale = Vector3.zero;
             mMan.bMusicCanPlay = false;
             pauseButton.transform.localScale = Vector3.zero;
+            brioBar.transform.localScale = Vector3.zero;
 
             // Set player
             mainCamera.transform.position = new Vector2(1.45f, 3.33f);
@@ -98,6 +100,7 @@ public class Chp0 : MonoBehaviour
 
             // Set UI
             pauseButton.transform.localScale = Vector3.one;
+            brioBar.transform.localScale = Vector3.one;
             uMan.CheckIfMobile();
 
             // Fade in scene
@@ -116,10 +119,9 @@ public class Chp0 : MonoBehaviour
 
             // Show UI
             pauseButton.transform.localScale = Vector3.one;
+            brioBar.transform.localScale = Vector3.one;
             if (uMan.bControlsActive)
-            {
                 touches.transform.localScale = Vector3.one;
-            }
 
             // Fade in scene
             sFaderAnim.GetComponent<Animator>().enabled = true;

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/21/2019
-// Last:  02/20/2020
+// Last:  02/27/2020
 
 using UnityEngine;
 
@@ -76,7 +76,7 @@ public class ScriptManager : MonoBehaviour
         else if (treeTunnel)
         {
             if (action == "WarpOut")
-                treeTunnel.WarpOut();
+                treeTunnel.CompleteCutscene();
         }
     }
 

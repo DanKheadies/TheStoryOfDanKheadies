@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/25/2020
+// Last:  02/27/2020
 
 using System.Collections;
 using UnityEngine;
@@ -76,8 +76,6 @@ public class MenuControl : MonoBehaviour
         // Skip animations
         if ((Input.GetKeyDown(KeyCode.Space) ||
              Input.GetMouseButtonDown(0) ||
-             //Input.GetButtonDown("Controller Bottom Button") ||
-             //Input.GetButtonDown("Controller Right Button")) &&
              contSupp.ControllerButtonPadBottom("down") ||
              contSupp.ControllerButtonPadRight("down")) &&
              danFace.GetComponent<CanvasRenderer>().GetAlpha() != 1f)
@@ -120,30 +118,19 @@ public class MenuControl : MonoBehaviour
 
         if ((Input.GetKeyDown(KeyCode.Space) ||
              Input.GetMouseButtonDown(0) ||
-             //Input.GetButtonDown("Controller Bottom Button")) &&
              contSupp.ControllerButtonPadBottom("down")) &&
              bIsSelectable &&
              !bAvoidSelection)
         {
+            Debug.Log("selecting...");
             SelectOption();
         }
 
         // Controller Support 
-        //if (Input.GetAxis("Controller DPad Vertical") == 0 &&
-        //        Input.GetAxis("Controller Joystick Vertical") == 0 &&
-        //        Input.GetAxis("Controller DPad Horizontal") == 0 &&
-        //        Input.GetAxis("Controller Joystick Horizontal") == 0)
         if (!contSupp.bIsMoving)
-        //if (contSupp.ControllerDirectionalPadVertical() == 0 &&
-        //    contSupp.ControllerLeftJoystickVertical() == 0 &&
-        //    contSupp.ControllerDirectionalPadHorizontal() == 0 &&
-        //    contSupp.ControllerLeftJoystickHorizontal() == 0)
-        {
             bFreezeControllerInput = false;
-        }
+
         else if (!bFreezeControllerInput &&
-                 //(Input.GetAxis("Controller DPad Vertical") > 0 ||
-                 // Input.GetAxis("Controller Joystick Vertical") < 0))
                  (contSupp.ControllerDirectionalPadVertical() < 0 ||
                   contSupp.ControllerLeftJoystickVertical() < 0))
         {
@@ -151,8 +138,6 @@ public class MenuControl : MonoBehaviour
             bFreezeControllerInput = true;
         }
         else if (!bFreezeControllerInput &&
-                 //(Input.GetAxis("Controller DPad Vertical") < 0 ||
-                 // Input.GetAxis("Controller Joystick Vertical") > 0))
                  (contSupp.ControllerDirectionalPadVertical() > 0 ||
                   contSupp.ControllerLeftJoystickVertical() > 0))
         {
@@ -160,8 +145,6 @@ public class MenuControl : MonoBehaviour
             bFreezeControllerInput = true;
         }
         else if (!bFreezeControllerInput &&
-                 //(Input.GetAxis("Controller DPad Horizontal") > 0 ||
-                 // Input.GetAxis("Controller Joystick Horizontal") > 0))
                  (contSupp.ControllerDirectionalPadHorizontal() > 0 ||
                   contSupp.ControllerLeftJoystickHorizontal() > 0))
         {
@@ -169,8 +152,6 @@ public class MenuControl : MonoBehaviour
             bFreezeControllerInput = true;
         }
         else if (!bFreezeControllerInput &&
-                 //(Input.GetAxis("Controller DPad Horizontal") < 0 ||
-                 // Input.GetAxis("Controller Joystick Horizontal") < 0))
                  (contSupp.ControllerDirectionalPadHorizontal() < 0 ||
                   contSupp.ControllerLeftJoystickHorizontal() < 0))
         {
@@ -324,11 +305,17 @@ public class MenuControl : MonoBehaviour
     public void SelectOption()
     {
         if (currentPosition == SelectionPosition.Start)
+        {
+            Debug.Log("starting...");
             startB.GetComponent<Button>().onClick.Invoke();
+        }
         else if (currentPosition == SelectionPosition.GoOn)
             goOnB.GetComponent<Button>().onClick.Invoke();
         else if (currentPosition == SelectionPosition.New)
+        {
+            Debug.Log("new...");
             newB.GetComponent<Button>().onClick.Invoke();
+        }
         else if (currentPosition == SelectionPosition.End)
             endB.GetComponent<Button>().onClick.Invoke();
         else if (currentPosition == SelectionPosition.YesNew)
@@ -372,9 +359,7 @@ public class MenuControl : MonoBehaviour
             newB.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         }
         else
-        {
             startB.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
-        }
 
         endB.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
 

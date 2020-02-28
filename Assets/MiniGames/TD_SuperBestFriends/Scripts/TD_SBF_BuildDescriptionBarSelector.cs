@@ -11,7 +11,6 @@ public class TD_SBF_BuildDescriptionBarSelector : MonoBehaviour
     public Button returnB;
     public ControllerSupport contSupp;
     public GameObject buildDescBar;
-    //public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_ControlManagement cMan;
     public TD_SBF_NodeUI nodeUI;
     public TD_SBF_NodeUISelector nodeUISel;
@@ -38,8 +37,6 @@ public class TD_SBF_BuildDescriptionBarSelector : MonoBehaviour
             buildDescBar.activeSelf &&
             bIsNowBuildDescMode)
         {
-            //if (Input.GetButtonDown("Controller Bottom Button") ||
-            //    Input.GetButtonDown("Controller Right Button"))
             if (contSupp.ControllerButtonPadBottom("down") ||
                 contSupp.ControllerButtonPadRight("down"))
             {

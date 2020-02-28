@@ -18,7 +18,6 @@ public class TD_SBF_ShopSelector : MonoBehaviour
     public GameObject shopScrollOptions;
     public TD_SBF_BuildDescriptionBar buildDescriptionbar;
     public TD_SBF_BuildDescriptionBarSelector buildDescriptionBarSel;
-    //public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_ControlManagement cMan;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_NodeUISelector nodeUISel;
@@ -57,20 +56,17 @@ public class TD_SBF_ShopSelector : MonoBehaviour
            bIsNowTowerMode)
         {
             // Controller Support 
-            //if (Input.GetAxis("Controller Rightstick Vertical") == 0)
             if (contSupp.ControllerRightJoystickVertical() == 0)
             {
                 bFreezeControllerInput = false;
             }
             else if (!bFreezeControllerInput &&
-                     //(Input.GetAxis("Controller Rightstick Vertical") > 0))
                      contSupp.ControllerRightJoystickVertical() > 0)
             {
                 bControllerDown = true;
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
-                     //(Input.GetAxis("Controller Rightstick Vertical") < 0))
                      contSupp.ControllerRightJoystickVertical() < 0)
             {
                 bControllerUp = true;

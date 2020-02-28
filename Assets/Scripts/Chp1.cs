@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  02/14/2020
+// Last:  02/27/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -234,6 +234,9 @@ public class Chp1 : MonoBehaviour
 
         yield return new WaitForSeconds(0.333f);
 
+        // Stop player (incase they pause)
+        player.GetComponent<PlayerMovement>().StopPlayerMovement();
+
         npc_dagon.GetComponent<Animator>().SetBool("bIsVogging", false);
         npc_dagon.GetComponent<Animator>().SetBool("bIsWalking", true);
         npc_dagon.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
@@ -249,11 +252,22 @@ public class Chp1 : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
 
+            // Stop player (incase they pause)
+            player.GetComponent<PlayerMovement>().StopPlayerMovement();
+
             npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(-0.55f, 0);
             npc_dagon.GetComponent<Animator>().SetFloat("MoveX", -1f);
             npc_dagon.GetComponent<Animator>().SetFloat("MoveY", 0);
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
+
+            // Stop player (incase they pause)
+            player.GetComponent<PlayerMovement>().StopPlayerMovement();
+
+            yield return new WaitForSeconds(1f);
+
+            // Stop player (incase they pause)
+            player.GetComponent<PlayerMovement>().StopPlayerMovement();
 
             npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -0.4f);
             npc_dagon.GetComponent<Animator>().SetFloat("MoveX", 0);
@@ -267,11 +281,22 @@ public class Chp1 : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
 
+            // Stop player (incase they pause)
+            player.GetComponent<PlayerMovement>().StopPlayerMovement();
+
             npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(-0.55f, 0);
             npc_dagon.GetComponent<Animator>().SetFloat("MoveX", -1f);
             npc_dagon.GetComponent<Animator>().SetFloat("MoveY", 0);
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
+
+            // Stop player (incase they pause)
+            player.GetComponent<PlayerMovement>().StopPlayerMovement();
+
+            yield return new WaitForSeconds(1f);
+
+            // Stop player (incase they pause)
+            player.GetComponent<PlayerMovement>().StopPlayerMovement();
 
             npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0.5f);
             npc_dagon.GetComponent<Animator>().SetFloat("MoveX", 0);
@@ -280,11 +305,17 @@ public class Chp1 : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        // Stop player (incase they pause)
+        player.GetComponent<PlayerMovement>().StopPlayerMovement();
+
         npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(-0.5f, 0);
         npc_dagon.GetComponent<Animator>().SetFloat("MoveX", -1f);
         npc_dagon.GetComponent<Animator>().SetFloat("MoveY", 0);
 
         yield return new WaitForSeconds(0.666f);
+
+        // Stop player (incase they pause)
+        player.GetComponent<PlayerMovement>().StopPlayerMovement();
 
         npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         npc_dagon.GetComponent<Animator>().SetBool("bIsWalking", false);
@@ -295,6 +326,9 @@ public class Chp1 : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
+        // Stop player (incase they pause)
+        player.GetComponent<PlayerMovement>().StopPlayerMovement();
+
         npc_dagon.GetComponent<Collider2D>().enabled = false;
         npc_dagon.GetComponent<Rigidbody2D>().velocity = new Vector2(-0.5f, 0);
         npc_dagon.GetComponent<Animator>().SetFloat("MoveX", -1f);
@@ -302,6 +336,9 @@ public class Chp1 : MonoBehaviour
         npc_dagon.GetComponent<Animator>().SetBool("bIsWalking", true);
 
         yield return new WaitForSeconds(1f);
+
+        // Stop player (incase they pause)
+        player.GetComponent<PlayerMovement>().StopPlayerMovement();
 
         // Reactivate Dagon
         npc_dagon.transform.localPosition = new Vector3(-6.63f, -7.075f, 0);
@@ -939,7 +976,7 @@ public class Chp1 : MonoBehaviour
         npc_al_khidr.transform.GetChild(1).gameObject.GetComponent<DialogueHolder>().bHasExited = true;
 
         // Stops the player's movement
-        player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+        player.GetComponent<PlayerMovement>().StopPlayerMovement();
 
         // Fade out
         screenFader.GetComponent<Animator>().Play("FadeOut");
@@ -955,7 +992,7 @@ public class Chp1 : MonoBehaviour
         StartCoroutine(HideAndSeekFinished());
 
         // Stops the player's movement
-        player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+        player.GetComponent<PlayerMovement>().StopPlayerMovement();
 
         // Fade out
         screenFader.GetComponent<Animator>().Play("FadeOut");

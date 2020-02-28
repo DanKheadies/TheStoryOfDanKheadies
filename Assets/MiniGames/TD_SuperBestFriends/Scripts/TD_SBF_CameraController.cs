@@ -10,7 +10,6 @@ public class TD_SBF_CameraController : MonoBehaviour
 {
     public ControllerSupport contSupp;
     public TD_SBF_ControlManagement cMan;
-    //public TD_SBF_ControllerSupport td_contSupp;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_TouchControls touchConts;
     
@@ -31,9 +30,6 @@ public class TD_SBF_CameraController : MonoBehaviour
             // Up
             if (Input.GetKey(KeyCode.W) ||
                 Input.GetKey(KeyCode.UpArrow) ||
-                //(contSupp.bIsControlling &&
-                 //(Input.GetAxis("Controller Joystick Vertical") > 0 ||
-                 // Input.GetAxis("Controller DPad Vertical") < 0)))
                 (contSupp.bIsMoving &&
                  (contSupp.ControllerLeftJoystickVertical() > 0 ||
                   contSupp.ControllerDirectionalPadVertical() > 0)))
@@ -44,9 +40,6 @@ public class TD_SBF_CameraController : MonoBehaviour
             // Down
             if (Input.GetKey(KeyCode.S) ||
                 Input.GetKey(KeyCode.DownArrow) ||
-                //(contSupp.bIsControlling &&
-                // (Input.GetAxis("Controller Joystick Vertical") < 0 ||
-                //  Input.GetAxis("Controller DPad Vertical") > 0)))
                 (contSupp.bIsMoving &&
                  (contSupp.ControllerLeftJoystickVertical() < 0 ||
                   contSupp.ControllerDirectionalPadVertical() < 0)))
@@ -57,9 +50,6 @@ public class TD_SBF_CameraController : MonoBehaviour
             // Right
             if (Input.GetKey(KeyCode.D) ||
                 Input.GetKey(KeyCode.RightArrow) ||
-                //(contSupp.bIsControlling &&
-                // (Input.GetAxis("Controller Joystick Horizontal") > 0 ||
-                //  Input.GetAxis("Controller DPad Horizontal") > 0)))
                 (contSupp.bIsMoving &&
                  (contSupp.ControllerLeftJoystickHorizontal() > 0 ||
                   contSupp.ControllerDirectionalPadHorizontal() > 0)))
@@ -70,9 +60,6 @@ public class TD_SBF_CameraController : MonoBehaviour
             // Left
             if (Input.GetKey(KeyCode.A) ||
                 Input.GetKey(KeyCode.LeftArrow) ||
-                //(contSupp.bIsControlling &&
-                // (Input.GetAxis("Controller Joystick Horizontal") < 0 ||
-                //  Input.GetAxis("Controller DPad Horizontal") < 0)))
                 (contSupp.bIsMoving &&
                     (contSupp.ControllerLeftJoystickHorizontal() < 0 ||
                      contSupp.ControllerDirectionalPadHorizontal() < 0)))

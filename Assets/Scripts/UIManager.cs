@@ -1,9 +1,8 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/09/2020
+// Last:  02/27/2020
 
-//using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +13,7 @@ public class UIManager : MonoBehaviour
     public Camera mainCamera;
     public Canvas HUD;
     public CanvasGroup guiControlsCan;
+    public ControllerSupport contSupp;
     public DeviceDetector devDetect;
     public DialogueManager dMan;
     public FixedJoystick fixedJoystick;
@@ -30,8 +30,9 @@ public class UIManager : MonoBehaviour
     public RectTransform stuffMenu;
     public Scene scene;
     public Slider brioBar;
+    public Slider fullBrioBar;
     public Slider contOpacSlider;
-    public Text brioText;
+    public Text fullBrioText;
     public Toggle conTog;
     public Toggle dPadTog;
     public TouchControls touches;
@@ -42,8 +43,7 @@ public class UIManager : MonoBehaviour
     public float currentContOpac;
 
     public int currentContDPad;
-
-
+    
     void Start ()
     {
         // Initializers 
@@ -52,19 +52,13 @@ public class UIManager : MonoBehaviour
         // Sets initial activation off saved data (or transfer, which always saves UI)
         // In other words, this first IF only occurs on Chp0 - New Game
         if (!PlayerPrefs.HasKey("ControlsActive"))
-        {
             CheckIfMobile();
-        }
         else
         {
             if (PlayerPrefs.GetInt("ControlsActive") == 1)
-            {
                 DisplayControls(); 
-            }
             else
-            {
                 HideControls();
-            }
         }
 
         // Sets initial opacity based off saved data (or transfer, which always saves UI)
@@ -114,7 +108,11 @@ public class UIManager : MonoBehaviour
     {
         brioBar.maxValue = playerBrio.playerMaxBrio;
         brioBar.value = playerBrio.playerCurrentBrio;
-        brioText.text = "BR:  " + (int)(playerBrio.playerCurrentBrio) + " / " + (int)(playerBrio.playerMaxBrio);
+
+        fullBrioBar.maxValue = playerBrio.playerMaxBrio;
+        fullBrioBar.value = playerBrio.playerCurrentBrio;
+        fullBrioText.text = "BR:  " + (int)(playerBrio.playerCurrentBrio) + 
+            " / " + (int)(playerBrio.playerMaxBrio);
     }
 
     public void DisplayControls()
@@ -147,41 +145,34 @@ public class UIManager : MonoBehaviour
         //#endif
 
         devDetect.CheckIfMobile();
+        contSupp.FindControllers();
+        contSupp.CheckControllers();
 
         // Show GUI Controls for Mobile Devices
-        if (devDetect.bIsMobile)
+        if (devDetect.bIsMobile &&
+            !contSupp.bControllerConnected)
         {
             DisplayControls();
         }
         else
-        {
             HideControls();
-        }
     }
 
     // Toggles the UI controls
     public void ToggleControls()
     {
         if (bControlsActive)
-        {
             HideControls();
-        }
         else if (!bControlsActive)
-        {
             DisplayControls();
-        }
     }
 
     public void CheckAndSetControls()
     {
         if (bControlsActive)
-        {
             DisplayControls();
-        }
         else if (!bControlsActive)
-        {
             HideControls();
-        }
     }
 
     public void DisplayDPad()
@@ -222,36 +213,30 @@ public class UIManager : MonoBehaviour
     public void ToggleDPadControl()
     {
         if (bControlsDPad)
-        {
             HideDPad();
-        }
         else if (!bControlsDPad)
-        {
             DisplayDPad();
-        }
     }
 
     public void CheckAndSetDPad()
     {
         if (bControlsDPad)
-        {
             DisplayDPad();
-        }
         else if (!bControlsDPad)
-        {
             HideDPad();
-        }
     }
 
     public void HideBrioAndButton()
     {
         brioBar.gameObject.transform.localScale = Vector3.zero;
+        fullBrioBar.gameObject.transform.localScale = Vector3.zero;
         pauseButtOpac.transform.localScale = Vector3.zero;
     }
 
     public void ShowBrioAndButton()
     {
         brioBar.gameObject.transform.localScale = Vector3.one;
+        fullBrioBar.gameObject.transform.localScale = Vector3.one;
         pauseButtOpac.transform.localScale = Vector3.one;
     }
 

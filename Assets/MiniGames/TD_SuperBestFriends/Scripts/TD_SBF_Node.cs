@@ -37,7 +37,6 @@ public class TD_SBF_Node : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetButtonDown("Controller Bottom Button") &&
         if (contSupp.ControllerButtonPadBottom("down") &&
             contSupp.bControllerConnected &&
             !contSupp.bBelayAction &&
@@ -103,7 +102,6 @@ public class TD_SBF_Node : MonoBehaviour
         if (turret)
         {
             // Build a new one
-            //isUpgraded = true;
             if (towerLevel == 3)
             {
                 Debug.Log("max'd");

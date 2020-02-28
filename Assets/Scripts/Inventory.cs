@@ -9,7 +9,6 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-
     public static Inventory instance;
     public Item selectedItem;
     public List<Item> items;

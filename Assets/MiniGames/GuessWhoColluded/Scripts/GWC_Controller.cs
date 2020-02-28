@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  02/24/2020
+// Last:  02/26/2020
 
 using System.Collections;
 using UnityEngine;
@@ -69,7 +69,6 @@ public class GWC_Controller : MonoBehaviour
 
     public float buttonTimer;
     public float guessThreshold;
-    public float invTimer;
     public float musicTimer1;
     public float musicTimer2;
     public float strobeTimer;
@@ -91,7 +90,6 @@ public class GWC_Controller : MonoBehaviour
         charTiles = new CharacterTile[24];
 
         guessThreshold = 1.25f;
-        invTimer = 0.333f;
         musicTimer1 = 5.39f;
         musicTimer2 = 1.05f;
         strobeTimer = 1.0f;
@@ -139,6 +137,8 @@ public class GWC_Controller : MonoBehaviour
         sFaderAnimDia.GetComponent<Animator>().enabled = true;
 
         player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
+
+        inv.LoadInventory("transfer");
     }
 
     void Update()
@@ -163,20 +163,6 @@ public class GWC_Controller : MonoBehaviour
 
                 // Sound Effect
                 SFXMan.sounds[2].PlayOneShot(SFXMan.sounds[2].clip);
-            }
-        }
-
-        // Transfer -- Load inventory
-        if (invTimer > 0)
-        {
-            invTimer -= Time.deltaTime;
-
-            if (invTimer <= 0)
-            {
-                inv.LoadInventory("transfer");
-
-                // Reset Transfer
-                PlayerPrefs.SetInt("Transferring", 0);
             }
         }
 
@@ -315,8 +301,6 @@ public class GWC_Controller : MonoBehaviour
             !dMan.bDialogueActive &&
             (Input.GetKey(KeyCode.Space) ||
              Input.GetKey(KeyCode.G) ||
-             //Mathf.Abs(Input.GetAxis("Controller Left Trigger")) > 0 ||
-             //Mathf.Abs(Input.GetAxis("Controller Right Trigger")) > 0 ||
              Mathf.Abs(contSupp.ControllerTriggerLeft()) > 0 ||
              Mathf.Abs(contSupp.ControllerTriggerRight()) > 0 ||
              (Input.GetMouseButton(0) &&

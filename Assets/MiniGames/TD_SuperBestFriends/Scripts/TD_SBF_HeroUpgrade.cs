@@ -76,18 +76,9 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
     {
         if (hBarMan.bUpgrading)
         {
-            //if (contSupp.ControllerRightJoystickVertical() != 0)
-            //    Debug.Log("v: " + contSupp.ControllerRightJoystickVertical());
-            //if (contSupp.ControllerRightJoystickHorizontal() != 0)
-            //    Debug.Log("h: " + contSupp.ControllerRightJoystickHorizontal());
-            //if (Input.GetAxis("Controller Rightstick Vertical") != 0 ||
-            //    Input.GetAxis("Controller Rightstick Horizontal") != 0)
             if (contSupp.ControllerRightJoystickVertical() != 0 ||
                 contSupp.ControllerRightJoystickHorizontal() != 0)
             {
-                //if (Input.GetAxis("Controller Rightstick Horizontal") > -0.333 &&
-                //    Input.GetAxis("Controller Rightstick Horizontal") < 0.333 &&
-                //    Input.GetAxis("Controller Rightstick Vertical") < -0.85)
                 if (contSupp.ControllerRightJoystickHorizontal() > -0.333f &&
                     contSupp.ControllerRightJoystickHorizontal() < 0.333f &&
                     contSupp.ControllerRightJoystickVertical() < -0.85f)
@@ -95,10 +86,6 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
                     currentSelection = UpgradeSection.Section1;
                     sec1.GetComponentInChildren<Button>().Select();
                 }
-                //else if (Input.GetAxis("Controller Rightstick Horizontal") > 0.333 &&
-                //         Input.GetAxis("Controller Rightstick Horizontal") < 0.85 &&
-                //         Input.GetAxis("Controller Rightstick Vertical") > -0.85 &&
-                //         Input.GetAxis("Controller Rightstick Vertical") < -0.333)
                 else if (contSupp.ControllerRightJoystickHorizontal() > 0.333f &&
                          contSupp.ControllerRightJoystickHorizontal() < 0.85f &&
                          contSupp.ControllerRightJoystickVertical() > -0.85f &&
@@ -107,9 +94,6 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
                     currentSelection = UpgradeSection.Section2;
                     sec2.GetComponentInChildren<Button>().Select();
                 }
-                //else if (Input.GetAxis("Controller Rightstick Horizontal") > 0.85 &&
-                //         Input.GetAxis("Controller Rightstick Vertical") > -0.333 &&
-                //         Input.GetAxis("Controller Rightstick Vertical") < 0.333)
                 else if (contSupp.ControllerRightJoystickHorizontal() > 0.85f &&
                          contSupp.ControllerRightJoystickVertical() > -0.333f &&
                          contSupp.ControllerRightJoystickVertical() < 0.333f)
@@ -117,10 +101,6 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
                     currentSelection = UpgradeSection.Section3;
                     sec3.GetComponentInChildren<Button>().Select();
                 }
-                //else if (Input.GetAxis("Controller Rightstick Horizontal") > 0.333 &&
-                //         Input.GetAxis("Controller Rightstick Horizontal") < 0.85 &&
-                //         Input.GetAxis("Controller Rightstick Vertical") > 0.333 &&
-                //         Input.GetAxis("Controller Rightstick Vertical") < 0.85)
                 else if (contSupp.ControllerRightJoystickHorizontal() > 0.333f &&
                          contSupp.ControllerRightJoystickHorizontal() < 0.85f &&
                          contSupp.ControllerRightJoystickVertical() > 0.333f &&
@@ -129,9 +109,6 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
                     currentSelection = UpgradeSection.Section4;
                     sec4.GetComponentInChildren<Button>().Select();
                 }
-                //else if (Input.GetAxis("Controller Rightstick Horizontal") > -0.333 &&
-                //         Input.GetAxis("Controller Rightstick Horizontal") < 0.333 &&
-                //         Input.GetAxis("Controller Rightstick Vertical") > 0.85)
                 else if (contSupp.ControllerRightJoystickHorizontal() > -0.333f &&
                          contSupp.ControllerRightJoystickHorizontal() < 0.333f &&
                          contSupp.ControllerRightJoystickVertical() > 0.85f)
@@ -139,10 +116,6 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
                     currentSelection = UpgradeSection.Section5;
                     sec5.GetComponentInChildren<Button>().Select();
                 }
-                //else if (Input.GetAxis("Controller Rightstick Horizontal") > -0.85 &&
-                //         Input.GetAxis("Controller Rightstick Horizontal") < -0.333 &&
-                //         Input.GetAxis("Controller Rightstick Vertical") > 0.333 &&
-                //         Input.GetAxis("Controller Rightstick Vertical") < 0.85)
                 else if (contSupp.ControllerRightJoystickHorizontal() > -0.85f &&
                          contSupp.ControllerRightJoystickHorizontal() < -0.333f &&
                          contSupp.ControllerRightJoystickVertical() > 0.333f &&
@@ -151,9 +124,6 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
                     currentSelection = UpgradeSection.Section6;
                     sec6.GetComponentInChildren<Button>().Select();
                 }
-                //else if (Input.GetAxis("Controller Rightstick Horizontal") < -0.85 &&
-                //         Input.GetAxis("Controller Rightstick Vertical") < 0.333 &&
-                //         Input.GetAxis("Controller Rightstick Vertical") > -0.333)
                 else if (contSupp.ControllerRightJoystickHorizontal() < -0.85f &&
                          contSupp.ControllerRightJoystickVertical() > -0.333f &&
                          contSupp.ControllerRightJoystickVertical() < 0.333f)
@@ -161,10 +131,6 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
                     currentSelection = UpgradeSection.Section7;
                     sec7.GetComponentInChildren<Button>().Select();
                 }
-                //else if (Input.GetAxis("Controller Rightstick Horizontal") < -0.333 &&
-                //         Input.GetAxis("Controller Rightstick Horizontal") > -0.85 &&
-                //         Input.GetAxis("Controller Rightstick Vertical") < -0.333 &&
-                //         Input.GetAxis("Controller Rightstick Vertical") > -0.85)
                 else if (contSupp.ControllerRightJoystickHorizontal() > -0.85f &&
                          contSupp.ControllerRightJoystickHorizontal() < -0.333f &&
                          contSupp.ControllerRightJoystickVertical() > -0.85f &&
@@ -177,8 +143,7 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
                     }
                 }
             }
-
-            //if (Input.GetButtonDown("Controller Bottom Button"))
+            
             if (contSupp.ControllerButtonPadBottom("down"))
             {
                 if (currentSelection == UpgradeSection.Section1)
@@ -198,8 +163,7 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
                 else if (currentSelection == UpgradeSection.Section8)
                     sec8.GetComponentInChildren<Button>().onClick.Invoke();
             }
-
-            //if (Input.GetButtonDown("Controller Right Button"))
+            
             if (contSupp.ControllerButtonPadRight("down"))
                 hBarMan.ToggleHeroUpgradeShells();
         }

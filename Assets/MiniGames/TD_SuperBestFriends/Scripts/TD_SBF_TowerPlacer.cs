@@ -72,7 +72,6 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
 
                 // TODO: avoid running this when a tower is present, i.e. need another condition
                 // Note: doesn't seem to harm anything, but shouldn't do it
-                //if (Input.GetButtonDown("Controller Bottom Button") &&
                 if (contSupp.ControllerButtonPadBottom("down") &&
                     TD_SBF_BuildManager.td_sbf_instance.TD_SBF_CanBuild &&
                     TD_SBF_BuildManager.td_sbf_instance.TD_SBF_HasThoughtsPrayers &&

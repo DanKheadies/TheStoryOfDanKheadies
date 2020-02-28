@@ -30,7 +30,6 @@ public class TD_SBF_PauseMenu : MonoBehaviour
     {
         if ((Input.GetKeyDown(KeyCode.Escape) ||
              Input.GetKeyDown(KeyCode.P) ||
-             //Input.GetButtonDown("Controller Start Button")) &&
              contSupp.ControllerMenuRight("down")) &&
              !modeSelector)
         {

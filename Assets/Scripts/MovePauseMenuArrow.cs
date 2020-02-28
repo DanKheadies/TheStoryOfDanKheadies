@@ -99,8 +99,6 @@ public class MovePauseMenuArrow : MonoBehaviour
             itemMenuAlpha.alpha == 0)
         {
             // Controller Support 
-            //if (Input.GetAxis("Controller DPad Vertical") == 0 &&
-            //    Input.GetAxis("Controller Joystick Vertical") == 0 &&
             if (contSupp.ControllerDirectionalPadVertical() == 0 &&
                 contSupp.ControllerLeftJoystickVertical() == 0 &&
                 joystick.Vertical == 0 &&
@@ -110,8 +108,6 @@ public class MovePauseMenuArrow : MonoBehaviour
                 bFreezeControllerInput = false;
             }
             else if (!bFreezeControllerInput &&
-                     //(Input.GetAxis("Controller DPad Vertical") > 0 ||
-                     // Input.GetAxis("Controller Joystick Vertical") < 0 ||
                      (contSupp.ControllerDirectionalPadVertical() < 0 ||
                       contSupp.ControllerLeftJoystickVertical() < 0 ||
                       joystick.Vertical < 0 ||
@@ -121,8 +117,6 @@ public class MovePauseMenuArrow : MonoBehaviour
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
-                     //(Input.GetAxis("Controller DPad Vertical") < 0 ||
-                     // Input.GetAxis("Controller Joystick Vertical") > 0 ||
                      (contSupp.ControllerDirectionalPadVertical() > 0 ||
                       contSupp.ControllerLeftJoystickVertical() > 0 ||
                       joystick.Vertical > 0 ||
@@ -149,15 +143,12 @@ public class MovePauseMenuArrow : MonoBehaviour
                 MoveUp();
             }
             else if (Input.GetButtonDown("Action") ||
-                     //Input.GetKeyDown(KeyCode.JoystickButton0) ||
                      contSupp.ControllerButtonPadBottom("down") ||
                      touches.bAaction)
             {
                 SelectOption();
             }
             else if (Input.GetKeyDown(KeyCode.Escape) ||
-                     //Input.GetKeyDown(KeyCode.JoystickButton7) ||
-                     //Input.GetKeyDown(KeyCode.JoystickButton1) ||
                      contSupp.ControllerMenuRight("down") ||
                      contSupp.ControllerButtonPadRight("down") ||
                      Input.GetButton("BAction") ||
@@ -351,37 +342,21 @@ public class MovePauseMenuArrow : MonoBehaviour
     {
         // For core
         if (currentPosition == ArrowPos.GoOn)
-        {
             GoOnBtn.onClick.Invoke();
-        }
         else if (currentPosition == ArrowPos.Save)
-        {
             SaveBtn.onClick.Invoke();
-        }
         else if (currentPosition == ArrowPos.Kogabi)
-        {
             KogabiBtn.onClick.Invoke();
-        }
         else if (currentPosition == ArrowPos.Stuff)
-        {
             StuffBtn.onClick.Invoke();
-        }
         else if (currentPosition == ArrowPos.Map)
-        {
             MapBtn.onClick.Invoke();
-        }
         else if (currentPosition == ArrowPos.Sound)
-        {
             SoundBtn.onClick.Invoke();
-        }
         else if (currentPosition == ArrowPos.Controls)
-        {
             ControlsBtn.onClick.Invoke();
-        }
         else if (currentPosition == ArrowPos.Quit)
-        {
             QuitBtn.onClick.Invoke();
-        }
 
         // For Guess Who Colluded
         if (bIsGWC)

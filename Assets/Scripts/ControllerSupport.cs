@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 02/21/2020
-// Last:  02/25/2020
+// Last:  02/26/2020
 
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +17,8 @@ public class ControllerSupport : MonoBehaviour
     public bool bIsOSX;
     public bool bIsLinux;
     public bool bIsiOS;
-    public bool bIsAndriod;
+    public bool bIsAndroid;
+    public bool bIsWebGL;
     //public bool bIsPS4;
     //public bool bIsXboxOne;
     //public bool bIsWii;
@@ -26,14 +27,27 @@ public class ControllerSupport : MonoBehaviour
     public bool bContIsXboxOne;
     public bool bContIsPS2;
     public bool bContIsPS4;
+    
+    public bool[] biOSAxisValue;
+    public bool[] biOSButtonValue;
+    public bool[] biOSWaitingForAxisUp;
+    public bool[] biOSWaitingForButtUp;
 
     public int currContCount;
     public int prevContCount;
+
+    public string iOSAxis;
+    public string iOSButton;
 
     public string[] controllers;
 
     void Start()
     {
+        biOSAxisValue = new bool[20];
+        biOSButtonValue = new bool[20];
+        biOSWaitingForAxisUp = new bool[20];
+        biOSWaitingForButtUp = new bool[20];
+
         FindControllers();
         CheckSystem();
         CheckControllers();
@@ -48,63 +62,45 @@ public class ControllerSupport : MonoBehaviour
         {
             //ControllerButtonsTest();
             CheckForMovement();
-            //ControllerInput();
         }
     }
 
     public void CheckSystem()
     {
-        Debug.Log(Application.platform);
-
 #if (UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN)
-        Debug.Log("Windows");
         bIsWindows = true;
 #elif (UNITY_EDITOR_MAC || UNITY_STANDALONE_OSX)
-        Debug.Log("OSX");
         bIsOSX = true;
 #elif (UNITY_EDITOR_LINUX || UNITY_STANDALONE_LINUX)
-        Debug.Log("Linux");
         bIsLinux = true;
 #elif UNITY_IOS
-        Debug.Log("iOS");
         bIsiOS = true;
 #elif UNITY_ANDROID
-        Debug.Log("Android");
-        bIsAndriod = true;
+        bIsAndroid = true;
 #elif UNITY_WEBGL
-        Debug.Log("WebGL");
-        bIsWindows = true;
+        bIsWebGL = true;
 #endif
     }
 
     public void CheckControllers()
     {
-        //foreach (string controller in controllers)
         // Only return the first controller (for now)
         if (controllers.Length > 0)
         {
-            Debug.Log(controllers[0]);
+            //Debug.Log(controllers[0]);
             // Example: "Controller (XBOX 360 For Windows)"
 
             string name = controllers[0];
 
-            if (name.Contains("XBOX 360"))
-            {
-                Debug.Log("XBOX 360 Controller");
+            if (name.Contains("XBOX 360") ||
+                name.Contains("Xbox 360"))
                 bContIsXbox360 = true;
-            }
 
-            if (name.Contains("XBOX ONE"))
-            {
-                Debug.Log("XBOX One Controller");
+            if (name.Contains("Xbox Wireless Controller"))
                 bContIsXboxOne = true;
-            }
 
             if (name.Contains("USB Gamepad"))
-            {
-                Debug.Log("PS2 Controller");
                 bContIsPS2 = true;
-            }
         }
         // Cleanse if no controllers present
         else
@@ -137,24 +133,47 @@ public class ControllerSupport : MonoBehaviour
             bIsMoving = false;
     }
 
-    public void ControllerInput()
+    public void CheatSheet()
     {
-        ControllerLeftJoystickHorizontal();
-        ControllerLeftJoystickVertical();
-        ControllerRightJoystickHorizontal();
-        ControllerRightJoystickVertical();
-        ControllerDirectionalPadHorizontal();
-        ControllerDirectionalPadVertical();
-        ControllerButtonPadBottom("down");
-        ControllerButtonPadRight("down");
-        ControllerButtonPadTop("down");
-        ControllerButtonPadLeft("down");
-        ControllerBumperRight("down");
-        ControllerBumperLeft("down");
-        ControllerTriggerRight();
-        ControllerTriggerLeft();
-        ControllerMenuRight("down");
-        ControllerMenuLeft("down");
+        // ios
+        // joy RH -> axis 3
+        // joy RV -> axis 4
+        // dpad U -> butt 4 / axis 5
+        // dpad R -> butt 5 / axis 6
+        // dpad D -> butt 6 / axis 7
+        // dpad L -> butt 7 / axis 8
+        // bump L -> butt 8 / axis 9
+        // bump R -> butt 9 / axis 10
+        // trig L -> butt 10 / axis 11
+        // trig R -> butt 11 / axis 12
+        // bot tp -> butt 12 / axis 13
+        // bot rt -> butt 13 / axis 14
+        // bot bt -> butt 14 / axis 15
+        // bot lt -> butt 15 / axis 16
+
+        // webgl
+        /*
+         joy L H -> ax X
+         joy L V -> ax Y
+         joy R H -> ax 4
+         joy R V -> ax 5
+         dpad up -> ax 7 / bt 12
+         dpad dw -> ax 7 / bt 13
+         dpad rt -> ax 6 / bt 15
+         dpad lf -> ax 6 / bt 14
+         butp bt -> bt 0
+         butp tp -> bt 3
+         butp rt -> bt 1
+         butp lf -> bt 2
+         bump rt -> bt 5
+         bump lf -> bt 4
+         trig rt -> ax 10
+         trig lf -> ax 9
+         menu rt -> bt 7
+         menu lf -> bt 6
+         joy R c -> bt 9
+         joy L c -> bt 8
+         */
     }
 
     public float ControllerLeftJoystickHorizontal()
@@ -166,6 +185,9 @@ public class ControllerSupport : MonoBehaviour
             return Input.GetAxis("Controller Axis X");
 
         if (bContIsXbox360 && bIsLinux)
+            return Input.GetAxis("Controller Axis X");
+
+        if (bContIsXbox360 && bIsWebGL)
             return Input.GetAxis("Controller Axis X");
 
         if (bContIsXboxOne && bIsWindows)
@@ -197,6 +219,9 @@ public class ControllerSupport : MonoBehaviour
         if (bContIsXbox360 && bIsLinux)
             return Input.GetAxis("Controller Axis Y");
 
+        if (bContIsXbox360 && bIsWebGL)
+            return Input.GetAxis("Controller Axis Y");
+
         if (bContIsXboxOne && bIsWindows)
             return Input.GetAxis("Controller Axis Y");
 
@@ -226,6 +251,9 @@ public class ControllerSupport : MonoBehaviour
         if (bContIsXbox360 && bIsLinux)
             return Input.GetAxis("Controller Axis 4");
 
+        if (bContIsXbox360 && bIsWebGL)
+            return Input.GetAxis("Controller Axis 4");
+
         if (bContIsXboxOne && bIsWindows)
             return Input.GetAxis("Controller Axis 4");
 
@@ -253,6 +281,9 @@ public class ControllerSupport : MonoBehaviour
             return Input.GetAxis("Controller Axis 4");
 
         if (bContIsXbox360 && bIsLinux)
+            return Input.GetAxis("Controller Axis 5");
+
+        if (bContIsXbox360 && bIsWebGL)
             return Input.GetAxis("Controller Axis 5");
 
         if (bContIsXboxOne && bIsWindows)
@@ -297,6 +328,9 @@ public class ControllerSupport : MonoBehaviour
         if (bContIsXbox360 && bIsLinux)
             return Input.GetAxis("Controller Axis 7");
 
+        if (bContIsXbox360 && bIsWebGL)
+            return Input.GetAxis("Controller Axis 6");
+
         if (bContIsXboxOne && bIsWindows)
             return Input.GetAxis("Controller Axis 6");
 
@@ -312,8 +346,15 @@ public class ControllerSupport : MonoBehaviour
 
         if (bContIsXboxOne && bIsiOS)
         {
-            // TODO: see if this needs trifecta-action check
+            //// dpad R -> axis 6
+            //if (Input.GetAxis("Controller Axis 6") != 0)
+            //    return Input.GetAxis("Controller Axis 6");
 
+            //// dpad L -> axis 8
+            //if (Input.GetAxis("Controller Axis 8") != 0)
+            //    return Input.GetAxis("Controller Axis 8");
+
+            // These buttons work
             if (Input.GetButton("Controller Button 5"))
                 return 1;
             if (Input.GetButton("Controller Button 7"))
@@ -350,6 +391,9 @@ public class ControllerSupport : MonoBehaviour
         if (bContIsXboxOne && bIsWindows)
             return Input.GetAxis("Controller Axis 7");
 
+        if (bContIsXbox360 && bIsWebGL)
+            return Input.GetAxis("Controller Axis 7");
+
         if (bContIsXboxOne && bIsOSX)
         {
             // TODO: see if this needs trifecta-action check
@@ -362,8 +406,15 @@ public class ControllerSupport : MonoBehaviour
 
         if (bContIsXboxOne && bIsiOS)
         {
-            // TODO: see if this needs trifecta-action check
+            //// dpad U -> axis 5
+            //if (Input.GetAxis("Controller Axis 5") != 0)
+            //    return Input.GetAxis("Controller Axis 5");
 
+            //// dpad D -> axis 7
+            //if (Input.GetAxis("Controller Axis 7") != 0)
+            //    return Input.GetAxis("Controller Axis 7");
+
+            // These buttons work
             if (Input.GetButton("Controller Button 4"))
                 return 1;
             if (Input.GetButton("Controller Button 6"))
@@ -411,6 +462,16 @@ public class ControllerSupport : MonoBehaviour
                 return Input.GetButtonUp("Controller Button 0");
         }
 
+        if (bContIsXbox360 && bIsWebGL)
+        {
+            if (_action == "down")
+                return Input.GetButtonDown("Controller Button 0");
+            else if (_action == "hold")
+                return Input.GetButton("Controller Button 0");
+            else if (_action == "up")
+                return Input.GetButtonUp("Controller Button 0");
+        }
+
         if (bContIsXboxOne && bIsWindows)
         {
             if (_action == "down")
@@ -432,14 +493,7 @@ public class ControllerSupport : MonoBehaviour
         }
 
         if (bContIsXboxOne && bIsiOS)
-        {
-            if (_action == "down")
-                return Input.GetButtonDown("Controller Button 14");
-            else if (_action == "hold")
-                return Input.GetButton("Controller Button 14");
-            else if (_action == "up")
-                return Input.GetButtonUp("Controller Button 14");
-        }
+            return HandleIOSButtonInput(_action, 14);
 
         if (bContIsPS4 && bIsWindows)
         {
@@ -496,6 +550,16 @@ public class ControllerSupport : MonoBehaviour
                 return Input.GetButtonUp("Controller Button 1");
         }
 
+        if (bContIsXbox360 && bIsWebGL)
+        {
+            if (_action == "down")
+                return Input.GetButtonDown("Controller Button 1");
+            else if (_action == "hold")
+                return Input.GetButton("Controller Button 1");
+            else if (_action == "up")
+                return Input.GetButtonUp("Controller Button 1");
+        }
+
         if (bContIsXboxOne && bIsWindows)
         {
             if (_action == "down")
@@ -517,14 +581,7 @@ public class ControllerSupport : MonoBehaviour
         }
 
         if (bContIsXboxOne && bIsiOS)
-        {
-            if (_action == "down")
-                return Input.GetButtonDown("Controller Button 13");
-            else if (_action == "hold")
-                return Input.GetButton("Controller Button 13");
-            else if (_action == "up")
-                return Input.GetButtonUp("Controller Button 13");
-        }
+            return HandleIOSButtonInput(_action, 13);
 
         if (bContIsPS4 && bIsWindows)
         {
@@ -581,6 +638,16 @@ public class ControllerSupport : MonoBehaviour
                 return Input.GetButtonUp("Controller Button 3");
         }
 
+        if (bContIsXbox360 && bIsWebGL)
+        {
+            if (_action == "down")
+                return Input.GetButtonDown("Controller Button 3");
+            else if (_action == "hold")
+                return Input.GetButton("Controller Button 3");
+            else if (_action == "up")
+                return Input.GetButtonUp("Controller Button 3");
+        }
+
         if (bContIsXboxOne && bIsWindows)
         {
             if (_action == "down")
@@ -602,14 +669,7 @@ public class ControllerSupport : MonoBehaviour
         }
 
         if (bContIsXboxOne && bIsiOS)
-        {
-            if (_action == "down")
-                return Input.GetButtonDown("Controller Button 19");
-            else if (_action == "hold")
-                return Input.GetButton("Controller Button 19");
-            else if (_action == "up")
-                return Input.GetButtonUp("Controller Button 19");
-        }
+            return HandleIOSButtonInput(_action, 12);
 
         if (bContIsPS4 && bIsWindows)
         {
@@ -666,6 +726,16 @@ public class ControllerSupport : MonoBehaviour
                 return Input.GetButtonUp("Controller Button 2");
         }
 
+        if (bContIsXbox360 && bIsWebGL)
+        {
+            if (_action == "down")
+                return Input.GetButtonDown("Controller Button 2");
+            else if (_action == "hold")
+                return Input.GetButton("Controller Button 2");
+            else if (_action == "up")
+                return Input.GetButtonUp("Controller Button 2");
+        }
+
         if (bContIsXboxOne && bIsWindows)
         {
             if (_action == "down")
@@ -687,14 +757,7 @@ public class ControllerSupport : MonoBehaviour
         }
 
         if (bContIsXboxOne && bIsiOS)
-        {
-            if (_action == "down")
-                return Input.GetButtonDown("Controller Button 15");
-            else if (_action == "hold")
-                return Input.GetButton("Controller Button 15");
-            else if (_action == "up")
-                return Input.GetButtonUp("Controller Button 15");
-        }
+            return HandleIOSButtonInput(_action, 15);
 
         if (bContIsPS4 && bIsWindows)
         {
@@ -751,6 +814,16 @@ public class ControllerSupport : MonoBehaviour
                 return Input.GetButtonUp("Controller Button 5");
         }
 
+        if (bContIsXbox360 && bIsWebGL)
+        {
+            if (_action == "down")
+                return Input.GetButtonDown("Controller Button 5");
+            else if (_action == "hold")
+                return Input.GetButton("Controller Button 5");
+            else if (_action == "up")
+                return Input.GetButtonUp("Controller Button 5");
+        }
+
         if (bContIsXboxOne && bIsWindows)
         {
             if (_action == "down")
@@ -772,14 +845,7 @@ public class ControllerSupport : MonoBehaviour
         }
 
         if (bContIsXboxOne && bIsiOS)
-        {
-            if (_action == "down")
-                return Input.GetButtonDown("Controller Button 9");
-            else if (_action == "hold")
-                return Input.GetButton("Controller Button 9");
-            else if (_action == "up")
-                return Input.GetButtonUp("Controller Button 9");
-        }
+            return HandleIOSButtonInput(_action, 9);
 
         if (bContIsPS4 && bIsWindows)
         {
@@ -836,6 +902,16 @@ public class ControllerSupport : MonoBehaviour
                 return Input.GetButtonUp("Controller Button 4");
         }
 
+        if (bContIsXbox360 && bIsWebGL)
+        {
+            if (_action == "down")
+                return Input.GetButtonDown("Controller Button 4");
+            else if (_action == "hold")
+                return Input.GetButton("Controller Button 4");
+            else if (_action == "up")
+                return Input.GetButtonUp("Controller Button 4");
+        }
+
         if (bContIsXboxOne && bIsWindows)
         {
             if (_action == "down")
@@ -857,14 +933,7 @@ public class ControllerSupport : MonoBehaviour
         }
 
         if (bContIsXboxOne && bIsiOS)
-        {
-            if (_action == "down")
-                return Input.GetButtonDown("Controller Button 8");
-            else if (_action == "hold")
-                return Input.GetButton("Controller Button 8");
-            else if (_action == "up")
-                return Input.GetButtonUp("Controller Button 8");
-        }
+            return HandleIOSButtonInput(_action, 8);
 
         if (bContIsPS4 && bIsWindows)
         {
@@ -900,6 +969,9 @@ public class ControllerSupport : MonoBehaviour
         if (bContIsXbox360 && bIsLinux)
             return Input.GetAxis("Controller Axis 6");
 
+        if (bContIsXbox360 && bIsWebGL)
+            return Input.GetAxis("Controller Axis 10");
+
         if (bContIsXboxOne && bIsWindows)
             return Input.GetAxis("Controller Axis 10");
 
@@ -907,7 +979,7 @@ public class ControllerSupport : MonoBehaviour
             return Input.GetAxis("Controller Axis 6");
 
         if (bContIsXboxOne && bIsiOS)
-            return Input.GetAxis("Controller Axis 11");
+            return Input.GetAxis("Controller Axis 12");
         //    return Input.GetButtonDown("Controller Button 11");
 
         if (bContIsPS4 && bIsWindows)
@@ -935,6 +1007,9 @@ public class ControllerSupport : MonoBehaviour
         if (bContIsXbox360 && bIsLinux)
             return Input.GetAxis("Controller Axis 3");
 
+        if (bContIsXbox360 && bIsWebGL)
+            return Input.GetAxis("Controller Axis 9");
+
         if (bContIsXboxOne && bIsWindows)
             return Input.GetAxis("Controller Axis 9");
 
@@ -942,7 +1017,7 @@ public class ControllerSupport : MonoBehaviour
             return Input.GetAxis("Controller Axis 5");
 
         if (bContIsXboxOne && bIsiOS)
-            return Input.GetAxis("Controller Axis 10");
+            return Input.GetAxis("Controller Axis 11");
         //    return Input.GetButtonDown("Controller Button 10");
 
         if (bContIsPS4 && bIsWindows)
@@ -991,6 +1066,16 @@ public class ControllerSupport : MonoBehaviour
                 return Input.GetButtonUp("Controller Button 10");
         }
 
+        if (bContIsXbox360 && bIsWebGL)
+        {
+            if (_action == "down")
+                return Input.GetButtonDown("Controller Button 9");
+            else if (_action == "hold")
+                return Input.GetButton("Controller Button 9");
+            else if (_action == "up")
+                return Input.GetButtonUp("Controller Button 9");
+        }
+
         if (bContIsXboxOne && bIsWindows)
         {
             if (_action == "down")
@@ -1012,14 +1097,7 @@ public class ControllerSupport : MonoBehaviour
         }
 
         if (bContIsXboxOne && bIsiOS)
-        {
-            if (_action == "down")
-                return Input.GetButtonDown("Controller Button 17");
-            else if (_action == "hold")
-                return Input.GetButton("Controller Button 17");
-            else if (_action == "up")
-                return Input.GetButtonUp("Controller Button 17");
-        }
+            return false; // n/a
 
         if (bContIsPS4 && bIsWindows)
         {
@@ -1076,6 +1154,16 @@ public class ControllerSupport : MonoBehaviour
                 return Input.GetButtonUp("Controller Button 9");
         }
 
+        if (bContIsXbox360 && bIsWebGL)
+        {
+            if (_action == "down")
+                return Input.GetButtonDown("Controller Button 8");
+            else if (_action == "hold")
+                return Input.GetButton("Controller Button 8");
+            else if (_action == "up")
+                return Input.GetButtonUp("Controller Button 8");
+        }
+
         if (bContIsXboxOne && bIsWindows)
         {
             if (_action == "down")
@@ -1097,14 +1185,7 @@ public class ControllerSupport : MonoBehaviour
         }
 
         if (bContIsXboxOne && bIsiOS)
-        {
-            if (_action == "down")
-                return Input.GetButtonDown("Controller Button 16");
-            else if (_action == "hold")
-                return Input.GetButton("Controller Button 16");
-            else if (_action == "up")
-                return Input.GetButtonUp("Controller Button 16");
-        }
+            return false; // n/a
 
         if (bContIsPS4 && bIsWindows)
         {
@@ -1161,6 +1242,16 @@ public class ControllerSupport : MonoBehaviour
                 return Input.GetButtonUp("Controller Button 7");
         }
 
+        if (bContIsXbox360 && bIsWebGL)
+        {
+            if (_action == "down")
+                return Input.GetButtonDown("Controller Button 7");
+            else if (_action == "hold")
+                return Input.GetButton("Controller Button 7");
+            else if (_action == "up")
+                return Input.GetButtonUp("Controller Button 7");
+        }
+
         if (bContIsXboxOne && bIsWindows)
         {
             if (_action == "down")
@@ -1193,14 +1284,24 @@ public class ControllerSupport : MonoBehaviour
 
         if (bContIsPS4 && bIsWindows)
         {
-            Debug.Log("TODO: confirm this is Start / Right");
-            
             if (_action == "down")
+            {
+                Debug.Log("TODO: confirm this is Start / Right");
                 return Input.GetButtonDown("Controller Button 9");
+
+            }
             else if (_action == "hold")
+            {
+                Debug.Log("TODO: confirm this is Start / Right");
                 return Input.GetButton("Controller Button 9");
+
+            }
             else if (_action == "up")
+            {
+                Debug.Log("TODO: confirm this is Start / Right");
                 return Input.GetButtonUp("Controller Button 9");
+
+            }
         }
 
         if (bContIsPS2 && bIsWindows)
@@ -1248,6 +1349,16 @@ public class ControllerSupport : MonoBehaviour
                 return Input.GetButtonUp("Controller Button 6");
         }
 
+        if (bContIsXbox360 && bIsWebGL)
+        {
+            if (_action == "down")
+                return Input.GetButtonDown("Controller Button 6");
+            else if (_action == "hold")
+                return Input.GetButton("Controller Button 6");
+            else if (_action == "up")
+                return Input.GetButtonUp("Controller Button 6");
+        }
+
         if (bContIsXboxOne && bIsWindows)
         {
             if (_action == "down")
@@ -1269,33 +1380,7 @@ public class ControllerSupport : MonoBehaviour
         }
 
         if (bContIsXboxOne && bIsiOS)
-        //{
-        //    if (_action == "down")
-        //        return Input.GetButtonDown("Controller Button 1");
-        //    else if (_action == "hold")
-        //        return Input.GetButton("Controller Button 1");
-        //    else if (_action == "up")
-        //        return Input.GetButtonUp("Controller Button 1");
-        //}
-        {
-            if (Input.GetButtonDown("Controller Button 1"))
-            {
-                Debug.Log("via Select / Left -> Button 1");
-                return Input.GetButtonDown("Controller Button 1");
-            }
-            else if (Input.GetButtonDown("Controller Button 2"))
-            {
-                Debug.Log("via Select / Left -> Button 2");
-                return Input.GetButtonDown("Controller Button 2");
-            }
-            else if (Input.GetButtonDown("Controller Button 3"))
-            {
-                Debug.Log("via Select / Left -> Button 3");
-                return Input.GetButtonDown("Controller Button 3");
-            }
-            Debug.Log("TODO: confirm this is Select / Left");
-            return false;
-        }
+            return false; // n/a
 
         if (bContIsPS4 && bIsWindows)
             return Input.GetButtonDown("Controller Button 8");
@@ -1340,6 +1425,24 @@ public class ControllerSupport : MonoBehaviour
 
         if (Input.GetAxis("Controller Axis 10") != 0)
             Debug.Log("[ContSupp] Axis 10");
+
+        if (Input.GetAxis("Controller Axis 11") != 0)
+            Debug.Log("[ContSupp] Axis 11");
+
+        if (Input.GetAxis("Controller Axis 12") != 0)
+            Debug.Log("[ContSupp] Axis 12");
+
+        if (Input.GetAxis("Controller Axis 13") != 0)
+            Debug.Log("[ContSupp] Axis 13");
+
+        if (Input.GetAxis("Controller Axis 14") != 0)
+            Debug.Log("[ContSupp] Axis 14");
+
+        if (Input.GetAxis("Controller Axis 15") != 0)
+            Debug.Log("[ContSupp] Axis 15");
+
+        if (Input.GetAxis("Controller Axis 16") != 0)
+            Debug.Log("[ContSupp] Axis 16");
 
         if (Input.GetButtonDown("Controller Button 0"))
             Debug.Log("[ContSupp] Button 0");
@@ -1420,13 +1523,6 @@ public class ControllerSupport : MonoBehaviour
             }
 
             // Recheck for controllers present
-            //for (int i = 0; i < controllers.Length; ++i)
-            //{
-            //    if (!string.IsNullOrEmpty(controllers[i]))
-            //        bControllerConnected = true;
-            //    else
-            //        bControllerConnected = false;
-            //}
             if (controllers.Length > 0)
                 bControllerConnected = true;
             else
@@ -1434,6 +1530,114 @@ public class ControllerSupport : MonoBehaviour
             
             currContCount = controllers.Length;
         }
+    }
+
+    public bool HandleIOSAxisInput(string _action, int _axisNum)
+    {
+        iOSAxis = "Controller Axis " + _axisNum.ToString();
+
+        // No activity & no up then bail
+        if (Input.GetAxis(iOSAxis) == 0 &&
+            !biOSWaitingForAxisUp[_axisNum])
+            return false;
+        // No activity but up then act
+        else if (Input.GetAxis(iOSAxis) == 0 &&
+                 biOSWaitingForAxisUp[_axisNum] &&
+                 _action == "up")
+        {
+            biOSAxisValue[_axisNum] = false;
+            biOSWaitingForAxisUp[_axisNum] = false;
+            //Debug.Log("up for " + iOSAxis);
+            return true;
+        }
+        // Activity and down first time then act
+        else if (Input.GetAxis(iOSAxis) != 0 &&
+                 !biOSAxisValue[_axisNum] &&
+                 _action == "down")
+        {
+            biOSAxisValue[_axisNum] = true;
+            biOSWaitingForAxisUp[_axisNum] = true;
+            //Debug.Log("down for " + iOSAxis);
+            return true;
+        }
+        // Activity and hold then act
+        else if (Input.GetAxis(iOSAxis) != 0 &&
+                 _action == "hold")
+        {
+            biOSWaitingForAxisUp[_axisNum] = true;
+            //Debug.Log("hold for " + iOSAxis);
+            return true;
+        }
+        // Activity and no up then set up
+        else if (Input.GetAxis(iOSAxis) != 0 &&
+                !biOSWaitingForAxisUp[_axisNum])
+        {
+            biOSWaitingForAxisUp[_axisNum] = true;
+        }
+        // No activity up then reset
+        else if (Input.GetAxis(iOSAxis) == 0 &&
+                 biOSWaitingForAxisUp[_axisNum])
+        {
+            //Debug.Log("reset for " + iOSAxis);
+            biOSAxisValue[_axisNum] = false;
+            biOSWaitingForAxisUp[_axisNum] = false;
+        }
+
+        return false;
+    }
+
+    public bool HandleIOSButtonInput(string _action, int _buttonNum)
+    {
+        iOSButton = "Controller Button " + _buttonNum.ToString();
+
+        // No activity & no up then bail
+        if (!Input.GetButton(iOSButton) &&
+            !biOSWaitingForButtUp[_buttonNum])
+            return false;
+        // No activity but up then act
+        else if (!Input.GetButton(iOSButton) &&
+                 biOSWaitingForButtUp[_buttonNum] &&
+                 _action == "up")
+        {
+            biOSButtonValue[_buttonNum] = false;
+            biOSWaitingForButtUp[_buttonNum] = false;
+            //Debug.Log("up for " + iOSButton);
+            return true;
+        }
+        // Activity and down first time then act
+        else if (Input.GetButton(iOSButton) &&
+                 !biOSButtonValue[_buttonNum] &&
+                 _action == "down")
+        {
+            biOSButtonValue[_buttonNum] = true;
+            biOSWaitingForButtUp[_buttonNum] = true;
+            //Debug.Log("down for " + iOSButton);
+            return true;
+        }
+        // Activity and hold then act
+        else if (Input.GetButton(iOSButton) &&
+                 _action == "hold")
+        {
+            biOSWaitingForButtUp[_buttonNum] = true;
+            //Debug.Log("hold for " + iOSButton);
+            return true;
+        }
+        // Activity and no up then set up
+        else if (Input.GetButton(iOSButton) &&
+                !biOSWaitingForButtUp[_buttonNum])
+        {
+            biOSWaitingForButtUp[_buttonNum] = true;
+        }
+        // No activity up then reset
+        else if (!Input.GetButton(iOSButton) &&
+                 biOSWaitingForButtUp[_buttonNum])
+        {
+            //Debug.Log("reset for " + iOSButton);
+            biOSButtonValue[_buttonNum] = false;
+            biOSWaitingForButtUp[_buttonNum] = false;
+        }
+
+        return false;
     }
 
     public IEnumerator BelayAction()

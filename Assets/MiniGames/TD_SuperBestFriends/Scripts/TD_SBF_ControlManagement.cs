@@ -21,7 +21,6 @@ public class TD_SBF_ControlManagement : MonoBehaviour
     public GraphicRaycaster m_Raycaster;
     public PointerEventData m_PointerEventData;
     public TD_SBF_BuildDescriptionBarSelector buildDescBarSel;
-    //public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_NodeUI nodeUI;
     public TD_SBF_TouchControls tConts;

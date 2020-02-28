@@ -28,8 +28,6 @@ public class TD_SBF_HeroActions : MonoBehaviour
     
     void Update()
     {
-        //if ((Input.GetButtonDown("Controller Top Button") ||
-        //     Input.GetButtonDown("Controller Left Button")) &&
         if ((contSupp.ControllerButtonPadTop("down") ||
              contSupp.ControllerButtonPadLeft("down")) && 
             gMan.bIsHeroMode &&
@@ -50,7 +48,6 @@ public class TD_SBF_HeroActions : MonoBehaviour
         if (basicAttackWaitCounter <= 0)
         {
             if ((Input.GetMouseButtonDown(0) ||
-                 //Input.GetButtonDown("Controller Bottom Button")) &&
                  contSupp.ControllerButtonPadBottom("down")) &&
                 gMan.bIsHeroMode &&
                 !EventSystem.current.IsPointerOverGameObject() &&
@@ -68,7 +65,6 @@ public class TD_SBF_HeroActions : MonoBehaviour
         if (secondaryAttackWaitCounter <= 0)
         {
             if ((Input.GetMouseButtonDown(1) ||
-                 //Input.GetButtonDown("Controller Right Button")) &&
                  contSupp.ControllerButtonPadRight("down")) &&
                 gMan.bIsHeroMode &&
                 !EventSystem.current.IsPointerOverGameObject() &&

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 02/08/2020
-// Last:  02/10/2020
+// Last:  02/27/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -105,6 +105,14 @@ public class CS_TreeTunnel : MonoBehaviour
             1);
     }
 
+    public void CompleteCutscene()
+    {
+        // Reward 
+        PlayerPrefs.SetString("TransferActions", "Quest5Reward");
+
+        WarpOut();
+    }
+
     public void WarpOut()
     {
         warpTreeTunnel.GetComponent<BoxCollider2D>().enabled = true;
@@ -115,9 +123,6 @@ public class CS_TreeTunnel : MonoBehaviour
         save.SaveInventoryTransfer();
         PlayerPrefs.SetInt("Transferring", 1);
         PlayerPrefs.SetString("TransferScene", warpTreeTunnel.GetComponent<SceneTransitioner>().BetaLoad);
-
-        // Reward 
-        PlayerPrefs.SetString("TransferActions", "Quest5Reward");
 
         // Stop the player from bringing up the dialog again
         dMan.gameObject.transform.localScale = Vector3.zero;

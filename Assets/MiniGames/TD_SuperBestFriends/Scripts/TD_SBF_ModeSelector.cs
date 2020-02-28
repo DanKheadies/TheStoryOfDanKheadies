@@ -54,7 +54,6 @@ public class TD_SBF_ModeSelector : MonoBehaviour
     {
         if ((Input.GetKeyDown(KeyCode.Escape) ||
              Input.GetKeyDown(KeyCode.P) ||
-             //Input.GetButtonDown("Controller Start Button")) &&
              contSupp.ControllerMenuRight("down")) &&
              !characterCanvas.activeSelf)
         {

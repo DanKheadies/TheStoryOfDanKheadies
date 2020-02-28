@@ -51,9 +51,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 2078005655141846750}
+  stuffBack: {fileID: 0}
   icon: {fileID: 5182995232039814133}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &223190629768556386
@@ -256,11 +259,109 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 6466046135437867885}
+  stuffBack: {fileID: 0}
   icon: {fileID: 7447508407549845481}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
+--- !u!1 &445428021124098982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6232587507680897809}
+  - component: {fileID: 9210860955910704955}
+  - component: {fileID: 6522396887773241035}
+  - component: {fileID: 7498379994658781581}
+  m_Layer: 5
+  m_Name: BrioText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6232587507680897809
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445428021124098982}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6426987126908843995}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -8, y: 9.5}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9210860955910704955
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445428021124098982}
+  m_CullTransparentMesh: 0
+--- !u!114 &6522396887773241035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445428021124098982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: b0e49ae5a2408094ba388c9d426e297f, type: 3}
+    m_FontSize: 24
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'BR:  XXX / YYY'
+--- !u!114 &7498379994658781581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445428021124098982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &509137832642645757
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,9 +1003,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 4424605348116612289}
+  stuffBack: {fileID: 0}
   icon: {fileID: 3818192721240366952}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &763559366781643410
@@ -1182,9 +1286,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 3377577894122319771}
+  stuffBack: {fileID: 0}
   icon: {fileID: 8041014410065093995}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &815927858378576753
@@ -1860,6 +1967,42 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &1248593903674041443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 44263429973808952}
+  m_Layer: 5
+  m_Name: BrioFill_Shell
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &44263429973808952
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248593903674041443}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7806831660881883757}
+  m_Father: {fileID: 6426987126908843995}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1281943089391446544
 GameObject:
   m_ObjectHideFlags: 0
@@ -2995,9 +3138,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 6840848087337262787}
+  stuffBack: {fileID: 0}
   icon: {fileID: 2877623933960603442}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &1693600642181015478
@@ -3259,9 +3405,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 7357634340770724828}
+  stuffBack: {fileID: 0}
   icon: {fileID: 9143389133008429611}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &1832628994573443719
@@ -3315,9 +3464,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 343234999844077331}
+  stuffBack: {fileID: 0}
   icon: {fileID: 4671787415039387075}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &2052800810923516934
@@ -4233,9 +4385,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 2597295691554700122}
+  stuffBack: {fileID: 0}
   icon: {fileID: 2685838162751860725}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &2496743505863215470
@@ -5089,9 +5244,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 2585964964946077617}
+  stuffBack: {fileID: 0}
   icon: {fileID: 3573025193932936927}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &2802752776101963335
@@ -5243,6 +5401,80 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!1 &2903898128755088139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4650164413489855864}
+  - component: {fileID: 3460812002813793574}
+  - component: {fileID: 3138266336605497071}
+  m_Layer: 5
+  m_Name: BrioBackground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4650164413489855864
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903898128755088139}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6426987126908843995}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3460812002813793574
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903898128755088139}
+  m_CullTransparentMesh: 0
+--- !u!114 &3138266336605497071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903898128755088139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.14901961, g: 0.1882353, b: 0.14901961, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
 --- !u!1 &3035139697270158458
 GameObject:
   m_ObjectHideFlags: 0
@@ -5368,9 +5600,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 7434061482499967224}
+  stuffBack: {fileID: 0}
   icon: {fileID: 5351460338274417774}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &3181632722550349915
@@ -5981,9 +6216,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 2797217573915635923}
+  stuffBack: {fileID: 0}
   icon: {fileID: 6052219738015713154}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &3459017497960903905
@@ -6187,9 +6425,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 5988529380378690684}
+  stuffBack: {fileID: 0}
   icon: {fileID: 1010640021416855892}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &3595789514826848461
@@ -6413,9 +6654,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 925778391375879622}
+  stuffBack: {fileID: 0}
   icon: {fileID: 3455548824381416968}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &3728966287738607871
@@ -6720,6 +6964,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef692f097ab740a46921f8e698114232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseBtn: {fileID: 0}
+  DropBtn: {fileID: 0}
+  BackBtn: {fileID: 0}
+  contSupp: {fileID: 0}
+  UseArw: {fileID: 0}
+  DropArw: {fileID: 0}
+  BackArw: {fileID: 0}
+  joystick: {fileID: 0}
+  moveSMA: {fileID: 0}
+  touches: {fileID: 0}
+  itemMenu: {fileID: 0}
   bControllerLeft: 0
   bControllerRight: 0
   bFreezeControllerInput: 0
@@ -7074,9 +7329,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 7254927105892136277}
+  stuffBack: {fileID: 0}
   icon: {fileID: 8550830650892102485}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &4157635317654151533
@@ -8251,9 +8509,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 3137372604666760145}
+  stuffBack: {fileID: 0}
   icon: {fileID: 7362109333988677013}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &4876246798097210141
@@ -8307,9 +8568,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 227335058349573724}
+  stuffBack: {fileID: 0}
   icon: {fileID: 2787950783431958314}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &5086420563683527189
@@ -8943,9 +9207,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 7164511839721570865}
+  stuffBack: {fileID: 0}
   icon: {fileID: 296152293247143586}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &5182323489239692565
@@ -9267,9 +9534,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 1650752331398706192}
+  stuffBack: {fileID: 0}
   icon: {fileID: 4907510897722101285}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &5491274664352163329
@@ -10245,6 +10515,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 0}
+  inventory: {fileID: 0}
+  slots: []
   itemsParent: {fileID: 5438114818100674631}
   itemMenu: {fileID: 3701773477980146946}
 --- !u!114 &8062225022313148810
@@ -10279,6 +10551,7 @@ MonoBehaviour:
   item18: {fileID: 0}
   item19: {fileID: 0}
   item20: {fileID: 0}
+  contSupp: {fileID: 0}
   itemSelector1: {fileID: 0}
   itemSelector2: {fileID: 0}
   itemSelector3: {fileID: 0}
@@ -10299,7 +10572,7 @@ MonoBehaviour:
   itemSelector18: {fileID: 0}
   itemSelector19: {fileID: 0}
   itemSelector20: {fileID: 0}
-  joystick: {fileID: 0}
+  fixedJoystick: {fileID: 0}
   touches: {fileID: 0}
   itemMenu: {fileID: 0}
   stuffMenu: {fileID: 0}
@@ -11846,7 +12119,7 @@ RectTransform:
   - {fileID: 5655120153732616390}
   - {fileID: 5655120152377524764}
   m_Father: {fileID: 5655120153924132584}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13913,9 +14186,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6840184b681044db304f200b9a2fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ControlsBtn: {fileID: 0}
+  GoOnBtn: {fileID: 0}
+  KogabiBtn: {fileID: 0}
+  MapBtn: {fileID: 0}
+  QuitBtn: {fileID: 0}
+  SaveBtn: {fileID: 0}
+  SoundBtn: {fileID: 0}
+  StuffBtn: {fileID: 0}
+  ControlsArw: {fileID: 0}
+  GoOnArw: {fileID: 0}
+  KogabiArw: {fileID: 0}
+  MapArw: {fileID: 0}
+  QuitArw: {fileID: 0}
+  SaveArw: {fileID: 0}
+  SoundArw: {fileID: 0}
+  StuffArw: {fileID: 0}
+  CollumBtn: {fileID: 0}
+  GGBtn: {fileID: 0}
+  IconsBtn: {fileID: 0}
+  ResetBtn: {fileID: 0}
+  CollumArw: {fileID: 0}
+  GGArw: {fileID: 0}
+  IconsArw: {fileID: 0}
+  ResetArw: {fileID: 0}
+  itemMenuAlpha: {fileID: 0}
+  contSupp: {fileID: 0}
+  joystick: {fileID: 0}
+  scene:
+    m_Handle: 0
+  touches: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  pauseScreen: {fileID: 0}
   bControllerDown: 0
   bControllerUp: 0
   bFreezeControllerInput: 0
+  bIsGWC: 0
+  bIsMinesweeper: 0
   currentPosition: 165
   bSecondaryMenu: 0
 --- !u!1 &5655120153343311465
@@ -14058,18 +14365,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aspectUtil: {fileID: 0}
+  playerAnim: {fileID: 0}
   mainCamera: {fileID: 0}
+  contSupp: {fileID: 0}
   fixedJoy: {fileID: 0}
   dArrow: {fileID: 0}
   dBox: {fileID: 0}
   dFrame: {fileID: 0}
   dPic: {fileID: 0}
-  imgStrobe: {fileID: 0}
   oMan: {fileID: 0}
   pause: {fileID: 0}
-  pMove: {fileID: 0}
-  scene:
-    m_Handle: 0
+  playerMove: {fileID: 0}
+  scriptMan: {fileID: 0}
   SFXMan: {fileID: 0}
   portPic: {fileID: 21300000, guid: cb0a295efb692dc4d967fcbe460a2fb7, type: 3}
   dText: {fileID: 0}
@@ -14080,6 +14387,7 @@ MonoBehaviour:
   bPauseDialogue: 0
   bTempControlActive: 0
   currentLine: 0
+  closingAction: 
   dialogueLines:
   - The Story of Dan Kheadies
 --- !u!114 &5655120153347217335
@@ -14095,6 +14403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
+  contSupp: {fileID: 0}
   dMan: {fileID: 0}
   fixedJoy: {fileID: 0}
   oBox: {fileID: 0}
@@ -14113,6 +14422,18 @@ MonoBehaviour:
   bOptionsActive: 0
   bPauseOptions: 0
   bTempControlActive: 0
+  cameraHeight: 0
+  cameraWidth: 0
+  pauseTime: 0
+  o1ArwPoints: []
+  o2ArwPoints: []
+  o3ArwPoints: []
+  o4ArwPoints: []
+  o1TextPoints: []
+  o2TextPoints: []
+  o3TextPoints: []
+  o4TextPoints: []
+  oFramePoints: []
   tempOptsCount: 0
   options: []
 --- !u!1 &5655120153377099176
@@ -14374,6 +14695,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf5122723f3fb34e855a16231a37a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  playerAnim: {fileID: 0}
+  playerMove: {fileID: 0}
+  scene:
+    m_Handle: 0
   bAvoidAniComp: 0
 --- !u!1 &5655120153528377556
 GameObject:
@@ -16005,6 +16331,7 @@ RectTransform:
   - {fileID: 5655120154294375522}
   - {fileID: 5655120154397305145}
   - {fileID: 5655120152998153801}
+  - {fileID: 6426987126908843995}
   - {fileID: 5655120152899353815}
   - {fileID: 5655120153672426317}
   m_Father: {fileID: 0}
@@ -16099,8 +16426,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc2999b2bcc76244b751226facc0c65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene:
-    m_Handle: 0
   sFader: {fileID: 0}
   sFaderDia: {fileID: 0}
 --- !u!114 &5655120153924132590
@@ -16116,13 +16441,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
-  camSlide: {fileID: 0}
   HUD: {fileID: 0}
-  dHUD: {fileID: 0}
-  contOpacCan: {fileID: 0}
-  hudCanvas: {fileID: 0}
+  guiControlsCan: {fileID: 0}
+  contSupp: {fileID: 0}
+  devDetect: {fileID: 0}
   dMan: {fileID: 0}
-  fixedJoy: {fileID: 0}
+  fixedJoystick: {fileID: 0}
   pauseButtOpac: {fileID: 0}
   dPads: []
   joySticks: []
@@ -16144,8 +16468,6 @@ MonoBehaviour:
   touches: {fileID: 0}
   bControlsActive: 0
   bControlsDPad: 0
-  bMobileDevice: 0
-  bUpdateBrio: 0
   currentContOpac: 0
   currentContDPad: 0
 --- !u!1 &5655120153945090053
@@ -16280,6 +16602,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae4634517fc8b1a48a757fe6c48dfcbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Opt1Btn: {fileID: 0}
+  Opt2Btn: {fileID: 0}
+  Opt3Btn: {fileID: 0}
+  Opt4Btn: {fileID: 0}
+  contSupp: {fileID: 0}
+  Opt1Arw: {fileID: 0}
+  Opt2Arw: {fileID: 0}
+  Opt3Arw: {fileID: 0}
+  Opt4Arw: {fileID: 0}
+  pauseScreen: {fileID: 0}
+  joystick: {fileID: 0}
+  oMan: {fileID: 0}
+  touches: {fileID: 0}
   bControllerDown: 0
   bControllerUp: 0
   bFreezeControllerInput: 0
@@ -19687,9 +20022,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 2591704457463262531}
+  stuffBack: {fileID: 0}
   icon: {fileID: 119753183282078986}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &6462756424933149284
@@ -20192,6 +20530,94 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!1 &6948104849801381626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6426987126908843995}
+  - component: {fileID: 433840876290615958}
+  m_Layer: 5
+  m_Name: BrioBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6426987126908843995
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6948104849801381626}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 4650164413489855864}
+  - {fileID: 44263429973808952}
+  - {fileID: 6232587507680897809}
+  m_Father: {fileID: 5655120153924132584}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 115, y: -42}
+  m_SizeDelta: {x: 180, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &433840876290615958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6948104849801381626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 3138266336605497071}
+  m_FillRect: {fileID: 7806831660881883757}
+  m_HandleRect: {fileID: 0}
+  m_Direction: 0
+  m_MinValue: 0
+  m_MaxValue: 30
+  m_WholeNumbers: 1
+  m_Value: 23
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &6974539542772697267
 GameObject:
   m_ObjectHideFlags: 0
@@ -21226,6 +21652,80 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &7660835734653924886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7806831660881883757}
+  - component: {fileID: 7787752021248730721}
+  - component: {fileID: 7952396462551560590}
+  m_Layer: 5
+  m_Name: BrioFill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7806831660881883757
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7660835734653924886}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 44263429973808952}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7787752021248730721
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7660835734653924886}
+  m_CullTransparentMesh: 0
+--- !u!114 &7952396462551560590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7660835734653924886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
 --- !u!1 &7687435635500455453
 GameObject:
   m_ObjectHideFlags: 0
@@ -21563,9 +22063,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeButton: {fileID: 3122902344518827216}
+  stuffBack: {fileID: 0}
   icon: {fileID: 7130827591551845752}
+  inv: {fileID: 0}
   item: {fileID: 0}
   fixedJoy: {fileID: 0}
+  itemMenu: {fileID: 0}
   touches: {fileID: 0}
   itemId: 0
 --- !u!1 &7987285342001635035
@@ -24401,7 +24904,7 @@ PrefabInstance:
     - target: {fileID: 4745645436471142536, guid: c592e81eb5439e8419eeab02c94e0367,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4745645436471142536, guid: c592e81eb5439e8419eeab02c94e0367,
         type: 3}
@@ -24487,6 +24990,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745645437850631434, guid: c592e81eb5439e8419eeab02c94e0367,
+        type: 3}
+      propertyPath: m_Name
+      value: FullBrioBarOpacity
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c592e81eb5439e8419eeab02c94e0367, type: 3}

@@ -46,8 +46,6 @@ public class MoveItemMenuArrow : MonoBehaviour
         if (itemMenu.gameObject.GetComponent<CanvasGroup>().alpha == 1)
         {
             // Controller Support 
-            //if (Input.GetAxis("Controller DPad Horizontal") == 0 &&
-            //    Input.GetAxis("Controller Joystick Horizontal") == 0 &&
             if (contSupp.ControllerDirectionalPadHorizontal() == 0 &&
                 contSupp.ControllerLeftJoystickHorizontal() == 0 &&
                 joystick.Horizontal == 0 &&
@@ -57,8 +55,6 @@ public class MoveItemMenuArrow : MonoBehaviour
                 bFreezeControllerInput = false;
             }
             else if (!bFreezeControllerInput &&
-                     //(Input.GetAxis("Controller DPad Horizontal") > 0 ||
-                     // Input.GetAxis("Controller Joystick Horizontal") > 0 ||
                      (contSupp.ControllerDirectionalPadHorizontal() > 0 ||
                       contSupp.ControllerLeftJoystickHorizontal() > 0 ||
                       joystick.Horizontal > 0 ||
@@ -68,8 +64,6 @@ public class MoveItemMenuArrow : MonoBehaviour
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
-                     //(Input.GetAxis("Controller DPad Horizontal") < 0 ||
-                     // Input.GetAxis("Controller Joystick Horizontal") < 0 ||
                      (contSupp.ControllerDirectionalPadHorizontal() < 0 ||
                       contSupp.ControllerLeftJoystickHorizontal() < 0 ||
                       joystick.Horizontal < 0 ||
@@ -115,11 +109,9 @@ public class MoveItemMenuArrow : MonoBehaviour
                     currentPosition = ItemArrowPos.Use;
                     ClearAllArrows();
                     UseArw.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-
                 }
             }
             else if (Input.GetButtonDown("Action") ||
-                     //Input.GetKeyDown(KeyCode.JoystickButton0) ||
                      contSupp.ControllerButtonPadBottom("down") ||
                      touches.bAaction)
             {
@@ -135,8 +127,6 @@ public class MoveItemMenuArrow : MonoBehaviour
                 touches.bAaction = false;
             }
             else if (Input.GetKeyDown(KeyCode.Escape) ||
-                     //Input.GetKeyDown(KeyCode.JoystickButton7) ||
-                     //Input.GetKeyDown(KeyCode.JoystickButton1) ||
                      contSupp.ControllerMenuRight("down") ||
                      contSupp.ControllerButtonPadRight("down") ||
                      Input.GetButton("BAction") ||

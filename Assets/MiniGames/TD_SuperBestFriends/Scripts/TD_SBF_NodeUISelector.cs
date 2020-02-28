@@ -15,7 +15,6 @@ public class TD_SBF_NodeUISelector : MonoBehaviour
     public ControllerSupport contSupp;
     public GameObject upgradeShell;
     public TD_SBF_BuildDescriptionBarSelector buildDescBarSel;
-    //public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_ControlManagement cMan;
     public TD_SBF_NodeUI nodeUI;
     public TD_SBF_Shop shop;
@@ -58,20 +57,17 @@ public class TD_SBF_NodeUISelector : MonoBehaviour
             bIsNowNodeUIMode)
         {
             // Controller Support 
-            //if (Input.GetAxis("Controller Rightstick Vertical") == 0)
             if (contSupp.ControllerRightJoystickVertical() == 0)
             {
                 bFreezeControllerInput = false;
             }
             else if (!bFreezeControllerInput &&
-                     //(Input.GetAxis("Controller Rightstick Vertical") > 0))
                      contSupp.ControllerRightJoystickVertical() > 0)
             {
                 bControllerDown = true;
                 bFreezeControllerInput = true;
             }
             else if (!bFreezeControllerInput &&
-                     //(Input.GetAxis("Controller Rightstick Vertical") < 0))
                      contSupp.ControllerRightJoystickVertical() < 0)
             {
                 bControllerUp = true;
@@ -88,12 +84,10 @@ public class TD_SBF_NodeUISelector : MonoBehaviour
                 bControllerUp = false;
                 MoveUp();
             }
-            //else if (Input.GetButtonDown("Controller Bottom Button"))
             else if (contSupp.ControllerButtonPadBottom("down"))
             {
                 SelectOption();
             }
-            //else if (Input.GetButtonDown("Controller Right Button"))
             else if (contSupp.ControllerButtonPadRight("down"))
             {
                 StartCoroutine(contSupp.BelayAction());
@@ -101,8 +95,6 @@ public class TD_SBF_NodeUISelector : MonoBehaviour
                 ResetNodeUI();
                 shopSel.ResetTowerMode();
             }
-            //else if (Input.GetButtonDown("Controller Right Bumper") ||
-            //         Input.GetButtonDown("Controller Left Bumper"))
             else if (contSupp.ControllerBumperRight("down") ||
                      contSupp.ControllerBumperLeft("down"))
             {
