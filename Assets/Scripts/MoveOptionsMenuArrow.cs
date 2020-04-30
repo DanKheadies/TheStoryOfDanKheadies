@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/23/2018
-// Last:  02/25/2020
+// Last:  04/30/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -162,24 +162,25 @@ public class MoveOptionsMenuArrow : MonoBehaviour
         }
     }
 
+    public void HideSelectors()
+    {
+        Opt1Arw.transform.localScale = Vector3.zero;
+        Opt2Arw.transform.localScale = Vector3.zero;
+        Opt3Arw.transform.localScale = Vector3.zero;
+        Opt4Arw.transform.localScale = Vector3.zero;
+    }
+
     public void ClearAllArrows()
     {
         if (oMan.bOptionsActive)
-        {
-            Opt1Arw.transform.localScale = Vector3.zero;
-            Opt2Arw.transform.localScale = Vector3.zero;
-            Opt3Arw.transform.localScale = Vector3.zero;
-            Opt4Arw.transform.localScale = Vector3.zero;
-        }
+            HideSelectors();
     }
 
     public void ResetArrows()
     {
-        Opt1Arw.transform.localScale = Vector3.one;
-        Opt2Arw.transform.localScale = Vector3.zero;
-        Opt3Arw.transform.localScale = Vector3.zero;
-        Opt4Arw.transform.localScale = Vector3.zero;
+        HideSelectors();
 
+        Opt1Arw.transform.localScale = Vector3.one;
         currentPosition = ArrowPos.Opt1;
     }
 }

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/27/2020
+// Last:  04/30/2020
 
 using System.Collections;
 using UnityEngine;
@@ -73,6 +73,12 @@ public class MenuControl : MonoBehaviour
 
     void Update()
     {
+        if (contSupp.ControllerButtonPadBottom("down"))
+        {
+            Debug.Log("bIsSelectable: " + bIsSelectable);
+            Debug.Log("bAvoidSelection: " + bAvoidSelection);
+        }
+
         // Skip animations
         if ((Input.GetKeyDown(KeyCode.Space) ||
              Input.GetMouseButtonDown(0) ||
@@ -329,7 +335,10 @@ public class MenuControl : MonoBehaviour
         Time.timeScale = 1;
 
         if (PlayerPrefs.GetString("Chapter") != "")
-            SceneManager.LoadScene(PlayerPrefs.GetString("Chapter"));
+        {
+            PlayerPrefs.SetString("TransferScene", PlayerPrefs.GetString("Chapter"));
+            SceneManager.LoadScene("SceneTransitioner");
+        }
         else
             SceneManager.LoadScene("Chp0");
     }
@@ -375,6 +384,7 @@ public class MenuControl : MonoBehaviour
 
     public void AvoidSelection()
     {
+        Debug.Log("avoid");
         bAvoidSelection = true;
         EventSystem.current.SetSelectedGameObject(null);
     }

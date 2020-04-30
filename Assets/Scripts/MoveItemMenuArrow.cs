@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 01/29/2018
-// Last:  02/25/2020
+// Last:  04/30/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -137,20 +137,22 @@ public class MoveItemMenuArrow : MonoBehaviour
         }
     }
 
+    public void HideSelectors()
+    {
+        UseArw.transform.localScale = Vector3.zero;
+        DropArw.transform.localScale = Vector3.zero;
+        BackArw.transform.localScale = Vector3.zero;
+    }
+
     public void ClearAllArrows()
     {
         if (itemMenu.gameObject.GetComponent<CanvasGroup>().alpha == 1)
-        {
-            UseArw.transform.localScale = Vector3.zero;
-            DropArw.transform.localScale = Vector3.zero;
-            BackArw.transform.localScale = Vector3.zero;
-        }
+            HideSelectors();
     }
 
     public void ResetArrowPos()
     {
-        DropArw.transform.localScale = Vector3.zero;
-        BackArw.transform.localScale = Vector3.zero;
+        HideSelectors();
 
         UseArw.transform.localScale = Vector3.one;
         currentPosition = ItemArrowPos.Use;

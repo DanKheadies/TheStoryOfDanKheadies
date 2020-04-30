@@ -247,6 +247,34 @@ public class UIManager : MonoBehaviour
         guiControlsCan.alpha = currentContOpac;
     }
 
+    public void IncreaseOpacity()
+    {
+        if (currentContOpac < 1.0f)
+            currentContOpac += 0.1f;
+        else
+            currentContOpac = 1.0f;
+
+        guiControlsCan.alpha = currentContOpac;
+        AdjustSlider();
+    }
+
+    public void DecreaseOpacity()
+    {
+        if (currentContOpac > 0)
+            currentContOpac -= 0.1f;
+        else
+            currentContOpac = 0f;
+
+        guiControlsCan.alpha = currentContOpac;
+        AdjustSlider();
+    }
+
+    public void AdjustSlider()
+    {
+        if (contOpacSlider)
+            contOpacSlider.value = currentContOpac;
+    }
+
     public void CheckAndSetMenus()
     {
         // Width > height = center in the screen

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 06/18/2019
-// Last:  02/25/2020
+// Last:  04/30/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +30,7 @@ public class MoveStuffMenuArrow : MonoBehaviour
     public Button item19;
     public Button item20;
     public ControllerSupport contSupp;
+    public GameObject backSelector;
     public GameObject itemSelector1;
     public GameObject itemSelector2;
     public GameObject itemSelector3;
@@ -51,6 +52,8 @@ public class MoveStuffMenuArrow : MonoBehaviour
     public GameObject itemSelector19;
     public GameObject itemSelector20;
     public FixedJoystick fixedJoystick;
+    public MovePauseMenuArrow movePMA;
+    public PauseGame pause;
     public TouchControls touches;
     public Transform itemMenu;
     public Transform stuffMenu; 
@@ -61,7 +64,11 @@ public class MoveStuffMenuArrow : MonoBehaviour
     public bool bControllerLeft;
     public bool bControllerRight;
     public bool bControllerUp;
+    public bool bDelayAction;
     public bool bFreezeControllerInput;
+    public bool bPauseSelection;
+
+    public int selectorColumn;
 
     public enum SelectorPosition : int
     {
@@ -84,7 +91,8 @@ public class MoveStuffMenuArrow : MonoBehaviour
         item17 = 17,
         item18 = 18,
         item19 = 19,
-        item20 = 20
+        item20 = 20,
+        back = 21
     }
 
     public SelectorPosition currentPosition;
@@ -93,6 +101,7 @@ public class MoveStuffMenuArrow : MonoBehaviour
     {
         // Initializers
         currentPosition = SelectorPosition.item1;
+        selectorColumn = 1;
     }
     
     void Update()
@@ -100,6 +109,13 @@ public class MoveStuffMenuArrow : MonoBehaviour
         if (stuffMenu.localScale == Vector3.one &&
             itemMenu.GetComponent<CanvasGroup>().alpha == 0)
         {
+            // Controller Support
+            if (bDelayAction)
+            {
+                bDelayAction = false;
+                return;
+            }
+
             // Controller Support 
             if (!contSupp.bIsMoving &&
                 fixedJoystick.Vertical == 0 &&
@@ -248,33 +264,66 @@ public class MoveStuffMenuArrow : MonoBehaviour
                 }
                 else if (currentPosition == SelectorPosition.item16)
                 {
-                    currentPosition = SelectorPosition.item1;
+                    currentPosition = SelectorPosition.back;
                     ClearAllSelectors();
-                    itemSelector1.transform.localScale = Vector3.one;
+                    backSelector.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item17)
                 {
-                    currentPosition = SelectorPosition.item2;
+                    currentPosition = SelectorPosition.back;
                     ClearAllSelectors();
-                    itemSelector2.transform.localScale = Vector3.one;
+                    backSelector.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item18)
                 {
-                    currentPosition = SelectorPosition.item3;
+                    currentPosition = SelectorPosition.back;
                     ClearAllSelectors();
-                    itemSelector3.transform.localScale = Vector3.one;
+                    backSelector.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item19)
                 {
-                    currentPosition = SelectorPosition.item4;
+                    currentPosition = SelectorPosition.back; 
                     ClearAllSelectors();
-                    itemSelector4.transform.localScale = Vector3.one;
+                    backSelector.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item20)
                 {
-                    currentPosition = SelectorPosition.item5;
+                    currentPosition = SelectorPosition.back; 
                     ClearAllSelectors();
-                    itemSelector5.transform.localScale = Vector3.one;
+                    backSelector.transform.localScale = Vector3.one;
+                }
+                else if (currentPosition == SelectorPosition.back)
+                {
+                    if (selectorColumn == 1)
+                    {
+                        backSelector.transform.localScale = Vector3.zero;
+                        currentPosition = SelectorPosition.item1;
+                        itemSelector1.transform.localScale = Vector3.one;
+                    }
+                    else if (selectorColumn == 2)
+                    {
+                        backSelector.transform.localScale = Vector3.zero;
+                        currentPosition = SelectorPosition.item2;
+                        itemSelector2.transform.localScale = Vector3.one;
+                    }
+                    else if (selectorColumn == 3)
+                    {
+                        backSelector.transform.localScale = Vector3.zero;
+                        currentPosition = SelectorPosition.item3;
+                        itemSelector3.transform.localScale = Vector3.one;
+                    }
+                    else if (selectorColumn == 4)
+                    {
+                        backSelector.transform.localScale = Vector3.zero;
+                        currentPosition = SelectorPosition.item4;
+                        itemSelector4.transform.localScale = Vector3.one;
+                    }
+                    else if (selectorColumn == 5)
+                    {
+                        backSelector.transform.localScale = Vector3.zero;
+                        currentPosition = SelectorPosition.item5;
+                        itemSelector5.transform.localScale = Vector3.one;
+                    }
                 }
             }
             else if (Input.GetKeyDown(KeyCode.W) ||
@@ -285,33 +334,33 @@ public class MoveStuffMenuArrow : MonoBehaviour
                 
                 if (currentPosition == SelectorPosition.item1)
                 {
-                    currentPosition = SelectorPosition.item16;
+                    currentPosition = SelectorPosition.back; 
                     ClearAllSelectors();
-                    itemSelector16.transform.localScale = Vector3.one;
+                    backSelector.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item2)
                 {
-                    currentPosition = SelectorPosition.item17;
+                    currentPosition = SelectorPosition.back; 
                     ClearAllSelectors();
-                    itemSelector17.transform.localScale = Vector3.one;
+                    backSelector.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item3)
                 {
-                    currentPosition = SelectorPosition.item18;
+                    currentPosition = SelectorPosition.back; 
                     ClearAllSelectors();
-                    itemSelector18.transform.localScale = Vector3.one;
+                    backSelector.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item4)
                 {
-                    currentPosition = SelectorPosition.item19;
+                    currentPosition = SelectorPosition.back; 
                     ClearAllSelectors();
-                    itemSelector19.transform.localScale = Vector3.one;
+                    backSelector.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item5)
                 {
-                    currentPosition = SelectorPosition.item20;
+                    currentPosition = SelectorPosition.back; 
                     ClearAllSelectors();
-                    itemSelector20.transform.localScale = Vector3.one;
+                    backSelector.transform.localScale = Vector3.one;
                 }
 
 
@@ -408,6 +457,39 @@ public class MoveStuffMenuArrow : MonoBehaviour
                     currentPosition = SelectorPosition.item15;
                     ClearAllSelectors();
                     itemSelector15.transform.localScale = Vector3.one;
+                }
+                else if (currentPosition == SelectorPosition.back)
+                {
+                    if (selectorColumn == 1)
+                    {
+                        backSelector.transform.localScale = Vector3.zero;
+                        currentPosition = SelectorPosition.item16;
+                        itemSelector16.transform.localScale = Vector3.one;
+                    }
+                    else if (selectorColumn == 2)
+                    {
+                        backSelector.transform.localScale = Vector3.zero;
+                        currentPosition = SelectorPosition.item17;
+                        itemSelector17.transform.localScale = Vector3.one;
+                    }
+                    else if (selectorColumn == 3)
+                    {
+                        backSelector.transform.localScale = Vector3.zero;
+                        currentPosition = SelectorPosition.item18;
+                        itemSelector18.transform.localScale = Vector3.one;
+                    }
+                    else if (selectorColumn == 4)
+                    {
+                        backSelector.transform.localScale = Vector3.zero;
+                        currentPosition = SelectorPosition.item19;
+                        itemSelector19.transform.localScale = Vector3.one;
+                    }
+                    else if (selectorColumn == 5)
+                    {
+                        backSelector.transform.localScale = Vector3.zero;
+                        currentPosition = SelectorPosition.item20;
+                        itemSelector20.transform.localScale = Vector3.one;
+                    }
                 }
             }
             else if (Input.GetKeyDown(KeyCode.A) ||
@@ -418,123 +500,156 @@ public class MoveStuffMenuArrow : MonoBehaviour
 
                 if (currentPosition == SelectorPosition.item1)
                 {
-                    currentPosition = SelectorPosition.item20;
+                    currentPosition = SelectorPosition.item5;
+                    selectorColumn = 5;
                     ClearAllSelectors();
-                    itemSelector20.transform.localScale = Vector3.one;
+                    itemSelector5.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item2)
                 {
                     currentPosition = SelectorPosition.item1;
+                    selectorColumn = 1;
                     ClearAllSelectors();
                     itemSelector1.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item3)
                 {
                     currentPosition = SelectorPosition.item2;
+                    selectorColumn = 2;
                     ClearAllSelectors();
                     itemSelector2.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item4)
                 {
                     currentPosition = SelectorPosition.item3;
+                    selectorColumn = 3;
                     ClearAllSelectors();
                     itemSelector3.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item5)
                 {
                     currentPosition = SelectorPosition.item4;
+                    selectorColumn = 4;
                     ClearAllSelectors();
                     itemSelector4.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item6)
                 {
-                    currentPosition = SelectorPosition.item5;
+                    currentPosition = SelectorPosition.item10;
+                    selectorColumn = 5;
                     ClearAllSelectors();
-                    itemSelector5.transform.localScale = Vector3.one;
+                    itemSelector10.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item7)
                 {
                     currentPosition = SelectorPosition.item6;
+                    selectorColumn = 1;
                     ClearAllSelectors();
                     itemSelector6.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item8)
                 {
                     currentPosition = SelectorPosition.item7;
+                    selectorColumn = 2;
                     ClearAllSelectors();
                     itemSelector7.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item9)
                 {
                     currentPosition = SelectorPosition.item8;
+                    selectorColumn = 3;
                     ClearAllSelectors();
                     itemSelector8.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item10)
                 {
                     currentPosition = SelectorPosition.item9;
+                    selectorColumn = 4;
                     ClearAllSelectors();
                     itemSelector9.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item11)
                 {
-                    currentPosition = SelectorPosition.item10;
+                    currentPosition = SelectorPosition.item15;
+                    selectorColumn = 5;
                     ClearAllSelectors();
-                    itemSelector10.transform.localScale = Vector3.one;
+                    itemSelector15.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item12)
                 {
                     currentPosition = SelectorPosition.item11;
+                    selectorColumn = 1;
                     ClearAllSelectors();
                     itemSelector11.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item13)
                 {
                     currentPosition = SelectorPosition.item12;
+                    selectorColumn = 2;
                     ClearAllSelectors();
                     itemSelector12.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item14)
                 {
                     currentPosition = SelectorPosition.item13;
+                    selectorColumn = 3;
                     ClearAllSelectors();
                     itemSelector13.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item15)
                 {
                     currentPosition = SelectorPosition.item14;
+                    selectorColumn = 4;
                     ClearAllSelectors();
                     itemSelector14.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item16)
                 {
-                    currentPosition = SelectorPosition.item15;
+                    currentPosition = SelectorPosition.item20;
+                    selectorColumn = 5;
                     ClearAllSelectors();
-                    itemSelector15.transform.localScale = Vector3.one;
+                    itemSelector20.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item17)
                 {
                     currentPosition = SelectorPosition.item16;
+                    selectorColumn = 1;
                     ClearAllSelectors();
                     itemSelector16.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item18)
                 {
                     currentPosition = SelectorPosition.item17;
+                    selectorColumn = 2;
                     ClearAllSelectors();
                     itemSelector17.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item19)
                 {
                     currentPosition = SelectorPosition.item18;
+                    selectorColumn = 3;
                     ClearAllSelectors();
                     itemSelector18.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item20)
                 {
                     currentPosition = SelectorPosition.item19;
+                    selectorColumn = 4;
                     ClearAllSelectors();
                     itemSelector19.transform.localScale = Vector3.one;
+                }
+                else if (currentPosition == SelectorPosition.back)
+                {
+                    if (selectorColumn == 1)
+                        selectorColumn = 5;
+                    else if (selectorColumn == 2)
+                        selectorColumn = 1;
+                    else if (selectorColumn == 3)
+                        selectorColumn = 2;
+                    else if (selectorColumn == 4)
+                        selectorColumn = 3;
+                    else if (selectorColumn == 5)
+                        selectorColumn = 4;
                 }
             }
             else if (Input.GetKeyDown(KeyCode.D) ||
@@ -546,217 +661,213 @@ public class MoveStuffMenuArrow : MonoBehaviour
                 if (currentPosition == SelectorPosition.item1)
                 {
                     currentPosition = SelectorPosition.item2;
+                    selectorColumn = 2;
                     ClearAllSelectors();
                     itemSelector2.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item2)
                 {
                     currentPosition = SelectorPosition.item3;
+                    selectorColumn = 3;
                     ClearAllSelectors();
                     itemSelector3.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item3)
                 {
                     currentPosition = SelectorPosition.item4;
+                    selectorColumn = 4;
                     ClearAllSelectors();
                     itemSelector4.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item4)
                 {
                     currentPosition = SelectorPosition.item5;
+                    selectorColumn = 5;
                     ClearAllSelectors();
                     itemSelector5.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item5)
                 {
-                    currentPosition = SelectorPosition.item6;
+                    currentPosition = SelectorPosition.item1;
+                    selectorColumn = 1;
                     ClearAllSelectors();
-                    itemSelector6.transform.localScale = Vector3.one;
+                    itemSelector1.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item6)
                 {
                     currentPosition = SelectorPosition.item7;
+                    selectorColumn = 2;
                     ClearAllSelectors();
                     itemSelector7.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item7)
                 {
                     currentPosition = SelectorPosition.item8;
+                    selectorColumn = 3;
                     ClearAllSelectors();
                     itemSelector8.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item8)
                 {
                     currentPosition = SelectorPosition.item9;
+                    selectorColumn = 4;
                     ClearAllSelectors();
                     itemSelector9.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item9)
                 {
                     currentPosition = SelectorPosition.item10;
+                    selectorColumn = 5;
                     ClearAllSelectors();
                     itemSelector10.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item10)
                 {
-                    currentPosition = SelectorPosition.item11;
+                    currentPosition = SelectorPosition.item6;
+                    selectorColumn = 1;
                     ClearAllSelectors();
-                    itemSelector11.transform.localScale = Vector3.one;
+                    itemSelector6.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item11)
                 {
                     currentPosition = SelectorPosition.item12;
+                    selectorColumn = 2;
                     ClearAllSelectors();
                     itemSelector12.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item12)
                 {
                     currentPosition = SelectorPosition.item13;
+                    selectorColumn = 3;
                     ClearAllSelectors();
                     itemSelector13.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item13)
                 {
                     currentPosition = SelectorPosition.item14;
+                    selectorColumn = 4;
                     ClearAllSelectors();
                     itemSelector14.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item14)
                 {
                     currentPosition = SelectorPosition.item15;
+                    selectorColumn = 5;
                     ClearAllSelectors();
                     itemSelector15.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item15)
                 {
-                    currentPosition = SelectorPosition.item16;
+                    currentPosition = SelectorPosition.item11;
+                    selectorColumn = 1;
                     ClearAllSelectors();
-                    itemSelector16.transform.localScale = Vector3.one;
+                    itemSelector11.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item16)
                 {
                     currentPosition = SelectorPosition.item17;
+                    selectorColumn = 2;
                     ClearAllSelectors();
                     itemSelector17.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item17)
                 {
                     currentPosition = SelectorPosition.item18;
+                    selectorColumn = 3;
                     ClearAllSelectors();
                     itemSelector18.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item18)
                 {
                     currentPosition = SelectorPosition.item19;
+                    selectorColumn = 4;
                     ClearAllSelectors();
                     itemSelector19.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item19)
                 {
                     currentPosition = SelectorPosition.item20;
+                    selectorColumn = 5;
                     ClearAllSelectors();
                     itemSelector20.transform.localScale = Vector3.one;
                 }
                 else if (currentPosition == SelectorPosition.item20)
                 {
-                    currentPosition = SelectorPosition.item1;
+                    currentPosition = SelectorPosition.item16;
+                    selectorColumn = 1;
                     ClearAllSelectors();
-                    itemSelector1.transform.localScale = Vector3.one;
+                    itemSelector16.transform.localScale = Vector3.one;
+                }
+                else if (currentPosition == SelectorPosition.back)
+                {
+                    if (selectorColumn == 1)
+                        selectorColumn = 2;
+                    else if (selectorColumn == 2)
+                        selectorColumn = 3;
+                    else if (selectorColumn == 3)
+                        selectorColumn = 4;
+                    else if (selectorColumn == 4)
+                        selectorColumn = 5;
+                    else if (selectorColumn == 5)
+                        selectorColumn = 1;
                 }
             }
             else if (bAllowSelection &&
                      (Input.GetButtonDown("Action") ||
-                      //Input.GetKeyDown(KeyCode.JoystickButton0) ||
                       contSupp.ControllerButtonPadBottom("down") ||
                       touches.bAaction))
             {
                 if (currentPosition == SelectorPosition.item1)
-                {
                     item1.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item2)
-                {
                     item2.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item3)
-                {
                     item3.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item4)
-                {
                     item4.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item5)
-                {
                     item5.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item6)
-                {
                     item6.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item7)
-                {
                     item7.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item8)
-                {
                     item8.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item9)
-                {
                     item9.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item10)
-                {
                     item10.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item11)
-                {
                     item11.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item12)
-                {
                     item12.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item13)
-                {
                     item13.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item14)
-                {
                     item14.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item15)
-                {
                     item15.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item16)
-                {
                     item16.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item17)
-                {
                     item17.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item18)
-                {
                     item18.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item19)
-                {
                     item19.onClick.Invoke();
-                }
                 else if (currentPosition == SelectorPosition.item20)
-                {
                     item20.onClick.Invoke();
+                else if (currentPosition == SelectorPosition.back)
+                {
+                    ResetSelectors();
+                    movePMA.bDelayAction = true;
+                    bDelayAction = true;
+                    pause.Stuff(false);
                 }
-
-                //bAvoidAllower = false;
+                
                 touches.bAaction = false;
             }
             else if (Input.GetKeyDown(KeyCode.Escape) ||
-                     //Input.GetKeyDown(KeyCode.JoystickButton7) ||
-                     //Input.GetKeyDown(KeyCode.JoystickButton1) ||
                      contSupp.ControllerMenuRight("down") ||
                      contSupp.ControllerButtonPadRight("down") ||
                      Input.GetButton("BAction") ||
@@ -779,35 +890,9 @@ public class MoveStuffMenuArrow : MonoBehaviour
         bAllowSelection = false;
     }
 
-    public void ClearAllSelectors()
+    public void HideSelectors()
     {
-        if (stuffMenu.localScale == Vector3.one)
-        {
-            itemSelector1.transform.localScale = Vector3.zero;
-            itemSelector2.transform.localScale = Vector3.zero;
-            itemSelector3.transform.localScale = Vector3.zero;
-            itemSelector4.transform.localScale = Vector3.zero;
-            itemSelector5.transform.localScale = Vector3.zero;
-            itemSelector6.transform.localScale = Vector3.zero;
-            itemSelector7.transform.localScale = Vector3.zero;
-            itemSelector8.transform.localScale = Vector3.zero;
-            itemSelector9.transform.localScale = Vector3.zero;
-            itemSelector10.transform.localScale = Vector3.zero;
-            itemSelector11.transform.localScale = Vector3.zero;
-            itemSelector12.transform.localScale = Vector3.zero;
-            itemSelector13.transform.localScale = Vector3.zero;
-            itemSelector14.transform.localScale = Vector3.zero;
-            itemSelector15.transform.localScale = Vector3.zero;
-            itemSelector16.transform.localScale = Vector3.zero;
-            itemSelector17.transform.localScale = Vector3.zero;
-            itemSelector18.transform.localScale = Vector3.zero;
-            itemSelector19.transform.localScale = Vector3.zero;
-            itemSelector20.transform.localScale = Vector3.zero;
-        }
-    }
-
-    public void ResetSelectors()
-    {
+        itemSelector1.transform.localScale = Vector3.zero;
         itemSelector2.transform.localScale = Vector3.zero;
         itemSelector3.transform.localScale = Vector3.zero;
         itemSelector4.transform.localScale = Vector3.zero;
@@ -827,8 +912,21 @@ public class MoveStuffMenuArrow : MonoBehaviour
         itemSelector18.transform.localScale = Vector3.zero;
         itemSelector19.transform.localScale = Vector3.zero;
         itemSelector20.transform.localScale = Vector3.zero;
+        backSelector.transform.localScale = Vector3.zero;
+    }
+
+    public void ClearAllSelectors()
+    {
+        if (stuffMenu.localScale == Vector3.one)
+            HideSelectors();
+    }
+
+    public void ResetSelectors()
+    {
+        HideSelectors();
 
         itemSelector1.transform.localScale = Vector3.one;
+        selectorColumn = 1;
         currentPosition = SelectorPosition.item1;
 
         bAvoidAllower = false;

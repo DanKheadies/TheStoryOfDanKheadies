@@ -2,7 +2,7 @@
 // Authors: David W. Corso
 // Contributors: Nick Pettit
 // Start: 04/20/2017
-// Last:  02/25/2020
+// Last:  04/30/2020
 
 using System.Collections;
 using UnityEngine;
@@ -50,6 +50,10 @@ public class SceneTransitioner : MonoBehaviour
 
                 switch (BetaLoad)
                 {
+                    case "Chp0":
+                        sceneTitle.text = "Chapter 0";
+                        sceneSubtitle.text = "Before the beginning...";
+                        break;
                     case "Chp1":
                         sceneTitle.text = "Chapter 1";
                         sceneSubtitle.text = "In the beginning...";

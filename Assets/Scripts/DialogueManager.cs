@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/27/2020
+// Last:  04/28/2020
 
 using System.Collections;
 using UnityEngine;
@@ -33,9 +33,12 @@ public class DialogueManager : MonoBehaviour
     public bool bStartStrobing;
     public bool bPauseDialogue;
     public bool bTempControlActive;
+    public bool bTypewriting;
 
     private float cameraHeight;
     private float cameraWidth;
+    public float defaultDelayForTypewriting;
+    public float delayForTypewriting;
     private float pauseTime;
 
     // Arrays follow CSS rules for orientation
@@ -51,6 +54,7 @@ public class DialogueManager : MonoBehaviour
     public int currentLine;
 
     public string closingAction;
+    public string currentDialogue;
     public string[] dialogueLines;
 
     void Start()
@@ -58,6 +62,8 @@ public class DialogueManager : MonoBehaviour
         // TODO: Still needed?
         bDialogueActive = false;
         bPauseDialogue = false; // UX -- Prevents immediately reopening a dialogue while moving / talking
+        defaultDelayForTypewriting = 0.0666f;
+        delayForTypewriting = defaultDelayForTypewriting;
         pauseTime = 0.333f;
 
         dArrowPoints = new float[4];
@@ -85,35 +91,40 @@ public class DialogueManager : MonoBehaviour
             !pause.bPauseActive &&
             (touches.bAaction || 
              Input.GetButtonDown("Action") ||
+             Input.GetButtonDown("BAction") ||
              contSupp.ControllerButtonPadBottom("down") ||
+             contSupp.ControllerButtonPadRight("down") ||
              (Input.GetButtonDown("DialogueAction") && 
               !uMan.bControlsActive)))
         {
             touches.Vibrate();
 
-            if (currentLine < dialogueLines.Length)
+            if (!bTypewriting)
             {
-                currentLine++;
-
-                // 05/10/2019 DC -- Avoids the GWC double tap bug
-                if (!oMan.bOptionsActive)
+                if (currentLine < dialogueLines.Length)
                 {
-                    touches.bAaction = false;
+                    currentLine++;
+
+                    // 05/10/2019 DC -- Avoids the GWC double tap bug
+                    if (!oMan.bOptionsActive)
+                        touches.bAaction = false;
+                }
+
+                if (bDialogueActive &&
+                    !oMan.bOptionsActive &&
+                    currentLine <= dialogueLines.Length - 1)
+                {
+                    StartCoroutine(TypewriteText());
                 }
             }
-        }
-
-        // Set current text whenever Options are hidden
-        if (bDialogueActive &&
-            !oMan.bOptionsActive &&
-            currentLine <= dialogueLines.Length - 1)
-        {
-            dText.text = dialogueLines[currentLine];
+            else
+                delayForTypewriting = delayForTypewriting / 3f;
         }
 
         // Show Options if present and w/ the last dialogue prompt; otherwise, reset the dialogue
         if (bDialogueActive &&
             oMan.bDiaToOpts &&
+            !bTypewriting &&
             !oMan.bOptionsActive &&
             currentLine >= dialogueLines.Length - 1)
         {
@@ -177,7 +188,8 @@ public class DialogueManager : MonoBehaviour
         SFXMan.sounds[2].PlayOneShot(SFXMan.sounds[2].clip);
 
         // Set the text
-        dText.text = dialogueLines[currentLine];
+        //dText.text = dialogueLines[currentLine];
+        StartCoroutine(TypewriteText());
 
         // Set current picture
         dPic.sprite = portPic;
@@ -197,6 +209,22 @@ public class DialogueManager : MonoBehaviour
 
         // Hide BrioBar & Pause Button (Opac)
         uMan.HideBrioAndButton();
+    }
+
+    public IEnumerator TypewriteText()
+    {
+        for (int i = 0; i < dialogueLines[currentLine].Length + 1; i++)
+        {
+            bTypewriting = true;
+            currentDialogue = dialogueLines[currentLine].Substring(0, i);
+            dText.text = currentDialogue;
+
+            yield return new WaitForSeconds(delayForTypewriting);
+        }
+
+        PauseDialogue();
+        bTypewriting = false;
+        delayForTypewriting = defaultDelayForTypewriting;
     }
 
     public IEnumerator WaitForOptions()

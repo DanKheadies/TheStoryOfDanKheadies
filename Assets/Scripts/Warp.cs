@@ -10,6 +10,7 @@ using UnityEngine;
 public class Warp : MonoBehaviour
 {
     public Animator playerAnim;
+    public AreaAnimator areaAni;
     public CameraFollow cFollow;
     public PlayerMovement player;
     public ScreenFader sFader;
@@ -42,6 +43,9 @@ public class Warp : MonoBehaviour
             StartCoroutine(sFader.FadeToClear());
             
             yield return new WaitForSeconds(1.0f);
+
+            if (areaAni)
+                areaAni.CheckAreaToAnimate();
 
             player.bStopPlayerMovement = false;
         }

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/08/2017
-// Last:  02/25/2020
+// Last:  04/30/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,9 +49,10 @@ public class MovePauseMenuArrow : MonoBehaviour
 
     public bool bControllerDown;
     public bool bControllerUp;
+    public bool bDelayAction;
     public bool bFreezeControllerInput;
     public bool bIsGWC;
-    public bool bIsMinesweeper;
+    public bool bIsNotSaveable;
     
     public enum ArrowPos : int
     {
@@ -86,14 +87,22 @@ public class MovePauseMenuArrow : MonoBehaviour
 
         if (scene.name == "GuessWhoColluded")
             bIsGWC = true;
-        else if (scene.name == "Minesweeper")
-            bIsMinesweeper = true;
+        else if (scene.name == "CS_TreeTunnel" || 
+                 scene.name == "Minesweeper" ||
+                 scene.name == "PookieVision")
+            bIsNotSaveable = true;
 
         currentPosition = ArrowPos.GoOn;
     }
 	
 	void Update ()
     {
+        if (bDelayAction)
+        {
+            bDelayAction = false;
+            return;
+        }
+
         if (pauseMenu.localScale == Vector3.one &&
             pauseScreen.localScale == Vector3.one &&
             itemMenuAlpha.alpha == 0)
@@ -193,6 +202,13 @@ public class MovePauseMenuArrow : MonoBehaviour
             ClearAllArrows();
             QuitArw.transform.localScale = Vector3.one;
         }
+        else if (currentPosition == ArrowPos.Quit &&
+            !bIsGWC)
+        {
+            currentPosition = ArrowPos.GoOn;
+            ClearAllArrows();
+            GoOnArw.transform.localScale = Vector3.one;
+        }
 
         // For Guess Who Colluded
         if (bIsGWC)
@@ -216,30 +232,37 @@ public class MovePauseMenuArrow : MonoBehaviour
             {
                 currentPosition = ArrowPos.Colluminac;
                 ClearAllArrows();
-                CollumArw.transform.localScale = new Vector3(1, 1, 1);
+                CollumArw.transform.localScale = Vector3.one;
             }
             else if (currentPosition == ArrowPos.Colluminac)
             {
                 currentPosition = ArrowPos.Icons;
                 ClearAllArrows();
-                IconsArw.transform.localScale = new Vector3(1, 1, 1);
+                IconsArw.transform.localScale = Vector3.one;
             }
             else if (currentPosition == ArrowPos.Icons)
             {
                 currentPosition = ArrowPos.Reset;
                 ClearAllArrows();
-                ResetArw.transform.localScale = new Vector3(1, 1, 1);
+                ResetArw.transform.localScale = Vector3.one;
             }
             else if (currentPosition == ArrowPos.Reset)
             {
                 currentPosition = ArrowPos.GG;
                 ClearAllArrows();
-                GGArw.transform.localScale = new Vector3(1, 1, 1);
+                GGArw.transform.localScale = Vector3.one;
+            }
+            else if (currentPosition == ArrowPos.GG)
+            {
+                currentPosition = ArrowPos.GoOn;
+                ClearAllArrows();
+                GoOnArw.transform.localScale = Vector3.one;
+                bSecondaryMenu = false;
             }
         }
 
-        // For Minesweeper
-        else if (bIsMinesweeper)
+        // For mini-games and cutscenes
+        else if (bIsNotSaveable)
         {
             // Skips & goes back "down" to correct option
             if (currentPosition == ArrowPos.Save)
@@ -284,6 +307,13 @@ public class MovePauseMenuArrow : MonoBehaviour
             ClearAllArrows();
             GoOnArw.transform.localScale = Vector3.one;
         }
+        else if (currentPosition == ArrowPos.GoOn &&
+            !bIsGWC)
+        {
+            currentPosition = ArrowPos.Quit;
+            ClearAllArrows();
+            QuitArw.transform.localScale = Vector3.one;
+        }
 
         // For Guess Who Colluded
         if (bIsGWC)
@@ -311,7 +341,7 @@ public class MovePauseMenuArrow : MonoBehaviour
             {
                 currentPosition = ArrowPos.Quit;
                 ClearAllArrows();
-                QuitArw.transform.localScale = new Vector3(1, 1, 1);
+                QuitArw.transform.localScale = Vector3.one;
 
                 // Resets secondary menu positioning
                 bSecondaryMenu = false;
@@ -321,12 +351,18 @@ public class MovePauseMenuArrow : MonoBehaviour
             {
                 currentPosition = ArrowPos.GoOn;
                 ClearAllArrows();
-                GoOnArw.transform.localScale = new Vector3(1, 1, 1);
+                GoOnArw.transform.localScale = Vector3.one;
+            }
+            else if (currentPosition == ArrowPos.GoOn)
+            {
+                currentPosition = ArrowPos.GG;
+                ClearAllArrows();
+                GGArw.transform.localScale = Vector3.one;
             }
         }
 
-        // For Minesweeper
-        if (bIsMinesweeper)
+        // For mini-games and cutscenes
+        if (bIsNotSaveable)
         {
             // Skips & goes back "down" to correct option
             if (currentPosition == ArrowPos.Save)
@@ -374,30 +410,7 @@ public class MovePauseMenuArrow : MonoBehaviour
         touches.bAaction = false;
     }
 
-    public void ClearAllArrows()
-    {
-        if (pauseMenu.localScale == Vector3.one)
-        {
-            ControlsArw.transform.localScale = Vector3.zero;
-            GoOnArw.transform.localScale = Vector3.zero;
-            KogabiArw.transform.localScale = Vector3.zero;
-            MapArw.transform.localScale = Vector3.zero;
-            QuitArw.transform.localScale = Vector3.zero;
-            SaveArw.transform.localScale = Vector3.zero;
-            SoundArw.transform.localScale = Vector3.zero;
-            StuffArw.transform.localScale = Vector3.zero; 
-
-            if (bIsGWC)
-            {
-                CollumArw.transform.localScale = Vector3.zero;
-                GGArw.transform.localScale = Vector3.zero;
-                IconsArw.transform.localScale = Vector3.zero;
-                ResetArw.transform.localScale = Vector3.zero;
-            }
-        }
-    }
-
-    public void ResetArrows()
+    public void HideSelectors()
     {
         ControlsArw.transform.localScale = Vector3.zero;
         GoOnArw.transform.localScale = Vector3.zero;
@@ -407,14 +420,33 @@ public class MovePauseMenuArrow : MonoBehaviour
         SaveArw.transform.localScale = Vector3.zero;
         SoundArw.transform.localScale = Vector3.zero;
         StuffArw.transform.localScale = Vector3.zero;
+    }
+
+    public void HideGWCSelectors()
+    {
+        CollumArw.transform.localScale = Vector3.zero;
+        GGArw.transform.localScale = Vector3.zero;
+        IconsArw.transform.localScale = Vector3.zero;
+        ResetArw.transform.localScale = Vector3.zero;
+    }
+
+    public void ClearAllArrows()
+    {
+        if (pauseMenu.localScale == Vector3.one)
+        {
+            HideSelectors();
+
+            if (bIsGWC)
+                HideGWCSelectors();
+        }
+    }
+
+    public void ResetArrows()
+    {
+        HideSelectors();
 
         if (bIsGWC)
-        {
-            CollumArw.transform.localScale = Vector3.zero;
-            GGArw.transform.localScale = Vector3.zero;
-            IconsArw.transform.localScale = Vector3.zero;
-            ResetArw.transform.localScale = Vector3.zero;
-        }
+            HideGWCSelectors();
 
         GoOnArw.transform.localScale = Vector3.one;
         currentPosition = ArrowPos.GoOn;
