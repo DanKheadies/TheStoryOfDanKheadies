@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  02/27/2020
+// Last:  05/01/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,21 +18,46 @@ public class Chp1 : MonoBehaviour
     public GameObject homeCushion;
     public GameObject homeCushionCollider;
     public GameObject item_homeVRGoggles;
+    public GameObject npc_aaron;
     public GameObject npc_al_khidr;
     public GameObject npc_ashera;
     public GameObject npc_atandwa;
+    public GameObject npc_bazlo;
     public GameObject npc_brackey;
     public GameObject npc_canaan;
     public GameObject npc_chun;
     public GameObject npc_dagon;
     public GameObject npc_dilum;
     public GameObject npc_eliz;
+    public GameObject npc_emma;
     public GameObject npc_enki;
+    public GameObject npc_faith;
     public GameObject npc_heartha;
+    public GameObject npc_hugo;
+    public GameObject npc_hye;
+    public GameObject npc_jamaal;
+    public GameObject npc_jamie;
+    public GameObject npc_juman;
+    public GameObject npc_kart;
+    public GameObject npc_khalid;
+    public GameObject npc_luli;
+    public GameObject npc_lupita;
     public GameObject npc_marija;
+    public GameObject npc_marklar;
+    public GameObject npc_maximiliano;
+    public GameObject npc_mawkus;
+    public GameObject npc_molleen;
+    public GameObject npc_nesbit;
+    public GameObject npc_poeia;
     public GameObject npc_pookieB1;
     public GameObject npc_pookieB2;
+    public GameObject npc_ryuu;
+    public GameObject npc_sula;
+    public GameObject npc_sydelle;
+    public GameObject npc_tevin;
     public GameObject npc_thabo;
+    public GameObject npc_wharf;
+    public GameObject npc_yvette;
     public GameObject npc_zola;
     public GameObject player;
     public GameObject quest0;  // Truth or Elaborate Lie w/ Dagon
@@ -121,7 +146,8 @@ public class Chp1 : MonoBehaviour
             if (camFollow.currentCoords == (CameraFollow.AnandaCoords)32)
                 mMan.SwitchTrack(1);
         }
-        
+
+        LoadNPCLocations();
         LoadQuests();
         Chp1QuestChecker();
 
@@ -665,6 +691,172 @@ public class Chp1 : MonoBehaviour
         }
     }
 
+    public void LoadNPCLocations()
+    {
+        //npc;
+        //if (PlayerPrefs.GetFloat("Location-NPC-Prop"))
+        //npc.transform.position = (SavedX, SavedY);
+
+        //npc_aaron;
+        // n/a 
+
+        //npc_al_khidr;
+        // n/a
+
+        //npc_ashera;
+        // n/a
+
+        //npc_atandwa;
+        // n/a
+
+        //npc_bazlo;
+        // n/a
+
+        //npc_brackey;
+        // n/a
+
+        //npc_canaan;
+        // n/a
+
+        //npc_chun;
+        // n/a
+
+        //npc_dagon;
+        // TBD
+
+        //npc_dilum;
+        if (PlayerPrefs.GetFloat("CannaDilumPosX") != 0 ||
+            PlayerPrefs.GetFloat("CannaDilumPosY") != 0)
+            npc_dilum.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("CannaDilumPosX"),
+                PlayerPrefs.GetFloat("CannaDilumPosY"));
+
+        //npc_eliz;
+        // n/a
+
+        //npc_emma;
+        // n/a 
+
+        //npc_enki;
+        if (PlayerPrefs.GetFloat("HomeEnkiPosX") != 0 ||
+            PlayerPrefs.GetFloat("HomeEnkiPosY") != 0)
+            npc_enki.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("HomeEnkiPosX"),
+                PlayerPrefs.GetFloat("HomeEnkiPosY"));
+
+        //npc_faith;
+        if (PlayerPrefs.GetFloat("CampusFaithPosX") != 0 ||
+            PlayerPrefs.GetFloat("CampusFaithPosY") != 0)
+            npc_faith.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("CampusFaithPosX"),
+                PlayerPrefs.GetFloat("CampusFaithPosY"));
+
+        //npc_heartha;
+        // n/a
+
+        //npc_hugo;
+        if (PlayerPrefs.GetFloat("CampusHugoPosX") != 0 ||
+            PlayerPrefs.GetFloat("CampusHugoPosY") != 0)
+            npc_hugo.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("CampusHugoPosX"),
+                PlayerPrefs.GetFloat("CampusHugoPosY"));
+
+        //npc_hye;
+        // n/a
+
+        //npc_jamaal;
+        // n/a
+
+        //npc_jamie;
+        // n/a
+
+        //npc_juman;
+        // n/a
+
+        //npc_kart;
+        // n/a
+
+        //npc_khalid;
+        // n/a 
+
+        //npc_luli;
+        // n/a
+
+        //npc_lupita;
+        // n/a
+
+        //npc_marija;
+        // n/a
+
+        //npc_marklar;
+        if (PlayerPrefs.GetFloat("BatteryMarklarPosX") != 0 ||
+            PlayerPrefs.GetFloat("BatteryMarklarPosY") != 0)
+            npc_marklar.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("BatteryMarklarPosX"),
+                PlayerPrefs.GetFloat("BatteryMarklarPosY"));
+
+        //npc_maximiliano;
+        // n/a
+
+        //npc_mawkus;
+        // n/a
+
+        //npc_molleen;
+        // n/a
+
+        //npc_nesbit;
+        // n/a
+
+        //npc_poeia;
+        // n/a
+
+        //npc_pookieB1;
+        if (PlayerPrefs.GetFloat("CannaPookieBear1PosX") != 0 ||
+            PlayerPrefs.GetFloat("CannaPookieBear1PosY") != 0)
+            npc_pookieB1.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("CannaPookieBear1PosX"),
+                PlayerPrefs.GetFloat("CannaPookieBear1PosY"));
+
+        //npc_pookieB2;
+        if (PlayerPrefs.GetFloat("CannaPookieBear2PosX") != 0 ||
+            PlayerPrefs.GetFloat("CannaPookieBear2PosY") != 0)
+            npc_pookieB2.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("CannaPookieBear2PosX"),
+                PlayerPrefs.GetFloat("CannaPookieBear2PosY"));
+
+        //npc_ryuu;
+        if (PlayerPrefs.GetFloat("BuildersRyuuPosX") != 0 ||
+            PlayerPrefs.GetFloat("BuildersRyuuPosY") != 0)
+            npc_ryuu.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("BuildersRyuuPosX"),
+                PlayerPrefs.GetFloat("BuildersRyuuPosY"));
+
+        //npc_sula;
+        if (PlayerPrefs.GetFloat("CannaSulaPosX") != 0 ||
+            PlayerPrefs.GetFloat("CannaSulaPosY") != 0)
+            npc_sula.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("CannaSulaPosX"),
+                PlayerPrefs.GetFloat("CannaSulaPosY"));
+
+        //npc_sydelle;
+        // n/a
+
+        //npc_tevin;
+        // n/a 
+
+        //npc_thabo;
+        // n/a
+
+        //npc_wharf;
+        // n/a 
+
+        //npc_yvette;
+        // n/a 
+
+        //npc_zola;
+        // n/a
+    }
+
     public void PookieCheck()
     {
         if (!bHasFedPookie1 &&
@@ -682,6 +874,19 @@ public class Chp1 : MonoBehaviour
 
     public void PookieCheck(GameObject _pookieBear, string _qOptions, string _questNum)
     {
+        Debug.Log("bp: " + _pookieBear);
+        Debug.Log("qo: " + _qOptions);
+        Debug.Log("qn: " + _questNum);
+
+        if (_questNum == "Q7" &&
+            (bHasFedPookie1 || 
+             PlayerPrefs.GetInt("Chp1Pookie1Fed") == 1))
+            return;
+        if (_questNum == "Q8" &&
+            (bHasFedPookie2 ||
+             PlayerPrefs.GetInt("Chp1Pookie2Fed") == 1))
+            return;
+
         // Set the counters
         int greenCounter = 0;
         int orangeCounter = 0;
@@ -915,6 +1120,8 @@ public class Chp1 : MonoBehaviour
             Q7Options = _qOptions;
         if (_questNum == "Q8")
             Q8Options = _qOptions;
+
+        Debug.Log("pookie check");
     }
     
     IEnumerator PookieBear1Animations()
@@ -932,6 +1139,16 @@ public class Chp1 : MonoBehaviour
         npc_pookieB1.GetComponent<Animator>().Play("Sit Happy");
     }
 
+    public void PookieBear1DisableAndAnimate()
+    {
+        // Disable Pookie movement & dialogue
+        npc_pookieB1.GetComponent<NPCMovement>().enabled = false;
+        npc_pookieB1.transform.GetChild(0).gameObject.SetActive(false);
+        npc_pookieB1.transform.GetChild(1).gameObject.SetActive(false);
+
+        StartCoroutine(PookieBear1Animations());
+    }
+
     IEnumerator PookieBear2Animations()
     {
         yield return new WaitForSeconds(2);
@@ -945,6 +1162,16 @@ public class Chp1 : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         npc_pookieB2.GetComponent<Animator>().Play("Sit Happy");
+    }
+
+    public void PookieBear2DisableAndAnimate()
+    {
+        // Disable Pookie movement & dialogue
+        npc_pookieB2.GetComponent<NPCMovement>().enabled = false;
+        npc_pookieB2.transform.GetChild(0).gameObject.SetActive(false);
+        npc_pookieB2.transform.GetChild(1).gameObject.SetActive(false);
+
+        StartCoroutine(PookieBear2Animations());
     }
 
     public void PookieQuestStatus()
@@ -1010,6 +1237,154 @@ public class Chp1 : MonoBehaviour
             greatTree.transform.GetChild(4).gameObject.SetActive(false);
 
         greatTree.transform.GetChild(2).gameObject.SetActive(true); 
+    }
+
+    public void SaveNPCLocations()
+    {
+        //npc
+        //PlayerPrefs.SetFloat("Location-NPC-Prop", value);
+
+        //npc_aaron;
+        // n/a 
+
+        //npc_al_khidr;
+        // n/a
+
+        //npc_ashera;
+        // n/a
+
+        //npc_atandwa;
+        // n/a
+
+        //npc_bazlo;
+        // n/a
+
+        //npc_brackey;
+        // n/a
+
+        //npc_canaan;
+        // n/a
+
+        //npc_chun;
+        // n/a
+
+        //npc_dagon;
+        // TBD
+
+        //npc_dilum;
+        PlayerPrefs.SetFloat("CannaDilumPosX", npc_dilum.transform.position.x);
+        PlayerPrefs.SetFloat("CannaDilumPosY", npc_dilum.transform.position.y);
+
+        //npc_eliz;
+        // n/a
+
+        //npc_emma;
+        // n/a 
+
+        //npc_enki;
+        PlayerPrefs.SetFloat("HomeEnkiPosX", npc_enki.transform.position.x);
+        PlayerPrefs.SetFloat("HomeEnkiPosY", npc_enki.transform.position.y);
+
+        //npc_faith;
+        PlayerPrefs.SetFloat("CampusFaithPosX", npc_faith.transform.position.x);
+        PlayerPrefs.SetFloat("CampusFaithPosY", npc_faith.transform.position.y);
+
+        //npc_heartha;
+        // n/a
+
+        //npc_hugo;
+        PlayerPrefs.SetFloat("CampusHugoPosX", npc_hugo.transform.position.x);
+        PlayerPrefs.SetFloat("CampusHugoPosY", npc_hugo.transform.position.y);
+
+        //npc_hye;
+        // n/a
+
+        //npc_jamaal;
+        // n/a
+
+        //npc_jamie;
+        // n/a
+
+        //npc_juman;
+        // n/a
+
+        //npc_kart;
+        // n/a
+
+        //npc_khalid;
+        // n/a 
+
+        //npc_luli;
+        // n/a
+
+        //npc_lupita;
+        // n/a
+
+        //npc_marija;
+        // n/a
+
+        //npc_marklar;
+        PlayerPrefs.SetFloat("BatteryMarklarPosX", npc_marklar.transform.position.x);
+        PlayerPrefs.SetFloat("BatteryMarklarPosY", npc_marklar.transform.position.y);
+
+        //npc_maximiliano;
+        // n/a
+
+        //npc_mawkus;
+        // n/a
+
+        //npc_molleen;
+        // n/a
+
+        //npc_nesbit;
+        // n/a
+
+        //npc_poeia;
+        // n/a
+
+        //npc_pookieB1;
+        PlayerPrefs.SetFloat("CannaPookieBear1PosX", npc_pookieB1.transform.position.x);
+        PlayerPrefs.SetFloat("CannaPookieBear1PosY", npc_pookieB1.transform.position.y);
+
+        //npc_pookieB2;
+        PlayerPrefs.SetFloat("CannaPookieBear2PosX", npc_pookieB2.transform.position.x);
+        PlayerPrefs.SetFloat("CannaPookieBear2PosY", npc_pookieB2.transform.position.y);
+
+        //npc_ryuu;
+        PlayerPrefs.SetFloat("BuildersRyuuPosX", npc_ryuu.transform.position.x);
+        PlayerPrefs.SetFloat("BuildersRyuuPosY", npc_ryuu.transform.position.y);
+
+        //npc_sula;
+        PlayerPrefs.SetFloat("CannaSulaPosX", npc_ryuu.transform.position.x);
+        PlayerPrefs.SetFloat("CannaSulaPosY", npc_sula.transform.position.y);
+        
+        //npc_sydelle;
+        // n/a
+
+        //npc_tevin;
+        // n/a 
+
+        //npc_thabo;
+        // n/a
+
+        //npc_wharf;
+        // n/a 
+
+        //npc_yvette;
+        // n/a 
+
+        //npc_zola;
+        // n/a
+    }
+
+    public void SaveSpecificInfo()
+    {
+        if (bHasFedPookie1)
+            PlayerPrefs.SetInt("Chp1Pookie1Fed", 1);
+        if (bHasFedPookie2)
+            PlayerPrefs.SetInt("Chp1Pookie2Fed", 1);
+
+        SaveNPCLocations();
     }
 
     public void SetAsheraVogging()
@@ -1712,12 +2087,7 @@ public class Chp1 : MonoBehaviour
         else
             npc_pookieB1.GetComponent<Animator>().Play("Eat Left");
 
-        // Disable Pookie movement & dialogue
-        npc_pookieB1.GetComponent<NPCMovement>().enabled = false;
-        npc_pookieB1.transform.GetChild(0).gameObject.SetActive(false);
-        npc_pookieB1.transform.GetChild(1).gameObject.SetActive(false);
-
-        StartCoroutine(PookieBear1Animations());
+        PookieBear1DisableAndAnimate();
 
         quest7.GetComponent<QuestObject>().bHasEnded = true;
         qMan.questsEnded[quest7.GetComponent<QuestObject>().questNumber] = true;
@@ -1815,13 +2185,8 @@ public class Chp1 : MonoBehaviour
             npc_pookieB2.GetComponent<Animator>().Play("Eat Right");
         else
             npc_pookieB2.GetComponent<Animator>().Play("Eat Left");
-
-        // Disable Pookie movement & dialogue
-        npc_pookieB2.GetComponent<NPCMovement>().enabled = false;
-        npc_pookieB2.transform.GetChild(0).gameObject.SetActive(false);
-        npc_pookieB2.transform.GetChild(1).gameObject.SetActive(false);
-
-        StartCoroutine(PookieBear2Animations());
+        
+        PookieBear2DisableAndAnimate();
 
         quest8.GetComponent<QuestObject>().bHasEnded = true;
         qMan.questsEnded[quest8.GetComponent<QuestObject>().questNumber] = true;
@@ -2121,15 +2486,8 @@ public class Chp1 : MonoBehaviour
             npc_dilum.transform.GetChild(0).gameObject.SetActive(false);
             npc_dilum.transform.GetChild(1).gameObject.SetActive(true);
 
-            StartCoroutine(PookieBear1Animations());
-            npc_pookieB1.GetComponent<NPCMovement>().enabled = false;
-            npc_pookieB1.transform.GetChild(0).gameObject.SetActive(false);
-            npc_pookieB1.transform.GetChild(1).gameObject.SetActive(false);
-
-            StartCoroutine(PookieBear2Animations());
-            npc_pookieB2.GetComponent<NPCMovement>().enabled = false;
-            npc_pookieB2.transform.GetChild(0).gameObject.SetActive(false);
-            npc_pookieB2.transform.GetChild(1).gameObject.SetActive(false);
+            PookieBear1DisableAndAnimate();
+            PookieBear2DisableAndAnimate();
         }
         else if (qMan.questsEnded[7] ||
                  qMan.questsEnded[8])
@@ -2137,29 +2495,49 @@ public class Chp1 : MonoBehaviour
             if (qMan.questsEnded[7])
             {
                 bHasFedPookie1 = true;
-
-                StartCoroutine(PookieBear1Animations());
-                npc_pookieB1.GetComponent<NPCMovement>().enabled = false;
-                npc_pookieB1.transform.GetChild(0).gameObject.SetActive(false);
-                npc_pookieB1.transform.GetChild(1).gameObject.SetActive(false);
+                PookieBear1DisableAndAnimate();
             }
 
             if (qMan.questsEnded[8])
             {
                 bHasFedPookie2 = true;
-
-                StartCoroutine(PookieBear2Animations());
-                npc_pookieB2.GetComponent<NPCMovement>().enabled = false;
-                npc_pookieB2.transform.GetChild(0).gameObject.SetActive(false);
-                npc_pookieB2.transform.GetChild(1).gameObject.SetActive(false);
+                PookieBear2DisableAndAnimate();
             }
 
             PookieQuestStatus();
         }
+        
+        // Q7 start and fed (or not) and not complete
+        if (!qMan.questsCollected[7] &&
+            !qMan.questsEnded[7] &&
+            qMan.questsStarted[7])
+        {
+            if (PlayerPrefs.GetInt("Chp1Pookie1Fed") == 1)
+            {
+                bHasFedPookie1 = true;
+                PookieBear1DisableAndAnimate();
+            }
+            else
+                PookieCheck(npc_pookieB1, Q7Options, "Q7");
+        }
+        else if (qMan.questsStarted[7])
+            PookieCheck(npc_pookieB1, Q7Options, "Q7");
 
-        // Q7 & Q8 but not complete
-        PookieCheck(npc_pookieB1, Q7Options, "Q7");
-        PookieCheck(npc_pookieB2, Q8Options, "Q8");
+        // Q8 start and fed (or not) and not complete
+        if (!qMan.questsCollected[8] &&
+            !qMan.questsEnded[8] &&
+            qMan.questsStarted[8])
+        {
+            if (PlayerPrefs.GetInt("Chp1Pookie2Fed") == 1)
+            {
+                bHasFedPookie2 = true;
+                PookieBear2DisableAndAnimate();
+            }
+            else
+                PookieCheck(npc_pookieB2, Q8Options, "Q8");
+        }
+        else if (qMan.questsStarted[8])
+            PookieCheck(npc_pookieB2, Q8Options, "Q8");
     }
 
 

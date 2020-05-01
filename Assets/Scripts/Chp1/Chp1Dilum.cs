@@ -1,8 +1,9 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/22/2019
-// Last:  08/22/2019
+// Last:  05/01/2020
 
+using System.Collections;
 using UnityEngine;
 
 public class Chp1Dilum : MonoBehaviour
@@ -18,13 +19,20 @@ public class Chp1Dilum : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" &&
+        StartCoroutine(DelayCheck(collision));
+    }
+
+    IEnumerator DelayCheck(Collider2D _collision)
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (_collision.gameObject.tag == "Player" &&
             !qts[1].bEndQuest)
         {
             qts[0].bEndQuest = true;
             qts[1].bEndQuest = true;
 
-            gameObject.GetComponent<DialogueHolder>().OrientNPC(collision);
+            gameObject.GetComponent<DialogueHolder>().OrientNPC(_collision);
 
             chp1.PookieQuestComplete();
         }

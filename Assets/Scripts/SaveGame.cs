@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/09/2020
+// Last:  05/01/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +15,7 @@ public class SaveGame : MonoBehaviour
     public Inventory inv;
     public Item tempItem;
     public Scene scene;
+    public ScriptManager scriptMan;
     public TouchControls touches;
     public UIManager uMan;
     public VolumeManager savedVol;
@@ -62,6 +63,7 @@ public class SaveGame : MonoBehaviour
 
         SavingVolume();
         SavingUIControls();
+        scriptMan.SavingSpecificInfo();
     }
 
     // Test to check saved values

@@ -41996,6 +41996,7 @@ MonoBehaviour:
   chp1: {fileID: 841729771}
   treeTunnel: {fileID: 0}
   dMan: {fileID: 1880181858}
+  save: {fileID: 841729769}
   screenOri: {fileID: 769443538}
   tdsbfMenuCont: {fileID: 0}
   tdsbfScreenOriPause: {fileID: 0}
@@ -42094,6 +42095,7 @@ MonoBehaviour:
   tempItem: {fileID: 0}
   scene:
     m_Handle: 0
+  scriptMan: {fileID: 841729765}
   touches: {fileID: 531937442}
   uMan: {fileID: 783566141}
   savedVol: {fileID: 113998945}
@@ -42132,21 +42134,46 @@ MonoBehaviour:
   homeCushion: {fileID: 1362949786}
   homeCushionCollider: {fileID: 708240127}
   item_homeVRGoggles: {fileID: 2052798313}
+  npc_aaron: {fileID: 1983278649}
   npc_al_khidr: {fileID: 215809806}
   npc_ashera: {fileID: 24329180}
   npc_atandwa: {fileID: 1279384804}
+  npc_bazlo: {fileID: 1244259219}
   npc_brackey: {fileID: 1302678121}
   npc_canaan: {fileID: 1691541368}
   npc_chun: {fileID: 2095739429}
   npc_dagon: {fileID: 1780482140}
   npc_dilum: {fileID: 1132203878}
   npc_eliz: {fileID: 1173617574}
+  npc_emma: {fileID: 1522382180}
   npc_enki: {fileID: 862829841}
+  npc_faith: {fileID: 1281896720}
   npc_heartha: {fileID: 1033403214}
+  npc_hugo: {fileID: 651385047}
+  npc_hye: {fileID: 1338529680}
+  npc_jamaal: {fileID: 1129332547}
+  npc_jamie: {fileID: 1338340168}
+  npc_juman: {fileID: 651712914}
+  npc_kart: {fileID: 2087418016}
+  npc_khalid: {fileID: 2055793318}
+  npc_luli: {fileID: 408033580}
+  npc_lupita: {fileID: 1301142897}
   npc_marija: {fileID: 1675929005}
+  npc_marklar: {fileID: 1076638070}
+  npc_maximiliano: {fileID: 1171420809}
+  npc_mawkus: {fileID: 1742293201}
+  npc_molleen: {fileID: 1271627629}
+  npc_nesbit: {fileID: 1624251951}
+  npc_poeia: {fileID: 1111121090}
   npc_pookieB1: {fileID: 485260479}
   npc_pookieB2: {fileID: 1686517952}
+  npc_ryuu: {fileID: 546143670}
+  npc_sula: {fileID: 579209527}
+  npc_sydelle: {fileID: 380592229}
+  npc_tevin: {fileID: 1663936537}
   npc_thabo: {fileID: 1682213066}
+  npc_wharf: {fileID: 1616900758}
+  npc_yvette: {fileID: 390272644}
   npc_zola: {fileID: 1360548447}
   player: {fileID: 875949244}
   quest0: {fileID: 1553098094}
@@ -56083,7 +56110,7 @@ GameObject:
   - component: {fileID: 1111121092}
   - component: {fileID: 1111121093}
   m_Layer: 0
-  m_Name: Mari
+  m_Name: Poeia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57881,7 +57908,7 @@ GameObject:
   - component: {fileID: 1132203880}
   - component: {fileID: 1132203881}
   m_Layer: 0
-  m_Name: Dilmun
+  m_Name: Dilum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100293,7 +100320,7 @@ MonoBehaviour:
   bDelayAction: 0
   bFreezeControllerInput: 0
   bIsGWC: 0
-  bIsMinesweeper: 0
+  bIsNotSaveable: 0
   currentPosition: 165
   bSecondaryMenu: 0
 --- !u!1 &1928721747

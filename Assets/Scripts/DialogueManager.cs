@@ -118,7 +118,7 @@ public class DialogueManager : MonoBehaviour
                 }
             }
             else
-                delayForTypewriting = delayForTypewriting / 3f;
+                delayForTypewriting = delayForTypewriting / 10f;
         }
 
         // Show Options if present and w/ the last dialogue prompt; otherwise, reset the dialogue
