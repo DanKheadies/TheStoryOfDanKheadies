@@ -18,6 +18,7 @@ public class PlayerBrioManager : MonoBehaviour
     public Sprite portPic;
     public UIManager uMan;
 
+    public bool bAvoidFatigue;
     public bool bRestoreOverTime;
 
     public float diffMaxAndCurrent;
@@ -58,6 +59,9 @@ public class PlayerBrioManager : MonoBehaviour
         if (scene.name == "Chp0" ||
             scene.name == "Chp1")
             bRestoreOverTime = true;
+
+        if (scene.name == "PookieVision")
+            bAvoidFatigue = true;
 	}
 	
 	void Update ()
@@ -68,11 +72,11 @@ public class PlayerBrioManager : MonoBehaviour
              !dMan.bDialogueActive &&
              !sceneTrans.isActiveAndEnabled))
             BasicRestorePlayer();
-
-        // TODO: may not work if controller uses left joystick button
+        
         // Temp solution to give Brio
         if (Input.GetKeyUp(KeyCode.X) ||
-            contSupp.ControllerRightJoystickButton("up"))
+            (contSupp.ControllerBumperLeft("down") &&
+             contSupp.ControllerBumperRight("down")))
         {
             RestorePlayer(50);
             uMan.UpdateBrio();
@@ -82,7 +86,8 @@ public class PlayerBrioManager : MonoBehaviour
     // Removes Brio
     public void FatiguePlayer (float brioToRemove)
     {
-        playerCurrentBrio -= brioToRemove;
+        if (!bAvoidFatigue)
+            playerCurrentBrio -= brioToRemove;
 
         CheckIfROT();
         CheckForZeroBrio();

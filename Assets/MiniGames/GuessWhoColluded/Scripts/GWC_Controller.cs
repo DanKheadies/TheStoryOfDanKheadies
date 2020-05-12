@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  02/26/2020
+// Last:  05/03/2020
 
 using System.Collections;
 using UnityEngine;
@@ -88,7 +88,7 @@ public class GWC_Controller : MonoBehaviour
         chars = GetComponent<Characters>();
 
         charTiles = new CharacterTile[24];
-
+        
         guessThreshold = 1.25f;
         musicTimer1 = 5.39f;
         musicTimer2 = 1.05f;
@@ -444,6 +444,8 @@ public class GWC_Controller : MonoBehaviour
 
         GWC_DialogueResetter();
         dPic.sprite = portPic[48];
+
+        bCanFlip = false;
     }
 
     IEnumerator DelayedResetBoard()

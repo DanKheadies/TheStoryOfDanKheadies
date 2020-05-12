@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class TD_SBF_TouchControls : MonoBehaviour
 {
     public CanvasGroup guiControlsCan;
+    public ControllerSupport contSupp;
     public DeviceDetector devDetect;
     public FixedJoystick leftFixedJoystick;
     public FixedJoystick rightFixedJoystick;
@@ -49,27 +50,10 @@ public class TD_SBF_TouchControls : MonoBehaviour
             }
         }
 
-        // Sets initial activation off saved data (or transfer, which always saves UI)
-        // In other words, this first IF only occurs on Chp0 - New Game
-        if (!PlayerPrefs.HasKey("ControlsActive"))
-        {
-            CheckIfMobile();
-        }
-        else
-        {
-            if (PlayerPrefs.GetInt("ControlsActive") == 1)
-            {
-                DisplayControls();
-            }
-            else
-            {
-                HideControls();
-            }
-        }
+        CheckIfMobile();
 
-        // Sets initial opacity based off saved data (or transfer, which always saves UI)
-        // In other words, this first IF only occurs on Chp0 - New Game
-        if (!PlayerPrefs.HasKey("ControlsOpac"))
+        if (devDetect.bIsMobile &&
+            !contSupp.bControllerConnected)
         {
             currentContOpac = 1.0f;
             contOpacSlider.value = 1.0f;
@@ -77,18 +61,10 @@ public class TD_SBF_TouchControls : MonoBehaviour
         }
         else
         {
-            currentContOpac = PlayerPrefs.GetFloat("ControlsOpac");
-            contOpacSlider.value = currentContOpac;
-            guiControlsCan.alpha = currentContOpac;
+            currentContOpac = 0.0f;
+            contOpacSlider.value = 0.0f;
+            guiControlsCan.alpha = 0.0f;
         }
-
-        // DC TODO
-        //DisplayControls();
-    }
-
-    void Update()
-    {
-        
     }
 
     // Vibrate on touch
@@ -125,7 +101,6 @@ public class TD_SBF_TouchControls : MonoBehaviour
 
     public void DisplayControls()
     {
-        bControlsActive = true;
         transform.localScale = Vector3.one;
 
         leftFixedJoystick.GetComponent<FixedJoystick>().JoystickPosition();
@@ -134,58 +109,35 @@ public class TD_SBF_TouchControls : MonoBehaviour
 
     public void HideControls()
     {
-        bControlsActive = false;
         transform.localScale = Vector3.zero;
     }
 
     public void CheckIfMobile()
     {
-        // Set based off device
-        //#if !UNITY_EDITOR
-        //    #if UNITY_IOS
-        //        bMobileDevice = true;
-        //    #endif
-
-        //    #if UNITY_ANDROID
-        //        bMobileDevice = true;
-        //    #endif
-        //#endif
-
         devDetect.CheckIfMobile();
+        contSupp.FindControllers();
 
         // Show GUI Controls for Mobile Devices
-        if (devDetect.bIsMobile)
+        if (devDetect.bIsMobile &&
+            !contSupp.bControllerConnected)
         {
             DisplayControls();
         }
         else
-        {
             HideControls();
-        }
     }
 
-    // Toggles the UI controls
-    public void ToggleControls()
+    public void CheckOpacity()
     {
-        if (bControlsActive)
+        if (currentContOpac > 0)
         {
-            HideControls();
+            contOpacSlider.value = currentContOpac;
+            guiControlsCan.alpha = currentContOpac;
         }
-        else if (!bControlsActive)
+        else
         {
-            DisplayControls();
-        }
-    }
-
-    public void CheckAndSetControls()
-    {
-        if (bControlsActive)
-        {
-            DisplayControls();
-        }
-        else if (!bControlsActive)
-        {
-            HideControls();
+            contOpacSlider.value = 0.0f;
+            guiControlsCan.alpha = 0.0f;
         }
     }
 
@@ -194,8 +146,40 @@ public class TD_SBF_TouchControls : MonoBehaviour
     {
         currentContOpac = contOpacSlider.value;
         guiControlsCan.alpha = currentContOpac;
+
+        CheckOpacity();
     }
-    
+
+    public void IncreaseOpacity()
+    {
+        if (currentContOpac < 1.0f)
+            currentContOpac += 0.1f;
+        else
+            currentContOpac = 1.0f;
+
+        guiControlsCan.alpha = currentContOpac;
+        AdjustSlider();
+    }
+
+    public void DecreaseOpacity()
+    {
+        if (currentContOpac > 0)
+            currentContOpac -= 0.1f;
+        else
+            currentContOpac = 0f;
+
+        guiControlsCan.alpha = currentContOpac;
+        AdjustSlider();
+    }
+
+    public void AdjustSlider()
+    {
+        if (contOpacSlider)
+            contOpacSlider.value = currentContOpac;
+
+        CheckOpacity();
+    }
+
     // DC TODO 02/14/2019 -- Avoid & UIAct might be doing the same thing; see about consolidating
     public void AvoidSubUIElements()
     {

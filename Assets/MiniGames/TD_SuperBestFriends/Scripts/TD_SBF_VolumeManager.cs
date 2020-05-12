@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 10/17/2019
-// Last:  10/23/2019
+// Last:  05/05/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,42 +29,88 @@ public class TD_SBF_VolumeManager : MonoBehaviour
 
     void Update()
     {
-        // Increase volume w/ keyboard
         if (Input.GetKeyUp(KeyCode.Equals))
-        {
-            if (currentVolumeLevel < maxVolumeLevel)
-            {
-                currentVolumeLevel = currentVolumeLevel + incrementor;
-
-                LoopThruMusic(currentVolumeLevel);
-                LoopThruEffects(currentVolumeLevel);
-            }
-            else
-                currentVolumeLevel = maxVolumeLevel;
-
-            if (volumeSlider)
-                volumeSlider.value = currentVolumeLevel;
-
-            PlayerPrefs.SetFloat("TD_SBF_Volume", currentVolumeLevel);
-        }
-        // Decrease volume w/ keyboard
+            RaiseVolume();
         else if (Input.GetKeyUp(KeyCode.Minus))
+            LowerVolume();
+    }
+
+    public void RaiseVolume()
+    {
+        if (currentVolumeLevel < maxVolumeLevel)
         {
-            if (currentVolumeLevel > minVolumeLevel)
-            {
-                currentVolumeLevel = currentVolumeLevel - incrementor;
+            currentVolumeLevel = currentVolumeLevel + incrementor;
 
-                LoopThruMusic(currentVolumeLevel);
-                LoopThruEffects(currentVolumeLevel);
-            }
-            else
-                currentVolumeLevel = minVolumeLevel;
-
-            if (volumeSlider)
-                volumeSlider.value = currentVolumeLevel;
-
-            PlayerPrefs.SetFloat("TD_SBF_Volume", currentVolumeLevel);
+            LoopThruMusic(currentVolumeLevel);
+            LoopThruEffects(currentVolumeLevel);
         }
+        else
+            currentVolumeLevel = maxVolumeLevel;
+
+        if (volumeSlider)
+            volumeSlider.value = currentVolumeLevel;
+
+        PlayerPrefs.SetFloat("TD_SBF_Volume", currentVolumeLevel);
+        
+        AdjustSliders();
+    }
+
+    public void LowerVolume()
+    {
+        if (currentVolumeLevel > minVolumeLevel)
+        {
+            currentVolumeLevel = currentVolumeLevel - incrementor;
+
+            LoopThruMusic(currentVolumeLevel);
+            LoopThruEffects(currentVolumeLevel);
+        }
+        else
+            currentVolumeLevel = minVolumeLevel;
+
+        if (volumeSlider)
+            volumeSlider.value = currentVolumeLevel;
+
+        PlayerPrefs.SetFloat("TD_SBF_Volume", currentVolumeLevel);
+
+        AdjustSliders();
+    }
+
+    public void RaiseMusic()
+    {
+        if (currentMusicLevel < maxVolumeLevel)
+        {
+            currentMusicLevel = currentMusicLevel + incrementor;
+
+            LoopThruMusic(currentMusicLevel);
+        }
+        else
+            currentMusicLevel = maxVolumeLevel;
+
+        if (musicSlider)
+            musicSlider.value = currentMusicLevel;
+
+        PlayerPrefs.SetFloat("TD_SBF_MusicVolume", currentMusicLevel);
+
+        AdjustSliders();
+    }
+
+    public void LowerMusic()
+    {
+        if (currentMusicLevel > minVolumeLevel)
+        {
+            currentMusicLevel = currentMusicLevel - incrementor;
+
+            LoopThruMusic(currentMusicLevel);
+        }
+        else
+            currentMusicLevel = minVolumeLevel;
+
+        if (musicSlider)
+            musicSlider.value = currentMusicLevel;
+
+        PlayerPrefs.SetFloat("TD_SBF_MusicVolume", currentMusicLevel);
+
+        AdjustSliders();
     }
 
     public void GetAndSetVolume()
@@ -104,6 +150,15 @@ public class TD_SBF_VolumeManager : MonoBehaviour
         LoopThruMusic(currentMusicLevel);
     }
 
+    public void AdjustSliders()
+    {
+        if (volumeSlider)
+            volumeSlider.value = currentVolumeLevel;
+
+        if (musicSlider)
+            musicSlider.value = currentMusicLevel;
+    }
+
     public void OnVolumeSliderChange()
     {
         currentVolumeLevel = volumeSlider.value;
@@ -115,7 +170,9 @@ public class TD_SBF_VolumeManager : MonoBehaviour
 
     public void OnMusicSliderChange()
     {
-        currentMusicLevel = musicSlider.value * currentVolumeLevel;
+        //currentMusicLevel = musicSlider.value * currentVolumeLevel;
+        currentMusicLevel = musicSlider.value;
+        // DC TODO
 
         LoopThruMusic(currentMusicLevel);
     }

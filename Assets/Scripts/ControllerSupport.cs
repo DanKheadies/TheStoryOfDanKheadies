@@ -1,16 +1,20 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 02/21/2020
-// Last:  02/26/2020
+// Last:  05/04/2020
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControllerSupport : MonoBehaviour
 {
+    public Text devSupportText;
+
     public bool bBelayAction;
     public bool bControllerConnected;
+    public bool bIsDevSupportOn;
     public bool bIsMoving;
 
     public bool bIsWindows;
@@ -63,6 +67,9 @@ public class ControllerSupport : MonoBehaviour
             //ControllerButtonsTest();
             CheckForMovement();
         }
+
+        if (bIsDevSupportOn)
+            DevSupportShowControllerInput();
     }
 
     public void CheckSystem()
@@ -1638,6 +1645,128 @@ public class ControllerSupport : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void ToggleDevSupport()
+    {
+        bIsDevSupportOn = !bIsDevSupportOn;
+    }
+
+    public void DevSupportShowControllerInput()
+    {
+        if (devSupportText)
+        {
+            if (Input.GetAxis("Controller Axis X") != 0)
+                devSupportText.text = "[ContSupp] Axis X";
+
+            if (Input.GetAxis("Controller Axis Y") != 0)
+                devSupportText.text = "[ContSupp] Axis Y";
+
+            if (Input.GetAxis("Controller Axis 3") != 0)
+                devSupportText.text = "[ContSupp] Axis 3";
+
+            if (Input.GetAxis("Controller Axis 4") != 0)
+                devSupportText.text = "[ContSupp] Axis 4";
+
+            if (Input.GetAxis("Controller Axis 5") != 0)
+                devSupportText.text = "[ContSupp] Axis 5";
+
+            if (Input.GetAxis("Controller Axis 6") != 0)
+                devSupportText.text = "[ContSupp] Axis 6";
+
+            if (Input.GetAxis("Controller Axis 7") != 0)
+                devSupportText.text = "[ContSupp] Axis 7";
+
+            if (Input.GetAxis("Controller Axis 8") != 0)
+                devSupportText.text = "[ContSupp] Axis 8";
+
+            if (Input.GetAxis("Controller Axis 9") != 0)
+                devSupportText.text = "[ContSupp] Axis 9";
+
+            if (Input.GetAxis("Controller Axis 10") != 0)
+                devSupportText.text = "[ContSupp] Axis 10";
+
+            if (Input.GetAxis("Controller Axis 11") != 0)
+                devSupportText.text = "[ContSupp] Axis 11";
+
+            if (Input.GetAxis("Controller Axis 12") != 0)
+                devSupportText.text = "[ContSupp] Axis 12";
+
+            if (Input.GetAxis("Controller Axis 13") != 0)
+                devSupportText.text = "[ContSupp] Axis 13";
+
+            if (Input.GetAxis("Controller Axis 14") != 0)
+                devSupportText.text = "[ContSupp] Axis 14";
+
+            if (Input.GetAxis("Controller Axis 15") != 0)
+                devSupportText.text = "[ContSupp] Axis 15";
+
+            if (Input.GetAxis("Controller Axis 16") != 0)
+                devSupportText.text = "[ContSupp] Axis 16";
+
+            if (Input.GetButtonDown("Controller Button 0"))
+                devSupportText.text = "[ContSupp] Button 0";
+
+            if (Input.GetButtonDown("Controller Button 1"))
+                devSupportText.text = "[ContSupp] Button 1";
+
+            if (Input.GetButtonDown("Controller Button 2"))
+                devSupportText.text = "[ContSupp] Button 2";
+
+            if (Input.GetButtonDown("Controller Button 3"))
+                devSupportText.text = "[ContSupp] Button 3";
+
+            if (Input.GetButtonDown("Controller Button 4"))
+                devSupportText.text = "[ContSupp] Button 4";
+
+            if (Input.GetButtonDown("Controller Button 5"))
+                devSupportText.text = "[ContSupp] Button 5";
+
+            if (Input.GetButtonDown("Controller Button 6"))
+                devSupportText.text = "[ContSupp] Button 6";
+
+            if (Input.GetButtonDown("Controller Button 7"))
+                devSupportText.text = "[ContSupp] Button 7";
+
+            if (Input.GetButtonDown("Controller Button 8"))
+                devSupportText.text = "[ContSupp] Button 8";
+
+            if (Input.GetButtonDown("Controller Button 9"))
+                devSupportText.text = "[ContSupp] Button 9";
+
+            if (Input.GetButtonDown("Controller Button 10"))
+                devSupportText.text = "[ContSupp] Button 10";
+
+            if (Input.GetButtonDown("Controller Button 11"))
+                devSupportText.text = "[ContSupp] Button 11";
+
+            if (Input.GetButtonDown("Controller Button 12"))
+                devSupportText.text = "[ContSupp] Button 12";
+
+            if (Input.GetButtonDown("Controller Button 13"))
+                devSupportText.text = "[ContSupp] Button 13";
+
+            if (Input.GetButtonDown("Controller Button 14"))
+                devSupportText.text = "[ContSupp] Button 14";
+
+            if (Input.GetButtonDown("Controller Button 15"))
+                devSupportText.text = "[ContSupp] Button 15";
+
+            if (Input.GetButtonDown("Controller Button 16"))
+                devSupportText.text = "[ContSupp] Button 16";
+
+            if (Input.GetButtonDown("Controller Button 17"))
+                devSupportText.text = "[ContSupp] Button 17";
+
+            if (Input.GetButtonDown("Controller Button 18"))
+                devSupportText.text = "[ContSupp] Button 18";
+
+            if (Input.GetButtonDown("Controller Button 19"))
+                devSupportText.text = "[ContSupp] Button 19";
+
+            if (Input.GetButtonDown("Controller Button 20"))
+                devSupportText.text = "[ContSupp] Button 20";
+        }
     }
 
     public IEnumerator BelayAction()

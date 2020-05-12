@@ -5220,8 +5220,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51782a2ecd3fa494fbe2bab483a7ded4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  devSupportText: {fileID: 0}
   bBelayAction: 0
   bControllerConnected: 0
+  bIsDevSupportOn: 0
   bIsMoving: 0
   bIsWindows: 0
   bIsOSX: 0
@@ -7283,7 +7285,7 @@ MonoBehaviour:
   dialogueLines:
   - So the rest of the world is coming together swimmingly, but..
   - There's legit nothing to "do".. Lots to see, but meh..
-  - Run around, have a ball.. There's a button that gives more brio.
+  - Run around, have a ball.. There's "a" button that gives more brio.
   - And I have nooo idea what it is. Secrets secrets are so fun...
   - But I'm seriously you guys, come back later!
 --- !u!1 &147586401
@@ -41994,11 +41996,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chp0: {fileID: 0}
   chp1: {fileID: 841729771}
+  contSupp: {fileID: 0}
   treeTunnel: {fileID: 0}
   dMan: {fileID: 1880181858}
   save: {fileID: 841729769}
   screenOri: {fileID: 769443538}
   tdsbfMenuCont: {fileID: 0}
+  tdsbfModeSelector: {fileID: 0}
+  tdsbfmpmSelector: {fileID: 0}
   tdsbfScreenOriPause: {fileID: 0}
 --- !u!4 &841729766
 Transform:
@@ -44538,6 +44543,7 @@ MonoBehaviour:
     m_Handle: 0
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   uMan: {fileID: 783566141}
+  bAvoidFatigue: 0
   bRestoreOverTime: 0
   diffMaxAndCurrent: 0
   playerMaxBrio: 50
@@ -63744,15 +63750,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contSupp: {fileID: 99891412}
+  fixedJoystick: {fileID: 114859346918377831}
   backSelector: {fileID: 1642450590}
   buttonOpacitySelector: {fileID: 135275706}
   controlsDescriptionSelector: {fileID: 2010220630}
+  devSupport: {fileID: 0}
   dPadSelector: {fileID: 1760475202}
   showButtonsSelector: {fileID: 915298584}
   vibrateSelector: {fileID: 499550747}
-  fixedJoystick: {fileID: 114859346918377831}
   movePMA: {fileID: 1925394320}
   pause: {fileID: 841729768}
+  scriptMan: {fileID: 0}
   dPadToggle: {fileID: 1579862486}
   showButtonsToggle: {fileID: 936907976}
   vibrateToggle: {fileID: 5031184879281169172}
@@ -63765,7 +63773,10 @@ MonoBehaviour:
   bControllerRight: 0
   bControllerUp: 0
   bControllerUpSecondary: 0
+  bDevSupportActive: 0
   bFreezeControllerInput: 0
+  devSupportTimer: 0
+  devSupportTimerInit: 0
   currentPosition: 0
 --- !u!1 &1257724205
 GameObject:
@@ -100300,11 +100311,9 @@ MonoBehaviour:
   SoundArw: {fileID: 1870553749}
   StuffArw: {fileID: 716541017}
   CollumBtn: {fileID: 0}
-  GGBtn: {fileID: 0}
   IconsBtn: {fileID: 0}
   ResetBtn: {fileID: 0}
   CollumArw: {fileID: 0}
-  GGArw: {fileID: 0}
   IconsArw: {fileID: 0}
   ResetArw: {fileID: 0}
   itemMenuAlpha: {fileID: 978140086391917655}

@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  02/25/2020
+// Last:  05/05/2020
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,12 +18,15 @@ public class TD_SBF_PauseMenu : MonoBehaviour
     public GameObject optionsButtons;
     public GameObject pauseButtons;
     public GameObject ui;
+    public ScriptManager scriptMan;
     public TD_SBF_CameraFollow camFollow;
     public TD_SBF_GameManagement gMan;
+    public TD_SBF_MovePauseMenuSelector mpmSelector;
     public TD_SBF_SceneFader sceneFader;
     public TD_SBF_TouchControls touchConts;
 
-    public bool modeSelector;
+    public bool bIsModeSelector;
+
     public string levelToLoad = "TD_SBF_ModeSelector";
 
     void Update()
@@ -31,7 +34,7 @@ public class TD_SBF_PauseMenu : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.Escape) ||
              Input.GetKeyDown(KeyCode.P) ||
              contSupp.ControllerMenuRight("down")) &&
-             !modeSelector)
+             !bIsModeSelector)
         {
             Toggle();
         }
@@ -44,29 +47,35 @@ public class TD_SBF_PauseMenu : MonoBehaviour
         ResetPauseMenu();
 
         if (ui.activeSelf &&
-            !modeSelector)
+            !bIsModeSelector)
         {
             Time.timeScale = 0f;
 
-            if (touchConts &&
-                devDetect.bIsMobile)
+            if (touchConts && 
+                touchConts.currentContOpac > 0)
                 touchConts.HideControls();
+
+            if (contSupp.bControllerConnected)
+                mpmSelector.mainGoOnBtn.Select();
         }
         else
         {
             Time.timeScale = 1f;
 
             if (touchConts &&
-                devDetect.bIsMobile)
+                touchConts.currentContOpac > 0)
                 touchConts.DisplayControls();
         }
 
-        if (gMan.bIsHeroMode &&
-            ui.activeSelf)
-            camFollow.enabled = false;
-        else if (gMan.bIsHeroMode &&
-            !ui.activeSelf)
-            camFollow.enabled = true;
+        if (gMan)
+        {
+            if (gMan.bIsHeroMode &&
+                ui.activeSelf)
+                camFollow.enabled = false;
+            else if (gMan.bIsHeroMode &&
+                     !ui.activeSelf)
+                camFollow.enabled = true;
+        }
     }
 
     public void Retry()

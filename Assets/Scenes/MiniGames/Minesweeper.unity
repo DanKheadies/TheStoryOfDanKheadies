@@ -13565,15 +13565,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contSupp: {fileID: 1082650862}
+  fixedJoystick: {fileID: 945577419}
   backSelector: {fileID: 1296467826}
   buttonOpacitySelector: {fileID: 1266741077}
   controlsDescriptionSelector: {fileID: 1185663808}
+  devSupport: {fileID: 0}
   dPadSelector: {fileID: 1479738627}
   showButtonsSelector: {fileID: 439136985}
   vibrateSelector: {fileID: 804004095}
-  fixedJoystick: {fileID: 945577419}
   movePMA: {fileID: 584032641}
   pause: {fileID: 2074391689}
+  scriptMan: {fileID: 0}
   dPadToggle: {fileID: 620514292}
   showButtonsToggle: {fileID: 292764121}
   vibrateToggle: {fileID: 1158258765}
@@ -13586,7 +13588,10 @@ MonoBehaviour:
   bControllerRight: 0
   bControllerUp: 0
   bControllerUpSecondary: 0
+  bDevSupportActive: 0
   bFreezeControllerInput: 0
+  devSupportTimer: 0
+  devSupportTimerInit: 0
   currentPosition: 0
 --- !u!1 &543911347
 GameObject:
@@ -15065,11 +15070,9 @@ MonoBehaviour:
   SoundArw: {fileID: 2020965073}
   StuffArw: {fileID: 1294713207}
   CollumBtn: {fileID: 0}
-  GGBtn: {fileID: 0}
   IconsBtn: {fileID: 0}
   ResetBtn: {fileID: 0}
   CollumArw: {fileID: 0}
-  GGArw: {fileID: 0}
   IconsArw: {fileID: 0}
   ResetArw: {fileID: 0}
   itemMenuAlpha: {fileID: 817270847}
@@ -25334,8 +25337,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51782a2ecd3fa494fbe2bab483a7ded4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  devSupportText: {fileID: 0}
   bBelayAction: 0
   bControllerConnected: 0
+  bIsDevSupportOn: 0
   bIsMoving: 0
   bIsWindows: 0
   bIsOSX: 0
@@ -41804,6 +41809,7 @@ MonoBehaviour:
     m_Handle: 0
   portPic: {fileID: 21300000, guid: 0a08cb0a799bcbf48b8b87ca96676351, type: 3}
   uMan: {fileID: 517931596}
+  bAvoidFatigue: 0
   bRestoreOverTime: 0
   diffMaxAndCurrent: 0
   playerMaxBrio: 50
@@ -41833,14 +41839,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.034342445, y: 0.031496685}
-      - {x: -0.038870573, y: 0.031563442}
-      - {x: -0.062377762, y: -0.009942055}
-      - {x: -0.06428232, y: -0.08008003}
+    - - {x: 0.03972218, y: -0.048446022}
+      - {x: -0.040124077, y: -0.048234623}
+      - {x: -0.0597184, y: -0.059583664}
+      - {x: -0.06029328, y: -0.0787503}
       - {x: -0.029929576, y: -0.11702188}
       - {x: 0.028935518, y: -0.11702188}
       - {x: 0.061451357, y: -0.07710966}
-      - {x: 0.061877977, y: -0.010444641}
+      - {x: 0.06141187, y: -0.06072235}
 --- !u!114 &1933751392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44982,6 +44988,7 @@ MonoBehaviour:
   tempItem: {fileID: 0}
   scene:
     m_Handle: 0
+  scriptMan: {fileID: 2074391692}
   touches: {fileID: 945577415}
   uMan: {fileID: 517931596}
   savedVol: {fileID: 1758505871}
@@ -45075,10 +45082,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chp0: {fileID: 0}
   chp1: {fileID: 0}
+  contSupp: {fileID: 0}
   treeTunnel: {fileID: 0}
   dMan: {fileID: 1137910804}
+  save: {fileID: 0}
   screenOri: {fileID: 1820261571}
   tdsbfMenuCont: {fileID: 0}
+  tdsbfModeSelector: {fileID: 0}
+  tdsbfmpmSelector: {fileID: 0}
   tdsbfScreenOriPause: {fileID: 0}
 --- !u!114 &2074391693
 MonoBehaviour:

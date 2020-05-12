@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  05/01/2020
+// Last:  05/02/2020
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -874,10 +874,6 @@ public class Chp1 : MonoBehaviour
 
     public void PookieCheck(GameObject _pookieBear, string _qOptions, string _questNum)
     {
-        Debug.Log("bp: " + _pookieBear);
-        Debug.Log("qo: " + _qOptions);
-        Debug.Log("qn: " + _questNum);
-
         if (_questNum == "Q7" &&
             (bHasFedPookie1 || 
              PlayerPrefs.GetInt("Chp1Pookie1Fed") == 1))
@@ -1120,8 +1116,6 @@ public class Chp1 : MonoBehaviour
             Q7Options = _qOptions;
         if (_questNum == "Q8")
             Q8Options = _qOptions;
-
-        Debug.Log("pookie check");
     }
     
     IEnumerator PookieBear1Animations()
