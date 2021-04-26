@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tileset version="1.2" tiledversion="1.3.4" name="Oustide Collisions" tilewidth="112" tileheight="80" tilecount="9" columns="0">
+ <grid orientation="orthogonal" width="160" height="80"/>
+ <tile id="4">
+  <image width="8" height="16" source="../Fence/FencePost.a.png"/>
+ </tile>
+ <tile id="5">
+  <image width="8" height="16" source="../Fence/FencePost.b.png"/>
+ </tile>
+ <tile id="6">
+  <image width="8" height="16" source="../Fence/FenceRail.png"/>
+ </tile>
+ <tile id="26">
+  <image width="72" height="80" source="../Trees/Tree.1.A.png"/>
+ </tile>
+ <tile id="27">
+  <image width="72" height="80" source="../Trees/Tree.1.B.png"/>
+ </tile>
+ <tile id="31">
+  <image width="112" height="80" source="../Buildings/Pod/Pod.3.6.A.png"/>
+ </tile>
+ <tile id="32">
+  <image width="112" height="80" source="../Buildings/Pod/Pod.3.6.B.png"/>
+ </tile>
+ <tile id="41">
+  <image width="72" height="80" source="../Trees/Tree.1.C.png"/>
+ </tile>
+ <tile id="43">
+  <image width="112" height="80" source="../Buildings/Pod/Pod.3.6.C.png"/>
+ </tile>
+</tileset>
