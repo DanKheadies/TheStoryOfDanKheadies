@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 05/20/2018
-// Last:  02/26/2020
+// Last:  04/26/2021
 
 using System.Collections;
 using UnityEngine;
@@ -76,7 +76,7 @@ public class Element : MonoBehaviour
         // Set the Grid
         int x = (int)transform.position.x;
         int y = (int)transform.position.y;
-        Grid.elements[x, y] = this;
+        MineGrid.elements[x, y] = this;
     }
 
     public void LoadTexture(int adjacentCount)
@@ -147,7 +147,7 @@ public class Element : MonoBehaviour
         if (this.bIsMine)
         {
             // Show all mines
-            Grid.uncoverMines();
+            MineGrid.uncoverMines();
 
             // Game Over
             ms.bHasLost = true;
@@ -157,13 +157,13 @@ public class Element : MonoBehaviour
             // Show adjacent mine number
             int x = (int)transform.position.x;
             int y = (int)transform.position.y;
-            LoadTexture(Grid.adjacentMines(x, y));
+            LoadTexture(MineGrid.adjacentMines(x, y));
 
             // Uncover area w/out mines
-            Grid.FFuncover(x, y, new bool[Grid.w, Grid.h]);
+            MineGrid.FFuncover(x, y, new bool[MineGrid.w, MineGrid.h]);
 
             // Find out if the game was won
-            if (Grid.bIsFinished())
+            if (MineGrid.bIsFinished())
             {
                 ms.bHasWon = true;
             }

@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace SuperTiled2Unity.Editor
 {
     public class ChDir : IDisposable
     {
-        private string m_RestoreDirectory;
+        private readonly string m_RestoreDirectory;
 
         public ChDir(string path)
         {

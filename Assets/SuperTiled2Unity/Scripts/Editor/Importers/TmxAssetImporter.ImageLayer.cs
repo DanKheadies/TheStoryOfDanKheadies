@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -43,7 +40,7 @@ namespace SuperTiled2Unity.Editor
 
                         var renderer = goLayer.AddComponent<SpriteRenderer>();
                         renderer.sprite = sprite;
-                        renderer.color = new Color(1, 1, 1, layerComponent.CalculateOpacity());
+                        renderer.color = layerComponent.CalculateColor();
                         AssignMaterial(renderer, layerComponent.m_TiledName);
                         AssignSpriteSorting(renderer);
                     }

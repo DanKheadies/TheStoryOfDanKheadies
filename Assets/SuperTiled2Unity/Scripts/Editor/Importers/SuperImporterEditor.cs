@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEditor;
-using UnityEditor.Experimental.AssetImporters;
 using UnityEngine;
+
+#if UNITY_2020_2_OR_NEWER
+using ScriptedImporterEditor = UnityEditor.AssetImporters.ScriptedImporterEditor;
+#else
+using ScriptedImporterEditor = UnityEditor.Experimental.AssetImporters.ScriptedImporterEditor;
+#endif
 
 namespace SuperTiled2Unity.Editor
 {
@@ -283,6 +286,7 @@ namespace SuperTiled2Unity.Editor
             }
 
             EditorGUILayout.TextArea("", GUI.skin.horizontalSlider);
+            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Additional Tiled Asset Information", EditorStyles.boldLabel);
 
             using (new GuiScopedIndent())

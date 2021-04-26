@@ -2,10 +2,9 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 05/20/2018
-// Last:  08/13/2018
+// Last:  04/26/2021
 
-// Info
-public class Grid
+public class MineGrid
 {
     public static int w = 13; // this is the width
     public static int h = 13; // this is the height

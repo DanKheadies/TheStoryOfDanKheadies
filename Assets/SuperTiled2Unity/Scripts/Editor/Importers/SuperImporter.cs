@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Xml;
 using UnityEditor;
-using UnityEditor.Experimental.AssetImporters;
 using UnityEngine;
 using UnityEngine.Assertions;
+
+#if UNITY_2020_2_OR_NEWER
+using AssetImportContext = UnityEditor.AssetImporters.AssetImportContext;
+using ScriptedImporter = UnityEditor.AssetImporters.ScriptedImporter;
+#else
+using AssetImportContext = UnityEditor.Experimental.AssetImporters.AssetImportContext;
+using ScriptedImporter = UnityEditor.Experimental.AssetImporters.ScriptedImporter;
+#endif
 
 namespace SuperTiled2Unity.Editor
 {
@@ -102,6 +108,7 @@ namespace SuperTiled2Unity.Editor
             Assert.IsNotNull(m_SuperAsset, "Must be a SuperAsset type if we are requesting dependencies");
 
             // Is the asset in our cache?
+            path = path.SanitizePath();
             var key = new KeyValuePair<string, Type>(path.ToLower(), typeof(T));
             UnityEngine.Object cachedObject;
 

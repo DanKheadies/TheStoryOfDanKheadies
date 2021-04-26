@@ -2,7 +2,7 @@
 // Authors: senritsu
 // Contributors: David W. Corso
 // Start: 11/24/2019
-// Last:  11/24/2019
+// Last:  04/26/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -94,6 +94,7 @@ public class TD_SBF_RaycastMask : MonoBehaviour, ICanvasRaycastFilter
         }
         catch (UnityException e)
         {
+            Debug.Log(e);
             Debug.LogError("Mask texture not readable, set your sprite to Texture Type 'Advanced' and check 'Read/Write Enabled'");
             Destroy(this);
             return false;

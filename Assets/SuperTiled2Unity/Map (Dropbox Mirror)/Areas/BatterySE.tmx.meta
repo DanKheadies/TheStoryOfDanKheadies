@@ -1,113 +1,9 @@
 fileFormatVersion: 2
 guid: 21b86a981d1b6534995ef7916bed8fe8
 ScriptedImporter:
-  fileIDToRecycleName:
-    100000: _MapPrfab/BatterySE
-    100002: _MapPrfab/BatterySE/Grid
-    100004: _MapPrfab/BatterySE/Grid/1.Background
-    100006: _MapPrfab/BatterySE/Grid/3.Dirt
-    100008: _MapPrfab/BatterySE/Grid/4.Dirt
-    100010: _MapPrfab/BatterySE/Grid/5a.Grass
-    100012: _MapPrfab/BatterySE/Grid/5b.Grass
-    100014: _MapPrfab/BatterySE/Grid/5c.Grass
-    100016: _MapPrfab/BatterySE/Grid/6a.Flowers
-    100018: _MapPrfab/BatterySE/Grid/6b.Flowers
-    100020: _MapPrfab/BatterySE/Grid/10.FenceBelow
-    100022: _MapPrfab/BatterySE/Grid/15.TreeBelow
-    100024: _MapPrfab/BatterySE/Grid/30.FenceAbove
-    100026: _MapPrfab/BatterySE/Grid/34.TreeAboveWithSway
-    100028: _MapPrfab/BatterySE/Grid/35.TreeAboveHiddenForSway
-    100030: _MapPrfab/BatterySE/Grid/50.Collision
-    100032: _MapPrfab/BatterySE/Grid/50.Collision/Collision_Default
-    100034: _MapPrfab/BatterySE/Grid/50.Collision/Collision_Default/Polyline
-    100036: _MapPrfab/BatterySE/Grid/50.Collision/Collision_Default/Polyline (1)
-    400000: _MapPrfab/BatterySE/Transform
-    400002: _MapPrfab/BatterySE/Grid/Transform
-    400004: _MapPrfab/BatterySE/Grid/1.Background/Transform
-    400006: _MapPrfab/BatterySE/Grid/3.Dirt/Transform
-    400008: _MapPrfab/BatterySE/Grid/4.Dirt/Transform
-    400010: _MapPrfab/BatterySE/Grid/5a.Grass/Transform
-    400012: _MapPrfab/BatterySE/Grid/5b.Grass/Transform
-    400014: _MapPrfab/BatterySE/Grid/5c.Grass/Transform
-    400016: _MapPrfab/BatterySE/Grid/6a.Flowers/Transform
-    400018: _MapPrfab/BatterySE/Grid/6b.Flowers/Transform
-    400020: _MapPrfab/BatterySE/Grid/10.FenceBelow/Transform
-    400022: _MapPrfab/BatterySE/Grid/15.TreeBelow/Transform
-    400024: _MapPrfab/BatterySE/Grid/30.FenceAbove/Transform
-    400026: _MapPrfab/BatterySE/Grid/34.TreeAboveWithSway/Transform
-    400028: _MapPrfab/BatterySE/Grid/35.TreeAboveHiddenForSway/Transform
-    400030: _MapPrfab/BatterySE/Grid/50.Collision/Transform
-    400032: _MapPrfab/BatterySE/Grid/50.Collision/Collision_Default/Transform
-    400034: _MapPrfab/BatterySE/Grid/50.Collision/Collision_Default/Polyline/Transform
-    400036: _MapPrfab/BatterySE/Grid/50.Collision/Collision_Default/Polyline (1)/Transform
-    6000000: _MapPrfab/BatterySE/Grid/50.Collision/Collision_Default/PolygonCollider2D
-    6800000: _MapPrfab/BatterySE/Grid/50.Collision/Collision_Default/Polyline/EdgeCollider2D
-    6800002: _MapPrfab/BatterySE/Grid/50.Collision/Collision_Default/Polyline (1)/EdgeCollider2D
-    11400000: _MapPrfab/BatterySE/MonoBehaviour-SuperTiled2Unity.SuperMap
-    11400002: _MapPrfab/BatterySE/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400004: _MapPrfab/BatterySE/Grid/1.Background/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400006: _MapPrfab/BatterySE/Grid/1.Background/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400008: _MapPrfab/BatterySE/Grid/3.Dirt/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400010: _MapPrfab/BatterySE/Grid/3.Dirt/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400012: _MapPrfab/BatterySE/Grid/4.Dirt/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400014: _MapPrfab/BatterySE/Grid/4.Dirt/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400016: _MapPrfab/BatterySE/Grid/5a.Grass/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400018: _MapPrfab/BatterySE/Grid/5a.Grass/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400020: _MapPrfab/BatterySE/Grid/5b.Grass/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400022: _MapPrfab/BatterySE/Grid/5b.Grass/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400024: _MapPrfab/BatterySE/Grid/5c.Grass/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400026: _MapPrfab/BatterySE/Grid/5c.Grass/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400028: _MapPrfab/BatterySE/Grid/6a.Flowers/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400030: _MapPrfab/BatterySE/Grid/6a.Flowers/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400032: _MapPrfab/BatterySE/Grid/6b.Flowers/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400034: _MapPrfab/BatterySE/Grid/6b.Flowers/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400036: _MapPrfab/BatterySE/Grid/10.FenceBelow/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400038: _MapPrfab/BatterySE/Grid/10.FenceBelow/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400040: _MapPrfab/BatterySE/Grid/15.TreeBelow/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400042: _MapPrfab/BatterySE/Grid/15.TreeBelow/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400044: _MapPrfab/BatterySE/Grid/30.FenceAbove/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400046: _MapPrfab/BatterySE/Grid/30.FenceAbove/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400048: _MapPrfab/BatterySE/Grid/34.TreeAboveWithSway/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400050: _MapPrfab/BatterySE/Grid/34.TreeAboveWithSway/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400052: _MapPrfab/BatterySE/Grid/35.TreeAboveHiddenForSway/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400054: _MapPrfab/BatterySE/Grid/35.TreeAboveHiddenForSway/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400056: _MapPrfab/BatterySE/Grid/50.Collision/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400058: _MapPrfab/BatterySE/Grid/50.Collision/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400060: _MapPrfab/BatterySE/Grid/50.Collision/Collision_Default/MonoBehaviour-SuperTiled2Unity.SuperColliderComponent
-    11400062: _MapPrfab/BatterySE/Grid/50.Collision/Collision_Default/Polyline/MonoBehaviour-SuperTiled2Unity.SuperColliderComponent
-    11400064: _MapPrfab/BatterySE/Grid/50.Collision/Collision_Default/Polyline (1)/MonoBehaviour-SuperTiled2Unity.SuperColliderComponent
-    11400066: _superAsset
-    100100000: _MapPrfab
-    2569400265252428796: _MapPrfab/BatterySE/Grid/Grid
-    3664157343022684176: _MapPrfab/BatterySE/Grid/1.Background/TilemapRenderer
-    3664157343022684178: _MapPrfab/BatterySE/Grid/3.Dirt/TilemapRenderer
-    3664157343022684180: _MapPrfab/BatterySE/Grid/4.Dirt/TilemapRenderer
-    3664157343022684182: _MapPrfab/BatterySE/Grid/5a.Grass/TilemapRenderer
-    3664157343022684184: _MapPrfab/BatterySE/Grid/5b.Grass/TilemapRenderer
-    3664157343022684186: _MapPrfab/BatterySE/Grid/5c.Grass/TilemapRenderer
-    3664157343022684188: _MapPrfab/BatterySE/Grid/6a.Flowers/TilemapRenderer
-    3664157343022684190: _MapPrfab/BatterySE/Grid/6b.Flowers/TilemapRenderer
-    3664157343022684192: _MapPrfab/BatterySE/Grid/10.FenceBelow/TilemapRenderer
-    3664157343022684194: _MapPrfab/BatterySE/Grid/15.TreeBelow/TilemapRenderer
-    3664157343022684196: _MapPrfab/BatterySE/Grid/30.FenceAbove/TilemapRenderer
-    3664157343022684198: _MapPrfab/BatterySE/Grid/34.TreeAboveWithSway/TilemapRenderer
-    3664157343022684200: _MapPrfab/BatterySE/Grid/35.TreeAboveHiddenForSway/TilemapRenderer
-    3664157343022684202: _MapPrfab/BatterySE/Grid/50.Collision/TilemapRenderer
-    8195094279510102542: _MapPrfab/BatterySE/Grid/1.Background/Tilemap
-    8195094279510102544: _MapPrfab/BatterySE/Grid/3.Dirt/Tilemap
-    8195094279510102546: _MapPrfab/BatterySE/Grid/4.Dirt/Tilemap
-    8195094279510102548: _MapPrfab/BatterySE/Grid/5a.Grass/Tilemap
-    8195094279510102550: _MapPrfab/BatterySE/Grid/5b.Grass/Tilemap
-    8195094279510102552: _MapPrfab/BatterySE/Grid/5c.Grass/Tilemap
-    8195094279510102554: _MapPrfab/BatterySE/Grid/6a.Flowers/Tilemap
-    8195094279510102556: _MapPrfab/BatterySE/Grid/6b.Flowers/Tilemap
-    8195094279510102558: _MapPrfab/BatterySE/Grid/10.FenceBelow/Tilemap
-    8195094279510102560: _MapPrfab/BatterySE/Grid/15.TreeBelow/Tilemap
-    8195094279510102562: _MapPrfab/BatterySE/Grid/30.FenceAbove/Tilemap
-    8195094279510102564: _MapPrfab/BatterySE/Grid/34.TreeAboveWithSway/Tilemap
-    8195094279510102566: _MapPrfab/BatterySE/Grid/35.TreeAboveHiddenForSway/Tilemap
-    8195094279510102568: _MapPrfab/BatterySE/Grid/50.Collision/Tilemap
+  internalIDToNameTable: []
   externalObjects: {}
+  serializedVersion: 2
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -118,7 +14,7 @@ ScriptedImporter:
   missingSortingLayers: []
   missingLayers: []
   missingTags: []
-  importerVersion: 21
+  importerVersion: 22
   pixelsPerUnit: 100
   edgesPerEllipse: 32
   numberOfObjectsImported: 2

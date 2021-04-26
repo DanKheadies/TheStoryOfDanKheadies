@@ -1,94 +1,9 @@
 fileFormatVersion: 2
 guid: de825f713be87f64eaa46f744e7e6095
 ScriptedImporter:
-  fileIDToRecycleName:
-    100000: _MapPrfab/Home.F1.Chp1
-    100002: _MapPrfab/Home.F1.Chp1/Grid
-    100004: _MapPrfab/Home.F1.Chp1/Grid/1.Background
-    100006: _MapPrfab/Home.F1.Chp1/Grid/9. Carpet
-    100008: _MapPrfab/Home.F1.Chp1/Grid/11.Wall
-    100010: _MapPrfab/Home.F1.Chp1/Grid/12.DoorPathBelow
-    100012: _MapPrfab/Home.F1.Chp1/Grid/13.Stair
-    100014: _MapPrfab/Home.F1.Chp1/Grid/14a.Furniture
-    100016: _MapPrfab/Home.F1.Chp1/Grid/14b.FurnitureRemovable
-    100018: _MapPrfab/Home.F1.Chp1/Grid/33.DoorPathAbove
-    100020: _MapPrfab/Home.F1.Chp1/Grid/50.Collision
-    100022: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default
-    100024: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline
-    100026: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline (1)
-    100028: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline (2)
-    100030: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline (3)
-    400000: _MapPrfab/Home.F1.Chp1/Transform
-    400002: _MapPrfab/Home.F1.Chp1/Grid/Transform
-    400004: _MapPrfab/Home.F1.Chp1/Grid/1.Background/Transform
-    400006: _MapPrfab/Home.F1.Chp1/Grid/9. Carpet/Transform
-    400008: _MapPrfab/Home.F1.Chp1/Grid/11.Wall/Transform
-    400010: _MapPrfab/Home.F1.Chp1/Grid/12.DoorPathBelow/Transform
-    400012: _MapPrfab/Home.F1.Chp1/Grid/13.Stair/Transform
-    400014: _MapPrfab/Home.F1.Chp1/Grid/14a.Furniture/Transform
-    400016: _MapPrfab/Home.F1.Chp1/Grid/14b.FurnitureRemovable/Transform
-    400018: _MapPrfab/Home.F1.Chp1/Grid/33.DoorPathAbove/Transform
-    400020: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Transform
-    400022: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Transform
-    400024: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline/Transform
-    400026: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline (1)/Transform
-    400028: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline (2)/Transform
-    400030: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline (3)/Transform
-    6000000: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/PolygonCollider2D
-    6800000: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline/EdgeCollider2D
-    6800002: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline (1)/EdgeCollider2D
-    6800004: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline (2)/EdgeCollider2D
-    6800006: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline (3)/EdgeCollider2D
-    11400000: _MapPrfab/Home.F1.Chp1/MonoBehaviour-SuperTiled2Unity.SuperMap
-    11400002: _superAsset
-    11400004: _MapPrfab/Home.F1.Chp1/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400006: _MapPrfab/Home.F1.Chp1/Grid/1.Background/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400008: _MapPrfab/Home.F1.Chp1/Grid/1.Background/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400010: _MapPrfab/Home.F1.Chp1/Grid/9. Carpet/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400012: _MapPrfab/Home.F1.Chp1/Grid/9. Carpet/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400014: _MapPrfab/Home.F1.Chp1/Grid/11.Wall/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400016: _MapPrfab/Home.F1.Chp1/Grid/11.Wall/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400018: _MapPrfab/Home.F1.Chp1/Grid/12.DoorPathBelow/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400020: _MapPrfab/Home.F1.Chp1/Grid/12.DoorPathBelow/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400022: _MapPrfab/Home.F1.Chp1/Grid/13.Stair/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400024: _MapPrfab/Home.F1.Chp1/Grid/13.Stair/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400026: _MapPrfab/Home.F1.Chp1/Grid/14a.Furniture/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400028: _MapPrfab/Home.F1.Chp1/Grid/14a.Furniture/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400030: _MapPrfab/Home.F1.Chp1/Grid/14b.FurnitureRemovable/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400032: _MapPrfab/Home.F1.Chp1/Grid/14b.FurnitureRemovable/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400034: _MapPrfab/Home.F1.Chp1/Grid/33.DoorPathAbove/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400036: _MapPrfab/Home.F1.Chp1/Grid/33.DoorPathAbove/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400038: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400040: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400042: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/MonoBehaviour-SuperTiled2Unity.SuperColliderComponent
-    11400044: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline/MonoBehaviour-SuperTiled2Unity.SuperColliderComponent
-    11400046: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline
-      (1)/MonoBehaviour-SuperTiled2Unity.SuperColliderComponent
-    11400048: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline
-      (2)/MonoBehaviour-SuperTiled2Unity.SuperColliderComponent
-    11400050: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Collision_Default/Polyline
-      (3)/MonoBehaviour-SuperTiled2Unity.SuperColliderComponent
-    100100000: _MapPrfab
-    2569400265252428796: _MapPrfab/Home.F1.Chp1/Grid/Grid
-    3664157343022684176: _MapPrfab/Home.F1.Chp1/Grid/1.Background/TilemapRenderer
-    3664157343022684178: _MapPrfab/Home.F1.Chp1/Grid/9. Carpet/TilemapRenderer
-    3664157343022684180: _MapPrfab/Home.F1.Chp1/Grid/11.Wall/TilemapRenderer
-    3664157343022684182: _MapPrfab/Home.F1.Chp1/Grid/12.DoorPathBelow/TilemapRenderer
-    3664157343022684184: _MapPrfab/Home.F1.Chp1/Grid/13.Stair/TilemapRenderer
-    3664157343022684186: _MapPrfab/Home.F1.Chp1/Grid/14a.Furniture/TilemapRenderer
-    3664157343022684188: _MapPrfab/Home.F1.Chp1/Grid/14b.FurnitureRemovable/TilemapRenderer
-    3664157343022684190: _MapPrfab/Home.F1.Chp1/Grid/33.DoorPathAbove/TilemapRenderer
-    3664157343022684192: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/TilemapRenderer
-    8195094279510102542: _MapPrfab/Home.F1.Chp1/Grid/1.Background/Tilemap
-    8195094279510102544: _MapPrfab/Home.F1.Chp1/Grid/9. Carpet/Tilemap
-    8195094279510102546: _MapPrfab/Home.F1.Chp1/Grid/11.Wall/Tilemap
-    8195094279510102548: _MapPrfab/Home.F1.Chp1/Grid/12.DoorPathBelow/Tilemap
-    8195094279510102550: _MapPrfab/Home.F1.Chp1/Grid/13.Stair/Tilemap
-    8195094279510102552: _MapPrfab/Home.F1.Chp1/Grid/14a.Furniture/Tilemap
-    8195094279510102554: _MapPrfab/Home.F1.Chp1/Grid/14b.FurnitureRemovable/Tilemap
-    8195094279510102556: _MapPrfab/Home.F1.Chp1/Grid/33.DoorPathAbove/Tilemap
-    8195094279510102558: _MapPrfab/Home.F1.Chp1/Grid/50.Collision/Tilemap
+  internalIDToNameTable: []
   externalObjects: {}
+  serializedVersion: 2
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -99,7 +14,7 @@ ScriptedImporter:
   missingSortingLayers: []
   missingLayers: []
   missingTags: []
-  importerVersion: 21
+  importerVersion: 22
   pixelsPerUnit: 100
   edgesPerEllipse: 32
   numberOfObjectsImported: 2

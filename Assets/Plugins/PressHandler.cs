@@ -2,7 +2,7 @@
 // Authors: valyard (https://github.com/valyard/UnityWebGLOpenLink)
 // Contributors: David W. Corso
 // Start: --/--/----
-// Last:  08/27/2018
+// Last:  04/26/2021
 
 using UnityEngine;
 using UnityEngine.EventSystems;

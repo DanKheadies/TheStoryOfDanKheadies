@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/25/2021
+// Last:  04/26/2021
 
 using System.Collections;
 using UnityEngine;
@@ -22,6 +22,8 @@ public class MenuControl : MonoBehaviour
     public GameObject newT;
     public GameObject noB;
     public GameObject smokeRings;
+    public GameObject spaceMoving;
+    public GameObject spaceTwinkling;
     public GameObject starExploding;
     public GameObject startB;
     public GameObject title;
@@ -98,6 +100,12 @@ public class MenuControl : MonoBehaviour
 
             whiteness.GetComponent<ImageFader>().enabled = false;
             whiteness.GetComponent<Image>().enabled = false;
+
+            spaceTwinkling.GetComponent<ImageFader>().enabled = false;
+            spaceTwinkling.GetComponent<Image>().enabled = false;
+
+            spaceMoving.GetComponent<ImageFader>().enabled = false;
+            spaceMoving.GetComponent<CanvasRenderer>().SetAlpha(1f);
 
             smokeRings.GetComponent<ImageFader>().enabled = false;
             smokeRings.GetComponent<CanvasRenderer>().SetAlpha(1f);

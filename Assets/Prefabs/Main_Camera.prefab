@@ -46,6 +46,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -57,6 +58,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -109,8 +111,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5186248832947789556}
   - component: {fileID: 5186248832947789557}
-  - component: {fileID: 5186248832947789562}
-  - component: {fileID: 5186248832947789563}
   - component: {fileID: 5186248832947789560}
   - component: {fileID: 5186248832947789559}
   - component: {fileID: 5186248832947789558}
@@ -150,9 +150,10 @@ Camera:
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -180,22 +181,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!92 &5186248832947789562
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5186248832947789561}
-  m_Enabled: 1
---- !u!124 &5186248832947789563
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5186248832947789561}
-  m_Enabled: 1
 --- !u!81 &5186248832947789560
 AudioListener:
   m_ObjectHideFlags: 0
@@ -218,6 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectUtil: {fileID: 0}
   myCam: {fileID: 0}
+  contSupp: {fileID: 0}
   player: {fileID: 0}
   scene:
     m_Handle: 0
@@ -226,6 +212,7 @@ MonoBehaviour:
   smoothVelocity: {x: 0.2, y: 0.2}
   bUpdateOn: 1
   currentCoords: 0
+  depth: 0
   minCamX: 0
   minCamY: 0
   maxCamX: 0
@@ -245,6 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3eea8c3d4e9f2408cadde8adb2223a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scene:
+    m_Handle: 0
   _wantedAspectRatio: 1.142857
 --- !u!114 &5186248832947789553
 MonoBehaviour:
@@ -258,6 +247,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab135d454d481db4880d7c2b3086fafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnim: {fileID: 0}
+  areaAni: {fileID: 0}
+  camFollow: {fileID: 0}
+  player: {fileID: 0}
+  playerMove: {fileID: 0}
+  touches: {fileID: 0}
+  bIsSliding: 0
+  bSlideDown: 0
+  bSlideLeft: 0
+  bSlideRight: 0
+  bSlideUp: 0
   bTempControlActive: 0
 --- !u!114 &5186248832947789552
 MonoBehaviour:
@@ -274,6 +274,9 @@ MonoBehaviour:
   aspectUtil: {fileID: 0}
   dMan: {fileID: 0}
   devOr: 0
+  fixedJoy: {fileID: 0}
   oMan: {fileID: 0}
+  sMan: {fileID: 0}
+  uMan: {fileID: 0}
   bIsFull: 0
   bSizingChange: 0

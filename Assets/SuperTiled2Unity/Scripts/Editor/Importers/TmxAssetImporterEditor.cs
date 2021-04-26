@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -50,7 +48,6 @@ namespace SuperTiled2Unity.Editor
             ShowTiledAssetGui();
 
             EditorGUILayout.PropertyField(m_TilesAsObjects, m_TilesAsObjectsContent);
-            EditorGUI.EndDisabledGroup();
 
             m_SortingMode.intValue = (int)(SortingMode)EditorGUILayout.EnumPopup(m_SortingModeContent, (SortingMode)m_SortingMode.intValue);
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SuperTiled2Unity.Editor
 {
@@ -13,6 +9,7 @@ namespace SuperTiled2Unity.Editor
         private static Texture2D m_TmxIcon;
         private static Texture2D m_TsxIcon;
         private static Texture2D m_TxIcon;
+        private static Texture2D m_WorldIcon;
 
         public static Texture2D GetSettingsIcon()
         {
@@ -52,6 +49,16 @@ namespace SuperTiled2Unity.Editor
             }
 
             return m_TxIcon;
+        }
+
+        public static Texture2D GetWorldIcon()
+        {
+            if (m_WorldIcon == null)
+            {
+                m_WorldIcon = AssetDatabaseEx.LoadFirstAssetByFilter<Texture2D>("world-file-icon-0x1badd00d");
+            }
+
+            return m_WorldIcon;
         }
     }
 }
