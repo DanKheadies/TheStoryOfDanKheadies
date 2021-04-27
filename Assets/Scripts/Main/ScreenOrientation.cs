@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/02/2018
-// Last:  04/26/2021
+// Last:  04/27/2021
 
 using UnityEngine;
 
@@ -26,7 +26,7 @@ public class ScreenOrientation : MonoBehaviour
 
         bIsFull = Screen.fullScreen;
         bSizingChange = false;
-	}
+    }
 	
 	void Update ()
     {
@@ -38,7 +38,7 @@ public class ScreenOrientation : MonoBehaviour
             bSizingChange)
         {
             ResetParameters();
-            
+
             bSizingChange = false;
         }
 
@@ -67,8 +67,8 @@ public class ScreenOrientation : MonoBehaviour
 
         if (uMan)
         {
-            uMan.CheckAndSetMenus();
-            uMan.CheckAndSetOrientation();
+            uMan.SetMenus();
+            uMan.SetOrientation();
         }
         
         if (sMan)

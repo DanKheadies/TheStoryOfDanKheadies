@@ -12692,7 +12692,19 @@ MonoBehaviour:
   touches: {fileID: 945577415}
   dManOffMax: {x: 0, y: 0}
   dManOffMin: {x: 0, y: 0}
-  pauseMenuPos: {x: 0, y: 0}
+  dPadsPos:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  joySticksPos:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
   bControlsActive: 0
   bControlsDPad: 0
   currentContOpac: 0
@@ -44619,6 +44631,7 @@ MonoBehaviour:
   bNeedsTimer: 0
   bAnimationToTransitionScene: 0
   timeToLoad: 0.001
+  OmegaLoad: 
   AlphaLoad: SceneTransitioner
   BetaLoad: Chp1
 --- !u!61 &2039617092

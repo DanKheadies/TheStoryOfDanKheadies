@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/26/2021
+// Last:  04/27/2021
 
 using System.Collections;
 using UnityEngine;
@@ -142,7 +142,7 @@ public class DialogueManager : MonoBehaviour
         {
             ConfigureParameters();
             fixedJoy.JoystickPosition();
-            uMan.CheckAndSetMenus();
+            uMan.SetMenus();
         }
 
         //Check sizing stuff

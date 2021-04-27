@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 01/14/2020
-// Last:  01/15/2020
+// Last:  04/27/2021
 
 using System.Collections;
 using UnityEngine;
@@ -13,8 +13,10 @@ public class AreaAnimator : MonoBehaviour
     public GameObject[] BatteryNEFlowers;
     public GameObject[] BatteryNWGrass;
     public GameObject[] BatteryNWFlowers;
+    public GameObject[] BatteryNWTrees;
     public GameObject[] BatterySEGrass;
     public GameObject[] BatterySEFlowers;
+    public GameObject[] BatterySETrees;
     public GameObject[] BatterySWGrass;
     public GameObject[] BatterySWFlowers;
     public GameObject[] BuildersNEGrass;
@@ -27,6 +29,7 @@ public class AreaAnimator : MonoBehaviour
     public GameObject[] BuildersSWFlowers;
     public GameObject[] CampusGrass;
     public GameObject[] CampusFlowers;
+    public GameObject[] CampusTrees;
     public GameObject[] CannaFieldNWGrass;
     public GameObject[] CannaFieldNWFlowers;
     public GameObject[] CannaFieldSEGrass;
@@ -35,6 +38,7 @@ public class AreaAnimator : MonoBehaviour
     public GameObject[] CannaFieldSWFlowers;
     public GameObject[] CannaHouseGrass;
     public GameObject[] CannaHouseFlowers;
+    public GameObject[] CannaHouseTrees;
     public GameObject[] FarmNWGrass;
     public GameObject[] FarmNWFlowers;
     public GameObject[] FarmNCGrass;
@@ -55,38 +59,49 @@ public class AreaAnimator : MonoBehaviour
     public GameObject[] FarmSEFlowers;
     public GameObject[] HomeGrass;
     public GameObject[] HomeFlowers;
+    public GameObject[] HomeTrees;
     public GameObject[] HousesEGrass;
     public GameObject[] HousesEFlowers;
+    public GameObject[] HousesETrees;
     public GameObject[] HousesNGrass;
     public GameObject[] HousesNFlowers;
+    public GameObject[] HousesNTrees;
     public GameObject[] HousesSGrass;
     public GameObject[] HousesSFlowers;
+    public GameObject[] HousesSTrees;
     public GameObject[] HousesWGrass;
     public GameObject[] HousesWFlowers;
+    public GameObject[] HousesWTrees;
     public GameObject[] LakeGrass;
     public GameObject[] LakeFlowers;
+    public GameObject[] LakeTrees;
     public GameObject[] PlaygroundEGrass;
     public GameObject[] PlaygroundEFlowers;
     public GameObject[] PlaygroundNGrass;
     public GameObject[] PlaygroundNFlowers;
+    public GameObject[] PlaygroundNTrees;
     public GameObject[] PlaygroundSGrass;
     public GameObject[] PlaygroundSFlowers;
+    public GameObject[] PlaygroundSTrees;
     public GameObject[] PlaygroundWGrass;
     public GameObject[] PlaygroundWFlowers;
     public GameObject[] RaceTrackEGrass;
     public GameObject[] RaceTrackEFlowers;
     public GameObject[] RiverGrass;
     public GameObject[] RiverFlowers;
+    public GameObject[] RiverTrees;
     public GameObject[] WoodsWGrass;
     public GameObject[] WoodsWFlowers;
+    public GameObject[] WoodsWTrees;
     public GameObject[] WoodsWSecretGrass;
     public GameObject[] WoodsWSecretFlowers;
+    public GameObject[] WoodsWSecretTrees;
 
     public bool bAlterateGrass;
     
     void Start()
     {
-        CheckAreaToAnimate();
+        StartCoroutine(DelayAreaCheck());
     }
 
     //BatteryNE
@@ -178,6 +193,12 @@ public class AreaAnimator : MonoBehaviour
         }
     }
 
+    public void ToggleBatteryNWTrees()
+    {
+        for (int i = 0; i < BatteryNWTrees.Length; i++)
+            BatteryNWTrees[i].GetComponent<Animator>().enabled = !BatteryNWTrees[i].GetComponent<Animator>().enabled;
+    }
+
 
     //BatterySE
     public void CycleBatterySEFlowers()
@@ -221,6 +242,12 @@ public class AreaAnimator : MonoBehaviour
 
             bAlterateGrass = false;
         }
+    }
+
+    public void ToggleBatterySETrees()
+    {
+        for (int i = 0; i < BatterySETrees.Length; i++)
+            BatterySETrees[i].GetComponent<Animator>().enabled = !BatterySETrees[i].GetComponent<Animator>().enabled;
     }
 
 
@@ -493,6 +520,12 @@ public class AreaAnimator : MonoBehaviour
         }
     }
 
+    public void ToggleCampusTrees()
+    {
+        for (int i = 0; i < CampusTrees.Length; i++)
+            CampusTrees[i].GetComponent<Animator>().enabled = !CampusTrees[i].GetComponent<Animator>().enabled;
+    }
+
 
     //CannaFieldNW 
     public void CycleCannaFieldNWFlowers()
@@ -629,7 +662,7 @@ public class AreaAnimator : MonoBehaviour
     }
 
 
-    //CannaHouse 
+    //CannaHouse
     public void CycleCannaHouseFlowers()
     {
         CannaHouseFlowers[0].SetActive(false);
@@ -671,6 +704,12 @@ public class AreaAnimator : MonoBehaviour
 
             bAlterateGrass = false;
         }
+    }
+
+    public void ToggleCannaHouseTrees()
+    {
+        for (int i = 0; i < CannaHouseTrees.Length; i++)
+            CannaHouseTrees[i].GetComponent<Animator>().enabled = !CannaHouseTrees[i].GetComponent<Animator>().enabled;
     }
 
 
@@ -1123,6 +1162,12 @@ public class AreaAnimator : MonoBehaviour
         }
     }
 
+    public void ToggleHomeTrees()
+    {
+        for (int i = 0; i < HomeTrees.Length; i++)
+            HomeTrees[i].GetComponent<Animator>().enabled = !HomeTrees[i].GetComponent<Animator>().enabled;
+    }
+
 
     //HousesE 
     public void CycleHousesEFlowers()
@@ -1166,6 +1211,12 @@ public class AreaAnimator : MonoBehaviour
 
             bAlterateGrass = false;
         }
+    }
+
+    public void ToggleHousesETrees()
+    {
+        for (int i = 0; i < HousesETrees.Length; i++)
+            HousesETrees[i].GetComponent<Animator>().enabled = !HousesETrees[i].GetComponent<Animator>().enabled;
     }
 
 
@@ -1213,6 +1264,12 @@ public class AreaAnimator : MonoBehaviour
         }
     }
 
+    public void ToggleHousesNTrees()
+    {
+        for (int i = 0; i < HousesNTrees.Length; i++)
+            HousesNTrees[i].GetComponent<Animator>().enabled = !HousesNTrees[i].GetComponent<Animator>().enabled;
+    }
+
 
     //HousesS 
     public void CycleHousesSFlowers()
@@ -1256,6 +1313,12 @@ public class AreaAnimator : MonoBehaviour
 
             bAlterateGrass = false;
         }
+    }
+
+    public void ToggleHousesSTrees()
+    {
+        for (int i = 0; i < HousesSTrees.Length; i++)
+            HousesSTrees[i].GetComponent<Animator>().enabled = !HousesSTrees[i].GetComponent<Animator>().enabled;
     }
 
 
@@ -1303,6 +1366,12 @@ public class AreaAnimator : MonoBehaviour
         }
     }
 
+    public void ToggleHousesWTrees()
+    {
+        for (int i = 0; i < HousesWTrees.Length; i++)
+            HousesWTrees[i].GetComponent<Animator>().enabled = !HousesWTrees[i].GetComponent<Animator>().enabled;
+    }
+
 
     //Lake 
     public void CycleLakeFlowers()
@@ -1346,6 +1415,12 @@ public class AreaAnimator : MonoBehaviour
 
             bAlterateGrass = false;
         }
+    }
+
+    public void ToggleLakeTrees()
+    {
+        for (int i = 0; i < LakeTrees.Length; i++)
+            LakeTrees[i].GetComponent<Animator>().enabled = !LakeTrees[i].GetComponent<Animator>().enabled;
     }
 
 
@@ -1438,6 +1513,12 @@ public class AreaAnimator : MonoBehaviour
         }
     }
 
+    public void TogglePlaygroundNTrees()
+    {
+        for (int i = 0; i < PlaygroundNTrees.Length; i++)
+            PlaygroundNTrees[i].GetComponent<Animator>().enabled = !PlaygroundNTrees[i].GetComponent<Animator>().enabled;
+    }
+
 
     //PlaygroundS 
     public void CyclePlaygroundSFlowers()
@@ -1481,6 +1562,12 @@ public class AreaAnimator : MonoBehaviour
 
             bAlterateGrass = false;
         }
+    }
+
+    public void TogglePlaygroundSTrees()
+    {
+        for (int i = 0; i < PlaygroundSTrees.Length; i++)
+            PlaygroundSTrees[i].GetComponent<Animator>().enabled = !PlaygroundSTrees[i].GetComponent<Animator>().enabled;
     }
 
 
@@ -1618,6 +1705,12 @@ public class AreaAnimator : MonoBehaviour
         }
     }
 
+    public void ToggleRiverTrees()
+    {
+        for (int i = 0; i < RiverTrees.Length; i++)
+            RiverTrees[i].GetComponent<Animator>().enabled = !RiverTrees[i].GetComponent<Animator>().enabled;
+    }
+
 
     //WoodsW 
     public void CycleWoodsWFlowers()
@@ -1661,6 +1754,12 @@ public class AreaAnimator : MonoBehaviour
 
             bAlterateGrass = false;
         }
+    }
+
+    public void ToggleWoodsWTrees()
+    {
+        for (int i = 0; i < WoodsWTrees.Length; i++)
+            WoodsWTrees[i].GetComponent<Animator>().enabled = !WoodsWTrees[i].GetComponent<Animator>().enabled;
     }
 
 
@@ -1707,11 +1806,205 @@ public class AreaAnimator : MonoBehaviour
             bAlterateGrass = false;
         }
     }
+    public void ToggleWoodsWSecretTrees()
+    {
+        for (int i = 0; i < WoodsWSecretTrees.Length; i++)
+            WoodsWSecretTrees[i].GetComponent<Animator>().enabled = !WoodsWSecretTrees[i].GetComponent<Animator>().enabled;
+    }
 
+
+    public void DisableAnimators()
+    {
+        // TODO: finish adding trees in WoodsW; see how to use Profiler first for performance understanding
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.BatteryNE)
+        {
+            if (BatteryNWTrees[0].GetComponent<Animator>().enabled)
+                ToggleBatteryNWTrees();
+
+            if (BatterySETrees[0].GetComponent<Animator>().enabled)
+                ToggleBatterySETrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.BatterySE)
+        {
+            if (HousesETrees[0].GetComponent<Animator>().enabled)
+                ToggleHousesETrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.BatterySW)
+        {
+            if (BatteryNWTrees[0].GetComponent<Animator>().enabled)
+                ToggleBatteryNWTrees();
+
+            if (BatterySETrees[0].GetComponent<Animator>().enabled)
+                ToggleBatterySETrees();
+
+            if (CampusTrees[0].GetComponent<Animator>().enabled)
+                ToggleCampusTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.BuildersNE)
+        {
+            if (HousesNTrees[0].GetComponent<Animator>().enabled)
+                ToggleHousesNTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.BuildersSE)
+        {
+            if (CampusTrees[0].GetComponent<Animator>().enabled)
+                ToggleCampusTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.Campus)
+        {
+            if (CannaHouseTrees[0].GetComponent<Animator>().enabled)
+                ToggleCannaHouseTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.CannaFieldNW)
+        {
+            if (CannaHouseTrees[0].GetComponent<Animator>().enabled)
+                ToggleCannaHouseTrees();
+
+            if (HomeTrees[0].GetComponent<Animator>().enabled)
+                ToggleHomeTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.CannaFieldSE)
+        {
+            if (CannaHouseTrees[0].GetComponent<Animator>().enabled)
+                ToggleCannaHouseTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.CannaHouse)
+        {
+            if (CampusTrees[0].GetComponent<Animator>().enabled)
+                ToggleCampusTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmNW)
+        {
+            if (CampusTrees[0].GetComponent<Animator>().enabled)
+                ToggleCampusTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmSW)
+        {
+            if (HousesSTrees[0].GetComponent<Animator>().enabled)
+                ToggleHousesSTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.Home)
+        {
+            if (HousesWTrees[0].GetComponent<Animator>().enabled)
+                ToggleHousesWTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.HousesE)
+        {
+            if (BatterySETrees[0].GetComponent<Animator>().enabled)
+                ToggleBatterySETrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.HousesN)
+        {
+            if (PlaygroundNTrees[0].GetComponent<Animator>().enabled)
+                TogglePlaygroundNTrees();
+
+            if (RiverTrees[0].GetComponent<Animator>().enabled)
+                ToggleRiverTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.HousesS)
+        {
+            if (PlaygroundSTrees[0].GetComponent<Animator>().enabled)
+                TogglePlaygroundSTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.HousesW)
+        {
+            if (HomeTrees[0].GetComponent<Animator>().enabled)
+                ToggleHomeTrees();
+
+            if (WoodsWTrees[0].GetComponent<Animator>().enabled)
+                ToggleWoodsWTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.Lake)
+        {
+            if (PlaygroundNTrees[0].GetComponent<Animator>().enabled)
+                TogglePlaygroundNTrees();
+
+            if (RiverTrees[0].GetComponent<Animator>().enabled)
+                ToggleRiverTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.PlaygroundE)
+        {
+            if (HousesETrees[0].GetComponent<Animator>().enabled)
+                ToggleHousesETrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.PlaygroundN)
+        {
+            if (HousesNTrees[0].GetComponent<Animator>().enabled)
+                ToggleHousesNTrees();
+
+            if (LakeTrees[0].GetComponent<Animator>().enabled)
+                ToggleLakeTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.PlaygroundS)
+        {
+            if (HousesSTrees[0].GetComponent<Animator>().enabled)
+                ToggleHousesSTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.PlaygroundN)
+        {
+            if (HomeTrees[0].GetComponent<Animator>().enabled)
+                ToggleHomeTrees();
+
+            if (WoodsWTrees[0].GetComponent<Animator>().enabled)
+                ToggleWoodsWTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.River)
+        {
+            if (HousesNTrees[0].GetComponent<Animator>().enabled)
+                ToggleHousesNTrees();
+
+            if (LakeTrees[0].GetComponent<Animator>().enabled)
+                ToggleLakeTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.WoodsW)
+        {
+            if (HousesWTrees[0].GetComponent<Animator>().enabled)
+                ToggleHousesWTrees();
+
+            if (WoodsWSecretTrees[0].GetComponent<Animator>().enabled)
+                ToggleWoodsWSecretTrees();
+        }
+
+        if (camFollow.currentCoords == CameraFollow.AnandaCoords.WoodsWSecret)
+        {
+            if (WoodsWTrees[0].GetComponent<Animator>().enabled)
+                ToggleWoodsWTrees();
+        }
+    }
+
+    public IEnumerator DelayAreaCheck()
+    {
+        yield return new WaitForSeconds(0.5f);
+        CheckAreaToAnimate();
+    }
 
     public void CheckAreaToAnimate()
     {
         CancelInvoke();
+        DisableAnimators();
 
         if (camFollow.currentCoords == CameraFollow.AnandaCoords.BatteryNE)
         {
@@ -1720,11 +2013,15 @@ public class AreaAnimator : MonoBehaviour
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.BatteryNW)
         {
+            //Invoke("AnimateBatteryNWTrees", 0.5f);
+            ToggleBatteryNWTrees();
             InvokeRepeating("CycleBatteryNWFlowers", 3f, 3f);
             InvokeRepeating("CycleBatteryNWGrass", 1f, 1f);
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.BatterySE)
         {
+            //Invoke("AnimateBatterySETrees", 0.5f);
+            ToggleBatterySETrees();
             InvokeRepeating("CycleBatterySEFlowers", 3f, 3f);
             InvokeRepeating("CycleBatterySEGrass", 1f, 1f);
         }
@@ -1755,6 +2052,8 @@ public class AreaAnimator : MonoBehaviour
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.Campus)
         {
+            //Invoke("AnimateCampusTrees", 0.5f);
+            ToggleCampusTrees();
             InvokeRepeating("CycleCampusFlowers", 3f, 3f);
             InvokeRepeating("CycleCampusGrass", 1f, 1f);
         }
@@ -1775,6 +2074,8 @@ public class AreaAnimator : MonoBehaviour
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.CannaHouse)
         {
+            //Invoke("AnimateCannaHouseTrees", 0.5f);
+            ToggleCannaHouseTrees();
             InvokeRepeating("CycleCannaHouseFlowers", 3f, 3f);
             InvokeRepeating("CycleCannaHouseGrass", 1f, 1f);
         }
@@ -1825,31 +2126,43 @@ public class AreaAnimator : MonoBehaviour
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.Home)
         {
+            //Invoke("AnimateHomeTrees", 0.5f);
+            ToggleHomeTrees();
             InvokeRepeating("CycleHomeFlowers", 3f, 3f);
             InvokeRepeating("CycleHomeGrass", 1f, 1f);
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.HousesE)
         {
+            //Invoke("AnimateHousesETrees", 0.5f);
+            ToggleHousesETrees();
             InvokeRepeating("CycleHousesEFlowers", 3f, 3f);
             InvokeRepeating("CycleHousesEGrass", 1f, 1f);
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.HousesN)
         {
+            //Invoke("AnimateHousesNTrees", 0.5f);
+            ToggleHousesNTrees();
             InvokeRepeating("CycleHousesNFlowers", 3f, 3f);
             InvokeRepeating("CycleHousesNGrass", 1f, 1f);
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.HousesS)
         {
+            //Invoke("AnimateHousesSTrees", 0.5f);
+            ToggleHousesSTrees();
             InvokeRepeating("CycleHousesSFlowers", 3f, 3f);
             InvokeRepeating("CycleHousesSGrass", 1f, 1f);
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.HousesW)
         {
+            //Invoke("AnimateHousesWTrees", 0.5f);
+            ToggleHousesWTrees();
             InvokeRepeating("CycleHousesWFlowers", 3f, 3f);
             InvokeRepeating("CycleHousesWGrass", 1f, 1f);
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.Lake)
         {
+            //Invoke("AnimateLakeTrees", 0.5f);
+            ToggleLakeTrees();
             InvokeRepeating("CycleLakeFlowers", 3f, 3f);
             InvokeRepeating("CycleLakeGrass", 1f, 1f);
         }
@@ -1860,11 +2173,15 @@ public class AreaAnimator : MonoBehaviour
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.PlaygroundN)
         {
+            //Invoke("AnimatePlaygroundNTrees", 0.5f);
+            TogglePlaygroundNTrees();
             InvokeRepeating("CyclePlaygroundNFlowers", 3f, 3f);
             InvokeRepeating("CyclePlaygroundNGrass", 1f, 1f);
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.PlaygroundS)
         {
+            //Invoke("AnimatePlaygroundSTrees", 0.5f);
+            TogglePlaygroundSTrees();
             InvokeRepeating("CyclePlaygroundSFlowers", 3f, 3f);
             InvokeRepeating("CyclePlaygroundSGrass", 1f, 1f);
         }
@@ -1880,16 +2197,22 @@ public class AreaAnimator : MonoBehaviour
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.River)
         {
+            //Invoke("AnimateRiverTrees", 0.5f);
+            ToggleRiverTrees();
             InvokeRepeating("CycleRiverFlowers", 3f, 3f);
             InvokeRepeating("CycleRiverGrass", 1f, 1f);
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.WoodsW)
         {
+            //Invoke("AnimateWoodsWTrees", 0.5f);
+            ToggleWoodsWTrees();
             InvokeRepeating("CycleWoodsWFlowers", 3f, 3f);
             InvokeRepeating("CycleWoodsWGrass", 1f, 1f);
         }
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.WoodsWSecret)
         {
+            //Invoke("AnimateWoodsWSecretTrees", 0.5f);
+            ToggleWoodsWSecretTrees();
             InvokeRepeating("CycleWoodsWSecretFlowers", 3f, 3f);
             InvokeRepeating("CycleWoodsWSecretGrass", 1f, 1f);
         }

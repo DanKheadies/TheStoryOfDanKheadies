@@ -27,6 +27,7 @@ public class SceneTransitioner : MonoBehaviour
     private float cameraWidth;
     public float timeToLoad;
 
+    public string OmegaLoad;
     public string AlphaLoad;
     public string BetaLoad;
 
@@ -133,9 +134,7 @@ public class SceneTransitioner : MonoBehaviour
 
             // TODO: prob change this
             if (scene.name != "GuessWhoColluded")
-            {
                 collision.gameObject.GetComponent<Animator>().SetBool("bIsWalking", false);
-            }
 
             StartCoroutine(DelayedTransition(2));
         }
@@ -166,9 +165,12 @@ public class SceneTransitioner : MonoBehaviour
         float scale = 0.0013849431818182f * Screen.width + 0.47727272727273f;
         smokeRings.localScale = new Vector3(scale, scale, 1);
 
+        //SceneManager.UnloadSceneAsync();
+
         yield return new WaitForSeconds(3);
 
         AsyncOperation async = SceneManager.LoadSceneAsync(BetaLoad);
+        //AsyncOperation async = SceneManager.LoadSceneAsync(BetaLoad, LoadSceneMode.Additive);
 
         while (!async.isDone)
         {

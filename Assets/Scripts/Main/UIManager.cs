@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/26/2021
+// Last:  04/27/2021
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -38,7 +38,8 @@ public class UIManager : MonoBehaviour
     public TouchControls touches;
     public Vector2 dManOffMax;
     public Vector2 dManOffMin;
-    public Vector2 pauseMenuPos;
+    public Vector2[] dPadsPos;
+    public Vector2[] joySticksPos;
 
     public bool bControlsActive;
     public bool bControlsDPad;
@@ -104,13 +105,13 @@ public class UIManager : MonoBehaviour
         UpdateBrio();
 
         // Sets menu position based off scene
-        CheckAndSetMenus();
+        SetMenus();
 
         // Sets other UI elements position for orientation change
-        GetAndStoreUIElements();
+        GetUIElements();
 
         // Sets UI based on orientation
-        CheckAndSetOrientation();
+        SetOrientation();
     }
 
     public void UpdateBrio()
@@ -165,13 +166,13 @@ public class UIManager : MonoBehaviour
             DisplayControls();
     }
 
-    public void CheckAndSetControls()
-    {
-        if (bControlsActive)
-            DisplayControls();
-        else if (!bControlsActive)
-            HideControls();
-    }
+    //public void CheckAndSetControls()
+    //{
+    //    if (bControlsActive)
+    //        DisplayControls();
+    //    else if (!bControlsActive)
+    //        HideControls();
+    //}
 
     public void DisplayDPad()
     {
@@ -216,13 +217,13 @@ public class UIManager : MonoBehaviour
             DisplayDPad();
     }
 
-    public void CheckAndSetDPad()
-    {
-        if (bControlsDPad)
-            DisplayDPad();
-        else if (!bControlsDPad)
-            HideDPad();
-    }
+    //public void CheckAndSetDPad()
+    //{
+    //    if (bControlsDPad)
+    //        DisplayDPad();
+    //    else if (!bControlsDPad)
+    //        HideDPad();
+    //}
 
     public void HideBrioAndButton()
     {
@@ -273,7 +274,7 @@ public class UIManager : MonoBehaviour
             contOpacSlider.value = currentContOpac;
     }
 
-    public void CheckAndSetMenus()
+    public void SetMenus()
     {
         // Width > height = center in the screen
         if (Screen.width >= Screen.height)
@@ -348,12 +349,38 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void GetAndStoreUIElements()
+    public void GetUIElements()
     {
         if (dMan)
         {
             dManOffMax = dMan.GetComponent<RectTransform>().offsetMax;
             dManOffMin = dMan.GetComponent<RectTransform>().offsetMin;
+        }
+
+        if (dPads[0])
+        {
+            int index = 0;
+            foreach (GameObject dPad in dPads)
+            {
+                dPadsPos[index] = new Vector2(
+                        dPad.GetComponent<RectTransform>().anchoredPosition.x,
+                        dPad.GetComponent<RectTransform>().anchoredPosition.y
+                    );
+                index++;
+            }
+        }
+
+        if (joySticks[0])
+        {
+            int index = 0;
+            foreach (GameObject joyStick in joySticks)
+            {
+                joySticksPos[index] = new Vector2(
+                        joyStick.GetComponent<RectTransform>().anchoredPosition.x,
+                        joyStick.GetComponent<RectTransform>().anchoredPosition.y
+                    );
+                index++;
+            }
         }
     }
 
@@ -363,18 +390,62 @@ public class UIManager : MonoBehaviour
         rect.offsetMax = new Vector2(-right, -top);
     }
 
-    //public void SetCenteredRect(RectTransform rect, float x, float y)
-    //{
-    //    rect.anchoredPosition = new Vector2(x, y);
-    //}
-
-    public void CheckAndSetOrientation()
+    public void SetPositionalRect(RectTransform rect, float x, float y)
     {
-        if (Screen.width <= Screen.height)
-            if (dMan)
-                SetStretchedRect(dMan.GetComponent<RectTransform>(), dManOffMin.x, dManOffMin.y, dManOffMax.x, dManOffMax.y - 200f);
-        else
+        rect.anchoredPosition = new Vector2(x, y);
+    }
+
+    public void SetOrientation()
+    {
+        if (Screen.width >= Screen.height)
+        {
             if (dMan)
                 SetStretchedRect(dMan.GetComponent<RectTransform>(), dManOffMin.x, dManOffMin.y, dManOffMax.x, dManOffMax.y);
+            
+            if (dPads[0])
+            {
+                int index = 0;
+                foreach (GameObject dPad in dPads)
+                {
+                    SetPositionalRect(dPad.GetComponent<RectTransform>(), dPadsPos[index].x + 25f, dPadsPos[index].y);
+                    index++;
+                }
+            }
+
+            if (joySticks[0])
+            {
+                int index = 0;
+                foreach (GameObject joyStick in joySticks)
+                {
+                    SetPositionalRect(joyStick.GetComponent<RectTransform>(), joySticksPos[index].x + 25f, joySticksPos[index].y);
+                    index++;
+                }
+            }
+        }
+        else
+        {
+            if (dMan)
+                SetStretchedRect(dMan.GetComponent<RectTransform>(), dManOffMin.x, dManOffMin.y, dManOffMax.x, dManOffMax.y - 200f);
+
+            if (dPads[0])
+            {
+                int index = 0;
+                foreach (GameObject dPad in dPads)
+                {
+                    SetPositionalRect(dPad.GetComponent<RectTransform>(), dPadsPos[index].x, dPadsPos[index].y);
+                    index++;
+                }
+            }
+
+            if (joySticks[0])
+            {
+                int index = 0;
+                foreach (GameObject joyStick in joySticks)
+                {
+                    SetPositionalRect(joyStick.GetComponent<RectTransform>(), joySticksPos[index].x, joySticksPos[index].y);
+                    index++;
+                }
+            }
+        }
     }
 }
