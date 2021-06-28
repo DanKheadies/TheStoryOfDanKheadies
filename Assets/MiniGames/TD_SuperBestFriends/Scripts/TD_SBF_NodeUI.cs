@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  04/26/2021
+// Last:  06/24/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -89,10 +89,7 @@ public class TD_SBF_NodeUI : MonoBehaviour
 
     public void DescriptionBarCheck()
     {
-        if (cMan.buildDescriptionBar.activeSelf)
-        {
-            cMan.DisableBuildDescriptionBar();
-            cMan.MaximizeTowerUpgradeBar();
-        }
+        cMan.DisableBuildDescriptionBar();
+        cMan.MaximizeTowerUpgradeBar();
     }
 }

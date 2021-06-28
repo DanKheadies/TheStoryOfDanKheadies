@@ -18,7 +18,7 @@ QualitySettings:
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 0
-    blendWeights: 1
+    skinWeights: 1
     textureQuality: 1
     anisotropicTextures: 0
     antiAliasing: 0
@@ -40,11 +40,12 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
+    customRenderPipeline: {fileID: 0}
     excludedTargetPlatforms:
     - WebGL
     - Standalone
-    - iPhone
     - Android
+    - iPhone
   - serializedVersion: 2
     name: Fast
     pixelLightCount: 0
@@ -57,7 +58,7 @@ QualitySettings:
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 0
-    blendWeights: 2
+    skinWeights: 2
     textureQuality: 0
     anisotropicTextures: 0
     antiAliasing: 0
@@ -79,6 +80,7 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
+    customRenderPipeline: {fileID: 0}
     excludedTargetPlatforms:
     - WebGL
     - Android
@@ -96,7 +98,7 @@ QualitySettings:
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 0
-    blendWeights: 2
+    skinWeights: 2
     textureQuality: 0
     anisotropicTextures: 1
     antiAliasing: 0
@@ -118,11 +120,12 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
+    customRenderPipeline: {fileID: 0}
     excludedTargetPlatforms:
     - WebGL
     - Standalone
-    - iPhone
     - Android
+    - iPhone
   - serializedVersion: 2
     name: Good
     pixelLightCount: 2
@@ -135,7 +138,7 @@ QualitySettings:
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 1
-    blendWeights: 2
+    skinWeights: 2
     textureQuality: 0
     anisotropicTextures: 1
     antiAliasing: 0
@@ -157,10 +160,9 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
+    customRenderPipeline: {fileID: 0}
     excludedTargetPlatforms:
     - WebGL
-    - Android
-    - iPhone
     - Standalone
   - serializedVersion: 2
     name: Beautiful
@@ -174,7 +176,7 @@ QualitySettings:
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 1
-    blendWeights: 4
+    skinWeights: 4
     textureQuality: 0
     anisotropicTextures: 2
     antiAliasing: 2
@@ -196,10 +198,12 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    excludedTargetPlatforms: []
+    customRenderPipeline: {fileID: 0}
+    excludedTargetPlatforms:
+    - Android
   - serializedVersion: 2
     name: Fantastic
-    pixelLightCount: 4
+    pixelLightCount: 0
     shadows: 2
     shadowResolution: 2
     shadowProjection: 1
@@ -209,7 +213,7 @@ QualitySettings:
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 1
-    blendWeights: 4
+    skinWeights: 4
     textureQuality: 0
     anisotropicTextures: 2
     antiAliasing: 2
@@ -231,6 +235,7 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
+    customRenderPipeline: {fileID: 0}
     excludedTargetPlatforms:
     - WebGL
     - Android

@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/10/2016
-// Last:  04/26/2021
+// Last:  06/25/2021
 
 using UnityEngine;
 
@@ -12,9 +12,22 @@ public class TD_SBF_CameraController : MonoBehaviour
     public TD_SBF_ControlManagement cMan;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_TouchControls touchConts;
-    
-    public float panSpeed = 30f;
-    public float scrollSpeed = 5f;
+
+    public float mouseSensitivity;
+    public float orthoZoomSpeed;
+    public float perspectiveZoomSpeed;
+    public float panSpeed;
+    public float scrollSpeed;
+    public Vector3 lastPosition;
+
+    void Start()
+    {
+        mouseSensitivity = 0.0125f;
+        perspectiveZoomSpeed = 0.1f;       // The rate of change of the field of view in perspective mode.
+        orthoZoomSpeed = 0.0125f;          // The rate of change of the orthographic size in orthographic mode.
+        panSpeed = 20f;
+        scrollSpeed = 5f;
+    }
 
     void Update()
     {
@@ -72,6 +85,61 @@ public class TD_SBF_CameraController : MonoBehaviour
                 VirtualJoystickMove();
 
             CalcPosition();
+
+            // Click and drag
+            if (Input.touchCount < 2)
+            {
+                if (Input.GetMouseButtonDown(0))
+                    lastPosition = Input.mousePosition;
+
+                if (Input.GetMouseButton(0))
+                {
+                    Vector3 delta = Input.mousePosition - lastPosition;
+                    transform.Translate(-delta.x * mouseSensitivity, -delta.y * mouseSensitivity, -10);
+                    lastPosition = Input.mousePosition;
+                }
+            }
+            
+            // Pinch and zoom
+            if (!cMan.bAvoidCamScroll && 
+                Input.touchCount == 2)
+            {
+                // Store both touches.
+                Touch touchZero = Input.GetTouch(0);
+                Touch touchOne = Input.GetTouch(1);
+
+                // Find the position in the previous frame of each touch.
+                Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+                Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+                // Find the magnitude of the vector (the distance) between the touches in each frame.
+                float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+                float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
+
+                // Find the difference in the distances between each frame.
+                float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+
+                // If the camera is orthographic...
+                if (gameObject.GetComponent<Camera>().orthographic)
+                {
+                    // ... change the orthographic size based on the change in distance between the touches.
+                    gameObject.GetComponent<Camera>().orthographicSize += deltaMagnitudeDiff * orthoZoomSpeed;
+
+                    // Make sure the orthographic size never drops below zero.
+                    gameObject.GetComponent<Camera>().orthographicSize = 
+                        Mathf.Clamp(gameObject.GetComponent<Camera>().orthographicSize, 5f, 50f);
+                }
+                // DC 02/22/2019 -- This "should" never run
+                else
+                {
+                    // Otherwise change the field of view based on the change in distance between the touches.
+                    gameObject.GetComponent<Camera>().fieldOfView += deltaMagnitudeDiff * perspectiveZoomSpeed;
+
+                    // Clamp the field of view to make sure it's between 0 and 180.
+                    gameObject.GetComponent<Camera>().fieldOfView = 
+                        Mathf.Clamp(gameObject.GetComponent<Camera>().fieldOfView, 0.1f, 179.9f);
+                }
+            }
         }
 
         // Mouse

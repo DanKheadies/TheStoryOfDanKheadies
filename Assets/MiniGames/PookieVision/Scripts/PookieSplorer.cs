@@ -2,13 +2,14 @@
 // Authors: Martijn / The Art of Code
 // Contributors: David W. Corso
 // Start: 08/03/2019
-// Last:  04/26/2021
+// Last:  06/27/2021
 
 using UnityEngine;
 
 public class PookieSplorer : MonoBehaviour
 {
     public ControllerSupport contSupp;
+    public TouchControls tConts;
 
     public Material mat;
     public Vector2 pos;
@@ -57,7 +58,8 @@ public class PookieSplorer : MonoBehaviour
     {
         // Zoom Out
         if (Input.GetKey(KeyCode.I) ||
-            contSupp.ControllerTriggerRight() > 0)
+            contSupp.ControllerTriggerRight() > 0 ||
+            tConts.bYaction)
         {
             if (scale > 0.00000001f)
             {
@@ -71,7 +73,8 @@ public class PookieSplorer : MonoBehaviour
         }
         // Zoom In
         else if (Input.GetKey(KeyCode.K) ||
-                 contSupp.ControllerTriggerLeft() > 0)
+                 contSupp.ControllerTriggerLeft() > 0 ||
+                 tConts.bXaction)
         {
             if (scale < 75000f)
             {
@@ -90,13 +93,15 @@ public class PookieSplorer : MonoBehaviour
 
         // Rotate Left
         if (Input.GetKey(KeyCode.J) ||
-            contSupp.ControllerBumperLeft("hold"))
+            contSupp.ControllerBumperLeft("hold") ||
+            tConts.bAaction)
         {
             angle -= 0.01f;
         }
         // Rotate Right
         else if (Input.GetKey(KeyCode.L) ||
-                 contSupp.ControllerBumperRight("hold"))
+                 contSupp.ControllerBumperRight("hold") ||
+                 tConts.bBaction)
         {
             angle += 0.01f;
         }
@@ -109,14 +114,16 @@ public class PookieSplorer : MonoBehaviour
         // Move Left
         if (Input.GetKey(KeyCode.A) ||
             contSupp.ControllerLeftJoystickHorizontal() < 0 ||
-            contSupp.ControllerDirectionalPadHorizontal() < 0)
+            contSupp.ControllerDirectionalPadHorizontal() < 0 ||
+            tConts.bLeft)
         {
             pos -= dir;
         }
         // Move Right
         else if (Input.GetKey(KeyCode.D) ||
                  contSupp.ControllerLeftJoystickHorizontal() > 0 ||
-                 contSupp.ControllerDirectionalPadHorizontal() > 0)
+                 contSupp.ControllerDirectionalPadHorizontal() > 0 ||
+                tConts.bRight)
         {
             pos += dir;
         }
@@ -126,35 +133,40 @@ public class PookieSplorer : MonoBehaviour
         // Move Down
         if (Input.GetKey(KeyCode.S) ||
             contSupp.ControllerLeftJoystickVertical() < 0 ||
-            contSupp.ControllerDirectionalPadVertical() < 0)
+            contSupp.ControllerDirectionalPadVertical() < 0 ||
+            tConts.bDown)
         {
             pos -= dir;
         }
         // Move Up
         else if (Input.GetKey(KeyCode.W) ||
                  contSupp.ControllerLeftJoystickVertical() > 0 ||
-                 contSupp.ControllerDirectionalPadVertical() > 0)
+                 contSupp.ControllerDirectionalPadVertical() > 0 ||
+                 tConts.bUp)
         {
             pos += dir;
         }
 
         // Cycle Colors
         if (Input.GetKey(KeyCode.U) ||
-            contSupp.ControllerButtonPadTop("hold"))
+            contSupp.ControllerButtonPadTop("hold") ||
+            tConts.bUpLeft)
         {
             if (color > 0)
                 color -= 0.01f;
         }
         else if (Input.GetKey(KeyCode.O) ||
-                 contSupp.ControllerButtonPadLeft("hold"))
+                 contSupp.ControllerButtonPadLeft("hold") ||
+                 tConts.bUpRight)
         {
             if (color < 1)
                 color += 0.01f;
         }
 
-        // Cycle 
+        // Kaleidoscope 
         if (Input.GetKey(KeyCode.E) ||
-            contSupp.ControllerButtonPadRight("hold"))
+            contSupp.ControllerButtonPadRight("hold") ||
+            tConts.bDownLeft)
         {
             if (symmetry > 0)
                 symmetry -= 0.1f;
@@ -163,14 +175,16 @@ public class PookieSplorer : MonoBehaviour
                 symmetry = 0;
         }
         else if (Input.GetKey(KeyCode.Q) ||
-                 contSupp.ControllerButtonPadBottom("hold"))
+                 contSupp.ControllerButtonPadBottom("hold") ||
+                 tConts.bDownRight)
         {
             if (symmetry < 1)
                 symmetry += 0.1f;
         }
 
         if (Input.GetKey(KeyCode.R) ||
-            contSupp.ControllerMenuLeft("hold"))
+            contSupp.ControllerMenuLeft("hold") ||
+            Input.touchCount == 3)
         {
             ResetShader();
         }

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/27/2021
+// Last:  06/27/2021
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,7 +17,8 @@ public class UIManager : MonoBehaviour
     public DeviceDetector devDetect;
     public DialogueManager dMan;
     public FixedJoystick fixedJoystick;
-    public GameObject pauseButtOpac; 
+    public GameObject pauseButtOpac;
+    public GameObject[] buttons;
     public GameObject[] dPads;
     public GameObject[] joySticks;
     public OptionsManager oMan;
@@ -38,11 +39,13 @@ public class UIManager : MonoBehaviour
     public TouchControls touches;
     public Vector2 dManOffMax;
     public Vector2 dManOffMin;
+    public Vector2[] buttonsPos;
     public Vector2[] dPadsPos;
     public Vector2[] joySticksPos;
 
     public bool bControlsActive;
     public bool bControlsDPad;
+    public bool bUseFourButtons;
 
     public float currentContOpac;
 
@@ -107,11 +110,28 @@ public class UIManager : MonoBehaviour
         // Sets menu position based off scene
         SetMenus();
 
+        // Set UI buttons on special situations
+        if (bUseFourButtons)
+            SetFourButtons();
+
         // Sets other UI elements position for orientation change
         GetUIElements();
 
         // Sets UI based on orientation
         SetOrientation();
+    }
+
+    public void SetFourButtons()
+    {
+        buttons[0].GetComponent<RectTransform>().anchoredPosition = new Vector2(-142.5f, 275f);
+        buttons[0].GetComponent<RectTransform>().sizeDelta = new Vector2(170f, 210f);
+        buttons[0].GetComponent<RectTransform>().localRotation = new Quaternion(0, 0, 15f, 0);
+        buttons[1].GetComponent<RectTransform>().anchoredPosition = new Vector2(-90f, 260f);
+        buttons[2].GetComponent<RectTransform>().anchoredPosition = new Vector2(-170f, 200f);
+        //buttons[3].GetComponent<RectTransform>().anchoredPosition = new Vector2(-115f, 350f);
+        buttons[3].GetComponent<RectTransform>().localScale = Vector3.one;
+        //buttons[4].GetComponent<RectTransform>().anchoredPosition = new Vector2(-195f, 290f);
+        buttons[4].GetComponent<RectTransform>().localScale = Vector3.one;
     }
 
     public void UpdateBrio()
@@ -181,13 +201,10 @@ public class UIManager : MonoBehaviour
         dPadTog.isOn = true;
 
         foreach (GameObject dPad in dPads)
-        {
             dPad.transform.localScale = Vector3.one;
-        }
+
         foreach (GameObject joyStick in joySticks)
-        {
             joyStick.transform.localScale = Vector3.zero;
-        }
     }
 
     public void HideDPad()
@@ -197,13 +214,10 @@ public class UIManager : MonoBehaviour
         dPadTog.isOn = false;
 
         foreach (GameObject dPad in dPads)
-        {
             dPad.transform.localScale = Vector3.zero;
-        }
+
         foreach (GameObject joyStick in joySticks)
-        {
             joyStick.transform.localScale = Vector3.one;
-        }
 
         fixedJoystick.GetComponent<FixedJoystick>().JoystickPosition();
     }
@@ -351,6 +365,19 @@ public class UIManager : MonoBehaviour
 
     public void GetUIElements()
     {
+        if (buttons[0])
+        {
+            int index = 0;
+            foreach (GameObject button in buttons)
+            {
+                buttonsPos[index] = new Vector2(
+                        button.GetComponent<RectTransform>().anchoredPosition.x,
+                        button.GetComponent<RectTransform>().anchoredPosition.y
+                    );
+                index++;
+            }
+        }
+
         if (dMan)
         {
             dManOffMax = dMan.GetComponent<RectTransform>().offsetMax;
@@ -399,6 +426,16 @@ public class UIManager : MonoBehaviour
     {
         if (Screen.width >= Screen.height)
         {
+            if (buttons[0])
+            {
+                int index = 0;
+                foreach (GameObject button in buttons)
+                {
+                    SetPositionalRect(button.GetComponent<RectTransform>(), buttonsPos[index].x, buttonsPos[index].y);
+                    index++;
+                }
+            }
+
             if (dMan)
                 SetStretchedRect(dMan.GetComponent<RectTransform>(), dManOffMin.x, dManOffMin.y, dManOffMax.x, dManOffMax.y);
             
@@ -424,6 +461,16 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            if (buttons[0])
+            {
+                int index = 0;
+                foreach (GameObject button in buttons)
+                {
+                    SetPositionalRect(button.GetComponent<RectTransform>(), buttonsPos[index].x + 20f, buttonsPos[index].y);
+                    index++;
+                }
+            }
+
             if (dMan)
                 SetStretchedRect(dMan.GetComponent<RectTransform>(), dManOffMin.x, dManOffMin.y, dManOffMax.x, dManOffMax.y - 200f);
 

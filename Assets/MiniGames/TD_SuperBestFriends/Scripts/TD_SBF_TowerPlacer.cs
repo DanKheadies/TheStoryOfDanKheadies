@@ -81,6 +81,34 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
                 }
             }
         }
+        else if (gMan.bIsTowerMode &&
+            !contSupp.bControllerConnected &&
+            Input.touchCount == 1 &&
+            Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            // TODO: avoid placing when over UI elements (i.e. the other tower buttons in teh shop)
+            // TODO: avoid placing while moving
+            // TODO: fix joystick re-centering 
+            RaycastHit hitInfo;
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+
+            if (Physics.Raycast(ray, out hitInfo) &&
+                !gMan.bIsHeroMode)
+            {
+                Debug.Log("have a ray");
+                CheckNode(hitInfo.point);
+
+                if (TD_SBF_BuildManager.td_sbf_instance.TD_SBF_CanBuild &&
+                    TD_SBF_BuildManager.td_sbf_instance.TD_SBF_HasThoughtsPrayers &&
+                    TD_SBF_BuildManager.td_sbf_instance.turretToBuild.cost != 0 &&
+                    !TD_SBF_BuildManager.td_sbf_instance.bOverTower &&
+                    !tConts.bAvoidSubUIElements)
+                {
+                    Debug.Log("gonna place it");
+                    PlaceTowerNear(hitInfo.point);
+                }
+            }
+        }
     }
     
     public void OnMouseOver()

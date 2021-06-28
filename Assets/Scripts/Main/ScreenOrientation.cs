@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/02/2018
-// Last:  04/27/2021
+// Last:  06/27/2021
 
 using UnityEngine;
 
@@ -10,7 +10,8 @@ public class ScreenOrientation : MonoBehaviour
 {
     public AspectUtility aspectUtil;
     public DialogueManager dMan;
-    public DeviceOrientation devOr;
+    public DeviceOrientation currentDevOr;
+    public DeviceOrientation newDevOr;
     public FixedJoystick fixedJoy;
     public OptionsManager oMan;
     public ScriptManager sMan;
@@ -22,7 +23,7 @@ public class ScreenOrientation : MonoBehaviour
 	void Start ()
     {
         // Initializers
-        devOr = Input.deviceOrientation;
+        GetDeviceOrientation();
 
         bIsFull = Screen.fullScreen;
         bSizingChange = false;
@@ -30,16 +31,36 @@ public class ScreenOrientation : MonoBehaviour
 	
 	void Update ()
     {
-		if (Input.deviceOrientation != devOr ||
-            Screen.autorotateToLandscapeLeft ||
-            Screen.autorotateToLandscapeRight ||
-            Screen.autorotateToPortrait || 
-            Screen.autorotateToPortraitUpsideDown ||
-            bSizingChange)
-        {
+        CheckDeviceOrientation();
+
+        if (Input.GetKeyDown(KeyCode.R))
             ResetParameters();
 
+        if (bSizingChange)
+        {
             bSizingChange = false;
+            GetDeviceOrientation();
+            ResetParameters();
+        }
+    }
+
+    public void CheckDeviceOrientation()
+    {
+        if (Input.deviceOrientation != currentDevOr)
+        {
+            newDevOr = Input.deviceOrientation;
+
+            if (((newDevOr == DeviceOrientation.Portrait ||
+                  newDevOr == DeviceOrientation.PortraitUpsideDown) &&
+                 (currentDevOr == DeviceOrientation.LandscapeLeft ||
+                  currentDevOr == DeviceOrientation.LandscapeRight)) ||
+                ((newDevOr == DeviceOrientation.LandscapeLeft ||
+                  newDevOr == DeviceOrientation.LandscapeRight) &&
+                 (currentDevOr == DeviceOrientation.Portrait ||
+                  currentDevOr == DeviceOrientation.PortraitUpsideDown)))
+            {
+                bSizingChange = true;
+            }
         }
 
         if (bIsFull != Screen.fullScreen)
@@ -47,15 +68,17 @@ public class ScreenOrientation : MonoBehaviour
             bIsFull = Screen.fullScreen;
             bSizingChange = true;
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetParameters();
-        }
+    public void GetDeviceOrientation()
+    {
+        currentDevOr = Input.deviceOrientation;
     }
 
     public void ResetParameters()
     {
+        Debug.Log("resetting");
+
         if (aspectUtil)
             aspectUtil.Awake();
         if (dMan)
@@ -76,8 +99,9 @@ public class ScreenOrientation : MonoBehaviour
             sMan.ResetParameters("CS_TreeTunnel");
             sMan.ResetParameters("MainMenu");
             sMan.ResetParameters("SceneTransitioner");
-            sMan.ResetParameters("TD_SBF_LX");
+            sMan.ResetParameters("TD_SBF_L1");
             sMan.ResetParameters("TD_SBF_MenuController");
+            sMan.ResetParameters("TD_SBF_ModeSelector");
         }
     }
 }

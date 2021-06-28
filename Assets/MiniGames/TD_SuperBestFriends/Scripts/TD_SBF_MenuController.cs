@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/27/2019
-// Last:  04/26/2021
+// Last:  06/26/2021
 
 using System.Collections;
 using UnityEngine;
@@ -74,6 +74,8 @@ public class TD_SBF_MenuController : MonoBehaviour
                 sbf_v.GetComponent<DelayAnimation>().bAvoidAni = true;
                 sbf_v.GetComponent<Animator>().enabled = false;
                 sbf_v.transform.localScale = new Vector3(4.75f, 4.75f, 1);
+
+                towerDefense.GetComponent<RectTransform>().sizeDelta = new Vector2(500f, 83.333f);
             }
 
             towerDeez.GetComponent<DelayAnimation>().bAvoidAni = true;
@@ -84,7 +86,7 @@ public class TD_SBF_MenuController : MonoBehaviour
             towerDefense.GetComponent<DelayAnimation>().bAvoidAni = true;
             towerDefense.GetComponent<Animator>().enabled = false;
             towerDefense.GetComponent<Image>().color = new Color(255f, 255f, 255f, 1);
-            
+
             StartCoroutine(DelaySelectable());
         }
 
@@ -117,6 +119,11 @@ public class TD_SBF_MenuController : MonoBehaviour
             characters_v.SetActive(false);
             curtain_v.SetActive(false);
             sbf_v.SetActive(false);
+
+            towerDeez.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            towerDefense.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
+            towerDefense.GetComponent<RectTransform>().sizeDelta = new Vector2(600f, 100f);
         }
         else
         {
@@ -127,6 +134,11 @@ public class TD_SBF_MenuController : MonoBehaviour
             characters_v.SetActive(true);
             curtain_v.SetActive(true);
             sbf_v.SetActive(true);
+
+            towerDeez.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -25f);
+            towerDefense.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 25f);
+
+            towerDefense.GetComponent<RectTransform>().sizeDelta = new Vector2(500f, 83.333f);
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  04/26/2021
+// Last:  06/27/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -1349,7 +1349,7 @@ public class Chp1 : MonoBehaviour
         PlayerPrefs.SetFloat("BuildersRyuuPosY", npc_ryuu.transform.position.y);
 
         //npc_sula;
-        PlayerPrefs.SetFloat("CannaSulaPosX", npc_ryuu.transform.position.x);
+        PlayerPrefs.SetFloat("CannaSulaPosX", npc_sula.transform.position.x);
         PlayerPrefs.SetFloat("CannaSulaPosY", npc_sula.transform.position.y);
         
         //npc_sydelle;
@@ -2196,28 +2196,6 @@ public class Chp1 : MonoBehaviour
 
         if (bHasGoggles)
         {
-#if UNITY_IOS
-            if ((UnityEngine.iOS.Device.generation.ToString()).IndexOf("iPad") > -1)
-                Debug.Log("local test if Ipad");
-#endif
-
-            Debug.Log("has goggles");
-            if (devDetect.bIsMobile &&
-                !devDetect.bIsIpad)
-            {
-                Debug.Log("mobile and not ipad");
-                // Any mobile device but iPad can't play 
-                dMan.dialogueLines = new string[] {
-                    "Ahh you seem to be lacking the necessary equipment.",
-                    "Come back when you have different hardware..."
-                };
-                dMan.currentLine = 0;
-                dText.text = dMan.dialogueLines[dMan.currentLine];
-                dMan.ShowDialogue();
-
-                return;
-            }
-
             warpPookieVision.GetComponent<BoxCollider2D>().enabled = true;
             warpPookieVision.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
 

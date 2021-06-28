@@ -57,5 +57,7 @@ public class TD_SBF_ShopButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
         if (!buildDescriptionBar.gameObject.activeSelf)
             HandleBuildDescriptionBar();
+
+        cMan.HandleBuildBarOnMobile();
     }
 }

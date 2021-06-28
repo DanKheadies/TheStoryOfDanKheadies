@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  04/26/2021
+// Last:  06/24/2021
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -26,13 +26,10 @@ public class TD_SBF_Node : MonoBehaviour
     void Awake()
     {
         contSupp = FindObjectOfType<ControllerSupport>();
+        heroAni = GameObject.FindGameObjectWithTag("Hero").GetComponent<TD_SBF_HeroAnimator>();
         startColor = GetComponent<SpriteRenderer>().color;
         tConts = FindObjectOfType<TD_SBF_TouchControls>();
         towerPlacer = FindObjectOfType<TD_SBF_TowerPlacer>();
-
-        if (heroAni)
-            heroAni = GameObject.FindGameObjectWithTag("Hero")
-                .GetComponent<TD_SBF_HeroAnimator>();
     }
 
     void Update()
@@ -93,6 +90,7 @@ public class TD_SBF_Node : MonoBehaviour
         GameObject effect = Instantiate(TD_SBF_BuildManager.td_sbf_instance.buildEffect, GetBuildPosition(), Quaternion.identity);
         Destroy(effect, 0.75f);
 
+        // TODO: Follow up eventually; VS say "meh" but it's needed and works
         if (TD_SBF_WaveSpawner.enemiesAlive > 0)
             AstarPath.active.Scan();
     }
@@ -186,6 +184,7 @@ public class TD_SBF_Node : MonoBehaviour
             Destroy(turret);
             turretBlueprint = null;
 
+            // TODO: Follow up eventually; VS say "meh" but it's needed and works
             if (TD_SBF_WaveSpawner.enemiesAlive > 0)
                 AstarPath.active.Scan();
 

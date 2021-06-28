@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/21/2019
-// Last:  04/26/2021
+// Last:  06/25/2021
 
 using UnityEngine;
 
@@ -17,10 +17,11 @@ public class ScriptManager : MonoBehaviour
     public DialogueManager dMan;
     public SaveGame save;
     public ScreenOrientation screenOri;
+    public TD_SBF_ControlManagement tdsbfContMan;
     public TD_SBF_MenuController tdsbfMenuCont;
     public TD_SBF_ModeSelector tdsbfModeSelector;
     public TD_SBF_MovePauseMenuSelector tdsbfmpmSelector;
-    public TD_SBF_ScreenOrientator_PauseMenu tdsbfScreenOriPause;
+    public TD_SBF_PauseMenu tdsbfPause;
     
     public void ActionOnClose(string action)
     {
@@ -105,16 +106,15 @@ public class ScriptManager : MonoBehaviour
         else if (tdsbfMenuCont &&
                  sceneName == "TD_SBF_MenuController")
             tdsbfMenuCont.OrientationCheck();
-        else if (tdsbfScreenOriPause &&
-                 sceneName == "TD_SBF_LX")
-            tdsbfScreenOriPause.SetTransform();
         else if (tdsbfModeSelector &&
-                 tdsbfmpmSelector &&
                  sceneName == "TD_SBF_ModeSelector")
+            tdsbfModeSelector.OrientationCheck();
+        else if (tdsbfContMan &&
+                 tdsbfPause &&
+                 sceneName == "TD_SBF_L1")
         {
-            tdsbfModeSelector.BackToArcade();
-            tdsbfmpmSelector.ResetMenuSelection();
-            Debug.Log("reset");
+            tdsbfContMan.ResetForOrientation();
+            tdsbfPause.ResetOrientation();
         }
     }
 

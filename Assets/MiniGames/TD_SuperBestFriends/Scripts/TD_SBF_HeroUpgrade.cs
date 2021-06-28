@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/24/2019
-// Last:  04/26/2021
+// Last:  06/24/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,11 +18,12 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
     public GameObject sec7;
     public GameObject sec8;
     public TD_SBF_HeroActions heroActions;
-    public TD_SBF_HeroBarManager hBarMan;
+    public TD_SBF_HeroBarManager hbMan;
     public TD_SBF_HeroStats heroStats;
     public TD_SBF_PlayerStatistics pStats;
-    public TD_SBF_ThoughtsPrayersUI tpUI;
-    
+    public TD_SBF_ThoughtsPrayersUI tpUI_H;
+    public TD_SBF_ThoughtsPrayersUI tpUI_V;
+
     public enum UpgradeSection : int
     {
         Section1 = 1,
@@ -74,7 +75,7 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
 
     void Update()
     {
-        if (hBarMan.bUpgrading)
+        if (hbMan.bUpgrading)
         {
             if (contSupp.ControllerRightJoystickVertical() != 0 ||
                 contSupp.ControllerRightJoystickHorizontal() != 0)
@@ -165,7 +166,7 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
             }
             
             if (contSupp.ControllerButtonPadRight("down"))
-                hBarMan.ToggleHeroUpgradeShells();
+                hbMan.ToggleHeroUpgradeShells();
         }
     }
 
@@ -195,8 +196,8 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
     {
         if (TD_SBF_PlayerStatistics.ThoughtsPrayers < costSec1)
         {
-            tpUI.FlashWarning();
-            hBarMan.ToggleHeroUpgradeShells();
+            FlashWarning();
+            hbMan.ToggleHeroUpgradeShells();
             return;
         }
 
@@ -234,8 +235,8 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
     {
         if (TD_SBF_PlayerStatistics.ThoughtsPrayers < costSec2)
         {
-            tpUI.FlashWarning();
-            hBarMan.ToggleHeroUpgradeShells();
+            FlashWarning();
+            hbMan.ToggleHeroUpgradeShells();
             return;
         }
 
@@ -271,8 +272,8 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
     {
         if (TD_SBF_PlayerStatistics.ThoughtsPrayers < costSec3)
         {
-            tpUI.FlashWarning();
-            hBarMan.ToggleHeroUpgradeShells();
+            FlashWarning();
+            hbMan.ToggleHeroUpgradeShells();
             return;
         }
 
@@ -300,7 +301,7 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
         lvlSec3++;
 
         heroActions.secondaryAttackWaitTime *= 0.8f;
-        hBarMan.secondaryAttackTotalTime *= 0.8f;
+        hbMan.secondaryAttackTotalTime *= 0.8f;
 
         sec3.transform.GetChild(2).GetComponent<Text>().text = costSec3.ToString();
     }
@@ -309,8 +310,8 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
     {
         if (TD_SBF_PlayerStatistics.ThoughtsPrayers < costSec4)
         {
-            tpUI.FlashWarning();
-            hBarMan.ToggleHeroUpgradeShells();
+            FlashWarning();
+            hbMan.ToggleHeroUpgradeShells();
             return;
         }
 
@@ -346,8 +347,8 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
     {
         if (TD_SBF_PlayerStatistics.ThoughtsPrayers < costSec5)
         {
-            tpUI.FlashWarning();
-            hBarMan.ToggleHeroUpgradeShells();
+            FlashWarning();
+            hbMan.ToggleHeroUpgradeShells();
             return;
         }
 
@@ -384,8 +385,8 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
     {
         if (TD_SBF_PlayerStatistics.ThoughtsPrayers < costSec6)
         {
-            tpUI.FlashWarning();
-            hBarMan.ToggleHeroUpgradeShells();
+            FlashWarning();
+            hbMan.ToggleHeroUpgradeShells();
             return;
         }
 
@@ -421,8 +422,8 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
     {
         if (TD_SBF_PlayerStatistics.ThoughtsPrayers < costSec7)
         {
-            tpUI.FlashWarning();
-            hBarMan.ToggleHeroUpgradeShells();
+            FlashWarning();
+            hbMan.ToggleHeroUpgradeShells();
             return;
         }
 
@@ -450,7 +451,7 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
         lvlSec7++;
 
         heroActions.basicAttackWaitTime *= 0.8f;
-        hBarMan.basicAttackTotalTime *= 0.8f;
+        hbMan.basicAttackTotalTime *= 0.8f;
 
         sec7.transform.GetChild(2).GetComponent<Text>().text = costSec7.ToString();
     }
@@ -459,8 +460,8 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
     {
         if (TD_SBF_PlayerStatistics.ThoughtsPrayers < costSec8)
         {
-            tpUI.FlashWarning();
-            hBarMan.ToggleHeroUpgradeShells();
+            FlashWarning();
+            hbMan.ToggleHeroUpgradeShells();
             return;
         }
 
@@ -469,5 +470,13 @@ public class TD_SBF_HeroUpgrade : MonoBehaviour
             heroStats.Revive(heroStats.startHealth);
             TD_SBF_PlayerStatistics.ThoughtsPrayers -= costSec8;
         }
+    }
+
+    public void FlashWarning()
+    {
+        if (Screen.width >= Screen.height)
+            tpUI_H.FlashWarning();
+        else
+            tpUI_V.FlashWarning();
     }
 }

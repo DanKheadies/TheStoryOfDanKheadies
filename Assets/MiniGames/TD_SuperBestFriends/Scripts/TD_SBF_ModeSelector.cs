@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/27/2019
-// Last:  04/26/2021
+// Last:  06/27/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,16 +9,22 @@ using UnityEngine.UI;
 public class TD_SBF_ModeSelector : MonoBehaviour
 {
     public Button backToModes;
+    public Button optionsButton;
     public Button[] characterButtons;
     public Button[] modeButtons;
+    public Component[] screenOriPauseObjects;
     public ControllerSupport contSupp;
     public GameObject characterCanvas;
+    public GameObject charactersObj;
     public GameObject modeCanvas;
+    public GameObject modesObj;
     public GameObject optionsCanvas;
     public Scrollbar charScrollBar;
     public TD_SBF_MoveModeMenuSelector mmmSelector;
     public TD_SBF_MovePauseMenuSelector mpmSelector;
     public TD_SBF_SceneFader fader;
+    public Text modeSelectText;
+    public Text charSelectText;
 
     public bool bControllerDown;
     //public bool bControllerLeft;
@@ -58,6 +64,8 @@ public class TD_SBF_ModeSelector : MonoBehaviour
         characterButtons[5].transform.GetChild(0).GetComponent<Image>().color = temp;
         characterButtons[6].transform.GetChild(0).GetComponent<Image>().color = temp;
         characterButtons[7].transform.GetChild(0).GetComponent<Image>().color = temp;
+
+        OrientationCheck();
 
 
         //int levelReached = PlayerPrefs.GetInt("levelReached", 1);
@@ -217,6 +225,110 @@ public class TD_SBF_ModeSelector : MonoBehaviour
                             0);
             }
         }
+    }
+
+    public void ResetOrientation()
+    {
+        screenOriPauseObjects = optionsCanvas.transform.GetChild(0).transform.GetComponentsInChildren<TD_SBF_ScreenOrientator_PauseMenu>(true);
+
+        foreach (TD_SBF_ScreenOrientator_PauseMenu obj in screenOriPauseObjects)
+            obj.SetTransform();
+    }
+
+    public void OrientationCheck()
+    {
+        if (Screen.width >= Screen.height)
+        {
+            optionsButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-50f, -50f);
+            optionsButton.GetComponent<RectTransform>().sizeDelta = new Vector2(50f, 50f);
+            optionsButton.GetComponentInChildren<Text>().fontSize = 42;
+
+            modeSelectText.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -50f);
+            modeSelectText.GetComponent<RectTransform>().localScale = Vector3.one;
+
+            modesObj.GetComponent<RectTransform>().sizeDelta = new Vector2(600f, 200f);
+            modesObj.transform.GetChild(0).GetComponentInChildren<Text>().fontSize = 42;
+            modesObj.transform.GetChild(1).GetComponentInChildren<Text>().fontSize = 42;
+            modesObj.transform.GetChild(2).GetComponentInChildren<Text>().fontSize = 42;
+
+            charSelectText.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -50f);
+            charSelectText.GetComponent<RectTransform>().sizeDelta = new Vector2(600f, 50f);
+            charSelectText.GetComponent<RectTransform>().localScale = Vector3.one;
+            charSelectText.GetComponent<Text>().lineSpacing = 1;
+
+            backToModes.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 25f);
+            backToModes.GetComponent<RectTransform>().sizeDelta = new Vector2(250f, 50f);
+            backToModes.transform.GetChild(0).GetComponentInChildren<Text>().fontSize = 24;
+
+            charactersObj.GetComponent<RectTransform>().sizeDelta = new Vector2(600, 185);
+            charactersObj.transform.GetChild(1).GetComponent<RectTransform>().anchoredPosition = new Vector2(317, 0);
+            charactersObj.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(20, 160);
+            charactersObj.transform.GetChild(0).GetComponentInChildren<GridLayoutGroup>().cellSize = new Vector2(120, 120);
+            charactersObj.transform.GetChild(0).GetComponentInChildren<GridLayoutGroup>().spacing = new Vector2(20, 15);
+
+            foreach (Button charButton in characterButtons)
+            {
+                charButton.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(64, 100);
+
+                if (charButton.name == "Character2")
+                    charButton.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(64, 104);
+                else if (charButton.name == "Character4")
+                    charButton.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(72, 108);
+                else if (charButton.name == "Character5")
+                    charButton.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(60, 96);
+                else if (charButton.name == "Character7")
+                    charButton.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(96, 96);
+                else if (charButton.name == "Character7")
+                    charButton.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(72, 100);
+            }
+        }
+        else
+        {
+            optionsButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-100f, -100f);
+            optionsButton.GetComponent<RectTransform>().sizeDelta = new Vector2(100f, 100f);
+            optionsButton.GetComponentInChildren<Text>().fontSize = 84;
+
+            modeSelectText.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -225f);
+            modeSelectText.GetComponent<RectTransform>().localScale = new Vector3(1.75f, 1.75f, 1);
+
+            modesObj.GetComponent<RectTransform>().sizeDelta = new Vector2(900f, 450f);
+            modesObj.transform.GetChild(0).GetComponentInChildren<Text>().fontSize = 64;
+            modesObj.transform.GetChild(1).GetComponentInChildren<Text>().fontSize = 64;
+            modesObj.transform.GetChild(2).GetComponentInChildren<Text>().fontSize = 64;
+
+            charSelectText.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -225f);
+            charSelectText.GetComponent<RectTransform>().sizeDelta = new Vector2(400f, 150f);
+            charSelectText.GetComponent<RectTransform>().localScale = new Vector3(1.75f, 1.75f, 1);
+            charSelectText.GetComponent<Text>().lineSpacing = 2;
+
+            backToModes.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 150f);
+            backToModes.GetComponent<RectTransform>().sizeDelta = new Vector2(400f, 100f);
+            backToModes.transform.GetChild(0).GetComponentInChildren<Text>().fontSize = 64;
+
+            charactersObj.GetComponent<RectTransform>().sizeDelta = new Vector2(600, 800);
+            charactersObj.transform.GetChild(1).GetComponent<RectTransform>().anchoredPosition = new Vector2(330, 0);
+            charactersObj.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(40, 650);
+            charactersObj.transform.GetChild(0).GetComponentInChildren<GridLayoutGroup>().cellSize = new Vector2(250, 250);
+            charactersObj.transform.GetChild(0).GetComponentInChildren<GridLayoutGroup>().spacing = new Vector2(30, 30);
+
+            foreach (Button charButton in characterButtons)
+            {
+                charButton.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(128, 200);
+
+                if (charButton.name == "Character2")
+                    charButton.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(128, 208);
+                else if (charButton.name == "Character4")
+                    charButton.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(144, 216);
+                else if (charButton.name == "Character5")
+                    charButton.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(120, 192);
+                else if (charButton.name == "Character7")
+                    charButton.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(192, 192);
+                else if (charButton.name == "Character7")
+                    charButton.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(144, 200);
+            }
+        }
+
+        ResetOrientation();
     }
 
     public void ToggleMode()

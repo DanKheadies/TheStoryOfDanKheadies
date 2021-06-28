@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 01/14/2020
-// Last:  04/27/2021
+// Last:  06/02/2021
 
 using System.Collections;
 using UnityEngine;
@@ -39,24 +39,24 @@ public class AreaAnimator : MonoBehaviour
     public GameObject[] CannaHouseGrass;
     public GameObject[] CannaHouseFlowers;
     public GameObject[] CannaHouseTrees;
-    public GameObject[] FarmNWGrass;
-    public GameObject[] FarmNWFlowers;
-    public GameObject[] FarmNCGrass;
-    public GameObject[] FarmNCFlowers;
-    public GameObject[] FarmNEGrass;
-    public GameObject[] FarmNEFlowers;
-    public GameObject[] FarmWCGrass;
-    public GameObject[] FarmWCFlowers;
-    public GameObject[] FarmCCGrass;
-    public GameObject[] FarmCCFlowers;
-    public GameObject[] FarmECGrass;
-    public GameObject[] FarmECFlowers;
-    public GameObject[] FarmSWGrass;
-    public GameObject[] FarmSWFlowers;
-    public GameObject[] FarmSCGrass;
-    public GameObject[] FarmSCFlowers;
-    public GameObject[] FarmSEGrass;
-    public GameObject[] FarmSEFlowers;
+    //public GameObject[] FarmNWGrass;
+    //public GameObject[] FarmNWFlowers;
+    //public GameObject[] FarmNCGrass;
+    //public GameObject[] FarmNCFlowers;
+    //public GameObject[] FarmNEGrass;
+    //public GameObject[] FarmNEFlowers;
+    //public GameObject[] FarmWCGrass;
+    //public GameObject[] FarmWCFlowers;
+    //public GameObject[] FarmCCGrass;
+    //public GameObject[] FarmCCFlowers;
+    //public GameObject[] FarmECGrass;
+    //public GameObject[] FarmECFlowers;
+    //public GameObject[] FarmSWGrass;
+    //public GameObject[] FarmSWFlowers;
+    //public GameObject[] FarmSCGrass;
+    //public GameObject[] FarmSCFlowers;
+    //public GameObject[] FarmSEGrass;
+    //public GameObject[] FarmSEFlowers;
     public GameObject[] HomeGrass;
     public GameObject[] HomeFlowers;
     public GameObject[] HomeTrees;
@@ -714,408 +714,408 @@ public class AreaAnimator : MonoBehaviour
 
 
     //FarmNW 
-    public void CycleFarmNWFlowers()
-    {
-        FarmNWFlowers[0].SetActive(false);
-        FarmNWFlowers[1].SetActive(true);
-
-        StartCoroutine(NormalizeFarmNWFlowers());
-    }
-
-    public IEnumerator NormalizeFarmNWFlowers()
-    {
-        yield return new WaitForSeconds(1f);
-
-        FarmNWFlowers[0].SetActive(true);
-        FarmNWFlowers[1].SetActive(false);
-    }
-
-    public void CycleFarmNWGrass()
-    {
-        if (FarmNWGrass[0].activeSelf)
-        {
-            if (!bAlterateGrass)
-                FarmNWGrass[1].SetActive(true);
-            else
-                FarmNWGrass[2].SetActive(true);
-
-            FarmNWGrass[0].SetActive(false);
-        }
-        else if (FarmNWGrass[1].activeSelf)
-        {
-            FarmNWGrass[0].SetActive(true);
-            FarmNWGrass[1].SetActive(false);
-
-            bAlterateGrass = true;
-        }
-        else if (FarmNWGrass[2].activeSelf)
-        {
-            FarmNWGrass[0].SetActive(true);
-            FarmNWGrass[2].SetActive(false);
-
-            bAlterateGrass = false;
-        }
-    }
-
-
-    //FarmNC 
-    public void CycleFarmNCFlowers()
-    {
-        FarmNCFlowers[0].SetActive(false);
-        FarmNCFlowers[1].SetActive(true);
-
-        StartCoroutine(NormalizeFarmNCFlowers());
-    }
-
-    public IEnumerator NormalizeFarmNCFlowers()
-    {
-        yield return new WaitForSeconds(1f);
-
-        FarmNCFlowers[0].SetActive(true);
-        FarmNCFlowers[1].SetActive(false);
-    }
-
-    public void CycleFarmNCGrass()
-    {
-        if (FarmNCGrass[0].activeSelf)
-        {
-            if (!bAlterateGrass)
-                FarmNCGrass[1].SetActive(true);
-            else
-                FarmNCGrass[2].SetActive(true);
-
-            FarmNCGrass[0].SetActive(false);
-        }
-        else if (FarmNCGrass[1].activeSelf)
-        {
-            FarmNCGrass[0].SetActive(true);
-            FarmNCGrass[1].SetActive(false);
-
-            bAlterateGrass = true;
-        }
-        else if (FarmNCGrass[2].activeSelf)
-        {
-            FarmNCGrass[0].SetActive(true);
-            FarmNCGrass[2].SetActive(false);
-
-            bAlterateGrass = false;
-        }
-    }
-
-
-    //FarmNE
-    public void CycleFarmNEFlowers()
-    {
-        FarmNEFlowers[0].SetActive(false);
-        FarmNEFlowers[1].SetActive(true);
-
-        StartCoroutine(NormalizeFarmNEFlowers());
-    }
-
-    public IEnumerator NormalizeFarmNEFlowers()
-    {
-        yield return new WaitForSeconds(1f);
-
-        FarmNEFlowers[0].SetActive(true);
-        FarmNEFlowers[1].SetActive(false);
-    }
-
-    public void CycleFarmNEGrass()
-    {
-        if (FarmNEGrass[0].activeSelf)
-        {
-            if (!bAlterateGrass)
-                FarmNEGrass[1].SetActive(true);
-            else
-                FarmNEGrass[2].SetActive(true);
-
-            FarmNEGrass[0].SetActive(false);
-        }
-        else if (FarmNEGrass[1].activeSelf)
-        {
-            FarmNEGrass[0].SetActive(true);
-            FarmNEGrass[1].SetActive(false);
-
-            bAlterateGrass = true;
-        }
-        else if (FarmNEGrass[2].activeSelf)
-        {
-            FarmNEGrass[0].SetActive(true);
-            FarmNEGrass[2].SetActive(false);
-
-            bAlterateGrass = false;
-        }
-    }
-
-
-    //FarmWC 
-    public void CycleFarmWCFlowers()
-    {
-        FarmWCFlowers[0].SetActive(false);
-        FarmWCFlowers[1].SetActive(true);
-
-        StartCoroutine(NormalizeFarmWCFlowers());
-    }
-
-    public IEnumerator NormalizeFarmWCFlowers()
-    {
-        yield return new WaitForSeconds(1f);
-
-        FarmWCFlowers[0].SetActive(true);
-        FarmWCFlowers[1].SetActive(false);
-    }
-
-    public void CycleFarmWCGrass()
-    {
-        if (FarmWCGrass[0].activeSelf)
-        {
-            if (!bAlterateGrass)
-                FarmWCGrass[1].SetActive(true);
-            else
-                FarmWCGrass[2].SetActive(true);
-
-            FarmWCGrass[0].SetActive(false);
-        }
-        else if (FarmWCGrass[1].activeSelf)
-        {
-            FarmWCGrass[0].SetActive(true);
-            FarmWCGrass[1].SetActive(false);
-
-            bAlterateGrass = true;
-        }
-        else if (FarmWCGrass[2].activeSelf)
-        {
-            FarmWCGrass[0].SetActive(true);
-            FarmWCGrass[2].SetActive(false);
-
-            bAlterateGrass = false;
-        }
-    }
-
-
-    //FarmCC 
-    public void CycleFarmCCFlowers()
-    {
-        FarmCCFlowers[0].SetActive(false);
-        FarmCCFlowers[1].SetActive(true);
-
-        StartCoroutine(NormalizeFarmCCFlowers());
-    }
-
-    public IEnumerator NormalizeFarmCCFlowers()
-    {
-        yield return new WaitForSeconds(1f);
-
-        FarmCCFlowers[0].SetActive(true);
-        FarmCCFlowers[1].SetActive(false);
-    }
-
-    public void CycleFarmCCGrass()
-    {
-        if (FarmCCGrass[0].activeSelf)
-        {
-            if (!bAlterateGrass)
-                FarmCCGrass[1].SetActive(true);
-            else
-                FarmCCGrass[2].SetActive(true);
-
-            FarmCCGrass[0].SetActive(false);
-        }
-        else if (FarmCCGrass[1].activeSelf)
-        {
-            FarmCCGrass[0].SetActive(true);
-            FarmCCGrass[1].SetActive(false);
-
-            bAlterateGrass = true;
-        }
-        else if (FarmCCGrass[2].activeSelf)
-        {
-            FarmCCGrass[0].SetActive(true);
-            FarmCCGrass[2].SetActive(false);
-
-            bAlterateGrass = false;
-        }
-    }
-
-
-    //FarmEC 
-    public void CycleFarmECFlowers()
-    {
-        FarmECFlowers[0].SetActive(false);
-        FarmECFlowers[1].SetActive(true);
-
-        StartCoroutine(NormalizeFarmECFlowers());
-    }
-
-    public IEnumerator NormalizeFarmECFlowers()
-    {
-        yield return new WaitForSeconds(1f);
-
-        FarmECFlowers[0].SetActive(true);
-        FarmECFlowers[1].SetActive(false);
-    }
-
-    public void CycleFarmECGrass()
-    {
-        if (FarmECGrass[0].activeSelf)
-        {
-            if (!bAlterateGrass)
-                FarmECGrass[1].SetActive(true);
-            else
-                FarmECGrass[2].SetActive(true);
-
-            FarmECGrass[0].SetActive(false);
-        }
-        else if (FarmECGrass[1].activeSelf)
-        {
-            FarmECGrass[0].SetActive(true);
-            FarmECGrass[1].SetActive(false);
-
-            bAlterateGrass = true;
-        }
-        else if (FarmECGrass[2].activeSelf)
-        {
-            FarmECGrass[0].SetActive(true);
-            FarmECGrass[2].SetActive(false);
-
-            bAlterateGrass = false;
-        }
-    }
-
-
-    //FarmSW 
-    public void CycleFarmSWFlowers()
-    {
-        FarmSWFlowers[0].SetActive(false);
-        FarmSWFlowers[1].SetActive(true);
-
-        StartCoroutine(NormalizeFarmSWFlowers());
-    }
-
-    public IEnumerator NormalizeFarmSWFlowers()
-    {
-        yield return new WaitForSeconds(1f);
-
-        FarmSWFlowers[0].SetActive(true);
-        FarmSWFlowers[1].SetActive(false);
-    }
-
-    public void CycleFarmSWGrass()
-    {
-        if (FarmSWGrass[0].activeSelf)
-        {
-            if (!bAlterateGrass)
-                FarmSWGrass[1].SetActive(true);
-            else
-                FarmSWGrass[2].SetActive(true);
-
-            FarmSWGrass[0].SetActive(false);
-        }
-        else if (FarmSWGrass[1].activeSelf)
-        {
-            FarmSWGrass[0].SetActive(true);
-            FarmSWGrass[1].SetActive(false);
-
-            bAlterateGrass = true;
-        }
-        else if (FarmSWGrass[2].activeSelf)
-        {
-            FarmSWGrass[0].SetActive(true);
-            FarmSWGrass[2].SetActive(false);
-
-            bAlterateGrass = false;
-        }
-    }
-
-
-    //FarmSC 
-    public void CycleFarmSCFlowers()
-    {
-        FarmSCFlowers[0].SetActive(false);
-        FarmSCFlowers[1].SetActive(true);
-
-        StartCoroutine(NormalizeFarmSCFlowers());
-    }
-
-    public IEnumerator NormalizeFarmSCFlowers()
-    {
-        yield return new WaitForSeconds(1f);
-
-        FarmSCFlowers[0].SetActive(true);
-        FarmSCFlowers[1].SetActive(false);
-    }
-
-    public void CycleFarmSCGrass()
-    {
-        if (FarmSCGrass[0].activeSelf)
-        {
-            if (!bAlterateGrass)
-                FarmSCGrass[1].SetActive(true);
-            else
-                FarmSCGrass[2].SetActive(true);
-
-            FarmSCGrass[0].SetActive(false);
-        }
-        else if (FarmSCGrass[1].activeSelf)
-        {
-            FarmSCGrass[0].SetActive(true);
-            FarmSCGrass[1].SetActive(false);
-
-            bAlterateGrass = true;
-        }
-        else if (FarmSCGrass[2].activeSelf)
-        {
-            FarmSCGrass[0].SetActive(true);
-            FarmSCGrass[2].SetActive(false);
-
-            bAlterateGrass = false;
-        }
-    }
-
-
-    //FarmSE 
-    public void CycleFarmSEFlowers()
-    {
-        FarmSEFlowers[0].SetActive(false);
-        FarmSEFlowers[1].SetActive(true);
-
-        StartCoroutine(NormalizeFarmSEFlowers());
-    }
-
-    public IEnumerator NormalizeFarmSEFlowers()
-    {
-        yield return new WaitForSeconds(1f);
-
-        FarmSEFlowers[0].SetActive(true);
-        FarmSEFlowers[1].SetActive(false);
-    }
-
-    public void CycleFarmSEGrass()
-    {
-        if (FarmSEGrass[0].activeSelf)
-        {
-            if (!bAlterateGrass)
-                FarmSEGrass[1].SetActive(true);
-            else
-                FarmSEGrass[2].SetActive(true);
-
-            FarmSEGrass[0].SetActive(false);
-        }
-        else if (FarmSEGrass[1].activeSelf)
-        {
-            FarmSEGrass[0].SetActive(true);
-            FarmSEGrass[1].SetActive(false);
-
-            bAlterateGrass = true;
-        }
-        else if (FarmSEGrass[2].activeSelf)
-        {
-            FarmSEGrass[0].SetActive(true);
-            FarmSEGrass[2].SetActive(false);
-
-            bAlterateGrass = false;
-        }
-    }
+    //public void CycleFarmNWFlowers()
+    //{
+    //    FarmNWFlowers[0].SetActive(false);
+    //    FarmNWFlowers[1].SetActive(true);
+
+    //    StartCoroutine(NormalizeFarmNWFlowers());
+    //}
+
+    //public IEnumerator NormalizeFarmNWFlowers()
+    //{
+    //    yield return new WaitForSeconds(1f);
+
+    //    FarmNWFlowers[0].SetActive(true);
+    //    FarmNWFlowers[1].SetActive(false);
+    //}
+
+    //public void CycleFarmNWGrass()
+    //{
+    //    if (FarmNWGrass[0].activeSelf)
+    //    {
+    //        if (!bAlterateGrass)
+    //            FarmNWGrass[1].SetActive(true);
+    //        else
+    //            FarmNWGrass[2].SetActive(true);
+
+    //        FarmNWGrass[0].SetActive(false);
+    //    }
+    //    else if (FarmNWGrass[1].activeSelf)
+    //    {
+    //        FarmNWGrass[0].SetActive(true);
+    //        FarmNWGrass[1].SetActive(false);
+
+    //        bAlterateGrass = true;
+    //    }
+    //    else if (FarmNWGrass[2].activeSelf)
+    //    {
+    //        FarmNWGrass[0].SetActive(true);
+    //        FarmNWGrass[2].SetActive(false);
+
+    //        bAlterateGrass = false;
+    //    }
+    //}
+
+
+    ////FarmNC 
+    //public void CycleFarmNCFlowers()
+    //{
+    //    FarmNCFlowers[0].SetActive(false);
+    //    FarmNCFlowers[1].SetActive(true);
+
+    //    StartCoroutine(NormalizeFarmNCFlowers());
+    //}
+
+    //public IEnumerator NormalizeFarmNCFlowers()
+    //{
+    //    yield return new WaitForSeconds(1f);
+
+    //    FarmNCFlowers[0].SetActive(true);
+    //    FarmNCFlowers[1].SetActive(false);
+    //}
+
+    //public void CycleFarmNCGrass()
+    //{
+    //    if (FarmNCGrass[0].activeSelf)
+    //    {
+    //        if (!bAlterateGrass)
+    //            FarmNCGrass[1].SetActive(true);
+    //        else
+    //            FarmNCGrass[2].SetActive(true);
+
+    //        FarmNCGrass[0].SetActive(false);
+    //    }
+    //    else if (FarmNCGrass[1].activeSelf)
+    //    {
+    //        FarmNCGrass[0].SetActive(true);
+    //        FarmNCGrass[1].SetActive(false);
+
+    //        bAlterateGrass = true;
+    //    }
+    //    else if (FarmNCGrass[2].activeSelf)
+    //    {
+    //        FarmNCGrass[0].SetActive(true);
+    //        FarmNCGrass[2].SetActive(false);
+
+    //        bAlterateGrass = false;
+    //    }
+    //}
+
+
+    ////FarmNE
+    //public void CycleFarmNEFlowers()
+    //{
+    //    FarmNEFlowers[0].SetActive(false);
+    //    FarmNEFlowers[1].SetActive(true);
+
+    //    StartCoroutine(NormalizeFarmNEFlowers());
+    //}
+
+    //public IEnumerator NormalizeFarmNEFlowers()
+    //{
+    //    yield return new WaitForSeconds(1f);
+
+    //    FarmNEFlowers[0].SetActive(true);
+    //    FarmNEFlowers[1].SetActive(false);
+    //}
+
+    //public void CycleFarmNEGrass()
+    //{
+    //    if (FarmNEGrass[0].activeSelf)
+    //    {
+    //        if (!bAlterateGrass)
+    //            FarmNEGrass[1].SetActive(true);
+    //        else
+    //            FarmNEGrass[2].SetActive(true);
+
+    //        FarmNEGrass[0].SetActive(false);
+    //    }
+    //    else if (FarmNEGrass[1].activeSelf)
+    //    {
+    //        FarmNEGrass[0].SetActive(true);
+    //        FarmNEGrass[1].SetActive(false);
+
+    //        bAlterateGrass = true;
+    //    }
+    //    else if (FarmNEGrass[2].activeSelf)
+    //    {
+    //        FarmNEGrass[0].SetActive(true);
+    //        FarmNEGrass[2].SetActive(false);
+
+    //        bAlterateGrass = false;
+    //    }
+    //}
+
+
+    ////FarmWC 
+    //public void CycleFarmWCFlowers()
+    //{
+    //    FarmWCFlowers[0].SetActive(false);
+    //    FarmWCFlowers[1].SetActive(true);
+
+    //    StartCoroutine(NormalizeFarmWCFlowers());
+    //}
+
+    //public IEnumerator NormalizeFarmWCFlowers()
+    //{
+    //    yield return new WaitForSeconds(1f);
+
+    //    FarmWCFlowers[0].SetActive(true);
+    //    FarmWCFlowers[1].SetActive(false);
+    //}
+
+    //public void CycleFarmWCGrass()
+    //{
+    //    if (FarmWCGrass[0].activeSelf)
+    //    {
+    //        if (!bAlterateGrass)
+    //            FarmWCGrass[1].SetActive(true);
+    //        else
+    //            FarmWCGrass[2].SetActive(true);
+
+    //        FarmWCGrass[0].SetActive(false);
+    //    }
+    //    else if (FarmWCGrass[1].activeSelf)
+    //    {
+    //        FarmWCGrass[0].SetActive(true);
+    //        FarmWCGrass[1].SetActive(false);
+
+    //        bAlterateGrass = true;
+    //    }
+    //    else if (FarmWCGrass[2].activeSelf)
+    //    {
+    //        FarmWCGrass[0].SetActive(true);
+    //        FarmWCGrass[2].SetActive(false);
+
+    //        bAlterateGrass = false;
+    //    }
+    //}
+
+
+    ////FarmCC 
+    //public void CycleFarmCCFlowers()
+    //{
+    //    FarmCCFlowers[0].SetActive(false);
+    //    FarmCCFlowers[1].SetActive(true);
+
+    //    StartCoroutine(NormalizeFarmCCFlowers());
+    //}
+
+    //public IEnumerator NormalizeFarmCCFlowers()
+    //{
+    //    yield return new WaitForSeconds(1f);
+
+    //    FarmCCFlowers[0].SetActive(true);
+    //    FarmCCFlowers[1].SetActive(false);
+    //}
+
+    //public void CycleFarmCCGrass()
+    //{
+    //    if (FarmCCGrass[0].activeSelf)
+    //    {
+    //        if (!bAlterateGrass)
+    //            FarmCCGrass[1].SetActive(true);
+    //        else
+    //            FarmCCGrass[2].SetActive(true);
+
+    //        FarmCCGrass[0].SetActive(false);
+    //    }
+    //    else if (FarmCCGrass[1].activeSelf)
+    //    {
+    //        FarmCCGrass[0].SetActive(true);
+    //        FarmCCGrass[1].SetActive(false);
+
+    //        bAlterateGrass = true;
+    //    }
+    //    else if (FarmCCGrass[2].activeSelf)
+    //    {
+    //        FarmCCGrass[0].SetActive(true);
+    //        FarmCCGrass[2].SetActive(false);
+
+    //        bAlterateGrass = false;
+    //    }
+    //}
+
+
+    ////FarmEC 
+    //public void CycleFarmECFlowers()
+    //{
+    //    FarmECFlowers[0].SetActive(false);
+    //    FarmECFlowers[1].SetActive(true);
+
+    //    StartCoroutine(NormalizeFarmECFlowers());
+    //}
+
+    //public IEnumerator NormalizeFarmECFlowers()
+    //{
+    //    yield return new WaitForSeconds(1f);
+
+    //    FarmECFlowers[0].SetActive(true);
+    //    FarmECFlowers[1].SetActive(false);
+    //}
+
+    //public void CycleFarmECGrass()
+    //{
+    //    if (FarmECGrass[0].activeSelf)
+    //    {
+    //        if (!bAlterateGrass)
+    //            FarmECGrass[1].SetActive(true);
+    //        else
+    //            FarmECGrass[2].SetActive(true);
+
+    //        FarmECGrass[0].SetActive(false);
+    //    }
+    //    else if (FarmECGrass[1].activeSelf)
+    //    {
+    //        FarmECGrass[0].SetActive(true);
+    //        FarmECGrass[1].SetActive(false);
+
+    //        bAlterateGrass = true;
+    //    }
+    //    else if (FarmECGrass[2].activeSelf)
+    //    {
+    //        FarmECGrass[0].SetActive(true);
+    //        FarmECGrass[2].SetActive(false);
+
+    //        bAlterateGrass = false;
+    //    }
+    //}
+
+
+    ////FarmSW 
+    //public void CycleFarmSWFlowers()
+    //{
+    //    FarmSWFlowers[0].SetActive(false);
+    //    FarmSWFlowers[1].SetActive(true);
+
+    //    StartCoroutine(NormalizeFarmSWFlowers());
+    //}
+
+    //public IEnumerator NormalizeFarmSWFlowers()
+    //{
+    //    yield return new WaitForSeconds(1f);
+
+    //    FarmSWFlowers[0].SetActive(true);
+    //    FarmSWFlowers[1].SetActive(false);
+    //}
+
+    //public void CycleFarmSWGrass()
+    //{
+    //    if (FarmSWGrass[0].activeSelf)
+    //    {
+    //        if (!bAlterateGrass)
+    //            FarmSWGrass[1].SetActive(true);
+    //        else
+    //            FarmSWGrass[2].SetActive(true);
+
+    //        FarmSWGrass[0].SetActive(false);
+    //    }
+    //    else if (FarmSWGrass[1].activeSelf)
+    //    {
+    //        FarmSWGrass[0].SetActive(true);
+    //        FarmSWGrass[1].SetActive(false);
+
+    //        bAlterateGrass = true;
+    //    }
+    //    else if (FarmSWGrass[2].activeSelf)
+    //    {
+    //        FarmSWGrass[0].SetActive(true);
+    //        FarmSWGrass[2].SetActive(false);
+
+    //        bAlterateGrass = false;
+    //    }
+    //}
+
+
+    ////FarmSC 
+    //public void CycleFarmSCFlowers()
+    //{
+    //    FarmSCFlowers[0].SetActive(false);
+    //    FarmSCFlowers[1].SetActive(true);
+
+    //    StartCoroutine(NormalizeFarmSCFlowers());
+    //}
+
+    //public IEnumerator NormalizeFarmSCFlowers()
+    //{
+    //    yield return new WaitForSeconds(1f);
+
+    //    FarmSCFlowers[0].SetActive(true);
+    //    FarmSCFlowers[1].SetActive(false);
+    //}
+
+    //public void CycleFarmSCGrass()
+    //{
+    //    if (FarmSCGrass[0].activeSelf)
+    //    {
+    //        if (!bAlterateGrass)
+    //            FarmSCGrass[1].SetActive(true);
+    //        else
+    //            FarmSCGrass[2].SetActive(true);
+
+    //        FarmSCGrass[0].SetActive(false);
+    //    }
+    //    else if (FarmSCGrass[1].activeSelf)
+    //    {
+    //        FarmSCGrass[0].SetActive(true);
+    //        FarmSCGrass[1].SetActive(false);
+
+    //        bAlterateGrass = true;
+    //    }
+    //    else if (FarmSCGrass[2].activeSelf)
+    //    {
+    //        FarmSCGrass[0].SetActive(true);
+    //        FarmSCGrass[2].SetActive(false);
+
+    //        bAlterateGrass = false;
+    //    }
+    //}
+
+
+    ////FarmSE 
+    //public void CycleFarmSEFlowers()
+    //{
+    //    FarmSEFlowers[0].SetActive(false);
+    //    FarmSEFlowers[1].SetActive(true);
+
+    //    StartCoroutine(NormalizeFarmSEFlowers());
+    //}
+
+    //public IEnumerator NormalizeFarmSEFlowers()
+    //{
+    //    yield return new WaitForSeconds(1f);
+
+    //    FarmSEFlowers[0].SetActive(true);
+    //    FarmSEFlowers[1].SetActive(false);
+    //}
+
+    //public void CycleFarmSEGrass()
+    //{
+    //    if (FarmSEGrass[0].activeSelf)
+    //    {
+    //        if (!bAlterateGrass)
+    //            FarmSEGrass[1].SetActive(true);
+    //        else
+    //            FarmSEGrass[2].SetActive(true);
+
+    //        FarmSEGrass[0].SetActive(false);
+    //    }
+    //    else if (FarmSEGrass[1].activeSelf)
+    //    {
+    //        FarmSEGrass[0].SetActive(true);
+    //        FarmSEGrass[1].SetActive(false);
+
+    //        bAlterateGrass = true;
+    //    }
+    //    else if (FarmSEGrass[2].activeSelf)
+    //    {
+    //        FarmSEGrass[0].SetActive(true);
+    //        FarmSEGrass[2].SetActive(false);
+
+    //        bAlterateGrass = false;
+    //    }
+    //}
 
 
     //Home 
@@ -1883,17 +1883,17 @@ public class AreaAnimator : MonoBehaviour
                 ToggleCampusTrees();
         }
 
-        if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmNW)
-        {
-            if (CampusTrees[0].GetComponent<Animator>().enabled)
-                ToggleCampusTrees();
-        }
+        //if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmNW)
+        //{
+        //    if (CampusTrees[0].GetComponent<Animator>().enabled)
+        //        ToggleCampusTrees();
+        //}
 
-        if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmSW)
-        {
-            if (HousesSTrees[0].GetComponent<Animator>().enabled)
-                ToggleHousesSTrees();
-        }
+        //if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmSW)
+        //{
+        //    if (HousesSTrees[0].GetComponent<Animator>().enabled)
+        //        ToggleHousesSTrees();
+        //}
 
         if (camFollow.currentCoords == CameraFollow.AnandaCoords.Home)
         {
@@ -2079,51 +2079,51 @@ public class AreaAnimator : MonoBehaviour
             InvokeRepeating("CycleCannaHouseFlowers", 3f, 3f);
             InvokeRepeating("CycleCannaHouseGrass", 1f, 1f);
         }
-        else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmNW)
-        {
-            InvokeRepeating("CycleFarmNWFlowers", 3f, 3f);
-            InvokeRepeating("CycleFarmNWGrass", 1f, 1f);
-        }
-        else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmNC)
-        {
-            InvokeRepeating("CycleFarmNCFlowers", 3f, 3f);
-            InvokeRepeating("CycleFarmNCGrass", 1f, 1f);
-        }
-        else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmNE)
-        {
-            InvokeRepeating("CycleFarmNEFlowers", 3f, 3f);
-            InvokeRepeating("CycleFarmNEGrass", 1f, 1f);
-        }
-        else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmWC)
-        {
-            InvokeRepeating("CycleFarmWCFlowers", 3f, 3f);
-            InvokeRepeating("CycleFarmWCGrass", 1f, 1f);
-        }
-        else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmCC)
-        {
-            InvokeRepeating("CycleFarmCCFlowers", 3f, 3f);
-            InvokeRepeating("CycleFarmCCGrass", 1f, 1f);
-        }
-        else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmEC)
-        {
-            InvokeRepeating("CycleFarmECFlowers", 3f, 3f);
-            InvokeRepeating("CycleFarmECGrass", 1f, 1f);
-        }
-        else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmSW)
-        {
-            InvokeRepeating("CycleFarmSWFlowers", 3f, 3f);
-            InvokeRepeating("CycleFarmSWGrass", 1f, 1f);
-        }
-        else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmSC)
-        {
-            InvokeRepeating("CycleFarmSCFlowers", 3f, 3f);
-            InvokeRepeating("CycleFarmSCGrass", 1f, 1f);
-        }
-        else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmSE)
-        {
-            InvokeRepeating("CycleFarmSEFlowers", 3f, 3f);
-            InvokeRepeating("CycleFarmSEGrass", 1f, 1f);
-        }
+        //else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmNW)
+        //{
+        //    InvokeRepeating("CycleFarmNWFlowers", 3f, 3f);
+        //    InvokeRepeating("CycleFarmNWGrass", 1f, 1f);
+        //}
+        //else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmNC)
+        //{
+        //    InvokeRepeating("CycleFarmNCFlowers", 3f, 3f);
+        //    InvokeRepeating("CycleFarmNCGrass", 1f, 1f);
+        //}
+        //else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmNE)
+        //{
+        //    InvokeRepeating("CycleFarmNEFlowers", 3f, 3f);
+        //    InvokeRepeating("CycleFarmNEGrass", 1f, 1f);
+        //}
+        //else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmWC)
+        //{
+        //    InvokeRepeating("CycleFarmWCFlowers", 3f, 3f);
+        //    InvokeRepeating("CycleFarmWCGrass", 1f, 1f);
+        //}
+        //else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmCC)
+        //{
+        //    InvokeRepeating("CycleFarmCCFlowers", 3f, 3f);
+        //    InvokeRepeating("CycleFarmCCGrass", 1f, 1f);
+        //}
+        //else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmEC)
+        //{
+        //    InvokeRepeating("CycleFarmECFlowers", 3f, 3f);
+        //    InvokeRepeating("CycleFarmECGrass", 1f, 1f);
+        //}
+        //else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmSW)
+        //{
+        //    InvokeRepeating("CycleFarmSWFlowers", 3f, 3f);
+        //    InvokeRepeating("CycleFarmSWGrass", 1f, 1f);
+        //}
+        //else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmSC)
+        //{
+        //    InvokeRepeating("CycleFarmSCFlowers", 3f, 3f);
+        //    InvokeRepeating("CycleFarmSCGrass", 1f, 1f);
+        //}
+        //else if (camFollow.currentCoords == CameraFollow.AnandaCoords.FarmSE)
+        //{
+        //    InvokeRepeating("CycleFarmSEFlowers", 3f, 3f);
+        //    InvokeRepeating("CycleFarmSEGrass", 1f, 1f);
+        //}
         else if (camFollow.currentCoords == CameraFollow.AnandaCoords.Home)
         {
             //Invoke("AnimateHomeTrees", 0.5f);

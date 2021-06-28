@@ -22,6 +22,7 @@ public class TD_SBF_BuildDescriptionBar : MonoBehaviour
 
     public void CheckReturnButton()
     {
+        // TODO: tower upgrade bar for _H & _V
         if (!towerUpgradeBar.selectionEffect)
         {
             returnButton.GetComponent<Image>().enabled = false;

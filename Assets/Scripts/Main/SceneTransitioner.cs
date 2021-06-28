@@ -27,7 +27,7 @@ public class SceneTransitioner : MonoBehaviour
     private float cameraWidth;
     public float timeToLoad;
 
-    public string OmegaLoad;
+    // public string OmegaLoad;
     public string AlphaLoad;
     public string BetaLoad;
 
@@ -165,12 +165,15 @@ public class SceneTransitioner : MonoBehaviour
         float scale = 0.0013849431818182f * Screen.width + 0.47727272727273f;
         smokeRings.localScale = new Vector3(scale, scale, 1);
 
-        //SceneManager.UnloadSceneAsync();
-
         yield return new WaitForSeconds(3);
 
+        var unloader = Resources.UnloadUnusedAssets();
+        while (!unloader.isDone)
+        {
+            yield return null;
+        }
+
         AsyncOperation async = SceneManager.LoadSceneAsync(BetaLoad);
-        //AsyncOperation async = SceneManager.LoadSceneAsync(BetaLoad, LoadSceneMode.Additive);
 
         while (!async.isDone)
         {

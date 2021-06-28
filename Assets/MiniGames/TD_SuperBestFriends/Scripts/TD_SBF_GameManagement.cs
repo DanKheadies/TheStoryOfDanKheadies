@@ -2,21 +2,21 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  04/26/2021
+// Last:  06/26/2021
 
 using UnityEngine;
 
 public class TD_SBF_GameManagement : MonoBehaviour
 {
     public ControllerSupport contSupp;
+    public DeviceDetector devDetect;
     public GameObject cameraCont;
     public GameObject completeLevelUI_Horizontal;
     public GameObject completeLevelUI_Vertical;
     public GameObject gameOverUI_Horizontal;
     public GameObject gameOverUI_Vertical;
-    public GameObject HUD_Horizontal;
-    public GameObject HUD_Vertical;
     public TD_SBF_ControlManagement cMan;
+    public TD_SBF_HeroBarManager heroBMan;
     public TD_SBF_NodeUISelector nodeUISel;
     public TD_SBF_ShopSelector shopSel;
 
@@ -25,28 +25,13 @@ public class TD_SBF_GameManagement : MonoBehaviour
     public static bool IsGameOver;
     public static bool IsLevelWon;
 
-    void Awake()
-    {
-        // TODO: Enable if device flips
-
-        if (Screen.width >= Screen.height)
-        {
-            HUD_Horizontal.SetActive(true);
-            HUD_Vertical.SetActive(false);
-        }
-        else
-        {
-            HUD_Horizontal.SetActive(false);
-            HUD_Vertical.SetActive(true);
-        }
-    }
-
     void Start()
     {
         IsGameOver = false;
         IsLevelWon = false;
 
         cameraCont.GetComponent<TD_SBF_CameraController>().enabled = true;
+        cameraCont.GetComponent<TD_SBF_CameraFollow>().GetHero();
     }
 
     void Update()
@@ -120,6 +105,8 @@ public class TD_SBF_GameManagement : MonoBehaviour
             gameOverUI_Vertical.SetActive(true);
             gameOverUI_Horizontal.SetActive(false);
         }
+
+        heroBMan.HideGUIControls();
     }
 
     public void ToggleHeroMode()
@@ -127,9 +114,25 @@ public class TD_SBF_GameManagement : MonoBehaviour
         bIsHeroMode = !bIsHeroMode;
 
         if (bIsHeroMode)
+        {
             cameraCont.GetComponent<TD_SBF_CameraFollow>().enabled = true;
+
+            if (devDetect.bIsMobile &&
+                !contSupp.bControllerConnected)
+            {
+                heroBMan.ShowGUIControls();
+            }
+        }
         else
+        {
             cameraCont.GetComponent<TD_SBF_CameraFollow>().enabled = false;
+
+            if (devDetect.bIsMobile &&
+                !contSupp.bControllerConnected)
+            {
+                heroBMan.HideGUIControls();
+            }
+        }
         
         GameObject prevAreaTBC = GameObject.FindGameObjectWithTag("PrevGridNode");
         if (prevAreaTBC)

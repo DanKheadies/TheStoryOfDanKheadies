@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 12/10/2019
-// Last:  04/26/2021
+// Last:  06/27/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,13 +13,13 @@ public class TD_SBF_TouchControls : MonoBehaviour
     public DeviceDetector devDetect;
     public FixedJoystick leftFixedJoystick;
     public FixedJoystick rightFixedJoystick;
+    public RectTransform[] joystickCanvases;
     public Slider contOpacSlider;
     public Toggle vibeTog;
 
     public bool bAvoidSubUIElements;
     public bool bControlsVibrate;
     public bool bControlsActive;
-    //public bool bMobileDevice;
     public float currentContOpac;
     public int currentContVibe;
 
@@ -65,6 +65,42 @@ public class TD_SBF_TouchControls : MonoBehaviour
             contOpacSlider.value = 0.0f;
             guiControlsCan.alpha = 0.0f;
         }
+    }
+
+    public void OrientationCheck(bool _bIsHorizontal)
+    {
+        if (_bIsHorizontal)
+        {
+            joystickCanvases[0].GetComponent<RectTransform>().anchoredPosition = new Vector2(-125, 125);
+            joystickCanvases[1].GetComponent<RectTransform>().anchoredPosition = new Vector2(-125, 125);
+            joystickCanvases[2].GetComponent<RectTransform>().anchoredPosition = new Vector2(125, 125);
+            joystickCanvases[3].GetComponent<RectTransform>().anchoredPosition = new Vector2(125, 125);
+
+            joystickCanvases[1].GetComponent<FixedJoystick>().JoystickPosition();
+            joystickCanvases[3].GetComponent<FixedJoystick>().JoystickPosition();
+        } 
+        else
+        {
+            joystickCanvases[0].GetComponent<RectTransform>().anchoredPosition = new Vector2(-125, 375);
+            joystickCanvases[1].GetComponent<RectTransform>().anchoredPosition = new Vector2(-125, 375);
+            joystickCanvases[2].GetComponent<RectTransform>().anchoredPosition = new Vector2(125, 375);
+            joystickCanvases[3].GetComponent<RectTransform>().anchoredPosition = new Vector2(125, 375);
+
+            joystickCanvases[1].GetComponent<FixedJoystick>().JoystickPosition();
+            joystickCanvases[3].GetComponent<FixedJoystick>().JoystickPosition();
+        }
+    }
+
+    public void ShowOnMobile()
+    {
+        foreach (RectTransform obj in joystickCanvases)
+            obj.transform.localScale = Vector3.one;
+    }
+
+    public void HideOnMobile()
+    {
+        foreach (RectTransform obj in joystickCanvases)
+            obj.transform.localScale = Vector3.zero;
     }
 
     // Vibrate on touch

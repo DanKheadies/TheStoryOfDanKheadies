@@ -2,13 +2,14 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  04/26/2021
+// Last:  06/25/2021
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TD_SBF_PauseMenu : MonoBehaviour
 {
+    public Component[] screenOriPauseObjects;
     public ControllerSupport contSupp;
     public DeviceDetector devDetect;
     public GameObject audioButtons;
@@ -118,6 +119,14 @@ public class TD_SBF_PauseMenu : MonoBehaviour
     {
         muorButtons.SetActive(!muorButtons.activeSelf);
         creditsButtons.SetActive(!creditsButtons.activeSelf);
+    }
+
+    public void ResetOrientation()
+    {
+        screenOriPauseObjects = ui.transform.GetComponentsInChildren<TD_SBF_ScreenOrientator_PauseMenu>(true);
+
+        foreach (TD_SBF_ScreenOrientator_PauseMenu obj in screenOriPauseObjects)
+            obj.SetTransform();
     }
 
     public void ResetPauseMenu()

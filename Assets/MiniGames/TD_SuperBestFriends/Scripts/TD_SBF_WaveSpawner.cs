@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  04/26/2021
+// Last:  06/24/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,8 +11,8 @@ using System.Collections;
 public class TD_SBF_WaveSpawner : MonoBehaviour
 {
     public TD_SBF_GameManagement gameMan;
-    public Text waveCountdownText_Horizontal;
-    public Text waveCountdownText_Vertical;
+    public Text waveCountdownText_H;
+    public Text waveCountdownText_V;
     public Transform spawnPoint;
     public Wave[] waves;
 
@@ -58,13 +58,9 @@ public class TD_SBF_WaveSpawner : MonoBehaviour
         // TODO: Enable if device flips
 
         if (Screen.width >= Screen.height)
-        {
-            waveCountdownText_Horizontal.text = string.Format("{0:00.00}", countdown);
-        }
+            waveCountdownText_H.text = string.Format("{0:00.00}", countdown);
         else
-        {
-            waveCountdownText_Horizontal.text = string.Format("{0:00.00}", countdown);
-        }
+            waveCountdownText_V.text = string.Format("{0:00.00}", countdown);
     }
 
     IEnumerator SpawnWave()
@@ -88,6 +84,7 @@ public class TD_SBF_WaveSpawner : MonoBehaviour
 
         waveIndex++;
 
+        // TODO: Follow up eventually; VS say "meh" but it's needed and works(?)
         AstarPath.active.Scan();
     }
 

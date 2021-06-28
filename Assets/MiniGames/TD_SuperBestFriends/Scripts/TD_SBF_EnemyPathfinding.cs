@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/17/2019
-// Last:  04/26/2021
+// Last:  06/24/2021
 
 using UnityEngine;
 using Pathfinding;
@@ -44,6 +44,7 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
     {
         if (bHoldPosition)
         {
+            // TODO: Follow up eventually; VS say "meh" but it's needed and works(?)
             GetComponentInParent<AIPath>().canMove = false;
         }
     }
@@ -93,6 +94,7 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
         bScatteredOnce = true;
         bScatteredTwice = true;
 
+        // TODO: Follow up eventually; VS say "meh" but it's needed and works(?)
         GetComponentInParent<AIDestinationSetter>().target =
             spawnPoint;
         
@@ -102,6 +104,7 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
 
     public void ResetTarget()
     {
+        // TODO: Follow up eventually; VS say "meh" but it's needed and works(?)
         GetComponentInParent<AIDestinationSetter>().target = throne;
         GetComponentInParent<TD_SBF_Enemy>().speed = GetComponentInParent<TD_SBF_Enemy>().startSpeed;
 
@@ -233,7 +236,8 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
         bIsPunching = false;
         bTimeToDestroy = false;
         enemyAni.Play("Enemy_Idle");
-        
+
+        // TODO: Follow up eventually; VS say "meh" but it's needed and works(?)
         GetComponentInParent<AIPath>().canMove = true;
 
         ToggleCollider();
@@ -266,6 +270,7 @@ public class TD_SBF_EnemyPathfinding : MonoBehaviour
     }
     public void RerecheckPathing()
     {
+        // TODO: Follow up eventually; VS say "meh" but it's needed and works(?)
         AstarPath.active.Scan();
     }
 
