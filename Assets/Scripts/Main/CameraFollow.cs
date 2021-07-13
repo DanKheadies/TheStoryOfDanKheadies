@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/04/2021
+// Last:  07/10/2021
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -37,15 +37,15 @@ public class CameraFollow : MonoBehaviour
         CannaFieldSE = 11,
         CannaFieldSW = 12,
         CannaHouse = 13,
-        //FarmNW = 14,
-        //FarmNC = 15,
-        //FarmNE = 16,
-        //FarmWC = 17,
-        //FarmCC = 18,
-        //FarmEC = 19,
-        //FarmSW = 20,
-        //FarmSC = 21,
-        //FarmSE = 22,
+        FarmNW = 14,
+        FarmNC = 15,
+        FarmNE = 16,
+        FarmWC = 17,
+        FarmCC = 18,
+        FarmEC = 19,
+        FarmSW = 20,
+        FarmSC = 21,
+        FarmSE = 22,
         Home = 23,
         HousesE = 24,
         HousesN = 25,
@@ -305,123 +305,123 @@ public class CameraFollow : MonoBehaviour
                         (maxCamPos.y + 5.12f * -2.0f)),
                     depth);
                 }
-                //else if (currentCoords == AnandaCoords.FarmNW)
-                //{
-                //    transform.position = new Vector3(
-                //    Mathf.Clamp(
-                //        transform.position.x,
-                //        (minCamPos.x + 5.12f * 1.0f),
-                //        (maxCamPos.x + 5.12f * 1.0f)),
-                //    Mathf.Clamp(
-                //        transform.position.y,
-                //        (minCamPos.y + 5.12f * -3.0f),
-                //        (maxCamPos.y + 5.12f * -3.0f)),
-                //    depth);
-                //}
-                //else if (currentCoords == AnandaCoords.FarmNC)
-                //{
-                //    transform.position = new Vector3(
-                //    Mathf.Clamp(
-                //        transform.position.x,
-                //        (minCamPos.x + 5.12f * 2.0f),
-                //        (maxCamPos.x + 5.12f * 2.0f)),
-                //    Mathf.Clamp(
-                //        transform.position.y,
-                //        (minCamPos.y + 5.12f * -3.0f),
-                //        (maxCamPos.y + 5.12f * -3.0f)),
-                //    depth);
-                //}
-                //else if (currentCoords == AnandaCoords.FarmNE)
-                //{
-                //    transform.position = new Vector3(
-                //    Mathf.Clamp(
-                //        transform.position.x,
-                //        (minCamPos.x + 5.12f * 3.0f),
-                //        (maxCamPos.x + 5.12f * 3.0f)),
-                //    Mathf.Clamp(
-                //        transform.position.y,
-                //        (minCamPos.y + 5.12f * -3.0f),
-                //        (maxCamPos.y + 5.12f * -3.0f)),
-                //    depth);
-                //}
-                //else if (currentCoords == AnandaCoords.FarmWC)
-                //{
-                //    transform.position = new Vector3(
-                //    Mathf.Clamp(
-                //        transform.position.x,
-                //        (minCamPos.x + 5.12f * 1.0f),
-                //        (maxCamPos.x + 5.12f * 1.0f)),
-                //    Mathf.Clamp(
-                //        transform.position.y,
-                //        (minCamPos.y + 5.12f * -4.0f),
-                //        (maxCamPos.y + 5.12f * -4.0f)),
-                //    depth);
-                //}
-                //else if (currentCoords == AnandaCoords.FarmCC)
-                //{
-                //    transform.position = new Vector3(
-                //    Mathf.Clamp(
-                //        transform.position.x,
-                //        (minCamPos.x + 5.12f * 2.0f),
-                //        (maxCamPos.x + 5.12f * 2.0f)),
-                //    Mathf.Clamp(
-                //        transform.position.y,
-                //        (minCamPos.y + 5.12f * -4.0f),
-                //        (maxCamPos.y + 5.12f * -4.0f)),
-                //    depth);
-                //}
-                //else if (currentCoords == AnandaCoords.FarmEC)
-                //{
-                //    transform.position = new Vector3(
-                //    Mathf.Clamp(
-                //        transform.position.x,
-                //        (minCamPos.x + 5.12f * 3.0f),
-                //        (maxCamPos.x + 5.12f * 3.0f)),
-                //    Mathf.Clamp(
-                //        transform.position.y,
-                //        (minCamPos.y + 5.12f * -4.0f),
-                //        (maxCamPos.y + 5.12f * -4.0f)),
-                //    depth);
-                //}
-                //else if (currentCoords == AnandaCoords.FarmSW)
-                //{
-                //    transform.position = new Vector3(
-                //    Mathf.Clamp(
-                //        transform.position.x,
-                //        (minCamPos.x + 5.12f * 1.0f),
-                //        (maxCamPos.x + 5.12f * 1.0f)),
-                //    Mathf.Clamp(
-                //        transform.position.y,
-                //        (minCamPos.y + 5.12f * -5.0f),
-                //        (maxCamPos.y + 5.12f * -5.0f)),
-                //    depth);
-                //}
-                //else if (currentCoords == AnandaCoords.FarmSC)
-                //{
-                //    transform.position = new Vector3(
-                //    Mathf.Clamp(
-                //        transform.position.x,
-                //        (minCamPos.x + 5.12f * 2.0f),
-                //        (maxCamPos.x + 5.12f * 2.0f)),
-                //    Mathf.Clamp(
-                //        transform.position.y,
-                //        (minCamPos.y + 5.12f * -5.0f),
-                //        (maxCamPos.y + 5.12f * -5.0f)),
-                //    depth);
-                //}
-                //else if (currentCoords == AnandaCoords.FarmSE)
-                //{
-                //    transform.position = new Vector3(
-                //    Mathf.Clamp(
-                //        transform.position.x,
-                //        (minCamPos.x + 5.12f * 3.0f),
-                //        (maxCamPos.x + 5.12f * 3.0f)),
-                //    Mathf.Clamp(
-                //        transform.position.y,
-                //        (minCamPos.y + 5.12f * -5.0f),
-                //        (maxCamPos.y + 5.12f * -5.0f)),
-                //    depth);
-                //}
+                else if (currentCoords == AnandaCoords.FarmNW)
+                {
+                    transform.position = new Vector3(
+                    Mathf.Clamp(
+                        transform.position.x,
+                        (minCamPos.x + 5.12f * 1.0f),
+                        (maxCamPos.x + 5.12f * 1.0f)),
+                    Mathf.Clamp(
+                        transform.position.y,
+                        (minCamPos.y + 5.12f * -3.0f),
+                        (maxCamPos.y + 5.12f * -3.0f)),
+                    depth);
+                }
+                else if (currentCoords == AnandaCoords.FarmNC)
+                {
+                    transform.position = new Vector3(
+                    Mathf.Clamp(
+                        transform.position.x,
+                        (minCamPos.x + 5.12f * 2.0f),
+                        (maxCamPos.x + 5.12f * 2.0f)),
+                    Mathf.Clamp(
+                        transform.position.y,
+                        (minCamPos.y + 5.12f * -3.0f),
+                        (maxCamPos.y + 5.12f * -3.0f)),
+                    depth);
+                }
+                else if (currentCoords == AnandaCoords.FarmNE)
+                {
+                    transform.position = new Vector3(
+                    Mathf.Clamp(
+                        transform.position.x,
+                        (minCamPos.x + 5.12f * 3.0f),
+                        (maxCamPos.x + 5.12f * 3.0f)),
+                    Mathf.Clamp(
+                        transform.position.y,
+                        (minCamPos.y + 5.12f * -3.0f),
+                        (maxCamPos.y + 5.12f * -3.0f)),
+                    depth);
+                }
+                else if (currentCoords == AnandaCoords.FarmWC)
+                {
+                    transform.position = new Vector3(
+                    Mathf.Clamp(
+                        transform.position.x,
+                        (minCamPos.x + 5.12f * 1.0f),
+                        (maxCamPos.x + 5.12f * 1.0f)),
+                    Mathf.Clamp(
+                        transform.position.y,
+                        (minCamPos.y + 5.12f * -4.0f),
+                        (maxCamPos.y + 5.12f * -4.0f)),
+                    depth);
+                }
+                else if (currentCoords == AnandaCoords.FarmCC)
+                {
+                    transform.position = new Vector3(
+                    Mathf.Clamp(
+                        transform.position.x,
+                        (minCamPos.x + 5.12f * 2.0f),
+                        (maxCamPos.x + 5.12f * 2.0f)),
+                    Mathf.Clamp(
+                        transform.position.y,
+                        (minCamPos.y + 5.12f * -4.0f),
+                        (maxCamPos.y + 5.12f * -4.0f)),
+                    depth);
+                }
+                else if (currentCoords == AnandaCoords.FarmEC)
+                {
+                    transform.position = new Vector3(
+                    Mathf.Clamp(
+                        transform.position.x,
+                        (minCamPos.x + 5.12f * 3.0f),
+                        (maxCamPos.x + 5.12f * 3.0f)),
+                    Mathf.Clamp(
+                        transform.position.y,
+                        (minCamPos.y + 5.12f * -4.0f),
+                        (maxCamPos.y + 5.12f * -4.0f)),
+                    depth);
+                }
+                else if (currentCoords == AnandaCoords.FarmSW)
+                {
+                    transform.position = new Vector3(
+                    Mathf.Clamp(
+                        transform.position.x,
+                        (minCamPos.x + 5.12f * 1.0f),
+                        (maxCamPos.x + 5.12f * 1.0f)),
+                    Mathf.Clamp(
+                        transform.position.y,
+                        (minCamPos.y + 5.12f * -5.0f),
+                        (maxCamPos.y + 5.12f * -5.0f)),
+                    depth);
+                }
+                else if (currentCoords == AnandaCoords.FarmSC)
+                {
+                    transform.position = new Vector3(
+                    Mathf.Clamp(
+                        transform.position.x,
+                        (minCamPos.x + 5.12f * 2.0f),
+                        (maxCamPos.x + 5.12f * 2.0f)),
+                    Mathf.Clamp(
+                        transform.position.y,
+                        (minCamPos.y + 5.12f * -5.0f),
+                        (maxCamPos.y + 5.12f * -5.0f)),
+                    depth);
+                }
+                else if (currentCoords == AnandaCoords.FarmSE)
+                {
+                    transform.position = new Vector3(
+                    Mathf.Clamp(
+                        transform.position.x,
+                        (minCamPos.x + 5.12f * 3.0f),
+                        (maxCamPos.x + 5.12f * 3.0f)),
+                    Mathf.Clamp(
+                        transform.position.y,
+                        (minCamPos.y + 5.12f * -5.0f),
+                        (maxCamPos.y + 5.12f * -5.0f)),
+                    depth);
+                }
                 else if (currentCoords == AnandaCoords.Home)
                 {
                     transform.position = new Vector3(

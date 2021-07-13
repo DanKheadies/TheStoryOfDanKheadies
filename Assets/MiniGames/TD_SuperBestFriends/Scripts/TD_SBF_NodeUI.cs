@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  06/24/2021
+// Last:  06/30/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +19,8 @@ public class TD_SBF_NodeUI : MonoBehaviour
 
     public void SetTarget(TD_SBF_Node _target)
     {
+        Debug.Log("node ui - set target");
+        Debug.Log(_target);
         if (selectionEffect)
             Destroy(selectionEffect);
 

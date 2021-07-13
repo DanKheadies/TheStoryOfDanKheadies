@@ -14693,11 +14693,14 @@ MonoBehaviour:
   noSelection: {r: 1, g: 1, b: 1, a: 0}
   selectTower: {r: 1, g: 1, b: 1, a: 0.49019608}
   contSupp: {fileID: 348776490}
+  devDetect: {fileID: 1038036483}
+  m_EventSystem: {fileID: 73192795}
   gridNode: {fileID: 8943368815015379926, guid: a5e8dba458d694f4d92e06036f203dd7,
     type: 3}
   gridNodeSelector: {fileID: 2775194692102258096, guid: 8fbd8919c784ff74d88ee664ad2187f0,
     type: 3}
   gridNodeTBC: {fileID: 0}
+  m_Raycaster: {fileID: 326326424}
   gMan: {fileID: 1038036484}
   grid: {fileID: 287380994}
   nodeUI: {fileID: 1095411564}
@@ -23232,7 +23235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832694024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34, y: -70, z: -10}
+  m_LocalPosition: {x: 35.2, y: -67, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -23269,10 +23272,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contSupp: {fileID: 348776490}
+  devDetect: {fileID: 1038036483}
   cMan: {fileID: 326326428}
   gMan: {fileID: 1038036484}
   touchConts: {fileID: 45733301624262487}
-  bPinchZooming: 0
+  tPlacer: {fileID: 527363574}
+  mobileSensitivity: 0
   mouseSensitivity: 0
   orthoZoomSpeed: 0
   perspectiveZoomSpeed: 0
@@ -23293,7 +23298,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectUtil: {fileID: 0}
   dMan: {fileID: 0}
-  devOr: 0
+  currentDevOr: 0
+  newDevOr: 0
   fixedJoy: {fileID: 0}
   oMan: {fileID: 0}
   sMan: {fileID: 1038036486}
@@ -27355,7 +27361,7 @@ MonoBehaviour:
     count: 1
     rate: 1
   timeBetweenWaves: 10
-  countdown: 15
+  countdown: 30
   prevWaveIndex: 0
   waveIndex: 0
 --- !u!114 &1038036486
@@ -27377,6 +27383,7 @@ MonoBehaviour:
   chp1: {fileID: 0}
   contSupp: {fileID: 0}
   treeTunnel: {fileID: 0}
+  tyTunnel: {fileID: 0}
   dMan: {fileID: 0}
   save: {fileID: 0}
   screenOri: {fileID: 832694030}

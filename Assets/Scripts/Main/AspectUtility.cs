@@ -27,7 +27,8 @@ public class AspectUtility : MonoBehaviour
             _wantedAspectRatio = 2.285714f;
         else if (scene.name == "Immunis")
             _wantedAspectRatio = 2.285714f;
-        else if (scene.name == "PookieVision")
+        else if (scene.name == "PookieVision" ||
+                 scene.name == "CS_TyrannyTunnel")
             _wantedAspectRatio = 1f;
         else
             _wantedAspectRatio = 1.142857f;

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/02/2018
-// Last:  06/27/2021
+// Last:  06/28/2021
 
 using UnityEngine;
 
@@ -97,6 +97,7 @@ public class ScreenOrientation : MonoBehaviour
         if (sMan)
         {
             sMan.ResetParameters("CS_TreeTunnel");
+            sMan.ResetParameters("CS_TyrannyTunnel");
             sMan.ResetParameters("MainMenu");
             sMan.ResetParameters("SceneTransitioner");
             sMan.ResetParameters("TD_SBF_L1");

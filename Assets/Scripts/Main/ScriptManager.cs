@@ -14,6 +14,7 @@ public class ScriptManager : MonoBehaviour
     public Chp1 chp1;
     public ControllerSupport contSupp;
     public CS_TreeTunnel treeTunnel;
+    public CS_TyrannyTunnel tyTunnel;
     public DialogueManager dMan;
     public SaveGame save;
     public ScreenOrientation screenOri;
@@ -58,6 +59,11 @@ public class ScriptManager : MonoBehaviour
             if (action == "WarpOut")
                 treeTunnel.CompleteCutscene();
         }
+        else if (tyTunnel)
+        {
+            if (action == "WarpOut")
+                tyTunnel.CompleteCutscene();
+        }
     }
 
     public void DialogueAction(string action)
@@ -93,6 +99,9 @@ public class ScriptManager : MonoBehaviour
         if (treeTunnel &&
             sceneName == "CS_TreeTunnel")
             treeTunnel.ScaleAnimation();
+        else if (tyTunnel &&
+                 sceneName == "CS_TyrannyTunnel")
+            tyTunnel.AdjustCamera();
         else if (mainMenuBack1 &&
                  mainMenuBack2 &&
                  sceneName == "MainMenu")

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/13/2019
-// Last:  06/27/2021
+// Last:  06/28/2021
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -73,12 +73,87 @@ public class TD_SBF_ControlManagement : MonoBehaviour
 
     public void HandleBuildBarOnMobile()
     {
-        Debug.Log("handling on mobile");
         if (devDetect.bIsMobile)
-        {
             DisableBuildDescriptionBar();
-            tConts.bAvoidSubUIElements = false;
+    }
+
+    public void OrientationActivation()
+    {
+        if (bIsHorizontal)
+        {
+            statsBar_H.SetActive(true);
+            controlsBar_H.SetActive(true);
+            towerUpgradeBar_H.SetActive(true);
+            statsBar_V.SetActive(false);
+            controlsBar_V.SetActive(false);
+            towerUpgradeBar_V.SetActive(false);
+
+            if (devDetect.bIsMobile)
+            {
+                statsBar_H.GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                    80,
+                    statsBar_H.GetComponent<RectTransform>().anchoredPosition.y);
+                controlsBar_H.GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                    -80,
+                    statsBar_H.GetComponent<RectTransform>().anchoredPosition.y);
+            }
+            else
+            {
+                statsBar_H.GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                    50,
+                    statsBar_H.GetComponent<RectTransform>().anchoredPosition.y);
+                controlsBar_H.GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                    -50,
+                    statsBar_H.GetComponent<RectTransform>().anchoredPosition.y);
+            }
         }
+        else
+        {
+            statsBar_H.SetActive(false);
+            controlsBar_H.SetActive(false);
+            towerUpgradeBar_H.SetActive(false);
+            statsBar_V.SetActive(true);
+            controlsBar_V.SetActive(true);
+            towerUpgradeBar_V.SetActive(true);
+        }
+
+        tConts.OrientationCheck(bIsHorizontal);
+    }
+
+    public void OrientationCheck()
+    {
+        if (Screen.width >= Screen.height)
+            bIsHorizontal = true;
+        else
+            bIsHorizontal = false;
+    }
+
+    public void OrientationDisables()
+    {
+        DisableBuildBar();
+        DisableBuildDescriptionBar();
+        DisableHeroBar();
+        gMan.DisableHeroMode();
+        gMan.DisableTowerMode();
+        tConts.HideOnMobile();
+        TD_SBF_BuildManager.td_sbf_instance.DeselectNodeOnOrientationSwap();
+    }
+
+    public void OrientationSetup()
+    {
+        OrientationDisables();
+        OrientationActivation();
+    }
+
+    public void ResetForOrientation()
+    {
+        // Reset occurs AFTER orientation sizing changes, i.e. tries to "fix" on the wrong orientation
+        // Temp inverse the orientation, i.e. bIsHorizontal, disable canvases, then reset to correct orientation
+        OrientationCheck();
+        bIsHorizontal = !bIsHorizontal;
+        OrientationDisables();
+        bIsHorizontal = !bIsHorizontal;
+        OrientationActivation();
     }
 
     public void ToggleBuildBar()
@@ -419,89 +494,6 @@ public class TD_SBF_ControlManagement : MonoBehaviour
 
             bBelayTUB = false;
         }
-    }
-
-    public void OrientationActivation()
-    {
-        if (bIsHorizontal)
-        {
-            statsBar_H.SetActive(true);
-            controlsBar_H.SetActive(true);
-            towerUpgradeBar_H.SetActive(true);
-            statsBar_V.SetActive(false);
-            controlsBar_V.SetActive(false);
-            towerUpgradeBar_V.SetActive(false);
-
-            // CHECK that this works
-            if (devDetect.bIsMobile)
-            {
-                statsBar_H.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                    80,
-                    statsBar_H.GetComponent<RectTransform>().anchoredPosition.y);
-                controlsBar_H.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                    -80,
-                    statsBar_H.GetComponent<RectTransform>().anchoredPosition.y);
-            }
-            else
-            {
-                statsBar_H.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                    50,
-                    statsBar_H.GetComponent<RectTransform>().anchoredPosition.y);
-                controlsBar_H.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                    -50,
-                    statsBar_H.GetComponent<RectTransform>().anchoredPosition.y);
-            }
-        }
-        else
-        {
-            statsBar_H.SetActive(false);
-            controlsBar_H.SetActive(false);
-            towerUpgradeBar_H.SetActive(false);
-            statsBar_V.SetActive(true);
-            controlsBar_V.SetActive(true);
-            towerUpgradeBar_V.SetActive(true);
-        }
-
-        tConts.OrientationCheck(bIsHorizontal);
-    }
-
-    public void OrientationCheck()
-    {
-        if (Screen.width >= Screen.height)
-            bIsHorizontal = true;
-        else
-            bIsHorizontal = false;
-    }
-
-    public void OrientationDisables()
-    {
-        // Runs at the start b/c of OrientationSetup (is probably OK)
-        DisableBuildBar();
-        DisableBuildDescriptionBar();
-        DisableHeroBar();
-        gMan.DisableHeroMode();
-        gMan.DisableTowerMode();
-        TD_SBF_BuildManager.td_sbf_instance.DeselectNodeOnOrientationSwap();
-
-        // Small Bug: the code above prevents users from selecting a tower after an orientation switch
-        // Once they select Build mode (or Hero?), they can select towers again; not great, not terrible
-    }
-
-    public void OrientationSetup()
-    {
-        OrientationDisables();
-        OrientationActivation();
-    }
-
-    public void ResetForOrientation()
-    {
-        // Reset occurs AFTER orientation sizing changes, i.e. tries to "fix" on the wrong orientation
-        // Temp inverse the orientation, i.e. bIsHorizontal, disable canvases, then reset to correct orientation
-        OrientationCheck();
-        bIsHorizontal = !bIsHorizontal;
-        OrientationDisables();
-        bIsHorizontal = !bIsHorizontal;
-        OrientationActivation();
     }
 
     public void AvoidCamScroll()

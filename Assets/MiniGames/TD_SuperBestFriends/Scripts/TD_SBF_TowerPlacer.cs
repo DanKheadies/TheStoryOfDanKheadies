@@ -2,10 +2,11 @@
 // Authors: Jason (Unity3d College)
 // Contributors: David W. Corso
 // Start: 09/13/2019
-// Last:  04/26/2021
+// Last:  06/30/2021
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class TD_SBF_TowerPlacer : MonoBehaviour
@@ -15,9 +16,13 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
     public Color noSelection;
     public Color selectTower;
     public ControllerSupport contSupp;
+    public DeviceDetector devDetect;
+    public EventSystem m_EventSystem;
     public GameObject gridNode;
     public GameObject gridNodeSelector;
     public GameObject gridNodeTBC;
+    public GraphicRaycaster m_Raycaster;
+    public PointerEventData m_PointerEventData;
     public RaycastHit currentHit;
     //public TD_SBF_ControllerSupport contSupp;
     public TD_SBF_GameManagement gMan;
@@ -82,39 +87,58 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
             }
         }
         else if (gMan.bIsTowerMode &&
-            !contSupp.bControllerConnected &&
-            Input.touchCount == 1 &&
-            Input.GetTouch(0).phase == TouchPhase.Ended)
+                 !contSupp.bControllerConnected &&
+                 Input.touchCount == 1 &&
+                 Input.GetTouch(0).phase == TouchPhase.Ended)
         {
-            // TODO: avoid placing when over UI elements (i.e. the other tower buttons in teh shop)
-            // TODO: avoid placing while moving
-            // TODO: fix joystick re-centering 
+            Vector2 touchPos = Input.GetTouch(0).position;
+
             RaycastHit hitInfo;
-            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            Ray ray = Camera.main.ScreenPointToRay(touchPos);
 
             if (Physics.Raycast(ray, out hitInfo) &&
                 !gMan.bIsHeroMode)
             {
-                Debug.Log("have a ray");
                 CheckNode(hitInfo.point);
+
+                if (CheckMobileAndGUIAndBail(touchPos))
+                    return;
 
                 if (TD_SBF_BuildManager.td_sbf_instance.TD_SBF_CanBuild &&
                     TD_SBF_BuildManager.td_sbf_instance.TD_SBF_HasThoughtsPrayers &&
                     TD_SBF_BuildManager.td_sbf_instance.turretToBuild.cost != 0 &&
-                    !TD_SBF_BuildManager.td_sbf_instance.bOverTower &&
-                    !tConts.bAvoidSubUIElements)
+                    !TD_SBF_BuildManager.td_sbf_instance.bOverTower)
                 {
-                    Debug.Log("gonna place it");
                     PlaceTowerNear(hitInfo.point);
                 }
             }
         }
     }
-    
+
+    public bool CheckMobileAndGUIAndBail(Vector2 touchPosition)
+    {
+        m_PointerEventData = new PointerEventData(m_EventSystem);
+        m_PointerEventData.position = touchPosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+
+        m_Raycaster.Raycast(m_PointerEventData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.layer == 5) // UI
+                return true;
+        }
+
+        return false;
+    }
+
+
     public void OnMouseOver()
     {
         if (gMan.bIsTowerMode &&
-            !contSupp.bControllerConnected)
+            !contSupp.bControllerConnected &&
+            !devDetect.bIsMobile)
         {
             RaycastHit hitInfo;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -224,6 +248,7 @@ public class TD_SBF_TowerPlacer : MonoBehaviour
         finalPosition += new Vector3(0, 0, -1f);
 
         // Avoid tower placement when clicking UI
+        // Doesn't work for mobile/touch
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 

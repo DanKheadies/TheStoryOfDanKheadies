@@ -14502,7 +14502,7 @@ Animator:
   m_GameObject: {fileID: 1345799922}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 731c960c893b7b249804dcfcc852c077, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6f1e02845407a9448aa5706357b3b6b2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -18692,7 +18692,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectUtil: {fileID: 1820261572}
   dMan: {fileID: 1137910804}
-  devOr: 0
+  currentDevOr: 0
+  newDevOr: 0
   fixedJoy: {fileID: 945577419}
   oMan: {fileID: 1137910805}
   sMan: {fileID: 2074391692}
@@ -21390,6 +21391,7 @@ MonoBehaviour:
   chp1: {fileID: 0}
   contSupp: {fileID: 0}
   treeTunnel: {fileID: 2074391686}
+  tyTunnel: {fileID: 0}
   dMan: {fileID: 1137910804}
   save: {fileID: 0}
   screenOri: {fileID: 1820261571}

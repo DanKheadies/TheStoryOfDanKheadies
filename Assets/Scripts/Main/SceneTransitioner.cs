@@ -2,7 +2,7 @@
 // Authors: David W. Corso
 // Contributors: Nick Pettit
 // Start: 04/20/2017
-// Last:  04/30/2020
+// Last:  07/12/2021
 
 using System.Collections;
 using UnityEngine;
@@ -62,6 +62,10 @@ public class SceneTransitioner : MonoBehaviour
                     case "CS_TreeTunnel":
                         sceneTitle.text = "A Great Tree";
                         sceneSubtitle.text = "Offering you a branch..";
+                        break;
+                    case "CS_TyrannyTunnel":
+                        sceneTitle.text = "I'm So Tired";
+                        sceneSubtitle.text = "/u/SnowflakeSorcerer & @TheBirminghamBear";
                         break;
                     case "Minesweeper":
                         sceneTitle.text = "Minesweeper";

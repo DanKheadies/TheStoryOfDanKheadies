@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  06/24/2021
+// Last:  07/01/2021
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,6 +12,7 @@ public class TD_SBF_Node : MonoBehaviour
     public Color startColor;
     public Color hoverColor;
     public Color notEnoughThoughtsPrayersColor;
+    public DeviceDetector devDetect;
     public ControllerSupport contSupp;
     public GameObject turret;
     //public TD_SBF_ControllerSupport contSupp;
@@ -26,6 +27,7 @@ public class TD_SBF_Node : MonoBehaviour
     void Awake()
     {
         contSupp = FindObjectOfType<ControllerSupport>();
+        devDetect = FindObjectOfType<DeviceDetector>();
         heroAni = GameObject.FindGameObjectWithTag("Hero").GetComponent<TD_SBF_HeroAnimator>();
         startColor = GetComponent<SpriteRenderer>().color;
         tConts = FindObjectOfType<TD_SBF_TouchControls>();
@@ -51,6 +53,8 @@ public class TD_SBF_Node : MonoBehaviour
                 }
             }
         }
+
+        // OnTouchDown();
     }
 
     public Vector3 GetBuildPosition()
@@ -201,9 +205,13 @@ public class TD_SBF_Node : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
+        // TODO - try using another function that executes on mobile, i.e. OnTouchDown()
         if (turret &&
-            !tConts.bAvoidSubUIElements)
+            (!tConts.bAvoidSubUIElements && 
+             !devDetect.bIsMobile) ||
+            (devDetect.bIsMobile))
         {
+            Debug.Log("node - select node");
             TD_SBF_BuildManager.td_sbf_instance.SelectNode(this);
             return;
         }

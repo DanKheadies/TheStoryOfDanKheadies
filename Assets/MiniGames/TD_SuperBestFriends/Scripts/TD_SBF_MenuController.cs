@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/27/2019
-// Last:  06/26/2021
+// Last:  06/30/2021
 
 using System.Collections;
 using UnityEngine;
@@ -24,6 +24,7 @@ public class TD_SBF_MenuController : MonoBehaviour
     public GameObject curtain_v;
     public GameObject sbf_v;
 
+    public bool bIsLoaded;
     public bool bIsFull;
     public bool bIsSelectable;
     public bool bSizingChange;
@@ -43,7 +44,8 @@ public class TD_SBF_MenuController : MonoBehaviour
              Input.GetMouseButtonDown(0) ||
              contSupp.ControllerButtonPadBottom("down") ||
              contSupp.ControllerButtonPadRight("down")) &&
-             towerDeez.GetComponent<Image>().color.a != 1f)
+             towerDeez.GetComponent<Image>().color.a != 1f &&
+             !bIsLoaded)
         {
             if (Screen.width >= Screen.height)
             {
@@ -87,6 +89,7 @@ public class TD_SBF_MenuController : MonoBehaviour
             towerDefense.GetComponent<Animator>().enabled = false;
             towerDefense.GetComponent<Image>().color = new Color(255f, 255f, 255f, 1);
 
+            bIsLoaded = true;
             StartCoroutine(DelaySelectable());
         }
 
@@ -95,6 +98,7 @@ public class TD_SBF_MenuController : MonoBehaviour
              contSupp.ControllerButtonPadBottom("down")) &&
              bIsSelectable)
         {
+            bIsLoaded = true;
             towerDeez.GetComponent<Button>().onClick.Invoke();
         }
     }

@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  06/25/2021
+// Last:  07/01/2021
 
 using UnityEngine;
 
@@ -55,6 +55,8 @@ public class TD_SBF_BuildManager : MonoBehaviour
             nodeUI_V.Hide();
     }
 
+    // TODO: slight bug with mobile; after building tower, can't select a tower to see upgrades / deets UI
+    // Issue seems to stem from TD_SBF_Node.cs
     public void SelectNode(TD_SBF_Node node)
     {
         // Controller Support

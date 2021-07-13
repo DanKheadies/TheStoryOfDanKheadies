@@ -2,17 +2,21 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/10/2016
-// Last:  06/25/2021
+// Last:  07/01/2021
 
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TD_SBF_CameraController : MonoBehaviour
 {
     public ControllerSupport contSupp;
+    public DeviceDetector devDetect;
     public TD_SBF_ControlManagement cMan;
     public TD_SBF_GameManagement gMan;
     public TD_SBF_TouchControls touchConts;
+    public TD_SBF_TowerPlacer tPlacer;
 
+    public float mobileSensitivity;
     public float mouseSensitivity;
     public float orthoZoomSpeed;
     public float perspectiveZoomSpeed;
@@ -22,7 +26,8 @@ public class TD_SBF_CameraController : MonoBehaviour
 
     void Start()
     {
-        mouseSensitivity = 0.0125f;
+        mobileSensitivity = 0.0125f;
+        mouseSensitivity = 0.0333f;
         perspectiveZoomSpeed = 0.1f;       // The rate of change of the field of view in perspective mode.
         orthoZoomSpeed = 0.0125f;          // The rate of change of the orthographic size in orthographic mode.
         panSpeed = 20f;
@@ -86,20 +91,47 @@ public class TD_SBF_CameraController : MonoBehaviour
 
             CalcPosition();
 
-            // Click and drag
-            if (Input.touchCount < 2)
+            // Click and drag (mouse)
+            if (!devDetect.bIsMobile)
             {
-                if (Input.GetMouseButtonDown(0))
+                if (EventSystem.current.IsPointerOverGameObject())
+                    return;
+            
+                if (Input.GetMouseButtonDown(0) ||
+                    Input.GetMouseButtonDown(1))
                     lastPosition = Input.mousePosition;
 
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0) ||
+                    Input.GetMouseButton(1))
                 {
                     Vector3 delta = Input.mousePosition - lastPosition;
                     transform.Translate(-delta.x * mouseSensitivity, -delta.y * mouseSensitivity, -10);
                     lastPosition = Input.mousePosition;
                 }
             }
-            
+
+            // Click and drag (touch)
+            if (Input.touchCount == 1)
+            {
+                if (tPlacer.CheckMobileAndGUIAndBail(Input.GetTouch(0).position))
+                    return;
+
+                if (Input.GetTouch(0).phase == TouchPhase.Began)
+                    lastPosition = new Vector3(
+                        Input.GetTouch(0).position.x,
+                        Input.GetTouch(0).position.y,
+                        0);
+
+                if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                {
+                    Vector3 delta = new Vector3(Input.GetTouch(0).position.x,
+                        Input.GetTouch(0).position.y,
+                        1) - lastPosition;
+                    transform.Translate(-delta.x * mobileSensitivity, -delta.y * mobileSensitivity, -10);
+                    lastPosition = Input.mousePosition;
+                }
+            }
+
             // Pinch and zoom
             if (!cMan.bAvoidCamScroll && 
                 Input.touchCount == 2)
@@ -153,6 +185,8 @@ public class TD_SBF_CameraController : MonoBehaviour
                 scroll = Input.GetAxis("Mouse ScrollWheel");
             else
                 scroll = touchConts.rightFixedJoystick.Vertical * 0.05f;
+
+            // TODO - Investigate why mobile "locks" up on the zoom
 
             // Zoom In
             if (scroll > 0 &&

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  06/27/2021
+// Last:  07/12/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +19,7 @@ public class Chp1 : MonoBehaviour
     public GameObject homeCushionCollider;
     public GameObject item_homeVRGoggles;
     public GameObject npc_aaron;
+    public GameObject npc_akira;
     public GameObject npc_al_khidr;
     public GameObject npc_ashera;
     public GameObject npc_atandwa;
@@ -29,25 +30,26 @@ public class Chp1 : MonoBehaviour
     public GameObject npc_dagon;
     public GameObject npc_dilum;
     public GameObject npc_eliz;
+    public GameObject npc_eloher;
     public GameObject npc_emma;
     public GameObject npc_enki;
-    public GameObject npc_faith;
     public GameObject npc_heartha;
     public GameObject npc_hugo;
     public GameObject npc_hye;
     public GameObject npc_jamaal;
     public GameObject npc_jamie;
-    public GameObject npc_juman;
+    public GameObject npc_kalika;
     public GameObject npc_kart;
     public GameObject npc_khalid;
     public GameObject npc_luli;
     public GameObject npc_lupita;
     public GameObject npc_marija;
     public GameObject npc_marklar;
-    public GameObject npc_maximiliano;
     public GameObject npc_mawkus;
+    public GameObject npc_maximiliano;
     public GameObject npc_molleen;
     public GameObject npc_nesbit;
+    public GameObject npc_pebs;
     public GameObject npc_poeia;
     public GameObject npc_pookieB1;
     public GameObject npc_pookieB2;
@@ -71,11 +73,14 @@ public class Chp1 : MonoBehaviour
     public GameObject quest8;  // PookieBear2
     public GameObject quest9;  // PookieVision
     public GameObject quest10; // TowerDeez
+    public GameObject quest11; // TowerDeez SBF
+    public GameObject quest12; // Talking to Pebs
     public GameObject questTrigger1;
     public GameObject questTrigger2;
     public GameObject screenFader;
     public GameObject treeHouseDoor;
     public GameObject warpCSTreeTunnel;
+    public GameObject warpCSTyrannyTunnel;
     public GameObject warpGWC;
     public GameObject warpMinesweeper;
     public GameObject warpPookieVision;
@@ -697,6 +702,13 @@ public class Chp1 : MonoBehaviour
         //if (PlayerPrefs.GetFloat("Location-NPC-Prop"))
         //npc.transform.position = (SavedX, SavedY);
 
+        //npc_akira;
+        if (PlayerPrefs.GetFloat("CampusAkiraPosX") != 0 ||
+            PlayerPrefs.GetFloat("CampusAkiraPosY") != 0)
+            npc_akira.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("CampusAkiraPosX"),
+                PlayerPrefs.GetFloat("CampusAkiraPosY"));
+
         //npc_aaron;
         // n/a 
 
@@ -734,6 +746,13 @@ public class Chp1 : MonoBehaviour
         //npc_eliz;
         // n/a
 
+        //npc_eloher;
+        if (PlayerPrefs.GetFloat("CampusEloherPosX") != 0 ||
+            PlayerPrefs.GetFloat("CampusEloherPosY") != 0)
+            npc_eloher.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("CampusEloherPosX"),
+                PlayerPrefs.GetFloat("CampusEloherPosY"));
+
         //npc_emma;
         // n/a 
 
@@ -743,13 +762,6 @@ public class Chp1 : MonoBehaviour
             npc_enki.transform.position = new Vector2(
                 PlayerPrefs.GetFloat("HomeEnkiPosX"),
                 PlayerPrefs.GetFloat("HomeEnkiPosY"));
-
-        //npc_faith;
-        if (PlayerPrefs.GetFloat("CampusFaithPosX") != 0 ||
-            PlayerPrefs.GetFloat("CampusFaithPosY") != 0)
-            npc_faith.transform.position = new Vector2(
-                PlayerPrefs.GetFloat("CampusFaithPosX"),
-                PlayerPrefs.GetFloat("CampusFaithPosY"));
 
         //npc_heartha;
         // n/a
@@ -770,8 +782,12 @@ public class Chp1 : MonoBehaviour
         //npc_jamie;
         // n/a
 
-        //npc_juman;
-        // n/a
+        //npc_kalika;
+        if (PlayerPrefs.GetFloat("CampusFaithPosX") != 0 ||
+            PlayerPrefs.GetFloat("CampusFaithPosY") != 0)
+            npc_kalika.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("CampusFaithPosX"),
+                PlayerPrefs.GetFloat("CampusFaithPosY"));
 
         //npc_kart;
         // n/a
@@ -795,16 +811,19 @@ public class Chp1 : MonoBehaviour
                 PlayerPrefs.GetFloat("BatteryMarklarPosX"),
                 PlayerPrefs.GetFloat("BatteryMarklarPosY"));
 
-        //npc_maximiliano;
+        //npc_mawkus;
         // n/a
 
-        //npc_mawkus;
+        //npc_maximiliano;
         // n/a
 
         //npc_molleen;
         // n/a
 
         //npc_nesbit;
+        // n/a
+
+        //npc_pebs;
         // n/a
 
         //npc_poeia;
@@ -1241,6 +1260,10 @@ public class Chp1 : MonoBehaviour
         //npc_aaron;
         // n/a 
 
+        //npc_akira;
+        PlayerPrefs.SetFloat("CampusAkiraPosX", npc_akira.transform.position.x);
+        PlayerPrefs.SetFloat("CampusAkiraPosY", npc_akira.transform.position.y);
+
         //npc_al_khidr;
         // n/a
 
@@ -1272,16 +1295,16 @@ public class Chp1 : MonoBehaviour
         //npc_eliz;
         // n/a
 
+        //npc_eloher;
+        PlayerPrefs.SetFloat("CampusEloherPosX", npc_eloher.transform.position.x);
+        PlayerPrefs.SetFloat("CampusEloherPosY", npc_eloher.transform.position.y);
+
         //npc_emma;
         // n/a 
 
         //npc_enki;
         PlayerPrefs.SetFloat("HomeEnkiPosX", npc_enki.transform.position.x);
         PlayerPrefs.SetFloat("HomeEnkiPosY", npc_enki.transform.position.y);
-
-        //npc_faith;
-        PlayerPrefs.SetFloat("CampusFaithPosX", npc_faith.transform.position.x);
-        PlayerPrefs.SetFloat("CampusFaithPosY", npc_faith.transform.position.y);
 
         //npc_heartha;
         // n/a
@@ -1302,6 +1325,10 @@ public class Chp1 : MonoBehaviour
         //npc_juman;
         // n/a
 
+        //npc_kalika;
+        PlayerPrefs.SetFloat("CampusFaithPosX", npc_kalika.transform.position.x);
+        PlayerPrefs.SetFloat("CampusFaithPosY", npc_kalika.transform.position.y);
+
         //npc_kart;
         // n/a
 
@@ -1321,10 +1348,10 @@ public class Chp1 : MonoBehaviour
         PlayerPrefs.SetFloat("BatteryMarklarPosX", npc_marklar.transform.position.x);
         PlayerPrefs.SetFloat("BatteryMarklarPosY", npc_marklar.transform.position.y);
 
-        //npc_maximiliano;
+        //npc_mawkus;
         // n/a
 
-        //npc_mawkus;
+        //npc_maximiliano;
         // n/a
 
         //npc_molleen;
@@ -1475,6 +1502,7 @@ public class Chp1 : MonoBehaviour
         npc_chun.GetComponent<Animator>().enabled = false;
     }
     
+    /** Quests **/
 
     public void Quest0Reward()
     {
@@ -1590,6 +1618,21 @@ public class Chp1 : MonoBehaviour
 
             quest7.GetComponent<QuestObject>().CollectedQuest();
             quest8.GetComponent<QuestObject>().CollectedQuest();
+        }
+    }
+
+    public void Quest12Reward()
+    {
+        if (!quest12.GetComponent<QuestObject>().bHasCollected)
+        {
+            player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(100);
+            player.GetComponent<PlayerBrioManager>().RestorePlayer(100);
+            uMan.UpdateBrio();
+
+            npc_pebs.transform.GetChild(0).gameObject.SetActive(false);
+            npc_pebs.transform.GetChild(1).gameObject.SetActive(true);
+
+            quest12.GetComponent<QuestObject>().CollectedQuest();
         }
     }
 
@@ -1792,6 +1835,24 @@ public class Chp1 : MonoBehaviour
         {
             oMan.ResetOptions();
             Quest10Dialogue2Opt2();
+        }
+
+
+        // Quest 12 - Dialogue 1 - Option 1
+        if (npc_pebs.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+            npc_pebs.transform.GetChild(0).gameObject.activeSelf &&
+            moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
+        {
+            oMan.ResetOptions();
+            Quest12Dialogue1Opt1();
+        }
+        // Quest 12 - Dialogue 1 - Option 2
+        else if (npc_pebs.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered &&
+                 npc_pebs.transform.GetChild(0).gameObject.activeSelf &&
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
+        {
+            oMan.ResetOptions();
+            Quest12Dialogue1Opt2();
         }
     }
 
@@ -2354,7 +2415,65 @@ public class Chp1 : MonoBehaviour
         //npc_brackey.GetComponent<Animator>().enabled = false;  
     }
 
-    
+    public void Quest12Dialogue1Opt1()
+    {
+        // yes for cutscene
+
+        CheckingForGoggles();
+
+        if (bHasGoggles)
+        {
+            warpCSTyrannyTunnel.GetComponent<BoxCollider2D>().enabled = true;
+            warpCSTyrannyTunnel.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
+
+            // Save Transfer Values 
+            save.SaveBrioTransfer();
+            save.SaveInventoryTransfer();
+            save.SavePositionTransfer();
+            PlayerPrefs.SetInt("Transferring", 1);
+            PlayerPrefs.SetString("TransferScene", warpCSTyrannyTunnel.GetComponent<SceneTransitioner>().BetaLoad);
+
+            // Save Quests
+            SaveQuests();
+
+            // Stop the player from bringing up the dialog again 
+            dMan.gameObject.transform.localScale = Vector3.zero;
+
+            // Stop Dan from moving
+            dMan.gameObject.SetActive(false);
+
+            // Stop NPCs from moving
+            npc_pebs.GetComponent<NPCMovement>().moveSpeed = 0;
+            npc_pebs.GetComponent<Animator>().enabled = false;
+
+            // TODO: stop other NPCs in the area
+            // TODO: restoring NPC movement when revisiting, post cutscene
+        }
+        else
+        {
+            // No cutscene
+            dMan.dialogueLines = new string[] {
+                "Oh, well.. You'll need Particle Visors to experience it.",
+                "Come back when you have some."
+            };
+            dMan.currentLine = 0;
+            dText.text = dMan.dialogueLines[dMan.currentLine];
+            dMan.ShowDialogue();
+        }
+    }
+
+    public void Quest12Dialogue1Opt2()
+    {
+        // No play a game
+        dMan.dialogueLines = new string[] {
+                "No worries. Perhaps later..."
+            };
+        dMan.currentLine = 0;
+        dText.text = dMan.dialogueLines[dMan.currentLine];
+        dMan.ShowDialogue();
+    }
+
+
     public void Chp1QuestChecker()
     {
         // Q0 
