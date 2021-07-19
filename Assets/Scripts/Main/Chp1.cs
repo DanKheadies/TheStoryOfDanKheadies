@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  07/12/2021
+// Last:  07/13/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +12,7 @@ public class Chp1 : MonoBehaviour
 {
     public Camera mainCamera;
     public CameraFollow camFollow;
+    public ControllerSupport contSupp;
     public DeviceDetector devDetect;
     public DialogueManager dMan;
     public GameObject greatTree;
@@ -141,6 +142,13 @@ public class Chp1 : MonoBehaviour
 
             // Cleanse transfer data
             save.DeleteTransPrefs();
+
+            // Show GUI for mobile, no-controller
+            if (devDetect.bIsMobile &&
+                !contSupp.bControllerConnected)
+            {
+                uMan.DisplayControls();
+            }
         }
         // Chapter 1 -- Saved Game
         else

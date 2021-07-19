@@ -5297,10 +5297,10 @@ MonoBehaviour:
   walkZone: {fileID: 2041298340}
   dMan: {fileID: 1865790888}
   npcRigidBody: {fileID: 579209532}
-  lastMove: {x: 0, y: 0}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
   bCanMove: 0
+  bCollision: 0
   bHasWalkZone: 0
   bIsWalking: 0
   moveSpeed: 0.5
@@ -7096,6 +7096,12 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!1 &732916325 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1236619948895149856, guid: 188a208e0b98b864ebb420573cb33984,
+    type: 3}
+  m_PrefabInstance: {fileID: 1301156122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &732984822
 GameObject:
   m_ObjectHideFlags: 0
@@ -7763,6 +7769,8 @@ MonoBehaviour:
   - {x: 0, y: 0}
   bControlsActive: 0
   bControlsDPad: 0
+  bOnlyDPad: 0
+  bOnlyJoystick: 0
   bUseFourButtons: 0
   currentContOpac: 0
   currentContDPad: 0
@@ -9306,6 +9314,7 @@ MonoBehaviour:
   chp1: {fileID: 0}
   contSupp: {fileID: 1163081862}
   treeTunnel: {fileID: 0}
+  tyTunnel: {fileID: 0}
   dMan: {fileID: 1865790888}
   save: {fileID: 0}
   screenOri: {fileID: 5186248832239742066}
@@ -9452,6 +9461,8 @@ MonoBehaviour:
   player: {fileID: 875949244}
   sFaderAnim: {fileID: 155552445}
   sFaderAnimDia: {fileID: 1288803991}
+  upStairsStairs: {fileID: 732916325}
+  upStairsStairsWarp: {fileID: 1452947033}
   inv: {fileID: 475676935}
   mMan: {fileID: 46970153}
   save: {fileID: 841729769}
@@ -12571,10 +12582,10 @@ MonoBehaviour:
   walkZone: {fileID: 2041298340}
   dMan: {fileID: 1865790888}
   npcRigidBody: {fileID: 1132203883}
-  lastMove: {x: 0, y: 0}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
   bCanMove: 0
+  bCollision: 0
   bHasWalkZone: 0
   bIsWalking: 0
   moveSpeed: 0.5
@@ -15151,6 +15162,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2849997245917478664, guid: 188a208e0b98b864ebb420573cb33984,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2849997245917478664, guid: 188a208e0b98b864ebb420573cb33984,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2849997245917478664, guid: 188a208e0b98b864ebb420573cb33984,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 822154387289207274, guid: 188a208e0b98b864ebb420573cb33984,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4772007366790695120, guid: 188a208e0b98b864ebb420573cb33984,
         type: 3}
       propertyPath: m_Name
@@ -16196,7 +16227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1452947034
 Transform:
   m_ObjectHideFlags: 0
@@ -19209,6 +19240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 875949248}
+  chp0: {fileID: 841729771}
   contSupp: {fileID: 1163081862}
   dMan: {fileID: 1865790888}
   player: {fileID: 875949244}

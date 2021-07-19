@@ -1,7 +1,7 @@
 // CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 06/28/2021
-// Last:  07/12/2021
+// Last:  07/13/2021
 
 using System.Collections;
 using UnityEngine;
@@ -109,6 +109,9 @@ public class CS_TyrannyTunnel : MonoBehaviour
 
         // Hide BrioBar & Pause Button (Opac)
         uMan.HideBrioAndButton();
+
+        // Hide controls
+        uMan.HideControls();
 
         // Get transfer items (if any)
         inv.LoadInventory("transfer");

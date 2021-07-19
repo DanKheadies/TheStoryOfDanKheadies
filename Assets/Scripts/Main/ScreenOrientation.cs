@@ -18,6 +18,8 @@ public class ScreenOrientation : MonoBehaviour
     public UIManager uMan;
 
     public bool bIsFull;
+    public bool bIsLandscape;
+    public bool bIsPortrait;
     public bool bSizingChange;
     
 	void Start ()
@@ -46,9 +48,27 @@ public class ScreenOrientation : MonoBehaviour
 
     public void CheckDeviceOrientation()
     {
-        if (Input.deviceOrientation != currentDevOr)
+        //if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft ||
+        //    Input.deviceOrientation == DeviceOrientation.LandscapeRight)
+        //{
+        //    bIsLandscape = true;
+        //    bIsPortrait = false;
+        //}
+        //else if (Input.deviceOrientation == DeviceOrientation.Portrait ||
+        //         Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
+        //{
+        //    bIsLandscape = false;
+        //    bIsPortrait = true;
+        //}
+
+        if (Input.deviceOrientation == DeviceOrientation.FaceUp ||
+            Input.deviceOrientation == DeviceOrientation.FaceDown)
+            return;
+        else if (Input.deviceOrientation != currentDevOr)
         {
             newDevOr = Input.deviceOrientation;
+            Debug.Log("cur: " + currentDevOr);
+            Debug.Log("new: " + newDevOr);
 
             if (((newDevOr == DeviceOrientation.Portrait ||
                   newDevOr == DeviceOrientation.PortraitUpsideDown) &&
@@ -72,6 +92,10 @@ public class ScreenOrientation : MonoBehaviour
 
     public void GetDeviceOrientation()
     {
+        if (Input.deviceOrientation == DeviceOrientation.FaceUp ||
+            Input.deviceOrientation == DeviceOrientation.FaceDown)
+            currentDevOr = DeviceOrientation.Unknown;
+
         currentDevOr = Input.deviceOrientation;
     }
 

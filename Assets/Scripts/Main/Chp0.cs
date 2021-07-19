@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  04/26/2021
+// Last:  07/18/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +22,8 @@ public class Chp0 : MonoBehaviour
     public GameObject player;
     public GameObject sFaderAnim;
     public GameObject sFaderAnimDia;
+    public GameObject upStairsStairs;
+    public GameObject upStairsStairsWarp;
     public Inventory inv;
     public MusicManager mMan;
     public SaveGame save;
@@ -31,6 +33,7 @@ public class Chp0 : MonoBehaviour
     public UIManager uMan;
 
     public bool bAvoidUpdate;
+    public bool bHasGoggles;
     public bool bStartGame;
     
     public string[] dialogueLines;
@@ -80,6 +83,9 @@ public class Chp0 : MonoBehaviour
             save.GetSavedGame();
 
             VisorCheck();
+
+            if (bHasGoggles)
+                RevealStairs();
             
             sFaderAnimDia.GetComponent<Animator>().enabled = true;
         }
@@ -130,6 +136,12 @@ public class Chp0 : MonoBehaviour
         }
     }
 
+    public void RevealStairs()
+    {
+        upStairsStairs.transform.localScale = Vector3.one;
+        upStairsStairsWarp.SetActive(true);
+    }
+
     public void VisorCheck()
     {
         // Item Check -- Check on VR Goggles to avoid farming
@@ -140,6 +152,7 @@ public class Chp0 : MonoBehaviour
 
             if (item == "VR.Goggles")
             {
+                bHasGoggles = true;
                 homeVRGoggles.transform.localScale = Vector3.zero;
             }
         }

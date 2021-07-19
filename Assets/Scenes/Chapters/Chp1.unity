@@ -44460,6 +44460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 769443537}
   camFollow: {fileID: 769443535}
+  contSupp: {fileID: 99891412}
   devDetect: {fileID: 841729772}
   dMan: {fileID: 1880181858}
   greatTree: {fileID: 18194764}
@@ -101822,8 +101823,8 @@ MonoBehaviour:
   action: 
   dialogueLines:
   - Hey Danketello! First day up and out eh? Welcome..
-  - ' iSkewl is just over there. I''ve been rehearsing a project'
-  - for history class. Wanna see it?
+  - iSkewl is just over there. I've been rehearsing a project
+  - for history class. Wanna check it?
 --- !u!60 &1883472435
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -101867,7 +101868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oMan: {fileID: 1880181860}
   options:
-  - Sure, let's hear it.
+  - Sure, let's do it.
   - Nah, perhaps later...
 --- !u!1 &1884072223
 GameObject:

@@ -15266,7 +15266,7 @@ Transform:
   m_GameObject: {fileID: 1444730139}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1820261577}
   m_RootOrder: 0
@@ -18699,6 +18699,8 @@ MonoBehaviour:
   sMan: {fileID: 2074391692}
   uMan: {fileID: 517931596}
   bIsFull: 0
+  bIsLandscape: 0
+  bIsPortrait: 0
   bSizingChange: 0
 --- !u!114 &1820261572
 MonoBehaviour:

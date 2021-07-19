@@ -45,6 +45,8 @@ public class UIManager : MonoBehaviour
 
     public bool bControlsActive;
     public bool bControlsDPad;
+    public bool bOnlyDPad;
+    public bool bOnlyJoystick;
     public bool bUseFourButtons;
 
     public float currentContOpac;

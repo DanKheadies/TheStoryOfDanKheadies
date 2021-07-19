@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/23/2019
-// Last:  04/26/2021
+// Last:  07/13/2021
 
 using UnityEngine;
 
@@ -11,11 +11,15 @@ public class PookieController : MonoBehaviour
     public GameObject warpPookieVision;
     public Inventory inv;
     public SaveGame save;
+    public UIManager uMan;
 
     void Start()
     {
         // Get transfer items (if any)
         inv.LoadInventory("transfer");
+
+        // Force dPad
+        uMan.DisplayDPad();
     }
 
     public void GG()

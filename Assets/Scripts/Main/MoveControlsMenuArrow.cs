@@ -227,7 +227,8 @@ public class MoveControlsMenuArrow : MonoBehaviour
                     uMan.ToggleControls();
                     touches.Vibrate();
                 }
-                else if (currentPosition == SelectorPosition.dPad)
+                else if (currentPosition == SelectorPosition.dPad &&
+                         !uMan.bOnlyDPad)
                 {
                     dPadToggle.isOn = !dPadToggle.isOn;
                     uMan.ToggleDPadControl();

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  04/26/2021
+// Last:  07/13/2021
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class ItemManager : MonoBehaviour
 {
     public Animator playerAnim;
+    public Chp0 chp0;
     public ControllerSupport contSupp;
     public DialogueManager dMan;
     public GameObject player;
@@ -142,6 +143,10 @@ public class ItemManager : MonoBehaviour
                 // Note: cannabis is taken care of in CannabisPlant.cs
                 GetComponent<BoxCollider2D>().enabled = false;
                 transform.localScale = Vector2.zero;
+
+                // Reveal stairs for Chp0
+                if (chp0)
+                    chp0.RevealStairs();
             }
 
             dMan.portPic = portPic;
