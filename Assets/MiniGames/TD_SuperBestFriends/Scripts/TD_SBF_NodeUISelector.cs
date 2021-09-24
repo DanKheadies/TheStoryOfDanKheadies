@@ -53,8 +53,8 @@ public class TD_SBF_NodeUISelector : MonoBehaviour
         }
 
         if (contSupp.bControllerConnected &&
-            upgradeShell.activeSelf &&
-            bIsNowNodeUIMode)
+            bIsNowNodeUIMode &&
+            upgradeShell.activeSelf)
         {
             // Controller Support 
             if (contSupp.ControllerRightJoystickVertical() == 0)

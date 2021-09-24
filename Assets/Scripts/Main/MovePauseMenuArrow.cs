@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 11/08/2017
-// Last:  04/26/2021
+// Last:  07/19/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -85,7 +85,9 @@ public class MovePauseMenuArrow : MonoBehaviour
         if (scene.name == "GuessWhoColluded")
             bIsGWC = true;
 
-        if (scene.name == "CS_TreeTunnel" || 
+        if (scene.name == "CS_ShadowMonster" ||
+            scene.name == "CS_TreeTunnel" ||
+            scene.name == "CS_TyrannyTunnel" ||
             scene.name == "GuessWhoColluded" ||
             scene.name == "Minesweeper" ||
             scene.name == "PookieVision")

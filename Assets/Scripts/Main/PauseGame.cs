@@ -1,8 +1,9 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/26/2017
-// Last:  04/26/2021
+// Last:  09/23/2021
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -88,6 +89,12 @@ public class PauseGame : MonoBehaviour
         }
     }
 
+    IEnumerator DelayUnpause()
+    {
+        yield return new WaitForSeconds(0.5f);
+        PausingDone();
+    }
+
     public void Pausing()
     {
         bPausing = true;
@@ -100,6 +107,12 @@ public class PauseGame : MonoBehaviour
 
     public void Pause()
     {
+        if (pauseScreen.localScale == Vector3.one &&
+            bPausing)
+        {
+            return;
+        }
+
         if (pauseScreen.localScale != Vector3.one)
         {
             controlsMenu.transform.localScale = Vector3.zero;
@@ -119,7 +132,7 @@ public class PauseGame : MonoBehaviour
             // "Lock" Joystick to vertical direction
             fixedJoy.joystickMode = JoystickMode.Vertical;
 
-            bPausing = false;
+            StartCoroutine(DelayUnpause());
             bPauseActive = true;
             playerMove.bStopPlayerMovement = true;
         }

@@ -106,6 +106,7 @@ public class TD_SBF_TouchControls : MonoBehaviour
     // Vibrate on touch
     public void Vibrate()
     {
+        Handheld.Vibrate();
         // DC 04/16/2019 -- Avoid showing in UnityEditor Log
 #if !UNITY_EDITOR
             if (bControlsVibrate)

@@ -1,7 +1,7 @@
 // CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 06/28/2021
-// Last:  07/13/2021
+// Last:  07/19/2021
 
 using System.Collections;
 using UnityEngine;
@@ -203,7 +203,6 @@ public class CS_TyrannyTunnel : MonoBehaviour
 
         // Set player scale to start transition
         player.transform.localScale = Vector3.one;
-        Debug.Log("setting player");
 
         // Freeze animation
         sceneAni.GetComponent<Animator>().enabled = false;

@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 10/08/2016
-// Last:  04/26/2021
+// Last:  07/21/2021
 
 using UnityEngine;
 
@@ -58,13 +58,15 @@ public class GameManagement : MonoBehaviour
     {
         IsLevelWon = true;
 
+        // Reward player
+        // TODO: Figure later on different levels / modes
+        PlayerPrefs.SetString("TransferActions", "Quest10Reward");
+
         Debug.Log("level won");
         Debug.Log("current level: " + PlayerPrefs.GetInt("levelReached"));
         // Unlock next level
         PlayerPrefs.SetInt("levelReached", (PlayerPrefs.GetInt("levelReached") + 1));
         Debug.Log("current level: " + PlayerPrefs.GetInt("levelReached"));
-
-        // TODO: Enable if device flips
 
         if (Screen.width >= Screen.height)
         {
@@ -81,8 +83,6 @@ public class GameManagement : MonoBehaviour
     void EndGame()
     {
         IsGameOver = true;
-
-        // TODO: Enable if device flips
 
         if (Screen.width >= Screen.height)
         {

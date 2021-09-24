@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 02/21/2020
-// Last:  04/26/2021
+// Last:  08/02/2021
 
 using System.Collections;
 using System.Collections.Generic;
@@ -104,7 +104,8 @@ public class ControllerSupport : MonoBehaviour
                 name.Contains("Xbox 360"))
                 bContIsXbox360 = true;
 
-            if (name.Contains("Xbox Wireless Controller"))
+            if (name.Contains("Xbox Wireless Controller") ||
+                name.Contains("Xbox Bluetooth Gamepad"))
                 bContIsXboxOne = true;
 
             if (name.Contains("USB Gamepad"))

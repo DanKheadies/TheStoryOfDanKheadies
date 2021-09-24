@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/21/2019
-// Last:  06/25/2021
+// Last:  09/08/2021
 
 using UnityEngine;
 
@@ -13,8 +13,10 @@ public class ScriptManager : MonoBehaviour
     public Chp0 chp0;
     public Chp1 chp1;
     public ControllerSupport contSupp;
+    public CS_ShadowMonster shadowMonster;
     public CS_TreeTunnel treeTunnel;
     public CS_TyrannyTunnel tyTunnel;
+    public CS_Wealthy wealthy;
     public DialogueManager dMan;
     public SaveGame save;
     public ScreenOrientation screenOri;
@@ -54,6 +56,11 @@ public class ScriptManager : MonoBehaviour
             else if (action == "SmoochyWoochy")
                 chp1.SmoochyWoochyCheck();
         }
+        else if (shadowMonster)
+        {
+            if (action == "WarpOut")
+                shadowMonster.CompleteCutscene();
+        }
         else if (treeTunnel)
         {
             if (action == "WarpOut")
@@ -63,6 +70,11 @@ public class ScriptManager : MonoBehaviour
         {
             if (action == "WarpOut")
                 tyTunnel.CompleteCutscene();
+        }
+        else if (wealthy)
+        {
+            if (action == "WarpOut")
+                wealthy.CompleteCutscene();
         }
     }
 
@@ -130,9 +142,7 @@ public class ScriptManager : MonoBehaviour
     public void SavingSpecificInfo()
     {
         if (chp1)
-        {
             chp1.SaveSpecificInfo();
-        }
     }
 
     public void ToggleDevSupport()

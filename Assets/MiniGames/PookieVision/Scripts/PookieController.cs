@@ -1,8 +1,9 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/23/2019
-// Last:  07/13/2021
+// Last:  07/21/2021
 
+using System.Collections;
 using UnityEngine;
 
 public class PookieController : MonoBehaviour
@@ -20,6 +21,16 @@ public class PookieController : MonoBehaviour
 
         // Force dPad
         uMan.DisplayDPad();
+
+        // Complete quest after timer
+        StartCoroutine(QuestReward());
+    }
+    IEnumerator QuestReward()
+    {
+        yield return new WaitForSeconds(260f);
+
+        // Reward 
+        PlayerPrefs.SetString("TransferActions", "Quest9Reward");
     }
 
     public void GG()

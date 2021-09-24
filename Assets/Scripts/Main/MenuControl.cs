@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/26/2021
+// Last:  09/23/2021
 
 using System.Collections;
 using UnityEngine;
@@ -61,20 +61,12 @@ public class MenuControl : MonoBehaviour
         {
             bHasSavedData = true;
 
-            //currentPosition = SelectionPosition.GoOn;
-
             startB.transform.localScale = Vector3.zero;
             goOnB.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
             newB.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         }
-        //else
-        //    currentPosition = SelectionPosition.Start;
-
-        //if (device.bIsMobile ||
-        //    !contSupp.bControllerConnected)
-        //{
+        
         currentPosition = SelectionPosition.Nothing;
-        //}
 
         StartCoroutine(InitialDelayedSelection());
     }
@@ -138,14 +130,17 @@ public class MenuControl : MonoBehaviour
 
         if ((contSupp.ControllerButtonPadBottom("down") ||
              Input.GetKeyDown(KeyCode.Space)) &&
-             bIsSelectable) // &&
-             //!bAvoidSelection)
+             bIsSelectable)
         {
             //Debug.Log("selecting...");
             SelectOption();
         }
 
         // Controller Support 
+        // DC TODO -- Controller wide support for drift
+        // Noticed here, but is present everywhere (other menus, walking, etc.)
+        // Drift causes the bFreeze to "malfunction" and the stick has to be toggled to free it
+        // Should re-work my controller logic or find a way to "clear" drift
         if (!contSupp.bIsMoving)
             bFreezeControllerInput = false;
 

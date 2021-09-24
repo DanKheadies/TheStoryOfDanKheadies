@@ -12879,6 +12879,8 @@ MonoBehaviour:
   - {x: 0, y: 0}
   bControlsActive: 0
   bControlsDPad: 0
+  bOnlyDPad: 0
+  bOnlyJoystick: 0
   bUseFourButtons: 0
   currentContOpac: 0
   currentContDPad: 0
@@ -39763,12 +39765,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectUtil: {fileID: 1820261572}
   dMan: {fileID: 1137910804}
-  devOr: 0
+  currentDevOr: 0
+  newDevOr: 0
   fixedJoy: {fileID: 945577419}
   oMan: {fileID: 1137910805}
   sMan: {fileID: 2074391692}
   uMan: {fileID: 517931596}
   bIsFull: 0
+  bIsLandscape: 0
+  bIsPortrait: 0
   bSizingChange: 0
 --- !u!114 &1820261572
 MonoBehaviour:
@@ -45642,7 +45647,9 @@ MonoBehaviour:
   chp0: {fileID: 0}
   chp1: {fileID: 0}
   contSupp: {fileID: 0}
+  shadowMonster: {fileID: 0}
   treeTunnel: {fileID: 0}
+  tyTunnel: {fileID: 0}
   dMan: {fileID: 1137910804}
   save: {fileID: 0}
   screenOri: {fileID: 1820261571}

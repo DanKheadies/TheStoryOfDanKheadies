@@ -2,7 +2,7 @@
 // Authors: Asbjørn / Brackeys
 // Contributors: David W. Corso
 // Start: 09/11/2019
-// Last:  06/26/2021
+// Last:  07/21/2021
 
 using UnityEngine;
 
@@ -69,13 +69,15 @@ public class TD_SBF_GameManagement : MonoBehaviour
     {
         IsLevelWon = true;
 
+        // Reward player
+        // TODO: Figure later on different levels / modes
+        PlayerPrefs.SetString("TransferActions", "Quest11Reward");
+
         Debug.Log("level won");
         Debug.Log("current level: " + PlayerPrefs.GetInt("TD_SBF_LevelReached"));
         // Unlock next level
         PlayerPrefs.SetInt("TD_SBF_LevelReached", (PlayerPrefs.GetInt("TD_SBF_LevelReached") + 1));
         Debug.Log("current level: " + PlayerPrefs.GetInt("TD_SBF_LevelReached"));
-
-        // TODO: Enable if device flips
 
         if (Screen.width >= Screen.height)
         {
@@ -92,8 +94,6 @@ public class TD_SBF_GameManagement : MonoBehaviour
     void EndGame()
     {
         IsGameOver = true;
-
-        // TODO: Enable if device flips
 
         if (Screen.width >= Screen.height)
         {

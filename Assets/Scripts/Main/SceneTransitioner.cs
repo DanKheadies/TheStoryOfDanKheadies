@@ -2,7 +2,7 @@
 // Authors: David W. Corso
 // Contributors: Nick Pettit
 // Start: 04/20/2017
-// Last:  07/12/2021
+// Last:  09/08/2021
 
 using System.Collections;
 using UnityEngine;
@@ -59,6 +59,10 @@ public class SceneTransitioner : MonoBehaviour
                         sceneTitle.text = "Chapter 1";
                         sceneSubtitle.text = "In the beginning...";
                         break;
+                    case "CS_ShadowMonster":
+                        sceneTitle.text = "Be a Monster";
+                        sceneSubtitle.text = "Akira's Shadow";
+                        break;
                     case "CS_TreeTunnel":
                         sceneTitle.text = "A Great Tree";
                         sceneSubtitle.text = "Offering you a branch..";
@@ -66,6 +70,10 @@ public class SceneTransitioner : MonoBehaviour
                     case "CS_TyrannyTunnel":
                         sceneTitle.text = "I'm So Tired";
                         sceneSubtitle.text = "/u/SnowflakeSorcerer & @TheBirminghamBear";
+                        break;
+                    case "CS_Wealthy":
+                        sceneTitle.text = "Be Wealthy";
+                        sceneSubtitle.text = "Akira's How To";
                         break;
                     case "Minesweeper":
                         sceneTitle.text = "Minesweeper";

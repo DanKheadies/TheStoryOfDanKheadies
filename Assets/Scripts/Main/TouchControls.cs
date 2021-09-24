@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  04/26/2021
+// Last:  09/23/2021
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -47,9 +47,10 @@ public class TouchControls : MonoBehaviour
         // Sets initial vibrate based off saved data
         if (!PlayerPrefs.HasKey("ControlsVibrate"))
         {
-            currentContVibe = 1;
-            vibeTog.isOn = true;
-            bControlsVibrate = true;
+            // DC TODO -- Implement a more controlled vibration; removing vibrate on start-up til then
+            currentContVibe = 0;
+            vibeTog.isOn = false;
+            bControlsVibrate = false; 
         }
         else
         {

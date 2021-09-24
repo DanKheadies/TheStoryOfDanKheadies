@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 06/03/2018
-// Last:  04/26/2021
+// Last:  07/21/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -177,8 +177,6 @@ public class Minesweeper : MonoBehaviour
         npc_chun.transform.GetChild(0).GetComponent<DialogueHolder>().bContinueDialogue = true;
         dMan.PauseDialogue();
 
-        // Ask about difficulty
-
         // Reward 
         PlayerPrefs.SetString("TransferActions", "Quest6Reward");
     }
@@ -189,8 +187,6 @@ public class Minesweeper : MonoBehaviour
         npc_chun.transform.GetChild(1).gameObject.SetActive(true);
         npc_chun.transform.GetChild(1).GetComponent<DialogueHolder>().bContinueDialogue = true;
         dMan.PauseDialogue();
-
-        // Ask about difficulty
     }
 
     public void MinesweeperDialogueCheck()

@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/02/2018
-// Last:  06/28/2021
+// Last:  07/21/2021
 
 using UnityEngine;
 
@@ -48,39 +48,31 @@ public class ScreenOrientation : MonoBehaviour
 
     public void CheckDeviceOrientation()
     {
-        //if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft ||
-        //    Input.deviceOrientation == DeviceOrientation.LandscapeRight)
-        //{
-        //    bIsLandscape = true;
-        //    bIsPortrait = false;
-        //}
-        //else if (Input.deviceOrientation == DeviceOrientation.Portrait ||
-        //         Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
-        //{
-        //    bIsLandscape = false;
-        //    bIsPortrait = true;
-        //}
-
         if (Input.deviceOrientation == DeviceOrientation.FaceUp ||
             Input.deviceOrientation == DeviceOrientation.FaceDown)
             return;
         else if (Input.deviceOrientation != currentDevOr)
         {
-            newDevOr = Input.deviceOrientation;
-            Debug.Log("cur: " + currentDevOr);
-            Debug.Log("new: " + newDevOr);
+            //if (currentDevOr == DeviceOrientation.Unknown)
+            //    GetDeviceOrientation();
 
-            if (((newDevOr == DeviceOrientation.Portrait ||
-                  newDevOr == DeviceOrientation.PortraitUpsideDown) &&
-                 (currentDevOr == DeviceOrientation.LandscapeLeft ||
-                  currentDevOr == DeviceOrientation.LandscapeRight)) ||
-                ((newDevOr == DeviceOrientation.LandscapeLeft ||
-                  newDevOr == DeviceOrientation.LandscapeRight) &&
-                 (currentDevOr == DeviceOrientation.Portrait ||
-                  currentDevOr == DeviceOrientation.PortraitUpsideDown)))
-            {
+            //newDevOr = Input.deviceOrientation;
+            //Debug.Log("cur: " + currentDevOr);
+            //Debug.Log("new: " + newDevOr);
+
+            //if (((newDevOr == DeviceOrientation.Portrait ||
+            //      newDevOr == DeviceOrientation.PortraitUpsideDown) &&
+            //     (currentDevOr == DeviceOrientation.LandscapeLeft ||
+            //      currentDevOr == DeviceOrientation.LandscapeRight)) ||
+            //    ((newDevOr == DeviceOrientation.LandscapeLeft ||
+            //      newDevOr == DeviceOrientation.LandscapeRight) &&
+            //     (currentDevOr == DeviceOrientation.Portrait ||
+            //      currentDevOr == DeviceOrientation.PortraitUpsideDown)))
+            //if (newDevOr != currentDevOr)
+            //{
+            Debug.Log("changing");
                 bSizingChange = true;
-            }
+            //}
         }
 
         if (bIsFull != Screen.fullScreen)
@@ -95,8 +87,8 @@ public class ScreenOrientation : MonoBehaviour
         if (Input.deviceOrientation == DeviceOrientation.FaceUp ||
             Input.deviceOrientation == DeviceOrientation.FaceDown)
             currentDevOr = DeviceOrientation.Unknown;
-
-        currentDevOr = Input.deviceOrientation;
+        else 
+            currentDevOr = Input.deviceOrientation;
     }
 
     public void ResetParameters()

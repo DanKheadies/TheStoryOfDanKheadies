@@ -13123,6 +13123,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 781125122594661686, guid: 774bf80073c8e6247a8d4e3749274d19,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1773061431737714471, guid: 774bf80073c8e6247a8d4e3749274d19,
         type: 3}
       propertyPath: m_Enabled
@@ -15455,7 +15460,7 @@ MonoBehaviour:
   cFollow: {fileID: 769443535}
   player: {fileID: 875949246}
   sFader: {fileID: 155552450}
-  touches: {fileID: 0}
+  touches: {fileID: 570562711}
   warpTarget: {fileID: 1370055029}
   AnandaCoord: 0
 --- !u!61 &306881856
@@ -19482,7 +19487,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.14, y: 0.22}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.14, y: 0.22}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -19551,12 +19556,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 23
-  m_Sprite: {fileID: 21300000, guid: cf66fff0d02c26b4c857e88f1e2e08d7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fcf61f4d8d2d856498deecfae2acb239, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.14, y: 0.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -21608,7 +21613,7 @@ MonoBehaviour:
   cFollow: {fileID: 769443535}
   player: {fileID: 875949246}
   sFader: {fileID: 155552450}
-  touches: {fileID: 0}
+  touches: {fileID: 570562711}
   warpTarget: {fileID: 1154143074}
   AnandaCoord: 0
 --- !u!61 &410730589
@@ -31418,7 +31423,7 @@ MonoBehaviour:
   cFollow: {fileID: 769443535}
   player: {fileID: 875949246}
   sFader: {fileID: 155552450}
-  touches: {fileID: 0}
+  touches: {fileID: 570562711}
   warpTarget: {fileID: 486191113}
   AnandaCoord: 0
 --- !u!61 &615586813
@@ -33227,6 +33232,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1394304448}
+  - {fileID: 1006967537}
+  - {fileID: 2112464069}
+  - {fileID: 800453557}
   m_Father: {fileID: 1658427972}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -37928,7 +37936,7 @@ MonoBehaviour:
   cFollow: {fileID: 769443535}
   player: {fileID: 875949246}
   sFader: {fileID: 155552450}
-  touches: {fileID: 0}
+  touches: {fileID: 570562711}
   warpTarget: {fileID: 2000753386}
   AnandaCoord: 0
 --- !u!61 &735438912
@@ -39104,7 +39112,7 @@ MonoBehaviour:
   cFollow: {fileID: 769443535}
   player: {fileID: 875949246}
   sFader: {fileID: 155552450}
-  touches: {fileID: 0}
+  touches: {fileID: 570562711}
   warpTarget: {fileID: 1376857649}
   AnandaCoord: 0
 --- !u!61 &757208932
@@ -41142,6 +41150,8 @@ MonoBehaviour:
   - {x: 0, y: 0}
   bControlsActive: 0
   bControlsDPad: 0
+  bOnlyDPad: 0
+  bOnlyJoystick: 0
   bUseFourButtons: 0
   currentContOpac: 0
   currentContDPad: 0
@@ -42027,6 +42037,89 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799097456}
   m_CullTransparentMesh: 0
+--- !u!1 &800453556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 800453557}
+  - component: {fileID: 800453559}
+  - component: {fileID: 800453558}
+  m_Layer: 0
+  m_Name: Chp1.to.CS_Wealthy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &800453557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800453556}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 651385048}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &800453558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800453556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b56044d191f45f449c828fa834b1b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  contSupp: {fileID: 99891412}
+  scene:
+    m_Handle: 0
+  sceneSubtitle: {fileID: 0}
+  sceneTitle: {fileID: 0}
+  smokeRings: {fileID: 0}
+  bLoadScene: 0
+  bNeedsTimer: 0
+  bAnimationToTransitionScene: 0
+  timeToLoad: 0.001
+  AlphaLoad: SceneTransitioner
+  BetaLoad: CS_Wealthy
+--- !u!61 &800453559
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800453556}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5}
+  m_EdgeRadius: 0
 --- !u!1 &807656990
 GameObject:
   m_ObjectHideFlags: 0
@@ -43760,7 +43853,7 @@ MonoBehaviour:
   cFollow: {fileID: 769443535}
   player: {fileID: 875949246}
   sFader: {fileID: 155552450}
-  touches: {fileID: 0}
+  touches: {fileID: 570562711}
   warpTarget: {fileID: 527502866}
   AnandaCoord: 0
 --- !u!61 &829267701
@@ -44322,8 +44415,10 @@ MonoBehaviour:
   chp0: {fileID: 0}
   chp1: {fileID: 841729771}
   contSupp: {fileID: 0}
+  shadowMonster: {fileID: 0}
   treeTunnel: {fileID: 0}
   tyTunnel: {fileID: 0}
+  wealthy: {fileID: 0}
   dMan: {fileID: 1880181858}
   save: {fileID: 841729769}
   screenOri: {fileID: 769443538}
@@ -44524,12 +44619,16 @@ MonoBehaviour:
   quest10: {fileID: 502026026}
   quest11: {fileID: 714060920}
   quest12: {fileID: 408274759}
+  quest13: {fileID: 1915551915}
+  quest14: {fileID: 1778459670}
   questTrigger1: {fileID: 612160514}
   questTrigger2: {fileID: 1599190429}
   screenFader: {fileID: 155552445}
   treeHouseDoor: {fileID: 316947528}
+  warpCSShadowMonster: {fileID: 2112464066}
   warpCSTreeTunnel: {fileID: 565295443}
   warpCSTyrannyTunnel: {fileID: 333103893}
+  warpCSWealthy: {fileID: 800453556}
   warpGWC: {fileID: 1337416201}
   warpMinesweeper: {fileID: 672920307}
   warpPookieVision: {fileID: 968759459}
@@ -47874,7 +47973,7 @@ MonoBehaviour:
   cFollow: {fileID: 769443535}
   player: {fileID: 875949246}
   sFader: {fileID: 155552450}
-  touches: {fileID: 0}
+  touches: {fileID: 570562711}
   warpTarget: {fileID: 1697228260}
   AnandaCoord: 0
 --- !u!61 &889289063
@@ -51392,7 +51491,7 @@ MonoBehaviour:
   cFollow: {fileID: 769443535}
   player: {fileID: 875949246}
   sFader: {fileID: 155552450}
-  touches: {fileID: 0}
+  touches: {fileID: 570562711}
   warpTarget: {fileID: 857001025}
   AnandaCoord: 23
 --- !u!61 &966161848
@@ -52621,6 +52720,114 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002856153}
   m_CullTransparentMesh: 0
+--- !u!1 &1006967536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1006967537}
+  - component: {fileID: 1006967539}
+  - component: {fileID: 1006967538}
+  - component: {fileID: 1006967540}
+  m_Layer: 0
+  m_Name: DialogueZone2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1006967537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006967536}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_Children: []
+  m_Father: {fileID: 651385048}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1006967538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006967536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d54c8da22bff46419731d3bba7bae75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 651712916}
+  colliEnter: {fileID: 0}
+  contSupp: {fileID: 99891412}
+  dMan: {fileID: 1880181858}
+  pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
+  portPic: {fileID: 21300000, guid: 30b885a9c033d6e4389f527a1091fddf, type: 3}
+  touches: {fileID: 570562711}
+  uMan: {fileID: 783566141}
+  bActionOnClose: 0
+  bContinueDialogue: 0
+  bHasEntered: 0
+  bHasExited: 0
+  action: 
+  dialogueLines:
+  - Hopefully this helps you acheive your potential...
+  - Care to listen to anything else?
+--- !u!60 &1006967539
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006967536}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.0005865097, y: 0.25744724}
+      - {x: 0.25175986, y: 0.0010722479}
+      - {x: 0.0001227061, y: -0.25014114}
+      - {x: -0.25205263, y: -0.005599022}
+--- !u!114 &1006967540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006967536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e170fc8c9217ef40a0a7f1de9e47582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oMan: {fileID: 1880181860}
+  options:
+  - Be a Monster
+  - Everyone Can be Wealthy
+  - Nah, GLHF dude..
 --- !u!1 &1007829775
 GameObject:
   m_ObjectHideFlags: 0
@@ -57413,7 +57620,7 @@ Animator:
   m_GameObject: {fileID: 1076638070}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dcc3e594ff389434fba59eff717c8fb4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9b58ee3b1e477d64ab1bc33402185c06, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -57537,7 +57744,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 23
-  m_Sprite: {fileID: 21300000, guid: dcb7760d072696c49a095082884bdf6e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 349c4973425994949ac0b1591b3f4c15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -69391,7 +69598,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 23
-  m_Sprite: {fileID: 21300000, guid: af0d9c7d00792854bb10109b85f24031, type: 3}
+  m_Sprite: {fileID: 21300000, guid: df3ed638f34fd3a458fd5b7736f51ca0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -71460,7 +71667,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 23
-  m_Sprite: {fileID: 21300000, guid: af0d9c7d00792854bb10109b85f24031, type: 3}
+  m_Sprite: {fileID: 21300000, guid: df3ed638f34fd3a458fd5b7736f51ca0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -74221,6 +74428,7 @@ GameObject:
   - component: {fileID: 1394304448}
   - component: {fileID: 1394304450}
   - component: {fileID: 1394304449}
+  - component: {fileID: 1394304451}
   m_Layer: 0
   m_Name: DialogueZone
   m_TagString: Untagged
@@ -74270,8 +74478,8 @@ MonoBehaviour:
   action: 
   dialogueLines:
   - Yo, name's Akira.
-  - I'm taking a quick sec before I go back to the booth.
-  - I'll show you what I'm working on in a bit.
+  - I'm taking a quick sec before I go back to the grind...
+  - Wanna see what I'm working on?
 --- !u!60 &1394304450
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -74301,6 +74509,23 @@ PolygonCollider2D:
       - {x: 0.25175986, y: 0.0010722479}
       - {x: 0.0001227061, y: -0.25014114}
       - {x: -0.25205263, y: -0.005599022}
+--- !u!114 &1394304451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394304447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e170fc8c9217ef40a0a7f1de9e47582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oMan: {fileID: 1880181860}
+  options:
+  - Be a Monster
+  - Everyone Can be Wealthy
+  - Naaaahhhhh.. GLHF tho.
 --- !u!1 &1395845278
 GameObject:
   m_ObjectHideFlags: 0
@@ -80102,6 +80327,7 @@ GameObject:
   - component: {fileID: 1490998101}
   - component: {fileID: 1490998103}
   - component: {fileID: 1490998102}
+  - component: {fileID: 1490998104}
   m_Layer: 0
   m_Name: DialogueZone2
   m_TagString: Untagged
@@ -80181,6 +80407,28 @@ PolygonCollider2D:
       - {x: 0.25175986, y: 0.0010722479}
       - {x: 0.0001227061, y: -0.25014114}
       - {x: -0.25205263, y: -0.005599022}
+--- !u!114 &1490998104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490998100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181ddc14ac81eed4daec3af3e0b231e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcAnim: {fileID: 651712916}
+  dMan: {fileID: 1880181858}
+  qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
+  spRend: {fileID: 651712920}
+  bActionOnClose: 0
+  bBeginQuest: 0
+  bEndQuest: 1
+  questNumber: 12
+  action: 
 --- !u!1001 &1492817264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82508,8 +82756,8 @@ MonoBehaviour:
   bHasExited: 0
   action: 
   dialogueLines:
-  - Ho Dan, I'm about to add difficulty levels to Minesweeper.
-  - Wanna play the basic version before I do that?
+  - Ho Dan, care for some old school glory?
+  - Minesweeper is on the menu today. Care to eat?
 --- !u!114 &1525022432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82524,8 +82772,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oMan: {fileID: 1880181860}
   options:
-  - Sure. Let's play!
-  - Nah, perhaps later...
+  - Chya, a basic serving!
+  - Sure, with a lil spicy..
+  - Give me something intense!
+  - Nah, I'm full right meow.
 --- !u!1 &1525610619
 GameObject:
   m_ObjectHideFlags: 0
@@ -86053,6 +86303,114 @@ PolygonCollider2D:
       - {x: 0.87067217, y: 0.22413372}
       - {x: 0.8700555, y: -0.4090869}
       - {x: -0.69546753, y: -0.40908054}
+--- !u!1 &1592462278
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1592462279}
+  - component: {fileID: 1592462282}
+  - component: {fileID: 1592462281}
+  - component: {fileID: 1592462280}
+  m_Layer: 0
+  m_Name: DialogueZone2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1592462279
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592462278}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2095739430}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1592462280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592462278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e170fc8c9217ef40a0a7f1de9e47582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oMan: {fileID: 1880181860}
+  options:
+  - A basic serving!
+  - A lil spice..
+  - Something intense!
+  - I'm full right meow.
+--- !u!114 &1592462281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592462278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d54c8da22bff46419731d3bba7bae75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 2095739431}
+  colliEnter: {fileID: 0}
+  contSupp: {fileID: 99891412}
+  dMan: {fileID: 1880181858}
+  pause: {fileID: 841729768}
+  scriptMan: {fileID: 841729765}
+  portPic: {fileID: 21300000, guid: b9a7fea6747b7f544a4b817add47c0fb, type: 3}
+  touches: {fileID: 570562711}
+  uMan: {fileID: 783566141}
+  bActionOnClose: 0
+  bContinueDialogue: 0
+  bHasEntered: 0
+  bHasExited: 0
+  action: 
+  dialogueLines:
+  - Nice, now that you're warmed up, what can I offer you?
+--- !u!60 &1592462282
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592462278}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.0005865097, y: 0.25744724}
+      - {x: 0.25175986, y: 0.0010722479}
+      - {x: 0.0001227061, y: -0.25014114}
+      - {x: -0.25205263, y: -0.005599022}
 --- !u!1 &1599190429
 GameObject:
   m_ObjectHideFlags: 0
@@ -91711,7 +92069,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 23
-  m_Sprite: {fileID: 21300000, guid: af0d9c7d00792854bb10109b85f24031, type: 3}
+  m_Sprite: {fileID: 21300000, guid: df3ed638f34fd3a458fd5b7736f51ca0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96749,6 +97107,61 @@ PolygonCollider2D:
       - {x: 0.87067217, y: 0.22413372}
       - {x: 0.8700555, y: -0.4090869}
       - {x: -0.69546753, y: -0.40908054}
+--- !u!1 &1778459670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1778459672}
+  - component: {fileID: 1778459671}
+  m_Layer: 0
+  m_Name: Quest_14
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1778459671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778459670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efbf76c65fdcf6a4f87e30f35e1df6ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dMan: {fileID: 1880181858}
+  qMan: {fileID: 2041127070}
+  sMan: {fileID: 841729765}
+  portPic: {fileID: 21300000, guid: cb0a295efb692dc4d967fcbe460a2fb7, type: 3}
+  bActionOnClose: 0
+  bHasStarted: 0
+  bHasEnded: 0
+  bHasCollected: 0
+  questNumber: 14
+  action: 
+  beginText: []
+  endText: []
+--- !u!4 &1778459672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778459670}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2041127069}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1779665545
 GameObject:
   m_ObjectHideFlags: 0
@@ -101774,6 +102187,7 @@ GameObject:
   - component: {fileID: 1883472435}
   - component: {fileID: 1883472434}
   - component: {fileID: 1883472436}
+  - component: {fileID: 1883472437}
   m_Layer: 0
   m_Name: DialogueZone
   m_TagString: Untagged
@@ -101870,6 +102284,28 @@ MonoBehaviour:
   options:
   - Sure, let's do it.
   - Nah, perhaps later...
+--- !u!114 &1883472437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883472432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181ddc14ac81eed4daec3af3e0b231e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcAnim: {fileID: 651712916}
+  dMan: {fileID: 1880181858}
+  qMan: {fileID: 2041127070}
+  scriptMan: {fileID: 841729765}
+  spRend: {fileID: 651712920}
+  bActionOnClose: 0
+  bBeginQuest: 1
+  bEndQuest: 0
+  questNumber: 12
+  action: 
 --- !u!1 &1884072223
 GameObject:
   m_ObjectHideFlags: 0
@@ -103430,6 +103866,61 @@ PolygonCollider2D:
       - {x: 0.87067217, y: 0.22413372}
       - {x: 0.8700555, y: -0.4090869}
       - {x: -0.69546753, y: -0.40908054}
+--- !u!1 &1915551915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1915551917}
+  - component: {fileID: 1915551916}
+  m_Layer: 0
+  m_Name: Quest_13
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1915551916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915551915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efbf76c65fdcf6a4f87e30f35e1df6ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dMan: {fileID: 1880181858}
+  qMan: {fileID: 2041127070}
+  sMan: {fileID: 841729765}
+  portPic: {fileID: 21300000, guid: cb0a295efb692dc4d967fcbe460a2fb7, type: 3}
+  bActionOnClose: 0
+  bHasStarted: 0
+  bHasEnded: 0
+  bHasCollected: 0
+  questNumber: 13
+  action: 
+  beginText: []
+  endText: []
+--- !u!4 &1915551917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915551915}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2041127069}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1916011502
 GameObject:
   m_ObjectHideFlags: 0
@@ -109893,6 +110384,8 @@ Transform:
   - {fileID: 502026028}
   - {fileID: 714060922}
   - {fileID: 408274761}
+  - {fileID: 1915551917}
+  - {fileID: 1778459672}
   m_Father: {fileID: 841729766}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -109923,6 +110416,8 @@ MonoBehaviour:
   - {fileID: 502026027}
   - {fileID: 714060921}
   - {fileID: 408274760}
+  - {fileID: 1915551916}
+  - {fileID: 1778459671}
   questsStarted: 
   questsEnded: 
   questsCollected: 
@@ -110464,6 +110959,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WestArm
       objectReference: {fileID: 0}
+    - target: {fileID: 2715838064607969376, guid: 3f9fad2f485786b4a950b5e6c9c45854,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: -2695619058785784247, guid: 3f9fad2f485786b4a950b5e6c9c45854,
     type: 3}
@@ -110519,6 +111019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 875949248}
+  chp0: {fileID: 0}
   contSupp: {fileID: 99891412}
   dMan: {fileID: 1880181858}
   player: {fileID: 875949244}
@@ -112348,7 +112849,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 23
-  m_Sprite: {fileID: 21300000, guid: af0d9c7d00792854bb10109b85f24031, type: 3}
+  m_Sprite: {fileID: 21300000, guid: df3ed638f34fd3a458fd5b7736f51ca0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -112478,6 +112979,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1525022429}
+  - {fileID: 1592462279}
   m_Father: {fileID: 1971630148}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -113332,6 +113834,89 @@ PolygonCollider2D:
       - {x: 0.87067217, y: 0.22413372}
       - {x: 0.8700555, y: -0.4090869}
       - {x: -0.69546753, y: -0.40908054}
+--- !u!1 &2112464066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2112464069}
+  - component: {fileID: 2112464068}
+  - component: {fileID: 2112464067}
+  m_Layer: 0
+  m_Name: Chp1.to.CS_ShadowMonster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2112464067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112464066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b56044d191f45f449c828fa834b1b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  contSupp: {fileID: 99891412}
+  scene:
+    m_Handle: 0
+  sceneSubtitle: {fileID: 0}
+  sceneTitle: {fileID: 0}
+  smokeRings: {fileID: 0}
+  bLoadScene: 0
+  bNeedsTimer: 0
+  bAnimationToTransitionScene: 0
+  timeToLoad: 0.001
+  AlphaLoad: SceneTransitioner
+  BetaLoad: CS_ShadowMonster
+--- !u!61 &2112464068
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112464066}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5}
+  m_EdgeRadius: 0
+--- !u!4 &2112464069
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112464066}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 651385048}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2113526708
 GameObject:
   m_ObjectHideFlags: 0

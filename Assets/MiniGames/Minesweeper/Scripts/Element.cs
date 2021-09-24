@@ -2,7 +2,7 @@
 // Authors: noobtuts.com
 // Contributors: David W. Corso
 // Start: 05/20/2018
-// Last:  04/26/2021
+// Last:  07/21/2021
 
 using System.Collections;
 using UnityEngine;
@@ -29,8 +29,14 @@ public class Element : MonoBehaviour
 
     void Start()
     {
-        //mineProbability = 0.01f;
-        mineProbability = 0.15f; // DC TODO set different skill levels
+        if (PlayerPrefs.GetInt("MinesweeperDifficulty") == 1)
+            mineProbability = 0.15f;
+        else if (PlayerPrefs.GetInt("MinesweeperDifficulty") == 2)
+            mineProbability = 0.215f;
+        else if (PlayerPrefs.GetInt("MinesweeperDifficulty") == 3)
+            mineProbability = 0.333f;
+        else
+            mineProbability = 0.01f;
 
         Initialize();
     }
