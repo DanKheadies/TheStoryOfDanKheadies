@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 12/10/2019
-// Last:  06/27/2021
+// Last:  09/27/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -106,7 +106,7 @@ public class TD_SBF_TouchControls : MonoBehaviour
     // Vibrate on touch
     public void Vibrate()
     {
-        Handheld.Vibrate();
+        //Handheld.Vibrate();
         // DC 04/16/2019 -- Avoid showing in UnityEditor Log
 #if !UNITY_EDITOR
             if (bControlsVibrate)

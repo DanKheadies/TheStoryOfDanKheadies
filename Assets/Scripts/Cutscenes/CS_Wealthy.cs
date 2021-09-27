@@ -1,7 +1,7 @@
 // CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/08/2021
-// Last:  09/23/2021
+// Last:  09/27/2021
 
 using System.Collections;
 using UnityEngine;
@@ -42,8 +42,70 @@ public class CS_Wealthy : MonoBehaviour
         player.GetComponent<PlayerMovement>().bStopPlayerMovement = true;
 
         dialogueLines = new string[] {
-            "I read this New Testament line decades ago..",
-            "I could never understand it."
+            "Overall, capitalism is intrinsic to the human species.",
+            "Capitalism is not something we invented.",
+            "It's not even something we discovered.",
+            "It is innate to us in every exchange that we have.",
+            "When you and I exchange information, I want some information",
+            "back from you. I give you information, you give me information.",
+            "If we weren't having a good information exchange, you'd go ",
+            "talk to someone else. So the notion of exchange and keeping track",
+            "of debits and credits is built into us as flexible, social animals.",
+            "Even if we have very little in common, we can still cooperate.",
+            "And what lets us cooperate is we can keep track of debits and",
+            "credits: who put in how much.",
+            "That's all free market capitalism is.",
+            "So I strongly believe that it is innate to the human species.",
+            "And that we are going to create more and more wealth and",
+            "abundance for everybody.",
+            "Everybody can be wealthy.",
+            "Everybody can be retired.",
+            "Everybody can be successful.",
+            "It is merely a question of education and desire..",
+            "You have to want it.",
+            "If you don't want it, that's fine. Then you opt out of the game.",
+            "But don't put down the people who are playing the game. Because",
+            "that's the game that keeps you in a comfortable, warm bed at night.",
+            "That's the game that keeps a roof over your head.",
+            "That's the game that keeps your supermarket stocked.",
+            "That's the game that keeps the iPhone buzzing in your pocket.",
+            "It is a beautiful game that is worth playing ethically.",
+            "Rationally.",
+            "Morally.",
+            "And socially for the human race.",
+            "And it's going to continue to make us all richer and richer until",
+            "we have massive wealth creation for anybody who wants it.",
+            "The US is a very popular country for immigrants because of ",
+            "the American Dream. Anyone can come here, be poor, work hard, ",
+            "make money, and get wealthy. But if you get too many takers and",
+            "not enough makers, society falls apart.",
+            "Imagine an organism that has too many parasites.",
+            "You actually need some small number of parasites to stay healthy.",
+            "And you need a lot of symbiotes, like all the mitochondria in all",
+            "of our cells that help us respirate and burn oxygen.",
+            "These are symbiotes that help us survive.",
+            "And we couldn't survive without them.",
+            "But to me, those are partners in the wealth creation that",
+            "creates the human body.",
+            "But if you were just filled with parasites, you would die.",
+            "Any organism can only withstand a small number of parasites.",
+            "And when the parasitic element gets too far out of control, you die.",
+            "Everybody can be wealthy.",
+            "Everybody can be retired.",
+            "Everybody can be successful.",
+            "It is merely a question of education and desire..",
+            "You have to want it.",
+            "I'm talking about ethical, wealth creation.",
+            "I'm not talking about monopolies.",
+            "I'm not talking about crony capitalism.",
+            "I'm not talking about mispriced externalities, like the environment.",
+            "I'm talking about free minds and free markets.",
+            "Small scale exchange between humans as voluntary and doesn't have",
+            "an outside impact on others.",
+            "But I think that kind of wealth creation,",
+            "if a society doesn't respect it,",
+            "the group does not respect it,",
+            "that society will plunge into ruin and darkness."
         };
 
         dMan.dialogueLines = dialogueLines;
