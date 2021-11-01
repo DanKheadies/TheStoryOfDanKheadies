@@ -1550,7 +1550,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1710,6 +1710,8 @@ MonoBehaviour:
   npcAnim: {fileID: 24329182}
   walkZone: {fileID: 1824042510}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 24329185}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -4500,7 +4502,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5096,7 +5098,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5963,7 +5965,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -10967,7 +10969,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -11319,6 +11321,8 @@ MonoBehaviour:
   npcAnim: {fileID: 215809808}
   walkZone: {fileID: 190270238}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 215809811}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -12482,7 +12486,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -13179,7 +13183,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -18545,7 +18549,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -19967,6 +19971,8 @@ MonoBehaviour:
   npcAnim: {fileID: 380592231}
   walkZone: {fileID: 1695199618}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 380592234}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -20596,6 +20602,8 @@ MonoBehaviour:
   npcAnim: {fileID: 390272646}
   walkZone: {fileID: 1799801308}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 390272649}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -21408,7 +21416,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -21871,6 +21879,8 @@ MonoBehaviour:
   npcAnim: {fileID: 408033582}
   walkZone: {fileID: 1799801308}
   dMan: {fileID: 1880181858}
+  path: {fileID: 408033587}
+  pause: {fileID: 841729768}
   npcRigidBody: {fileID: 408033585}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -21999,6 +22009,7 @@ MonoBehaviour:
   defaultWayPoint: {fileID: 1751253421}
   prevWayPoint: {fileID: 0}
   nearbyWayPoints: []
+  bAvoidTrigger: 0
 --- !u!1 &408274759
 GameObject:
   m_ObjectHideFlags: 0
@@ -24912,7 +24923,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -25064,7 +25075,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -26165,6 +26176,8 @@ MonoBehaviour:
   npcAnim: {fileID: 485260481}
   walkZone: {fileID: 494721991}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 485260484}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -27784,7 +27797,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -28389,7 +28402,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -29515,6 +29528,8 @@ MonoBehaviour:
   npcAnim: {fileID: 546143672}
   walkZone: {fileID: 1417908391}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 546143675}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -31146,6 +31161,8 @@ MonoBehaviour:
   npcAnim: {fileID: 579209529}
   walkZone: {fileID: 1799801308}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 579209532}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -31315,7 +31332,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -31378,7 +31395,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -31908,7 +31925,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -32581,7 +32598,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -32877,7 +32894,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -33995,7 +34012,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -34536,6 +34553,8 @@ MonoBehaviour:
   npcAnim: {fileID: 651385049}
   walkZone: {fileID: 1473577027}
   dMan: {fileID: 1880181858}
+  path: {fileID: 651385054}
+  pause: {fileID: 841729768}
   npcRigidBody: {fileID: 651385052}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -34595,7 +34614,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!212 &651385053
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -34664,6 +34683,7 @@ MonoBehaviour:
   defaultWayPoint: {fileID: 1263640804}
   prevWayPoint: {fileID: 0}
   nearbyWayPoints: []
+  bAvoidTrigger: 0
 --- !u!1 &651712914
 GameObject:
   m_ObjectHideFlags: 0
@@ -34735,6 +34755,8 @@ MonoBehaviour:
   npcAnim: {fileID: 651712916}
   walkZone: {fileID: 1860913738}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 651712919}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -35239,7 +35261,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -35692,7 +35714,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -38967,7 +38989,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -39787,7 +39809,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -40149,7 +40171,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -41386,7 +41408,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -41449,7 +41471,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -47862,6 +47884,8 @@ MonoBehaviour:
   npcAnim: {fileID: 862829843}
   walkZone: {fileID: 1904756}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 862829847}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -49058,7 +49082,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -49253,7 +49277,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -49541,6 +49565,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883781845}
   m_CullTransparentMesh: 0
+--- !u!1 &884354883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 884354884}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &884354884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884354883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.95, y: -3.83, z: -7.140498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &886250610
 GameObject:
   m_ObjectHideFlags: 0
@@ -50610,7 +50664,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -51362,7 +51416,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -51544,7 +51598,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -52526,7 +52580,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -53469,7 +53523,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -53888,7 +53942,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -54530,7 +54584,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -54899,7 +54953,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -55141,7 +55195,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -55972,7 +56026,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -57017,7 +57071,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -57196,6 +57250,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1033403216}
   walkZone: {fileID: 0}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1033403219}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -58934,7 +58990,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -58998,7 +59054,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -60393,6 +60449,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1076638072}
   walkZone: {fileID: 828470360}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1076638075}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -62193,6 +62251,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1111121092}
   walkZone: {fileID: 1473577027}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1111121095}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -63686,6 +63746,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1129332549}
   walkZone: {fileID: 1904756}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1129332552}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -64000,6 +64062,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1132203880}
   walkZone: {fileID: 1860913738}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1132203883}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -64420,7 +64484,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -64918,7 +64982,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -66111,6 +66175,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1171420811}
   walkZone: {fileID: 1904756}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1171420814}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -66395,6 +66461,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1173617576}
   walkZone: {fileID: 190270238}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1173617579}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -66724,7 +66792,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -66844,7 +66912,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -67766,7 +67834,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -67830,7 +67898,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -69694,7 +69762,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -69770,6 +69838,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1244259221}
   walkZone: {fileID: 1860913738}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1244259224}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -70555,7 +70625,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -71109,6 +71179,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1271627631}
   walkZone: {fileID: 1904756}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1271627634}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -71521,8 +71593,8 @@ MonoBehaviour:
   action: 
   dialogueLines:
   - Hey Dan. Guess what, I've been choosen!
-  - The developer is going to have me walk around the map.
-  - When they get off their ARSE.. Lazy P.O.S...
+  - Watch me go here! Then over there! Then...
+  - Well, you'll see!
 --- !u!1 &1279384804
 GameObject:
   m_ObjectHideFlags: 0
@@ -71593,6 +71665,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1279384806}
   walkZone: {fileID: 190270238}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1279384809}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -71891,6 +71965,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1281896722}
   walkZone: {fileID: 1473577027}
   dMan: {fileID: 1880181858}
+  path: {fileID: 1281896727}
+  pause: {fileID: 841729768}
   npcRigidBody: {fileID: 1281896725}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -71950,7 +72026,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!212 &1281896726
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -72019,6 +72095,7 @@ MonoBehaviour:
   defaultWayPoint: {fileID: 466826260}
   prevWayPoint: {fileID: 0}
   nearbyWayPoints: []
+  bAvoidTrigger: 0
 --- !u!1 &1284752830
 GameObject:
   m_ObjectHideFlags: 0
@@ -72775,6 +72852,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1301142899}
   walkZone: {fileID: 1695199618}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1301142902}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -72993,6 +73072,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1302678123}
   walkZone: {fileID: 0}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1302678126}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -73161,7 +73242,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -73846,7 +73927,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -74971,6 +75052,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1338340170}
   walkZone: {fileID: 1695199618}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1338340173}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -75152,6 +75235,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1338529682}
   walkZone: {fileID: 1799801308}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1338529685}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -76251,6 +76336,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1360548449}
   walkZone: {fileID: 190270238}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1360548452}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -76419,7 +76506,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -77121,7 +77208,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -78308,7 +78395,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -78892,7 +78979,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -79970,7 +80057,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -80170,7 +80257,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -81119,7 +81206,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -86145,7 +86232,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -86221,6 +86308,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1522382182}
   walkZone: {fileID: 1799801308}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1522382185}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -88099,7 +88188,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -90770,7 +90859,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -90835,7 +90924,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -91443,6 +91532,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1616900760}
   walkZone: {fileID: 1904756}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1616900763}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -92085,6 +92176,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1624251957}
   walkZone: {fileID: 1904756}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1624251956}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -93099,7 +93192,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -93681,7 +93774,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -94564,6 +94657,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1663936539}
   walkZone: {fileID: 1904756}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1663936542}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -95062,7 +95157,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -95228,6 +95323,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1675929007}
   walkZone: {fileID: 190270238}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1675929010}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -95840,6 +95937,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1682213068}
   walkZone: {fileID: 190270238}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1682213071}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -96009,7 +96108,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -96086,6 +96185,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1686517954}
   walkZone: {fileID: 0}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1686517957}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -96404,6 +96505,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1691541370}
   walkZone: {fileID: 1695199618}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1691541373}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -97912,7 +98015,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -99121,7 +99224,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -99546,6 +99649,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1742293203}
   walkZone: {fileID: 1904756}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1742293206}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -99714,7 +99819,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -100266,7 +100371,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -100433,7 +100538,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -102092,6 +102197,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1780482142}
   walkZone: {fileID: 1824042510}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1780482145}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -105929,7 +106036,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -108912,6 +109019,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1916128269}
   walkZone: {fileID: 1473577027}
   dMan: {fileID: 1880181858}
+  path: {fileID: 1916128274}
+  pause: {fileID: 841729768}
   npcRigidBody: {fileID: 1916128272}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -108971,7 +109080,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!212 &1916128273
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -109040,6 +109149,7 @@ MonoBehaviour:
   defaultWayPoint: {fileID: 2049685225}
   prevWayPoint: {fileID: 0}
   nearbyWayPoints: []
+  bAvoidTrigger: 0
 --- !u!1 &1919813361
 GameObject:
   m_ObjectHideFlags: 0
@@ -109624,7 +109734,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -110522,7 +110632,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -111796,6 +111906,8 @@ MonoBehaviour:
   npcAnim: {fileID: 1983278651}
   walkZone: {fileID: 1860913738}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 1983278654}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -112324,7 +112436,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -112802,7 +112914,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -116025,7 +116137,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -116563,6 +116675,8 @@ MonoBehaviour:
   npcAnim: {fileID: 2055793320}
   walkZone: {fileID: 1473577027}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 0}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -117331,7 +117445,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -117966,6 +118080,8 @@ MonoBehaviour:
   npcAnim: {fileID: 2087418018}
   walkZone: {fileID: 1695199618}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 2087418021}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -118136,7 +118252,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -118299,6 +118415,8 @@ MonoBehaviour:
   npcAnim: {fileID: 2095739431}
   walkZone: {fileID: 0}
   dMan: {fileID: 1880181858}
+  path: {fileID: 0}
+  pause: {fileID: 0}
   npcRigidBody: {fileID: 2095739434}
   minWalkPoint: {x: 0, y: 0}
   maxWalkPoint: {x: 0, y: 0}
@@ -120007,7 +120125,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

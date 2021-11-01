@@ -1,7 +1,7 @@
 // CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 10/30/2021
-// Last:  10/31/2021
+// Last:  11/01/2021
 
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +14,8 @@ public class NPCPathFinding : MonoBehaviour
     public WayPoint defaultWayPoint;
     public WayPoint prevWayPoint;
     public WayPoint[] nearbyWayPoints;
+
+    public bool bAvoidTrigger;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,7 @@ public class NPCPathFinding : MonoBehaviour
     IEnumerator DelayUpdateWayPoints()
     {
         yield return new WaitForSeconds(0.5f);
+        bAvoidTrigger = false;
         UpdateWayPoints();
     }
 
@@ -86,7 +89,14 @@ public class NPCPathFinding : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<WayPoint>())
+        if (!bAvoidTrigger &&
+            collision.gameObject.GetComponent<WayPoint>() &&
+            collision.gameObject.GetComponent<WayPoint>().name == currentWayPoint.name)
+        {
+            //Debug.Log("collision");
+            //Debug.Log(collision.name);
+            bAvoidTrigger = true;
             StartCoroutine(DelayUpdateWayPoints());
+        }
     }
 }

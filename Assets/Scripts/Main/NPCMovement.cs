@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  10/31/2021
+// Last:  11/01/2021
 
 using UnityEngine;
 
@@ -11,6 +11,8 @@ public class NPCMovement : MonoBehaviour
     public Animator npcAnim;
     public Collider2D walkZone;
     public DialogueManager dMan;
+    public NPCPathFinding path;
+    public PauseGame pause;
     public Rigidbody2D npcRigidBody;
     public Vector2 minWalkPoint;
     public Vector2 maxWalkPoint;
@@ -63,17 +65,41 @@ public class NPCMovement : MonoBehaviour
         {
             walkCounter -= Time.deltaTime;
 
-            if (transform.GetComponent<NPCPathFinding>())
+            if (path)
             {
-                npcRigidBody.velocity = new Vector2(
-                    Mathf.Abs(transform.position.x) - Mathf.Abs(GetComponent<NPCPathFinding>().currentWayPoint.transform.position.x),
-                    Mathf.Abs(transform.position.y) - Mathf.Abs(GetComponent<NPCPathFinding>().currentWayPoint.transform.position.y)
-                );
-                transform.position = Vector2.MoveTowards(
-                    transform.position,
-                    GetComponent<NPCPathFinding>().currentWayPoint.transform.position,
-                    moveSpeed / 100 // something off here
-                );
+                if (dMan.bDialogueActive ||
+                    pause.bPauseActive)
+                {
+                    npcRigidBody.velocity = new Vector2(
+                        (Mathf.Abs(transform.position.x) -
+                         Mathf.Abs(GetComponent<NPCPathFinding>().currentWayPoint.transform.position.x)) *
+                         -(transform.position.x / Mathf.Abs(transform.position.x)),
+                        (Mathf.Abs(transform.position.y) -
+                         Mathf.Abs(GetComponent<NPCPathFinding>().currentWayPoint.transform.position.y)) *
+                         -(transform.position.y / Mathf.Abs(transform.position.y))
+                    );
+                    transform.position = Vector2.MoveTowards(
+                        transform.position,
+                        transform.position,
+                        0
+                    );
+                }
+                else
+                {
+                    npcRigidBody.velocity = new Vector2(
+                        (Mathf.Abs(transform.position.x) -
+                            Mathf.Abs(GetComponent<NPCPathFinding>().currentWayPoint.transform.position.x)) *
+                            -(transform.position.x / Mathf.Abs(transform.position.x)),
+                        (Mathf.Abs(transform.position.y) -
+                            Mathf.Abs(GetComponent<NPCPathFinding>().currentWayPoint.transform.position.y)) *
+                            -(transform.position.y / Mathf.Abs(transform.position.y))
+                    );
+                    transform.position = Vector2.MoveTowards(
+                        transform.position,
+                        GetComponent<NPCPathFinding>().currentWayPoint.transform.position,
+                        moveSpeed / 100
+                    );
+                }
             }
             else
             {
