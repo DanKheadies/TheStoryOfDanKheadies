@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  09/27/2021
+// Last:  10/31/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -165,6 +165,7 @@ public class Chp1 : MonoBehaviour
         }
 
         LoadNPCLocations();
+        LoadNPCWayPoints();
         LoadQuests();
         Chp1QuestChecker();
 
@@ -828,7 +829,11 @@ public class Chp1 : MonoBehaviour
         // n/a 
 
         //npc_luli;
-        // n/a
+        if (PlayerPrefs.GetFloat("HousesWLuliPosX") != 0 ||
+            PlayerPrefs.GetFloat("HousesWLuliPosY") != 0)
+            npc_luli.transform.position = new Vector2(
+                PlayerPrefs.GetFloat("HousesWLuliPosX"),
+                PlayerPrefs.GetFloat("HousesWLuliPosY"));
 
         //npc_lupita;
         // n/a
@@ -906,6 +911,14 @@ public class Chp1 : MonoBehaviour
 
         //npc_zola;
         // n/a
+    }
+
+    public void LoadNPCWayPoints()
+    {
+        npc_akira.GetComponent<NPCPathFinding>().LoadNPCWayPoint();
+        npc_eloher.GetComponent<NPCPathFinding>().LoadNPCWayPoint();
+        npc_kalika.GetComponent<NPCPathFinding>().LoadNPCWayPoint();
+        npc_luli.GetComponent<NPCPathFinding>().LoadNPCWayPoint();
     }
 
     public void PookieCheck()
@@ -1368,7 +1381,8 @@ public class Chp1 : MonoBehaviour
         // n/a 
 
         //npc_luli;
-        // n/a
+        PlayerPrefs.SetFloat("HousesWLuliPosX", npc_luli.transform.position.x);
+        PlayerPrefs.SetFloat("HousesWLuliPosY", npc_luli.transform.position.y);
 
         //npc_lupita;
         // n/a
@@ -1430,6 +1444,14 @@ public class Chp1 : MonoBehaviour
         // n/a
     }
 
+    public void SaveNPCWayPoints()
+    {
+        npc_akira.GetComponent<NPCPathFinding>().SaveNPCWayPoint();
+        npc_eloher.GetComponent<NPCPathFinding>().SaveNPCWayPoint();
+        npc_kalika.GetComponent<NPCPathFinding>().SaveNPCWayPoint();
+        npc_luli.GetComponent<NPCPathFinding>().SaveNPCWayPoint();
+    }
+
     public void SaveSpecificInfo()
     {
         if (bHasFedPookie1)
@@ -1438,6 +1460,7 @@ public class Chp1 : MonoBehaviour
             PlayerPrefs.SetInt("Chp1Pookie2Fed", 1);
 
         SaveNPCLocations();
+        SaveNPCWayPoints();
     }
 
     public void SetAsheraVogging()

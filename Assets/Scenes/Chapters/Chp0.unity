@@ -9313,8 +9313,10 @@ MonoBehaviour:
   chp0: {fileID: 841729771}
   chp1: {fileID: 0}
   contSupp: {fileID: 1163081862}
+  shadowMonster: {fileID: 0}
   treeTunnel: {fileID: 0}
   tyTunnel: {fileID: 0}
+  wealthy: {fileID: 0}
   dMan: {fileID: 1865790888}
   save: {fileID: 0}
   screenOri: {fileID: 5186248832239742066}
@@ -9471,6 +9473,7 @@ MonoBehaviour:
   touches: {fileID: 1769910844}
   uMan: {fileID: 783566141}
   bAvoidUpdate: 0
+  bHasGoggles: 0
   bStartGame: 0
   dialogueLines: []
 --- !u!114 &841729772
@@ -23409,7 +23412,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Testicle
+  m_Text: icle
 --- !u!222 &1958486564
 CanvasRenderer:
   m_ObjectHideFlags: 0

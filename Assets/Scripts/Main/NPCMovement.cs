@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  07/12/2021
+// Last:  10/31/2021
 
 using UnityEngine;
 
@@ -63,81 +63,96 @@ public class NPCMovement : MonoBehaviour
         {
             walkCounter -= Time.deltaTime;
 
-            switch (walkDirection)
+            if (transform.GetComponent<NPCPathFinding>())
             {
-                case 0:
-                    npcRigidBody.velocity = new Vector2(0, 0);
-                    bIsWalking = false;
-
-                    break;
-
-                case 1:
-                    npcRigidBody.velocity = new Vector2(0, moveSpeed);
-
-                    if (bHasWalkZone &&
-                        transform.position.y > (maxWalkPoint.y - 0.25))
-                    {
+                npcRigidBody.velocity = new Vector2(
+                    Mathf.Abs(transform.position.x) - Mathf.Abs(GetComponent<NPCPathFinding>().currentWayPoint.transform.position.x),
+                    Mathf.Abs(transform.position.y) - Mathf.Abs(GetComponent<NPCPathFinding>().currentWayPoint.transform.position.y)
+                );
+                transform.position = Vector2.MoveTowards(
+                    transform.position,
+                    GetComponent<NPCPathFinding>().currentWayPoint.transform.position,
+                    moveSpeed / 100 // something off here
+                );
+            }
+            else
+            {
+                switch (walkDirection)
+                {
+                    case 0:
+                        npcRigidBody.velocity = new Vector2(0, 0);
                         bIsWalking = false;
-                        waitCounter = waitTime;
-                    }
-                    else if (bCollision)
-                    {
-                        bCollision = false;
-                        ChooseDirection(1);
-                    }
 
-                    break;
+                        break;
 
-                case 2:
-                    npcRigidBody.velocity = new Vector2(0, -moveSpeed);
+                    case 1:
+                        npcRigidBody.velocity = new Vector2(0, moveSpeed);
 
-                    if (bHasWalkZone &&
-                        transform.position.y < (minWalkPoint.y + 0.25))
-                    {
-                        bIsWalking = false;
-                        waitCounter = waitTime;
-                    }
-                    else if (bCollision)
-                    {
-                        bCollision = false;
-                        ChooseDirection(2);
-                    }
+                        if (bHasWalkZone &&
+                            transform.position.y > (maxWalkPoint.y - 0.25))
+                        {
+                            bIsWalking = false;
+                            waitCounter = waitTime;
+                        }
+                        else if (bCollision)
+                        {
+                            bCollision = false;
+                            ChooseDirection(1);
+                        }
 
-                    break;
+                        break;
 
-                case 3:
-                    npcRigidBody.velocity = new Vector2(moveSpeed, 0);
+                    case 2:
+                        npcRigidBody.velocity = new Vector2(0, -moveSpeed);
 
-                    if (bHasWalkZone &&
-                        transform.position.x > (maxWalkPoint.x - 0.25))
-                    {
-                        bIsWalking = false;
-                        waitCounter = waitTime;
-                    }
-                    else if (bCollision)
-                    {
-                        bCollision = false;
-                        ChooseDirection(3);
-                    }
+                        if (bHasWalkZone &&
+                            transform.position.y < (minWalkPoint.y + 0.25))
+                        {
+                            bIsWalking = false;
+                            waitCounter = waitTime;
+                        }
+                        else if (bCollision)
+                        {
+                            bCollision = false;
+                            ChooseDirection(2);
+                        }
 
-                    break;
+                        break;
 
-                case 4: 
-                    npcRigidBody.velocity = new Vector2(-moveSpeed, 0);
+                    case 3:
+                        npcRigidBody.velocity = new Vector2(moveSpeed, 0);
 
-                    if (bHasWalkZone &&
-                        transform.position.x < (minWalkPoint.x + 0.25))
-                    {
-                        bIsWalking = false;
-                        waitCounter = waitTime;
-                    }
-                    else if (bCollision)
-                    {
-                        bCollision = false;
-                        ChooseDirection(4);
-                    }
+                        if (bHasWalkZone &&
+                            transform.position.x > (maxWalkPoint.x - 0.25))
+                        {
+                            bIsWalking = false;
+                            waitCounter = waitTime;
+                        }
+                        else if (bCollision)
+                        {
+                            bCollision = false;
+                            ChooseDirection(3);
+                        }
 
-                    break;
+                        break;
+
+                    case 4:
+                        npcRigidBody.velocity = new Vector2(-moveSpeed, 0);
+
+                        if (bHasWalkZone &&
+                            transform.position.x < (minWalkPoint.x + 0.25))
+                        {
+                            bIsWalking = false;
+                            waitCounter = waitTime;
+                        }
+                        else if (bCollision)
+                        {
+                            bCollision = false;
+                            ChooseDirection(4);
+                        }
+
+                        break;
+                }
             }
 
             // Animate movement
@@ -199,9 +214,9 @@ public class NPCMovement : MonoBehaviour
 
     public void ChooseDirection(int _direction)
     {
-        do
+        while (walkDirection == _direction)
         {
             walkDirection = Random.Range(1, 5);
-        } while (walkDirection == _direction);
+        } 
     }
 }

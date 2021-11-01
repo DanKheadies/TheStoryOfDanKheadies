@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 02/21/2020
-// Last:  08/02/2021
+// Last:  09/27/2021
 
 using System.Collections;
 using System.Collections.Generic;
@@ -67,10 +67,10 @@ public class ControllerSupport : MonoBehaviour
         {
             //ControllerButtonsTest();
             CheckForMovement();
-        }
 
-        if (bIsDevSupportOn)
-            DevSupportShowControllerInput();
+            if (bIsDevSupportOn)
+                DevSupportShowControllerInput();
+        }
     }
 
     public void CheckSystem()
