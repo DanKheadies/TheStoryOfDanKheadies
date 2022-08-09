@@ -118,7 +118,7 @@ public class DialogueManager : MonoBehaviour
                 }
             }
             else
-                delayForTypewriting = delayForTypewriting / 10f;
+                delayForTypewriting = 0;
         }
 
         // Show Options if present and w/ the last dialogue prompt; otherwise, reset the dialogue
@@ -305,7 +305,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Jamma 8x16 Font Change
-        dText.fontSize = (int)(dText.fontSize * 0.75f);
+        dText.fontSize = (int)(dText.fontSize * 0.75f - 1f);
 
         dArrow.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(dArrowPoints[0], dArrowPoints[1]);
         dArrow.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(dArrowPoints[2], dArrowPoints[3]);

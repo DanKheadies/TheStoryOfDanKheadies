@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 02/08/2020
-// Last:  07/13/2021
+// Last:  08/08/2022
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +11,7 @@ public class CS_TreeTunnel : MonoBehaviour
     public Camera mainCamera;
     public DialogueManager dMan;
     public GameObject dBox;
+    public GameObject pause;
     public GameObject player;
     public GameObject warpTreeTunnel;
     public Image dPic;
@@ -40,20 +41,23 @@ public class CS_TreeTunnel : MonoBehaviour
 
         dialogueLines = new string[] {
             "Treat everything in our world as 'real' and 'truth'..",
-            "Compile a database so rich and extensive about the world that you",
-            "arm yourself with skills and knowledge for any situation.",
-            "With enough time and an open mind, you will come to understand",
-            "the true disposition of your existence. The 'real' value of reality.",
-            "After all, it's all real. Think about it...",
-            "Haven't Luke Skywalker and Santa Claus affected your life more than",
-            "most of the people in your life?",
-            "Whether Jesus is real or not, he's had a bigger impact on the world",
-            "than any of us have. And the same can be said for South Park and",
-            "Superman and Harry Potter. They've changed our lives...",
+            "Compile a database so rich and extensive about the world that",
+            "you arm yourself with skills and knowledge for any situation.",
+            "With enough time and an open mind, you will come to understand the",
+            "true disposition of your existence.",
+            "The 'real' value of reality.",
+            "After all, it's all real. Think about it..",
+            "Haven't Luke Skywalker and Santa Claus affected your life",
+            "more than most of the people in your life?",
+            "Whether Jesus is real or not, he's had a bigger impact on",
+            "the world than any of us have.",
+            "And the same can be said for South Park.",
+            "And Superman. And Harry Potter...",
+            "They've changed our lives.",
             "Changed the way we act in the world.",
             "Doesn't that make them kind of real?",
-            "They might be imaginary, but they're more important than most of",
-            "us here. And they're all gonna be around here long after we're dead.",
+            "They might be imaginary. But they're more important than most of us here.",
+            "And they're all gonna be around here long after we're dead.",
             "So, in a way, those things are more realer than any of us..."
         };
 
@@ -89,6 +93,18 @@ public class CS_TreeTunnel : MonoBehaviour
 
                 // Sound Effect
                 SFXMan.sounds[2].PlayOneShot(SFXMan.sounds[2].clip);
+            }
+        }
+
+        // Lose brio every X seconds while watching
+        if (brio.playerCurrentBrio > 1 &&
+            pause.transform.localScale != Vector3.one)
+        {
+            if (!warpTreeTunnel.GetComponent<SceneTransitioner>().bAnimationToTransitionScene)
+            {
+                brio.FatiguePlayer(0.0025f);
+                brio.bRestoreOverTime = false;
+                uMan.UpdateBrio(); // Since hidden, don't need?
             }
         }
     }

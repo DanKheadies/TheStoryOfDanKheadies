@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  11/01/2021
+// Last:  11/02/2021
 
 using UnityEngine;
 
@@ -11,6 +11,7 @@ public class NPCMovement : MonoBehaviour
     public Animator npcAnim;
     public Collider2D walkZone;
     public DialogueManager dMan;
+    public DeviceDetector dev;
     public NPCPathFinding path;
     public PauseGame pause;
     public Rigidbody2D npcRigidBody;
@@ -23,6 +24,7 @@ public class NPCMovement : MonoBehaviour
     public bool bIsWalking;
 
     public float moveSpeed;
+    public float moveSpeedDeviceFactor;
     public float waitCounter;
     public float waitTime;
     public float walkCounter;
@@ -54,6 +56,12 @@ public class NPCMovement : MonoBehaviour
         }
 
         bCanMove = true;
+
+        if (dev && 
+            dev.bIsMobile)
+            moveSpeedDeviceFactor = 10;
+        else
+            moveSpeedDeviceFactor = 100;
 
         ChooseDirection(0);
     }
@@ -97,7 +105,7 @@ public class NPCMovement : MonoBehaviour
                     transform.position = Vector2.MoveTowards(
                         transform.position,
                         GetComponent<NPCPathFinding>().currentWayPoint.transform.position,
-                        moveSpeed / 100
+                        moveSpeed / moveSpeedDeviceFactor
                     );
                 }
             }

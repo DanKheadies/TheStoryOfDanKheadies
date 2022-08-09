@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  10/31/2021
+// Last:  11/02/2021
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -183,9 +183,11 @@ public class Chp1 : MonoBehaviour
         }
     }
 
+    // Not sure why I needed this as an IEnumerator, but it was messing up GreatTree quest line.
+    // Leaving the structure, just moving the yield to the end.
     IEnumerator TransferActions(string functionName)
     {
-        yield return new WaitForEndOfFrame();
+        //yield return new WaitForEndOfFrame();
 
         if (functionName == "Quest5Reward")
             Quest5Reward();
@@ -210,6 +212,8 @@ public class Chp1 : MonoBehaviour
 
         if (functionName == "Quest14Reward")
             Quest14Reward();
+
+        yield return new WaitForEndOfFrame();
     }
 
 
@@ -536,7 +540,7 @@ public class Chp1 : MonoBehaviour
                 "41..",
                 "42... Game on!"
             };
-        dMan.portPic = player.GetComponent<PlayerBrioManager>().portPic;
+        dMan.portPic = player.GetComponent<PlayerBrioManager>().portPicDan;
         dMan.currentLine = 0;
         dText.text = dMan.dialogueLines[dMan.currentLine];
         dMan.ShowDialogue();
@@ -624,7 +628,7 @@ public class Chp1 : MonoBehaviour
             dMan.dialogueLines = new string[] {
                 tempCool + ".. That's " + Q4KidCounter + " of 6."
             };
-            dMan.portPic = player.GetComponent<PlayerBrioManager>().portPic;
+            dMan.portPic = player.GetComponent<PlayerBrioManager>().portPicDan;
             dMan.currentLine = 0;
             dText.text = dMan.dialogueLines[dMan.currentLine];
             dMan.ShowDialogue();
@@ -635,7 +639,7 @@ public class Chp1 : MonoBehaviour
             dMan.dialogueLines = new string[] {
                 "Shibby.. Found all of you."
             };
-            dMan.portPic = player.GetComponent<PlayerBrioManager>().portPic;
+            dMan.portPic = player.GetComponent<PlayerBrioManager>().portPicDan;
             dMan.currentLine = 0;
             dText.text = dMan.dialogueLines[dMan.currentLine];
             dMan.ShowDialogue();
@@ -1644,6 +1648,7 @@ public class Chp1 : MonoBehaviour
             uMan.UpdateBrio();
 
             greatTree.transform.GetChild(0).gameObject.SetActive(false);
+            greatTree.transform.GetChild(2).gameObject.SetActive(false);
             greatTree.transform.GetChild(5).gameObject.SetActive(true);
 
             quest5.GetComponent<QuestObject>().CollectedQuest();

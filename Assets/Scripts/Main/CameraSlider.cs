@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/24/2020
+// Last:  08/08/2022
 
 using System.Collections;
 using UnityEngine;
@@ -65,7 +65,10 @@ public class CameraSlider : MonoBehaviour
 
         // Checks (& resumes) UI controls
         if (bTempControlActive)
+        {
             touches.transform.localScale = Vector3.one;
+            touches.GetComponentInParent<UIManager>().PointerUpOnSlide();
+        }
     }
     
     public void SlideRight()

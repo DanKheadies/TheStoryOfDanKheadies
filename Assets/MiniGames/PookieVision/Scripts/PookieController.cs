@@ -1,16 +1,19 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/23/2019
-// Last:  07/21/2021
+// Last:  11/02/2021
 
 using System.Collections;
 using UnityEngine;
 
 public class PookieController : MonoBehaviour
 {
+    public DialogueManager dMan;
+    public GameObject pause;
     public GameObject pookieSplorer;
     public GameObject warpPookieVision;
     public Inventory inv;
+    public PlayerBrioManager brio;
     public SaveGame save;
     public UIManager uMan;
 
@@ -25,6 +28,23 @@ public class PookieController : MonoBehaviour
         // Complete quest after timer
         StartCoroutine(QuestReward());
     }
+
+    private void Update()
+    {
+        // Lose brio every X seconds while playing
+        if (brio.playerCurrentBrio > 1 &&
+            pause.transform.localScale != Vector3.one &&
+            !dMan.bDialogueActive)
+        {
+            if (!warpPookieVision.GetComponent<SceneTransitioner>().bAnimationToTransitionScene)
+            {
+                brio.FatiguePlayer(0.0025f);
+                brio.bRestoreOverTime = false;
+                uMan.UpdateBrio();
+            }
+        }
+    }
+
     IEnumerator QuestReward()
     {
         yield return new WaitForSeconds(260f);

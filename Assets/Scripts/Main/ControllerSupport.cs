@@ -1,7 +1,15 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 02/21/2020
-// Last:  09/27/2021
+// Last:  02/21/2022
+
+// Setup Notes: Create new or repurpose Input Manager's total size and axis / buttons
+// Axis: X (Horizontal), Y (Vertical), and 3-16
+//// Name is set to: Controller Axis [Value], i.e. "Controller Axis X" and "Controller Axis 13"
+//// Gravity: 0, Dead: 0.2, Sensitivity: 1, only Axis Y has invert, Type: Joystick Axis, match Axis to name
+// Buttons: 0-15
+//// Name is set to: Controller Button [Value], i.e. "Controller Button 0" and "Controller Button 7"
+//// Positive button: joystick button [value], Gravity: 1000, Dead: 0.1, Sensitivity: 1000, Type: Key or Mouse
 
 using System.Collections;
 using System.Collections.Generic;
@@ -104,12 +112,18 @@ public class ControllerSupport : MonoBehaviour
                 name.Contains("Xbox 360"))
                 bContIsXbox360 = true;
 
-            if (name.Contains("Xbox Wireless Controller") ||
+            else if (name.Contains("Xbox Wireless Controller") ||
                 name.Contains("Xbox Bluetooth Gamepad"))
                 bContIsXboxOne = true;
 
-            if (name.Contains("USB Gamepad"))
+            else if (name.Contains("USB Gamepad"))
                 bContIsPS2 = true;
+
+            else
+            {
+                Debug.Log("no name");
+                bContIsXboxOne = true;
+            }
         }
         // Cleanse if no controllers present
         else

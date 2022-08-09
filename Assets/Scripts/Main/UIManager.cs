@@ -1,14 +1,16 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  06/27/2021
+// Last:  08/08/2022
 
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // Manage Overworld UI Display
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     public Camera mainCamera;
     public Canvas HUD;
@@ -22,6 +24,7 @@ public class UIManager : MonoBehaviour
     public GameObject[] dPads;
     public GameObject[] joySticks;
     public OptionsManager oMan;
+    public PauseGame pause;
     public PlayerBrioManager playerBrio;
     public RectTransform controlsMenu;
     public RectTransform gwcMenu;
@@ -496,5 +499,122 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (guiControlsCan.GetComponent<RectTransform>().localScale == Vector3.zero)
+            return;
+
+        if (fixedJoystick.bFirstTap)
+            fixedJoystick.OnDrag(eventData);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (guiControlsCan.GetComponent<RectTransform>().localScale == Vector3.zero)
+            return;
+
+        if (Screen.width >= Screen.height && // landscape
+            ((!pause.bPauseActive &&
+              !dMan.bDialogueActive &&
+              Input.mousePosition.x <= Screen.width / 2) || // regular gameplay
+             (pause.bPauseActive &&
+              Input.mousePosition.x <= Screen.width / 3) || // pause menu
+             (dMan.bDialogueActive &&
+              Input.mousePosition.x <= Screen.width / 4))) // dialogue
+        {
+            if (joySticks[0])
+            {
+                int index = 0;
+                foreach (GameObject joyStick in joySticks)
+                {
+                    joyStick.transform.position = Input.mousePosition;
+
+                    if (joyStick.GetComponent<FixedJoystick>() != null)
+                        joyStick.GetComponent<FixedJoystick>().OnPointerDown(eventData);
+
+                    index++;
+                }
+            }
+        }
+
+        if (Screen.width < Screen.height && // portrait
+            ((!pause.bPauseActive &&
+              !dMan.bDialogueActive &&
+              Input.mousePosition.x <= Screen.width / 2.5) || // regular gameplay
+             (pause.bPauseActive &&
+              Input.mousePosition.x <= Screen.width / 2.5 &&
+              Input.mousePosition.y <= Screen.height / 2) || // pause menu
+             (dMan.bDialogueActive &&
+              Input.mousePosition.x <= Screen.width / 2.5 &&
+              Input.mousePosition.y <= Screen.height / 2))) // dialogue
+        {
+            if (joySticks[0])
+            {
+                int index = 0;
+                foreach (GameObject joyStick in joySticks)
+                {
+                    joyStick.transform.position = Input.mousePosition;
+
+                    if (joyStick.GetComponent<FixedJoystick>() != null)
+                        joyStick.GetComponent<FixedJoystick>().OnPointerDown(eventData);
+
+                    index++;
+                }
+            }
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (guiControlsCan.GetComponent<RectTransform>().localScale == Vector3.zero)
+            return;
+
+        if (Screen.width >= Screen.height)
+        {
+            if (joySticks[0])
+            {
+                int index = 0;
+                foreach (GameObject joyStick in joySticks)
+                {
+                    // TODO: Lerp on the way back
+                    SetPositionalRect(joyStick.GetComponent<RectTransform>(), joySticksPos[index].x + 25f, joySticksPos[index].y);
+                    //joyStick.transform.position = Vector2.Lerp(
+                    //    joyStick.transform.position,
+                    //    joyStick.GetComponent<RectTransform>().anchoredPosition = new Vector2(joySticksPos[index].x + 25f, joySticksPos[index].y),
+                    //    2f
+                    //);
+
+                    if (joyStick.GetComponent<FixedJoystick>() != null)
+                        joyStick.GetComponent<FixedJoystick>().OnPointerUp(eventData);
+
+                    index++;
+                }
+            }
+        }
+
+        if (Screen.width < Screen.height)
+        {
+            if (joySticks[0])
+            {
+                int index = 0;
+                foreach (GameObject joyStick in joySticks)
+                {
+                    SetPositionalRect(joyStick.GetComponent<RectTransform>(), joySticksPos[index].x, joySticksPos[index].y);
+
+                    if (joyStick.GetComponent<FixedJoystick>() != null)
+                        joyStick.GetComponent<FixedJoystick>().OnPointerUp(eventData);
+
+                    index++;
+                }
+            }
+        }
+    }
+
+    public void PointerUpOnSlide()
+    {
+        PointerEventData eventData = null;
+        OnPointerUp(eventData);
     }
 }

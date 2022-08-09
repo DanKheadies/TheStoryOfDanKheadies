@@ -4,7 +4,6 @@
 // Last:  11/01/2021
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCPathFinding : MonoBehaviour

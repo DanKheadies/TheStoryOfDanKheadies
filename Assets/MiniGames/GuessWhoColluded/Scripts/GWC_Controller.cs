@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  04/26/2021
+// Last:  11/02/2021
 
 using System.Collections;
 using UnityEngine;
@@ -330,6 +330,19 @@ public class GWC_Controller : MonoBehaviour
             Input.GetKeyUp(KeyCode.Space))
         {
             buttonTimer = 0;
+        }
+
+        // Lose brio every X seconds while playing
+        if (brio.playerCurrentBrio > 1 &&
+            pauseScreen.transform.localScale != Vector3.one &&
+            !dMan.bDialogueActive)
+        {
+            if (!warpGWC.GetComponent<SceneTransitioner>().bAnimationToTransitionScene)
+            {
+                brio.FatiguePlayer(0.0025f);
+                brio.bRestoreOverTime = false;
+                uMan.UpdateBrio();
+            }
         }
     }
 

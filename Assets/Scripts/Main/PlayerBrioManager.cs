@@ -1,12 +1,13 @@
 ﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 04/20/2017
-// Last:  02/25/2020
+// Last:  11/02/2021
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // Manage the Player's Brio
+// Not present for TD minigames (need dMan, et al.)
 public class PlayerBrioManager : MonoBehaviour
 {
     public Animator playerAnim;
@@ -14,8 +15,11 @@ public class PlayerBrioManager : MonoBehaviour
     public ControllerSupport contSupp;
     public DialogueManager dMan;
     public PauseGame pause;
+    public QuestManager qMan;
     public Scene scene;
-    public Sprite portPic;
+    public Sprite portPicDan;
+    public Sprite portPicGreatTree;
+    public Sprite portPicUnknown;
     public UIManager uMan;
 
     public bool bAvoidFatigue;
@@ -25,7 +29,11 @@ public class PlayerBrioManager : MonoBehaviour
     public float playerMaxBrio;
     public float playerCurrentBrio;
 
-    private string[] warningLines;
+    public int fatiguedCounter;
+
+    private string[] basicWarningLines;
+    private string[] treeKnownWarningLines;
+    private string[] treeUnknownWarningLines;
 
     void Start ()
     {
@@ -33,10 +41,25 @@ public class PlayerBrioManager : MonoBehaviour
         scene = SceneManager.GetActiveScene();
 
         // Set warning dialogue
-        warningLines = new string[]
+        basicWarningLines = new string[]
         {
             "Phew.. I am le tired...",
             "I may need a nap or something."
+        };
+
+        treeKnownWarningLines = new string[]
+        {
+            "Even with my aid, you have much to learn.",
+            "Your brio, your energy, is precious.",
+            "Invest it well.",
+            "Every day..."
+        };
+
+        treeUnknownWarningLines = new string[]
+        {
+            "You are new to this world my child.",
+            "You must learn to use your resources more efficiently.",
+            "Find me, and I will help you."
         };
 
         // Setting the brio
@@ -60,8 +83,7 @@ public class PlayerBrioManager : MonoBehaviour
             scene.name == "Chp1")
             bRestoreOverTime = true;
 
-        if (scene.name == "PookieVision")
-            bAvoidFatigue = true;
+        //InvokeRepeating("BrioReport", 1f, 1f);
 	}
 	
 	void Update ()
@@ -83,13 +105,18 @@ public class PlayerBrioManager : MonoBehaviour
         }
     }
 
+    public void BrioReport()
+    {
+        Debug.Log(playerCurrentBrio);
+    }
+
     // Removes Brio
     public void FatiguePlayer (float brioToRemove)
     {
         if (!bAvoidFatigue)
             playerCurrentBrio -= brioToRemove;
 
-        CheckIfROT();
+        ShouldRestoreOverTime();
         CheckForZeroBrio();
     }
 
@@ -98,7 +125,7 @@ public class PlayerBrioManager : MonoBehaviour
     {
         playerCurrentBrio += brioToGive;
 
-        CheckIfROT();
+        ShouldRestoreOverTime();
     }
 
     // Adds Brio once below half (temp algo)
@@ -109,7 +136,7 @@ public class PlayerBrioManager : MonoBehaviour
         playerCurrentBrio += 0.01f;
         uMan.UpdateBrio();
 
-        CheckIfROT();
+        ShouldRestoreOverTime();
     }
 
     // Increase the Max Brio
@@ -117,7 +144,7 @@ public class PlayerBrioManager : MonoBehaviour
     {
         playerMaxBrio = playerMaxBrio + increaseAmount;
 
-        CheckIfROT();
+        ShouldRestoreOverTime();
     }
 
     // Checks for no brio
@@ -125,9 +152,29 @@ public class PlayerBrioManager : MonoBehaviour
     {
         if (playerCurrentBrio <= 0)
         {
-            // Opens Dialogue Manager and gives a warning
-            dMan.dialogueLines = warningLines;
-            dMan.portPic = portPic;
+            // Not saving atm; will reset with each game reload
+            fatiguedCounter++;
+
+            if (fatiguedCounter >= 3)
+            {
+                if (qMan &&
+                    qMan.questsStarted[5])
+                {
+                    dMan.dialogueLines = treeKnownWarningLines;
+                    dMan.portPic = portPicGreatTree;
+                }
+                else
+                {
+                    dMan.dialogueLines = treeUnknownWarningLines;
+                    dMan.portPic = portPicUnknown;
+                }
+            }
+            else
+            {
+                dMan.dialogueLines = basicWarningLines;
+                dMan.portPic = portPicDan;
+            }
+
             dMan.ShowDialogue();
 
             if (playerAnim)
@@ -137,7 +184,7 @@ public class PlayerBrioManager : MonoBehaviour
         }
     }
 
-    public void CheckIfROT()
+    public void ShouldRestoreOverTime()
     {
         if (playerCurrentBrio < diffMaxAndCurrent)
             bRestoreOverTime = true;
