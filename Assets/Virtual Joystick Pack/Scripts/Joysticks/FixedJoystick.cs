@@ -1,4 +1,4 @@
-﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--DTFun--NonCommercial--ShareALike
 // Authors: Fenerax Studios (https://assetstore.unity.com/publishers/32730)
 // Contributors: David W. Corso
 // Start: --/--/----

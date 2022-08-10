@@ -1,7 +1,7 @@
-﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--DTFun--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 08/20/2019
-// Last:  04/26/2021
+// Last:  08/10/2022
 
 using UnityEngine;
 
@@ -32,28 +32,31 @@ public class Chp1RacePerimeter : MonoBehaviour
         };
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Shrink player's hitbox while within the race area
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            player.GetComponent<PolygonCollider2D>().points = racePoints;
-        }
-    }
-
     public void OnTriggerExit2D(Collider2D collision)
     {
         // Reset the player's hitbox to normal when outside the race area
         if (collision.gameObject.CompareTag("Player"))
         {
-            player.GetComponent<PolygonCollider2D>().points = ogPoints;
+            DeactivatePlayerRacingHitbox();
 
-            chp1.quest1.GetComponent<QuestObject>().bHasStarted = false; // DC TODO -- error prone?
-            chp1.raceTimer = 0f;
+            if (!chp1.qMan.questsEnded[1])
+            {
+                chp1.quest1.GetComponent<QuestObject>().bHasStarted = false;
+                chp1.qMan.questsStarted[1] = false;
+                chp1.raceTimer = 0f;
+            }
 
             chp1RC.ResetCheckpoints();
-
-            raceEnd.GetComponent<QuestTrigger>().bEndQuest = false;
         }
+    }
+
+    public void ActivatePlayerRacingHitbox()
+    {
+        player.GetComponent<PolygonCollider2D>().points = racePoints;
+    }
+
+    public void DeactivatePlayerRacingHitbox()
+    {
+        player.GetComponent<PolygonCollider2D>().points = ogPoints;
     }
 }

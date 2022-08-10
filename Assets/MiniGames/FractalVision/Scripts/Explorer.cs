@@ -1,4 +1,4 @@
-﻿// CC 4.0 International License: Attribution--Holistic3d.com & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Holistic3d.com & DTFun--NonCommercial--ShareALike
 // Authors: Martijn / The Art of Code
 // Contributors: David W. Corso
 // Start: 07/31/2019

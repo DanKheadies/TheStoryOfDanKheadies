@@ -1,4 +1,4 @@
-﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--DTFun--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 02/08/2020
 // Last:  08/08/2022

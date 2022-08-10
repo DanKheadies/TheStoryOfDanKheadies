@@ -1,4 +1,4 @@
-﻿// CC 4.0 International License: Attribution--Blackthronprod & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Blackthronprod & DTFun--NonCommercial--ShareALike
 // Authors: Blackthornprod
 // Contributors: David W. Corso
 // Start: 07/05/2018

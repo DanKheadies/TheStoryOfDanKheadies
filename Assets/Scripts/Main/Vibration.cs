@@ -5,7 +5,7 @@
 //// https://benoitfreslon.com
 ////
 //////////////////////////////////////////////////////////////////////////////////
-//// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
+//// CC 4.0 International License: Attribution--DTFun--NonCommercial--ShareALike
 //// Authors: Benoit Freslon
 //// Contributors: David Corso
 //// Start: 09/23/2021

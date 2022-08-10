@@ -1,4 +1,4 @@
-﻿// CC 4.0 International License: Attribution--Unity3d College & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Unity3d College & DTFun--NonCommercial--ShareALike
 // Authors: Jason (Unity3d College)
 // Contributors: David W. Corso
 // Start: 09/13/2019

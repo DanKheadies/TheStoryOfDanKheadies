@@ -1,8 +1,8 @@
-﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--DTFun--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Contributors: Nick Pettit
 // Start: 04/20/2017
-// Last:  09/08/2021
+// Last:  08/10/2022
 
 using System.Collections;
 using UnityEngine;
@@ -14,6 +14,7 @@ public class SceneTransitioner : MonoBehaviour
 {
     public Camera mainCamera;
     public ControllerSupport contSupp;
+    public GameObject sceneTrans;
     public Scene scene;
     public Text sceneSubtitle;
     public Text sceneTitle;
@@ -138,7 +139,8 @@ public class SceneTransitioner : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // Do SceneTransitioner Animation then load
-            GameObject.Find("SceneTransitioner").GetComponent<Animator>().enabled = true;
+            //GameObject.Find("SceneTransitioner").GetComponent<Animator>().enabled = true;
+            sceneTrans.GetComponent<Animator>().enabled = true;
 
             // Stops the player's movement
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
@@ -159,6 +161,12 @@ public class SceneTransitioner : MonoBehaviour
 
     IEnumerator DelayedTransition(float _time)
     {
+        if (mainCamera)
+            sceneTrans.transform.localScale = new Vector2(
+                1.4437501804688f * mainCamera.GetComponent<AspectUtility>()._wantedAspectRatio,
+                1.4437501804688f * mainCamera.GetComponent<AspectUtility>()._wantedAspectRatio
+            );
+
         yield return new WaitForSeconds(_time);
 
         SceneManager.LoadScene(AlphaLoad);

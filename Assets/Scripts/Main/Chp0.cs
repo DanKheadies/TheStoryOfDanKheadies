@@ -1,7 +1,7 @@
-﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--DTFun--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/07/2018
-// Last:  07/18/2021
+// Last:  08/09/2022
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -50,9 +50,11 @@ public class Chp0 : MonoBehaviour
             brioBar.transform.localScale = Vector3.zero;
 
             // Set player
-            mainCamera.transform.position = new Vector2(1.45f, 3.33f);
-            player.transform.position = new Vector2(1.45f, 3.33f);
-            
+            //mainCamera.transform.position = new Vector2(1.525f, 3.33f);
+            //player.transform.position = new Vector2(1.525f, 3.33f);
+            mainCamera.transform.position = new Vector2(1.32f, 3.3f);
+            player.transform.position = new Vector2(1.32f, 3.3f);
+
             // Set dialogue & dialogue elements
             dialogueLines = new string[] {
                 "Dan.",

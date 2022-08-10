@@ -1,7 +1,7 @@
-﻿// CC 4.0 International License: Attribution--HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--DTFun--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 03/08/2018
-// Last:  11/02/2021
+// Last:  08/10/2022
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,12 +19,14 @@ public class Chp1 : MonoBehaviour
     public GameObject homeCushion;
     public GameObject homeCushionCollider;
     public GameObject item_homeVRGoggles;
+    public GameObject labDoorHelper;
     public GameObject npc_aaron;
     public GameObject npc_akira;
     public GameObject npc_al_khidr;
     public GameObject npc_ashera;
     public GameObject npc_atandwa;
     public GameObject npc_bazlo;
+    public GameObject npc_bobert;
     public GameObject npc_brackey;
     public GameObject npc_canaan;
     public GameObject npc_chun;
@@ -69,15 +71,16 @@ public class Chp1 : MonoBehaviour
     public GameObject quest3;  // Item Check w/ Enki
     public GameObject quest4;  // Hide & Seek w/ Al-khidr
     public GameObject quest5;  // Talking to GreatTree
-    public GameObject quest6;  // Minesweeper
+    public GameObject quest6;  // Minesweeper w/ Chun
     public GameObject quest7;  // PookieBear1
     public GameObject quest8;  // PookieBear2
-    public GameObject quest9;  // PookieVision
-    public GameObject quest10; // TowerDeez
-    public GameObject quest11; // TowerDeez SBF
+    public GameObject quest9;  // PookieVision w/ Heartha
+    public GameObject quest10; // TowerDeez w/ Brackeys
+    public GameObject quest11; // TowerDeez SBF w/ Brackeys
     public GameObject quest12; // Talking to Pebs
     public GameObject quest13; // Experiencing Akira's Shadow Monster
     public GameObject quest14; // Experiencing Akira's Wealthy
+    public GameObject quest15; // Guess Who Colluded w/ Eloher
     public GameObject questTrigger1;
     public GameObject questTrigger2;
     public GameObject screenFader;
@@ -212,6 +215,9 @@ public class Chp1 : MonoBehaviour
 
         if (functionName == "Quest14Reward")
             Quest14Reward();
+
+        if (functionName == "Quest15Reward")
+            Quest15Reward();
 
         yield return new WaitForEndOfFrame();
     }
@@ -391,6 +397,9 @@ public class Chp1 : MonoBehaviour
         // Remove cushion
         homeCushionCollider.SetActive(false);
         homeCushion.SetActive(false);
+
+        // Add Lab Door Helper
+        labDoorHelper.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
 
@@ -1325,6 +1334,9 @@ public class Chp1 : MonoBehaviour
         //npc_bazlo;
         // n/a
 
+        //npc_bobert;
+        // n/a
+
         //npc_brackey;
         // n/a
 
@@ -1516,6 +1528,158 @@ public class Chp1 : MonoBehaviour
             // Reset bool check
             bHasQ3SmoochWoochy = false;
         }
+    }
+
+    public void StopAllNPCs()
+    {
+        //npc_aaron;
+        // n/a 
+
+        //npc_akira;
+        npc_akira.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_akira.GetComponent<Animator>().enabled = false;
+
+        //npc_al_khidr;
+        // n/a
+
+        //npc_ashera;
+        // n/a
+
+        //npc_atandwa;
+        // n/a
+
+        //npc_bazlo;
+        // n/a
+
+        //npc_bobert;
+        npc_bobert.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_bobert.GetComponent<Animator>().enabled = false;
+
+        //npc_brackey;
+        npc_brackey.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_brackey.GetComponent<Animator>().enabled = false;
+
+        //npc_canaan;
+        npc_canaan.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_canaan.GetComponent<Animator>().enabled = false;
+
+        //npc_chun;
+        npc_chun.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_chun.GetComponent<Animator>().enabled = false;
+
+        //npc_dagon;
+        // TBD
+
+        //npc_dilum;
+        npc_dilum.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_dilum.GetComponent<Animator>().enabled = false;
+
+        //npc_eliz;
+        // n/a
+
+        //npc_eloher;
+        npc_eloher.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_eloher.GetComponent<Animator>().enabled = false;
+
+        //npc_emma;
+        // n/a 
+
+        //npc_enki;
+        npc_enki.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_enki.GetComponent<Animator>().enabled = false;
+
+        //npc_heartha;
+        npc_heartha.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_heartha.GetComponent<Animator>().enabled = false;
+
+        //npc_hugo;
+        npc_hugo.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_hugo.GetComponent<Animator>().enabled = false;
+
+        //npc_hye;
+        // n/a
+
+        //npc_jamaal;
+        // n/a
+
+        //npc_jamie;
+        // n/a
+
+        //npc_juman;
+        // n/a
+
+        //npc_kalika;
+        npc_kalika.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_kalika.GetComponent<Animator>().enabled = false;
+
+        //npc_kart;
+        // n/a
+
+        //npc_khalid;
+        // n/a 
+
+        //npc_luli;
+        npc_luli.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_luli.GetComponent<Animator>().enabled = false;
+
+        //npc_lupita;
+        // n/a
+
+        //npc_marija;
+        // n/a
+
+        //npc_marklar;
+        npc_marklar.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_marklar.GetComponent<Animator>().enabled = false;
+
+        //npc_mawkus;
+        // n/a
+
+        //npc_maximiliano;
+        // n/a
+
+        //npc_molleen;
+        // n/a
+
+        //npc_nesbit;
+        // n/a
+
+        //npc_poeia;
+        // n/a
+
+        //npc_pookieB1;
+        npc_pookieB1.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_pookieB1.GetComponent<Animator>().enabled = false;
+
+        //npc_pookieB2;
+        npc_pookieB2.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_pookieB2.GetComponent<Animator>().enabled = false;
+
+        //npc_ryuu;
+        npc_ryuu.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_ryuu.GetComponent<Animator>().enabled = false;
+
+        //npc_sula;
+        npc_sula.GetComponent<NPCMovement>().moveSpeed = 0;
+        npc_sula.GetComponent<Animator>().enabled = false;
+
+        //npc_sydelle;
+        // n/a
+
+        //npc_tevin;
+        // n/a 
+
+        //npc_thabo;
+        // n/a
+
+        //npc_wharf;
+        // n/a 
+
+        //npc_yvette;
+        // n/a 
+
+        //npc_zola;
+        // n/a
     }
 
     IEnumerator TogglePlayerHitBoxDelay()
@@ -1759,6 +1923,18 @@ public class Chp1 : MonoBehaviour
             npc_akira.transform.GetChild(1).gameObject.SetActive(true);
 
             quest14.GetComponent<QuestObject>().CollectedQuest();
+        }
+    }
+
+    public void Quest15Reward()
+    {
+        if (!quest15.GetComponent<QuestObject>().bHasCollected)
+        {
+            player.GetComponent<PlayerBrioManager>().IncreaseMaxBrio(25);
+            player.GetComponent<PlayerBrioManager>().RestorePlayer(50);
+            uMan.UpdateBrio();
+
+            quest15.GetComponent<QuestObject>().CollectedQuest();
         }
     }
 
@@ -2035,6 +2211,28 @@ public class Chp1 : MonoBehaviour
             oMan.ResetOptions();
             Quest1314DialogueXOptNo();
         }
+
+
+        // Quest 15 - Dialogue X - Option 1
+        if ((npc_eloher.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered ||
+             npc_eloher.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered) &&
+            (npc_eloher.transform.GetChild(0).gameObject.activeSelf ||
+             npc_eloher.transform.GetChild(1).gameObject.activeSelf) &&
+            moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
+        {
+            oMan.ResetOptions();
+            Quest15DialogueXOptYes(1);
+        }
+        // Quest 15 - Dialogue X - Option 2
+        else if ((npc_eloher.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered ||
+                  npc_eloher.transform.GetChild(1).GetComponent<DialogueHolder>().bHasEntered) &&
+                 (npc_eloher.transform.GetChild(0).gameObject.activeSelf ||
+                  npc_eloher.transform.GetChild(1).gameObject.activeSelf) &&
+                 moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
+        {
+            oMan.ResetOptions();
+            Quest15DialogueXOptYes(2);
+        }
     }
 
     public void Quest0Dialogue1Opt1()
@@ -2136,11 +2334,12 @@ public class Chp1 : MonoBehaviour
         // Save Quests
         SaveQuests();
 
-        // Stop the player from bringing up the dialog again 
+        // Stop the player from bringing up the dialogue again 
         dMan.gameObject.transform.localScale = Vector3.zero;
+        dMan.gameObject.SetActive(false);
 
         // Stop Dan from moving
-        dMan.gameObject.SetActive(false);
+        player.GetComponent<Animator>().enabled = false;
     }
 
     public void Quest5Dialogue3Opt2()
@@ -2203,11 +2402,12 @@ public class Chp1 : MonoBehaviour
             // Save Quests
             SaveQuests();
 
-            // Stop the player from bringing up the dialog again 
+            // Stop the player from bringing up the dialogue again 
             dMan.gameObject.transform.localScale = Vector3.zero;
+            dMan.gameObject.SetActive(false);
 
             // Stop Dan from moving
-            dMan.gameObject.SetActive(false);
+            player.GetComponent<Animator>().enabled = false;
 
             // Stop NPCs from moving
             npc_chun.GetComponent<NPCMovement>().moveSpeed = 0;
@@ -2458,11 +2658,12 @@ public class Chp1 : MonoBehaviour
             // Save Quests
             SaveQuests();
 
-            // Stop the player from bringing up the dialog again 
+            // Stop the player from bringing up the dialogue again 
             dMan.gameObject.transform.localScale = Vector3.zero;
+            dMan.gameObject.SetActive(false);
 
             // Stop Dan from moving
-            dMan.gameObject.SetActive(false);
+            player.GetComponent<Animator>().enabled = false;
 
             // Stop NPCs from moving
             //npc_heartha.GetComponent<NPCMovement>().moveSpeed = 0;
@@ -2566,11 +2767,12 @@ public class Chp1 : MonoBehaviour
         // Save Quests
         SaveQuests();
 
-        // Stop the player from bringing up the dialog again 
+        // Stop the player from bringing up the dialogue again 
         dMan.gameObject.transform.localScale = Vector3.zero;
+        dMan.gameObject.SetActive(false);
 
         // Stop Dan from moving
-        dMan.gameObject.SetActive(false);
+        player.GetComponent<Animator>().enabled = false;
 
         // Stop NPCs from moving
         //npc_brackey.GetComponent<NPCMovement>().moveSpeed = 0;
@@ -2592,11 +2794,12 @@ public class Chp1 : MonoBehaviour
         // Save Quests
         SaveQuests();
 
-        // Stop the player from bringing up the dialog again 
+        // Stop the player from bringing up the dialogue again 
         dMan.gameObject.transform.localScale = Vector3.zero;
+        dMan.gameObject.SetActive(false);
 
         // Stop Dan from moving
-        dMan.gameObject.SetActive(false);
+        player.GetComponent<Animator>().enabled = false;
 
         // Stop NPCs from moving
         //npc_brackey.GetComponent<NPCMovement>().moveSpeed = 0;
@@ -2624,11 +2827,12 @@ public class Chp1 : MonoBehaviour
             // Save Quests
             SaveQuests();
 
-            // Stop the player from bringing up the dialog again 
+            // Stop the player from bringing up the dialogue again 
             dMan.gameObject.transform.localScale = Vector3.zero;
+            dMan.gameObject.SetActive(false);
 
             // Stop Dan from moving
-            dMan.gameObject.SetActive(false);
+            player.GetComponent<Animator>().enabled = false;
 
             // Stop NPCs from moving
             npc_pebs.GetComponent<NPCMovement>().moveSpeed = 0;
@@ -2694,11 +2898,12 @@ public class Chp1 : MonoBehaviour
             // Save Quests
             SaveQuests();
 
-            // Stop the player from bringing up the dialog again 
+            // Stop the player from bringing up the dialogue again 
             dMan.gameObject.transform.localScale = Vector3.zero;
+            dMan.gameObject.SetActive(false);
 
             // Stop Dan from moving
-            dMan.gameObject.SetActive(false);
+            player.GetComponent<Animator>().enabled = false;
 
             // Stop NPCs from moving
             npc_akira.GetComponent<NPCMovement>().moveSpeed = 0;
@@ -2725,6 +2930,67 @@ public class Chp1 : MonoBehaviour
         // No cutscene
         dMan.dialogueLines = new string[] {
                 "All good. Later mah dude."
+            };
+        dMan.currentLine = 0;
+        dText.text = dMan.dialogueLines[dMan.currentLine];
+        dMan.ShowDialogue();
+    }
+
+    public void Quest15DialogueXOptYes(int difficulty)
+    {
+        // yes play a game
+
+        CheckingForGoggles();
+
+        if (bHasGoggles)
+        {
+            // Transition animation
+            warpGWC.GetComponent<BoxCollider2D>().enabled = true;
+            warpGWC.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
+
+            // Save info
+            save.SaveBrioTransfer();
+            save.SaveInventoryTransfer();
+            save.SavePositionTransfer();
+            PlayerPrefs.SetInt("Transferring", 1);
+            PlayerPrefs.SetString("TransferScene", warpGWC.GetComponent<SceneTransitioner>().BetaLoad);
+
+            // Save Quests
+            SaveQuests();
+
+            // Stop the player from bringing up the dialogue again 
+            dMan.gameObject.transform.localScale = Vector3.zero;
+            dMan.gameObject.SetActive(false);
+
+            // Stop Dan from moving
+            player.GetComponent<Animator>().enabled = false;
+
+            // Stop NPCs from moving
+            npc_eloher.GetComponent<NPCMovement>().moveSpeed = 0;
+            npc_eloher.GetComponent<Animator>().enabled = false;
+
+            StopAllNPCs();
+            // TODO: restoring NPC movement when revisiting, post mini-game
+        }
+        else
+        {
+            // No play a game
+            dMan.dialogueLines = new string[] {
+                "Oh, well.. You'll need Particle Visors to play.",
+                "Come back when you have some."
+            };
+            dMan.currentLine = 0;
+            dText.text = dMan.dialogueLines[dMan.currentLine];
+            dMan.ShowDialogue();
+        }
+    }
+
+    public void Quest15DialogueXOptNo()
+    {
+        // No play a game
+        dMan.dialogueLines = new string[] {
+                "I Guess you know Who then...",
+                "Peace friend."
             };
         dMan.currentLine = 0;
         dText.text = dMan.dialogueLines[dMan.currentLine];

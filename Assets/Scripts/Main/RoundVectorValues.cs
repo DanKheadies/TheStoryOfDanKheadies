@@ -1,4 +1,4 @@
-﻿// CC 4.0 International License: Attribution--Brackeys & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Brackeys & DTFun--NonCommercial--ShareALike
 // Authors: Yamaraj
 // Contributors: David W. Corso
 // Start: 06/30/2018

@@ -2,7 +2,7 @@
 // Authors: Eric Haines
 // Contributors: David W. Corso
 // Start: --/--/----
-// Last:  04/26/2021
+// Last:  08/10/2022
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,6 +16,11 @@ public class AspectUtility : MonoBehaviour
     static float wantedAspectRatio;
     public float _wantedAspectRatio;
 
+    public float zClose = 0.5714285f;
+    public float zNormal = 1f;
+    public float zStandard = 1.142857f;
+    public float zTwice = 2.285714f;
+
     // Call to refresh the camera / screen display
     public void Awake()
     {
@@ -24,16 +29,18 @@ public class AspectUtility : MonoBehaviour
         cam = GetComponent<Camera>();
 
         if (scene.name == "Minesweeper")
-            _wantedAspectRatio = 2.285714f;
+            _wantedAspectRatio = zTwice;
         else if (scene.name == "Immunis")
-            _wantedAspectRatio = 2.285714f;
+            _wantedAspectRatio = zTwice;
         else if (scene.name == "PookieVision" ||
                  scene.name == "CS_TyrannyTunnel")
-            _wantedAspectRatio = 1f;
+            _wantedAspectRatio = zNormal;
+        else if (scene.name == "Chp0")
+            _wantedAspectRatio = zClose;
         else
-            _wantedAspectRatio = 1.142857f;
+            _wantedAspectRatio = zStandard;
 
-        wantedAspectRatio = 1.142857f;
+        wantedAspectRatio = zStandard;
 
         if (!cam)
             cam = Camera.main;

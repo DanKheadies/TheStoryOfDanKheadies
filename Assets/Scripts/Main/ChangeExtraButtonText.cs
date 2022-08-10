@@ -1,4 +1,4 @@
-﻿// CC 4.0 International License: Attribution--Brackeys & HolisticGaming.com--NonCommercial--ShareALike
+﻿// CC 4.0 International License: Attribution--Brackeys & DTFun--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 09/16/2019
 // Last:  04/26/2021
