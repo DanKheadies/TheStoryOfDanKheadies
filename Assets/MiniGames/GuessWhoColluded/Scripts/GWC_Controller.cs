@@ -1,7 +1,7 @@
 ﻿// CC 4.0 International License: Attribution--DTFun--NonCommercial--ShareALike
 // Authors: David W. Corso
 // Start: 07/31/2018
-// Last:  11/02/2021
+// Last:  08/10/2022
 
 using System.Collections;
 using UnityEngine;
@@ -687,6 +687,9 @@ public class GWC_Controller : MonoBehaviour
         oMan.ResetOptions();
         warpGWC.GetComponent<BoxCollider2D>().enabled = true;
         warpGWC.GetComponent<SceneTransitioner>().bAnimationToTransitionScene = true;
+
+        // Reward 
+        PlayerPrefs.SetString("TransferActions", "Quest15Reward");
 
         // Save Transfer Values
         save.SaveBrioTransfer();

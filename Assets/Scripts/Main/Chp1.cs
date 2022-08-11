@@ -2221,7 +2221,7 @@ public class Chp1 : MonoBehaviour
             moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt1)
         {
             oMan.ResetOptions();
-            Quest15DialogueXOptYes(1);
+            Quest15DialogueXOptYes();
         }
         // Quest 15 - Dialogue X - Option 2
         else if ((npc_eloher.transform.GetChild(0).GetComponent<DialogueHolder>().bHasEntered ||
@@ -2231,7 +2231,7 @@ public class Chp1 : MonoBehaviour
                  moveOptsArw.currentPosition == MoveOptionsMenuArrow.ArrowPos.Opt2)
         {
             oMan.ResetOptions();
-            Quest15DialogueXOptYes(2);
+            Quest15DialogueXOptNo();
         }
     }
 
@@ -2936,7 +2936,7 @@ public class Chp1 : MonoBehaviour
         dMan.ShowDialogue();
     }
 
-    public void Quest15DialogueXOptYes(int difficulty)
+    public void Quest15DialogueXOptYes()
     {
         // yes play a game
 
@@ -2966,11 +2966,7 @@ public class Chp1 : MonoBehaviour
             player.GetComponent<Animator>().enabled = false;
 
             // Stop NPCs from moving
-            npc_eloher.GetComponent<NPCMovement>().moveSpeed = 0;
-            npc_eloher.GetComponent<Animator>().enabled = false;
-
             StopAllNPCs();
-            // TODO: restoring NPC movement when revisiting, post mini-game
         }
         else
         {
@@ -3175,6 +3171,13 @@ public class Chp1 : MonoBehaviour
         {
             npc_akira.transform.GetChild(0).gameObject.SetActive(false);
             npc_akira.transform.GetChild(1).gameObject.SetActive(true);
+        }
+
+        // Q15
+        if (qMan.questsCollected[15])
+        {
+            npc_eloher.transform.GetChild(0).gameObject.SetActive(false);
+            npc_eloher.transform.GetChild(1).gameObject.SetActive(true);
         }
     }
 

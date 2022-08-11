@@ -84,6 +84,10 @@ public class SceneTransitioner : MonoBehaviour
                         sceneTitle.text = "Guess Who";
                         sceneSubtitle.text = "Colluded...";
                         break;
+                    case "GWCMenu":
+                        sceneTitle.text = "Guess Who";
+                        sceneSubtitle.text = "Colluded...";
+                        break;
                     case "PookieVision":
                         sceneTitle.text = "Pookie Vision";
                         sceneSubtitle.text = "For the kids..";
